@@ -35,9 +35,15 @@ def scrape_courses(url):
     return all_courses
 
 
+def write_to_file(url, classes):
+    major = url.split('/')[-2]
+    with open(major+'.out', 'w') as f:
+        for elem in classes:
+            f.write(str(elem) + '\n')
+
 if __name__ == "__main__":
-    for elem in get_websites():
-        print(elem)
-        classes = scrape_courses(elem)
-        for each in classes:
-            print(each)
+    all_websites = get_websites()
+    course = scrape_courses(all_websites[0])
+    write_to_file(all_websites[0], course)
+
+    
