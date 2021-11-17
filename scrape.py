@@ -1,4 +1,3 @@
-from typing import Text
 from bs4 import BeautifulSoup
 import requests
 
@@ -43,7 +42,7 @@ def write_to_file(url, classes):
 
 if __name__ == "__main__":
     all_websites = get_websites()
-    course = scrape_courses(all_websites[0])
-    write_to_file(all_websites[0], course)
+    course = scrape_courses(all_websites[10])
+    write_to_file(all_websites[10], course)
 
     
