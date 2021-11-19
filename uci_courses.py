@@ -33,5 +33,5 @@ def write_to_csv(url, one_course):
 
 if __name__ == "__main__":
     websites = get_courses_websites()
-    uci_courses = get_courses(websites[0])
-    write_to_csv(websites[0], uci_courses)
+    one_course = get_courses(websites[73])
+    write_to_csv(websites[73], one_course)
