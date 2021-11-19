@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 from major_requirements import request_websites, scrape_courses
 from collections import namedtuple
-import csv
 
 Course_Info = namedtuple('Course', ['name', 'units'])
 
