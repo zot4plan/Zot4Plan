@@ -1,2 +1,0 @@
-from major_requirements import request_websites
-
