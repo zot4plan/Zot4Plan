@@ -35,6 +35,7 @@ def write_to_csv(url, one_course):
         for key, value in one_course.items():
             f.write(key + ';' + value.name + ';' + value.units + ';' + value.description + '\n')
 
+
 if __name__ == "__main__":
     websites = get_courses_websites()
     one_course = get_courses(websites[73])
