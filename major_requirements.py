@@ -2,11 +2,20 @@ from bs4 import BeautifulSoup
 import requests
 
 def request_websites(url):
+    """
+    request_websites attains permission from the server - with the intend to scrape and turn
+    the link into a Soup object
+    """
+
     link = requests.get(url).text
     soup = BeautifulSoup(link, 'lxml')
     return soup
 
 def get_websites():
+    """
+    get_websites scrapes all the redirected websites in the main page of UCI major requirements.
+    """
+
     all_href = []
     prefered = ['bs/', 'ba/', 'bfa/']
     soup = request_websites("http://catalogue.uci.edu/undergraduatedegrees/")
@@ -20,6 +29,10 @@ def get_websites():
         
 
 def scrape_courses(url):
+    """
+    scrape_courses scrapes all of the required courses from the provided url.
+    """
+
     soup = request_websites(url)
     main = soup.find("table", class_='sc_courselist')
 
@@ -35,14 +48,13 @@ def scrape_courses(url):
 
 
 def write_to_file(url, classes):
+    """
+    write_to_file takes the information provided as parameters and write them out 
+    in a .out file. The information contains all of the required courses of a major.
+    """
+
     major = url.split('/')[-2]
     with open(major+'.out', 'w') as f:
         for elem in classes:
             f.write(str(elem) + '\n')
-
-if __name__ == "__main__":
-    all_websites = get_websites()
-    course = scrape_courses(all_websites[10])
-    write_to_file(all_websites[10], course)
-
     

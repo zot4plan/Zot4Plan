@@ -1,4 +1,5 @@
 class Course:
+
     def __init__(self, id, name, unit, description):
         self.id = id
         self.name = name
@@ -9,4 +10,4 @@ class Course:
         self.prereq = []
         self.next = []
         self.picked = False 
-        self.quarter = 0    
+        self.quarter = 0

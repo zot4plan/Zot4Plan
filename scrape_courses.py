@@ -6,6 +6,10 @@ from collections import namedtuple
 Course_Info = namedtuple('Course', ['name', 'units', 'description'])
 
 def get_courses_websites():
+    """
+    get_courses_websites scrapes all of the websites that can be redirected from the main UCI
+    course website. 
+    """
 
     all_websites = []
     soup = request_websites("http://catalogue.uci.edu/allcourses/")
@@ -15,7 +19,14 @@ def get_courses_websites():
             all_websites.append('http://catalogue.uci.edu' + get_href)
     return all_websites[1:]
 
+
 def get_courses(url):
+    """
+    get_courses takes in each invidiual website and scrape all courses provided in the url
+    and their information (course id, course name, units, description, restriction, and prereq).
+    All the information is organized in a dictionary: id: namedtuple(info).
+    """
+
     course_dict = {}
     soup = request_websites(url)
     for elem in soup.find_all('div', class_='courseblock'):
@@ -29,14 +40,15 @@ def get_courses(url):
         course_dict[name[0]] = c_info
     return course_dict
 
-def write_to_csv(url, one_course):
+
+def write_to_out(url, one_course):
+    """
+    write_to_out takes in the provided dictionary (containing info of each course section) and
+    write it out in a .out function - all info separated by ";".
+    """
+
     filename = str(url.split('/')[-2])
     with open('data/'+filename + '.out', 'w') as f:
         for key, value in one_course.items():
             f.write(key + ';' + value.name + ';' + value.units + ';' + value.description + '\n')
 
-
-if __name__ == "__main__":
-    websites = get_courses_websites()
-    one_course = get_courses(websites[73])
-    write_to_csv(websites[73], one_course)
