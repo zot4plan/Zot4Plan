@@ -1,0 +1,32 @@
+[
+    {
+        "id": "I&C SCI 31",    
+        "name": "Introduction to Programming",
+        "Description": "Introduction to fundamental concepts and techniques for writing software in a high-level programming language. Covers the syntax and semantics of data types, expressions, exceptions, control structures, input/output, methods, classes, and pragmatics of programming.",
+        "Prerequisite": [],
+        "Next": [],
+        "Units": 4,
+        "Taken": false,
+        "Quarter": 0
+    },
+    {
+        "id": "I&C SCI 32",    
+        "name": "Programming with Software Libraries",
+        "Description": "Introduction to fundamental concepts and techniques for writing software in a high-level programming language. Covers the syntax and semantics of data types, expressions, exceptions, control structures, input/output, methods, classes, and pragmatics of programming.",
+        "Prerequisite": [],
+        "Next": [],
+        "Units": 4,
+        "Taken": false,
+        "Quarter": 0
+    },
+    {
+        "id": "I&C SCI 33",    
+        "name": "Intermediate Programming",
+        "Description": "Introduction to fundamental concepts and techniques for writing software in a high-level programming language. Covers the syntax and semantics of data types, expressions, exceptions, control structures, input/output, methods, classes, and pragmatics of programming.",
+        "Prerequisite": [],
+        "Next": [],
+        "Units": 4,
+        "Taken": false,
+        "Quarter": 0
+    }
+]
