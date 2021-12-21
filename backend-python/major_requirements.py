@@ -57,9 +57,8 @@ def scrape_courses(url):
                         all_courses.append(course)
                     else:
                         all_courses.append(name + course)
-            else:
+            elif elem != '':
                 all_courses.append(elem)
-        print(url)
     except:
         print('error: ' + url)
     return all_courses

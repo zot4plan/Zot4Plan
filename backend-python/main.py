@@ -26,7 +26,6 @@ def create_objects(uci_course):
 def convert_to_json(uci_courses):
     just_dict = [elem.__dict__ for elem in uci_courses]
     with open('../data/data.json', 'w') as f:
-
         json.dump(just_dict, f,indent=4)
 
 if __name__ == "__main__":
