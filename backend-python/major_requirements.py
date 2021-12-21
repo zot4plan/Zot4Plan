@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import json 
 
 def request_websites(url):
     """
@@ -37,11 +38,28 @@ def scrape_courses(url):
     main = soup.find("table", class_='sc_courselist')
 
     all_courses = []
+    as_string = ""
     try:
         for elem in main.find_all('td', class_='codecol'):
-            get_courses = elem.find_all('a')
-            for each in get_courses:
-                all_courses.append(each.text)
+            elem = elem.text.strip().replace("\u00a0", " ")
+            if "or" in elem:
+                as_string = as_string[:-1]
+                as_string += elem + ','
+            else:
+                as_string += elem + ','
+        split_courses = as_string.split(',')
+        for elem in split_courses:
+            if '-' in elem:
+                class_series = elem.split('-')
+                name = class_series[0].split(" ")[0]
+                for course in class_series:
+                    if name in course:
+                        all_courses.append(course)
+                    else:
+                        all_courses.append(name + course)
+            else:
+                all_courses.append(elem)
+        print(url)
     except:
         print('error: ' + url)
     return all_courses
@@ -54,7 +72,10 @@ def write_to_file(url, classes):
     """
 
     major = url.split('/')[-2]
-    with open(major+'.out', 'w') as f:
-        for elem in classes:
-            f.write(str(elem) + '\n')
-    
+    with open("../data/" + major + '.json', 'w') as f:
+        json.dump(classes, f,indent=4)
+
+if __name__ == "__main__":
+    all_websites = get_websites()
+    course = scrape_courses(all_websites[23])
+    write_to_file(all_websites[23], course)

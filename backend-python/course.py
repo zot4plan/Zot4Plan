@@ -9,5 +9,4 @@ class Course:
         self.restriction = ""
         self.prereq = []
         self.next = []
-        self.picked = False 
         self.quarter = 0

@@ -37,7 +37,7 @@ def get_courses(url):
         for each in get_info:
             description += each.text + ';'
         c_info = Course_Info(name[1], (name[2].split(' ')[0]), description)
-        course_dict[name[0]] = c_info
+        course_dict[name[0].replace("\u00a0", " ")] = c_info
     return course_dict
 
 

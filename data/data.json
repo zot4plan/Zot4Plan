@@ -1,0 +1,145 @@
+[
+    {
+        "id": "AC ENG 20A",
+        "name": "Academic Writing",
+        "units": "5",
+        "description": "Grammar, sentence structure, paragraph and essay organization of formal written English.",
+        "prereqString": "Prerequisite: Placement into AC\u00a0ENG\u00a020A.\n",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 20B",
+        "name": "Academic Writing",
+        "units": "5",
+        "description": "Grammar, sentence structure, paragraph and essay organization of formal written English.",
+        "prereqString": "Prerequisite: AC\u00a0ENG\u00a020A. Placement into AC\u00a0ENG\u00a020B is also accepted.\n",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 20C",
+        "name": "Essentials of Academic Writing",
+        "units": "5",
+        "description": "Grammar, sentence structure, paragraph and essay organization of formal written English.",
+        "prereqString": "Prerequisite: AC\u00a0ENG\u00a020B. Placement into AC\u00a0ENG\u00a020C is also accepted.\n",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 20D",
+        "name": "Academic Writing",
+        "units": "5",
+        "description": "Grammar, sentence structure, paragraph and essay organization of formal written English.",
+        "prereqString": "Prerequisite: AC\u00a0ENG\u00a020C\n",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 22A",
+        "name": "Academic English Reading and Vocabulary",
+        "units": "2",
+        "description": "Intensive reading exercises with occasional practice in extensive reading, focusing on comprehension, development of vocabulary, syntax, rhetorical features, reading strategies, and study skills.",
+        "prereqString": "Prerequisite: Placement into AC\u00a0ENG\u00a022A is required.\n",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 22B",
+        "name": "ESL Reading and Vocabulary",
+        "units": "2",
+        "description": "Extensive reading and discussion with emphasis on journal articles, textbook chapters, notetaking, and the interpretation of charts, diagrams, tables, and figures.",
+        "prereqString": "",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 23A",
+        "name": "Oral English Communication I",
+        "units": "2",
+        "description": "Designed to help students hear and produce the sounds of English as an International Language with greater accuracy and confidence. Focuses on pronunciation features (e.g., consonant sounds, consonant clusters, vowels, thought groups, and nuclear stress).",
+        "prereqString": "",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 23B",
+        "name": "Oral English Communication II",
+        "units": "2",
+        "description": "Designed to help students develop conversational fluency in English as an International Language. Focuses on applying knowledge of linguistic features and communicative skills during conversational exchange in a variety of social, academic, and professional contexts.",
+        "prereqString": "",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 23C",
+        "name": "Oral English Communication III",
+        "units": "2",
+        "description": "Designed to help students hone their public speaking skills in English as an International Language. Focuses on preparing, organizing, and delivering speeches and presentations and interacting with the audience, emphasizing skills needed in academic settings.",
+        "prereqString": "Prerequisite: AC\u00a0ENG\u00a023A or AC\u00a0ENG\u00a023B\n",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 24",
+        "name": "ESL International TA Workshop",
+        "units": "2",
+        "description": "Designed for advanced-level international students preparing to be teaching assistants. Provides extensive practice in oral and written communication skills associated with teaching introductory-level college courses and participating in academic presentations and discussions. Review and analysis of language problems.",
+        "prereqString": "Prerequisite: AC\u00a0ENG\u00a023A or AC\u00a0ENG\u00a023B or AC\u00a0ENG\u00a023C\n",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 28",
+        "name": "Grammar",
+        "units": "2-4",
+        "description": "A full review of English grammar covering the following areas: grammar terms, verb tenses, verb forms, conditionals, passive and word forms, punctuation, sentence structure. The concepts are applied in targeted sentence and paragraph writing practice.",
+        "prereqString": "",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 29",
+        "name": "Special Topics in ESL",
+        "units": "2",
+        "description": "Directed and individualized work in English as a second language not covered in the AC ENG 20, 21, 22 sequence.",
+        "prereqString": "",
+        "restriction": "",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    },
+    {
+        "id": "AC ENG 139W",
+        "name": "Advanced Academic Writing Across the Curriculum",
+        "units": "4",
+        "description": "Designed for transfer students who speak English as a second language. Focuses on developing academic reading and writing skills including essay content, organization, vocabulary, and grammar. Academic content also covered.",
+        "prereqString": "Prerequisite: Satisfactory completion of the Lower-Division Writing requirement.\n",
+        "restriction": "Restriction: Restricted to students whose first language is not English.",
+        "prereq": [],
+        "next": [],
+        "quarter": 0
+    }
+]
