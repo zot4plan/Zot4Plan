@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import json 
+import re 
 
 def request_websites(url):
     """
@@ -40,28 +41,18 @@ def scrape_courses(url):
     all_courses = []
     as_string = ""
     try:
-        for elem in main.find_all('td', class_='codecol'):
-            elem = elem.text.strip().replace("\u00a0", " ")
-            if "or" in elem:
-                as_string = as_string[:-1]
-                as_string += elem + ','
+        all_courses = []
+        hash_rule = re.compile(r'[A-Z]')
+        for elem in main.find_all('tr'):
+            if elem.find_all('span', class_='courselistcomment'):
+                all_courses.append(elem.text.strip())
             else:
-                as_string += elem + ','
-        split_courses = as_string.split(',')
-        for elem in split_courses:
-            if '-' in elem:
-                class_series = elem.split('-')
-                name = class_series[0].split(" ")[0]
-                for course in class_series:
-                    if name in course:
-                        all_courses.append(course)
-                    else:
-                        all_courses.append(name + course)
-            elif elem != '':
-                all_courses.append(elem)
+                for course in elem.find_all('td', class_='codecol'):
+                    all_courses.append(course.text.replace("\u00a0", " "))
     except:
         print('error: ' + url)
     return all_courses
+
 
 
 def write_to_file(url, classes):
