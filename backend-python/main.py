@@ -31,7 +31,7 @@ def convert_to_json(uci_courses):
 
 if __name__ == "__main__":
     websites = get_courses_websites()
-    one_course = get_courses(websites[0])
+    one_course = get_courses(websites[73])
     new_object = create_objects(one_course)
     convert_to_json(new_object)
 
