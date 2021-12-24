@@ -1,10 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
-import Years from './components/Years';
-import Courses from './components/Courses';
-import { Container, Row, Col } from 'react-bootstrap';
-import {data} from './Assets/data';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {data} from './assets/data';
 import {useState} from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function App() {
   /*const [courses, setCourses] = useState(data);
@@ -14,15 +16,16 @@ function App() {
     })
   } */
   return (
-    <>
+  <DndProvider backend={HTML5Backend}>
+    <BrowserRouter>
       <Header/>
-      <Container fluid='md'> 
-        <Row>
-          <Col sm={8}><Years/></Col>
-          <Col sm={4}><Courses/></Col>
-        </Row>
-      </Container>
-    </>
+      <Routes>
+        <Route path="/" element={<HomePage/>}></Route>
+        <Route path="/home" element={<HomePage/>}></Route>
+        <Route path="/about" element={<AboutPage/>}></Route>
+      </Routes>
+    </BrowserRouter>
+  </DndProvider>
   );
 }
 

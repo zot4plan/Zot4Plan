@@ -1,24 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDrop } from 'react-dnd';
 import CourseCard from './CourseCard';
-import ItemTypes from '../Assets/ItemTypes';
-import { useState } from 'react';
+import ItemTypes from '../assets/ItemTypes';
 
-function QuarterColumn() {
-  const [courses, setCourses] = useState([]); 
-
-  const onDrop = (item) => {
-    if (!courses.find((course) => {return item.item.id === course.id})){
-      courses.push(item.item);
-      setCourses(courses);
-    }
-    item.item.taken = true;
-    console.log(courses)
-  }
+function QuarterColumn({courses, quarter, onDrop}) {
 
   const [{ isOver }, dropRef] = useDrop(() => ({
     accept: ItemTypes,
-    drop: (item, monitor) => onDrop(item),
+    drop: (item, monitor) => onDrop(item.item, quarter),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
     }),

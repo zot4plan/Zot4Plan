@@ -2,11 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Popover,OverlayTrigger,Button } from 'react-bootstrap';
 import React, {useRef} from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import ItemTypes from '../Assets/ItemTypes';
+import ItemTypes from '../assets/ItemTypes';
 
 function CourseCard({item, index}) {
-   // const ref = useRef(null);
-   /* const [, drop] = useDrop({
+    const ref = useRef(null)
+   /* const [, dropRef] = useDrop({
         accept: ItemTypes,
         hover(item, monitor) {
             if(!ref.current){
@@ -35,7 +35,7 @@ function CourseCard({item, index}) {
             
         }
     }) */
-    const [{isDragging}, drag] = useDrag({
+    const [{isDragging}, dragRef] = useDrag({
         type: ItemTypes,
         item: () => ({item}),
         collect: (monitor) => ({
@@ -47,13 +47,11 @@ function CourseCard({item, index}) {
    // const onOpen = () => setShow(true);
    // const onClose = () => setShow(false);
 
-//drag(drop(ref));
-   // drag(ref);
-   
+   // const dragDropRef = dragRef(dropRef(ref))
     return (
         <div
-            ref={drag}
-            style={{opacity: isDragging? 0.4 : 1,}}
+            ref={dragRef}
+            style={{opacity: isDragging? 0.4 : 1, minWidth: 100}}
         >
             <OverlayTrigger
                 trigger="click"
@@ -61,13 +59,11 @@ function CourseCard({item, index}) {
                 overlay={
                 <Popover id={item.id}>
                     <Popover.Header as="h4">{item.id}</Popover.Header>
-                    <Popover.Body>
-                    {item.description} <b>{item.taken.toString()}</b>
-                    </Popover.Body>
+                    <Popover.Body> {item.description} </Popover.Body>
                 </Popover>
                 }
             >
-                <Button variant="primary">{item.id}</Button>
+                <Button variant="primary" className="w-100">{item.id}</Button>
             </OverlayTrigger>
         </div>
     ); 
