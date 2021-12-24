@@ -38,17 +38,16 @@ def scrape_courses(url):
     soup = request_websites(url)
     main = soup.find("table", class_='sc_courselist')
 
-    all_courses = []
-    as_string = ""
     try:
-        all_courses = []
-        hash_rule = re.compile(r'[A-Z]')
+        all_courses = {}
         for elem in main.find_all('tr'):
             if elem.find_all('span', class_='courselistcomment'):
-                all_courses.append(elem.text.strip())
+                in_string = elem.text.strip()
+                all_courses[in_string] = in_string.isupper()
             else:
                 for course in elem.find_all('td', class_='codecol'):
-                    all_courses.append(course.text.replace("\u00a0", " "))
+                    in_string = course.text.strip().replace("\u00a0", " ")
+                    all_courses[in_string] = in_string.isupper()
     except:
         print('error: ' + url)
     return all_courses

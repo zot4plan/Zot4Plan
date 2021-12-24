@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Courses from '../components/Courses';
 import QuarterColumn from '../components/QuarterColumn';
 import Inputs from '../components/Inputs';
+import Requiremnets from '../components/Requirements';
 import { Container, Row, Col } from 'react-bootstrap';
 import {data} from '../assets/data';
 import {useCallback, useState} from 'react';
@@ -65,8 +66,11 @@ function HomePage() {
                   <Courses 
                   courses= {courses.filter((course => course.quarter === 0))}
                   onDrop={moveCourse}/> 
-                  <div style={{backgroundColor:'grey', minHeight:100}}
-                      className= 'mt-4'> requirement courses</div>
+                  <div style={{backgroundColor:'paleturquoise', minHeight:100}}
+                      className= 'mt-4'> Required courses:
+                      <Requiremnets />
+                      </div>
+
                 </Col>
         </Row>
       </Container>

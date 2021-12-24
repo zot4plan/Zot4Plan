@@ -1,3 +1,4 @@
+const required_ics = 
 {
     "Lower-division": false,
     "A. Select one of the following series:": false,
@@ -98,3 +99,5 @@
     "COMPSCI 111": true,
     "COMPSCI 112": true
 }
+
+export default required_ics;
