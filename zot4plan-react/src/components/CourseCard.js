@@ -60,6 +60,8 @@ function CourseCard({item, index}) {
                 <Popover id={item.id}>
                     <Popover.Header as="h4">{item.id}</Popover.Header>
                     <Popover.Body> {item.description} </Popover.Body>
+                    <Popover.Body> {item.prereqString} </Popover.Body>
+                    <Popover.Body> {item.restriction} </Popover.Body>
                 </Popover>
                 }
             >

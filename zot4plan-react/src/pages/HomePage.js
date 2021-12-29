@@ -6,17 +6,20 @@ import Requiremnets from '../components/Requirements';
 import { Container, Row, Col } from 'react-bootstrap';
 import {data} from '../assets/data';
 import {useCallback, useState} from 'react';
+import {icsData} from '../assets/IcsData'
+
 
 function HomePage() {
   //const [layout, setLayout] = useState([]);
-  const [courses, setCourses] = useState(data); 
+  const [courses, setCourses] = useState(Object.values(icsData)); 
+  // const [icsCourses, setIcsCourses] = useState(Object.values(icsData)); 
   const years = ['Freshman','Sophomore','Junior','Senior'];
   const quarters = ['Fall','Winter','Spring'];
 
   const moveCourse = ((item, quarter) => {
     console.log('course', item.quarter);
     console.log('quarter', quarter);
-
+    // console.log('icsCourses', icsCourses)
     //return drag and drop are the same
     if( item.quarter === quarter) 
         return;
@@ -24,7 +27,9 @@ function HomePage() {
     let copy = [...courses];
     let index = copy.findIndex((course) => course.id === item.id)
     copy[index].quarter = quarter;
+    
     setCourses(copy);
+
   })
 
   return (
@@ -63,12 +68,9 @@ function HomePage() {
 
                 <Col sm={6}> 
                   <div> <Inputs/></div>
-                  <Courses 
-                  courses= {courses.filter((course => course.quarter === 0))}
-                  onDrop={moveCourse}/> 
                   <div style={{backgroundColor:'paleturquoise', minHeight:100}}
                       className= 'mt-4'> Required courses:
-                      <Requiremnets />
+                      <Requiremnets courses={courses}/>
                       </div>
 
                 </Col>

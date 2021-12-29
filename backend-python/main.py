@@ -7,7 +7,7 @@ def create_objects(uci_course):
     create_objects take in a course from UCI and turn them into a Course object.
     """
 
-    course_object = []
+    course_object = {}
 
     for key,value in uci_course.items():
         all_info = value.description.split(';')[:-1]
@@ -18,15 +18,15 @@ def create_objects(uci_course):
                 new_course.restriction = item 
             elif 'Prerequisite:' in item:
                 new_course.prereqString = item 
-        course_object.append(new_course)
+        course_object[new_course.id] = new_course.__dict__
 
     return course_object
 
 
 def convert_to_json(uci_courses):
-    just_dict = [elem.__dict__ for elem in uci_courses]
+    
     with open('../data/data.json', 'w') as f:
-        json.dump(just_dict, f,indent=4)
+        json.dump(uci_courses, f,indent=4)
 
 if __name__ == "__main__":
     websites = get_courses_websites()

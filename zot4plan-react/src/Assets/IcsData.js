@@ -1,3 +1,4 @@
+const icsData = 
 {
     "I&C SCI 3": {
         "id": "I&C SCI 3",
@@ -440,3 +441,7 @@
         "quarter": 0
     }
 }
+
+
+
+export {icsData};
