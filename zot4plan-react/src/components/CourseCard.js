@@ -58,7 +58,7 @@ function CourseCard({item, index}) {
                 placement='bottom'
                 overlay={
                 <Popover id={item.id}>
-                    <Popover.Header as="h4">{item.id}</Popover.Header>
+                    <Popover.Header as="h4">{item.id + ", " + item.units + " Units"}</Popover.Header>
                     <Popover.Body> {item.description} </Popover.Body>
                     <Popover.Body> {item.prereqString} </Popover.Body>
                     <Popover.Body> {item.restriction} </Popover.Body>

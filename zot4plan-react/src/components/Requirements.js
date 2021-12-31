@@ -1,23 +1,22 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import required_ics from '../assets/icsrequirements';
 import {Container, Row, Col} from 'react-bootstrap';
-import {icsData} from '../assets/IcsData'
 import CourseCard from './CourseCard'
 import './Requirements.css'
 import { Popover,OverlayTrigger,Button } from 'react-bootstrap';
 
 const Requirements = ({courses}) => {
 
-    let courseArray = Object.entries(required_ics)
+    let courseArray = required_ics
     let index = 0
 
     function renderCol(){  
         let columns = []
         index++
         while(index < courseArray.length && courseArray[index][1]){
-
-            if(icsData.hasOwnProperty(courseArray[index][0])){
-                let i = courses.findIndex((course) => course.id === courseArray[index][0])
+            let i = courses.findIndex((course) => course.id === courseArray[index][0])
+            
+            if(i > -1){
 
                 if(courses[i].quarter !== 0){
                     columns.push(<Col key = {courseArray[index][0]}>
@@ -40,8 +39,8 @@ const Requirements = ({courses}) => {
 
                 columns.push(<Col key = {courseArray[index][0]}>
                     <CourseCard 
-                        item={icsData[courseArray[index][0]]}
-                        index={icsData[courseArray[index][0]].id} > 
+                        item={courses[i]}
+                        index={courses[i].id} > 
                     </CourseCard>
                     </Col>)
                 }

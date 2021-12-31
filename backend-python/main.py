@@ -2,12 +2,14 @@ from scrape_courses import get_courses_websites, get_courses
 from course import Course
 import json 
 
+All_Courses = {}
+
 def create_objects(uci_course):
     """
     create_objects take in a course from UCI and turn them into a Course object.
     """
 
-    course_object = {}
+    ##course_object = {}
 
     for key,value in uci_course.items():
         all_info = value.description.split(';')[:-1]
@@ -18,20 +20,22 @@ def create_objects(uci_course):
                 new_course.restriction = item 
             elif 'Prerequisite:' in item:
                 new_course.prereqString = item 
-        course_object[new_course.id] = new_course.__dict__
-
-    return course_object
+        All_Courses[new_course.id] = new_course.__dict__
 
 
-def convert_to_json(uci_courses):
+def convert_to_json():
     
-    with open('../data/data.json', 'w') as f:
-        json.dump(uci_courses, f,indent=4)
+    with open('../data/data.json', 'a') as f:
+        json.dump(All_Courses, f,indent=4)
 
 if __name__ == "__main__":
     websites = get_courses_websites()
+    
+    one_course = get_courses(websites[29])
+    create_objects(one_course)
+
     one_course = get_courses(websites[73])
-    new_object = create_objects(one_course)
-    convert_to_json(new_object)
+    create_objects(one_course)
+    convert_to_json()
 
 

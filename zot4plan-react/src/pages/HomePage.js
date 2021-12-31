@@ -9,9 +9,10 @@ import {useCallback, useState} from 'react';
 import {icsData} from '../assets/IcsData'
 
 
-function HomePage() {
+function HomePage({initialCourses}) {
+
   //const [layout, setLayout] = useState([]);
-  const [courses, setCourses] = useState(Object.values(icsData)); 
+  const [courses, setCourses] = useState(initialCourses); 
   // const [icsCourses, setIcsCourses] = useState(Object.values(icsData)); 
   const years = ['Freshman','Sophomore','Junior','Senior'];
   const quarters = ['Fall','Winter','Spring'];

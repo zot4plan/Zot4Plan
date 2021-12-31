@@ -48,7 +48,7 @@ def write_to_out(url, one_course):
     """
 
     filename = str(url.split('/')[-2])
-    with open('data/'+filename + '.out', 'w') as f:
+    with open('data/'+ filename + '.out', 'w') as f:
         for key, value in one_course.items():
             f.write(key + ';' + value.name + ';' + value.units + ';' + value.description + '\n')
 
