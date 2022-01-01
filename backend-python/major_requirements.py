@@ -140,3 +140,5 @@ if __name__ == "__main__":
     all_websites = get_websites()
     course = scrape_courses(all_websites[23])
     write_to_file(all_websites[23], course)
+    course = scrape_courses(all_websites[27])
+    write_to_file(all_websites[27], course)

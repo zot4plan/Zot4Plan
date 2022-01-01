@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import required_ics from '../assets/icsrequirements';
 import {Container, Row, Col} from 'react-bootstrap';
 import CourseCard from './CourseCard'
-import './Requirements.css'
 import { Popover,OverlayTrigger,Button } from 'react-bootstrap';
 
 const Requirements = ({courses}) => {
@@ -32,7 +31,7 @@ const Requirements = ({courses}) => {
                             </Popover>
                             }
                             >
-                            <Button variant="secondary" className="w-100">{courses[i].id}</Button>
+                            <Button variant="outline-secondary" className="w-100">{courses[i].id}</Button>
                         </OverlayTrigger>
                         </Col>)
                 }else{

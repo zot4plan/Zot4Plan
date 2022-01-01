@@ -3,7 +3,7 @@ import { Popover,OverlayTrigger,Button } from 'react-bootstrap';
 import React, {useRef} from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import ItemTypes from '../assets/ItemTypes';
-
+import './EditButton.css'
 function CourseCard({item, index}) {
     const ref = useRef(null)
    /* const [, dropRef] = useDrop({
@@ -58,14 +58,14 @@ function CourseCard({item, index}) {
                 placement='bottom'
                 overlay={
                 <Popover id={item.id}>
-                    <Popover.Header as="h4">{item.id + ", " + item.units + " Units"}</Popover.Header>
-                    <Popover.Body> {item.description} </Popover.Body>
+                    <Popover.Header as="h4">{item.name}</Popover.Header>
+                    <Popover.Body> {"Description: " + item.description} </Popover.Body>
                     <Popover.Body> {item.prereqString} </Popover.Body>
                     <Popover.Body> {item.restriction} </Popover.Body>
                 </Popover>
                 }
             >
-                <Button variant="primary" className="w-100">{item.id}</Button>
+                <Button variant="primary" size ='sm' className="edit-button">{item.id}</Button>
             </OverlayTrigger>
         </div>
     ); 

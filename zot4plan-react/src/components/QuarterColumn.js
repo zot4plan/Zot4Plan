@@ -16,7 +16,7 @@ function QuarterColumn({courses, quarter, onDrop}) {
   return (
     <div 
     ref={dropRef}
-    style={{height:'200px',backgroundColor: isOver?"#90CAF9":"#BBDEFB",}}> 
+    style={{height:'200px',backgroundColor: isOver?"#90CAF9":"#FCFDFE",}}> 
       {courses.map((course) => 
         <CourseCard 
         key={course.id}
