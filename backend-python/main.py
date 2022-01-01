@@ -33,9 +33,16 @@ if __name__ == "__main__":
     
     one_course = get_courses(websites[29])
     create_objects(one_course)
+    
+    one_course = get_courses(websites[72])
+    create_objects(one_course)
 
     one_course = get_courses(websites[73])
     create_objects(one_course)
+    
+    one_course = get_courses(websites[94])
+    create_objects(one_course)
+
+    one_course = get_courses(websites[138])
+    create_objects(one_course)
     convert_to_json()
-
-

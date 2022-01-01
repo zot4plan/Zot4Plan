@@ -35,7 +35,12 @@ def get_websites():
                 all_href.append('http://catalogue.uci.edu/' + href + '#requirementstext')
     return all_href
 
+
 def get_name(in_string):
+    """
+    get_name scrapes the course name - excluding any trailing characters or integers.
+    """
+
     name = ''
     for char in in_string:
         if not char.isdigit():
@@ -44,9 +49,13 @@ def get_name(in_string):
             break
     return name[:-1]
 
-def get_series(all_courses, in_string, name):
 
-    ## check course validity:
+def get_series(all_courses, in_string, name):
+    """
+    get_series splits any course series by '-' and check the validity of all
+    courses within that range.
+    """
+
     num_series = []
     in_string = in_string.replace(" ", '')
     course_series = in_string.split('-')
