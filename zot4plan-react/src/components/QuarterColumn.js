@@ -13,7 +13,6 @@ function QuarterColumn({courses, quarter, onDrop}) {
     }),
   })); 
 
-  console.log(courses)
 
   return (
     <div 
@@ -22,14 +21,14 @@ function QuarterColumn({courses, quarter, onDrop}) {
       height:'172px',
       backgroundColor: isOver?"#90CAF9":"#FCFDFE",}}
     > 
-      {courses.map((course) => 
+      {courses.map((course, index) => <div className= {index>=1? "mt-1" :""}>
         <CourseCard 
         key={course.id}
         item={course}
         index={course.id}
         buttonClass="full-button"
         > 
-        </CourseCard> )}
+        </CourseCard> </div>)}
     </div>
   );
 }

@@ -3,11 +3,22 @@ import required_ics from '../assets/icsrequirements';
 import {Container, Row, Col} from 'react-bootstrap';
 import CourseCard from './CourseCard'
 import { Popover,OverlayTrigger,Button } from 'react-bootstrap';
+import { useDrop } from 'react-dnd';
+import ItemTypes from '../assets/ItemTypes';
 
-const Requirements = ({courses}) => {
+
+const Requirements = ({courses, onDrop}) => {
 
     let courseArray = required_ics
     let index = 0
+    
+    const [{ isOver }, dropRef] = useDrop(() => ({
+        accept: ItemTypes,
+        drop: (item, monitor) => onDrop(item.item, 0),
+        collect: (monitor) => ({
+          isOver: monitor.isOver(),
+        }),
+      })); 
 
     function renderCol(){  
         let columns = []
@@ -18,7 +29,7 @@ const Requirements = ({courses}) => {
             if(courses[courseId] != undefined){
 
                 if(courses[courseId].quarter !== 0){
-                    columns.push(<Col key = {courseId}>
+                    columns.push(<Col className="mt-2" key = {courseId}>
                         <div style={{width: 100}}>
                         <OverlayTrigger
                             trigger="click"
@@ -38,7 +49,7 @@ const Requirements = ({courses}) => {
                         </Col>)
                 }else{
 
-                columns.push(<Col key = {courseId}>
+                columns.push(<Col className="mt-2" key = {courseId}>
                     <CourseCard 
                         item={courses[courseId]}
                         index={courseId}
@@ -48,7 +59,7 @@ const Requirements = ({courses}) => {
                 }
             }
             else
-                columns.push(<Col key = {courseId}>{courseId}</Col>)
+                columns.push(<Col className="mt-2" key = {courseId}>{courseId}</Col>)
             index++
 
         }
@@ -73,9 +84,9 @@ const Requirements = ({courses}) => {
     }
 
     return (
-        <>
+        <div ref = {dropRef} >
             {renderRequirements()}
-        </>
+        </div>
     )
 }
 

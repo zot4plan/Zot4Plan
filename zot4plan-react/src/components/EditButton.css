@@ -10,3 +10,8 @@
     width: 100%;
     display: block;
 }
+
+.edit-button:hover,.full-button:hover{
+    background-color: #006C84;
+    opacity: 0.5;
+} 

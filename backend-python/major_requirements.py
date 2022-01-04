@@ -23,7 +23,7 @@ def get_websites():
     """
     get_websites scrapes all the redirected websites in the main page of UCI major requirements.
     """
-
+    major_names = []
     all_href = []
     prefered = ['bs/', 'ba/', 'bfa/']
     soup = request_websites("http://catalogue.uci.edu/undergraduatedegrees/")
@@ -33,6 +33,9 @@ def get_websites():
             get_type = href.split('_')
             if get_type[-1] in prefered and href not in all_href:
                 all_href.append('http://catalogue.uci.edu/' + href + '#requirementstext')
+                major_names.append(each.text)
+
+    write_major_names(major_names)
     return all_href
 
 
@@ -67,7 +70,8 @@ def get_series(all_courses, in_string, name):
                     if (len(num_series) > 0 and num_series[-1] != full_name) or len(num_series) == 0:
                         num_series.append(full_name)  
         elif (len(num_series) > 0 and num_series[-1] != name + ' ' + course_series[i]) or len(num_series) == 0:
-            num_series.append(name + ' ' + course_series[i])
+            if (name + ' ' + course_series[i]) in Data:
+                num_series.append(name + ' ' + course_series[i])
 
     return num_series
 
@@ -125,20 +129,23 @@ def scrape_courses(url):
 
 
 
-def write_to_file(url, classes):
+def write_requirements_file(url, classes):
     """
     write_to_file takes the information provided as parameters and write them out 
     in a .out file. The information contains all of the required courses of a major.
     """
 
-    major = url.split('/')[-2]
+    major = url.split('/')[-2].replace('_','')
     with open("../data/" + major + '.json', 'w') as f:
         json.dump(classes, f,indent=4)
 
+def write_major_names(all_names):
+    with open("../data/majorNames" + '.json', 'w') as f:
+        json.dump(all_names, f,indent=4)
 
 if __name__ == "__main__":
     all_websites = get_websites()
     course = scrape_courses(all_websites[23])
-    write_to_file(all_websites[23], course)
-    course = scrape_courses(all_websites[27])
-    write_to_file(all_websites[27], course)
+    write_requirements_file(all_websites[23], course)
+    # course = scrape_courses(all_websites[27])
+    # write_to_file(all_websites[27], course)

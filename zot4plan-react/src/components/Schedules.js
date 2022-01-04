@@ -25,7 +25,6 @@ function Schedules({courses, moveCourse}) {
 
                 {quarters.map((quarter, indexQuarter) => {
                   const currentQuarter = indexYear*3 + indexQuarter + 1;
-                  console.log(currentQuarter)
                   return (
                     <Col key={year+quarter} className='p-0 square border-end border-3'>
                       <h5 
