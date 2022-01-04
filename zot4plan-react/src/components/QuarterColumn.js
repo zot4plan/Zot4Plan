@@ -13,15 +13,21 @@ function QuarterColumn({courses, quarter, onDrop}) {
     }),
   })); 
 
+  console.log(courses)
+
   return (
     <div 
     ref={dropRef}
-    style={{height:'200px',backgroundColor: isOver?"#90CAF9":"#FCFDFE",}}> 
+    style={{
+      height:'172px',
+      backgroundColor: isOver?"#90CAF9":"#FCFDFE",}}
+    > 
       {courses.map((course) => 
         <CourseCard 
         key={course.id}
         item={course}
         index={course.id}
+        buttonClass="full-button"
         > 
         </CourseCard> )}
     </div>

@@ -12,22 +12,15 @@ import required_ics from './assets/icsrequirements';
 function App() {
 
   let courseArray = required_ics
-  let initialCourse = new Set()
+  let initialCourse = {}
 
   courseArray.map((item) => {
     if(item[1] && data.hasOwnProperty([item[0]])) 
-      {
-        initialCourse.add(data[item[0]])
-      }
+        initialCourse[item[0]] = data[item[0]];
   })
-  initialCourse = [...initialCourse]
+
   console.log(initialCourse)
-  /*const [courses, setCourses] = useState(data);
-  const onDrop = (item, monitor, quarter) => {
-    setCourses(prevState => {
-      const newCourses = preState.filter(i => i.id !=item.id).concat()
-    })
-  } */
+
   return (
   <DndProvider backend={HTML5Backend}>
     <BrowserRouter>

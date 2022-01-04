@@ -4,7 +4,7 @@ import React, {useRef} from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import ItemTypes from '../assets/ItemTypes';
 import './EditButton.css'
-function CourseCard({item, index}) {
+function CourseCard({item, index, buttonClass}) {
     const ref = useRef(null)
    /* const [, dropRef] = useDrop({
         accept: ItemTypes,
@@ -51,7 +51,7 @@ function CourseCard({item, index}) {
     return (
         <div
             ref={dragRef}
-            style={{opacity: isDragging? 0.4 : 1, minWidth: 100}}
+            style={{opacity: isDragging? 0.4 : 1}}
         >
             <OverlayTrigger
                 trigger="click"
@@ -65,7 +65,14 @@ function CourseCard({item, index}) {
                 </Popover>
                 }
             >
-                <Button variant="primary" size ='sm' className="edit-button">{item.id}</Button>
+                
+                <Button 
+                    variant="primary" 
+                    size ='sm' 
+                    className={buttonClass}
+                >
+                    {item.id}
+                </Button>
             </OverlayTrigger>
         </div>
     ); 

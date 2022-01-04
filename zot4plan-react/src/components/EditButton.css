@@ -1,4 +1,12 @@
 .edit-button {
     background-color: #006C84;
     border: #fff !important;
+    width: 100px;
+}
+
+.full-button {
+    background-color: #006C84;
+    border: #fff !important;
+    width: 100%;
+    display: block;
 }
