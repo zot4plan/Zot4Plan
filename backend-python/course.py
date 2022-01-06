@@ -7,6 +7,3 @@ class Course:
         self.description = description
         self.prereqString = ""
         self.restriction = ""
-        self.prereq = []
-        self.next = []
-        self.quarter = 0

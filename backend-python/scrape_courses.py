@@ -11,13 +11,16 @@ def get_courses_websites():
     course website. 
     """
 
-    all_websites = []
+    all_websites = set()
     soup = request_websites("http://catalogue.uci.edu/allcourses/")
     for elem in soup.find_all('a'):
         get_href = elem.get('href')
         if '/allcourses' in str(get_href):
-            all_websites.append('http://catalogue.uci.edu' + get_href)
-    return all_websites[1:]
+            all_websites.add('http://catalogue.uci.edu' + get_href)
+
+    all_websites = [elem for elem in all_websites]
+
+    return sorted(all_websites)[1:]
 
 
 def get_courses(url):

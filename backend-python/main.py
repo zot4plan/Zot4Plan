@@ -29,20 +29,12 @@ def convert_to_json():
         json.dump(All_Courses, f,indent=4)
 
 if __name__ == "__main__":
+
     websites = get_courses_websites()
+    # print(websites)
+    for each_url in websites:
+        one_course = get_courses(each_url)
+        create_objects(one_course)
+        print(each_url)
     
-    one_course = get_courses(websites[29])
-    create_objects(one_course)
-    
-    one_course = get_courses(websites[72])
-    create_objects(one_course)
-
-    one_course = get_courses(websites[73])
-    create_objects(one_course)
-    
-    one_course = get_courses(websites[94])
-    create_objects(one_course)
-
-    one_course = get_courses(websites[138])
-    create_objects(one_course)
     convert_to_json()
