@@ -6,7 +6,8 @@ import re
 from requests.api import get 
 
 f = open('../data/data.json')   
-Data = json.load(f)
+in_list = json.load(f)
+Data = {elem for elem in in_list}
 f.close()
 
 def request_websites(url):
@@ -24,7 +25,7 @@ def get_websites():
     get_websites scrapes all the redirected websites in the main page of UCI major requirements.
     """
     major_names = []
-    all_href = []
+    all_href = set()
     prefered = ['bs/', 'ba/', 'bfa/']
     soup = request_websites("http://catalogue.uci.edu/undergraduatedegrees/")
     for elem in soup.find_all('ul'):
@@ -32,11 +33,12 @@ def get_websites():
             href = each.get('href')
             get_type = href.split('_')
             if get_type[-1] in prefered and href not in all_href:
-                all_href.append('http://catalogue.uci.edu/' + href + '#requirementstext')
+                all_href.add('http://catalogue.uci.edu/' + href + '#requirementstext')
                 major_names.append(each.text)
 
     write_major_names(major_names)
-    return all_href
+    in_list = [elem for elem in all_href]
+    return sorted(in_list)
 
 
 def get_name(in_string):
@@ -128,16 +130,24 @@ def scrape_courses(url):
     return all_courses
 
 
-
 def write_requirements_file(url, classes):
     """
     write_to_file takes the information provided as parameters and write them out 
     in a .out file. The information contains all of the required courses of a major.
     """
-
     major = url.split('/')[-2].replace('_','')
-    with open("../data/" + major + '.json', 'w') as f:
-        json.dump(classes, f,indent=4)
+    with open("../data/majorsRequirements.sql", 'a') as f:
+        in_json = '['
+        for elem in classes:
+            if elem[1] is False:
+                elem[0] = elem[0].replace("'", "\\'")
+            in_json += '["' + elem[0] + '","' + str(elem[1]) + '"],'
+        if len(in_json) > 1:
+            in_json = in_json[:-1] + ']'
+        else:
+            in_json += ']'        
+        f.write("INSERT INTO majors (name, majorRequirements) VALUES ('" + major + "','" + in_json + "');" + '\n')
+
 
 def write_major_names(all_names):
     with open("../data/majorNames" + '.json', 'w') as f:
@@ -145,7 +155,7 @@ def write_major_names(all_names):
 
 if __name__ == "__main__":
     all_websites = get_websites()
-    course = scrape_courses(all_websites[23])
-    write_requirements_file(all_websites[23], course)
-    # course = scrape_courses(all_websites[27])
-    # write_to_file(all_websites[27], course)
+
+    for each in all_websites:
+        course = scrape_courses(each)
+        write_requirements_file(each, course)
