@@ -140,7 +140,7 @@ def write_requirements_file(url, classes):
         in_json = '['
         for elem in classes:
             if elem[1] is False:
-                elem[0] = elem[0].replace("'", "\\'")
+                elem[0] = (elem[0].replace('"', "'")).replace("'","\\'")
             in_json += '["' + elem[0] + '","' + str(elem[1]) + '"],'
         if len(in_json) > 1:
             in_json = in_json[:-1] + ']'
