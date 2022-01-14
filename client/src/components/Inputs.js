@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { InputGroup, Button, FormControl } from 'react-bootstrap';
 
 function Inputs() {
+    
     return (
       <InputGroup className="mb-3 mt-4">
         <FormControl

@@ -1,31 +1,36 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import QuarterColumn from '../components/QuarterColumn';
 import Schedules from '../components/Schedules';
-import Inputs from '../components/Inputs';
 import Requiremnets from '../components/Requirements';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, InputGroup, Button, FormControl } from 'react-bootstrap';
 import {useCallback, useState} from 'react';
 import required_ics from '../assets/icsrequirements';
 import {data} from '../assets/data';
+import Axios from 'axios';
 
 function HomePage() {
-  
-  let nameString = 'MajorNames.json';
-  let majorNames = require('../assets/' + nameString);
-  console.log(majorNames);
-
   let courseArray = required_ics
   let initialCourses = {}
 
+  //get data information from all courses
   courseArray.map((item) => {
     if(item[1] && data.hasOwnProperty([item[0]])) 
         initialCourses[item[0]] = data[item[0]];
   })
 
-
   const [courses, setCourses] = useState(initialCourses); 
-  const years = ['Freshman','Sophomore','Junior','Senior'];
-  const quarters = ['Fall','Winter','Spring'];
+  const [addCourse, setAddCourse] = useState("");
+  const [allAddCourses, setAllAddCourses] = useState([]);
+
+  
+  const additionalCourse = () => {
+    Axios.get('http://localhost:8080/api/addCourse', {
+      params: {
+        id: addCourse
+      }
+    }).then((res) => {
+      console.log(res);
+    }).catch((err)=> console.log(err))
+  }
 
   const moveCourse = ((item, quarter) => {
     console.log('course', item.quarter);
@@ -49,7 +54,25 @@ function HomePage() {
           </Col>
 
           <Col sm={6}> 
-            <div> <Inputs/></div>
+            <div>  
+              <InputGroup className="mb-3 mt-4">
+                <FormControl
+                  placeholder="Add course"
+                  aria-label="Add course"
+                  aria-describedby="basic-addon2"
+                  onChange = {e => setAddCourse(e.target.value)}
+                />
+                <Button 
+                  variant="outline-secondary" 
+                  id="button-addon2"
+                  onClick = { e => {
+                    e.preventDefault();
+                    additionalCourse();
+                  }}>
+                <i className="fas fa-plus"></i>
+                </Button>
+              </InputGroup>
+            </div>
 
             <div style={{backgroundColor:'#E2E8E4', minHeight:100, minWidth: 500}}
                 className= 'mt-4'> Required courses:

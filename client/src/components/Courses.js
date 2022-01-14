@@ -5,7 +5,6 @@ import { useDrop } from 'react-dnd';
 import ItemTypes from '../assets/ItemTypes';
 
 function Courses({courses, onDrop}) {
-
     const [{ isOver }, dropRef] = useDrop(() => ({
         accept: ItemTypes,
         drop: (item, monitor) => onDrop(item.item, 0),
