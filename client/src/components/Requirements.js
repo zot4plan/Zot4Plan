@@ -8,7 +8,6 @@ import ItemTypes from '../assets/ItemTypes';
 
 
 const Requirements = ({courses, onDrop}) => {
-
     let courseArray = required_ics
     let index = 0
     
@@ -27,7 +26,6 @@ const Requirements = ({courses, onDrop}) => {
             let courseId =  courseArray[index][0]
             
             if(courses[courseId] != undefined){
-
                 if(courses[courseId].quarter !== 0){
                     columns.push(<Col className="mt-2" key = {courseId}>
                         <div style={{width: 100}}>
@@ -68,7 +66,6 @@ const Requirements = ({courses, onDrop}) => {
 
     function renderRequirements(){        
         var rows = []
-
        // console.log(courses)
         for(index; index < courseArray.length; index++){
             let i = index 
@@ -82,7 +79,6 @@ const Requirements = ({courses, onDrop}) => {
         }
         return rows
     }
-
     return (
         <div ref = {dropRef} >
             {renderRequirements()}

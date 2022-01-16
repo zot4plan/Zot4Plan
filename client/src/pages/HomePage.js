@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Schedules from '../components/Schedules';
 import Requiremnets from '../components/Requirements';
+import AddCourse from '../components/AddCourse';
 import { Container, Row, Col, InputGroup, Button, FormControl } from 'react-bootstrap';
 import {useCallback, useState} from 'react';
 import required_ics from '../assets/icsrequirements';
@@ -21,7 +22,8 @@ function HomePage() {
   const [addCourse, setAddCourse] = useState("");
   const [allAddCourses, setAllAddCourses] = useState([]);
 
-  
+  const onChangeCourse = ((value) => {setAddCourse(value)})
+
   const additionalCourse = () => {
     Axios.get('http://localhost:8080/api/addCourse', {
       params: {
@@ -54,31 +56,13 @@ function HomePage() {
           </Col>
 
           <Col sm={6}> 
-            <div>  
-              <InputGroup className="mb-3 mt-4">
-                <FormControl
-                  placeholder="Add course"
-                  aria-label="Add course"
-                  aria-describedby="basic-addon2"
-                  onChange = {e => setAddCourse(e.target.value)}
-                />
-                <Button 
-                  variant="outline-secondary" 
-                  id="button-addon2"
-                  onClick = { e => {
-                    e.preventDefault();
-                    additionalCourse();
-                  }}>
-                <i className="fas fa-plus"></i>
-                </Button>
-              </InputGroup>
-            </div>
-
+            <AddCourse onSubmitFunction={additionalCourse} 
+                      onChangeFunction ={onChangeCourse}/> 
+          
             <div style={{backgroundColor:'#E2E8E4', minHeight:100, minWidth: 500}}
                 className= 'mt-4'> Required courses:
                 <Requiremnets onDrop={moveCourse} courses={courses}/>
             </div>
-
           </Col>
         </Row>
       </Container>

@@ -23,10 +23,10 @@ exports.findOne = (req, res) => {
     const id = req.query.id;
     Courses.findByPk(id).then(data => {
         if(data) {
-            res.send(data);
+            res.send( {message: "success", data});
         }
         else {
-            res.status(404).send({ 
+            res.send({ 
                 message: `Cannot find course with id=${id}.`
             });
         }
