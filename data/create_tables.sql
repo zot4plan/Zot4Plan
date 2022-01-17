@@ -17,3 +17,5 @@ CREATE TABLE courses (
     name VARCHAR(50) NOT NULL,
     majorRequirements json DEFAULT NULL,
     PRIMARY KEY(id));
+
+ALTER TABLE courses ADD FULLTEXT(id);
