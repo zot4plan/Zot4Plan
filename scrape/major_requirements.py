@@ -25,20 +25,21 @@ def get_websites():
     get_websites scrapes all the redirected websites in the main page of UCI major requirements.
     """
     major_names = []
-    all_href = set()
+    all_href = []
     prefered = ['bs/', 'ba/', 'bfa/']
     soup = request_websites("http://catalogue.uci.edu/undergraduatedegrees/")
     for elem in soup.find_all('ul'):
         for each in elem.find_all('a'):
             href = each.get('href')
             get_type = href.split('_')
-            if get_type[-1] in prefered and href not in all_href:
-                all_href.add('http://catalogue.uci.edu/' + href + '#requirementstext')
-                major_names.append(each.text)
+            website = 'http://catalogue.uci.edu/' + href + '#requirementstext'
+            name = each.text
+            if get_type[-1] in prefered and name not in major_names:
+                all_href.append([each.text, website])
+                major_names.append(name)
 
     write_major_names(major_names)
-    in_list = [elem for elem in all_href]
-    return sorted(in_list)
+    return all_href
 
 
 def get_name(in_string):
@@ -130,12 +131,11 @@ def scrape_courses(url):
     return all_courses
 
 
-def write_requirements_file(url, classes):
+def write_requirements_file(name, classes):
     """
     write_to_file takes the information provided as parameters and write them out 
     in a .out file. The information contains all of the required courses of a major.
     """
-    major = url.split('/')[-2].replace('_','')
     with open("../data/majorsRequirements.sql", 'a') as f:
         in_json = '['
         for elem in classes:
@@ -146,7 +146,7 @@ def write_requirements_file(url, classes):
             in_json = in_json[:-1] + ']'
         else:
             in_json += ']'        
-        f.write("INSERT INTO majors (name, majorRequirements) VALUES ('" + major + "','" + in_json + "');" + '\n')
+        f.write("INSERT INTO majors (name, majorRequirements) VALUES ('" + name + "','" + in_json + "');" + '\n')
 
 
 def write_major_names(all_names):
@@ -157,5 +157,5 @@ if __name__ == "__main__":
     all_websites = get_websites()
 
     for each in all_websites:
-        course = scrape_courses(each)
-        write_requirements_file(each, course)
+        course = scrape_courses(each[1])
+        write_requirements_file(each[0], course)
