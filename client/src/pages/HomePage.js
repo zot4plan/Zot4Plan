@@ -57,7 +57,18 @@ function HomePage() {
 
           <Col sm={6}> 
             <AddCourse onSubmitFunction={additionalCourse} 
-                      onChangeFunction ={onChangeCourse}/> 
+                      onChangeFunction ={onChangeCourse}
+                      courseArray={[
+                        "Pikachu",
+                        "Squirtle",
+                        "Bulbasaur",
+                        "Abra",
+                        "Charizard",
+                        "Blastoise",
+                        "Mew",
+                        "Mewtwo",
+                        "Wartortle"
+                      ]}/> 
           
             <div style={{backgroundColor:'#E2E8E4', minHeight:100, minWidth: 500}}
                 className= 'mt-4'> Required courses:
