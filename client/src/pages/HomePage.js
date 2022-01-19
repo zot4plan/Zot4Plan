@@ -19,12 +19,8 @@ function HomePage() {
   })
 
   const [courses, setCourses] = useState(initialCourses); 
-  const [addCourse, setAddCourse] = useState("");
-  const [allAddCourses, setAllAddCourses] = useState([]);
 
-  const onChangeCourse = ((value) => {setAddCourse(value)})
-
-  const additionalCourse = () => {
+  const additionalCourse = (addCourse) => {
     Axios.get('http://localhost:8080/api/addCourse', {
       params: {
         id: addCourse
@@ -56,19 +52,7 @@ function HomePage() {
           </Col>
 
           <Col sm={6}> 
-            <AddCourse onSubmitFunction={additionalCourse} 
-                      onChangeFunction ={onChangeCourse}
-                      courseArray={[
-                        "Pikachu",
-                        "Squirtle",
-                        "Bulbasaur",
-                        "Abra",
-                        "Charizard",
-                        "Blastoise",
-                        "Mew",
-                        "Mewtwo",
-                        "Wartortle"
-                      ]}/> 
+            <AddCourse onSubmit={additionalCourse} /> 
           
             <div style={{backgroundColor:'#E2E8E4', minHeight:100, minWidth: 500}}
                 className= 'mt-4'> Required courses:

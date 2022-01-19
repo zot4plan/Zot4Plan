@@ -1,12 +1,33 @@
+const { Sequelize } = require("../models");
 const db = require("../models");
 const Courses = db.courses;
 const Op = db.Sequelize.Op;
 
 // Retrieve all Courses from the database.
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? {title: {[Op.like]: `%${title}` }} : null;
-    Courses.findAll({ where: condition }).then(data => {
+    let id = "";
+    let condition ="";
+
+    if(req.query.id.indexOf("\&") > -1) {
+        id = req.query.id + "%";
+        condition = "id LIKE :id";
+    }
+    else {
+        req.query.id.split(" ").forEach((text) => { 
+            if (text.trim().length > 0)
+                id += "+" + text +" ";
+        });
+        id+="*";
+        condition = 'MATCH(id) AGAINST (:id IN BOOLEAN MODE)';
+    }
+
+    Courses.findAll({ 
+        attributes: ['id'],
+        where: Sequelize.literal(condition),
+        replacements: {
+            id: id
+        }
+        }).then(data => {
         res.send(data);
     })
     .catch(err => {

@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useRef } from 'react';
 import { InputGroup, Button, FormControl, ListGroup } from 'react-bootstrap';
+import Axios from 'axios';
 
-function AddCourse( {onSubmitFunction, onChangeFunction, courseArray} ) {
+function AddCourse( {onSubmit} ) {
   const [autoComplete, setAutoComplete] = useState({
     suggestRowIdx: 0,
     filteredSuggestions: [],
@@ -18,20 +19,27 @@ function AddCourse( {onSubmitFunction, onChangeFunction, courseArray} ) {
   };
 
   const setSearchBarValue = (e) => {
-    const suggestions = courseArray;
     const userInput = e.currentTarget.value;
 
     if(userInput.trim().length === 0) {
       itemRefs.current = [];
     }
 
-    const filteredSuggestions = suggestions.filter(
-      suggestion =>
-        suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-    );
+    if(userInput.trim().length > 2) {
+      Axios.get('http://localhost:8080/api/filterCourses', {
+        params: {
+          id: userInput
+        }
+      }).then((res) => {
+        console.log(res);
+        let filteredSuggestions = [];
+        res.data.forEach(course => filteredSuggestions.push(course.id))
+        setAutoComplete({suggestRowIdx: 0, showSuggestions:true, userInput: userInput,filteredSuggestions: filteredSuggestions} );
 
-      setAutoComplete((prevState) => ({...prevState, userInput: userInput,filteredSuggestions: filteredSuggestions} ));
-      
+      }).catch((err)=> console.log(err))
+    }
+    else
+    setAutoComplete({suggestRowIdx: 0, showSuggestions:false, userInput: userInput,filteredSuggestions: []} );
   };
 
   const addToRefs = (el, index) => {
@@ -98,7 +106,7 @@ function AddCourse( {onSubmitFunction, onChangeFunction, courseArray} ) {
                 id="button-addon2"
                 onClick = { e => {
                   e.preventDefault();
-                  onSubmitFunction();
+                  onSubmit(autoComplete.userInput);
                 }}>
           <i className="fas fa-plus"></i>
         </Button>
