@@ -4,7 +4,6 @@ import CourseCard from './CourseCard';
 import ItemTypes from '../assets/ItemTypes';
 
 function QuarterColumn({courses, quarter, onDrop}) {
-
   const [{ isOver }, dropRef] = useDrop(() => ({
     accept: ItemTypes,
     drop: (item, monitor) => onDrop(item.item, quarter),
@@ -21,14 +20,15 @@ function QuarterColumn({courses, quarter, onDrop}) {
       height:'172px',
       backgroundColor: isOver?"#90CAF9":"#FCFDFE",}}
     > 
-      {courses.map((course, index) => <div className= {index>=1? "mt-1" :""}>
+      {courses.map((course, index) => 
         <CourseCard 
+        className= {index>=1? "mt-1" :""}
         key={course.id}
         item={course}
         index={course.id}
         buttonClass="full-button"
         > 
-        </CourseCard> </div>)}
+        </CourseCard> )}
     </div>
   );
 }

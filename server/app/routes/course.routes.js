@@ -5,9 +5,10 @@ module.exports = app => {
 
     router.get("/filterCourses", courses.findAll);
     router.get("/addCourse", courses.findOne);
-    router.get("/courses", courses.getAllCourses);
-    
+    router.get("/getCourses", courses.getCourses);
+
     router.get("/getMajors", majors.getMajors);
+    router.get("/getRequirement", majors.getRequirement)
 
     app.use('/api',router);
 };

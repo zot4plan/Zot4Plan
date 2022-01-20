@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
     .catch(err => {
         res.status(500).send({
             message:
-                err.message || "Some error occurred while retrieving tutorials."
+                err.message || "Some error occurred while retrieving courses."
         })
     })
   
@@ -55,22 +55,21 @@ exports.findOne = (req, res) => {
     })
     .catch(err => {
         res.status(500).send({
-            message: "Error retrieving Tutorial with id=" + id
+            message: "Error retrieving course with id=" + id
         });
     });
 };
 
 // Find all courses from requirements 
-exports.getAllCourses = (req, res) => {
-    const coursesArray = req.query.courseArray;
-    var condition = coursesArray ? {id: {[Op.in]: `%${courseArray}` }} : null;
-    Courses.findAll({ where: condition }).then(data => {
+exports.getCourses = (req, res) => {
+    const coursesArray = req.query.id;
+    Courses.findAll({ where: {id: {[Op.in]: coursesArray}} }).then(data => {
         res.send(data);
     })
     .catch(err => {
         res.status(500).send({
             message:
-                err.message || "Some error occurred while retrieving tutorials."
+                err.message || "Some error occurred while retrieving courses."
         })
     })
 }

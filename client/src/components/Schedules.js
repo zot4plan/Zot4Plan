@@ -35,7 +35,8 @@ function Schedules({courses, moveCourse}) {
                       <QuarterColumn 
                         courses={quarterCourses[currentQuarter-1]} 
                         onDrop={moveCourse} 
-                        quarter={currentQuarter}>
+                        quarter={currentQuarter}
+                        >
                       </QuarterColumn>
                     </Col>
                   )

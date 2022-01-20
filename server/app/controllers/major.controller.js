@@ -10,7 +10,26 @@ exports.getMajors = (req, res) => {
     .catch(err => {
         res.status(500).send({
             message:
-                err.message || "Some error occurred while retrieving tutorials."
+                err.message || "Some error occurred while retrieving majors."
         })
     })
+}
+
+exports.getRequirement = (req, res) => {
+    const id = req.query.id;
+    Majors.findByPk(id, {attributes: ['majorRequirements']}).then(data => {
+        if(data) {
+            res.send(data);
+        }
+        else {
+            res.send({ 
+                message: `Cannot find course with id=${id}.`
+            });
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "Error retrieving major with id=" + id
+        });
+    });
 }

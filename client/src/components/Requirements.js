@@ -1,16 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import required_ics from '../assets/icsrequirements';
 import {Row, Col} from 'react-bootstrap';
 import CourseCard from './CourseCard'
 import { Popover,OverlayTrigger,Button } from 'react-bootstrap';
 import { useDrop } from 'react-dnd';
 import ItemTypes from '../assets/ItemTypes';
 
-
-const Requirements = ({courses, onDrop}) => {
-    let courseArray = required_ics
+const Requirements = ({courses, onDrop, requirements}) => {
     let index = 0
-    
     const [{ isOver }, dropRef] = useDrop(() => ({
         accept: ItemTypes,
         drop: (item, monitor) => onDrop(item.item, 0),
@@ -22,8 +18,8 @@ const Requirements = ({courses, onDrop}) => {
     function renderCol(){  
         let columns = []
         index++
-        while(index < courseArray.length && courseArray[index][1]){
-            let courseId =  courseArray[index][0]
+        while(index < requirements.length && requirements[index][1] === "True"){
+            let courseId =  requirements[index][0]
             
             if(courses[courseId] != undefined){
                 if(courses[courseId].quarter !== 0){
@@ -66,15 +62,14 @@ const Requirements = ({courses, onDrop}) => {
 
     function renderRequirements(){        
         var rows = []
-       // console.log(courses)
-        for(index; index < courseArray.length; index++){
+        for(index; index < requirements.length; index++){
             let i = index 
-            if(!courseArray[index][1]){
-                rows.push(<div key = {courseArray[i][0] + i}> 
-                                <h6>{courseArray[i][0]}</h6> 
+            if(requirements[index][1] === "False"){
+                rows.push(<div key = {requirements[i][0] + i}> 
+                                <h6>{requirements[i][0]}</h6> 
                                 <Row xs={3} md={4} className="mt-2"> {renderCol()}</Row>
                           </div>)
-                index--
+                index--;
             }
         }
         return rows
