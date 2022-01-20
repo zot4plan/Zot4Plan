@@ -8,6 +8,7 @@ exports.findAll = (req, res) => {
     let id = "";
     let condition ="";
 
+    //use LIKE if id contains special character
     if(req.query.id.indexOf("\&") > -1) {
         id = req.query.id + "%";
         condition = "id LIKE :id";

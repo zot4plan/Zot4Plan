@@ -1,9 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Schedules from '../components/Schedules';
 import Requiremnets from '../components/Requirements';
-import AddCourse from '../components/AddCourse';
-import { Container, Row, Col, InputGroup, Button, FormControl } from 'react-bootstrap';
-import {useCallback, useState} from 'react';
+import AutoCompleteSearch from '../components/AutoCompleteSearch';
+import SelectMajor from '../components/SelectMajor';
+import {Container, Row, Col} from 'react-bootstrap';
+import {useState} from 'react';
 import required_ics from '../assets/icsrequirements';
 import {data} from '../assets/data';
 import Axios from 'axios';
@@ -52,7 +53,8 @@ function HomePage() {
           </Col>
 
           <Col sm={6}> 
-            <AddCourse onSubmit={additionalCourse} /> 
+            <SelectMajor/>
+            <AutoCompleteSearch onSubmit={additionalCourse} /> 
           
             <div style={{backgroundColor:'#E2E8E4', minHeight:100, minWidth: 500}}
                 className= 'mt-4'> Required courses:

@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import { InputGroup, Button, FormControl, ListGroup } from 'react-bootstrap';
 import Axios from 'axios';
 
-function AddCourse( {onSubmit} ) {
+function AutoCompleteSearch( {onSubmit} ) {
   const [autoComplete, setAutoComplete] = useState({
     suggestRowIdx: 0,
     filteredSuggestions: [],
@@ -39,7 +39,7 @@ function AddCourse( {onSubmit} ) {
       }).catch((err)=> console.log(err))
     }
     else
-    setAutoComplete({suggestRowIdx: 0, showSuggestions:false, userInput: userInput,filteredSuggestions: []} );
+      setAutoComplete({suggestRowIdx: 0, showSuggestions:false, userInput: userInput,filteredSuggestions: []} );
   };
 
   const addToRefs = (el, index) => {
@@ -102,7 +102,8 @@ function AddCourse( {onSubmit} ) {
           onKeyDown={onSelectKeyDown}
           value={autoComplete.userInput}
         />
-        <Button variant="outline-secondary" 
+        <Button style={{zIndex: 0}}
+                variant="outline-secondary" 
                 id="button-addon2"
                 onClick = { e => {
                   e.preventDefault();
@@ -118,4 +119,4 @@ function AddCourse( {onSubmit} ) {
   );
 }
 
-export default AddCourse
+export default AutoCompleteSearch

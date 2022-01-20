@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import required_ics from '../assets/icsrequirements';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 import CourseCard from './CourseCard'
 import { Popover,OverlayTrigger,Button } from 'react-bootstrap';
 import { useDrop } from 'react-dnd';
