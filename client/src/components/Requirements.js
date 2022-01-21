@@ -7,12 +7,10 @@ import ItemTypes from '../assets/ItemTypes';
 
 const Requirements = ({courses, onDrop, requirements}) => {
     let index = 0
-    const [{ isOver }, dropRef] = useDrop(() => ({
+    console.log("requirement");
+    const [{}, dropRef] = useDrop(() => ({
         accept: ItemTypes,
         drop: (item, monitor) => onDrop(item.item, 0),
-        collect: (monitor) => ({
-          isOver: monitor.isOver(),
-        }),
       })); 
 
     function renderCol(){  
@@ -29,7 +27,7 @@ const Requirements = ({courses, onDrop, requirements}) => {
                             trigger="click"
                             placement='bottom'
                             overlay={
-                            <Popover id={courses[courseId].id}>
+                            <Popover id={courseId}>
                                 <Popover.Header as="h4">{courseId}</Popover.Header>
                                 <Popover.Body> {courses[courseId].description} </Popover.Body>
                                 <Popover.Body> {courses[courseId].prereqString} </Popover.Body>

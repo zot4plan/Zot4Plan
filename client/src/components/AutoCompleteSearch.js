@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState, useRef } from 'react';
+import { useState, useRef,useEffect } from 'react';
 import { InputGroup, Button, FormControl, ListGroup } from 'react-bootstrap';
 import Axios from 'axios';
 
@@ -10,9 +10,26 @@ function AutoCompleteSearch( {onSubmit} ) {
     showSuggestions: false,
     userInput: ""
   });
-
+  const ref = useRef();
   const itemRefs = useRef();
   itemRefs.current = [];
+
+  useEffect(() => {
+    const checkIfClickedOutside = e => {
+      // If the menu is open and the clicked target is not within the menu,
+      // then close the menu
+      if (autoComplete.showSuggestions && ref.current && !ref.current.contains(e.target)) {
+        setAutoComplete( (prevState) => ({...prevState, showSuggestions: false, userInput: ""}) );
+      }
+    }
+
+    document.addEventListener("mousedown", checkIfClickedOutside)
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+  }, [autoComplete])
 
   const selectText = text => {
     setAutoComplete( (prevState) => ({...prevState, userInput: text}) );
@@ -53,18 +70,18 @@ function AutoCompleteSearch( {onSubmit} ) {
     const suggestRowIdx = autoComplete.suggestRowIdx;
 
     let scrollIndex = suggestRowIdx - 1;
-
+    
     if (e.keyCode === 13) {
       selectText(filteredSuggestions[suggestRowIdx]);
     }
     else if (e.keyCode === 38 && suggestRowIdx > 0) {
-      //itemRefs.current[scrollIndex].scrollIntoView();
+      itemRefs.current[scrollIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
       setAutoComplete( (prevState) => ({...prevState, suggestRowIdx: scrollIndex}) );
     }
     // User pressed the down arrow, increment the index
     else if (e.keyCode === 40 && suggestRowIdx + 1 !== filteredSuggestions.length) {
       scrollIndex = suggestRowIdx + 1;
-      //itemRefs.current[scrollIndex].scrollIntoView();
+      itemRefs.current[scrollIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
       setAutoComplete( prevState =>{ return {...prevState, suggestRowIdx: scrollIndex} });
     }
   };
@@ -74,11 +91,11 @@ function AutoCompleteSearch( {onSubmit} ) {
     const suggestRowIdx = autoComplete.suggestRowIdx;
 
     return (
-      <>
+      <ListGroup className="dropbox" ref={ref}>
         {filteredSuggestions.map((suggestion, index) => {
           return (
             <ListGroup.Item
-              className={index === suggestRowIdx ? "active" : null}
+              className={index === suggestRowIdx ? "drop-item active" : "drop-item"}
               key={suggestion}
               onClick={e => selectText(e.currentTarget.innerText)}
               ref={el => addToRefs(el, index)}
@@ -87,12 +104,12 @@ function AutoCompleteSearch( {onSubmit} ) {
             </ListGroup.Item>
           );
         })}
-      </>
+      </ListGroup>
     ); 
   }
 
   return (
-    <div className="search-bar-dropdown mb-3 mt-4">
+    <div className="mb-3 mt-4 autoComplete">
       <InputGroup>
         <FormControl
           placeholder="Add course"
@@ -112,9 +129,7 @@ function AutoCompleteSearch( {onSubmit} ) {
           <i className="fas fa-plus"></i>
         </Button>
       </InputGroup>
-      <ListGroup>
-        {renderSuggestions()}
-      </ListGroup>
+      {autoComplete.showSuggestions && renderSuggestions()}
     </div>
   );
 }

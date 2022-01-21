@@ -25,35 +25,41 @@ function HomePage() {
   
   //get requirement and courses when selecting a major
   const getRequirement = async (e) => {
-    // get requirement 
-    const res = await Axios.get('http://localhost:8080/api/getRequirement', {
-      params: { id: e.value }
-    });
-    const requirementData = await res.data.majorRequirements;
-    let courseIds = new Set();
+    // if input is not empty
+    if(e) {
+      // get requirement 
+      const res = await Axios.get('http://localhost:8080/api/getRequirement', {
+        params: { id: e.value }
+      });
+      const requirementData = await res.data.majorRequirements;
+      let courseIds = new Set();
 
-    res.data.majorRequirements.forEach(elem => {
-      if(elem[1] === "True")
-        courseIds.add(elem[0]);
-    });
-    
-    // get courses data after get the requirement 
-    const res2 = await Axios.get('http://localhost:8080/api/getCourses', {
-      params: { id: Array.from(courseIds)
-      },
-      paramsSerializer: function(params) {
-        return Qs.stringify(params,{arrayFormat: 'brackets'} )
-      },
-    });
+      res.data.majorRequirements.forEach(elem => {
+        if(elem[1] === "True")
+          courseIds.add(elem[0]);
+      });
+      
+      // get courses data after get the requirement 
+      const res2 = await Axios.get('http://localhost:8080/api/getCourses', {
+        params: { id: Array.from(courseIds)
+        },
+        paramsSerializer: function(params) {
+          return Qs.stringify(params,{arrayFormat: 'brackets'} )
+        },
+      });
 
-    const courseData = {};
-    res2.data.forEach(course => {
-      course.quarter = 0;
-      courseData[course.id] = course;
-    })
-    setMajor({courses: courseData, requirement:res.data.majorRequirements})
-   // setRequirement(res.data.majorRequirements)
-   // setCourses(courseData)
+      const courseData = {};
+      res2.data.forEach(course => {
+        course.quarter = 0;
+        courseData[course.id] = course;
+      })
+      setMajor({courses: courseData, requirement:res.data.majorRequirements})
+    // setRequirement(res.data.majorRequirements)
+    // setCourses(courseData)
+    }
+    else {
+      setMajor({courses: {}, requirement: []})
+    }
   }
 
   //move course between quarters and requirement

@@ -1,6 +1,6 @@
 import QuarterColumn from "./QuarterColumn"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 
 
 function Schedules({courses, moveCourse}) {

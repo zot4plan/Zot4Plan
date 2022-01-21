@@ -1,3 +1,20 @@
+/*** Add Course Dropbox ***/
+.autoComplete {
+    width: 300px;
+}
+.dropbox {
+    position: absolute;
+    width: inherit;
+    height: 300px;
+    overflow-y: auto;
+}
+
+.drop-item{
+    z-index: 2;
+    width:inherit;
+}
+
+/*** customize button ***/
 .edit-button {
     background-color: #006C84;
     border: #fff !important;
