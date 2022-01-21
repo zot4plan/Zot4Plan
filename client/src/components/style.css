@@ -1,11 +1,15 @@
 /*** Add Course Dropbox ***/
 .autoComplete {
-    width: 300px;
+    position: relative;
+    width: auto;
 }
+
 .dropbox {
     position: absolute;
-    width: inherit;
+    width: 100%;
     height: 300px;
+    margin-right: auto;
+    margin-left:auto;
     overflow-y: auto;
 }
 

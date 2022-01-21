@@ -89,7 +89,7 @@ function HomePage() {
             <SelectMajor onSelect={getRequirement}/>
             <AutoCompleteSearch onSubmit={additionalCourse} /> 
           
-            <div style={{backgroundColor:'#E2E8E4', minHeight:100, minWidth: 500}}
+            <div style={{backgroundColor:'#E2E8E4', minHeight:100, }}
                 className= 'mt-4'> Required courses:
                 <Requiremnets onDrop={moveCourse} courses={major.courses} requirements={major.requirement}/>
             </div>

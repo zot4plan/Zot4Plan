@@ -110,7 +110,7 @@ function AutoCompleteSearch( {onSubmit} ) {
 
   return (
     <div className="mb-3 mt-4 autoComplete">
-      <InputGroup>
+      <InputGroup className="inputGroup">
         <FormControl
           placeholder="Add course"
           aria-label="Add course"
@@ -129,7 +129,7 @@ function AutoCompleteSearch( {onSubmit} ) {
           <i className="fas fa-plus"></i>
         </Button>
       </InputGroup>
-      {autoComplete.showSuggestions && renderSuggestions()}
+        {autoComplete.showSuggestions && renderSuggestions()}
     </div>
   );
 }
