@@ -36,3 +36,11 @@
     background-color: #006C84;
     opacity: 0.5;
 } 
+
+/*** Requirement ***/
+.requirement {
+    background-color: #E2E8E4;
+    min-height: 100px;
+    max-height: 80vh;
+    overflow: scroll;
+}

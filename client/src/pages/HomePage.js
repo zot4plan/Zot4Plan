@@ -9,9 +9,10 @@ import Qs from 'qs';
 import Axios from 'axios';
 
 function HomePage() {
-  const [major, setMajor] = useState({courses:{}, requirement:[]})
-  //const [courses, setCourses] = useState({}); 
+  const [major, setMajor] = useState({courses:{}, requirement:[], addedCourses: []})
+  //const [addedCourses, setAddCourses] = useState([]); 
   //const [requirement, setRequirement] = useState([]);
+
   //add course axios
   const additionalCourse = async (addCourse) => {
     Axios.get('http://localhost:8080/api/addCourse', {
@@ -20,6 +21,18 @@ function HomePage() {
       }
     }).then((res) => {
       console.log(res);
+       if(res.data.message === "success"){
+        let course = res.data.data;
+        if(major.courses[course.id] != undefined)
+          console.log("Course has already added.")
+        else {
+          course.quarter = 0;
+          setMajor(prevState => ({...prevState, courses: {...prevState.courses,[course.id]: course}, addedCourses: [...prevState.addedCourses, course.id]}));
+        }
+      }
+      else {
+        console.log(res.data.message);
+      }
     }).catch((err)=> console.log(err))
   }
   
@@ -33,7 +46,7 @@ function HomePage() {
       });
       const requirementData = await res.data.majorRequirements;
       let courseIds = new Set();
-
+      // elem[0]: courseId or text, elem[1]: True is courseId, False is text
       res.data.majorRequirements.forEach(elem => {
         if(elem[1] === "True")
           courseIds.add(elem[0]);
@@ -53,12 +66,12 @@ function HomePage() {
         course.quarter = 0;
         courseData[course.id] = course;
       })
-      setMajor({courses: courseData, requirement:res.data.majorRequirements})
+      setMajor({courses: courseData, requirement:res.data.majorRequirements, addedCourses: []})
     // setRequirement(res.data.majorRequirements)
     // setCourses(courseData)
     }
     else {
-      setMajor({courses: {}, requirement: []})
+      setMajor({courses: {}, requirement: [], addedCourses: []})
     }
   }
 
@@ -82,17 +95,13 @@ function HomePage() {
       <Container fluid='md'> 
         <Row>
           <Col sm={6}> 
-            <Schedules courses={major.courses} moveCourse={moveCourse}> </Schedules>
+            <Schedules courses={major.courses} moveCourse={moveCourse}/> 
           </Col>
 
           <Col sm={6}> 
             <SelectMajor onSelect={getRequirement}/>
-            <AutoCompleteSearch onSubmit={additionalCourse} /> 
-          
-            <div style={{backgroundColor:'#E2E8E4', minHeight:100, }}
-                className= 'mt-4'> Required courses:
-                <Requiremnets onDrop={moveCourse} courses={major.courses} requirements={major.requirement}/>
-            </div>
+            <AutoCompleteSearch onSubmit={additionalCourse}/> 
+            <Requiremnets onDrop={moveCourse} major={major}/>
           </Col>
         </Row>
       </Container>

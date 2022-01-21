@@ -4,8 +4,13 @@ import CourseCard from './CourseCard'
 import { Popover,OverlayTrigger,Button } from 'react-bootstrap';
 import { useDrop } from 'react-dnd';
 import ItemTypes from '../assets/ItemTypes';
+import './style.css'
 
-const Requirements = ({courses, onDrop, requirements}) => {
+const Requirements = ({major, onDrop}) => {
+    const courses = major.courses;
+    const requirement = major.requirement;
+    const addedCourses = major.addedCourses;
+
     let index = 0
     console.log("requirement");
     const [{}, dropRef] = useDrop(() => ({
@@ -16,13 +21,12 @@ const Requirements = ({courses, onDrop, requirements}) => {
     function renderCol(){  
         let columns = []
         index++
-        while(index < requirements.length && requirements[index][1] === "True"){
-            let courseId =  requirements[index][0]
+        while(index < requirement.length && requirement[index][1] === "True"){
+            let courseId =  requirement[index][0]
             
             if(courses[courseId] != undefined){
                 if(courses[courseId].quarter !== 0){
                     columns.push(<Col className="mt-2" key = {courseId}>
-                        <div style={{width: 100}}>
                         <OverlayTrigger
                             trigger="click"
                             placement='bottom'
@@ -37,7 +41,6 @@ const Requirements = ({courses, onDrop, requirements}) => {
                             >
                             <Button variant="outline-secondary" size ='sm'>{courseId}</Button>
                         </OverlayTrigger>
-                        </div>
                         </Col>)
                 }else{
 
@@ -59,12 +62,28 @@ const Requirements = ({courses, onDrop, requirements}) => {
     }
 
     function renderRequirements(){        
-        var rows = []
-        for(index; index < requirements.length; index++){
+        var rows = [];
+
+        if(addedCourses.length > 0) {
+            rows.push(<div key = "addCourses"> 
+                <h5>Additional Courses:</h5> 
+                <Row xs={3} md={4} className="mt-2"> {addedCourses.map(course => (<Col className="mt-2" key = {course}>
+                    <CourseCard 
+                        item={courses[course]}
+                        index={course}
+                        buttonClass="edit-button" > 
+                    </CourseCard>
+                    </Col>))
+                }</Row>
+          </div> )
+        }
+
+        rows.push(<h5 key="header">Required Courses:</h5>)
+        for(index; index < requirement.length; index++){
             let i = index 
-            if(requirements[index][1] === "False"){
-                rows.push(<div key = {requirements[i][0] + i}> 
-                                <h6>{requirements[i][0]}</h6> 
+            if(requirement[index][1] === "False"){
+                rows.push(<div key = {requirement[i][0] + i}> 
+                                <h6>{requirement[i][0]}</h6> 
                                 <Row xs={3} md={4} className="mt-2"> {renderCol()}</Row>
                           </div>)
                 index--;
@@ -73,7 +92,7 @@ const Requirements = ({courses, onDrop, requirements}) => {
         return rows
     }
     return (
-        <div ref = {dropRef} >
+        <div className="requirement mt-4" ref = {dropRef} >
             {renderRequirements()}
         </div>
     )

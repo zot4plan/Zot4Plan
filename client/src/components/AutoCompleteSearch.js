@@ -19,7 +19,7 @@ function AutoCompleteSearch( {onSubmit} ) {
       // If the menu is open and the clicked target is not within the menu,
       // then close the menu
       if (autoComplete.showSuggestions && ref.current && !ref.current.contains(e.target)) {
-        setAutoComplete( (prevState) => ({...prevState, showSuggestions: false, userInput: ""}) );
+        setAutoComplete( (prevState) => ({...prevState, showSuggestions: false}) );
       }
     }
 
@@ -125,6 +125,7 @@ function AutoCompleteSearch( {onSubmit} ) {
                 onClick = { e => {
                   e.preventDefault();
                   onSubmit(autoComplete.userInput);
+                  setAutoComplete( prevState =>{ return {...prevState, userInput: ""} });
                 }}>
           <i className="fas fa-plus"></i>
         </Button>
