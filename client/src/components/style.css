@@ -1,3 +1,4 @@
+/*** all components style ***/
 /*** Add Course Dropbox ***/
 .autoComplete {
     position: relative;
@@ -18,7 +19,8 @@
     width:inherit;
 }
 
-/*** customize button ***/
+/*** CourseCard ***/
+/* couse button */
 .edit-button {
     background-color: #006C84;
     border: #fff !important;
@@ -26,21 +28,35 @@
 }
 
 .full-button {
-    background-color: #006C84;
     border: #fff !important;
     width: 100%;
     display: block;
 }
 
-.edit-button:hover,.full-button:hover{
+.edit-button:hover{
     background-color: #006C84;
     opacity: 0.5;
 } 
+/* remove-btn */
+.removeBtn {
+    flex: 0 0 auto;
+    font-size: 12px;
+    margin: auto;
+}
+
+/* course header */
+.course-header {
+    flex: 1 1 auto;
+    font-size: 14px;
+    margin: auto;
+}
+
 
 /*** Requirement ***/
 .requirement {
     background-color: #E2E8E4;
     min-height: 100px;
     max-height: 80vh;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }

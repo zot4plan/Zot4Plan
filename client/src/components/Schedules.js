@@ -3,10 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Row, Col} from 'react-bootstrap';
 
 
-function Schedules({courses, moveCourse}) {
+function Schedules({courses, moveCourse, removeCourse}) {
     const years = ['Freshman','Sophomore','Junior','Senior'];
     const quarters = ['Fall','Winter','Spring'];
-    const quartersColor = ['#FA8072','#a0e6ff','#58D68D']
+   //const quartersColor = ['#FA8072','#a0e6ff','#58D68D']
     //'#E2E8E4' : grey
     let quarterCourses = [[],[],[],[],[],[],[],[],[],[],[],[]]
     Object.values(courses).forEach((course) => {
@@ -36,6 +36,7 @@ function Schedules({courses, moveCourse}) {
                         courses={quarterCourses[currentQuarter-1]} 
                         onDrop={moveCourse} 
                         quarter={currentQuarter}
+                        removeCourse={removeCourse}
                         >
                       </QuarterColumn>
                     </Col>

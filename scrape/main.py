@@ -18,7 +18,7 @@ if __name__ == "__main__":
                     elif 'Prerequisite:' in item:
                         prereq_string = item.replace('\n', '').replace('"', "'")
                 course_names.append(key)
-                f.write('INSERT INTO courses VALUES ("' + key + '","' + value.name + '","' + value.units + '","' + all_info[0].replace('"', "'") + '","' + restrict_string + '","' + prereq_string + '");' + '\n')
+                f.write('INSERT INTO courses VALUES ("' + key + '","' + value.name + '","' + value.units + '","' + all_info[0].replace('"', "'") + '","' + prereq_string + '","' + restrict_string + '");' + '\n')
     
     with open('../data/data.json', 'w') as f: 
         json.dump(course_names, f,indent=4)

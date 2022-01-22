@@ -1,15 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState, useRef,useEffect } from 'react';
+import { useState, useRef, useEffect, memo } from 'react';
 import { InputGroup, Button, FormControl, ListGroup } from 'react-bootstrap';
 import Axios from 'axios';
 
 function AutoCompleteSearch( {onSubmit} ) {
+  console.log("add course component");
   const [autoComplete, setAutoComplete] = useState({
     suggestRowIdx: 0,
     filteredSuggestions: [],
     showSuggestions: false,
     userInput: ""
   });
+
   const ref = useRef();
   const itemRefs = useRef();
   itemRefs.current = [];
@@ -135,4 +137,4 @@ function AutoCompleteSearch( {onSubmit} ) {
   );
 }
 
-export default AutoCompleteSearch
+export default memo(AutoCompleteSearch);

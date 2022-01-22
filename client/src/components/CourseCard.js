@@ -1,76 +1,57 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { memo } from 'react';
 import { Popover,OverlayTrigger,Button } from 'react-bootstrap';
-import React, {useRef} from 'react';
-import { useDrag, useDrop } from 'react-dnd';
+import { useDrag } from 'react-dnd';
 import ItemTypes from '../assets/ItemTypes';
 import './style.css'
 
-function CourseCard({item, index, buttonClass}) {
-    const ref = useRef(null)
-   /* const [, dropRef] = useDrop({
-        accept: ItemTypes,
-        hover(item, monitor) {
-            if(!ref.current){
-                return;
-            }
-            const dragIndex = item.id;
-            const hoverIndex = index;
-
-            if(dragIndex === hoverIndex) {
-                return;
-            }
-
-            const hoveredRect = ref.current.getBoundClientRect();
-            const hoverMiddleY = (hoveredRect.bottom - hoveredRect.top) / 2;
-            const mousePosition = monitor.getClientOffset();
-            const hoverClientY = mousePosition.y - hoveredRect.top;
-
-            if(dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-                return;
-            }
-            if(dragIndex > hoverIndex && hoverClientY < hoverMiddleY) {
-                return;
-            }
-           // moveItem(dragIndex, hoverIndex);
-            item.id=hoverIndex;
-            
-        }
-    }) */
+export function CourseCard({item, buttonClass, isDraggable, removeCourse,quarter}) {
+    //const [draggabble, setDraggable] = useState(true);
+    console.log(item.id);
     const [{isDragging}, dragRef] = useDrag({
         type: ItemTypes,
-        item: () => ({item}),
+        canDrag: isDraggable,
+        item: () => ({item,quarter}),
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
         }),
-    });
-    
-   // const [show, setShow] = useState(false);
-   // const onOpen = () => setShow(true);
-   // const onClose = () => setShow(false);
+    },[isDraggable]);
 
-   // const dragDropRef = dragRef(dropRef(ref))
+    function removeButton () {
+        return (
+            <Button variant="danger" 
+                    className="removeBtn" 
+                    onClick={(e) => {
+                        e.preventDefault(); 
+                        removeCourse(item.id)}}
+            >
+                <i className="fa fa-trash"></i>
+            </Button>
+        )
+    }
+
     return (
-        <div
-            ref={dragRef}
-            style={{opacity: isDragging? 0.4 : 1}}
+        <div ref={dragRef}
+             style={{opacity: isDragging? 0.4 : 1 }}
         >
             <OverlayTrigger
-                trigger="click"
-                placement='bottom'
+                trigger="click" placement='bottom' rootClose
                 overlay={
                 <Popover id={item.id}>
-                    <Popover.Header as="h4">{item.title}</Popover.Header>
-                    <Popover.Body> {"Description: " + item.description} </Popover.Body>
-                    <Popover.Body> {item.prereqString} </Popover.Body>
-                    <Popover.Body> {item.restriction} </Popover.Body>
+                    <Popover.Header style={{display:"flex"}}> 
+                        <p className="course-header"> <b>{item.title}</b> <br/>{item.units + " units"} </p>
+                        {item.removable && removeButton()}
+                    </Popover.Header>
+                    <Popover.Body> 
+                        <p> <b>{"Description: "}</b> {item.description} </p>
+                        <p> <b>{"Prerequisite: "}</b> {item.prereqString} </p>
+                        <p> <b>{"Restriction: "}</b> {item.restriction} </p>
+                    </Popover.Body>
                 </Popover>
                 }
             >
-                
-                <Button 
-                    variant="primary" 
-                    size ='sm' 
-                    className={buttonClass}
+                <Button variant={isDraggable? "primary":"secondary"} 
+                        size='sm' className={buttonClass}
                 >
                     {item.id}
                 </Button>
@@ -79,5 +60,9 @@ function CourseCard({item, index, buttonClass}) {
     ); 
 }
 
+const equalFn = function (prevCourse, nextCourse) {
+    return prevCourse.isDraggable === nextCourse.isDraggable && prevCourse.item.id === nextCourse.item.id && prevCourse.item.quarter === nextCourse.item.quarter;
+}
+
   
-export default CourseCard;
+export default  memo(CourseCard, equalFn);
