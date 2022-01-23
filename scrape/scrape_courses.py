@@ -3,7 +3,7 @@ import requests
 from major_requirements import request_websites, scrape_courses
 from collections import namedtuple
 
-Course_Info = namedtuple('Course', ['name', 'units', 'description'])
+Course_Info = namedtuple('Course', ['name', 'units', 'description', 'ge'])
 
 def get_courses_websites():
     """
@@ -37,9 +37,13 @@ def get_courses(url):
         name = elem.find('p', class_='courseblocktitle').text.split('.  ')
         testing = elem.find('div', class_='courseblockdesc')
         get_info = testing.find_all('p')
+        ge_tag = ''
         for each in get_info:
             description += each.text + ';'
-        c_info = Course_Info(name[1], (name[2].split(' ')[0]), description)
+            ge = each.find('strong')
+            if ge is not None:
+                ge_tag = ge.text.replace('.', '')
+        c_info = Course_Info(name[1], (name[2].split(' ')[0]), description, ge_tag)
         course_dict[name[0].replace("\u00a0", " ")] = c_info
     return course_dict
 
@@ -55,3 +59,8 @@ def write_to_out(url, one_course):
         for key, value in one_course.items():
             f.write(key + ';' + value.name + ';' + value.units + ';' + value.description + '\n')
 
+
+if __name__ == "__main__":
+    websites = get_courses_websites()
+    uci_course = get_courses(websites[0])
+    print(uci_course)

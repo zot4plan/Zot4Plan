@@ -50,8 +50,8 @@ export function CourseCard({item, buttonClass, isDraggable, removeCourse,quarter
                 </Popover>
                 }
             >
-                <Button variant={isDraggable? "primary":"secondary"} 
-                        size='sm' className={buttonClass}
+                <Button className={isDraggable? "edit-button":"picked-button"} 
+ 
                 >
                     {item.id}
                 </Button>

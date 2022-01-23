@@ -25,6 +25,14 @@
     background-color: #006C84;
     border: #fff !important;
     width: 100px;
+    font-size: 16px;
+}
+
+.picked-button{
+    background-color: #68737b;
+    border: #fff !important;
+    width: 100px;
+    font-size: 16px;
 }
 
 .full-button {

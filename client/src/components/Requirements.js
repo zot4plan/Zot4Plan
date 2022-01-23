@@ -13,7 +13,7 @@ const Requirements = ({major, onDrop, removeCourse}) => {
     console.log("requirement");
     const [, dropRef] = useDrop(() => ({
         accept: ItemTypes,
-        drop: (item, monitor) => onDrop(item.item, 0),
+        drop: (item, monitor) => onDrop(item, 0),
       })); 
 
     function renderCol(){  
@@ -28,7 +28,7 @@ const Requirements = ({major, onDrop, removeCourse}) => {
                                   item={courses[courseId]}
                                   isDraggable= {courses[courseId].quarter === 0}
                                   removeCourse = {removeCourse}
-                                    //buttonClass="edit-button" 
+                                  //buttonClass="edit-button" 
                                 />     
                             </Col>)
             }
