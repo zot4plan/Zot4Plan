@@ -19,7 +19,6 @@ def get_courses_websites():
             all_websites.add('http://catalogue.uci.edu' + get_href)
 
     all_websites = [elem for elem in all_websites]
-
     return sorted(all_websites)[1:]
 
 
@@ -50,21 +49,3 @@ def get_courses(url):
         c_info = Course_Info(name[1], (name[2].split(' ')[0]), description ,prereq, restrict, ge_tag)
         course_dict[name[0].replace("\u00a0", " ")] = c_info
     return course_dict
-
-
-def write_to_out(url, one_course):
-    """
-    write_to_out takes in the provided dictionary (containing info of each course section) and
-    write it out in a .out function - all info separated by ";".
-    """
-
-    filename = str(url.split('/')[-2])
-    with open('data/'+ filename + '.out', 'w') as f:
-        for key, value in one_course.items():
-            f.write(key + ';' + value.name + ';' + value.units + ';' + value.description + '\n')
-
-
-if __name__ == "__main__":
-    websites = get_courses_websites()
-    uci_course = get_courses(websites[0])
-    print(uci_course)

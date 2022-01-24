@@ -38,7 +38,6 @@ def get_websites():
                 all_href.append([each.text, website])
                 major_names.append(name)
 
-    write_major_names(major_names)
     return all_href
 
 
@@ -147,11 +146,6 @@ def write_requirements_file(name, classes):
         else:
             in_json += ']'        
         f.write("INSERT INTO majors (name, majorRequirements) VALUES ('" + name + "','" + in_json + "');" + '\n')
-
-
-def write_major_names(all_names):
-    with open("../data/majorNames" + '.json', 'w') as f:
-        json.dump(all_names, f,indent=4)
 
 if __name__ == "__main__":
     all_websites = get_websites()
