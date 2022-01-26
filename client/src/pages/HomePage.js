@@ -1,50 +1,49 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Schedules from '../components/Schedules';
-import Requiremnets from '../components/Requirements';
+import Quarters from '../components/Quarters';
 import AutoCompleteSearch from '../components/AutoCompleteSearch';
 import SelectMajor from '../components/SelectMajor';
+import CoursesTabs from '../components/CoursesTabs';
 import {Container, Row, Col} from 'react-bootstrap';
 import {useState, useCallback} from 'react';
 import Qs from 'qs';
 import Axios from 'axios';
 
 function HomePage() {
-  const [major, setMajor] = useState({courses:{}, requirement:[], addedCourses: []})
-  const [quarters, setQuarters] = useState({0:[], 1:[], 2:[], 3:[], 4:[], 5:[],
-                                 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[]});
+  const [major, setMajor] = useState({courses:{}, requirement:[], addCourses: []})
   
   /************ add course axios *************/
-  const additionalCourse = useCallback(async (addCourse) => {
-    Axios.get('http://localhost:8080/api/addCourse', {
+  const additionalCourse = (addCourse) => {
+    if(major.courses[addCourse] !== undefined)
+      console.log("Course has already added.");
+    else {
+      Axios.get('http://localhost:8080/api/addCourse', {
       params: {
         id: addCourse
       }
     }).then((res) => {
       console.log(res);
        if(res.data.message === "success"){
-        let course = res.data.data;
-        if(major.courses[course.id] !== undefined)
-          console.log("Course has already added.")
-        else {
+          let course = res.data.data;
+          //
           course.quarter = 0;
           course.removable = true;
-          setQuarters(prevState => ({...prevState, 0: [...prevState[0],course.id]}))
-          setMajor(prevState => ({...prevState, courses: {...prevState.courses,[course.id]: course}, addedCourses: [...prevState.addedCourses, course.id]}));
-        }
+
+          setMajor(prevState => ({...prevState, courses: {...prevState.courses,[course.id]: course}, addCourses: [...prevState.addCourses, course.id]}));
+        
       }
       else {
         console.log(res.data.message);
       }
     }).catch((err)=> console.log(err))
-  },[])
-
+    }
+  }
 
   /************ remove additional course *************/
   const removeCourse = (id) => {
     const courses = {...major.courses};
     delete courses[id];
-    const arr = major.addedCourses.filter(e => e !== id)
-    setMajor(prevState => ({...prevState, courses: courses, addedCourses: arr}));
+    const arr = major.addCourses.filter(e => e !== id)
+    setMajor(prevState => ({...prevState, courses: courses, addCourses: arr}));
   }
 
   /******* retrieve requirement and courses when select major *******/
@@ -78,10 +77,10 @@ function HomePage() {
         course.removable = false;
         courseData[course.id] = course;
       })
-      setMajor({courses: courseData, requirement:res.data.majorRequirements, addedCourses: []})
+      setMajor({courses: courseData, requirement:res.data.majorRequirements, addCourses:[]})
     }
     else 
-      setMajor({courses: {}, requirement: [], addedCourses: []})
+      setMajor({courses:{}, requirement:[], addCourses:[]})
   },[])
 
   /*** move course between quarters and requirement ***/
@@ -102,13 +101,13 @@ function HomePage() {
     <Container fluid='md'> 
       <Row>
         <Col sm={6}> 
-          <Schedules courses={major.courses} moveCourse={moveCourse} removeCourse={removeCourse}/> 
+          <Quarters courses={major.courses} moveCourse={moveCourse} removeCourse={removeCourse}/> 
         </Col>
 
         <Col sm={6}> 
           <SelectMajor onSelect={getRequirement}/>
           <AutoCompleteSearch onSubmit={additionalCourse}/> 
-          <Requiremnets onDrop={moveCourse} major={major} removeCourse={removeCourse}/>
+          <CoursesTabs major={major} moveCourse={moveCourse} removeCourse={removeCourse} />
         </Col>
       </Row>
     </Container>
@@ -116,7 +115,3 @@ function HomePage() {
 }
 
 export default HomePage;
-/*
-<Requiremnets onDrop={moveCourse} courses={courses} requirements={requirement}/> 
-<Requiremnets onDrop={moveCourse} courses={major.courses} requirements={major.requirement}/>
-*/

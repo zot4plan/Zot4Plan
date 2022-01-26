@@ -1,0 +1,115 @@
+{
+   "Anthropology, B.A.": [
+    {
+        "type": "h1",
+        "text": "A. Complete the following",
+        "children": {
+            "type": "courses",
+            "courses": ["ANTHRO 2A"]
+        }
+    },
+    {
+        "type": "h1",
+        "text": "B. Select one of the following:",
+        "children": {
+            "type": "courses",
+            "courses": ["ANTHRO 2A", "ANTHRO 2B", "ANTHRO 2C"]
+        }
+    },
+
+    {
+        "type": "h1",
+        "text": "C. Select one of the following:",
+         "children": {
+            "type": "courses",
+            "courses": ["ANTHRO 2A", "ANTHRO 2B", "ANTHRO 2C", "ANTHRO 20A", "ANTHRO 25A", "ANTHRO 30A","ANTHRO 30C","ANTHRO 41A","ANTHRO 45A","ANTHRO 48","ANTHRO 89"]
+        }
+    },
+    {
+        "type": "h1",
+        "text": "D. Complete the following:",
+         "children": {
+            "type": "courses",
+            "courses": ["ANTHRO 100A", "ANTHRO 100B", "ANTHRO 180AW"]
+        }
+    },
+    {
+        "type": "h1",
+        "text": "E. Select six additional elective courses from the following:",
+         "children": {
+            "type": "courses",
+            "courses": ["ANTHRO 124", "ANTHRO 125", "ANTHRO 126", "ANTHRO 127", "ANTHRO 129", "ANTHRO 138", "ANTHRO 139", "ANTHRO 140", "ANTHRO 146", "ANTHRO 147", "ANTHRO 148", "ANTHRO 149", "ANTHRO 169"]
+        }
+
+    }],
+    "Applied Physics, B.S.": [
+        {
+            "type": "h1",
+            "text": "A. Complete the following",
+            "children": {
+                "type": "courses",
+                "courses": [{"or": [["MATH 2A"],["MATH 5A"]]},"MATH 2B","MATH 2D","MATH 2E", "MATH 3A", "MATH 3D", "PHYSICS 50", "PHYSICS 50", {"or": [["PHYSICS 61A"],["PHYSICS 51A"]]}, "PHYSICS 111A", "PHYSICS 112A", "PHYSICS 113A", "PHYSICS 115A"]
+            }
+        },
+        {
+            "type": "h1",
+            "text": "B. Complete <b>one</b> of the following series:",
+            "children": {
+                "type": "courses",
+                "courses": [{"or": [["PHYSICS 7C","PHYSICS 7LC","PHYSICS 7D","PHYSICS 7LD", "PHYSICS 7E"],["PHYSICS 3A","PHYSICS 3B","PHYSICS 3LB","PHYSICS 3C","PHYSICS 3LC"]]}]
+            }
+        },
+        {
+            "type": "h1",
+            "text": "C. Complete <b>one</b> of the following:",
+            "children": {
+                "type": "courses",
+                "courses": ["PHYSICS 53", "I&C SCI 45C", "MATH 9", "EECS 10", "EECS 12"]
+            }
+        },
+        {
+            "type": "h1",
+            "text": "D. Complete <b>one</b> of the following:",
+            "children": {
+                "type": "courses",
+                "courses": ["PHYSICS 53", "I&C SCI 45C", "MATH 9", "EECS 10", "EECS 12"]
+            }
+        },
+        {
+            "type": "h1",
+            "text": "D. Complete <b>one</b> of the following:",
+            "children": {
+                "type": "courses",
+                "courses": [["PHYSICS 52A","PHYSICS 52B","PHYSICS 52C"],["CHEM 1LC", "CHEM 1LD"],["CHEM H2LA","CHEM H2LB"], ["CHEM M2LA","CHEM M2LB"], ["CHEM H52LA", "CHEM H52LB"],["CHEM M52LA","CHEM M52LB"],["ENGR 7A", "ENGR 7B"], ["EECS 70LA", "EECS 70LB"]] 
+            }
+        },
+        {
+            "type": "h1",
+            "text": "F. Complete <b>eight units</b> of upper-division laboratory using any combination of the following courses:",
+            "children": {
+                "type": "courses",
+                "courses": ["PHYSICS 106W", "PHYSICS 120", "PHYSICS 121W", "PHYSICS 139", "PHYSICS 193", "PHYSICS 196C"],
+                "note": "or one approved upper-division laboratory course outside of Physics" 
+            }
+        },
+        {
+            "type": "h1",
+            "text": "G. Complete <b>two units</b> of writing communication from the following courses:",
+            "children": {
+                "type": "courses",
+                "courses": ["PHYSICS 194","PHY SCI 139W","EDUC 143BW"],
+                "node": "or alternate upper-division writing course with department approval" 
+            }
+        },
+        {
+            "type": "h1",
+            "text": "H. Complete <b>32 additional units</b> of coherently-related electives in accord with the following rules:",
+            "children": {
+                "type": "courses",
+                "courses": ["PHYSICS 194","PHY SCI 139W","EDUC 143BW"],
+                "node": "or alternate upper-division writing course with department approval" 
+            }
+        }
+    ]
+
+}

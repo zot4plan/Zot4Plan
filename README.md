@@ -1,3 +1,5 @@
+Authors:  Loc Khong and Tram La
+
 Online resources that we consulted when completing this project: 
     Autocomplete feature: https://medium.com/swlh/implement-autocomplete-feature-in-react-9b2721a7deda
     Axios request: https://www.bezkoder.com/axios-request/
@@ -9,3 +11,8 @@ External Librabres:
     Qs
     React-bootstrap
     React-router-bootstrap
+
+How to run the code?
+Open 2 terminals: one is for client and the other is for server
+    cd to client folder: npm start
+    cd to server folder: node server.js

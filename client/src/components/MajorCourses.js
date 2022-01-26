@@ -5,10 +5,7 @@ import { useDrop } from 'react-dnd';
 import ItemTypes from '../assets/ItemTypes';
 import './style.css'
 
-const Requirements = ({major, onDrop, removeCourse}) => {
-    const courses = major.courses;
-    const requirement = major.requirement;
-    const addedCourses = major.addedCourses;
+function MajorCourses ({courses, requirement, onDrop, removeCourse}) {
     let index = 0;
     console.log("requirement");
     const [, dropRef] = useDrop(() => ({
@@ -42,21 +39,6 @@ const Requirements = ({major, onDrop, removeCourse}) => {
     function renderRequirements(){        
         var rows = [];
 
-        if(addedCourses.length > 0) {
-            rows.push(<div key = "addCourses"> 
-                <h5>Additional Courses:</h5> 
-                <Row xs={3} md={4} className="mt-2"> {addedCourses.map(course => (<Col className="mt-2" key = {course}>
-                    <CourseCard 
-                        item={courses[course]}
-                        isDraggable= {courses[course].quarter === 0}
-                        removeCourse = {removeCourse}
-                        //buttonClass="edit-button" 
-                        /> 
-                    </Col>))
-                }</Row>
-          </div> )
-        }
-
         rows.push(<h5 key="header">Required Courses:</h5>)
         for(index; index < requirement.length; index++){
             let i = index 
@@ -78,4 +60,4 @@ const Requirements = ({major, onDrop, removeCourse}) => {
     )
 }
 
-export default Requirements
+export default MajorCourses

@@ -21,3 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 
 /__pycache__
+/scrape/__pycache__

@@ -1,9 +1,9 @@
-import QuarterColumn from "./QuarterColumn"
+import Quarter from "./Quarter"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Row, Col} from 'react-bootstrap';
 
 
-function Schedules({courses, moveCourse, removeCourse}) {
+function Quarters({courses, moveCourse, removeCourse}) {
     const years = ['Freshman','Sophomore','Junior','Senior'];
     const quarters = ['Fall','Winter','Spring'];
    //const quartersColor = ['#FA8072','#a0e6ff','#58D68D']
@@ -32,13 +32,13 @@ function Schedules({courses, moveCourse, removeCourse}) {
                       className="square border-bottom border-3 p-1"> {quarter}
                       </h5>
 
-                      <QuarterColumn 
+                      <Quarter 
                         courses={quarterCourses[currentQuarter-1]} 
                         onDrop={moveCourse} 
                         quarter={currentQuarter}
                         removeCourse={removeCourse}
                         >
-                      </QuarterColumn>
+                      </Quarter>
                     </Col>
                   )
                 })}
@@ -49,4 +49,4 @@ function Schedules({courses, moveCourse, removeCourse}) {
 }
 
   
-export default Schedules;
+export default Quarters;

@@ -4,7 +4,7 @@ import { useDrop } from 'react-dnd';
 import CourseCard from './CourseCard';
 import ItemTypes from '../assets/ItemTypes';
 
-function QuarterColumn({courses, quarter, onDrop, removeCourse}) {
+function Quarter({courses, quarter, onDrop, removeCourse}) {
   const [{ isOver }, dropRef] = useDrop(() => ({
     accept: ItemTypes,
     drop: (item, monitor) => onDrop(item, quarter),
@@ -48,4 +48,4 @@ const equalFn = function(prevQuarter, nextQuarter) {
   return true;
 }
 
-export default memo(QuarterColumn, equalFn);
+export default memo(Quarter, equalFn);
