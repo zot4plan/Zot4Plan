@@ -10,6 +10,13 @@ in_list = json.load(f)
 Data = {elem for elem in in_list}
 f.close()
 
+class Header:
+    def __init__(self, name, typeParent = None):
+        self.name = name
+        self.child = []
+        self.typeParent = typeParent
+
+
 def request_websites(url):
     """
     request_websites attains permission from the server - with the intend to scrape and turn
@@ -20,24 +27,41 @@ def request_websites(url):
     soup = BeautifulSoup(link, 'lxml')
     return soup
 
+
 def get_websites():
     """
     get_websites scrapes all the redirected websites in the main page of UCI major requirements.
     """
+    # major_names = []
+    # all_href = []
+    # prefered = ['bs/', 'ba/', 'bfa/']
+    # soup = request_websites("http://catalogue.uci.edu/undergraduatedegrees/")
+    # for elem in soup.find_all('ul'):
+    #     for each in elem.find_all('a'):
+    #         href = each.get('href')
+    #         get_type = href.split('_')
+    #         website = 'http://catalogue.uci.edu/' + href
+    #         name = each.text
+    #         if get_type[-1] in prefered and name not in major_names:
+    #             all_href.append([each.text, website])
+    #             major_names.append(name)
+
+    # return all_href
+
     major_names = []
     all_href = []
     prefered = ['bs/', 'ba/', 'bfa/']
     soup = request_websites("http://catalogue.uci.edu/undergraduatedegrees/")
-    for elem in soup.find_all('ul'):
-        for each in elem.find_all('a'):
-            href = each.get('href')
-            get_type = href.split('_')
-            website = 'http://catalogue.uci.edu/' + href + '#requirementstext'
-            name = each.text
-            if get_type[-1] in prefered and name not in major_names:
-                all_href.append([each.text, website])
-                major_names.append(name)
-
+    find_div = soup.find_all('ul')
+    get_li = find_div[36].find_all('a')
+    for each in get_li:
+        href = each.get('href')
+        get_type = href.split('_')
+        website = 'http://catalogue.uci.edu/' + href
+        name = each.text
+        if get_type[-1] in prefered:
+            all_href.append([each.text, website])
+            major_names.append(name)
     return all_href
 
 
@@ -53,6 +77,15 @@ def get_name(in_string):
         else:
             break
     return name[:-1]
+
+
+def expand_series(courses):
+
+    items = courses.split('- ')
+    name = get_name(items[0])
+    for x in range(1, len(items)):
+        items[x] = name + ' ' + items[x]
+    return items
 
 
 def get_series(all_courses, in_string, name):
@@ -77,57 +110,53 @@ def get_series(all_courses, in_string, name):
 
     return num_series
 
+
 def scrape_courses(url):
-    """
-    scrape_courses scrapes all of the required courses from the provided url.
-    """
-
     soup = request_websites(url)
-    main = soup.find("table", class_='sc_courselist')
-
-
-    try:
-        all_courses = []
-        for elem in main.find_all('tr'):
-            if elem.find_all('span', class_='courselistcomment'):
-                change_space = elem.text.strip().replace("\u00a0", " ")
-                in_string = change_space.strip().replace("\u2013", "-")
-                if in_string.isupper():
-                    course_name = get_name(in_string)
-                    if '-' in in_string:
-                        check_series = in_string.split(',')
-                        series = []
-                        for i in range(len(check_series)):
-                            if i == 0:
-                                series = get_series(all_courses, check_series[i][len(course_name):], course_name)
-                            else:
-                                series = get_series(all_courses, check_series[i], course_name)
-                        for elem in series:
-                            all_courses.append([elem, True])
-                    else:
-                        all_courses.append([in_string, True])
+    table = soup.find('div', id='requirementstextcontainer')
+    main = table.find_all("tr")
+    requirements = []
+    for elem in main:
+        ## Checks if elem is a course (clickable)
+        course = elem.find("td", class_="codecol")
+        if course != None:
+            change_space = course.text.strip().replace("\u00a0", " ") ## replace space symbol with space character
+            name = change_space.strip().replace("\u2013", "-")
+            ## checks if this is the parent is Area header or list comment
+            if len(requirements[-1].child) == 0: 
+                requirements[-1].child.append(Header("","Courses"))
+            ## checks if courses are relatted to the previous - such as or (chose one)
+            if 'or' in name:
+                ## only append when the previous is already containing other 'or' cases (in a list)
+                if type(requirements[-1].child[-1].child[-1]) == list:
+                    requirements[-1].child[-1].child[-1].append(name[3:])
                 else:
-                    all_courses.append([in_string, False])
+                    prev = requirements[-1].child[-1].child[-1]
+                    requirements[-1].child[-1].child[-1] = [prev, name[3:]]
+            elif '-' in name:
+                courses = expand_series(name)
+                for elem in courses:
+                    requirements[-1].child[-1].child.append(elem)
             else:
-                for course in elem.find_all('td', class_='codecol'):
-                    change_space = course.text.strip().replace("\u00a0", " ")
-                    in_string = change_space.strip().replace("\u2013", "-")
-                    
-                    if '-' in in_string:
-                        course_name = get_name(in_string)
-                        series = get_series(all_courses, in_string[len(course_name):], course_name)
-                        for elem in series:
-                            all_courses.append([elem, True])
-                    elif 'or' in in_string:
-                        all_courses.append(['or', False])
-                        in_string = in_string.replace("or ", '')
-                    
-                        all_courses.append([in_string, True])
-                    else:
-                        all_courses.append([in_string, True])
-    except:
-        print('error: ' + url)
-    return all_courses
+                requirements[-1].child[-1].child.append(name)
+            continue
+
+        area_header = elem.find("span", class_="courselistcomment areaheader")
+        if area_header != None:
+            change_space = area_header.text.strip().replace("\u00a0", " ")
+            name =  change_space.strip().replace("\u2013", "-")
+            requirements.append(Header(name, "Header"))
+            continue
+
+        list_comment = elem.find("span", class_="courselistcomment")
+        if list_comment != None:
+            change_space = list_comment.text.strip().replace("\u00a0", " ")
+            name =  change_space.strip().replace("\u2013", "-")
+            if len(requirements) == 0:
+                requirements.append(Header("", 'Header'))
+            requirements[-1].child.append(Header(name, 'Courses'))
+    
+    return requirements  
 
 
 def write_requirements_file(name, classes):
@@ -147,9 +176,21 @@ def write_requirements_file(name, classes):
             in_json += ']'        
         f.write("INSERT INTO majors (name, majorRequirements) VALUES ('" + name + "','" + in_json + "');" + '\n')
 
+def write_to_json(name, info):
+    name = name.replace(' ', '_')
+    name = name.replace(',', '')
+    with open('../data/' + name + 'json', 'w') as f:
+        json_version = []
+        for elem in info:
+            if elem.typeParent == "Header":
+                elem.child = [each.__dict__ for each in elem.child]
+            json_version.append(elem.__dict__)
+        json.dump(json_version, f, indent=4)
+
+
 if __name__ == "__main__":
     all_websites = get_websites()
-
-    for each in all_websites:
-        course = scrape_courses(each[1])
-        write_requirements_file(each[0], course)
+    for elem in all_websites:
+        majorInfo = scrape_courses(elem[1])
+        write_to_json(elem[0], majorInfo)
+        ## write_requirements_file(each[0], course)
