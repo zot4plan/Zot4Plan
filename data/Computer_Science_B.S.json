@@ -1,0 +1,318 @@
+[
+    {
+        "name": "Lower-division",
+        "child": [
+            {
+                "name": "A. Select one of the following series:",
+                "child": [
+                    "I&C SCI 31",
+                    "I&C SCI 32",
+                    "I&C SCI 33"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "or",
+                "child": [
+                    "I&C SCI 32A",
+                    "I&C SCI 33"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "B. Complete:",
+                "child": [
+                    "I&C SCI 45C",
+                    "I&C SCI 46",
+                    "I&C SCI 51",
+                    "I&C SCI 53",
+                    "I&C SCI 53L",
+                    "IN4MATX 43",
+                    "MATH 2A",
+                    "MATH 2B",
+                    "I&C SCI 6B",
+                    "I&C SCI 6D",
+                    [
+                        "I&C SCI 6N",
+                        "MATH 3A"
+                    ],
+                    "STATS 67"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "C. Two courses approved for General Education category II except those offered by CSE, Economics, Engineering, ICS, or Mathematics. University Studies courses can be used with the approval of the CS Vice Chair for Undergraduate Studies.",
+                "child": [],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Upper-division",
+        "child": [
+            {
+                "name": "A. Core",
+                "child": [
+                    "COMPSCI 161",
+                    "I&C SCI 139W"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "B. Upper-division electives: Select 11 upper-division courses from the list below. Sections B-1 and B-2 must be completed as part of the 11 upper-division electives.",
+                "child": [
+                    "COMPSCI 103-160, 162-189",
+                    "IN4MATX 102",
+                    "IN4MATX 113",
+                    "IN4MATX 115",
+                    "IN4MATX 117",
+                    "IN4MATX 121",
+                    "IN4MATX 122",
+                    "IN4MATX 124",
+                    "IN4MATX 131",
+                    "IN4MATX 133",
+                    "IN4MATX 134",
+                    "I&C SCI 161",
+                    "I&C SCI 162"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "B-1. Project Courses: Choose at least two projects courses from the following list:",
+                "child": [
+                    "COMPSCI 113",
+                    "COMPSCI 114",
+                    "COMPSCI 117",
+                    "COMPSCI 122B",
+                    "COMPSCI 122C",
+                    "COMPSCI 122D",
+                    "COMPSCI 125",
+                    "COMPSCI 133",
+                    "COMPSCI 142B",
+                    "COMPSCI 143B",
+                    "COMPSCI 145",
+                    "COMPSCI 145L",
+                    "COMPSCI 147",
+                    "COMPSCI 153",
+                    "COMPSCI 154",
+                    "COMPSCI 165",
+                    "COMPSCI 175",
+                    "IN4MATX 117",
+                    "IN4MATX 134"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "B-2. Specialization: Select and satisfy the requirements for one of the specializations below. (Note: Students may not pursue more than one specialization.)",
+                "child": [],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Some of the specializations include recommended electives. These are courses related to the specialization and intended to help students choose courses to take toward their upper-division elective requirement.",
+        "child": [],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Algorithms: Four courses from the following list:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "COMPSCI 162",
+                    "COMPSCI 163",
+                    "COMPSCI 164",
+                    "COMPSCI 165",
+                    "COMPSCI 166",
+                    "COMPSCI 167",
+                    "COMPSCI 169"
+                ],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Architecture and Embedded Systems: four courses from the following list:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "COMPSCI 145",
+                    "COMPSCI 145L",
+                    "COMPSCI 147",
+                    "COMPSCI 151",
+                    "COMPSCI 152",
+                    "COMPSCI 153",
+                    "COMPSCI 154"
+                ],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Bioinformatics: three courses from the following list:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "COMPSCI 184A"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "and complete:",
+                "child": [
+                    "COMPSCI 172B",
+                    "COMPSCI 172C",
+                    "COMPSCI 184C"
+                ],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "General CS track",
+        "child": [
+            {
+                "name": "",
+                "child": ["COMPSCI 103-189, except COMPSCI 161"],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Information",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "COMPSCI 121",
+                    "COMPSCI 122A",
+                    "COMPSCI 178"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "and four courses from:",
+                "child": [
+                    "I&C SCI 45J",
+                    "COMPSCI 122B",
+                    "COMPSCI 122C",
+                    "COMPSCI 122D",
+                    "COMPSCI 125",
+                    "COMPSCI 132",
+                    "COMPSCI 134",
+                    "COMPSCI 141",
+                    "COMPSCI 142A",
+                    "COMPSCI 143A",
+                    "COMPSCI 163",
+                    "COMPSCI 165",
+                    "COMPSCI 167",
+                    "COMPSCI 179"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "at least one of which must be:",
+                "child": [
+                    "COMPSCI 122B",
+                    "COMPSCI 122C",
+                    "COMPSCI 122D",
+                    "COMPSCI 125",
+                    "COMPSCI 179"
+                ],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Intelligent Systems",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "COMPSCI 171",
+                    "COMPSCI 175",
+                    "COMPSCI 178"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "and at least three courses from:",
+                "child": [
+                    "COMPSCI 116",
+                    "COMPSCI 121",
+                    "COMPSCI 125",
+                    "COMPSCI 162",
+                    "COMPSCI 163",
+                    "COMPSCI 164",
+                    "COMPSCI 169",
+                    "COMPSCI 177",
+                    "COMPSCI 179"
+                ],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Networked Systems",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "COMPSCI 132",
+                    "COMPSCI 133",
+                    "COMPSCI 134",
+                    "COMPSCI 143A"
+                ],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Systems and Software: three courses from the following list:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "COMPSCI 131",
+                    "COMPSCI 141",
+                    "COMPSCI 142A",
+                    "COMPSCI 142B",
+                    "COMPSCI 143A",
+                    "COMPSCI 143B"
+                ],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Visual Computing: four courses from the following list:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "COMPSCI 111",
+                    "COMPSCI 112",
+                    "COMPSCI 114",
+                    "COMPSCI 116",
+                    "COMPSCI 117",
+                    "I&C SCI 162"
+                ],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    }
+]

@@ -3,7 +3,7 @@ import requests
 from major_requirements import request_websites, scrape_courses
 from collections import namedtuple
 
-Course_Info = namedtuple('Course', ['name', 'units', 'description','prerequisite', 'restriction', 'ge'])
+Course_Info = namedtuple('Course', ['name', 'department', 'units', 'description','prerequisite', 'restriction', 'ge'])
 
 def get_courses_websites():
     """
@@ -46,6 +46,24 @@ def get_courses(url):
                 prereq = info.replace('\n', '').replace('"', "'").replace('Prerequisite:','')
             if ge is not None:
                 ge_tag = ge.text.replace('.', '').upper()
-        c_info = Course_Info(name[1], (name[2].split(' ')[0]), description ,prereq, restrict, ge_tag)
-        course_dict[name[0].replace("\u00a0", " ")] = c_info
+    
+        unit = "0"
+        if len(name[2].split(' ')[0]) > 1:
+            unit = name[2].split(' ')[0][-1]
+        elif len(name[2].split(' ')[0]) == 1:
+            unit = name[2].split(' ')[0]
+        
+        key_name = name[0].replace("\u00a0", " ")
+        get_dept = key_name.split(" ")[:-1]
+        department = " ".join(get_dept)
+        c_info = Course_Info(name[1], department, unit, description ,prereq, restrict, ge_tag)
+        course_dict[key_name] = c_info
+    
     return course_dict
+
+
+if __name__ == "__main__":
+    websites = get_courses_websites()
+    for each_url in websites:
+        one_course = get_courses(each_url)
+        print(one_course)

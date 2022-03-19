@@ -1,0 +1,28 @@
+[
+    {
+        "type": "h1",
+        "text": "A. Complete the following",
+        "courses": ["ANTHRO 2A"]
+    },
+    {
+        "type": "h1",
+        "text": "B. Select one of the following:",
+        "courses": ["ANTHRO 2A", "ANTHRO 2B", "ANTHRO 2C"]
+    },
+
+    {
+        "type": "h1",
+        "text": "C. Select one of the following:",
+        "courses": ["ANTHRO 2A", "ANTHRO 2B", "ANTHRO 2C", "ANTHRO 20A"]
+    },
+    {
+        "type": "h1",
+        "text": "D. Complete the following:",
+        "courses": ["ANTHRO 100A", "ANTHRO 100B", "ANTHRO 180AW"]
+    },
+    {
+        "type": "h1",
+        "text": "E. Select six additional elective courses from the following:",
+        "courses": ["ANTHRO 124", "ANTHRO 125", "ANTHRO 126", "ANTHRO 127", "ANTHRO 129", "ANTHRO 138", "ANTHRO 139", "ANTHRO 140", "ANTHRO 146", "ANTHRO 147", "ANTHRO 148", "ANTHRO 149", "ANTHRO 169"]
+    }
+]

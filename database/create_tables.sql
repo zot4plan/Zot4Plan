@@ -5,10 +5,11 @@ USE zot4plandb;
 GO
 CREATE TABLE courses (
     id VARCHAR(25) NOT NULL,
-    title VARCHAR(200) NOT NULL,
-    units VARCHAR(10) NOT NULL,
+    name VARCHAR(200) NOT NULL,
+    department VARCHAR(20) NOT NULL,
+    units INT NOT NULL,
     description VARCHAR(1000) NOT NULL,
-    prereqString VARCHAR(1000) NOT NULL,
+    prerequisite VARCHAR(1000) NOT NULL,
     restriction VARCHAR(1000) NOT NULL,
     PRIMARY KEY(id));
 ALTER TABLE courses ADD FULLTEXT(id);

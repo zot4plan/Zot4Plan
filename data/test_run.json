@@ -1,0 +1,209 @@
+[
+    {
+        "name": "",
+        "child": [
+            {
+                "name": "A. Complete the following:",
+                "child": [
+                    "MATH 2A- 2B",
+                    "PSYCH 10A- 10B- 10C",
+                    "COGS 106",
+                    "COGS 107",
+                    "COGS 108",
+                    "PSYCH 14M",
+                    "or COGS 14P",
+                    "or I&C SCI 31",
+                    "PSYCH 9A- 9B- 9C",
+                    "COGS 109"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "B. Select three courses from the following:",
+                "child": [],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Research Methods",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "PSYCH 112A- 112LA",
+                    "PSYCH 112BW- 112LB",
+                    "PSYCH 112C- 112LC",
+                    "COGS 112P- 112LP",
+                    "COGS 112R- 112LR"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "C. Select six courses from the following list:",
+                "child": [
+                    "BIO SCI 35",
+                    "BIO SCI 36",
+                    "BIO SCI 37",
+                    "BIO SCI 38",
+                    "COGS 14P",
+                    "LSCI 3",
+                    "LSCI 10",
+                    "LSCI 20",
+                    "LSCI 51",
+                    "I&C SCI 31",
+                    "I&C SCI 32",
+                    "I&C SCI 33",
+                    "LPS 30",
+                    "LPS 31",
+                    "MATH 2D",
+                    "MATH 2E",
+                    "MATH 3A",
+                    "MATH 3D",
+                    "PHYSICS 3A- 3B- 3C"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "or",
+                "child": [
+                    "PHYSICS 7C- 7D- 7E"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "with labs PHYSICS 7LC and PHYSICS 7LD",
+                "child": [
+                    "PHYSICS 15",
+                    "PSYCH 14M",
+                    "STATS 7",
+                    "STATS 110",
+                    "STATS 111",
+                    "STATS 112"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "NOTE: Careful selection should be made in order to satisfy general education requirements and prerequisites for upper-division courses.",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "D. Select three courses from the following:",
+                "child": [],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Upper Division Core Courses",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "PSYCH 130A",
+                    "PSYCH 140C",
+                    "PSYCH 140J",
+                    "PSYCH 140L",
+                    "PSYCH 140M",
+                    "PSYCH 150",
+                    "PSYCH 160A",
+                    "PSYCH 160D"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "E. Select seven courses from the following list. Up to three courses may also be taken from Requirement B and Requirement D:",
+                "child": [],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Upper-Division Core Electives:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "COMPSCI 171",
+                    "COMPSCI 178",
+                    "COMPSCI 183",
+                    "LSCI 102",
+                    "LSCI 111",
+                    "LSCI 121",
+                    "PSYCH 120A",
+                    "PSYCH 120D",
+                    "PSYCH 120H",
+                    "PSYCH 120P",
+                    "PSYCH 131A",
+                    "PSYCH 131B",
+                    "PSYCH 156A",
+                    "PSYCH 161",
+                    "PSYCH 161H",
+                    "PSYCH 162N",
+                    "PSYCH 9A",
+                    "MATH 2A",
+                    "Science course (C)",
+                    "General Education",
+                    "PSYCH 10A",
+                    "COGS 14P",
+                    "Science course (C)",
+                    "General Education",
+                    "Core course (D)",
+                    "Core elective (E)",
+                    "Research Methods (B)",
+                    "COGS 107",
+                    "Core elective (E)",
+                    "Research Methods (B)",
+                    "Elective",
+                    "Elective",
+                    "PSYCH 10A",
+                    "COGS 14P",
+                    "Core elective (E)",
+                    "Core course (D)",
+                    "Core elective (E)",
+                    "Research methods (B)",
+                    "Core elective (E)",
+                    "COGS 107",
+                    "PSYCH 9A",
+                    "MATH 2A",
+                    "Science course (C)",
+                    "General Education",
+                    "PSYCH 10A",
+                    "COGS 14P",
+                    "Science course (C)",
+                    "General Education",
+                    "Core course (D)",
+                    "PSYCH H101A",
+                    "COGS 107",
+                    "Research Methods (B)",
+                    "Core elective (E)",
+                    "Research Methods (B)",
+                    "PSYCH H101B",
+                    "Elective",
+                    "PSYCH 9A",
+                    "LPS 31",
+                    "Science course (C)",
+                    "General Education",
+                    "PSYCH 10A",
+                    "Computer Tech Requirement",
+                    "Additional Science course (D)",
+                    "General Education",
+                    "Core course (E)",
+                    "PSYCH H101A",
+                    "Research Methods (G)",
+                    "Elective",
+                    "Research Methods (G)",
+                    "PSYCH H101B",
+                    "Elective",
+                    "Elective"
+                ],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    }
+]

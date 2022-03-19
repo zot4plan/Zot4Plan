@@ -5,19 +5,23 @@ module.exports = (sequelize, Sequelize) => {
             allowNull:false,
             primaryKey: true
         },  
-        title: {
+        name: {
             type: Sequelize.STRING(200),
             allowNull:false,
         },
+        department: {
+            type: Sequelize.STRING(20),
+            allowNull: false,
+        },
         units: {
-            type: Sequelize.STRING(10),
+            type: Sequelize.INTEGER,
             allowNull:false,
         },
         description: {
             type: Sequelize.STRING(1000),
             allowNull:false,
         },
-        prereqString: {
+        prerequisite: {
             type: Sequelize.STRING(1000),
             allowNull:false,
         },

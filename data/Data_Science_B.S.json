@@ -1,0 +1,115 @@
+[
+    {
+        "name": "",
+        "child": [
+            {
+                "name": "Lower-division:",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "A. Select one of the following series:",
+                "child": [
+                    "I&C SCI 31",
+                    "I&C SCI 32",
+                    "I&C SCI 33"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "or",
+                "child": [
+                    "I&C SCI 32A",
+                    "I&C SCI 33"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "B. Complete:",
+                "child": [
+                    "I&C SCI 45C",
+                    "I&C SCI 46",
+                    "I&C SCI 51",
+                    "IN4MATX 43"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "C. Complete:",
+                "child": [
+                    "MATH 2A",
+                    "MATH 2B",
+                    "MATH 2D",
+                    [
+                        "MATH 3A",
+                        "I&C SCI 6N"
+                    ],
+                    "I&C SCI 6B",
+                    "I&C SCI 6D",
+                    "STATS 5",
+                    "STATS 7",
+                    "STATS 68"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "Upper-division:",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "A. Data Science core requirements:",
+                "child": [
+                    "STATS 110",
+                    "STATS 111",
+                    "STATS 112",
+                    "STATS 115",
+                    "STATS 120A",
+                    "STATS 120B",
+                    "STATS 120C",
+                    "I&C SCI 139W",
+                    "COMPSCI 122A",
+                    "COMPSCI 161",
+                    "COMPSCI 178",
+                    "IN4MATX 143"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "B. Three elective courses from the list below:",
+                "child": [
+                    "MATH 130B",
+                    "MATH 130C",
+                    "STATS 140",
+                    "I&C SCI 53",
+                    "COMPSCI 111",
+                    "COMPSCI 115",
+                    "COMPSCI 121",
+                    "COMPSCI 122B",
+                    "COMPSCI 122C",
+                    "COMPSCI 125",
+                    "COMPSCI 131",
+                    "COMPSCI 134",
+                    "COMPSCI 163",
+                    "COMPSCI 165",
+                    "COMPSCI 169",
+                    "COMPSCI 171",
+                    "COMPSCI 172B",
+                    "IN4MATX 131",
+                    "IN4MATX 141",
+                    "IN4MATX 161"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "C. Data Science capstone team-based project courses: STATS 170A and STATS 170B",
+                "child": [
+                    "STATS 170A",
+                    "STATS 170B"
+                ],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    }
+]
