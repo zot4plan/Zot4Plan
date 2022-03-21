@@ -22,20 +22,25 @@
     {
         "name": "B. Complete:",
         "child": [
-            "I&C SCI 45C",
-            "I&C SCI 45J",
-            "I&C SCI 46",
-            "I&C SCI 51",
-            "IN4MATX 43",
-            "MATH 2A",
-            "MATH 2B",
-            "I&C SCI 6B",
-            "I&C SCI 6D",
-            [
-                "I&C SCI 6N",
-                "MATH 3A"
-            ],
-            "STATS 67"
+            {
+                "name": "",
+                "child": [
+                    "I&C SCI 45C",
+                    "I&C SCI 45J",
+                    "I&C SCI 46",
+                    "I&C SCI 51",
+                    "IN4MATX 43",
+                    "MATH 2A",
+                    "MATH 2B",
+                    "I&C SCI 6B",
+                    "I&C SCI 6D",
+                    [
+                        "I&C SCI 6N",
+                        "MATH 3A"
+                    ],
+                    "STATS 67"
+                ]
+            }
         ]
     },
     {

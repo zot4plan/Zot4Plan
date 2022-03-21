@@ -22,27 +22,37 @@
     {
         "name": "B. Complete:",
         "child": [
-            "I&C SCI 45C",
-            "I&C SCI 46",
-            "I&C SCI 51",
-            "IN4MATX 43"
+        {
+            "name": "",
+            "child": [
+                "I&C SCI 45C",
+                "I&C SCI 46",
+                "I&C SCI 51",
+                "IN4MATX 43"
+            ]
+        }
         ]
     },
     {
         "name": "C. Complete:",
         "child": [
-            "MATH 2A",
-            "MATH 2B",
-            "MATH 2D",
-            [
-                "MATH 3A",
-                "I&C SCI 6N"
-            ],
-            "I&C SCI 6B",
-            "I&C SCI 6D",
-            "STATS 5",
-            "STATS 7",
-            "STATS 68"
+        {
+            "name": "",
+            "child": [
+                "MATH 2A",
+                "MATH 2B",
+                "MATH 2D",
+                [
+                    "MATH 3A",
+                    "I&C SCI 6N"
+                ],
+                "I&C SCI 6B",
+                "I&C SCI 6D",
+                "STATS 5",
+                "STATS 7",
+                "STATS 68" 
+            ]
+        }
         ]
     },
     {
