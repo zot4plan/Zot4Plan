@@ -1,46 +1,42 @@
 [
     {
-        "name": "Lower-division",
+        "name": "Lower-division: A. Select one of the following series:",
         "child": [
             {
-                "name": "A. Select one of the following series:",
+                "name": "Group 1",
                 "child": [
-                    "I&C SCI 31",
-                    "I&C SCI 32",
-                    "I&C SCI 33"
-                ],
-                "typeParent": "Courses"
+                "I&C SCI 31",
+                "I&C SCI 32",
+                "I&C SCI 33"
+                ]
             },
             {
-                "name": "or",
+                "name": "Group 2",
                 "child": [
                     "I&C SCI 32A",
-                    "I&C SCI 33"
-                ],
-                "typeParent": "Courses"
-            },
-            {
-                "name": "B. Complete:",
-                "child": [
-                    "I&C SCI 45C",
-                    "I&C SCI 45J",
-                    "I&C SCI 46",
-                    "I&C SCI 51",
-                    "IN4MATX 43",
-                    "MATH 2A",
-                    "MATH 2B",
-                    "I&C SCI 6B",
-                    "I&C SCI 6D",
-                    [
-                        "I&C SCI 6N",
-                        "MATH 3A"
-                    ],
-                    "STATS 67"
-                ],
-                "typeParent": "Courses"
+                    "I&C SCI 33" 
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
+    },
+    {
+        "name": "B. Complete:",
+        "child": [
+            "I&C SCI 45C",
+            "I&C SCI 45J",
+            "I&C SCI 46",
+            "I&C SCI 51",
+            "IN4MATX 43",
+            "MATH 2A",
+            "MATH 2B",
+            "I&C SCI 6B",
+            "I&C SCI 6D",
+            [
+                "I&C SCI 6N",
+                "MATH 3A"
+            ],
+            "STATS 67"
+        ]
     },
     {
         "name": "Upper-division",
@@ -63,8 +59,7 @@
                     "IN4MATX 191A",
                     "IN4MATX 191B",
                     "I&C SCI 139W"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
                 "name": "B. Select four of the following:",
@@ -88,15 +83,12 @@
                     "COMPSCI 165",
                     "I&C SCI 167",
                     "I&C SCI 168"
-                ],
-                "typeParent": "Courses"
-            },
-            {
-                "name": "Software Engineering elective courses may not be counted as part of the Management minor.",
-                "child": [],
-                "typeParent": "Courses"
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
+    },
+    {
+        "name": "Software Engineering elective courses may not be counted as part of the Management minor.",
+        "child": []
     }
 ]

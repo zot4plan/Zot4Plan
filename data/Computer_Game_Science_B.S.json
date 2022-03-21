@@ -1,53 +1,49 @@
 [
     {
-        "name": "Lower-division",
+        "name": "Lower-division: A. Select one of the following series:",
         "child": [
             {
-                "name": "A. Select one of the following series:",
-                "child": [
+                "name": "Group 1",
+                "child":[
                     "I&C SCI 31",
                     "I&C SCI 32",
                     "I&C SCI 33"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "or",
+                "name": "Group 2",
                 "child": [
                     "I&C SCI 32A",
                     "I&C SCI 33"
-                ],
-                "typeParent": "Courses"
-            },
-            {
-                "name": "B. Complete:",
-                "child": [
-                    "I&C SCI 45C",
-                    "I&C SCI 46",
-                    "I&C SCI 51",
-                    "I&C SCI 60",
-                    "I&C SCI 61",
-                    "I&C SCI 62",
-                    "IN4MATX 43",
-                    "MATH 2A",
-                    "MATH 2B",
-                    [
-                        "I&C SCI 6N",
-                        "MATH 3A"
-                    ],
-                    "I&C SCI 6B",
-                    "I&C SCI 6D",
-                    "STATS 67",
-                    "PHYSICS 3A",
-                    [
-                        "FLM&MDA 85A",
-                        "FLM&MDA 85C"
-                    ]
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
+                ]
+            }  
+        ]
+    },
+    {
+        "name": "Lower Division: B. Complete:",
+        "child": [
+            "I&C SCI 45C",
+            "I&C SCI 46",
+            "I&C SCI 51",
+            "I&C SCI 60",
+            "I&C SCI 61",
+            "I&C SCI 62",
+            "IN4MATX 43",
+            "MATH 2A",
+            "MATH 2B",
+            [
+                "I&C SCI 6N",
+                "MATH 3A"
+            ],
+            "I&C SCI 6B",
+            "I&C SCI 6D",
+            "STATS 67",
+            "PHYSICS 3A",
+            [
+                "FLM&MDA 85A",
+                "FLM&MDA 85C"
+            ]
+        ]
     },
     {
         "name": "Upper-division",
@@ -62,17 +58,15 @@
                     "I&C SCI 168",
                     "I&C SCI 169A",
                     "I&C SCI 169B"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "and select two of the following:",
+                "name": "And select two of the following:",
                 "child": [
                     "COMPSCI 112",
                     "I&C SCI 163",
                     "I&C SCI 166"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
                 "name": "B. Select two of the following:",
@@ -84,93 +78,57 @@
                     "IN4MATX 113",
                     "IN4MATX 121",
                     "IN4MATX 131"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
                 "name": "C. CGS Elective Courses:\nFive additional courses:\n1. Two courses from A-C.\n2. Three courses must be in the same Bren ICS track.",
-                "child": [],
-                "typeParent": "Courses"
+                "child": []
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
         "name": "Bren ICS Tracks:",
-        "child": [],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Algorithms",
         "child": [
             {
-                "name": "",
+                "name": "Algorithms",
                 "child": [
                     "COMPSCI 161",
                     "COMPSCI 162",
                     "COMPSCI 163",
                     "COMPSCI 164",
                     "COMPSCI 165"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Artificial Intelligence",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Artificial Intelligence",
                 "child": [
                     "COMPSCI 171",
                     "COMPSCI 175",
                     "COMPSCI 177",
                     "COMPSCI 178",
                     "COMPSCI 179"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Computational Biology",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Computational Biology",
                 "child": [
                     "COMPSCI 183",
                     "COMPSCI 184A",
                     "COMPSCI 184C"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Computer Graphics and Vision",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Computer Graphics and Vision",
                 "child": [
                     "COMPSCI 111",
                     "COMPSCI 112",
                     "COMPSCI 114",
                     "COMPSCI 116",
                     "COMPSCI 117"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Computer Networks",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Computer Networks",
                 "child": [
                     "COMPSCI 131",
                     "COMPSCI 132",
@@ -180,17 +138,10 @@
                         "COMPSCI 137",
                         "IN4MATX 124"
                     ]
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Databases",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Databases",
                 "child": [
                     [
                         "COMPSCI 121",
@@ -199,80 +150,45 @@
                     "COMPSCI 122A",
                     "COMPSCI 122B",
                     "COMPSCI 125"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Hardware",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Hardware",
                 "child": [
                     "COMPSCI 145",
                     "COMPSCI 151",
                     "COMPSCI 153",
                     "COMPSCI 154"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Human-Computer Interaction",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Human-Computer Interaction",
                 "child": [
                     "IN4MATX 131",
                     "IN4MATX 132",
                     "IN4MATX 133",
                     "IN4MATX 134"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Operating Systems",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Operating Systems",
                 "child": [
                     "COMPSCI 143A",
                     "COMPSCI 143B",
                     "COMPSCI 146"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Programming Languages and Compilers",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Programming Languages and Compilers",
                 "child": [
                     "IN4MATX 101",
                     "IN4MATX 102",
                     "COMPSCI 142A",
                     "COMPSCI 142B"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Social and Organizational Computing",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Social and Organizational Computing",
                 "child": [
                     "IN4MATX 151",
                     "IN4MATX 153",
@@ -280,17 +196,10 @@
                     "IN4MATX 162W",
                     "IN4MATX 163",
                     "IN4MATX 171"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Software Engineering",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Software Engineering",
                 "child": [
                     "IN4MATX 113",
                     "IN4MATX 115",
@@ -298,71 +207,43 @@
                     "IN4MATX 121",
                     "IN4MATX 122",
                     "IN4MATX 124"
-                ],
-                "typeParent": "Courses"
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
         "name": "Non-Track Courses (some of these courses have prerequisites that are not part of the CGS major):",
-        "child": [],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Computer Game Science",
         "child": [
             {
-                "name": "",
+                "name": "Computer Game Science",
                 "child": [
                     "I&C SCI 162",
                     "I&C SCI 163",
                     "I&C SCI 166"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Business Management",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Business Management",
                 "child": [
                     "MGMT 101",
                     "MGMT 102",
                     "MGMT 105",
                     "MGMT 154",
                     "MGMT 155"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Cognitive Science",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Cognitive Science",
                 "child": [
                     "PSYCH 130A",
                     "PSYCH 131A",
                     "PSYCH 131B",
                     "PSYCH 135M",
-                    "PSYCH 140C"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Mathematics",
-        "child": [
+                    "PSYCH 140C" 
+                ]
+            },
             {
-                "name": "",
+                "name": "Mathematics",
                 "child": [
                     "MATH 112A",
                     "MATH 112B",
@@ -370,26 +251,18 @@
                     "MATH 115",
                     "MATH 121A",
                     "MATH 121B"
-                ],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
-    },
-    {
-        "name": "Film and Media Studies",
-        "child": [
+                ]
+            },
             {
-                "name": "",
+                "name": "Film and Media Studies",
                 "child": [
                     "FLM&MDA 113",
                     "FLM&MDA 114",
                     "FLM&MDA 117A",
                     "FLM&MDA 144"
-                ],
-                "typeParent": "Courses"
+                ]
             }
-        ],
-        "typeParent": "Header"
+
+        ]
     }
 ]

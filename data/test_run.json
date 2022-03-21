@@ -1,9 +1,9 @@
 [
     {
-        "name": "",
+        "name": "A. Complete the following:",
         "child": [
             {
-                "name": "A. Complete the following:",
+                "name": "",
                 "child": [
                     "MATH 2A- 2B",
                     "PSYCH 10A- 10B- 10C",
@@ -15,11 +15,14 @@
                     "or I&C SCI 31",
                     "PSYCH 9A- 9B- 9C",
                     "COGS 109"
-                ],
-                "typeParent": "Courses"
-            },
+                ]            }
+        ]
+    },
+    {
+        "name": "B. Select three courses from the following:",
+        "child": [
             {
-                "name": "B. Select three courses from the following:",
+                "name": "",
                 "child": [],
                 "typeParent": "Courses"
             }

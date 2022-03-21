@@ -1,62 +1,53 @@
 [
     {
-        "name": "",
+        "name": "Lower-division: A. Select one of the following series:",
         "child": [
             {
-                "name": "Lower-division:",
-                "child": [],
-                "typeParent": "Courses"
-            },
-            {
-                "name": "A. Select one of the following series:",
+                "name": "Group 1",
                 "child": [
                     "I&C SCI 31",
                     "I&C SCI 32",
                     "I&C SCI 33"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "or",
+                "name": "Group 2",
                 "child": [
                     "I&C SCI 32A",
                     "I&C SCI 33"
-                ],
-                "typeParent": "Courses"
-            },
-            {
-                "name": "B. Complete:",
-                "child": [
-                    "I&C SCI 45C",
-                    "I&C SCI 46",
-                    "I&C SCI 51",
-                    "IN4MATX 43"
-                ],
-                "typeParent": "Courses"
-            },
-            {
-                "name": "C. Complete:",
-                "child": [
-                    "MATH 2A",
-                    "MATH 2B",
-                    "MATH 2D",
-                    [
-                        "MATH 3A",
-                        "I&C SCI 6N"
-                    ],
-                    "I&C SCI 6B",
-                    "I&C SCI 6D",
-                    "STATS 5",
-                    "STATS 7",
-                    "STATS 68"
-                ],
-                "typeParent": "Courses"
-            },
-            {
-                "name": "Upper-division:",
-                "child": [],
-                "typeParent": "Courses"
-            },
+                ]
+            }
+        ]
+    },
+    {
+        "name": "B. Complete:",
+        "child": [
+            "I&C SCI 45C",
+            "I&C SCI 46",
+            "I&C SCI 51",
+            "IN4MATX 43"
+        ]
+    },
+    {
+        "name": "C. Complete:",
+        "child": [
+            "MATH 2A",
+            "MATH 2B",
+            "MATH 2D",
+            [
+                "MATH 3A",
+                "I&C SCI 6N"
+            ],
+            "I&C SCI 6B",
+            "I&C SCI 6D",
+            "STATS 5",
+            "STATS 7",
+            "STATS 68"
+        ]
+    },
+    {
+        "name": "Upper-division:",
+        "child": [
             {
                 "name": "A. Data Science core requirements:",
                 "child": [
@@ -72,8 +63,7 @@
                     "COMPSCI 161",
                     "COMPSCI 178",
                     "IN4MATX 143"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
                 "name": "B. Three elective courses from the list below:",
@@ -98,18 +88,15 @@
                     "IN4MATX 131",
                     "IN4MATX 141",
                     "IN4MATX 161"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "C. Data Science capstone team-based project courses: STATS 170A and STATS 170B",
+                "name": "C. Data Science capstone team-based project courses:",
                 "child": [
                     "STATS 170A",
                     "STATS 170B"
-                ],
-                "typeParent": "Courses"
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
     }
 ]

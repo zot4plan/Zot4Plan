@@ -1,63 +1,52 @@
 [
     {
-        "name": "Lower-division",
+        "name": "Lower Division: A. Select one of the following series:",
         "child": [
             {
-                "name": "A. Select one of the following series:",
+                "name": "Group 1",
                 "child": [
                     "I&C SCI 31",
                     "I&C SCI 32",
                     "I&C SCI 33"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "or",
+                "name": "Group 2",
                 "child": [
                     "I&C SCI 32A",
                     "I&C SCI 33"
-                ],
-                "typeParent": "Courses"
-            },
-            {
-                "name": "B. Complete:",
-                "child": [
-                    "I&C SCI 45J",
-                    "IN4MATX 43",
-                    "I&C SCI 6B",
-                    [
-                        "STATS 7",
-                        "STATS 67"
-                    ]
-                ],
-                "typeParent": "Courses"
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
-        "name": "Upper-division",
+        "name": "Lower Division: B. Complete:",
         "child": [
-            {
-                "name": "A. Informatics Core Requirements:",
-                "child": [
+            "I&C SCI 45J",
+            "IN4MATX 43",
+            "I&C SCI 6B",
+            [
+                "STATS 7",
+                "STATS 67"
+            ]
+        ]
+    },
+    {
+        "name": "Upper-division: A. Informatics Core Requirements:",
+        "child": [
+        
                     "IN4MATX 113",
                     "IN4MATX 121",
                     "IN4MATX 131",
                     "IN4MATX 151",
                     "IN4MATX 161",
                     "IN4MATX 191A",
-                    "I 191B"
-                ],
-                "typeParent": "Courses"
-            },
-            {
-                "name": "B. One of the following specializations:",
-                "child": [],
-                "typeParent": "Courses"
-            }
-        ],
-        "typeParent": "Header"
+                    "IN4MATX 191B"
+                ]
+    },
+    {
+        "name": "B. One of the following specializations:",
+        "child": []
     },
     {
         "name": "1. Specialization in Human-Computer Interaction",
@@ -66,11 +55,10 @@
                 "name": "Complete:",
                 "child": [
                     "IN4MATX 132"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "and select three of the following:",
+                "name": "And select three of the following:",
                 "child": [
                     "IN4MATX 133",
                     "IN4MATX 141",
@@ -78,32 +66,27 @@
                     "IN4MATX 153",
                     "IN4MATX 162W",
                     "IN4MATX 171"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "and select two project courses from the following:",
+                "name": "And select two project courses from the following:",
                 "child": [
                     "IN4MATX 125",
                     "IN4MATX 134",
                     "IN4MATX 148",
                     "IN4MATX 163",
                     "IN4MATX 172"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "and select two additional courses from the following:",
-                "child": [],
-                "typeParent": "Courses"
+                "name": "And select two additional courses from the following:",
+                "child": []
             },
             {
                 "name": "IN4MATX 100-190",
-                "child": [],
-                "typeParent": "Courses"
+                "child": []
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
         "name": "2. Specialization in Organizations and Information Technology",
@@ -116,11 +99,10 @@
                     "IN4MATX 163",
                     "MGMT 5",
                     "MGMT 102"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "and select four of the following:",
+                "name": "And select four of the following:",
                 "child": [
                     "MGMT 107",
                     "MGMT 173",
@@ -132,31 +114,25 @@
                     "SOCIOL 135",
                     "SOCIOL 141",
                     "SOCIOL 143"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
                 "name": "IN4MATX 100-190",
-                "child": [],
-                "typeParent": "Courses"
+                "child": []
             },
             {
-                "name": "and select two additional courses from the following:",
-                "child": [],
-                "typeParent": "Courses"
+                "name": "And select two additional courses from the following:",
+                "child": []
             },
             {
                 "name": "IN4MATX 100-190",
-                "child": [],
-                "typeParent": "Courses"
+                "child": []
             },
             {
                 "name": "COMPSCI 100-199",
-                "child": [],
-                "typeParent": "Courses"
+                "child": []
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
         "name": "3. Specialization in Health Informatics",
@@ -166,8 +142,7 @@
                 "child": [
                     "IN4MATX 171",
                     "IN4MATX 172"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
                 "name": "Select four from the following:",
@@ -190,44 +165,38 @@
                     "COMPSCI 145L",
                     "COMPSCI 171",
                     "COMPSCI 178"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "and select two courses from the following:",
+                "name": "And select two courses from the following:",
                 "child": [
                     "NUR SCI 110W",
                     "PUBHLTH 101",
                     "PUBHLTH 122"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "and select two additional courses from the following:",
-                "child": [],
-                "typeParent": "Courses"
+                "name": "And select two additional courses from the following:",
+                "child": []
             },
             {
                 "name": "IN4MATX 100-199",
-                "child": [],
-                "typeParent": "Courses"
+                "child": []
             },
             {
                 "name": "COMPSCI 100-199",
-                "child": [],
-                "typeParent": "Courses"
+                "child": []
             },
             {
                 "name": "PUBHLTH 100-199",
-                "child": [],
-                "typeParent": "Courses"
+                "child": []
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
         "name": "4. Specialization in Individual Studies",
-        "child": [],
-        "typeParent": "Header"
+        "child": [
+            "https://catalogue.uci.edu/donaldbrenschoolofinformationandcomputersciences/departmentofinformatics/informatics_bs/#requirementstext"
+        ]
     }
 ]
