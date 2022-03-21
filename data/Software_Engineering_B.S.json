@@ -53,7 +53,10 @@
                     "COMPSCI 143A",
                     "COMPSCI 132",
                     "COMPSCI 161",
-                    "IN4MATX 101/COMPSCI 141",
+                    [
+                        "IN4MATX 101",
+                        "COMPSCI 141"
+                    ],
                     "IN4MATX 113",
                     "IN4MATX 115",
                     "IN4MATX 131",
@@ -70,11 +73,17 @@
                 "name": "B. Select four of the following:",
                 "child": [
                     "IN4MATX 102",
-                    "IN4MATX 125/COMPSCI 113",
+                    [
+                        "IN4MATX 125",
+                        "COMPSCI 113"
+                    ],
                     "IN4MATX 132",
                     "IN4MATX 133",
                     "IN4MATX 134",
-                    "IN4MATX 141/COMPSCI 121",
+                    [
+                        "IN4MATX 141",
+                        "COMPSCI 121"
+                    ],
                     "IN4MATX 143",
                     "IN4MATX 148",
                     "IN4MATX 161",
