@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING(50),
             allowNull:false,
         },
-        majorRequirements: {
+        major_requirement: {
             type: Sequelize.JSON,
         },
     }, {

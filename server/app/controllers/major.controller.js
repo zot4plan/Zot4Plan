@@ -16,7 +16,7 @@ exports.getMajors = (req, res) => {
 
 exports.getRequirement = (req, res) => {
     const id = req.query.id;
-    Majors.findByPk(id, {attributes: ['majorRequirements']}).then(data => {
+    Majors.findByPk(id, {attributes: ['major_requirement']}).then(data => {
         if(data) {
             res.send(data);
         }

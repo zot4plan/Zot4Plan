@@ -14,10 +14,10 @@ CREATE TABLE courses (
     PRIMARY KEY(id));
 ALTER TABLE courses ADD FULLTEXT(id);
 
- CREATE TABLE majors(
+CREATE TABLE majors(
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
-    majorRequirements json DEFAULT NULL,
+    major_requirement json DEFAULT NULL,
     PRIMARY KEY(id));
  
 /* CREATE TABLE generalEducations(

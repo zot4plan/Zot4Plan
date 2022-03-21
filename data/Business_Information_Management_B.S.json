@@ -8,19 +8,16 @@
                     "I&C SCI 31",
                     "I&C SCI 32",
                     "I&C SCI 33"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
                 "name": "Group 2",
                 "child": [
                     "I&C SCI 32A",
                     "I&C SCI 33"
-                ],
-                "typeParent": "Courses"
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
         "name": "B. Complete the following:",
@@ -30,11 +27,9 @@
                 "child": [
                     "I&C SCI 45J",
                     "IN4MATX 43"
-                ],
-                "typeParent": "Courses"
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
         "name": "C. Complete the following:",
@@ -54,11 +49,9 @@
                         "STATS 8",
                         "STATS 67"
                     ]
-                ],
-                "typeParent": "Courses"
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
         "name": "D. Complete the following:",
@@ -70,11 +63,9 @@
                     "ECON 20B",
                     "MGMT 30A",
                     "MGMT 30B"
-                ],
-                "typeParent": "Courses"
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
         "name": "E. Upper-Division Core:",
@@ -102,21 +93,17 @@
                     "IN4MATX 113",
                     "IN4MATX 143",
                     "STATS 110"
-                ],
-                "typeParent": "Courses"
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
         "name": "F. Electives:",
         "child": [
             {
                 "name": "Select five upper-division courses, except independent study and internships, with at least three of the five courses to be taken within the Bren School. Upper-division courses completed via the UC Education Abroad Program may also be utilized toward this requirement upon prior approval by the Bren School of ICS Student Affairs Office.",
-                "child": [],
-                "typeParent": "Courses"
+                "child": []
             }
-        ],
-        "typeParent": "Header"
+        ]
     }
 ]
