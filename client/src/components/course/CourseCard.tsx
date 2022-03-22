@@ -1,6 +1,6 @@
 //import { useSelector } from 'react-redux';
 //import {RootState} from '../app/store';
-import { MouseEvent } from 'react';
+import { MouseEvent, memo } from 'react';
 import Popup from './Popup';
 import { useDispatch } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
@@ -56,4 +56,4 @@ function CourseCard({id, index, droppableId}: courseType) {
     )
 }
 
-export default CourseCard
+export default memo(CourseCard)

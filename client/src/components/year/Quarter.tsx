@@ -42,10 +42,15 @@ function Quarter({id,index}:quarter) {
                 {quarter.name} 
             </h2>
             <Droppable 
-            droppableId={id}>
+              droppableId={id}
+            >
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
+                {...provided.droppableProps}
+                style={{
+                  backgroundColor: snapshot.isDraggingOver? 'lightblue' : 'white',
+                }}
                 {...provided.droppableProps}
                 className="course-wrapper"
               >

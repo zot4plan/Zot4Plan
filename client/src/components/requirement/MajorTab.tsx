@@ -17,7 +17,7 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
     let subContent:JSX.Element[] = [];
     let nameHeader;
     if(name !== "")
-        nameHeader = <p>{name}</p>
+        nameHeader = <p key={id +'p'}>{name}</p>
 
     let index = 0;
 
@@ -31,7 +31,7 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
         }
         else {
             subContent.push(
-                <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
+                <div key={id + 'div' + index} style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
                     <ReqCourseCard key={id+c[0]} courseId={id+c[0]}
                     index={index}/>
                     <span style={{paddingRight:'1rem', paddingBottom:'0.5rem'}}> or </span>
@@ -45,7 +45,8 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
     return (
         <>
             {nameHeader}
-            <Droppable 
+            <Droppable
+            key={id+'MajorTab'} 
             droppableId={id+'MajorTab'}
             isDropDisabled={true}
             >
@@ -87,8 +88,6 @@ const MajorSection = ({id}:MajorSectionType) => {
         </div>
         </>
     )
-    
-    
 }
 
 function MajorTab () {

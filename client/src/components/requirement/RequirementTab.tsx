@@ -1,4 +1,4 @@
-import {MouseEvent, useState} from 'react';
+import {useState} from 'react';
 import GETab from './GETab';
 import MajorTab from './MajorTab';
 import OtherTab from './OtherTab';

@@ -8,8 +8,10 @@
     --accent-color-1:#DF2935;
     --accent-color-2:#C0486A;
 }
-.requirement-drop-wrapper div[data-rbd-placeholder-context-id] {display: none !important;}
-.requirement-drop-wrapper div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
+
+.tab-container div[data-rbd-placeholder-context-id] {display: none !important;}
+.tab-container div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
+.tab-container div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
 
 body {
     margin: 0;
@@ -221,13 +223,16 @@ html, body, #root { background-color: var(--primary-color);}
     margin:0;
     opacity: 0;
     max-height: 0;
+    opacity: 0;
     overflow: hidden;
 }
 
 .quarter-column{
     flex-grow: 1;
     width: 25%;
+    height: inherit;
     border: 1px solid var(--border-color);
+    transition: min-height var(--transition-time) ease;
 }
 
 .quarter-header {
@@ -242,8 +247,15 @@ html, body, #root { background-color: var(--primary-color);}
     background-color: #F8F8F8;
 }
 
-.course-wrapper {
-    min-height: 100px;
+.course-wrapper {min-height: 100px;}
+
+.hide div, .hide h2 {
+    min-height: 0px !important;
+    max-height: 0px !important;
+    min-width: 0px !important;
+    max-width: 0px !important;
+    border: none;
+    overflow: hidden;
 }
 
 /* CourseCard */

@@ -1,7 +1,6 @@
 import {createSlice, PayloadAction, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import { addCourseToQuarter, removeCourseFromQuarter } from "./ScheduleSlice";
 import Axios from 'axios';
-import { createNonNullExpression } from "typescript";
 
 export const fetchGECategories = createAsyncThunk(
     "features/fetchGECategories", async (_, thunkAPI) => {
