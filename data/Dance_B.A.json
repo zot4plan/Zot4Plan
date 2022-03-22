@@ -35,10 +35,10 @@
         ]
     },
     {
-        "name": "C. Technique: Students must complete at least one Dance technique course (ballet, modern dance, jazz, Spanish, world dance, pointe, social dance, tap, or repertory) each quarter in residence. At a minimum, students must complete level II in Ballet, Modern, and Jazz (DANCE 132A-DANCE 132B-DANCE 132C, DANCE 142A-DANCE 142B-DANCE 142C, and DANCE 152A-DANCE 152B-DANCE 152C) and level III in either Ballet or Modern (DANCE 133A-DANCE 133B-DANCE 133C or DANCE 143A-DANCE 143B-DANCE 143C). Students who place above level II in any technique must take a year of that technique at the level in which they are placed. All students must also complete one course chosen from DANCE 14 (Social Dance), DANCE 52A, DANCE 52B, DANCE 52C (Tap I) or DANCE 110 (World Dance). NOTE: Units earned in ballet, jazz, and modern technique courses beyond the required amount do not count toward departmental elective requirements but may count toward University requirements.",
+        "name": "C. Technique: Students must complete at least one of the following: ",
         "child": [
             {
-                "name": "",
+                "name": "Dance technique course (ballet, modern dance, jazz, Spanish, world dance, pointe, social dance, tap, or repertory) each quarter in residence. At a minimum, students must complete level II in Ballet, Modern, and Jazz (DANCE 132A-DANCE 132B-DANCE 132C, DANCE 142A-DANCE 142B-DANCE 142C, and DANCE 152A-DANCE 152B-DANCE 152C) and level III in either Ballet or Modern (DANCE 133A-DANCE 133B-DANCE 133C or DANCE 143A-DANCE 143B-DANCE 143C). Students who place above level II in any technique must take a year of that technique at the level in which they are placed. All students must also complete one course chosen from DANCE 14 (Social Dance), DANCE 52A, DANCE 52B, DANCE 52C (Tap I) or DANCE 110 (World Dance). NOTE: Units earned in ballet, jazz, and modern technique courses beyond the required amount do not count toward departmental elective requirements but may count toward University requirements.",
                 "child": []
             }
         ]
@@ -61,15 +61,17 @@
         "child": [
             {
                 "name": "",
-                "child": []
+                "child": [
+                    "DRAMA 101"
+                ]
             }
         ]
     },
     {
-        "name": "F. Electives: 12 units of electives must be completed within the major.",
+        "name": "F. Electives: ",
         "child": [
             {
-                "name": "",
+                "name": "12 units of electives must be completed within the major.",
                 "child": []
             }
         ]

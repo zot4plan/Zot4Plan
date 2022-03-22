@@ -33,12 +33,11 @@
             {
                 "name": "Asia: Art History 150-163",
                 "child": []
-            }
-        ]
-    },
-    {
-        "name": "And at least one course in each of the following five historical periods:",
-        "child": [
+            },
+            {
+                "name": "And at least one course in each of the following five historical periods:",
+                "child": []
+            },
             {
                 "name": "Ancient: Art History 100-107",
                 "child": [

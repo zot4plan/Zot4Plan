@@ -20,7 +20,7 @@
         ]
     },
     {
-        "name": "B. Complete:",
+        "name": "Lower Division: B. Complete:",
         "child": [
             {
                 "name": "",
@@ -98,11 +98,11 @@
                     "I&C SCI 167",
                     "I&C SCI 168"
                 ]
+            },
+            {
+                "name": "Software Engineering elective courses may not be counted as part of the Management minor.",
+                "child": []
             }
         ]
-    },
-    {
-        "name": "Software Engineering elective courses may not be counted as part of the Management minor.",
-        "child": []
     }
 ]

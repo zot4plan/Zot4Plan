@@ -17,7 +17,7 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
     let subContent:JSX.Element[] = [];
     let nameHeader;
     if(name !== "")
-        nameHeader = <p key={id +'p'}>{name}</p>
+        nameHeader = <p key={id +'p'} style={{marginLeft: '1rem'}}>{name}</p>
 
     let index = 0;
 
@@ -31,7 +31,7 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
         }
         else {
             subContent.push(
-                <div key={id + 'div' + index} style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
+                <div key={id + 'div' + index} className='or-container'>
                     <ReqCourseCard key={id+c[0]} courseId={id+c[0]}
                     index={index}/>
                     <span style={{paddingRight:'1rem', paddingBottom:'0.5rem'}}> or </span>
@@ -67,26 +67,26 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
 
 const MajorSection = ({id}:MajorSectionType) => {
    console.log(id);
-   const [show, setShow] = useState(true);
+   const [show, setShow] = useState(false);
    const sectionData = 
             useSelector((state:RootState)=>state.requirement.major.byIds[id]);
     return (
-        <>  
-        <div
-            key={id} 
-            className='year-header-wrapper' 
-            onClick={() => setShow(!show)}>
-            <h1 className="year-header">{sectionData.name}</h1>
-            <div className="rightIcon">
-                <Right show={show}/>
+        <div className='section-wrapper'>  
+            <div
+                key={id} 
+                className='year-header-wrapper' 
+                onClick={() => setShow(!show)}>
+                <h1 className="section-header">{sectionData.name}</h1>
+                <div className="rightIcon">
+                    <Right show={show}/>
+                </div>
+            </div>
+            <div style={{display: show? "block" : "none"}}>
+                {sectionData.subList.map((c)=> 
+                    <DroppbaleSection key={c.id} id={c.id} name={c.name} courses={c.courses}/>
+                )}
             </div>
         </div>
-        <div style={{display: show? "block" : "none"}}>
-            {sectionData.subList.map((c)=> 
-                <DroppbaleSection key={c.id} id={c.id} name={c.name} courses={c.courses}/>
-            )}
-        </div>
-        </>
     )
 }
 

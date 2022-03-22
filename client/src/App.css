@@ -130,7 +130,8 @@ html, body, #root { background-color: var(--primary-color);}
         border-top: 1px solid white;
         background-color: white;
         padding-top:1rem;
-        min-height: 500px;
+        height: 700px;
+        overflow: scroll;
         box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.8);
     }
 
@@ -138,6 +139,14 @@ html, body, #root { background-color: var(--primary-color);}
         display: flex;
         flex-wrap: wrap;
         margin: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .or-container {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        flex-basis: 100%;
     }
 
 /*** left-container ***/
@@ -358,4 +367,18 @@ html, body, #root { background-color: var(--primary-color);}
     color: white;
     background-color: var(--accent-color-2);
     box-shadow: 0 0 3px 3px var(--accent-color-2);
+}
+
+/*** Section Header ***/
+.section-header {
+    font-size: 1.25rem;
+    font-weight: 600;
+    background-color: var(--primary-color-2);
+    padding:0.3rem 0.75rem;
+    margin:0;
+}
+
+.section-wrapper {
+    box-shadow: 1px 0px 5px 0px rgba(0,0,0,0.6);
+    margin: 1rem;
 }
