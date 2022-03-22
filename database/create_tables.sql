@@ -27,10 +27,8 @@ CREATE TABLE majors(
 
  CREATE TABLE courses_in_ge(
     courseId VARCHAR(25) NOT NULL,
-    geId VARCHAR(10) NOT NULL,
-    special Boolean NOT NULL,
-    FOREIGN KEY(courseId) REFERENCES courses(id),
-    FOREIGN KEY(geId) REFERENCES generalEducation(id));
+    geIds VARCHAR(20) NOT NULL,
+    FOREIGN KEY(courseId) REFERENCES courses(id));
 
 INSERT INTO generalEducations VALUES ("IA","Lower-Division Requirement");
 INSERT INTO generalEducations VALUES ("IB","Upper-Division Requirement");

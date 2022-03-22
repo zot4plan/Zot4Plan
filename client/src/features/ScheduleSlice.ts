@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
+import { fetchMajor } from './RequirementSlice'
 
 interface QuarterType {
     id: string;
@@ -107,10 +108,27 @@ export const ScheduleSlice = createSlice ({
             
             delete state.years.byIds[id];
             state.years.allIds.splice(action.payload.index,1);
+        },
+
+        refreshState: (state) => {
+            state.years.allIds.forEach((yearId)=> {
+                state.years.byIds[yearId].quarters.forEach((quarterId)=>{
+                    state.quarters[quarterId].courses = []
+                })
+            })
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchMajor.pending, (state) => {
+            state.years.allIds.forEach((yearId)=> {
+                state.years.byIds[yearId].quarters.forEach((quarterId)=>{
+                    state.quarters[quarterId].courses = []
+                })
+            })
+        });
     }
 });
 
-export const {addCourseToQuarter, removeCourseFromQuarter, moveCourse, addYear, removeYear} = ScheduleSlice.actions;
+export const {addCourseToQuarter, removeCourseFromQuarter, moveCourse, addYear, removeYear, refreshState} = ScheduleSlice.actions;
 
 export default ScheduleSlice.reducer;

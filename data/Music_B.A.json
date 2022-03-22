@@ -1,0 +1,144 @@
+[
+    {
+        "name": "",
+        "child": [
+            {
+                "name": "A. Complete the following:",
+                "child": [
+                    "MUSIC 15A",
+                    "MUSIC 15B",
+                    "MUSIC 15C",
+                    "MUSIC 16A",
+                    "MUSIC 16B",
+                    "MUSIC 16C",
+                    "MUSIC 16D",
+                    "MUSIC 40B",
+                    "MUSIC 40C",
+                    "MUSIC 40D"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "*Exception: MUSIC 40B, MUSIC 40C, MUSIC 40D must be completed with a grade of D or higher.",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "B. Select six quarters of instrumental or vocal instruction for Music majors from the following:",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "MUSIC 65-70",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "In addition to completing the common curriculum, students in the B.A. program must pass the departmental piano proficiency examination or take three quarters of MUSIC 10 (Piano for Majors) with a grade of C or better and complete the following course requirements:",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "A. Select three courses in Theory, Composition, and Technology from the following:",
+                "child": [
+                    "MUSIC 153",
+                    "MUSIC 51",
+                    "MUSIC 131",
+                    "MUSIC 132",
+                    "MUSIC 136",
+                    "MUSIC 147",
+                    "MUSIC 150",
+                    "MUSIC 151",
+                    "MUSIC 152",
+                    "MUSIC 155",
+                    "MUSIC 157",
+                    "MUSIC 183A",
+                    "MUSIC 183B",
+                    "MUSIC 183C",
+                    "MUSIC 189"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "B. Select three courses in Music and Culture (including at least two upper-division courses) from the following:",
+                "child": [
+                    "AFAM 143",
+                    "AFAM 144",
+                    "MUSIC 4",
+                    "MUSIC 8",
+                    "MUSIC 9",
+                    "MUSIC 41",
+                    "MUSIC 42",
+                    "MUSIC 44",
+                    "MUSIC 45",
+                    "MUSIC 48",
+                    "MUSIC 78",
+                    "MUSIC 82A",
+                    "MUSIC 82B",
+                    "MUSIC 82C",
+                    "MUSIC 140",
+                    "MUSIC 141",
+                    "MUSIC 142",
+                    "MUSIC 143",
+                    "MUSIC 144",
+                    "MUSIC 145",
+                    "MUSIC 146",
+                    "MUSIC 148",
+                    "MUSIC 149",
+                    "MUSIC 156A",
+                    "MUSIC 156B",
+                    "MUSIC 181"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "C. Select six courses in Performance and Practice from the following:",
+                "child": [
+                    "MUSIC 21A",
+                    "MUSIC 21B",
+                    "MUSIC 21C",
+                    "MUSIC 158A",
+                    "MUSIC 158B",
+                    "MUSIC 158C",
+                    "MUSIC 160",
+                    "MUSIC 161",
+                    "MUSIC 162",
+                    "MUSIC 164",
+                    "MUSIC 171",
+                    "MUSIC 176",
+                    "MUSIC 178",
+                    "MUSIC 182",
+                    "MUSIC 193",
+                    "MUSIC 197"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "D. Depending upon the student\u2019s area of emphasis, one of the following BA projects (which may develop work originally completed in meeting the requirements of another course) must be completed:",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "(1) a formal lecture or lecture/performance lasting a minimum of 20 minutes",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "(2) a composition or portfolio of compositions of appropriate length growing out of work done in MUSIC 157",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "(3) a thesis of at least 20 double-spaced pages on an appropriate musical subject",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "Proposed projects, along with the name of the Senate faculty member who has agreed to supervise it, must be submitted to the undergraduate faculty advisor by November 1 of the academic year in which graduation is expected. Upon approval of the project proposal the student may register for up to two quarters of independent study (MUSIC 199) in which to complete the project.",
+                "child": [],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    }
+]

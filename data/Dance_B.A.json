@@ -1,0 +1,77 @@
+[
+    {
+        "name": "A. Complete the following:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "DANCE 2",
+                    "DANCE 21A",
+                    "DANCE 60A",
+                    "DANCE 90A",
+                    "DANCE 90B",
+                    "DANCE 90C",
+                    "DANCE 100",
+                    "DANCE 180C",
+                    "DANCE 185W"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "B. Complete one four-unit course from the following:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "DANCE 125A",
+                    "DANCE 127A",
+                    "DANCE 162A",
+                    "DANCE 163",
+                    "DANCE 164",
+                    "DANCE 195"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "C. Technique: Students must complete at least one Dance technique course (ballet, modern dance, jazz, Spanish, world dance, pointe, social dance, tap, or repertory) each quarter in residence. At a minimum, students must complete level II in Ballet, Modern, and Jazz (DANCE 132A-DANCE 132B-DANCE 132C, DANCE 142A-DANCE 142B-DANCE 142C, and DANCE 152A-DANCE 152B-DANCE 152C) and level III in either Ballet or Modern (DANCE 133A-DANCE 133B-DANCE 133C or DANCE 143A-DANCE 143B-DANCE 143C). Students who place above level II in any technique must take a year of that technique at the level in which they are placed. All students must also complete one course chosen from DANCE 14 (Social Dance), DANCE 52A, DANCE 52B, DANCE 52C (Tap I) or DANCE 110 (World Dance). NOTE: Units earned in ballet, jazz, and modern technique courses beyond the required amount do not count toward departmental elective requirements but may count toward University requirements.",
+        "child": [
+            {
+                "name": "",
+                "child": []
+            }
+        ]
+    },
+    {
+        "name": "D. Performance:",
+        "child": [
+            {
+                "name": "Select two of the following:",
+                "child": [
+                    "DANCE 170",
+                    "DANCE 171",
+                    "DANCE 172"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "E. Four units of DRAMA 101 (Theater Production) must be taken during the first year in residence.",
+        "child": [
+            {
+                "name": "",
+                "child": []
+            }
+        ]
+    },
+    {
+        "name": "F. Electives: 12 units of electives must be completed within the major.",
+        "child": [
+            {
+                "name": "",
+                "child": []
+            }
+        ]
+    }
+]

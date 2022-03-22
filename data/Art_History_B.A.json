@@ -1,0 +1,126 @@
+[
+    {
+        "name": "A. Select three of the following:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "ART HIS 40A",
+                    "ART HIS 40B",
+                    "ART HIS 40C",
+                    "ART HIS 42A",
+                    "ART HIS 42B",
+                    "ART HIS 42C",
+                    "ART HIS 42D",
+                    "ART HIS 42E",
+                    "ART HIS 44",
+                    "ART HIS 55"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "B. Select eight upper-division Art History courses, with at least one course in each of the following geographical regions:",
+        "child": [
+            {
+                "name": "Americas: Art History 140, 156, 163-167",
+                "child": []
+            },
+            {
+                "name": "Europe: Art History 100-140",
+                "child": []
+            },
+            {
+                "name": "Asia: Art History 150-163",
+                "child": []
+            }
+        ]
+    },
+    {
+        "name": "And at least one course in each of the following five historical periods:",
+        "child": [
+            {
+                "name": "Ancient: Art History 100-107",
+                "child": [
+                    "ART HIS 155A"
+                ]
+            },
+            {
+                "name": "Medieval:",
+                "child": [
+                    "ART HIS 110",
+                    "ART HIS 111B",
+                    "ART HIS 112",
+                    "ART HIS 114",
+                    "ART HIS 155B"
+                ]
+            },
+            {
+                "name": "Early Modern: Art History 120-128",
+                "child": [
+                    "ART HIS 151B",
+                    "ART HIS 165A"
+                ]
+            },
+            {
+                "name": "Modern:",
+                "child": [
+                    "ART HIS 134C",
+                    "ART HIS 134D",
+                    "ART HIS 134E",
+                    "ART HIS 145A",
+                    "ART HIS 151C",
+                    "ART HIS 155C",
+                    "ART HIS 156",
+                    "ART HIS 164A",
+                    "ART HIS 164E",
+                    "ART HIS 165B",
+                    "ART HIS 165C",
+                    "ART HIS 183B",
+                    "ART HIS 183C"
+                ]
+            },
+            {
+                "name": "Contemporary:",
+                "child": [
+                    "ART HIS 140A",
+                    "ART HIS 140B",
+                    "ART HIS 145B",
+                    "ART HIS 162C",
+                    "ART HIS 163",
+                    "ART HIS 164B",
+                    "ART HIS 164D",
+                    "ART HIS 183B",
+                    "ART HIS 183C"  
+                ]
+            }
+        ]
+    },
+    {
+        "name": "C. Complete:",
+        "child": [
+        {
+            "name": "",
+            "child": [
+                "ART HIS 190W"
+            ]
+        }
+        ]
+    },
+    {
+        "name": "D. Select one of the following options:",
+        "child": [
+            {
+                "name": "1. Two quarters of:",
+                "child": ["ART HIS 198"]
+            },
+            {
+                "name": "2. Or one quarter of:",
+                "child": [
+                    "ART HIS 196",
+                    "ART HIS 198"
+                ]
+            }
+        ]
+    }
+]

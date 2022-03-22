@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
-import { addCourseToQuarter, removeCourseFromQuarter } from "./ScheduleSlice";
+import { addCourseToQuarter, removeCourseFromQuarter, refreshState } from "./ScheduleSlice";
 import Axios from 'axios';
 
 export const fetchGECategories = createAsyncThunk(
@@ -70,7 +70,10 @@ interface RequirementType{
         error:string;
     };
     other: string[];
-    courses: {[propName:string]: CourseType};
+    courses: {
+        byIds: {[propName:string]: CourseType},
+        allIds: string[];
+    };
 }
 
 const initialState:RequirementType = {
@@ -88,7 +91,8 @@ const initialState:RequirementType = {
        error:"",
    },
    other: [],
-   courses: {}
+   courses: {byIds: {},
+            allIds: []}
 }
 
 export const requirementSlice = createSlice ({
@@ -98,7 +102,8 @@ export const requirementSlice = createSlice ({
        addCourseToRequirement: (state, action: PayloadAction<AddCoursePayload>) => {
         if(action.payload.position === 'other')
             state.other.push(action.payload.course.id);
-        state.courses[action.payload.course.id] = action.payload.course;
+        state.courses.byIds[action.payload.course.id] = action.payload.course;
+        state.courses.allIds.push(action.payload.course.id);
        }
     },
     extraReducers: (builder) => {
@@ -121,6 +126,14 @@ export const requirementSlice = createSlice ({
         //fetch Major Requirement courses
         builder.addCase(fetchMajor.pending, (state) => {
             state.major.status = "loading";
+            state.courses.allIds = [];
+            state.courses.byIds = {};
+            state.major.allIds = [];
+            state.major.byIds = {};
+            state.other = [];
+            state.ge.allIds.forEach((id)=>{
+                state.ge.byIds[id].courses = [];
+            });
         });
         builder.addCase(fetchMajor.fulfilled,(state, action: PayloadAction<FetchMajorPayload>) => {    
             console.log(action.payload);
@@ -134,10 +147,15 @@ export const requirementSlice = createSlice ({
                     state.major.byIds[sId].subList.push({id: cId, name: c.name, courses: c.child})
                     c.child.forEach((course) => {
                         if(typeof(course) === 'string')
-                            state.courses[course] = {id: course, isPicked: false};
+                        {
+                            state.courses.byIds[course] = {id: course, isPicked: false};
+                            state.courses.allIds.push(course);
+                        }
                         else {
-                            state.courses[course[0]] = {id: course[0], isPicked: false};
-                            state.courses[course[1]] = {id: course[1], isPicked: false};
+                            state.courses.byIds[course[0]] = {id: course[0], isPicked: false};
+                            state.courses.byIds[course[1]] = {id: course[1], isPicked: false};
+                            state.courses.allIds.push(course[0]);
+                            state.courses.allIds.push(course[1]);
                         }
                     })
                 })
@@ -152,10 +170,21 @@ export const requirementSlice = createSlice ({
 
         // toggle isPicked attribute of course
         builder.addCase(addCourseToQuarter, (state, action) => {
-            state.courses[action.payload.courseId].isPicked = true;
+            state.courses.byIds[action.payload.courseId].isPicked = true;
         })
         builder.addCase(removeCourseFromQuarter, (state, action) => {
-            state.courses[action.payload.courseId].isPicked = false;
+            state.courses.byIds[action.payload.courseId].isPicked = false;
+        })
+        builder.addCase(refreshState, (state, action) => {
+            console.log(state.courses.allIds);
+            state.courses.allIds.forEach((id)=>{
+                console.log(id);
+                if(state.courses.byIds[id].isPicked)
+                {
+                    state.courses.byIds[id].isPicked = false;
+                    console.log(id);
+                }
+            }) 
         })
     },
 });

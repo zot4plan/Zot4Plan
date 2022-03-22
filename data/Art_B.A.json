@@ -1,0 +1,61 @@
+[
+    {
+        "name": "A. Complete the following:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "ART 1A",
+                    "ART 1B",
+                    "ART 1C",
+                    "ART 9A",
+                    "ART 11A"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "B. Select one of the following:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "ART HIS 40A",
+                    "ART HIS 40B",
+                    "ART HIS 40C",
+                    "ART HIS 42A",
+                    "ART HIS 42B",
+                    "ART HIS 42C",
+                    "ART HIS 42D"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "C. Select four of the following:",
+        "child": [
+        {
+            "name": "Lower-division ART 20-99",
+            "child": []
+        }
+        ]
+    },
+    {
+        "name": "D. Select six upper-division courses from:",
+        "child": [
+            {
+                "name": "ART 100-115 and ART 130-195",
+                "child": []
+            }
+        ]
+    },
+    {
+        "name": "E. Select two of the following:",
+        "child": [
+            {
+                "name": "Issues courses from ART 116-129",
+                "child": []
+            }
+        ]
+    }
+]

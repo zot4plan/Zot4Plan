@@ -1,0 +1,82 @@
+[
+    {
+        "name": "",
+        "child": [
+            {
+                "name": "A. Complete the following:",
+                "child": [
+                    "DRAMA 10"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "B. Select one of the following:",
+                "child": [
+                    "DRAMA 15",
+                    "DRAMA 20A",
+                    "DRAMA 20B",
+                    "DRAMA 20C"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "C. Complete the following:",
+                "child": [
+                    "DRAMA 30A"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "D. Complete one year survey in the development of drama:",
+                "child": [
+                    "DRAMA 40A",
+                    "DRAMA 40B",
+                    "DRAMA 40C"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "E. Select five of the following, of which at least one must be DRAMA 50C, DRAMA 50D, or DRAMA 50E:",
+                "child": [
+                    "DRAMA 30B",
+                    "DRAMA 30C",
+                    "DRAMA 50A",
+                    "DRAMA 50B",
+                    "DRAMA 50C",
+                    "DRAMA 50D",
+                    "DRAMA 50E"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "F. Select seven of the following:",
+                "child": [
+                    "DRAMA 80"
+                ],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "Upper-division Drama courses, which must include three dramatic literature courses from DRAMA 103-129, or 180 (excluding DRAMA 101, 198, and 199).",
+                "child": [],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    },
+    {
+        "name": "Theatre Production (DRAMA 101) requirements:",
+        "child": [
+            {
+                "name": "Freshmen\u2014eight units, of which four units must be completed during the first year of residency at UCI;",
+                "child": [],
+                "typeParent": "Courses"
+            },
+            {
+                "name": "Transfer Students: Sophomores\u2014six units, of which four units must be completed during the first year of residency at UCI; Juniors and Seniors\u2014four units, which must be completed during the first year of residency at UCI.",
+                "child": [],
+                "typeParent": "Courses"
+            }
+        ],
+        "typeParent": "Header"
+    }
+]

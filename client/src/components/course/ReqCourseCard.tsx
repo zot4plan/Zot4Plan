@@ -24,7 +24,7 @@ function getStyle(style: any, snapshot: { isDropAnimating: any; }) {
 function ReqCourseCard({courseId, index}: courseType) {
     console.log(courseId.substr(4))
     const course = useSelector(
-        (state: RootState) => state.requirement.courses[courseId.substr(4)])
+        (state: RootState) => state.requirement.courses.byIds[courseId.substr(4)])
         
     //const dispatch = useDispatch();
     /*const submitRemoveCourse = (event: MouseEvent<HTMLButtonElement>) => {

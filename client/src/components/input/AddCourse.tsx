@@ -51,12 +51,12 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
 
 function AddCourse() {
     const [selectCourse, setSelectCourse] = useState<string>("");
-    const courses = useSelector((state:RootState)=> state.requirement.courses);
+    const courses = useSelector((state:RootState)=> state.requirement.courses.allIds);
     const dispatch = useDispatch();
 
     const submitAddCourse = (event: MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
-        if(courses[selectCourse] === undefined)
+        if(!courses.includes(selectCourse))
             setTimeout(() => {
                 Axios.get('http://localhost:8080/api/addCourse', {
                     params: { id: selectCourse }}).then((res) => {
