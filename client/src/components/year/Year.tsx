@@ -15,7 +15,7 @@ interface YearType {
 }
 
 function Year({year, index}:YearType) {
-    const [show, setShow] = useState (false);
+    const [show, setShow] = useState (true);
     const dispatch = useDispatch();
 
     const deleteYear = () => {

@@ -62,7 +62,12 @@
             {
                 "name": "",
                 "child": [
-                    "DRAMA 101"
+                    "DRAMA 101A",
+                    "DRAMA 101B",
+                    "DRAMA 101C",
+                    "DRAMA 101D",
+                    "DRAMA 101E",
+                    "DRAMA 101S"
                 ]
             }
         ]

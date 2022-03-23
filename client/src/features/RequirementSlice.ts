@@ -49,6 +49,8 @@ export const fetchMajor = createAsyncThunk(
                         courseIds: courseIds, 
                         courseData: result.data
                     };
+                    console.log(courseIds);
+                    console.log(result.data);
                     return res;
                 })
                 .catch(() => {
