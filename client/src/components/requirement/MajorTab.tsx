@@ -1,5 +1,5 @@
-import {useState, useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import {useState} from 'react';
+import { useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
 import {Droppable} from 'react-beautiful-dnd';
 import Right from '../icons/Right';
@@ -16,7 +16,7 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
     let subContent:JSX.Element[] = [];
     let nameHeader;
     if(name !== "")
-        nameHeader = <p key={id +'p'} style={{marginLeft: '1rem'}}>{name}</p>
+        nameHeader = <p key={id +'p'} style={{margin:'0.5rem 1rem', paddingBottom:'0.5rem'}}>{name}</p>
 
     let index = 0;
 
@@ -41,25 +41,32 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
             index += 2;
         }
     })
+
+    let content;
+    if(courses.length > 0) {
+        content = 
+            <Droppable
+                key={id+'MajorTab'} 
+                droppableId={id+'MajorTab'}
+                isDropDisabled={true}
+            >
+                {(provided, snapshot) => (
+                    <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className="requirement-drop-wrapper"
+                    >
+                        {subContent}
+                        <div style={{display:'none'}}> {provided.placeholder} </div>
+                    </div>
+                )} 
+            </Droppable>
+    }
+
     return (
         <>
             {nameHeader}
-            <Droppable
-            key={id+'MajorTab'} 
-            droppableId={id+'MajorTab'}
-            isDropDisabled={true}
-            >
-            {(provided, snapshot) => (
-                <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                className="requirement-drop-wrapper"
-                >
-                   {subContent}
-                    <div style={{display:'none'}}> {provided.placeholder} </div>
-                </div>
-            )} 
-            </Droppable>
+            {content}
         </>
     )
 }

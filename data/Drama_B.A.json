@@ -1,42 +1,58 @@
 [
     {
-        "name": "",
+        "name": "A. Complete the following:",
         "child": [
             {
-                "name": "A. Complete the following:",
+                "name": "",
                 "child": [
                     "DRAMA 10"
-                ],
-                "typeParent": "Courses"
-            },
+                ]
+            }
+        ]
+    },
+    {
+        "name": "B. Select one of the following:",
+        "child": [
             {
-                "name": "B. Select one of the following:",
+                "name": "",
                 "child": [
                     "DRAMA 15",
                     "DRAMA 20A",
                     "DRAMA 20B",
                     "DRAMA 20C"
-                ],
-                "typeParent": "Courses"
-            },
+                ]
+            }
+        ]
+    },
+    {
+        "name": "C. Complete the following:",
+        "child": [
             {
-                "name": "C. Complete the following:",
+                "name": "",
                 "child": [
                     "DRAMA 30A"
-                ],
-                "typeParent": "Courses"
-            },
+                ]
+            }
+        ]
+    },
+    {
+        "name": "D. Complete one year survey in the development of drama:",
+        "child": [
             {
-                "name": "D. Complete one year survey in the development of drama:",
+                "name": "Students are required to take in their sophomore year, after completion of the lower-division writing requirement.",
                 "child": [
                     "DRAMA 40A",
                     "DRAMA 40B",
                     "DRAMA 40C"
-                ],
-                "typeParent": "Courses"
-            },
+                ]
+            }
+        ]
+    },
+    {
+        "name": "E. Select five of the following",
+        "child": [
             {
-                "name": "E. Select five of the following, of which at least one must be DRAMA 50C, DRAMA 50D, or DRAMA 50E:",
+                "name": "At least one must be DRAMA 50C, 50D, or 50E:",
                 "child": [
                     "DRAMA 30B",
                     "DRAMA 30C",
@@ -45,38 +61,74 @@
                     "DRAMA 50C",
                     "DRAMA 50D",
                     "DRAMA 50E"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
-                "name": "F. Select seven of the following:",
+                "name": "Students entering the Department as freshman must complete the requirement of three courses chosen from DRAMA 50A, 50B, 50C, 50D, 50E by the end of their junior year. All other students must complete these courses within one year of entering the major.",
+                "child": []
+            }
+        ]
+    },
+
+    {
+        "name": "F. Select seven of the following:",
+        "child": [
+            {
+                "name": "",
                 "child": [
                     "DRAMA 80"
-                ],
-                "typeParent": "Courses"
+                ]
             },
             {
                 "name": "Upper-division Drama courses, which must include three dramatic literature courses from DRAMA 103-129, or 180 (excluding DRAMA 101, 198, and 199).",
-                "child": [],
-                "typeParent": "Courses"
+                "child": [
+                    "DRAMA 103",
+                    "DRAMA 103W",
+                    "DRAMA 109",
+                    "DRAMA 109W",
+                    "DRAMA 110",
+                    "DRAMA 110W",
+                    "DRAMA 112",
+                    "DRAMA 112W",
+                    "DRAMA 116",
+                    "DRAMA 116W",
+                    "DRAMA 118",
+                    "DRAMA 118W",
+                    "DRAMA 121",
+                    "DRAMA 122",
+                    "DRAMA 123",
+                    "DRAMA 126",
+                    "DRAMA 126W",
+                    "DRAMA 129",
+                    "DRAMA 129W",
+                    "DRAMA 180",
+                    "DRAMA 180W"
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
     },
     {
         "name": "Theatre Production (DRAMA 101) requirements:",
         "child": [
             {
-                "name": "Freshmen\u2014eight units, of which four units must be completed during the first year of residency at UCI;",
-                "child": [],
-                "typeParent": "Courses"
+                "name": "Freshmen - eight units (four units must be completed during the first year of residency at UCI).",
+                "child": []
             },
             {
-                "name": "Transfer Students: Sophomores\u2014six units, of which four units must be completed during the first year of residency at UCI; Juniors and Seniors\u2014four units, which must be completed during the first year of residency at UCI.",
-                "child": [],
-                "typeParent": "Courses"
+                "name": "Transfer Students: Sophomores - six units (four units must be completed during the first year of residency at UCI); Juniors and Seniors - four units (must be completed during the first year of residency at UCI).",
+                "child": []
+            },
+            {
+                "name": "",
+                "child": [
+                    "DRAMA 101A",
+                    "DRAMA 101B",
+                    "DRAMA 101C",
+                    "DRAMA 101D",
+                    "DRAMA 101E",
+                    "DRAMA 101S"
+                ]
             }
-        ],
-        "typeParent": "Header"
+        ]
     }
 ]

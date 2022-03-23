@@ -20,8 +20,12 @@
         ]
     },
     {
-        "name": "B. Select eight upper-division Art History courses, with at least one course in each of the following geographical regions:",
+        "name": "B. Select eight upper-division Art History courses: ",
         "child": [
+            {
+                "name": "At least one course in each of the following geographical regions and historical periods:",
+                "child": []
+            },
             {
                 "name": "Americas: Art History 140, 156, 163-167",
                 "child": []
@@ -35,12 +39,11 @@
                 "child": []
             },
             {
-                "name": "And at least one course in each of the following five historical periods:",
-                "child": []
-            },
-            {
-                "name": "Ancient: Art History 100-107",
+                "name": "Ancient:",
                 "child": [
+                    "ART HIS 100",
+                    "ART HIS 103",
+                    "ART HIS 107",
                     "ART HIS 155A"
                 ]
             },
@@ -55,8 +58,12 @@
                 ]
             },
             {
-                "name": "Early Modern: Art History 120-128",
+                "name": "Early Modern:",
                 "child": [
+                    "ART HIS 120",
+                    "ART HIS 121",
+                    "ART HIS 125",
+                    "ART HIS 128",
                     "ART HIS 151B",
                     "ART HIS 165A"
                 ]
@@ -98,12 +105,12 @@
     {
         "name": "C. Complete:",
         "child": [
-        {
-            "name": "",
-            "child": [
-                "ART HIS 190W"
-            ]
-        }
+            {
+                "name": "",
+                "child": [
+                    "ART HIS 190W"
+                ]
+            }
         ]
     },
     {
