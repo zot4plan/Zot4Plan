@@ -1,6 +1,6 @@
 //import { useSelector } from 'react-redux';
 //import {RootState} from '../app/store';
-import { MouseEvent, memo } from 'react';
+import { memo } from 'react';
 import Popup from './Popup';
 import { useDispatch } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
@@ -20,15 +20,13 @@ interface DragItem {
   }
 
 function CourseCard({id, index, droppableId}: courseType) {
-    //const course = useSelector((state: RootState) => state.course.byId[id])
-
     const dispatch = useDispatch();
     console.log(id,index,droppableId);
 
-    const submitRemoveCourse = (event: MouseEvent<HTMLButtonElement>) => {
+    /*const submitRemoveCourse = (event: MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
      
-    };
+    }; */
   
     return (   
     <Draggable key={id} draggableId={id} index={index}>

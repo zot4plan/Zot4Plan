@@ -1,7 +1,9 @@
 function Refresh () {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="48px" height="48px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M21.168 8A10.003 10.003 0 0 0 12 2c-5.185 0-9.45 3.947-9.95 9"/><path d="M17 8h4.4a.6.6 0 0 0 .6-.6V3M2.881 16c1.544 3.532 5.068 6 9.168 6c5.186 0 9.45-3.947 9.951-9"/><path d="M7.05 16h-4.4a.6.6 0 0 0-.6.6V21"/></g></svg>
-
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="50px" height="50px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M16.583 9.667C15.81 8.097 14.043 7 11.988 7C9.388 7 7.25 8.754 7 11"/><path strokeLinecap="round" strokeLinejoin="round" d="M14.494 9.722H16.4a.6.6 0 0 0 .6-.6V7.5m-9.583 6.167C8.191 15.629 9.957 17 12.012 17c2.6 0 4.736-2.193 4.988-5"/>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9.506 13.622H7.6a.6.6 0 0 0-.6.6V16.4"/></g></svg>
     )
 }
 

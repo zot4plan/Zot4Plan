@@ -1,10 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from '../../app/store';
-import { MouseEvent } from 'react';
 import Popup from './Popup';
 import { Draggable } from 'react-beautiful-dnd';
-import { removeCourseFromQuarter } from '../../features/ScheduleSlice'
-import Xmark from '../icons/Xmark';
+//import { removeCourseFromQuarter } from '../../features/ScheduleSlice'
+//import Xmark from '../icons/Xmark';
 
 interface courseType {
     courseId: string;
@@ -22,9 +21,9 @@ function getStyle(style: any, snapshot: { isDropAnimating: any; }) {
 }
 
 function ReqCourseCard({courseId, index}: courseType) {
-    console.log(courseId.substr(4))
-    const course = useSelector(
-        (state: RootState) => state.requirement.courses.byIds[courseId.substr(4)])
+    const id = courseId.substr(4);
+    const isPicked = useSelector(
+        (state: RootState) => state.requirement.courses.byIds[id].isPicked)
         
     //const dispatch = useDispatch();
     /*const submitRemoveCourse = (event: MouseEvent<HTMLButtonElement>) => {
@@ -36,26 +35,26 @@ function ReqCourseCard({courseId, index}: courseType) {
     <Draggable 
         key={courseId} 
         draggableId={courseId}
-        isDragDisabled={course.isPicked} 
+        isDragDisabled={isPicked} 
         index={index}
     >
         {(provided, snapshot) => (
             <>
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                style={getStyle(provided.draggableProps.style, snapshot)}
-                className="course-card w"
-              >
-                 <Popup id={course.id} showUnit={false} isCrossed ={course.isPicked}/>
+            <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            style={getStyle(provided.draggableProps.style, snapshot)}
+            className="course-card w"
+            >
+                <Popup id={id} showUnit={false} isCrossed ={isPicked}/>
 
-              </div>
-              {snapshot.isDragging && (
-                    <div className="card-box w">
-                        <div className="courseId">{course.id}</div> 
-                    </div>
-                )}
+            </div>
+            {snapshot.isDragging && (
+                <div className="card-box w">
+                    <div className="courseId">{id}</div> 
+                </div>
+            )}
             </>
           )}
     </Draggable>

@@ -13,18 +13,20 @@ const GESection = ({geId}:GESection) => {
     const ge = useSelector((state:RootState)=>state.requirement.ge.byIds[geId]);
     const [show, setShow] = useState(false);
     return (
-        <>  
-        <div
-            key={geId} 
-            className='year-header-wrapper' 
-            onClick={() => setShow(!show)}>
-            <h1 className="year-header">{geId + ": " + ge.name}</h1>
-            <div className="rightIcon">
-                <Right show={show}/>
+        <div className='section-wrapper'>  
+            <div
+                key={geId} 
+                className='year-header-wrapper' 
+                onClick={() => setShow(!show)}>
+                <h1 className="section-header">{geId + ": " + ge.name}</h1>
+                <div className="rightIcon">
+                    <Right show={show}/>
+                </div>
+            </div>
+            <div style={{display: show? "block" : "none"}}>
+                <DroppableArea key={geId + 'drop'} courseIds={ge.courses} droppableId={geId}/>
             </div>
         </div>
-        <DroppableArea key={geId + 'drop'} courseIds={ge.courses} droppableId={geId}/>
-        </>
     )
 }
 

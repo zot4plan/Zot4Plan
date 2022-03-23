@@ -1,18 +1,17 @@
-import {useState} from 'react'
-import { useSelector } from 'react-redux';
-import {RootState} from '../../app/store'
-import {Droppable} from 'react-beautiful-dnd'
+import {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {RootState} from '../../app/store';
+import {Droppable} from 'react-beautiful-dnd';
 import Right from '../icons/Right';
 import ReqCourseCard from '../course/ReqCourseCard';
 
-interface MajorSectionType {
-    id:string;
-}
+interface MajorSectionType { id:string;}
 interface SubListType {
     id: string;
     name: string;
     courses: (string|string[])[];
 }
+
 const DroppbaleSection = ({id, name, courses}: SubListType) => {
     let subContent:JSX.Element[] = [];
     let nameHeader;
@@ -57,7 +56,7 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
                 className="requirement-drop-wrapper"
                 >
                    {subContent}
-                    <div style={{display:'none'}}>{provided.placeholder} </div>
+                    <div style={{display:'none'}}> {provided.placeholder} </div>
                 </div>
             )} 
             </Droppable>
@@ -68,8 +67,7 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
 const MajorSection = ({id}:MajorSectionType) => {
    console.log(id);
    const [show, setShow] = useState(false);
-   const sectionData = 
-            useSelector((state:RootState)=>state.requirement.major.byIds[id]);
+   const sectionData = useSelector((state:RootState)=>state.requirement.major.byIds[id]);
     return (
         <div className='section-wrapper'>  
             <div
@@ -92,22 +90,22 @@ const MajorSection = ({id}:MajorSectionType) => {
 
 function MajorTab () {
     const sectionIds = useSelector((state:RootState)=>state.requirement.major.allIds);
-    const status = useSelector((state:RootState)=>state.requirement.major.status);
+    const majorStatus = useSelector((state:RootState)=>state.requirement.major.status);
     const error = useSelector((state:RootState)=>state.requirement.major.error);
 
     let content
-    if(status === 'idle')
-        content = <p>Select your major</p>
-    else if (status === 'loading') 
-        content = <p>Loading....</p> 
-   
-    else if (status === 'succeeded') {
+
+    if(majorStatus === 'idle')
+        content = <p className='center-p'>Select your major</p>
+    else if (majorStatus === 'loading') 
+        content = <p className='center-p'>Loading....</p> 
+    else if (majorStatus === 'succeeded') {
         content = sectionIds.map((id) => (
            <MajorSection key={id} id={id}/>
         ))
     } 
-    else if (status === 'failed') 
-        content = <div>{error}</div>
+    else if (majorStatus === 'failed') 
+        content = <p className='center-p'>{error}</p>
     
     return (
         <div className="tab-container"  >

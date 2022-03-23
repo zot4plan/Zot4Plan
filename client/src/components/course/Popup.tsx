@@ -1,13 +1,46 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import Info from '../icons/Info';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../app/store';
 
 interface courseType {
     id: string;
     showUnit: boolean;
     isCrossed: boolean;
 }
+interface RenderPopupType {
+    course: {
+        id: string;
+        name: string;
+        department: string;
+        units: number;
+        description: string;
+        prerequisite: string;
+        restriction: string;
+    }
+}
 
-const renderUnit = (unit:number) => {
+const RenderPopup = ({course}: RenderPopupType) => {
+    return (
+        <>
+        <div>
+            <p className="course-header"> 
+                <b>{course.id}</b> <br/>
+                {course.name}<br/>
+                {course.units + " units"} 
+            </p>
+        </div>
+        <div> 
+            <p> <b>{"Description: "}</b>{course.description}</p>
+            <p> <b>{"Prerequisite: "}</b>{course.prerequisite}</p>
+            <p> <b>{"Restriction: "}</b>{course.restriction}</p>
+            <p> <b> course.GE </b></p>
+        </div>
+    </>
+    )
+}
+
+const RenderUnit = (unit:number) => {
     return (
         <div className='unit'>{unit + ' units'}</div>
     )
@@ -15,29 +48,22 @@ const renderUnit = (unit:number) => {
 
 function Popup({id, showUnit, isCrossed}: courseType) {
     const [show, setShow] = useState(false);
-    
+    const course = useSelector((state: RootState) => state.requirement.courses.byIds[id].data)
+
     return ( 
         <div className={showUnit? "card-box": "card-box w"} >
             <div 
                 className='courseId' 
                 onClick={()=>setShow(!show)}
                 style={{textDecoration: isCrossed? "line-through":"none"}}
-            > {id}</div>
-            {showUnit && renderUnit(4)}
+            > 
+                {id}
+            </div>
 
+            {showUnit && RenderUnit(course.units)}
+            
             <div className="card-popup" style={{display: show? "block":"none"}}>
-                <div>
-                    <p className="course-header"> 
-                        <b>{id}</b> <br/>
-                        Beyond SQL Data Management<br/>
-                        {4 + " units"} 
-                    </p>
-                </div>
-                <div> 
-                    <p> <b>{"Description: "}</b>Internships focused on writing. In consultation with a faculty advisor, students create a course from response essays, research essays, and assessment project data. Internships may include editing and publication projects, supervised teaching and tutoring assignments, community literacy projects.</p>
-                    <p> <b>{"Prerequisite: "}</b>Upper-division students only. School of Info {'&'} Computer Sci students have first consideration for enrollment.</p>
-                    <p> <b>{"Restriction: "}</b>Upper-division students only. Art History Majors only.</p>
-                </div>
+                <RenderPopup course={course}/>
             </div>
         </div>
     )

@@ -15,9 +15,30 @@ import Linkedin from './components/icons/Linkedin';
 import OutlineAdd from './components/icons/OutlineAdd';
 import Refresh from './components/icons/Refresh';
 
-function App() {
+const Header = () => {
+  return (
+    <div className="header">
+      <Logo/>
+      <SelectMajor/>
+      <a target="_blank" href="https://www.linkedin.com/" rel="noreferrer"
+      className="linkedin"><Linkedin/></a>
+      <a target="_blank" href="https://github.com/" rel="noreferrer" 
+      className="github"><Github/></a>
+    </div>
+  )
+}
+const RenderYears = () => {
   const years = useSelector((state: RootState) => state.shedule.years);
-  console.log(years);
+  return (
+    <>
+          {years.allIds.map( (id,index) => (
+            <Year key={index} year= {years.byIds[id]} index={index} />
+          ))}
+    </>
+  )
+}
+
+function App() {
   const dispatch = useDispatch();
 
   const addNewYear = () => {
@@ -50,36 +71,26 @@ function App() {
 
   return (
   <>
-  <div className="header">
-    <Logo/>
-    <SelectMajor/>
-    <a target="_blank" href="https://www.linkedin.com/" rel="noreferrer"
-    className="linkedin"><Linkedin/></a>
-    <a target="_blank" href="https://github.com/" rel="noreferrer" 
-    className="github"><Github/></a>
-  </div>
+  <Header/>
   <DragDropContext onDragEnd={onDragEnd}>
     <div className="grid-container">
-        <div className="left-container">
-          {years.allIds.map( (id,index) => (
-            <Year key={index} year= {years.byIds[id]} index={index} />
-          ))}
+      <div className="left-container">
+        <RenderYears/>
+        <div style={{display: "flex"}}>
           <div className="addIcon" onClick={addNewYear}>
             <OutlineAdd/>
           </div>
-          <div className="addIcon" onClick={refresh}>
+          <div className="refreshIcon" onClick={refresh}>
             <Refresh/>
           </div>
-
         </div>
-            
+      </div>
         <div className="right-container">
           <RequirementTab/>
         </div>
     </div>  
   </DragDropContext>
   </> 
- 
   );
 }
 

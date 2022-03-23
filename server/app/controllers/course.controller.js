@@ -1,7 +1,6 @@
 const { Sequelize } = require("../models");
 const db = require("../models");
 const Courses = db.courses;
-const Op = db.Sequelize.Op;
 
 // Retrieve all Courses from the database.
 exports.findAll = (req, res) => {
@@ -63,9 +62,10 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Get all courses data
+// Get all courses data in array
 exports.getCourses = (req, res) => {
-    Courses.findAll({ attributes: ['id']}).then(data => {
+    const ids = req.query.ids;
+    Courses.findAll({ where:{ id: ids } }).then(data => {
         res.send(data);
     })
     .catch(err => {

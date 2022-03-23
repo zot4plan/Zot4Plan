@@ -5,7 +5,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     router.get("/filterCourses", courses.findAll);
-    router.get("/addCourse", courses.findOne);
+    router.get("/getCourseById", courses.findOne);
     router.get("/getCourses", courses.getCourses);
 
     router.get("/getMajors", majors.getMajors);
