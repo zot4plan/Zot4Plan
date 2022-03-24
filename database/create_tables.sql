@@ -21,8 +21,9 @@ CREATE TABLE majors(
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     major_requirement json DEFAULT NULL,
+    url VARCHAR(300) NOT NULL,
     PRIMARY KEY(id));
- 
+
 /* CREATE TABLE generalEducations(
     id VARCHAR(10) NOT NULL,
     name VARCHAR(55) NOT NULL,
