@@ -6,7 +6,7 @@ import SelectMajor from './components/input/SelectMajor';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from './app/store';
-import { moveCourse, addYear, addCourseToQuarter, refreshState } from './features/ScheduleSlice';
+import { moveCourse, addYear, addCourseToQuarter, refreshState } from './features/StoreSlice';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 import Logo from './components/icons/Logo';
@@ -28,19 +28,26 @@ const Header = () => {
   )
 }
 const RenderYears = () => {
-  const years = useSelector((state: RootState) => state.shedule.years);
+  const yearIds = useSelector((state: RootState) => state.store.years.allIds);
   return (
     <>
-          {years.allIds.map( (id,index) => (
-            <Year key={index} year= {years.byIds[id]} index={index} />
+          {yearIds.map( (id,index) => (
+            <Year key={id} yearId= {id} index={index} />
           ))}
     </>
   )
 }
 
+const TotalUnits = () => {
+  const units = useSelector((state:RootState)=> state.store.years.totalUnits);
+  return (
+    <p>{"Total units: " + units}</p>
+  )
+}
+
 function App() {
   const dispatch = useDispatch();
-
+  
   const addNewYear = () => {
     dispatch(addYear());
   }
@@ -48,22 +55,24 @@ function App() {
   const refresh = () => {
     dispatch(refreshState());
   }
-  
+   
   const onDragEnd = (result: DropResult ) => {
     const { source, destination, draggableId } = result;
     if(!destination) return;
-    
-    if(source.droppableId.length > 5)
+
+    if(source.droppableId.length > 3) {
+    // draggableId = 'droppableId-courseId' with droppableId.length = 4
+      let courseId = draggableId.substring(source.droppableId.length);
       dispatch(addCourseToQuarter({
-        destinationId: destination.droppableId,
-        courseId: draggableId.substring(4),
-        destinationIndex: destination.index
+        quarterId: destination.droppableId,
+        courseId: courseId,
+        index: destination.index
       }))
+    }
     else
       dispatch(moveCourse({
         sourceId: source.droppableId,
         destinationId: destination.droppableId,
-        courseId: draggableId.substring(4),
         sourceIndex: source.index,
         destinationIndex: destination.index
       }))
@@ -77,11 +86,14 @@ function App() {
       <div className="left-container">
         <RenderYears/>
         <div style={{display: "flex"}}>
+        <div className="refreshIcon" onClick={refresh}>
+            <Refresh/>
+          </div>
           <div className="addIcon" onClick={addNewYear}>
             <OutlineAdd/>
           </div>
-          <div className="refreshIcon" onClick={refresh}>
-            <Refresh/>
+          <div>
+            <TotalUnits/>
           </div>
         </div>
       </div>

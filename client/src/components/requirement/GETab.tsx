@@ -1,30 +1,30 @@
 import {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from '../../app/store'
-import {fetchGECategories} from '../../features/RequirementSlice'
+import {fetchGECategories} from '../../features/FetchData'
 import DroppableArea from './DroppableArea';
 import Right from '../icons/Right';
 
 interface GESection {
-    geId: string
+    droppableId: string
 }
 
-const GESection = ({geId}:GESection) => {
-    const ge = useSelector((state:RootState)=>state.requirement.ge.byIds[geId]);
+const GESection = ({droppableId}:GESection) => {
+    const ge = useSelector((state:RootState)=>state.store.ge.byIds[droppableId]);
     const [show, setShow] = useState(false);
     return (
         <div className='section-wrapper'>  
             <div
-                key={geId} 
+                key={droppableId} 
                 className='year-header-wrapper' 
                 onClick={() => setShow(!show)}>
-                <h1 className="section-header">{geId + ": " + ge.name}</h1>
+                <h1 className="section-header">{ge.geId + ": " + ge.name}</h1>
                 <div className="rightIcon">
                     <Right show={show}/>
                 </div>
             </div>
             <div style={{display: show? "block" : "none"}}>
-                <DroppableArea key={geId + 'drop'} courseIds={ge.courses} droppableId={geId}/>
+                <DroppableArea key={droppableId} courseIds={ge.courses} droppableId={droppableId}/>
             </div>
         </div>
     )
@@ -32,9 +32,9 @@ const GESection = ({geId}:GESection) => {
 
 function GETab () {
     const dispatch = useDispatch()
-    const gEIds = useSelector((state:RootState)=>state.requirement.ge.allIds);
-    const status = useSelector((state:RootState)=>state.requirement.ge.status);
-    const error = useSelector((state:RootState)=>state.requirement.ge.error);
+    const gEIds = useSelector((state:RootState)=>state.store.ge.allIds);
+    const status = useSelector((state:RootState)=>state.store.ge.status);
+    const error = useSelector((state:RootState)=>state.store.ge.error);
 
     useEffect(() => {
         if (status === 'idle') {
@@ -49,7 +49,7 @@ function GETab () {
    
     else if (status === 'succeeded') {
         content = gEIds.map((id) => (
-           <GESection key={id} geId={id}/>
+           <GESection key={id} droppableId={id}/>
         ))
     } 
     else if (status === 'failed') 

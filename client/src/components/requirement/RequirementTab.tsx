@@ -20,8 +20,8 @@ function RequirementTab () {
         </li>
       </ul>
       {tab === 1 && <MajorTab/>}
-      {tab === 2 && <GETab />}
-      {tab === 3 && <OtherTab />}
+      {tab === 2 && <GETab/>}
+      {tab === 3 && <OtherTab/>}
     </div>
   );
 }

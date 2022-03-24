@@ -7,6 +7,7 @@ import {memo} from 'react'
 //import Xmark from '../icons/Xmark';
 
 interface courseType {
+    droppableId: string;
     courseId: string;
     index: number;
 }
@@ -21,11 +22,11 @@ function getStyle(style: any, snapshot: { isDropAnimating: any; }) {
     };
 }
 
-function ReqCourseCard({courseId, index}: courseType) {
-    const id = courseId.substring(4);
+function ReqCourseCard({courseId, droppableId, index}: courseType) {
+
     const repeatability = useSelector(
-        (state: RootState) => state.requirement.courses.byIds[id].repeatability)
-        console.log(id, repeatability)
+        (state: RootState) => state.store.courses.byIds[courseId].repeatability)
+
     let isDraggable = true;
     if(repeatability === 0)
         isDraggable = false;
@@ -38,28 +39,29 @@ function ReqCourseCard({courseId, index}: courseType) {
   
     return (   
     <Draggable 
-        key={courseId} 
-        draggableId={courseId}
+        key={droppableId + courseId} 
+        draggableId={droppableId + courseId}
         isDragDisabled={!isDraggable} 
         index={index}
     >
         {(provided, snapshot) => (
             <>
             <div
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            style={getStyle(provided.draggableProps.style, snapshot)}
-            className="course-card w"
-            >
-                <Popup id={id} showUnit={false} isCrossed ={!isDraggable}/>
-
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                style={getStyle(provided.draggableProps.style, snapshot)}
+                className="course-card w"
+                >
+                    <Popup id={courseId} showUnit={false} isCrossed ={!isDraggable}/>
             </div>
+
             {snapshot.isDragging && (
                 <div className="card-box w">
-                    <div className="courseId">{id}</div> 
+                    <div className="courseId">{courseId}</div> 
                 </div>
             )}
+            
             </>
           )}
     </Draggable>

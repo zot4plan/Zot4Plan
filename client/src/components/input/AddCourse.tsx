@@ -8,7 +8,7 @@ import Add from '../icons/Add'
 import { useSelector } from 'react-redux';
 import {RootState} from '../../app/store';
 import { useDispatch } from 'react-redux';
-import {addCourseToRequirement} from '../../features/RequirementSlice'
+import {addCourse} from '../../features/StoreSlice'
 
 interface OptionType {
     value: string;
@@ -51,7 +51,7 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
 
 function AddCourse() {
     const [selectCourse, setSelectCourse] = useState<string>("");
-    const courses = useSelector((state:RootState)=> state.requirement.courses.allIds);
+    const courses = useSelector((state:RootState)=> state.store.courses.allIds);
     const dispatch = useDispatch();
 
     const submitAddCourse = (event: MouseEvent<HTMLButtonElement>) => {
@@ -63,7 +63,7 @@ function AddCourse() {
                         console.log(res);
                         if(res.data.message === 'success') {
                             console.log(res.data);
-                            dispatch(addCourseToRequirement({position:'other', course: res.data.data}));
+                            dispatch(addCourse({position:'other', course: res.data.data}));
                         }
                 });
             }, 500); 

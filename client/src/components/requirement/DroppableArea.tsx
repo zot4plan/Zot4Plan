@@ -13,7 +13,8 @@ function DroppableArea({courseIds, droppableId}:DroppableAreaType) {
           return (
             <ReqCourseCard 
                 key={courseId}
-                courseId={droppableId==='otherTab'? ('0000' + courseId): ('1111' + courseId)}
+                courseId={courseId}
+                droppableId={droppableId}
                 index={index}
             />
           )

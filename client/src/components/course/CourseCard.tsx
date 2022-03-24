@@ -1,34 +1,26 @@
-//import { useSelector } from 'react-redux';
-//import {RootState} from '../app/store';
 import { memo } from 'react';
 import Popup from './Popup';
 import { useDispatch } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
-import { removeCourseFromQuarter } from '../../features/ScheduleSlice'
+import { removeCourseFromQuarter } from '../../features/StoreSlice'
 import Xmark from '../icons/Xmark';
 
 interface courseType {
-    id: string;
+    courseId: string;
     index: number;
     droppableId: string;
 }
 
-interface DragItem {
-    index: number;
-    id: string;
-    quarter: string;
-  }
-
-function CourseCard({id, index, droppableId}: courseType) {
+function CourseCard({index, droppableId, courseId}: courseType) {
     const dispatch = useDispatch();
-    
+    const showUnit = droppableId.length === 3;
+
     /*const submitRemoveCourse = (event: MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
-     
+        event.stopPropagation();     
     }; */
   
     return (   
-    <Draggable key={id} draggableId={id} index={index}>
+    <Draggable key={droppableId + courseId} draggableId={droppableId + courseId} index={index}>
         {(provided, snapshot) => (
             <div>
               <div
@@ -37,12 +29,12 @@ function CourseCard({id, index, droppableId}: courseType) {
                 {...provided.dragHandleProps}
                 className="course-card"
               >
-                 <Popup id={id.substring(4)} showUnit={true} isCrossed={false}/>
+                 <Popup id={courseId} showUnit={showUnit} isCrossed={false}/>
 
                 <div
                     className="xmark"    
                     onClick = {() => dispatch(
-                    removeCourseFromQuarter({quarterId: droppableId,index: index,courseId:id.substring(4) 
+                    removeCourseFromQuarter({quarterId: droppableId,index: index, courseId: courseId
                 }))}>
                     <Xmark/>
                 </div>

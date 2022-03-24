@@ -1,21 +1,31 @@
 import {useState, memo, MouseEvent} from "react";
 import Quarter from '../../components/year/Quarter';
-import { useDispatch } from 'react-redux';
-import {removeYear} from '../../features/ScheduleSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {removeYear} from '../../features/StoreSlice';
 import Remove from '../icons/Remove';
 import Right from '../icons/Right';
+import { RootState } from "../../app/store";
 
 interface YearType {
-    year: {
-        id: string;
-        name:string;
-        quarters: string[];
-    };
+    yearId: string;
     index: number;
 }
 
-function Year({year, index}:YearType) {
+interface YearUnitType {
+    yearId: string;
+}
+
+const YearUnit = ({yearId}: YearUnitType) => {
+    const units = useSelector((state:RootState) => state.store.years.byIds[yearId].units);
+
+    return (
+        <span>{units + " units"}</span>
+    )
+}
+
+function Year({yearId, index}:YearType) {
     const [show, setShow] = useState (true);
+    const year = useSelector((state:RootState) => state.store.years.byIds[yearId].data)
     const dispatch = useDispatch();
 
     const deleteYear = () => {
@@ -32,7 +42,11 @@ function Year({year, index}:YearType) {
         <div className='year-wrapper'>
             <div className='year-header-wrapper' key={year.id} 
             onClick={()=>setShow(!show)}>
-                <h1 className="year-header"> {year.name} </h1>
+                <div>
+                    <h1 className="year-header"> {year.name} </h1>
+                    <YearUnit yearId={yearId}/>
+                </div>
+
                 <div className="rightIcon">
                     <Right show ={show}/>
                 </div>
@@ -40,8 +54,8 @@ function Year({year, index}:YearType) {
             </div>
 
             <div className={show?'quarters-wrapper':'quarters-wrapper hide'} style={{display:'flex'}}>
-                {year.quarters.map((quarterId,index) => 
-                    <Quarter key={quarterId} id = {quarterId} index={index}/>
+                {year.quarters.map((quarterId) => 
+                    <Quarter key={quarterId} droppableId={quarterId} />
                 )}
             </div>
         </div>

@@ -4,58 +4,46 @@ import {RootState} from './../../app/store';
 import {Droppable} from 'react-beautiful-dnd';
 import { useCallback,memo } from 'react'
 
-interface quarter {
-    id: string;
-    index: number;
+interface quarter { 
+  droppableId: string;
 }
 
-export interface Item {
-    id: number
-    text: string
-  }
-  
-  export interface ContainerState {
-    cards: Item[]
-  }
-
-function Quarter({id,index}:quarter) {
-    const quarter = useSelector((state:RootState)=>state.shedule.quarters[id]);
+function Quarter({droppableId}:quarter) {
+    const quarter = useSelector((state:RootState)=>state.store.quarters[droppableId]);
     console.log(quarter)
 
     const renderCard = useCallback(
-        ( id: string, droppableId: string, index: number) => {
+        (id: string, droppableId: string, index: number) => {
           return (
             <CourseCard 
                 key={id} 
-                id={droppableId + id} 
                 index={index} 
                 droppableId={droppableId}
+                courseId = {id}
             />
           )
-        },
-        [],
-      )
+        },[],
+    )
 
     return (
         <div className="quarter-column">
             <h2 className="quarter-header"> 
                 {quarter.name} 
             </h2>
+
             <Droppable 
-              droppableId={id}
+              droppableId={droppableId}
             >
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                style={{
-                  backgroundColor: snapshot.isDraggingOver? 'lightblue' : 'white',
-                }}
                 {...provided.droppableProps}
+                style={{ backgroundColor: snapshot.isDraggingOver? 'lightblue' : 'white'}}
                 className="course-wrapper"
-              >
+                >
                   {quarter.courses.map(
-                    (course,index) => renderCard(course,id, index)
+                    (courseId , index) => renderCard(courseId, droppableId, index)
                   )}
                   {provided.placeholder}
               </div>
