@@ -51,10 +51,9 @@ function Popup({id, showUnit, isCrossed}: courseType) {
     const course = useSelector((state: RootState) => state.requirement.courses.byIds[id].data)
 
     return ( 
-        <div className={showUnit? "card-box": "card-box w"} >
+        <div className={showUnit? "card-box": "card-box w"} onClick={()=>setShow(!show)} >
             <div 
                 className='courseId' 
-                onClick={()=>setShow(!show)}
                 style={{textDecoration: isCrossed? "line-through":"none"}}
             > 
                 {id}
