@@ -362,6 +362,7 @@ html, body, #root { background-color: var(--primary-color);}
     display: none;
     border-radius: 10px;
     -webkit-box-shadow: 5px 5px 0px 0px #faf0f4;
+    word-spacing: normal;
 }
 
 .card-popup::before{
