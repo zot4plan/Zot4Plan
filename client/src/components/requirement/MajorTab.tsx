@@ -98,10 +98,13 @@ const MajorSection = ({id}:MajorSectionType) => {
 function MajorTab () {
     const sectionIds = useSelector((state:RootState)=>state.requirement.major.allIds);
     const majorStatus = useSelector((state:RootState)=>state.requirement.major.status);
+    const majorName = useSelector((state:RootState)=>state.requirement.major.name);
+    const majorUrl = 
+        useSelector((state:RootState)=>state.requirement.major.url);
+
     const error = useSelector((state:RootState)=>state.requirement.major.error);
 
     let content
-
     if(majorStatus === 'idle')
         content = <p className='center-p'>Select your major</p>
     else if (majorStatus === 'loading') 
@@ -113,10 +116,15 @@ function MajorTab () {
     } 
     else if (majorStatus === 'failed') 
         content = <p className='center-p'>{error}</p>
+
+    let hyperLink;
+    if(majorName !== '')
+        hyperLink = <a href={majorUrl} target='_blank' rel="noreferrer">{majorName} </a>
     
     return (
         <div className="tab-container"  >
-           {content}
+            {hyperLink}
+            {content}
         </div>
     )
 }

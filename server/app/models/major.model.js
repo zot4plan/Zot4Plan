@@ -11,7 +11,12 @@ module.exports = (sequelize, Sequelize) => {
         },
         major_requirement: {
             type: Sequelize.JSON,
+            allowNull:false,
         },
+        url: {
+            type: Sequelize.STRING(200),
+            allowNull:false,
+        }
     }, {
         timestamps: false
     });

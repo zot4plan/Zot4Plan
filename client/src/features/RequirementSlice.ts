@@ -25,6 +25,7 @@ export const fetchMajor = createAsyncThunk(
        Axios
         .get('http://localhost:8080/api/getRequirement', {params: { id: id }})
         .then((response) => {
+            console.log(response.data);
             const data:MajorType[] = response.data.major_requirement;
             let courseIds:string[] = [];
 
@@ -45,7 +46,9 @@ export const fetchMajor = createAsyncThunk(
                 .then (result => {
                     const res: FetchMajorPayload = {
                         status: "succeed",
-                        major_requirement: data, 
+                        major_requirement: data,
+                        url: response.data.url,
+                        name: response.data.name, 
                         courseIds: courseIds, 
                         courseData: result.data
                     };
@@ -56,7 +59,9 @@ export const fetchMajor = createAsyncThunk(
                 .catch(() => {
                     const res: FetchMajorPayload = {
                         status: "failed",
-                        major_requirement: [], 
+                        major_requirement: [],
+                        name: '',
+                        url: '', 
                         courseIds: [], 
                         courseData: [] };
                     return res;
@@ -65,7 +70,9 @@ export const fetchMajor = createAsyncThunk(
         .catch(()=> {
             const res: FetchMajorPayload = {
                 status: "failed",
-                major_requirement: [], 
+                major_requirement: [],
+                name: '',
+                url: '',  
                 courseIds: [], 
                 courseData: [] };
             return res;
@@ -90,7 +97,9 @@ interface CourseType {
 
 interface FetchMajorPayload {
     status: string,
-    major_requirement: MajorType[], 
+    major_requirement: MajorType[],
+    name: string,
+    url: string, 
     courseIds: string[], 
     courseData: CourseType[],
 }
@@ -107,6 +116,8 @@ interface RequirementType{
     major:{
         byIds:{[propName:string]:{id:string,name:string,subList:ChildType[]}}; 
         allIds: string[];
+        name: string;
+        url: string;
         status:string;
         error:string;
     }
@@ -133,6 +144,8 @@ const initialState:RequirementType = {
    {
         byIds: {},
         allIds: [],
+        name: '',
+        url: '',
         status: "idle",
         error:"",
    },
@@ -183,6 +196,8 @@ export const requirementSlice = createSlice ({
             state.major.status = "loading";
             state.major.allIds = [];
             state.major.byIds = {};
+            state.major.name = '';
+            state.major.url = '';
 
             state.other = [];
 
@@ -215,6 +230,8 @@ export const requirementSlice = createSlice ({
                     repeatability: course.repeatability
                 }
             })
+            state.major.name = action.payload.name;
+            state.major.url = action.payload.url;
 
             state.major.status = "succeeded";
         });
