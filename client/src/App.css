@@ -318,7 +318,7 @@ html, body, #root { background-color: var(--primary-color);}
 }
 
 .card-box{
-    border: 1px solid black;
+    border: 1px solid #307ABB;
     height: 36px;
     word-spacing: -2px;
     display: flex;
@@ -326,6 +326,7 @@ html, body, #root { background-color: var(--primary-color);}
     align-items: center;
     justify-content: space-between;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 .w { width: 125px; margin-bottom: 0.5rem; margin-right: 1rem;}
@@ -359,6 +360,8 @@ html, body, #root { background-color: var(--primary-color);}
     cursor: default;
     z-index: 1;
     display: none;
+    padding: 0rem 0.5rem;
+    border-radius: 10px;
 }
 
 .card-popup::before{
