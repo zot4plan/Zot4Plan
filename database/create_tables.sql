@@ -11,6 +11,9 @@ CREATE TABLE courses (
     description VARCHAR(1000) NOT NULL,
     prerequisite VARCHAR(1000) NOT NULL,
     restriction VARCHAR(1000) NOT NULL,
+    repeatability INT NOT NULL,
+    corequisite VARCHAR (1000),
+    ge VARCHAR(25) NOT NULL,
     PRIMARY KEY(id));
 ALTER TABLE courses ADD FULLTEXT(id);
 

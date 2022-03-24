@@ -3,7 +3,7 @@ import requests
 from major_requirements import request_websites, scrape_courses
 from collections import namedtuple
 
-Course_Info = namedtuple('Course', ['name', 'department', 'units', 'description','prerequisite', 'restriction', 'ge'])
+Course_Info = namedtuple('Course', ['name', 'department', 'units', 'description','prerequisite', 'corequisite', 'repeatability', 'restriction', 'ge'])
 
 def get_courses_websites():
     """
@@ -34,7 +34,7 @@ def get_courses(url):
         name = elem.find('p', class_='courseblocktitle').text.split('.  ')
         testing = elem.find('div', class_='courseblockdesc')
         get_info = testing.find_all('p')
-        ge_tag, restrict, prereq, description = '', '', '', ''
+        ge_tag, restrict, prereq, description, repeat, co_course = '', '', '', '', '1', ''
         for x in range(len(get_info)):
             info = get_info[x].text
             ge = get_info[x].find('strong')
@@ -44,6 +44,16 @@ def get_courses(url):
                 restrict = info.replace('"', "'").replace('Restriction:', '')
             elif 'Prerequisite:' in description:
                 prereq = info.replace('\n', '').replace('"', "'").replace('Prerequisite:','')
+            elif 'Corequisite:' in info:
+                co_course = info.replace('\n', '').replace('"', "'").replace('Corequisite:','')
+            elif 'Repeatability:' in info:
+                if 'Unlimited' in info or 'unlimited' in info:
+                    repeat = '9'
+                else:
+                    repeat = info.split(' ')
+                    for elem in repeat:
+                        if elem.isdigit():
+                            repeat = elem
             if ge is not None:
                 ge_tag = ge.text.replace('.', '').upper()
     
@@ -56,7 +66,8 @@ def get_courses(url):
         key_name = name[0].replace("\u00a0", " ")
         get_dept = key_name.split(" ")[:-1]
         department = " ".join(get_dept)
-        c_info = Course_Info(name[1], department, unit, description ,prereq, restrict, ge_tag)
+        c_info = Course_Info(name=name[1], department=department, units=unit, description=description, prerequisite=prereq, corequisite=co_course,
+                                repeatability=repeat ,restriction=restrict, ge=ge_tag)
         course_dict[key_name] = c_info
     
     return course_dict
