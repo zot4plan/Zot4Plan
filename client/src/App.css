@@ -349,7 +349,7 @@ html, body, #root { background-color: var(--primary-color);}
 
 .card-popup {
     background-color: white;
-    border: 1px solid;
+    border: 2.5px solid #F5E0E9;
     position: absolute;
     top:43px;
     left: 65%;
@@ -361,15 +361,16 @@ html, body, #root { background-color: var(--primary-color);}
     z-index: 1;
     display: none;
     border-radius: 10px;
+    -webkit-box-shadow: 5px 5px 0px 0px #faf0f4;
 }
 
 .card-popup::before{
     position: absolute;
-    background-color: var(--primary-color);
+    background-color: #F5E0E9;
     content: '';
     width: 25px;
-    height: 25px;
-    top: 5px;
+    height: 20px;
+    top: 2px;
     left: 50%;
     margin: auto;
     transform: rotate(45deg) translate(-50%);
@@ -413,9 +414,9 @@ html, body, #root { background-color: var(--primary-color);}
 
 .popup-header {
     padding: 0.5rem 0.5rem;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background-color: lightgrey;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    background-color: #F5E0E9;
 }
 
 .popup-header>p {
