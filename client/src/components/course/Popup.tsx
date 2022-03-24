@@ -49,6 +49,7 @@ const RenderUnit = (unit:number) => {
 function Popup({id, showUnit, isCrossed}: courseType) {
     const [show, setShow] = useState(false);
     const course = useSelector((state: RootState) => state.requirement.courses.byIds[id].data)
+    console.log(course);
 
     return ( 
         <div className={showUnit? "card-box": "card-box w"} >

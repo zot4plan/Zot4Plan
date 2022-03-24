@@ -80,9 +80,12 @@ interface CourseType {
     name: string;
     department: string;
     units: number;
+    repeatability: number;
+    corequisites:string;
     description: string;
     prerequisite: string;
     restriction: string;
+    ge:string;
 }
 
 interface FetchMajorPayload {
@@ -115,7 +118,12 @@ interface RequirementType{
     };
     other: string[];
     courses: {
-        byIds: {[propName:string]: {data: CourseType, isPicked: boolean}},
+        byIds: {
+            [propName:string]: {
+                data: CourseType, 
+                repeatability: number
+            }
+        },
         allIds: string[];
     };
 }
@@ -148,7 +156,7 @@ export const requirementSlice = createSlice ({
        addCourseToRequirement: (state, action: PayloadAction<AddCoursePayload>) => {
         if(action.payload.position === 'other')
             state.other.push(action.payload.course.id);
-        state.courses.byIds[action.payload.course.id] = {data: action.payload.course, isPicked: false};
+        state.courses.byIds[action.payload.course.id] = {data: action.payload.course, repeatability: 1};
         state.courses.allIds.push(action.payload.course.id);
        }
     },
@@ -204,7 +212,7 @@ export const requirementSlice = createSlice ({
             action.payload.courseData.forEach((course) => {
                 state.courses.byIds[course.id] = {
                     data: course,
-                    isPicked: false
+                    repeatability: course.repeatability
                 }
             })
 
@@ -218,17 +226,16 @@ export const requirementSlice = createSlice ({
 
         /****  toggle isPicked attribute of course ****/
         builder.addCase(addCourseToQuarter, (state, action) => {
-            state.courses.byIds[action.payload.courseId].isPicked = true;
+            state.courses.byIds[action.payload.courseId].repeatability -= 1;
         })
         builder.addCase(removeCourseFromQuarter, (state, action) => {
-            state.courses.byIds[action.payload.courseId].isPicked = false;
+            state.courses.byIds[action.payload.courseId].repeatability += 1;
         })
 
         /**** refresh state ****/
         builder.addCase(refreshState, (state, action) => {
             state.courses.allIds.forEach((id)=>{
-                if(state.courses.byIds[id].isPicked)
-                    state.courses.byIds[id].isPicked = false;
+                state.courses.byIds[id].repeatability = state.courses.byIds[id].data.repeatability;
             }) 
         })
     },

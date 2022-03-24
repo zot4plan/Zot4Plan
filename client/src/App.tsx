@@ -56,14 +56,14 @@ function App() {
     if(source.droppableId.length > 5)
       dispatch(addCourseToQuarter({
         destinationId: destination.droppableId,
-        courseId: draggableId.substr(4),
+        courseId: draggableId.substring(4),
         destinationIndex: destination.index
       }))
     else
       dispatch(moveCourse({
         sourceId: source.droppableId,
         destinationId: destination.droppableId,
-        courseId: draggableId,
+        courseId: draggableId.substring(4),
         sourceIndex: source.index,
         destinationIndex: destination.index
       }))

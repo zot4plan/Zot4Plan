@@ -38,12 +38,12 @@ function CourseCard({id, index, droppableId}: courseType) {
                 {...provided.dragHandleProps}
                 className="course-card"
               >
-                 <Popup id={id} showUnit={true} isCrossed={false}/>
+                 <Popup id={id.substring(4)} showUnit={true} isCrossed={false}/>
 
                 <div
                     className="xmark"    
                     onClick = {() => dispatch(
-                    removeCourseFromQuarter({quarterId: droppableId,index: index,courseId:id 
+                    removeCourseFromQuarter({quarterId: droppableId,index: index,courseId:id.substring(4) 
                 }))}>
                     <Xmark/>
                 </div>

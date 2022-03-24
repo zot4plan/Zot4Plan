@@ -29,6 +29,18 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING(1000),
             allowNull:false,
         },
+        repeatability: {
+            type: Sequelize.INTEGER,
+            allowNull:false,
+        },
+        corequisite: {
+            type: Sequelize.STRING(1000),
+            allowNull:false,
+        },
+        ge: {
+            type: Sequelize.STRING(25),
+            allowNull:false,
+        }, 
     }, {
         timestamps: false
     });

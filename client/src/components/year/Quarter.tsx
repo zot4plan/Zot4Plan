@@ -27,7 +27,7 @@ function Quarter({id,index}:quarter) {
           return (
             <CourseCard 
                 key={id} 
-                id={id} 
+                id={droppableId + id} 
                 index={index} 
                 droppableId={droppableId}
             />
