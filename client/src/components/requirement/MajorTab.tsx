@@ -119,7 +119,9 @@ function MajorTab () {
 
     let hyperLink;
     if(majorName !== '')
-        hyperLink = <a href={majorUrl} target='_blank' rel="noreferrer">{majorName} </a>
+        hyperLink = <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginBottom:'1rem'}} > 
+            <a className='hyperlink' href={majorUrl} target='_blank' rel="noreferrer">{majorName} </a>
+            </div>
     
     return (
         <div className="tab-container"  >

@@ -348,11 +348,11 @@ html, body, #root { background-color: var(--primary-color);}
 }
 
 .card-popup {
-    background-color: var(--primary-color);
+    background-color: white;
     border: 1px solid;
     position: absolute;
-    top:30px;
-    left: 50%;
+    top:43px;
+    left: 65%;
     width: 200px;
     height: auto;
     font-size: 12px;
@@ -360,7 +360,6 @@ html, body, #root { background-color: var(--primary-color);}
     cursor: default;
     z-index: 1;
     display: none;
-    padding: 0rem 0.5rem;
     border-radius: 10px;
 }
 
@@ -398,4 +397,27 @@ html, body, #root { background-color: var(--primary-color);}
     color: white;
     background-color: var(--accent-color-2);
     box-shadow: 0 0 3px 3px var(--accent-color-2);
+}
+
+.hyperlink {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: var(--accent-color-2);
+    font-weight: 630;
+}
+
+.hyperlink:hover {
+    color:#FF934F;
+    text-decoration: underline; 
+}
+
+.popup-header {
+    padding: 0.5rem 0.5rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: lightgrey;
+}
+
+.popup-header>p {
+    margin: 0;
 }

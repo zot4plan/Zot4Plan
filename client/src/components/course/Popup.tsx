@@ -15,26 +15,29 @@ interface RenderPopupType {
         department: string;
         units: number;
         description: string;
+        corequisites: string;
         prerequisite: string;
         restriction: string;
+        ge: string;
     }
 }
 
 const RenderPopup = ({course}: RenderPopupType) => {
     return (
         <>
-        <div>
-            <p className="course-header"> 
-                <b>{course.id}</b> <br/>
-                {course.name}<br/>
+        <div className='popup-header'>
+            <p> 
+                <b>{course.id + '. ' + course.name}</b> 
+                <br/>
                 {course.units + " units"} 
             </p>
         </div>
-        <div> 
+        <div style={{padding:'0.5rem 0.5rem'}}> 
             <p> <b>{"Description: "}</b>{course.description}</p>
             <p> <b>{"Prerequisite: "}</b>{course.prerequisite}</p>
             <p> <b>{"Restriction: "}</b>{course.restriction}</p>
-            <p> <b> course.GE </b></p>
+            <p> <b>{"Corequisites: "}</b>{course.corequisites}</p>
+            <p> <b>{"GE: "}</b>{course.ge}</p>
         </div>
     </>
     )
