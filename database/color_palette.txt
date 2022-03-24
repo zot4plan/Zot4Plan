@@ -1,3 +1,25 @@
 color 1: #faf0f4(2), #F5E0E9(3), #CC668F (11)
 
 color 2: #EBFFFB (2), #D6FFF6 (3), #33FFD6 (11)
+
+color 3: #D4C1EC(5), #BFA1E2 (7), #B592DD (8)
+
+color 4: EEEEFC (2), #DCDCF9 (3), 5151E1 (11)
+
+color 5: F1F6F9 (2), E2EDF3 (3), 6FA6C3 (11)
+
+color 6: F6F3F6 (2), EDE8ED (3), A58DA5 (11)
+
+color 7: FFF4EB (2), FFE9D6 (3), FF9233 (11)
+
+color 8: F1EFFB (2), E2DEF7 (3), 705BD7 (11)
+
+color 9: EBEBFF (2), D6D6FF (3), 5C5CFF (9)
+
+color 10: F3F4F6 (2), E8EAED (3), 8D97A5 (11)
+
+color 11: F7F5F3 (2), E7E0DA (4), B6A290 (10)
+
+color 12: F8F1F2 (2), F1E4E6 (3), BA7882 (11)
+
+color 13: E4F1ED (3), C9E3DB (5), 78BAA6 (11)
