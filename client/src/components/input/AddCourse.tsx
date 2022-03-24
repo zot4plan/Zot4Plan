@@ -58,8 +58,9 @@ function AddCourse() {
         event.stopPropagation();
         if(!courses.includes(selectCourse))
             setTimeout(() => {
-                Axios.get('http://localhost:8080/api/addCourse', {
+                Axios.get('http://localhost:8080/api/getCourseById', {
                     params: { id: selectCourse }}).then((res) => {
+                        console.log(res);
                         if(res.data.message === 'success') {
                             console.log(res.data);
                             dispatch(addCourseToRequirement({position:'other', course: res.data.data}));

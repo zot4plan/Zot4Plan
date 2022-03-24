@@ -21,8 +21,7 @@ interface DragItem {
 
 function CourseCard({id, index, droppableId}: courseType) {
     const dispatch = useDispatch();
-    console.log(id,index,droppableId);
-
+    
     /*const submitRemoveCourse = (event: MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
      
