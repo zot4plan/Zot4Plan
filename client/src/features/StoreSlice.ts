@@ -329,6 +329,7 @@ export const storeSlice = createSlice ({
                 section.child.forEach((c) => {
                     const cId = nanoid(MAJOR_ID_LENGTH);
                     state.major.byIds[sId].subList.push({id: cId, name: c.name, courses: c.child})
+                    
                 })
             })
 
