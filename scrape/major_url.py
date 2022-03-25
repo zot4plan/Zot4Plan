@@ -9,7 +9,7 @@ def get_url():
         for each in elem.find_all('a'):
             href = each.get('href')
             get_type = href.split('_')
-            website = 'http://catalogue.uci.edu/' + href + '#requirementstext'
+            website = 'http://catalogue.uci.edu' + href + '#requirementstext'
             name = each.text
             if get_type[-1] in prefered:
                 all_url[name] = website
