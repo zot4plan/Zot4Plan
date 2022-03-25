@@ -1,0 +1,75 @@
+[
+    {
+        "name": "A. Complete:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "LIT JRN 20",
+                    "LIT JRN 21",
+                    "LIT JRN 100"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "B. Select one course from the following:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "ENGLISH 8",
+                    "ENGLISH 9",
+                    "ENGLISH 10",
+                    "ENGLISH 11",
+                    "ENGLISH 12",
+                    "ENGLISH 15",
+                    "ENGLISH 16",
+                    "ENGLISH 17"
+                ]
+            }
+
+        ]
+    },
+    {
+        "name": "C. Complete:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "ENGLISH 105"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "D. Complete:",
+        "child": [
+            {
+                "name": "",
+                "child": [
+                    "LIT JRN 101A",
+                    "LIT JRN 101BW"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "E. Select:",
+        "child": [
+            {
+                "name": "At least three more Departmental (English, Literary Journalism, Writing) courses numbered 102 or above (excluding ENGLISH 150, LIT JRN 197, LIT JRN 198, LIT JRN 199, WRITING 139W, and WRITING 197). An upper-division course in a foreign literature in the original language or in translation may be substituted for one of the three courses.",
+                "child": []
+            }
+        ]
+    },
+    {
+        "name": "F. Two upper-division History courses in a single regional or thematic focus area.",
+        "child": [
+            {
+                "name": "",
+                "child": []
+            }
+        ]
+    }
+]
