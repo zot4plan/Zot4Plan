@@ -27,8 +27,9 @@ function Year({yearId, index}:YearType) {
     }
 
     return (
-        <div className='year-wrapper'>
-            <div className='year-header-wrapper' key={year.id} 
+        <div className='year-wrapper'
+             style={{marginBottom: show? '2rem': '1.25rem'}}>
+            <div className='accordion' key={year.id} 
             onClick={()=>setShow(!show)}>
 
                 <div className="year-header">

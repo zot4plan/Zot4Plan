@@ -21,9 +21,9 @@ const Header = () => {
       <Logo/>
       <SelectMajor/>
       <a target="_blank" href="https://www.linkedin.com/" rel="noreferrer"
-      className="linkedin"><Linkedin/></a>
+      className="linkedin" aria-label="Linkedin"><Linkedin/></a>
       <a target="_blank" href="https://github.com/" rel="noreferrer" 
-      className="github"><Github/></a>
+      className="github" aria-label="Github"><Github/></a>
     </div>
   )
 }
