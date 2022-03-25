@@ -19,13 +19,14 @@ interface RenderPopupType {
         prerequisite: string;
         restriction: string;
         ge: string;
-    }
+    },
+    color: string
 }
 
-const RenderPopup = ({course}: RenderPopupType) => {
+const RenderPopup = ({course, color}: RenderPopupType) => {
     return (
         <>
-        <div className='popup-header'>
+        <div className='popup-header' style={{backgroundColor: color}}>
             <p> 
                 <b>{course.id + '. ' + course.name}</b> 
                 <br/>
@@ -52,9 +53,12 @@ const RenderUnit = (unit:number) => {
 function Popup({id, showUnit, isCrossed}: courseType) {
     const [show, setShow] = useState(false);
     const course = useSelector((state: RootState) => state.store.courses.byIds[id].data)
+    const colors = useSelector((state: RootState) => state.store.depts.byIds[course.department].colors);
 
     return ( 
-        <div className={showUnit? "card-box": "card-box w"} onClick={()=>setShow(!show)} >
+        <div className={showUnit? "card-box": "card-box w"} 
+                onClick={()=>setShow(!show)} 
+                style={{backgroundColor: colors[2]}}>
             <div 
                 className='courseId' 
                 style={{textDecoration: isCrossed? "line-through":"none"}}
@@ -64,8 +68,16 @@ function Popup({id, showUnit, isCrossed}: courseType) {
 
             {showUnit && RenderUnit(course.units)}
             
-            <div className="card-popup" style={{display: show? "block":"none"}}>
-                <RenderPopup course={course}/>
+            <div className="card-popup-before" 
+                style={{display: show? "block":"none",  
+                        backgroundColor: colors[1]}}>
+            </div>
+
+            <div className="card-popup" 
+                 style={{display: show? "block":"none",
+                         borderColor: colors[1],
+                         boxShadow: '5px 5px 0px 0px' + colors[0]}}>
+                    <RenderPopup course={course} color={colors[1]} />
             </div>
         </div>
     )

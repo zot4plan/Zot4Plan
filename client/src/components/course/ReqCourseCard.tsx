@@ -23,7 +23,7 @@ function getStyle(style: any, snapshot: { isDropAnimating: any; }) {
 }
 
 function ReqCourseCard({courseId, droppableId, index}: courseType) {
-
+    //console.log(courseId);
     const repeatability = useSelector(
         (state: RootState) => state.store.courses.byIds[courseId].repeatability)
 

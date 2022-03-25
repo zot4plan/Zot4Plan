@@ -35,7 +35,6 @@ export const fetchGECategories = createAsyncThunk(
     "features/fetchGECategories", async (_, thunkAPI) => {
        try {
           const response = await Axios.get('http://localhost:8080/api/getGeneralEducation');
-
           return await response.data;
         } 
         catch (error) {
@@ -48,7 +47,6 @@ export const fetchMajor = createAsyncThunk(
        Axios
         .get('http://localhost:8080/api/getRequirement', {params: { id: id }})
         .then((response) => {
-            console.log(response.data);
             const data:MajorType[] = response.data.major_requirement;
             let courseIds:string[] = [];
 
@@ -75,13 +73,11 @@ export const fetchMajor = createAsyncThunk(
                         courseIds: courseIds, 
                         courseData: result.data
                     };
-                    console.log(courseIds);
-                    console.log(result.data);
                     return res;
                 })
-                .catch(() => {
+                .catch((error:string) => {
                     const res: FetchMajorPayload = {
-                        status: "failed",
+                        status: error,
                         major_requirement: [],
                         name: '',
                         url: '', 
@@ -90,9 +86,9 @@ export const fetchMajor = createAsyncThunk(
                     return res;
                 });
         })
-        .catch(()=> {
+        .catch((error:string)=> {
             const res: FetchMajorPayload = {
-                status: "failed",
+                status: error,
                 major_requirement: [],
                 name: '',
                 url: '',  

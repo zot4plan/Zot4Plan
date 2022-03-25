@@ -11,21 +11,9 @@ interface YearType {
     index: number;
 }
 
-interface YearUnitType {
-    yearId: string;
-}
-
-const YearUnit = ({yearId}: YearUnitType) => {
-    const units = useSelector((state:RootState) => state.store.years.byIds[yearId].units);
-
-    return (
-        <span>{units + " units"}</span>
-    )
-}
-
 function Year({yearId, index}:YearType) {
     const [show, setShow] = useState (true);
-    const year = useSelector((state:RootState) => state.store.years.byIds[yearId].data)
+    const year = useSelector((state:RootState) => state.store.years.byIds[yearId])
     const dispatch = useDispatch();
 
     const deleteYear = () => {
@@ -42,9 +30,9 @@ function Year({yearId, index}:YearType) {
         <div className='year-wrapper'>
             <div className='year-header-wrapper' key={year.id} 
             onClick={()=>setShow(!show)}>
-                <div>
-                    <h1 className="year-header"> {year.name} </h1>
-                    <YearUnit yearId={yearId}/>
+
+                <div className="year-header">
+                    <span> {year.name} </span>
                 </div>
 
                 <div className="rightIcon">
