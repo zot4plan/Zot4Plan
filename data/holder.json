@@ -1,274 +1,259 @@
 [
     {
-        "name": "A. Complete the following:",
+        "name": "Lower-division: A. Select one of the following series:",
         "child": [
             {
-                "name": "",
+                "name": "Group 1",
                 "child": [
-                    [
-                        "MATH 2A",
-                        "MATH 5A"
-                    ],
-                    "MATH 2B",
-                    "MATH 2D",
-                    "MATH 2E",
-                    "MATH 3A",
-                    "MATH 3D",
-                    "PHYSICS 50",
-                    [
-                        "PHYSICS 61A",
-                        "PHYSICS 51A"
-                    ],
-                    "PHYSICS 111A",
-                    "PHYSICS 112A",
-                    "PHYSICS 113A",
-                    "PHYSICS 115A"
-                ]
-            }
-        ]
-    },
-    {
-        "name": "B. Complete one of the following series:",
-        "child": [
-            {
-                "name": "Series 1:",
-                "child": [
-                    "PHYSICS 7C",
-                    "PHYSICS 7LC",
-                    "PHYSICS 7D",
-                    "PHYSICS 7LD",
-                    "PHYSICS 7E"
+                    "I&C SCI 31",
+                    "I&C SCI 32",
+                    "I&C SCI 33"
                 ]
             },
             {
-                "name": "Series 2:",
+                "name": "Group 2",
                 "child": [
-                    "PHYSICS 3A",
-                    "PHYSICS 3B",
-                    "PHYSICS 3LB",
-                    "PHYSICS 3C",
-                    "PHYSICS 3LC"
+                    "I&C SCI 32A",
+                    "I&C SCI 33"
                 ]
             }
         ]
     },
     {
-        "name": "C. Complete one of the following:",
+        "name": "Lower Division: B. Complete:",
         "child": [
             {
                 "name": "",
                 "child": [
-                    "PHYSICS 53",
                     "I&C SCI 45C",
-                    "MATH 9",
-                    "EECS 10",
-                    "EECS 12"
+                    "I&C SCI 46",
+                    "I&C SCI 51",
+                    "I&C SCI 53",
+                    "I&C SCI 53L",
+                    "IN4MATX 43",
+                    "MATH 2A",
+                    "MATH 2B",
+                    "I&C SCI 6B",
+                    "I&C SCI 6D",
+                    [
+                        "I&C SCI 6N",
+                        "MATH 3A"
+                    ],
+                    "STATS 67"
                 ]
             }
         ]
     },
     {
-        "name": "D. Complete one of the following:",
+        "name": "Lower Division: C. Select:",
         "child": [
             {
-                "name": "",
-                "child": [
-                    "PHYSICS 60",
-                    "CHEM 1C",
-                    "CHEM H2C",
-                    "CHEM M3C",
-                    "ENGRMAE 91"
-                ]
+                "name": "Two courses approved for General Education category II except those offered by CSE, Economics, Engineering, ICS, or Mathematics. University Studies courses can be used with the approval of the CS Vice Chair for Undergraduate Studies.",
+                "child": []
             }
         ]
     },
     {
-        "name": "E. Complete six units of lower-division laboratory using any combination of the following courses:",
+        "name": "Upper-division",
         "child": [
             {
-                "name": "",
+                "name": "A. Core",
                 "child": [
-                    "PHYSICS 52A",
-                    "PHYSICS 52B",
-                    "PHYSICS 52C",
-                    "CHEM 1LC",
-                    "CHEM 1LD",
-                    "CHEM H2LA",
-                    "CHEM H2LB",
-                    "CHEM M2LA",
-                    "CHEM M2LB",
-                    "CHEM 51LB",
-                    "CHEM 51LC",
-                    "CHEM H52LA",
-                    "CHEM H52LB",
-                    "CHEM M52LA",
-                    "CHEM M52LB",
-                    "ENGR 7A",
-                    "ENGR 7B",
-                    "EECS 70LA",
-                    "EECS 70LB"
+                    "COMPSCI 161",
+                    "I&C SCI 139W"
                 ]
+            },
+            {
+                "name": "B. Upper-division electives: Select 11 upper-division courses from the list below. Sections B-1 and B-2 must be completed as part of the 11 upper-division electives.",
+                "child": [
+                    "IN4MATX 102",
+                    "IN4MATX 113",
+                    "IN4MATX 115",
+                    "IN4MATX 117",
+                    "IN4MATX 121",
+                    "IN4MATX 122",
+                    "IN4MATX 124",
+                    "IN4MATX 131",
+                    "IN4MATX 133",
+                    "IN4MATX 134",
+                    "I&C SCI 161",
+                    "I&C SCI 162"
+                ]
+            },
+            {
+                "name": "COMPSCI 103-160, 162-189",
+                "child": []
+            },
+            {
+                "name": "B-1. Project Courses: Choose at least two projects courses from the following list:",
+                "child": [
+                    "COMPSCI 113",
+                    "COMPSCI 114",
+                    "COMPSCI 117",
+                    "COMPSCI 122B",
+                    "COMPSCI 122C",
+                    "COMPSCI 122D",
+                    "COMPSCI 125",
+                    "COMPSCI 133",
+                    "COMPSCI 142B",
+                    "COMPSCI 143B",
+                    "COMPSCI 145",
+                    "COMPSCI 145L",
+                    "COMPSCI 147",
+                    "COMPSCI 153",
+                    "COMPSCI 154",
+                    "COMPSCI 165",
+                    "COMPSCI 175",
+                    "IN4MATX 117",
+                    "IN4MATX 134"
+                ]
+            },
+            {
+                "name": "B-2. Specialization: Select and satisfy the requirements for one of the specializations below. (Note: Students may not pursue more than one specialization.)",
+                "child": []
             }
         ]
     },
     {
-        "name": "F. Complete eight units of upper-division laboratory using any combination of the following courses:",
+        "name": "Some of the specializations include recommended electives:",
         "child": [
             {
-                "name": "",
+                "name": "These are courses related to the specialization and intended to help students choose courses to take toward their upper-division elective requirement.",
+                "child": []
+            },
+            {
+                "name": "Algorithms: Four courses from the following list:",
                 "child": [
-                    "PHYSICS 106W",
-                    "PHYSICS 120",
-                    "PHYSICS 121W",
-                    "PHYSICS 139",
-                    "PHYSICS 193",
-                    "PHYSICS 196C"
+                    "COMPSCI 162",
+                    "COMPSCI 163",
+                    "COMPSCI 164",
+                    "COMPSCI 165",
+                    "COMPSCI 166",
+                    "COMPSCI 167",
+                    "COMPSCI 169"
                 ]
             },
             {
-                "name": "Or one approved upper-division laboratory course outside of Physics",
+                "name": "Architecture and Embedded Systems: four courses from the following list:",
+                "child": [
+                    "COMPSCI 145",
+                    "COMPSCI 145L",
+                    "COMPSCI 147",
+                    "COMPSCI 151",
+                    "COMPSCI 152",
+                    "COMPSCI 153",
+                    "COMPSCI 154"
+                ]
+            },
+            {
+                "name": "Bioinformatics: three courses from the following list:",
+                "child": [
+                    "COMPSCI 184A"
+                ]
+            },
+            {
+                "name": "And complete:",
+                "child": [
+                    "COMPSCI 172B",
+                    "COMPSCI 172C",
+                    "COMPSCI 184C"
+                ]
+            },
+            {
+                "name": "General CS track: COMPSCI 103-189, except COMPSCI 161",
                 "child": []
+            },
+            {
+                "name": "Information",
+                "child": [
+                    "COMPSCI 121",
+                    "COMPSCI 122A",
+                    "COMPSCI 178"
+                ]
+            },
+            {
+                "name": "And four courses from:",
+                "child": [
+                    "I&C SCI 45J",
+                    "COMPSCI 122B",
+                    "COMPSCI 122C",
+                    "COMPSCI 122D",
+                    "COMPSCI 125",
+                    "COMPSCI 132",
+                    "COMPSCI 134",
+                    "COMPSCI 141",
+                    "COMPSCI 142A",
+                    "COMPSCI 143A",
+                    "COMPSCI 163",
+                    "COMPSCI 165",
+                    "COMPSCI 167",
+                    "COMPSCI 179"
+                ]
+            },
+            {
+                "name": "At least one of which must be:",
+                "child": [
+                    "COMPSCI 122B",
+                    "COMPSCI 122C",
+                    "COMPSCI 122D",
+                    "COMPSCI 125",
+                    "COMPSCI 179"
+                ]
+            },
+            {
+                "name": "Intelligent Systems",
+                "child": [
+                    "COMPSCI 171",
+                    "COMPSCI 175",
+                    "COMPSCI 178"
+                ]
+            },
+            {
+                "name": "And at least three courses from:",
+                "child": [
+                    "COMPSCI 116",
+                    "COMPSCI 121",
+                    "COMPSCI 125",
+                    "COMPSCI 162",
+                    "COMPSCI 163",
+                    "COMPSCI 164",
+                    "COMPSCI 169",
+                    "COMPSCI 177",
+                    "COMPSCI 179"
+                ]
+            },
+            {
+                "name": "Networked Systems",
+                "child": [
+                    "COMPSCI 132",
+                    "COMPSCI 133",
+                    "COMPSCI 134",
+                    "COMPSCI 143A"
+                ]
+            },
+            {
+                "name": "Systems and Software: three courses from the following list:",
+                "child": [
+                    "COMPSCI 131",
+                    "COMPSCI 141",
+                    "COMPSCI 142A",
+                    "COMPSCI 142B",
+                    "COMPSCI 143A",
+                    "COMPSCI 143B" 
+                ]
+            },
+            {
+                "name": "Visual Computing: four courses from the following list:",
+                "child": [
+                    "COMPSCI 111",
+                    "COMPSCI 112",
+                    "COMPSCI 114",
+                    "COMPSCI 116",
+                    "COMPSCI 117",
+                    "I&C SCI 162"
+                ]
             }
-        ]
-    },
-    {
-        "name": "G. Complete two units of writing communication from the following courses:",
-        "child": [
-            {
-                "name": "",
-                "child": [
-                    "PHYSICS 194",
-                    "PHY SCI 139W",
-                    "EDUC 143BW"
-                ]
-            },
-            {
-                "name": "Or alternate upper-division writing course with department approval",
-                "child": []
-            },
-            {
-                "name": "PHYSICS 194 does not satisfy the University’s upper-division writing requirement. It is a prerequisite course for PHYSICS 121W, which does satisfy the upper-division writing requirement.",
-                "child": []
-            }
-        ]
-    },
-    {
-        "name": "H. Complete:",
-        "child": [
-            {
-                "name": "32 additional units of coherently-related electives in accord with the following rules:",
-                "child": []
-            },
-            {
-                "name": "- Up to eight units may be lower-division electives in physics such as PHYSICS 20, PHYSICS 61B, or PHYSICS H90",
-                "child": []
-            },
-            {
-                "name": "- Any upper-division physics courses PHYSICS 100-150",
-                "child": []
-            },
-            {
-                "name": "- Any graduate level physics courses PHYSICS 200-299 with approval of the Department Undergraduate Advisor",
-                "child": []
-            },
-            {
-                "name": "- Any combination of physics and non-physics courses pre-approved as a formal Concentration or Specialization",
-                "child": []
-            },
-            {
-                "name": "- Any other combination of physics and non-physics courses approved by the Physics Department Undergraduate Committee.",
-                "child": []
-            }
-        ]
-    },
-    {
-        "name": "Concentration in Biomedical Physics: ",
-        "child":[
-            {
-                "name": "A. Complete the following:",
-                "child": [
-                    "BIO SCI 97",
-                    "BIO SCI 98",
-                    "BIO SCI 99"
-                ]
-            },
-            {
-                "name": "B. Select one of the following:",
-                "child": []
-            },
-            {
-                "name": "Group 1:",
-                "child": [
-                    "CHEM 1A",
-                    "CHEM 1B",
-                    "CHEM 1C"
-                ]
-            },
-            {
-                "name": "Group 2:",
-                "child": [
-                    "CHEM H2A",
-                    "CHEM H2B",
-                    "CHEM H2C"
-                ]
 
-            },
-            {
-                "name": "C. Select one of the following:",
-                "child": []
-            },
-            {
-                "name": "Group 1:",
-                "child": [
-                    "CHEM 1LC",
-                    "CHEM 1LD"
-                ]
-            },
-            {
-                "name": "Group 2:",
-                "child": [
-                    "CHEM H2LA",
-                    "CHEM H2LB"
-                ]
-            },
-            {
-                "name": "Group 3:",
-                "child": [
-                    "CHEM M2LA",
-                    "CHEM M2LB"
-                ]
-            },
-            {
-                "name": "D. Complete:",
-                "child": [
-                    "CHEM 51A",
-                    "CHEM 51B"
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Concentration in Engineering Physics:",
-        "child": [
-            {
-                "name": "",
-                "child": [
-                    "EECS 70A",
-                    "EECS 70B",
-                    "EECS 70LB",
-                    "EECS 170A",
-                    "EECS 170LA",
-                    "EECS 170B",
-                    "EECS 170LB",
-                    "EECS 170C",
-                    "EECS 170LC",
-                    "EECS 174",
-                    "EECS 188",
-                    "ENGRMAE 120",
-                    "ENGRMAE 130A",
-                    "ENGRMAE 147"
-                ]
-            }
         ]
     }
 ]

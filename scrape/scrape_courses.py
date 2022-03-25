@@ -3,7 +3,7 @@ import requests
 from major_requirements import request_websites, scrape_courses
 from collections import namedtuple
 
-Course_Info = namedtuple('Course', ['name', 'department', 'units', 'description','prerequisite', 'corequisite', 'repeatability', 'restriction', 'ge'])
+Course_Info = namedtuple('Course', ['name', 'department', 'units', 'description','prerequisite', 'corequisite', 'repeatability', 'restriction', 'ge_string', 'ge_list'])
 
 def get_courses_websites():
     """
@@ -35,6 +35,7 @@ def get_courses(url):
         testing = elem.find('div', class_='courseblockdesc')
         get_info = testing.find_all('p')
         ge_tag, restrict, prereq, description, repeat, co_course = '', '', '', '', '1', ''
+        ge_list = []
         for x in range(len(get_info)):
             info = get_info[x].text
             ge = get_info[x].find('strong')
@@ -56,6 +57,8 @@ def get_courses(url):
                             repeat = elem
             if ge is not None:
                 ge_tag = ge.text.replace('.', '').upper()
+                in_list = ge_tag.replace(',', '').replace(')', '').replace('(', '').replace(')', '').replace('AND', '').replace('OR', '').replace('GE', '').split(' ')
+                ge_list = [elem.strip() for elem in in_list if elem != '']
     
         unit = "0"
         if len(name[2].split(' ')[0]) > 1:
@@ -67,7 +70,7 @@ def get_courses(url):
         get_dept = key_name.split(" ")[:-1]
         department = " ".join(get_dept)
         c_info = Course_Info(name=name[1], department=department, units=unit, description=description, prerequisite=prereq, corequisite=co_course,
-                                repeatability=repeat ,restriction=restrict, ge=ge_tag)
+                                repeatability=repeat ,restriction=restrict, ge_string=ge_tag, ge_list=ge_list)
         course_dict[key_name] = c_info
     
     return course_dict
@@ -77,4 +80,4 @@ if __name__ == "__main__":
     websites = get_courses_websites()
     for each_url in websites:
         one_course = get_courses(each_url)
-        print(one_course)
+        ##print(one_course)
