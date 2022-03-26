@@ -59,6 +59,7 @@ def get_courses(url):
                 ge_tag = ge.text.replace('.', '').upper()
                 in_list = ge_tag.replace(',', '').replace(')', '').replace('(', '').replace(')', '').replace('AND', '').replace('OR', '').replace('GE', '').split(' ')
                 ge_list = [elem.strip() for elem in in_list if elem != '']
+                print(ge_list)
     
         unit = "0"
         if len(name[2].split(' ')[0]) > 1:

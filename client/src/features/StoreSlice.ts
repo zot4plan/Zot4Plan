@@ -99,19 +99,10 @@ const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
 const YEAR_NAMES = ["Freshman","Sophomore","Junior","Senior"];
 
 const DEPT_COLORS = [
-    [ '#B2C1E6','#A3B5E1','#28407B'], // dark blue
-    ['#FED89A', '#FEC05D', '#FDA10D'], // yellow
-    ['#FEDBC3', '#FDC29B','#FA6D0F'], // orange
+    ['#E4F1ED', '#C9E3DB', '#78BAA6'], // light green
     ['#D4C1EC', '#BFA1E2', '#B592DD'], // lilac
-    ['#FBC6CA', '#F8A0A7','#F45B69'], // pink
     ['#C8DFE4', '#ADCFD7' ,'#5094A5'], // blue green
     ['#F1F6F9', '#E2EDF3', '#6FA6C3'], //blue ish?
-    ['#E4F1ED', '#C9E3DB', '#78BAA6'], // light green
-    ['#F1EFFB', '#E2DEF7', '#705BD7'], // dark purple
-    ['#F6F3F6', '#EDE8ED', '#A58DA5'], // light maroon
-    ['#F7F5F3', '#E7E0DA', '#B6A290'], // goldish brown
-    
-
 ]
 
 const generateInitialState = () => {
