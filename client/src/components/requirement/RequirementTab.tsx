@@ -7,7 +7,7 @@ function RequirementTab () {
   const [tab, setTab] = useState<number>(1);
 
   return (
-    <div style={{boxShadow: '0px 4px 4px 0px rgb(0 0 0 / 60%)'}}>
+    <div style={{boxShadow: '0px 4px 4px 0px rgb(0 0 0 / 60%)', borderRadius: '15px'}}>
       <ul className="tab-panel">
         <li className={tab === 1?"tab tab-active":"tab"} onClick={()=>setTab(1)}>
           Major Requirement

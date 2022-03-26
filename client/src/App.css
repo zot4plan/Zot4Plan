@@ -81,6 +81,7 @@ html, body, #root { background-color: var(--primary-color);}
 /*** right-container ***/
 .right-container {
     margin-left: 0.75rem;
+    border-radius: 15px;
 }
     /* Tabs */
     .tab-panel {
@@ -88,6 +89,7 @@ html, body, #root { background-color: var(--primary-color);}
         margin: 0;
         padding:0;
         list-style: none;
+        border-radius: 15px;
     }
 
     .tab{
@@ -108,9 +110,11 @@ html, body, #root { background-color: var(--primary-color);}
     .tab:nth-of-type(1) {
         border-right: 1px solid var(--primary-color);
         border-bottom: 2px solid var(--primary-color);
+        border-top-left-radius: 15px;
     }
     .tab:nth-of-type(3) {
         border-left: 1px solid var(--primary-color);
+        border-top-right-radius: 15px;
     }
 
     .tab:hover {color: var(--accent-color-2);}
@@ -131,6 +135,7 @@ html, body, #root { background-color: var(--primary-color);}
         background-color: white;
         height: 700px;
         overflow: scroll;
+        border-radius: 15px;
     }
 
     .requirement-drop-wrapper {
@@ -153,6 +158,7 @@ html, body, #root { background-color: var(--primary-color);}
         box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.6);
         margin: 1rem;
         margin-top: 0;
+        border-radius: 15px;
     }
     
     .or-container {
@@ -167,6 +173,7 @@ html, body, #root { background-color: var(--primary-color);}
         top: 10%;
         left: 50%;
         transform: translateX(-50%);
+        border-radius: 15px;
     }
 
 /*** left-container ***/

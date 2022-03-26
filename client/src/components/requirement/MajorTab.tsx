@@ -88,7 +88,7 @@ const MajorSection = ({id}:MajorSectionType) => {
         <div className='section-wrapper'>  
             <div
                 key={id} 
-                className='accordion' 
+                className={show? 'accordion': 'accordion closed-header'}
                 onClick={() => setShow(!show)}>
                 <h1 className="section-header">{sectionData.name}</h1>
                 <div className="rightIcon">
