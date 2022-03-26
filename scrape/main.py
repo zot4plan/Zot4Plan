@@ -9,7 +9,7 @@ if __name__ == "__main__":
             uci_course = get_courses(each_url)
             for key,value in uci_course.items():
                 course_names.append(key)
-                f.write('INSERT INTO courses VALUES ("' + key + '","' + value.name.strip() +  '","' + value.department + '","' + value.units + '","' + value.description + '","' + value.prerequisite + '","' + value.restriction + '","' + value.repeatability + '","' + value.corequisite + '","' + value.ge + '");' + '\n')
+                f.write('INSERT INTO courses VALUES ("' + key + '","' + value.name.strip() +  '","' + value.department + '","' + value.units + '","' + value.description + '","' + value.prerequisite + '","' + value.restriction + '","' + value.repeatability + '","' + value.corequisite + '","' + value.ge_string + '");' + '\n')
                 ## Only fulfilling one ge cat !!!! REMEMBER TO RE-RUN AND FIX TO SCRAPE ALL CASES LATER
                 ## if value.ge != "" and len(value.ge) <= 6:
                     ## f.write('INSERT INTO courses_in_ge VALUES ("' + key + '","' + value.ge[1:-1] + '");' + '\n')

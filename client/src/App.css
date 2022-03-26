@@ -302,7 +302,7 @@ html, body, #root { background-color: var(--primary-color);}
                 visibility var(--transition-time) ease;
 }
 
-.xmark:hover { color: var(--text-color);}
+.xmark:hover { color: white;}
 
 .course-card:hover .xmark{
     opacity: 1;
