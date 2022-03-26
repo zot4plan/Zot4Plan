@@ -24,6 +24,12 @@ CREATE TABLE majors(
     url VARCHAR(300) NOT NULL,
     PRIMARY KEY(id));
 
+ CREATE TABLE courses_in_ge(
+    courseId VARCHAR(25) NOT NULL,
+    geId VARCHAR(5) NOT NULL,
+    FOREIGN KEY(geId) REFERENCES generalEducations(id),
+    FOREIGN KEY(courseId) REFERENCES courses(id));
+
 /* CREATE TABLE generalEducations(
     id VARCHAR(10) NOT NULL,
     name VARCHAR(55) NOT NULL,
