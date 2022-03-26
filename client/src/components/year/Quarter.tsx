@@ -40,7 +40,7 @@ function Quarter({droppableId}:quarter) {
                 {...provided.droppableProps}
                 {...provided.droppableProps}
                 style={{ backgroundColor: snapshot.isDraggingOver? 'lightblue' : 'white'}}
-                className="course-wrapper"
+                className="droppable-h"
                 >
                   {quarter.courses.map(
                     (courseId , index) => renderCard(courseId, droppableId, index)

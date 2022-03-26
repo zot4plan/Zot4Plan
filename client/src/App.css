@@ -270,7 +270,7 @@ html, body, #root { background-color: var(--primary-color);}
     background-color: #F8F8F8;
 }
 
-.course-wrapper {min-height: 100px;}
+.droppable-h {min-height: 72px;}
 
 .hide div, .hide h2 {
     min-height: 0px !important;
@@ -284,7 +284,6 @@ html, body, #root { background-color: var(--primary-color);}
 /* CourseCard */
 .course-card {
     position: relative;
-    width:inherit;
     height: 36px;
     background-color: var(--background-color);
 }
@@ -293,7 +292,7 @@ html, body, #root { background-color: var(--primary-color);}
 .xmark{
     position:absolute;
     cursor: pointer;
-    color: grey;
+    color: #F2F2F2;
     top: 2px;
     right: 2px;
     opacity: 0;
@@ -332,9 +331,9 @@ html, body, #root { background-color: var(--primary-color);}
 .unit {
     font-size: 0.75rem;
     text-align: center;
-    color: grey;
     text-decoration: none;
     cursor: grab;
+    color:snow;
     padding-right: 1.6rem;
     padding-left: 0.5rem;
 }

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import {RootState} from '../../app/store';
 import {nanoid} from '@reduxjs/toolkit/src/nanoid';
 
-function OtherTab () {
+function AddTab () {
     const other = 
         useSelector((state:RootState)=> state.store.other)
     console.log("other");
@@ -17,4 +17,4 @@ function OtherTab () {
     )
 }
 
-export default OtherTab
+export default AddTab

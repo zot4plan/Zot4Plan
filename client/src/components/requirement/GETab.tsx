@@ -16,7 +16,7 @@ const GESection = ({droppableId}:GESection) => {
         <div className='section-wrapper'>  
             <div
                 key={droppableId} 
-                className='year-header-wrapper' 
+                className='accordion' 
                 onClick={() => setShow(!show)}>
                 <h1 className="section-header">{ge.geId + ": " + ge.name}</h1>
                 <div className="rightIcon">
