@@ -103,7 +103,7 @@ const DEPT_COLORS = [
     ['#AFD3E9', '#70ADD7', '#3688BF'],
     ['#C2E9EA', '#76CFD0', '#38A3A5'],
     ['#E4F1ED', '#C9E3DB', '#78BAA6'],
-    ['#F1F6F9', '#E2EDF3', '#6FA6C3'],
+    ['#B7D2E1', '#8CB7CF', '#6FA6C3'],
     ['#C8DFE4', '#ADCFD7' ,'#5094A5']
 ]
 
