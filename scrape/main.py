@@ -12,7 +12,7 @@ if __name__ == "__main__":
                 course_names.append(key)
                 f.write('INSERT INTO courses VALUES ("' + key + '","' + value.name.strip() +  '","' + value.department + '","' + value.units + '","' + value.description + '","' + value.prerequisite + '","' + value.restriction + '","' + value.repeatability + '","' + value.corequisite + '","' + value.ge_string + '");' + '\n')
                 for cat in value.ge_list:
-                    insert_ge.append('INSERT INTO courses_in_ge VALUES ("' + key + '","' + cat + '");' + '\n')
+                    insert_ge.append('INSERT INTO courses_in_ges VALUES ("' + key + '","' + cat + '");' + '\n')
     with open('../data/data.json', 'w') as f: 
         json.dump(course_names, f,indent=4)
     with open('../database/all_GEs.sql', 'a') as f:

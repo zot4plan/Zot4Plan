@@ -62,8 +62,8 @@ const SelectGEs = () => {
     }
 
     return (
-        <div>
-            <Select 
+        <div className='geBars'>
+            <Select
                 options={geIds.map( id=> ({label: id, value: id}) )} 
                 className=''
                 placeholder="Select GE"
@@ -71,7 +71,7 @@ const SelectGEs = () => {
             />
             <Select 
                 options={courses} 
-                className=''
+                className='geCourse'
                 placeholder="Choose course"
             />
         </div>

@@ -89,7 +89,7 @@ function AddCourse() {
                 placeholder="Find course"
                 aria-label="Browse Course"
             />
-            <button onClick={submitAddCourse}> <Add/> </button>
+            <button className='button' onClick={submitAddCourse}> <Add/> </button>
         </div>
     )
 };

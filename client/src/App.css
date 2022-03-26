@@ -103,6 +103,7 @@ html, body, #root { background-color: var(--primary-color);}
         transition: background-color ease-in-out 0.4s;
         position:relative;
         top:3px;
+        width: 33%;
     }
     .tab:nth-of-type(1) {
         border-right: 1px solid var(--primary-color);
@@ -119,6 +120,7 @@ html, body, #root { background-color: var(--primary-color);}
         color: var(--accent-color-2);
         font-weight: bold;
         border-top: 4px solid var(--accent-color-2);
+        width: 33%;
     }
 
     .tab-container{
@@ -177,7 +179,8 @@ html, body, #root { background-color: var(--primary-color);}
 /* year */
 .year-wrapper { 
     border-right: 2px solid var(--border-color);
-    box-shadow: 1px 2px 5px 1px rgb(0 0 0 / 50%) 
+    box-shadow: 1px 2px 5px 1px rgb(0 0 0 / 50%);
+    border-radius: 15px; 
 }
 
 .accordion {
@@ -186,6 +189,13 @@ html, body, #root { background-color: var(--primary-color);}
     color: var(--text-color);
     cursor: pointer;
     background-color: var(--primary-color-2);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.closed-header {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .year-header {
@@ -270,7 +280,17 @@ html, body, #root { background-color: var(--primary-color);}
     background-color: #F8F8F8;
 }
 
-.droppable-h {min-height: 72px;}
+.droppable-h {
+    min-height: 72px;
+}
+
+.quarters-wrapper > div:nth-child(1) > div{
+    border-bottom-left-radius: 15px;
+}
+
+.quarters-wrapper > div:nth-child(4) > div {
+    border-bottom-right-radius: 15px;
+}
 
 .hide div, .hide h2 {
     min-height: 0px !important;
@@ -412,4 +432,25 @@ html, body, #root { background-color: var(--primary-color);}
 .hyperlink:hover {
     color:#FF934F;
     text-decoration: underline; 
+}
+
+.geBars {
+    display: flex;
+    justify-content: center;
+    margin: 0rem 1rem 1rem 1rem;
+}
+
+.geCat {
+    margin-right: 1rem;
+}
+.geCourse {
+    margin-left: 1rem;
+}
+
+.button {
+    margin-left: 0.5rem;
+    background-color: white;
+    border-radius: 5px;
+    border-color: hsl(0, 0%, 80%);
+    border-style: solid;
 }
