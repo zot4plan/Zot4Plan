@@ -53,13 +53,14 @@ function AddCourse() {
     const [selectCourse, setSelectCourse] = useState<string>("");
     const courses = useSelector((state:RootState)=> state.store.courses.allIds);
     const dispatch = useDispatch();
+    console.log("add select");
 
     const submitAddCourse = (event: MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
         if(!courses.includes(selectCourse))
             setTimeout(() => {
                 Axios.get('http://localhost:8080/api/getCourseById', {
-                    params: { id: selectCourse }}).then((res) => {
+                    params: { id: selectCourse } } ).then((res) => {
                         console.log(res);
                         if(res.data.message === 'success') {
                             console.log(res.data);
@@ -71,7 +72,6 @@ function AddCourse() {
 
     const handleOnChange = (option: OptionType | null) => {
         if(option)
-            
             setSelectCourse(option.value);
         else
             setSelectCourse("");

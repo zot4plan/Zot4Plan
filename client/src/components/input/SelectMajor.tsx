@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import Select from 'react-select';
 import { useDispatch } from 'react-redux';
-import {fetchMajor} from '../../features/FetchData';
+import {fetchMajor} from '../../features/FetchData'
 
 interface OptionType {
     value: number;
@@ -56,7 +56,6 @@ function SelectMajor() {
                 placeholder="Select major"
                 onChange={handleOnChange}
         />
-                //onChange={onSelect}/>
     )
 };
 

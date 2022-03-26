@@ -24,11 +24,14 @@ CREATE TABLE majors(
     url VARCHAR(300) NOT NULL,
     PRIMARY KEY(id));
 
- CREATE TABLE courses_in_ge(
+ CREATE TABLE courses_in_ges(
+    id INT NOT NULL AUTO_INCREMENT,
     courseId VARCHAR(25) NOT NULL,
     geId VARCHAR(5) NOT NULL,
-    FOREIGN KEY(geId) REFERENCES generalEducations(id),
-    FOREIGN KEY(courseId) REFERENCES courses(id));
+    PRIMARY KEY(id));
+
+/*   FOREIGN KEY(geId) REFERENCES generalEducations(id),
+//   FOREIGN KEY(courseId) REFERENCES courses(id));
 
 /* CREATE TABLE generalEducations(
     id VARCHAR(10) NOT NULL,

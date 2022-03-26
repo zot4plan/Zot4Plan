@@ -2,7 +2,7 @@ import './App.css';
 
 import Year from './components/year/Year';
 import RequirementTab from './components/requirement/RequirementTab';
-import SelectMajor from './components/input/SelectMajor';
+import SelectOptions from './components/input/SelectMajor';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from './app/store';
@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <div className="header">
       <Logo/>
-      <SelectMajor/>
+      <SelectOptions/>
       <a target="_blank" href="https://www.linkedin.com/" rel="noreferrer"
       className="linkedin" aria-label="Linkedin"><Linkedin/></a>
       <a target="_blank" href="https://github.com/" rel="noreferrer" 

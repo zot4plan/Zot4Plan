@@ -1,0 +1,283 @@
+[
+   {
+       "name": "A. Complete the following:",
+       "child": [
+           {
+               "name": "",
+               "child": [
+                   [
+                       "MATH 2A",
+                       "MATH 5A"
+                   ],
+                   "MATH 2B",
+                   "MATH 2D",
+                   "MATH 2E",
+                   "MATH 3A",
+                   "MATH 3D",
+                   "PHYSICS 50",
+                   [
+                       "PHYSICS 61A",
+                       "PHYSICS 51A"
+                   ],
+                   "PHYSICS 111A",
+                   "PHYSICS 112A",
+                   "PHYSICS 113A",
+                   "PHYSICS 115A"
+               ]
+           }
+       ]
+   },
+   {
+       "name": "B. Complete one of the following series:",
+       "child": [
+           {
+               "name": "Series 1:",
+               "child": [
+                   "PHYSICS 7C",
+                   "PHYSICS 7LC",
+                   "PHYSICS 7D",
+                   "PHYSICS 7LD",
+                   "PHYSICS 7E"
+               ]
+           },
+           {
+               "name": "Series 2:",
+               "child": [
+                   "PHYSICS 3A",
+                   "PHYSICS 3B",
+                   "PHYSICS 3LB",
+                   "PHYSICS 3C",
+                   "PHYSICS 3LC"
+               ]
+           }
+       ]
+   },
+   {
+       "name": "C. Complete one of the following:",
+       "child": [
+           {
+               "name": "",
+               "child": [
+                   "PHYSICS 53",
+                   "I&C SCI 45C",
+                   "MATH 9",
+                   "EECS 10",
+                   "EECS 12"
+                ]
+           }
+       ]
+   },
+   {
+       "name": "D. Complete one of the following:",
+       "child": [
+           {
+               "name": "",
+               "child": [
+                   "PHYSICS 60",
+                   "CHEM 1C",
+                   "CHEM H2C",
+                   "CHEM M3C",
+                   "ENGRMAE 91"
+                ]
+           }
+       ]
+   },
+   {
+       "name": "E. Complete six units of lower-division laboratory using any combination of the following courses:",
+       "child": [
+           {
+               "name": "",
+               "child": [
+                   "PHYSICS 52A",
+                   "PHYSICS 52B",
+                   "PHYSICS 52C",
+                   "CHEM 1LC",
+                   "CHEM 1LD",
+                   "CHEM H2LA",
+                   "CHEM H2LB",
+                   "CHEM M2LA",
+                   "CHEM M2LB",
+                   "CHEM 51LB",
+                   "CHEM 51LC",
+                   "CHEM H52LA",
+                   "CHEM H52LB",
+                   "CHEM M52LA",
+                   "CHEM M52LB",
+                   "ENGR 7A",
+                   "ENGR 7B",
+                   "EECS 70LA",
+                   "EECS 70LB"
+               ]
+           }
+       ]
+   },
+   {
+       "name": "F. Complete eight units of upper-division laboratory using any combination of the following courses:",
+       "child": [
+           {
+               "name": "",
+               "child": [
+                   "PHYSICS 106W",
+                   "PHYSICS 120",
+                   "PHYSICS 121W",
+                   "PHYSICS 139",
+                   "PHYSICS 193",
+                   "PHYSICS 196C"
+               ]
+           },
+           {
+               "name": "Or one approved upper-division laboratory course outside of Physics",
+               "child": []
+           }
+       ]
+   },
+   {
+       "name": "G. Complete two units of writing communication from the following courses:",
+       "child": [
+           {
+               "name": "",
+               "child": [
+                   "PHYSICS 194",
+                   "PHY SCI 139W",
+                   "EDUC 143BW"
+                ]
+            },
+            {
+               "name": "Or alternate upper-division writing course with department approval",
+               "child": []
+            }
+ 
+       ]
+   },
+   {
+       "name": "H. Complete 32 additional units of coherently-related electives in accord with the following rules:",
+       "child": [
+           {
+               "name": "- Up to eight units may be lower-division electives in physics such as PHYSICS 20, PHYSICS 61B, or PHYSICS H90",
+               "child": []
+           },
+           {
+               "name": "- Any upper-division physics courses PHYSICS 100-150",
+               "child": []
+           },
+           {
+               "name": "- Any graduate level physics courses PHYSICS 200-299 with approval of the Department Undergraduate Advisor",
+               "child": []
+           },
+           {
+               "name": "- Any combination of physics and non-physics courses pre-approved as a formal Concentration or Specialization",
+               "child": []
+           },
+           {
+               "name": "- Any other combination of physics and non-physics courses approved by the Physics Department Undergraduate Committee.",
+               "child": []
+           }
+       ]
+   },
+   {
+       "name": "Concentration in Biomedical Physics: ",
+       "child":[
+           {
+               "name": "",
+               "child": []
+           }
+       ]
+   },
+   {
+       "name": "A. Complete the following:",
+       "child": [
+           {
+               "name": "",
+               "child": [
+                   "BIO SCI 97",
+                   "BIO SCI 98",
+                   "BIO SCI 99"
+               ]
+           }
+       ]
+   },
+   {
+       "name": "B. Select one of the following:",
+       "child": [
+           {
+               "name": "Group 1:",
+               "child": [
+                   "CHEM 1A",
+                   "CHEM 1B",
+                   "CHEM 1C"
+               ]
+           },
+           {
+               "name": "Group 2:",
+               "child": [
+                   "CHEM H2A",
+                   "CHEM H2B",
+                   "CHEM H2C"
+               ]
+ 
+           }
+       ]
+   },
+   {
+       "name": "C. Select one of the following:",
+       "child": [
+           {
+               "name": "Group 1:",
+               "child": [
+                   "CHEM 1LC",
+                   "CHEM 1LD"
+               ]
+           },
+           {
+               "name": "Group 2:",
+               "child": [
+                   "CHEM H2LA",
+                   "CHEM H2LB"
+               ]
+           },
+           {
+               "name": "Group 3:",
+               "child": [
+                   "CHEM M2LA",
+                   "CHEM M2LB"
+               ]
+           }
+       ]
+   },
+   {
+       "name": "D. Complete:",
+       "child": [
+           {
+               "name": "",
+               "child:": [
+                   "CHEM 51A",
+                   "CHEM 51B"
+               ]
+           }
+       ]
+   },
+   {
+       "name": "Concentration in Engineering Physics",
+       "child": [
+           {
+               "name": "",
+               "child": [
+                   "EECS 70A",
+                   "EECS 70B",
+                   "EECS 70LB",
+                   "EECS 170A",
+                   "EECS 170LA",
+                   "EECS 170B",
+                   "EECS 170LB",
+                   "EECS 170C",
+                   "EECS 170LC",
+                   "EECS 174",
+                   "EECS 188",
+                   "ENGRMAE 120",
+                   "ENGRMAE 130A",
+                   "ENGRMAE 147"
+               ]
+            }
+       ]
+   }
+]

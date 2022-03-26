@@ -1,4 +1,3 @@
-const { Sequelize } = require("../models");
 const db = require("../models");
 const GeneralEducation = db.generalEducation;
 

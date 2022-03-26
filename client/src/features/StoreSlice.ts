@@ -74,7 +74,8 @@ interface StoreType{
     }
     ge: {
         byIds: {[propName:string]: {id:string, geId:string, name:string, courses:string[]}};
-        allIds: string[];
+        droppableIds: string[];
+        geIds: string[];
         status: string;
         error:string;
     };
@@ -141,7 +142,8 @@ const generateInitialState = () => {
         },
         ge: {
             byIds: {},
-            allIds: [],
+            droppableIds: [],
+            geIds: [],
             status:"idle",
             error:"",
         },
@@ -271,7 +273,8 @@ export const storeSlice = createSlice ({
         builder.addCase( fetchGECategories.fulfilled,(state,action:PayloadAction<FetchGEPayload[]>) => {    
             action.payload.forEach( (ge) => {
                 const droppableId = nanoid(GE_ID_LENGTH);
-                state.ge.allIds.push(droppableId);
+                state.ge.droppableIds.push(droppableId);
+                state.ge.geIds.push(ge.id);
                 state.ge.byIds[droppableId] = {id: droppableId, geId: ge.id, name:ge.name, courses:[]}
             });
             state.ge.status = "succeeded";
@@ -295,7 +298,7 @@ export const storeSlice = createSlice ({
 
             state.other.courses = [];
 
-            state.ge.allIds.forEach((id)=>{
+            state.ge.droppableIds.forEach((id)=>{
                 state.ge.byIds[id].courses = [];
             });
 ;
