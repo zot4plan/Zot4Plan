@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import GETab from './GETab';
 import MajorTab from './MajorTab';
-import OtherTab from './OtherTab';
+import AddTab from './AddTab';
 
 function RequirementTab () {
   const [tab, setTab] = useState<number>(1);
@@ -16,12 +16,12 @@ function RequirementTab () {
           General Education
         </li>
         <li className={tab === 3?'tab tab-active':'tab'} onClick={()=>setTab(3)}>
-          Other
+          + Courses
         </li>
       </ul>
       {tab === 1 && <MajorTab/>}
       {tab === 2 && <GETab/>}
-      {tab === 3 && <OtherTab/>}
+      {tab === 3 && <AddTab/>}
     </div>
   );
 }
