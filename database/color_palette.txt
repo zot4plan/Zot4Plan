@@ -40,3 +40,8 @@
     ['#D4C1EC', '#BFA1E2', '#B592DD'], // lilac
     ['#C8DFE4', '#ADCFD7' ,'#5094A5'], // blue green
     ['#F1F6F9', '#E2EDF3', '#6FA6C3'], //blue ish?
+
+    ['#E4F1ED', '#C9E3DB', '#78BAA6'], // light green
+    ['#D4C1EC', '#BFA1E2', '#B592DD'], // lilac
+    ['#C8DFE4', '#ADCFD7' ,'#5094A5'], // blue green
+    ['#F1F6F9', '#E2EDF3', '#6FA6C3'], //blue ish?
