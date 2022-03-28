@@ -20,7 +20,7 @@ interface CourseType {
     department: string;
     units: number;
     repeatability: number;
-    corequisites:string;
+    corequisite:string;
     description: string;
     prerequisite: string;
     restriction: string;
@@ -38,10 +38,15 @@ interface FetchGEPayload {
     name:string; 
 }
 
-interface AddCoursePayload { 
-    position: string; 
+interface AddCourseOtherPayload { 
     course: CourseType; 
 }
+
+interface AddCourseGEPayload { 
+    GEIndex: string; 
+    courseId: CourseType; 
+}
+
 
 interface CourseQuarterPayload {
     quarterId: string;
@@ -166,9 +171,8 @@ export const storeSlice = createSlice ({
     name: "store",
     initialState,
     reducers: {
-        addCourse: (state, action: PayloadAction<AddCoursePayload>) => {
-            if(action.payload.position === 'other')
-                state.other.courses.push(action.payload.course.id);
+        addCourseOther: (state, action: PayloadAction<AddCourseOtherPayload>) => {
+            state.other.courses.push(action.payload.course.id);
 
             state.courses.byIds[action.payload.course.id] = {data: action.payload.course, repeatability: 1};
             state.courses.allIds.push(action.payload.course.id);
@@ -179,6 +183,10 @@ export const storeSlice = createSlice ({
                     {id: action.payload.course.department, colors: DEPT_COLORS[index] }
                 state.depts.size += 1;
             }
+        },
+
+        addCourseGE: (state, action: PayloadAction<AddCourseGEPayload>) => {
+
         },
 
         addCourseToQuarter: (state, action: PayloadAction<CourseQuarterPayload>) => {   
@@ -358,6 +366,6 @@ export const storeSlice = createSlice ({
     },
 });
 
-export const {  addCourse, addCourseToQuarter, moveCourse, 
+export const {  addCourseOther, addCourseGE, addCourseToQuarter, moveCourse, 
                 removeCourseFromQuarter, addYear, removeYear, refreshState } =  storeSlice.actions;
 export default  storeSlice.reducer;

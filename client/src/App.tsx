@@ -82,24 +82,19 @@ function App() {
   <>
   <Header/>
   <DragDropContext onDragEnd={onDragEnd}>
-    <div className="grid-container">
+    <div className="container">
       <div className="left-container">
         <RenderYears/>
         <div style={{display: "flex"}}>
-        <div className="refreshIcon" onClick={refresh}>
-            <Refresh/>
-          </div>
-          <div className="addIcon" onClick={addNewYear}>
-            <OutlineAdd/>
-          </div>
-          <div>
-            <TotalUnits/>
-          </div>
+          <div className="refreshIcon" onClick={refresh}> <Refresh/> </div>
+          <div className="addIcon" onClick={addNewYear}> <OutlineAdd/> </div>
+          <div> <TotalUnits/> </div>
         </div>
       </div>
-        <div className="right-container">
-          <RequirementTab/>
-        </div>
+
+      <div className="right-container">
+        <RequirementTab/>
+      </div>
     </div>  
   </DragDropContext>
   </> 

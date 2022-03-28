@@ -8,7 +8,7 @@ import Add from '../icons/Add'
 import { useSelector } from 'react-redux';
 import {RootState} from '../../app/store';
 import { useDispatch } from 'react-redux';
-import {addCourse} from '../../features/StoreSlice'
+import {addCourseOther} from '../../features/StoreSlice'
 
 interface OptionType {
     value: string;
@@ -64,7 +64,7 @@ function AddCourse() {
                         console.log(res);
                         if(res.data.message === 'success') {
                             console.log(res.data);
-                            dispatch(addCourse({position:'other', course: res.data.data}));
+                            dispatch(addCourseOther({course: res.data.data}));
                         }
                 });
             }, 500); 
@@ -86,10 +86,10 @@ function AddCourse() {
                 defaultOptions
                 loadOptions={promiseOptions}
                 onChange={handleOnChange}
-                placeholder="Find course"
-                aria-label="Browse Course"
+                placeholder="Choose course"
+                aria-label="Browse and add Course"
             />
-            <button className='button' onClick={submitAddCourse}> <Add/> </button>
+            <button className='add-btn' onClick={submitAddCourse}> <Add/> </button>
         </div>
     )
 };

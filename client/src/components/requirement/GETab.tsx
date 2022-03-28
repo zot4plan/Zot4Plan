@@ -1,4 +1,4 @@
-import {SetStateAction, useEffect, useState} from 'react'
+import {useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from '../../app/store'
 import {fetchGECategories} from '../../features/FetchData'
@@ -6,37 +6,87 @@ import DroppableArea from './DroppableArea';
 import Right from '../icons/Right';
 
 import Axios from 'axios'
-import Select from 'react-select';
+import Select, { StylesConfig } from 'react-select';
+import AddIcon from '../icons/Add'
 
 interface GESectionType {
     droppableId: string
 }
 
-interface SelectCoursesType {
-    geId: string;
-}
-
 interface OptionType {
-    value: string;
+    value: number | string;
     label: string;
 }
 
-const SelectCourses = ({geId}:SelectCoursesType) => {
-    const [courses, setCourses] = useState([]);
-    console.log(geId);
+const GEBarStyle: StylesConfig<OptionType, false> =  {
+    menu: (provided) => {
+        return {
+            ...provided, 
+            width: '65px'
+        };
+    },
 
-    return (
-        <Select 
-                options={courses.map( id=> ({label: id, value: id}) )} 
-                className=''
-                placeholder="Choose course"
-        />
-    )
+    control: (provided) => {
+        return {
+            ...provided, 
+            width: '65px'
+        };
+    },
+
+    valueContainer: (provided, state) => {
+        return {
+            ...provided, 
+            padding: '2px 4px'
+        };
+    },
+
+    dropdownIndicator: (provided, state) => {
+        return {
+            ...provided, 
+            padding: '2px'
+        };
+    }
 }
 
-const SelectGEs = () => {
+const CourseBarStyle: StylesConfig<OptionType, false> =  {
+    container: (provided) => {
+        return {
+            ...provided, 
+            marginLeft: '0.5rem'
+        };
+    },
+    menu: (provided) => {
+        return {
+            ...provided, 
+            width: '170px'
+        };
+    },
+
+    control: (provided) => {
+        return {
+            ...provided, 
+            width: '170px'
+        };
+    },
+
+    valueContainer: (provided, state) => {
+        return {
+            ...provided, 
+            padding: '2px 4px'
+        };
+    },
+    dropdownIndicator: (provided, state) => {
+        return {
+            ...provided, 
+            padding: '2px'
+        };
+    }
+}
+
+const GeSelectBar = () => {
     const geIds = useSelector((state:RootState)=>state.store.ge.geIds);
-   // const [option, setOption] = useState("");
+    const [geIndex, setGeIndex] = useState<number | string>(-1);
+    const [courseId, setCourseId] = useState<number | string>("");
     const [courses, setCourses] = useState([]);
 
     const handleOnChange = async (option: OptionType| null) => {
@@ -49,6 +99,7 @@ const SelectGEs = () => {
                 .then((res) => {
                     console.log(res.data);
                     const coursesArray = res.data.map( (course:{courseId : string}) =>({value: course.courseId, label: course.courseId}));
+                    setGeIndex(option.value);
                     setCourses(coursesArray);
                 })
                 .catch(err => {
@@ -57,23 +108,40 @@ const SelectGEs = () => {
             }, 500);
         }
         else {
+            setGeIndex(-1);
             setCourses([]);
         }
     }
 
+    const handleOnAddCourse = async (option: OptionType| null) => {
+        if(option) 
+            setCourseId(option.value);
+        else 
+           setCourseId("");
+    }
+
+
+
     return (
-        <div className='geBars'>
+        <div 
+            style= {{
+                display: 'flex',
+                justifyContent: 'center',
+                margin: '0rem 1rem 1rem 1rem'
+            }}>
             <Select
-                options={geIds.map( id=> ({label: id, value: id}) )} 
-                className=''
-                placeholder="Select GE"
+                styles={GEBarStyle}
+                options={geIds.map( (id,index) => ({label: id, value: index}))} 
                 onChange={handleOnChange}
+                placeholder='GE'              
             />
             <Select 
                 options={courses} 
-                className='geCourse'
+                styles={CourseBarStyle}
                 placeholder="Choose course"
+                onChange={handleOnAddCourse}
             />
+            <button className='add-btn'> <AddIcon/> </button>
         </div>
     )
 }
@@ -82,12 +150,12 @@ const GESection = ({droppableId}:GESectionType) => {
     const ge = useSelector((state:RootState)=>state.store.ge.byIds[droppableId]);
     const [show, setShow] = useState(false);
     return (
-        <div className='section-wrapper'>  
+        <div className='accordion-wrapper m-1 mt-0'>  
             <div
                 key={droppableId} 
-                className={show? 'accordion': 'accordion closed-header'}
+                className={show? 'accordion': 'accordion closed'}
                 onClick={() => setShow(!show)}>
-                <h1 className="section-header">{ge.geId + ": " + ge.name}</h1>
+                <h1 className="accordion-header">{ge.geId + ": " + ge.name}</h1>
                 <div className="rightIcon">
                     <Right show={show}/>
                 </div>
@@ -127,8 +195,8 @@ function GETab () {
   
     return (
         <div className="tab-container"  >
-            <SelectGEs/>
-           {content}
+            <GeSelectBar/>
+            {content}
         </div>
     )
 }

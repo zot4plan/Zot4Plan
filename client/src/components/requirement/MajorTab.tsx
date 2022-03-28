@@ -85,12 +85,12 @@ const MajorSection = ({id}:MajorSectionType) => {
    const [show, setShow] = useState(false);
    const sectionData = useSelector((state:RootState)=>state.store.major.byIds[id]);
     return (
-        <div className='section-wrapper'>  
+        <div className='accordion-wrapper m-1 mt-0'>  
             <div
                 key={id} 
-                className={show? 'accordion': 'accordion closed-header'}
+                className={show? 'accordion': 'accordion closed'}
                 onClick={() => setShow(!show)}>
-                <h1 className="section-header">{sectionData.name}</h1>
+                <h1 className="accordion-header">{sectionData.name}</h1>
                 <div className="rightIcon">
                     <Right show={show}/>
                 </div>

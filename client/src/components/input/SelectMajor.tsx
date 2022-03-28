@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import Axios from 'axios';
 import Select from 'react-select';
 import { useDispatch } from 'react-redux';
@@ -17,8 +17,8 @@ interface data {
 function SelectMajor() {
     console.log("Select Major component");
     const [majors, setMajors] = useState([]);
-    const [option, setOption] = useState<string> ("");
-    const [status, setStatus] = useState<string> ("idle");
+   // const [option, setOption] = useState<string> ("");
+   // const [status, setStatus] = useState<string> ("idle");
     const dispatch = useDispatch();
 
     useEffect( () => {
@@ -33,18 +33,19 @@ function SelectMajor() {
     const handleOnChange = async (option: OptionType | null) => {
         if(option){
             try {
-                setStatus('pending')
+            //    setStatus('pending')
                 await dispatch(fetchMajor({id: option.value}));
-                setOption(option.label);
+            //    setOption(option.label);
             }
             catch (err) {
                 console.error('Failed to save the post: ', err)
-            } finally {
-                setStatus('idle')
-            }
+            } 
+            //finally {
+            ///    setStatus('idle')
+           // }
         }
-        else
-            setOption("");
+    //    else
+    //       setOption("");
     }
 
 
@@ -55,8 +56,9 @@ function SelectMajor() {
                 className='select-major'
                 placeholder="Select major"
                 onChange={handleOnChange}
+                aria-label="Select major"
         />
     )
 };
 
-export default SelectMajor;
+export default memo(SelectMajor);

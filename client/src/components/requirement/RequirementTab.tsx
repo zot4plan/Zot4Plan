@@ -22,6 +22,7 @@ function RequirementTab () {
       {tab === 1 && <MajorTab/>}
       {tab === 2 && <GETab/>}
       {tab === 3 && <AddTab/>}
+      <div style={{height: '12px'}}></div>
     </div>
   );
 }

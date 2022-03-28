@@ -24,7 +24,7 @@ interface CourseType {
     department: string;
     units: number;
     repeatability: number;
-    corequisites:string;
+    corequisite:string;
     description: string;
     prerequisite: string;
     restriction: string;

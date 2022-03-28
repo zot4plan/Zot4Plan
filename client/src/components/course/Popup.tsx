@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, memo} from 'react';
 import Info from '../icons/Info';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
@@ -15,7 +15,7 @@ interface RenderPopupType {
         department: string;
         units: number;
         description: string;
-        corequisites: string;
+        corequisite: string;
         prerequisite: string;
         restriction: string;
         ge: string;
@@ -23,7 +23,19 @@ interface RenderPopupType {
     color: string
 }
 
-const RenderPopup = ({course, color}: RenderPopupType) => {
+const RenderPopup = memo(({course, color}: RenderPopupType) => {
+    let body = [];
+    body.push(<p key='description'> <b>{"Description: "}</b>{course.description}</p>);
+
+    if(course.prerequisite !== "")
+        body.push(<p key='prerequisite'> <b>{"Prerequisite: "}</b>{course.prerequisite}</p>)
+    if(course.restriction !== "")
+        body.push(<p key='restriction'> <b>{"Restriction: "}</b>{course.restriction}</p>)
+    if(course.corequisite !== "")
+        body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{course.corequisite}</p>)
+    if(course.ge !== "")
+        body.push(<p key='ge'> <b>{"GE: "}</b>{course.ge}</p>)
+
     return (
         <>
         <div className='popup-header' style={{backgroundColor: color}}>
@@ -33,22 +45,13 @@ const RenderPopup = ({course, color}: RenderPopupType) => {
                 {course.units + " units"} 
             </p>
         </div>
+        
         <div style={{padding:'0.5rem 0.5rem'}}> 
-            <p> <b>{"Description: "}</b>{course.description}</p>
-            <p> <b>{"Prerequisite: "}</b>{course.prerequisite}</p>
-            <p> <b>{"Restriction: "}</b>{course.restriction}</p>
-            <p> <b>{"Corequisites: "}</b>{course.corequisites}</p>
-            <p> <b>{"GE: "}</b>{course.ge}</p>
+            {body}
         </div>
     </>
     )
-}
-
-const RenderUnit = (unit:number) => {
-    return (
-        <div className='unit'>{unit + ' units'}</div>
-    )
-}
+})
 
 function Popup({id, showUnit, isCrossed}: courseType) {
     const [show, setShow] = useState(false);
@@ -66,7 +69,7 @@ function Popup({id, showUnit, isCrossed}: courseType) {
                 {id}
             </div>
 
-            {showUnit && RenderUnit(course.units)}
+            {showUnit && <div className='unit'>{course.units + ' units'}</div>}
             
             <div className="card-popup-before" 
                 style={{display: show? "block":"none",  
@@ -77,7 +80,7 @@ function Popup({id, showUnit, isCrossed}: courseType) {
                  style={{display: show? "block":"none",
                          borderColor: colors[1],
                          boxShadow: '5px 5px 0px 0px' + colors[0]}}>
-                    <RenderPopup course={course} color={colors[1]} />
+                <RenderPopup course={course} color={colors[1]}/>
             </div>
         </div>
     )
