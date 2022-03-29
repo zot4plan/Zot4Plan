@@ -5,7 +5,7 @@ if __name__ == "__main__":
     websites = get_courses_websites()
     course_names = []
     insert_ge = []
-    with open('../database/test.sql', 'a') as f: 
+    with open('../database/uci_courses.sql', 'a') as f: 
         for each_url in websites:
             uci_course = get_courses(each_url)
             for key,value in uci_course.items():

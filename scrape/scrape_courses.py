@@ -43,8 +43,8 @@ def get_courses(url):
                 description = info.replace('"', "'")
             elif 'Restriction:' in info:
                 restrict = info.replace('"', "'").replace('Restriction:', '')
-            elif 'Prerequisite:' in description:
-                prereq = info.replace('\n', '').replace('"', "'").replace('Prerequisite:','')
+            elif 'Prerequisite:' in info:
+                prereq = info.replace('\n', '').replace('"', "'").replace('Prerequisite:','').replace('\xa0ENG\xa0', ' ')
             elif 'Corequisite:' in info:
                 co_course = info.replace('\n', '').replace('"', "'").replace('Corequisite:','')
             elif 'Repeatability:' in info:
@@ -59,7 +59,6 @@ def get_courses(url):
                 ge_tag = ge.text.replace('.', '').upper()
                 in_list = ge_tag.replace(',', '').replace(')', '').replace('(', '').replace(')', '').replace('AND', '').replace('OR', '').replace('GE', '').split(' ')
                 ge_list = [elem.strip() for elem in in_list if elem != '']
-    
         unit = "0"
         if len(name[2].split(' ')[0]) > 1:
             unit = name[2].split(' ')[0][-1]
@@ -72,7 +71,6 @@ def get_courses(url):
         c_info = Course_Info(name=name[1], department=department, units=unit, description=description, prerequisite=prereq, corequisite=co_course,
                                 repeatability=repeat ,restriction=restrict, ge_string=ge_tag, ge_list=ge_list)
         course_dict[key_name] = c_info
-    
     return course_dict
 
 
