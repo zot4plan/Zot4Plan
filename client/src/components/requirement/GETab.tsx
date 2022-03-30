@@ -124,11 +124,8 @@ const GeSelectBar = () => {
 
     return (
         <div 
-            style= {{
-                display: 'flex',
-                justifyContent: 'center',
-                margin: '0rem 1rem 1rem 1rem'
-            }}>
+            className={'flex justify-center m-1'}
+            >
             <Select
                 styles={GEBarStyle}
                 options={geIds.map( (id,index) => ({label: id, value: index}))} 
@@ -150,15 +147,19 @@ const GESection = ({droppableId}:GESectionType) => {
     const ge = useSelector((state:RootState)=>state.store.ge.byIds[droppableId]);
     const [show, setShow] = useState(false);
     return (
-        <div className='accordion-wrapper m-1 mt-0'>  
+        <div className='shadow-0 m-1 mt-0 round-15'>  
             <div
                 key={droppableId} 
-                className={show? 'accordion': 'accordion closed'}
-                onClick={() => setShow(!show)}>
-                <h1 className="accordion-header">{ge.geId + ": " + ge.name}</h1>
-                <div className="rightIcon">
-                    <Right show={show}/>
-                </div>
+                className={'flex item-center bg-grey pointer accordion ' 
+                            + (show? 'round-top': 'round-15')}
+                onClick={() => setShow(!show)}
+                >
+                    <h1 className="accordion-header m-0 s-1">
+                        {ge.geId + ": " + ge.name}
+                    </h1>
+                    <div className="rightIcon">
+                        <Right show={show}/>
+                    </div>
             </div>
             <div style={{display: show? "block" : "none"}}>
                 <DroppableArea key={droppableId} courseIds={ge.courses} droppableId={droppableId}/>

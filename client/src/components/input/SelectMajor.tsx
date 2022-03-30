@@ -53,7 +53,7 @@ function SelectMajor() {
         <Select 
                 isClearable={true}
                 options={majors} 
-                className='select-major'
+                className='mr-05 black'
                 placeholder="Select major"
                 onChange={handleOnChange}
                 aria-label="Select major"

@@ -3,7 +3,7 @@ import Info from '../icons/Info';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
 
-interface courseType {
+interface PopUpType {
     id: string;
     showUnit: boolean;
     isCrossed: boolean;
@@ -15,6 +15,7 @@ interface RenderPopupType {
         department: string;
         units: number;
         description: string;
+        repeatability: number;
         corequisite: string;
         prerequisite: string;
         restriction: string;
@@ -33,13 +34,15 @@ const RenderPopup = memo(({course, color}: RenderPopupType) => {
         body.push(<p key='restriction'> <b>{"Restriction: "}</b>{course.restriction}</p>)
     if(course.corequisite !== "")
         body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{course.corequisite}</p>)
+    
+    body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{course.repeatability}</p>)
     if(course.ge !== "")
         body.push(<p key='ge'> <b>{"GE: "}</b>{course.ge}</p>)
 
     return (
         <>
         <div className='popup-header' style={{backgroundColor: color}}>
-            <p> 
+            <p className='m-0'> 
                 <b>{course.id + '. ' + course.name}</b> 
                 <br/>
                 {course.units + " units"} 
@@ -53,7 +56,7 @@ const RenderPopup = memo(({course, color}: RenderPopupType) => {
     )
 })
 
-function Popup({id, showUnit, isCrossed}: courseType) {
+function Popup({id, showUnit, isCrossed}: PopUpType) {
     const [show, setShow] = useState(false);
     const course = useSelector((state: RootState) => state.store.courses.byIds[id].data)
     const colors = useSelector((state: RootState) => state.store.depts.byIds[course.department].colors);
@@ -79,7 +82,7 @@ function Popup({id, showUnit, isCrossed}: courseType) {
             <div className="card-popup" 
                  style={{display: show? "block":"none",
                          borderColor: colors[1],
-                         boxShadow: '5px 5px 0px 0px' + colors[0]}}>
+                         boxShadow: '4px 4px 0px 0px' + colors[0]}}>
                 <RenderPopup course={course} color={colors[1]}/>
             </div>
         </div>

@@ -51,14 +51,14 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 style={getStyle(provided.draggableProps.style, snapshot)}
-                className="course-card w"
+                className="course-card w-125 mb-05 mr-1"
                 >
                     <Popup id={courseId} showUnit={false} isCrossed ={!isDraggable}/>
             </div>
 
             {snapshot.isDragging && (
-                <div className="card-box w">
-                    <div className="courseId">{courseId}</div> 
+                <div className="course-card card-box w-125 mb-05 mr-1">
+                   
                 </div>
             )}
             

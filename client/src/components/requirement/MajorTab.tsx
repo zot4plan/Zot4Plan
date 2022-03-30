@@ -16,7 +16,7 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
     let subContent:JSX.Element[] = [];
     let nameHeader;
     if(name !== "")
-        nameHeader = <p key={id +'p'} style={{margin:'0.5rem 1rem', paddingBottom:'0.5rem'}}>{name}</p>
+        nameHeader = <p key={id +'p'} style={{margin:'0.5rem 1rem'}}>{name}</p>
 
     let index = 0;
 
@@ -33,7 +33,10 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
         }
         else {
             subContent.push(
-                <div key={id + 'div' + index} className='or-container'>
+                <div 
+                    key={id + 'div' + index} 
+                    className='flex justify-center item-center flex-basis-100'
+                    >
                     <ReqCourseCard 
                         key={id+c[0]} 
                         courseId={c[0]}
@@ -63,7 +66,7 @@ const DroppbaleSection = ({id, name, courses}: SubListType) => {
                     <div
                     ref={provided.innerRef}
                     {...provided.droppableProps}
-                    className="requirement-drop-wrapper"
+                    className="flex flex-wrap mr-1 ml-1"
                     >
                         {subContent}
                         <div style={{display:'none'}}> {provided.placeholder} </div>
@@ -85,17 +88,23 @@ const MajorSection = ({id}:MajorSectionType) => {
    const [show, setShow] = useState(false);
    const sectionData = useSelector((state:RootState)=>state.store.major.byIds[id]);
     return (
-        <div className='accordion-wrapper m-1 mt-0'>  
+        <div className='m-1 mt-0 round-15 shadow-0'>  
             <div
                 key={id} 
-                className={show? 'accordion': 'accordion closed'}
-                onClick={() => setShow(!show)}>
-                <h1 className="accordion-header">{sectionData.name}</h1>
-                <div className="rightIcon">
-                    <Right show={show}/>
-                </div>
+                className={'flex item-center bg-grey pointer accordion ' 
+                            + (show? 'round-top': 'round-15')}
+                onClick={() => setShow(!show)}
+                >
+                    <h1 className="accordion-header m-0 s-1">
+                        {sectionData.name}
+                    </h1>
+                    <div className="rightIcon">
+                        <Right show={show}/>
+                    </div>
             </div>
-            <div style={{display: show? "block" : "none"}}>
+            <div 
+                className='pab-1 pat-1'
+                style={{display: show? "block" : "none"}}>
                 {sectionData.subList.map((c)=> 
                     <DroppbaleSection key={c.id} id={c.id} name={c.name} courses={c.courses}/>
                 )}
@@ -128,7 +137,7 @@ function MajorTab () {
 
     let hyperLink;
     if(majorName !== '')
-        hyperLink = <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginBottom:'1rem'}} > 
+        hyperLink = <div className='flex justify-center item-center m-1'> 
             <a className='hyperlink' href={majorUrl} target='_blank' rel="noreferrer">{majorName} </a>
             </div>
     

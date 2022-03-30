@@ -6,51 +6,56 @@ import { useCallback,memo } from 'react'
 
 interface quarter { 
   droppableId: string;
+  index: number;
 }
 
-function Quarter({droppableId}:quarter) {
-    const quarter = useSelector((state:RootState)=>state.store.quarters[droppableId]);
-    console.log(quarter)
+function Quarter({droppableId, index}:quarter) {
+  const quarter = useSelector((state:RootState)=>state.store.quarters[droppableId]);
+  console.log(quarter)
 
-    const renderCard = useCallback(
-        (id: string, droppableId: string, index: number) => {
-          return (
-            <CourseCard 
-                key={id} 
-                index={index} 
-                droppableId={droppableId}
-                courseId = {id}
-            />
-          )
-        },[],
-    )
-
-    return (
-        <div className="quarter-column">
-            <h2 className="quarter-header"> 
-                {quarter.name} 
-            </h2>
-
-            <Droppable 
+  const renderCard = useCallback(
+      (id: string, droppableId: string, index: number) => {
+        return (
+          <CourseCard 
+              key={id} 
+              index={index} 
               droppableId={droppableId}
-            >
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                {...provided.droppableProps}
-                style={{ backgroundColor: snapshot.isDraggingOver? 'lightblue' : 'white'}}
-                className="droppable-h"
-                >
-                  {quarter.courses.map(
-                    (courseId , index) => renderCard(courseId, droppableId, index)
-                  )}
-                  {provided.placeholder}
-              </div>
-            )} 
-            </Droppable>
-        </div>
-    )
+              courseId = {id}
+          />
+        )
+      },[],
+  )
+
+  return (
+    <Droppable 
+      droppableId={droppableId}
+    >
+    {(provided, snapshot) => (
+      <div
+        ref={provided.innerRef}
+        {...provided.droppableProps}
+        {...provided.droppableProps}
+        style={{ backgroundColor: snapshot.isDraggingOver? 'lightblue' : 'white'}}
+        className={"flex-basis-25 mh-76 " 
+                    + (index < 3? 'bd-r ':'')
+                    + (index === 0? 'round-bottom-left' : '')
+                    + (index === 3? 'round-bottom-right' : '')}
+        >
+          {quarter.courses.map(
+            (courseId , index) => renderCard(courseId, droppableId, index)
+          )}
+          {provided.placeholder}
+      </div>
+    )} 
+    </Droppable>
+  )
 }
 
 export default memo(Quarter);
+/*
+<div className="quarter-column">
+<h2 className="quarter-header m-0"> 
+    {quarter.name} 
+</h2>
+
+</div> */

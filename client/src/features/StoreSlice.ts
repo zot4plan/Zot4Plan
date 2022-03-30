@@ -9,7 +9,6 @@ interface YearType {
 
 interface QuarterType {
     id: string;
-    name: string;
     courses: string[];
     yearId : string;
 }
@@ -101,9 +100,7 @@ interface StoreType{
 const QUARTER_ID_LENGTH = 3;
 const MAJOR_ID_LENGTH = 4;
 const GE_ID_LENGTH = 5;
-const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
 const YEAR_NAMES = ["Freshman","Sophomore","Junior","Senior"];
-
 const DEPT_COLORS = [
     ['#AFD3E9', '#70ADD7', '#3688BF'],
     ['#C2E9EA', '#76CFD0', '#38A3A5'],
@@ -121,11 +118,11 @@ const generateInitialState = () => {
         let quarterIds:string[] = [];
         let yearId = nanoid(QUARTER_ID_LENGTH);
 
-        QUARTER_NAMES.forEach((name) => {
+        for(let j = 0; j< 4; j++) {
             let quarterId = nanoid(QUARTER_ID_LENGTH);
             quarterIds.push(quarterId);
-            quarters[quarterId] = {id: quarterId, name: name, courses: [], yearId: yearId};
-        })
+            quarters[quarterId] = {id: quarterId, courses: [], yearId: yearId};
+        }
 
         years[yearId] = {id: yearId, name: YEAR_NAMES[i], quarters: quarterIds};
         yearAllIds.push(yearId);
@@ -222,17 +219,16 @@ export const storeSlice = createSlice ({
             let yearId = nanoid(4);
             state.years.allIds.push(yearId);
 
-            QUARTER_NAMES.forEach((name) => {
+            for(let i = 0; i < 4; i++) {
                 let quarterId = nanoid(QUARTER_ID_LENGTH);
                 quarterIds.push(quarterId);
 
                 state.quarters[quarterId] = {
-                    id: quarterId, 
-                    name: name, 
+                    id: quarterId,  
                     courses: [], 
                     yearId: yearId
                 };
-            });
+            }
 
             state.years.byIds[yearId] = {
                 id: yearId, 

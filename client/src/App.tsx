@@ -1,7 +1,7 @@
 import './App.css';
 
 import Year from './components/year/Year';
-import RequirementTab from './components/requirement/RequirementTab';
+import Tabs from './components/requirement/Tabs';
 import SelectOptions from './components/input/SelectMajor';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,7 +17,7 @@ import Refresh from './components/icons/Refresh';
 
 const Header = () => {
   return (
-    <div className="header">
+    <div className="grid header-template-cols pa bg-black">
       <Logo/>
       <SelectOptions/>
       <a target="_blank" href="https://www.linkedin.com/" rel="noreferrer"
@@ -27,6 +27,7 @@ const Header = () => {
     </div>
   )
 }
+
 const RenderYears = () => {
   const yearIds = useSelector((state: RootState) => state.store.years.allIds);
   return (
@@ -82,18 +83,18 @@ function App() {
   <>
   <Header/>
   <DragDropContext onDragEnd={onDragEnd}>
-    <div className="container">
-      <div className="left-container">
+    <div className="grid body-template-cols m-1r5">
+      <div className="flex flex-column mr-075">
         <RenderYears/>
-        <div style={{display: "flex"}}>
+        <div className='flex align-center'>
           <div className="refreshIcon" onClick={refresh}> <Refresh/> </div>
-          <div className="addIcon" onClick={addNewYear}> <OutlineAdd/> </div>
+          <div className="flex align-center addIcon" onClick={addNewYear}> <OutlineAdd/> </div>
           <div> <TotalUnits/> </div>
         </div>
       </div>
 
-      <div className="right-container">
-        <RequirementTab/>
+      <div className="ml-075">
+        <Tabs/>
       </div>
     </div>  
   </DragDropContext>

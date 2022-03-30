@@ -1,4 +1,4 @@
-import {useState, memo, MouseEvent} from "react";
+import {useState, memo} from "react";
 import Quarter from '../../components/year/Quarter';
 import { useDispatch, useSelector } from 'react-redux';
 import {removeYear} from '../../features/StoreSlice';
@@ -10,7 +10,21 @@ interface YearType {
     yearId: string;
     index: number;
 }
-
+const QuarterHeaders = memo (() => {
+    const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
+    return (
+        <>
+            {QUARTER_NAMES.map((name, index) => {
+                return (
+                <h2 key={name} 
+                    className={"quarter-header m-0 flex-basis-25 " 
+                                + (index < 3? 'bd-r ':'')}> 
+                    {name}
+                </h2>)
+            })}
+        </>
+    )
+})
 function Year({yearId, index}:YearType) {
     const [show, setShow] = useState (true);
     const year = useSelector((state:RootState) => state.store.years.byIds[yearId])
@@ -27,12 +41,17 @@ function Year({yearId, index}:YearType) {
     }
 
     return (
-        <div className='accordion-wrapper'
-             style={{marginBottom: show? '2rem': '1.25rem'}}>
-            <div className={show? 'accordion': 'accordion closed'} key={year.id} 
-            onClick={()=>setShow(!show)}>
-
-                <div className="accordion-header year">
+        <div 
+            className='shadow-0 round-15'
+            style={{marginBottom: show? '2rem': '1.25rem'}}
+            >
+            <div 
+                className={'flex item-center color-black bg-grey pointer accordion ' 
+                            + (show? 'round-top': 'round-15')}  
+                key={year.id} 
+                onClick={()=>setShow(!show)}
+                >
+                <div className="accordion-header m-0 s-1r25">
                     <span> {year.name} </span>
                 </div>
 
@@ -42,9 +61,13 @@ function Year({yearId, index}:YearType) {
                 {index > 3 && removeBtn()}
             </div>
 
-            <div className={show?'quarters-wrapper':'quarters-wrapper hide'} style={{display:'flex'}}>
-                {year.quarters.map((quarterId) => 
-                    <Quarter key={quarterId} droppableId={quarterId} />
+            <div className={"flex ease " + (show? '':'hide')} >
+                <QuarterHeaders />
+            </div>
+
+            <div className={'flex quarters-wrapper ease '+ (show?'':'hide')}>
+                {year.quarters.map((quarterId, index) => 
+                    <Quarter key={quarterId} droppableId={quarterId} index={index}/>
                 )}
             </div>
         </div>

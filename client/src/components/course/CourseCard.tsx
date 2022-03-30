@@ -27,7 +27,7 @@ function CourseCard({index, droppableId, courseId}: courseType) {
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
-                className="course-card"
+                className="course-card m-02"
               >
                  <Popup id={courseId} showUnit={showUnit} isCrossed={false}/>
 
