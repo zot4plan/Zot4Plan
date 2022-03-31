@@ -1,4 +1,4 @@
-import ReqCourseCard from '../course/ReqCourseCard';
+import ReqCourseCard from '../course-card/ReqCourseCard';
 import {Droppable} from 'react-beautiful-dnd';
 import {memo} from 'react'
 

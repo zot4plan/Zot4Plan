@@ -57,7 +57,8 @@ interface MoveCoursePayload {
     sourceId: string;
     destinationId: string;
     sourceIndex: number;
-    destinationIndex: number;   
+    destinationIndex: number;  
+    courseId: string;
 }
 
 interface RemoveYearPayload {
@@ -188,27 +189,31 @@ export const storeSlice = createSlice ({
 
         addCourseToQuarter: (state, action: PayloadAction<CourseQuarterPayload>) => {   
             let quarterId = action.payload.quarterId;
-            let units = state.courses.byIds[action.payload.courseId].data.units;
-
-            state.years.totalUnits += units;
-            
-            state.quarters[quarterId].courses.splice(action.payload.index,0,action.payload.courseId);
-            state.courses.byIds[action.payload.courseId].repeatability -= 1;
+            let courseId = action.payload.courseId;
+            let units = state.courses.byIds[courseId].data.units;
+            if(!state.quarters[quarterId].courses.includes(courseId)) {
+                state.years.totalUnits += units;
+                state.courses.byIds[courseId].repeatability -= 1;
+                state.quarters[quarterId].courses.splice(action.payload.index, 0,courseId);
+            }
         },
 
         moveCourse: (state, action: PayloadAction<MoveCoursePayload> ) => {
-            let sourceYear = state.quarters[action.payload.sourceId].yearId;
-            let destinationYear = state.quarters[action.payload.destinationId].yearId;
-            let [removedCourse] = state.quarters[action.payload.sourceId].courses.splice(action.payload.sourceIndex, 1);
+            let sourceId = action.payload.sourceId,
+                destinationId = action.payload.destinationId,
+                courseId = action.payload.courseId;
 
-            state.quarters[action.payload.destinationId].courses.splice(action.payload.destinationIndex,0,removedCourse);
+            if(!state.quarters[destinationId].courses.includes(courseId)) {
+                state.quarters[sourceId].courses.splice(action.payload.sourceIndex, 1);
+                state.quarters[destinationId].courses.splice(action.payload.destinationIndex, 0, courseId);
+            }
         },
 
         removeCourseFromQuarter: (state, action: PayloadAction<CourseQuarterPayload>) => {
             state.quarters[action.payload.quarterId].courses.splice(action.payload.index,1);
             state.courses.byIds[action.payload.courseId].repeatability += 1;
 
-            let yearId = state.quarters[action.payload.quarterId].yearId;
+            //let yearId = state.quarters[action.payload.quarterId].yearId;
             let units = state.courses.byIds[action.payload.courseId].data.units;
 
             state.years.totalUnits -= units;

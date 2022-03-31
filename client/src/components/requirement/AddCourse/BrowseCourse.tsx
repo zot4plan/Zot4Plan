@@ -3,12 +3,12 @@ import  { StylesConfig } from "react-select";
 import Axios from 'axios';
 import AsyncSelect  from 'react-select/async';
 
-import Add from '../icons/Add'
+import Add from '../../icons/Add'
 
 import { useSelector } from 'react-redux';
-import {RootState} from '../../app/store';
+import {RootState} from '../../../app/store';
 import { useDispatch } from 'react-redux';
-import {addCourseOther} from '../../features/StoreSlice'
+import {addCourseOther} from '../../../features/StoreSlice'
 
 interface OptionType {
     value: string;
@@ -49,7 +49,7 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
         }, 500);
 }
 
-function AddCourse() {
+function BrowseCourse() {
     const [selectCourse, setSelectCourse] = useState<string>("");
     const courses = useSelector((state:RootState)=> state.store.courses.allIds);
     const dispatch = useDispatch();
@@ -94,4 +94,4 @@ function AddCourse() {
     )
 };
 
-export default AddCourse;
+export default BrowseCourse;

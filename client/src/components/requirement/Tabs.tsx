@@ -1,13 +1,13 @@
 import {useState} from 'react';
 import GETab from './GETab';
 import MajorTab from './MajorTab';
-import AddTab from './AddTab';
+import AddTab from './AddCourse/AddTab';
 
 function Tabs () {
   const [tab, setTab] = useState<number>(1);
 
   return (
-    <div className='shadow-0 round-15'>
+    <div className='ml-075 shadow-0 round-15'>
       <ul className="flex tab-panel m-0">
         <li className={'flex justify-center item-center tab round-top-left bd-r-w ' 
             + (tab === 1?"tab-active":"bg-grey")} 

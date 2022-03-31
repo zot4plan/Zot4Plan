@@ -1,4 +1,4 @@
-import CourseCard from '../course/CourseCard';
+import CourseCard from '../course-card/CourseCard';
 import {useSelector} from 'react-redux';
 import {RootState} from './../../app/store';
 import {Droppable} from 'react-beautiful-dnd';
