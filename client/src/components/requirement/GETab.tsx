@@ -150,8 +150,8 @@ const GESection = ({droppableId}:GESectionType) => {
         <div className='shadow-0 m-1 mt-0 round-15'>  
             <div
                 key={droppableId} 
-                className={'flex item-center bg-grey pointer accordion ' 
-                            + (show? 'round-top': 'round-15')}
+                className={'flex item-center bg-grey pointer accordion round-top-left round-top-right ' 
+                            + (show? '': 'round-15')}
                 onClick={() => setShow(!show)}
                 >
                     <h1 className="accordion-header m-0 s-1">
@@ -161,8 +161,10 @@ const GESection = ({droppableId}:GESectionType) => {
                         <Right show={show}/>
                     </div>
             </div>
-            <div style={{display: show? "block" : "none"}}>
-                <DroppableArea key={droppableId} courseIds={ge.courses} droppableId={droppableId}/>
+            <div 
+                className='pab-1 pat-1'
+                style={{display: show? "block" : "none"}}>
+                <DroppableArea key={droppableId} courseIds={ge.courses} text="" droppableId={droppableId}/>
             </div>
         </div>
     )

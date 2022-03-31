@@ -46,8 +46,8 @@ function Year({yearId, index}:YearType) {
             style={{marginBottom: show? '2rem': '1.25rem'}}
             >
             <div 
-                className={'flex item-center color-black bg-grey pointer accordion ' 
-                            + (show? 'round-top': 'round-15')}  
+                className={'flex item-center color-black bg-grey pointer accordion round-top-left round-top-right ' 
+                            + (show? '': 'round-15')}  
                 key={year.id} 
                 onClick={()=>setShow(!show)}
                 >

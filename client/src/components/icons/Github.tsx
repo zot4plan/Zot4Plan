@@ -1,7 +1,7 @@
 function Github () {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" 
-        aria-label="github" width="2.25rem" height="2.25rem" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"
+        aria-label="github" width="3.6rem" height='3.6rem' preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"
         className="round">
             <title>Github logo</title>
             <desc>An illustrated pink Github logo</desc>

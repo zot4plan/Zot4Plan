@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {RootState} from '../../app/store';
 import Popup from './Popup';
 import { Draggable } from 'react-beautiful-dnd';
@@ -51,13 +51,13 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 style={getStyle(provided.draggableProps.style, snapshot)}
-                className="course-card w-125 mb-05 mr-1"
+                className="relative card w-125 mb-05 mr-1"
                 >
                     <Popup id={courseId} showUnit={false} isCrossed ={!isDraggable}/>
             </div>
 
             {snapshot.isDragging && (
-                <div className="course-card card-box w-125 mb-05 mr-1">
+                <div className="flex flex-wrap justify-between item-center round-1 h-36 card-box w-125 mb-05 mr-1">
                    
                 </div>
             )}

@@ -1,8 +1,8 @@
 import CourseCard from '../course/CourseCard';
-import { useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {RootState} from './../../app/store';
 import {Droppable} from 'react-beautiful-dnd';
-import { useCallback,memo } from 'react'
+import {useCallback,memo } from 'react'
 
 interface quarter { 
   droppableId: string;
@@ -35,7 +35,7 @@ function Quarter({droppableId, index}:quarter) {
         ref={provided.innerRef}
         {...provided.droppableProps}
         {...provided.droppableProps}
-        style={{ backgroundColor: snapshot.isDraggingOver? 'lightblue' : 'white'}}
+        style={{backgroundColor: snapshot.isDraggingOver?'lightblue':'white'}}
         className={"flex-basis-25 mh-76 " 
                     + (index < 3? 'bd-r ':'')
                     + (index === 0? 'round-bottom-left' : '')

@@ -1,7 +1,7 @@
 function Logo () {
     return (
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-         width="11rem" height="2.25rem" viewBox="0 0 317 65"
+         width="17.6rem" height="3.6rem" viewBox="0 0 317 65"
          preserveAspectRatio="xMidYMid meet" className='clr-white'>
         
         <g transform="translate(0,65) scale(0.1,-0.1)"

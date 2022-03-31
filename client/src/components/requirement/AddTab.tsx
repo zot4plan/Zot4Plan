@@ -4,14 +4,13 @@ import { useSelector } from 'react-redux';
 import {RootState} from '../../app/store';
 
 function AddTab () {
-    const other = 
-        useSelector((state:RootState)=> state.store.other)
+    const other = useSelector((state:RootState)=> state.store.other)
     console.log("other");
    
     return (
         <div className="tab-container"  >
             <AddCourse></AddCourse>
-            <DroppableArea courseIds={other.courses} droppableId={other.id}/>
+            <DroppableArea courseIds={other.courses} droppableId={other.id} text=""/>
         </div>
     )
 }

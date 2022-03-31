@@ -62,8 +62,8 @@ function App() {
     if(!destination) return;
 
     if(source.droppableId.length > 3) {
-    // draggableId = 'droppableId-courseId' with droppableId.length = 4
-      let courseId = draggableId.substring(source.droppableId.length);
+      //// draggableId: droppableId(i)-courseId with i is droppableId length
+      let courseId = draggableId.substring(source.droppableId.length); 
       dispatch(addCourseToQuarter({
         quarterId: destination.droppableId,
         courseId: courseId,
@@ -86,9 +86,9 @@ function App() {
     <div className="grid body-template-cols m-1r5">
       <div className="flex flex-column mr-075">
         <RenderYears/>
-        <div className='flex align-center'>
-          <div className="refreshIcon" onClick={refresh}> <Refresh/> </div>
-          <div className="flex align-center addIcon" onClick={addNewYear}> <OutlineAdd/> </div>
+        <div className='relative flex align-center justify-between'>
+          <div className="round clr-blue icon" onClick={refresh}> <Refresh/> </div>
+          <div className="absolute center-x round clr-blue icon" onClick={addNewYear}> <OutlineAdd/> </div>
           <div> <TotalUnits/> </div>
         </div>
       </div>

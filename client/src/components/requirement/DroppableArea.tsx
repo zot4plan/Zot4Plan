@@ -1,28 +1,57 @@
 import ReqCourseCard from '../course/ReqCourseCard';
 import {Droppable} from 'react-beautiful-dnd';
-import { useCallback } from 'react'
+import {memo} from 'react'
 
 interface DroppableAreaType {
-    courseIds: string[];
+    courseIds: (string|string[])[];
+    text: string;
     droppableId: string;
 }
 
-function DroppableArea({courseIds, droppableId}:DroppableAreaType) {
-    const renderCard = useCallback(
-        ( courseId: string, droppableId: string, index: number) => {
-          return (
-            <ReqCourseCard 
-                key={courseId}
-                courseId={courseId}
-                droppableId={droppableId}
-                index={index}
-            />
-          )
-        },
-        [],
-      )
+function DroppableArea({courseIds, droppableId, text}:DroppableAreaType) {
+    let courseCards: JSX.Element[] = [];
+    
+    let index = 0;
+
+    courseIds.forEach((c) => {
+        if(typeof(c) === 'string') {
+            courseCards.push(
+                <ReqCourseCard 
+                    key={droppableId+c} 
+                    courseId={c}
+                    droppableId={droppableId}
+                    index={index}/>
+            )
+            index++;
+        }
+        else {
+            courseCards.push(
+                <div 
+                    key={droppableId + 'div' + index} 
+                    className='flex justify-center item-center flex-basis-100'
+                    >
+                    <ReqCourseCard 
+                        key={droppableId+c[0]} 
+                        courseId={c[0]}
+                        droppableId = {droppableId} 
+                        index={index}/>
+                    <span style={{paddingRight:'1rem', paddingBottom:'0.5rem'}}> or </span>
+                    <ReqCourseCard 
+                        key={droppableId+c[1]} 
+                        courseId={c[1]}
+                        droppableId={droppableId}
+                        index={index+1}/>
+                </div>
+            );
+            index += 2;
+        }
+    })
 
     return (
+        <>
+        {text !== "" && 
+            <p key={droppableId +'p'} style={{margin:'0.5rem 1rem'}}>{text}</p>
+        }
         <Droppable 
             droppableId={droppableId}
             isDropDisabled={true}
@@ -31,17 +60,15 @@ function DroppableArea({courseIds, droppableId}:DroppableAreaType) {
             <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className="requirement-drop-wrapper"
+            className="flex flex-wrap mr-1 ml-1"
             >
-                {courseIds.map(
-                    (courseId,index) => renderCard(courseId, droppableId, index)
-                )}
-
+               {courseCards}
                 <div style={{display:'none'}}>{provided.placeholder} </div>
             </div>
         )} 
         </Droppable>
+        </>
     )
 }
 
-export default DroppableArea;
+export default memo(DroppableArea);

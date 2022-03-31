@@ -1,5 +1,5 @@
 import {useState, memo} from 'react';
-import Info from '../icons/Info';
+//import Info from '../icons/Info';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
 
@@ -49,7 +49,7 @@ const RenderPopup = memo(({course, color}: RenderPopupType) => {
             </p>
         </div>
         
-        <div style={{padding:'0.5rem 0.5rem'}}> 
+        <div style={{padding:'0.5rem'}}> 
             {body}
         </div>
     </>
@@ -62,7 +62,7 @@ function Popup({id, showUnit, isCrossed}: PopUpType) {
     const colors = useSelector((state: RootState) => state.store.depts.byIds[course.department].colors);
 
     return ( 
-        <div className={showUnit? "card-box": "card-box w"} 
+        <div className={"flex flex-wrap justify-between item-center h-36 round-1 " + (showUnit? "": "w-125 mb-05 mr-1")} 
                 onClick={()=>setShow(!show)} 
                 style={{backgroundColor: colors[2]}}>
             <div 
