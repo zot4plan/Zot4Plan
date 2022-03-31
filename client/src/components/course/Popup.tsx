@@ -34,8 +34,8 @@ const RenderPopup = memo(({course, color}: RenderPopupType) => {
         body.push(<p key='restriction'> <b>{"Restriction: "}</b>{course.restriction}</p>)
     if(course.corequisite !== "")
         body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{course.corequisite}</p>)
-    
-    body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{course.repeatability}</p>)
+    if(course.repeatability > 1)
+        body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{course.repeatability}</p>)
     if(course.ge !== "")
         body.push(<p key='ge'> <b>{"GE: "}</b>{course.ge}</p>)
 
@@ -62,7 +62,8 @@ function Popup({id, showUnit, isCrossed}: PopUpType) {
     const colors = useSelector((state: RootState) => state.store.depts.byIds[course.department].colors);
 
     return ( 
-        <div className={"flex flex-wrap justify-between item-center h-36 round-1 " + (showUnit? "": "w-125 mb-05 mr-1")} 
+        <div className={"flex flex-wrap justify-between item-center h-36 round-1 " 
+                        + (showUnit? "": "w-125 mb-05 mr-1")} 
                 onClick={()=>setShow(!show)} 
                 style={{backgroundColor: colors[2]}}>
             <div 
