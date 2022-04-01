@@ -68,20 +68,20 @@ function App() {
   <>
   <Header/>
   <DragDropContext onDragEnd={onDragEnd}>
-    <div className="grid body-template-cols m-1r5">
-      <div className="flex flex-column mr-075">
+    <div className="grid body-template-cols m-2">
+      <div className="flex flex-column mr-2">
         <RenderYears/>
         <div className='relative flex align-center justify-between'>
-          <div className="round clr-blue icon" 
+          <div className="round cl-blue icon" 
                onClick={refresh}> <Refresh/> </div>
-          <div  className="absolute center-x round clr-blue icon" 
+          <div  className="absolute center-x round cl-blue icon" 
                 onClick={addNewYear}> <OutlineAdd/> </div>
           <div> <TotalUnits/> </div>
         </div>
       </div>
-
-      
-      <Tabs/>
+      <div className='ml-2 shadow round-15'>
+        <Tabs/>
+      </div>
     </div>  
   </DragDropContext>
   </> 

@@ -42,10 +42,9 @@ interface AddCourseOtherPayload {
 }
 
 interface AddCourseGEPayload { 
-    GEIndex: string; 
-    courseId: CourseType; 
+    GEIndex: number; 
+    course: CourseType; 
 }
-
 
 interface CourseQuarterPayload {
     quarterId: string;
@@ -94,8 +93,10 @@ interface StoreType{
         },
         allIds: string[];
     };
-    depts:  { byIds: {[propName:string]: {id:string, colors: string[]}}, 
-              size: number}
+    depts: {
+        byIds: {[propName:string]: {id:string, colors: string[]}}, 
+        size: number
+    }
 }
 
 const QUARTER_ID_LENGTH = 3;
@@ -184,7 +185,22 @@ export const storeSlice = createSlice ({
         },
 
         addCourseGE: (state, action: PayloadAction<AddCourseGEPayload>) => {
+            let droppableId = state.ge.droppableIds[action.payload.GEIndex],
+                courseId = action.payload.course.id;
+            if(!state.ge.byIds[droppableId].courses.includes(courseId)) {
+                state.ge.byIds[droppableId].courses.push(courseId);
+                if(state.courses.byIds[courseId] === undefined) {
+                    state.courses.byIds[courseId] = {data: action.payload.course, repeatability: action.payload.course.repeatability}
+                }
 
+                if(state.depts.byIds[action.payload.course.department] === undefined) { 
+                    let index = state.depts.size % DEPT_COLORS.length;
+                    state.depts.byIds[action.payload.course.department] = 
+                        {id: action.payload.course.department, colors: DEPT_COLORS[index] }
+                    state.depts.size += 1;
+                }
+            }
+            
         },
 
         addCourseToQuarter: (state, action: PayloadAction<CourseQuarterPayload>) => {   

@@ -7,14 +7,14 @@ function Tabs () {
   const [tab, setTab] = useState<number>(1);
 
   return (
-    <div className='ml-075 shadow-0 round-15'>
+    <>
       <ul className="flex tab-panel m-0">
-        <li className={'flex justify-center item-center tab round-top-left bd-r-w ' 
+        <li className={'flex justify-center item-center tab round-top-left bd-r-wh ' 
             + (tab === 1?"tab-active":"bg-grey")} 
             onClick={()=>setTab(1)}>
               Major Requirement
         </li>
-        <li className={'flex justify-center item-center tab bd-r-w ' 
+        <li className={'flex justify-center item-center tab bd-r-wh ' 
             + (tab === 2?"tab-active":"bg-grey")} 
             onClick={()=>setTab(2)}>
               General Education
@@ -31,7 +31,7 @@ function Tabs () {
       {tab === 3 && <AddTab/>}
 
       <div style={{height: '1.2rem'}}></div>
-    </div>
+    </>
   );
 }
 

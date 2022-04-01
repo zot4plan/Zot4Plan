@@ -1,38 +1,13 @@
-import {useState} from 'react';
 import { useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
-import DroppableArea from './DroppableArea';
-import Right from '../icons/Right';
+import Section from './Section'
 
 interface MajorSectionType { id:string;}
 
 const MajorSection = ({id}:MajorSectionType) => {
-   console.log(id);
-   const [show, setShow] = useState(false);
-   const sectionData = useSelector((state:RootState)=>state.store.major.byIds[id]);
+    const sectionData = useSelector((state:RootState)=>state.store.major.byIds[id]);
     return (
-        <div className='m-1 mt-0 round-15 shadow-0'>  
-            <div
-                key={id} 
-                className={'flex item-center bg-grey pointer accordion round-top-left round-top-right ' 
-                            + (show? '': 'round-15')}
-                onClick={() => setShow(!show)}
-                >
-                    <h1 className="accordion-header m-0 s-1">
-                        {sectionData.name}
-                    </h1>
-                    <div className="rightIcon">
-                        <Right show={show}/>
-                    </div>
-            </div>
-            <div 
-                className='pab-1 pat-1'
-                style={{display: show? "block" : "none"}}>
-                {sectionData.subList.map((c)=> 
-                    <DroppableArea key={c.id} droppableId={c.id} text={c.name} courseIds={c.courses}/>
-                )}
-            </div>
-        </div>
+        <Section id={id} name={sectionData.name} list={sectionData.subList}/>
     )
 }
 

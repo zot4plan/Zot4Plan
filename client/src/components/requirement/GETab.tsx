@@ -1,24 +1,27 @@
-import {useEffect, useState } from 'react'
+import {useEffect, useState, MouseEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from '../../app/store'
 import {fetchGECategories} from '../../features/FetchData'
-import DroppableArea from './DroppableArea';
-import Right from '../icons/Right';
+import Section from './Section';
 
 import Axios from 'axios'
 import Select, { StylesConfig } from 'react-select';
 import AddIcon from '../icons/Add'
+import {addCourseGE} from '../../features/StoreSlice';
 
-interface GESectionType {
-    droppableId: string
-}
+interface GESectionType { droppableId: string; }
 
-interface OptionType {
-    value: number | string;
+interface OptionType1 {
+    value: number;
     label: string;
 }
 
-const GEBarStyle: StylesConfig<OptionType, false> =  {
+interface OptionType2 {
+    value: string;
+    lablel: string;
+}
+
+const GEBarStyle: StylesConfig<OptionType1, false> =  {
     menu: (provided) => {
         return {
             ...provided, 
@@ -48,7 +51,7 @@ const GEBarStyle: StylesConfig<OptionType, false> =  {
     }
 }
 
-const CourseBarStyle: StylesConfig<OptionType, false> =  {
+const CourseBarStyle: StylesConfig<OptionType2, false> =  {
     container: (provided) => {
         return {
             ...provided, 
@@ -85,11 +88,12 @@ const CourseBarStyle: StylesConfig<OptionType, false> =  {
 
 const GeSelectBar = () => {
     const geIds = useSelector((state:RootState)=>state.store.ge.geIds);
-    const [geIndex, setGeIndex] = useState<number | string>(-1);
+    const [geIndex, setGeIndex] = useState<number>(-1);
     const [courseId, setCourseId] = useState<number | string>("");
     const [courses, setCourses] = useState([]);
+    const dispatch = useDispatch();
 
-    const handleOnChange = async (option: OptionType| null) => {
+    const handleOnChange = async (option: OptionType1| null) => {
         if(option) {
             console.log(option);
             setTimeout(() => {
@@ -113,14 +117,26 @@ const GeSelectBar = () => {
         }
     }
 
-    const handleOnAddCourse = async (option: OptionType| null) => {
+    const handleOnAddCourse = async (option: OptionType2| null) => {
         if(option) 
             setCourseId(option.value);
         else 
            setCourseId("");
     }
 
-
+    const submitAddCourse = (event: MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        setTimeout(() => {
+            Axios.get('http://localhost:8080/api/getCourseById', {
+                params: { id: courseId } } ).then((res) => {
+                    console.log(res);
+                    if(res.data.message === 'success') {
+                        console.log(res.data);
+                        dispatch(addCourseGE({course: res.data.data, GEIndex: geIndex}));
+                    }
+            });
+        }, 500); 
+    };
 
     return (
         <div 
@@ -132,41 +148,22 @@ const GeSelectBar = () => {
                 onChange={handleOnChange}
                 placeholder='GE'              
             />
-            <Select 
+            <Select
+                isClearable={true} 
                 options={courses} 
                 styles={CourseBarStyle}
                 placeholder="Choose course"
                 onChange={handleOnAddCourse}
             />
-            <button className='add-btn'> <AddIcon/> </button>
+            <button className='add-btn' onClick={submitAddCourse}> <AddIcon/> </button>
         </div>
     )
 }
 
 const GESection = ({droppableId}:GESectionType) => {
     const ge = useSelector((state:RootState)=>state.store.ge.byIds[droppableId]);
-    const [show, setShow] = useState(false);
     return (
-        <div className='shadow-0 m-1 mt-0 round-15'>  
-            <div
-                key={droppableId} 
-                className={'flex item-center bg-grey pointer accordion round-top-left round-top-right ' 
-                            + (show? '': 'round-15')}
-                onClick={() => setShow(!show)}
-                >
-                    <h1 className="accordion-header m-0 s-1">
-                        {ge.geId + ": " + ge.name}
-                    </h1>
-                    <div className="rightIcon">
-                        <Right show={show}/>
-                    </div>
-            </div>
-            <div 
-                className='pab-1 pat-1'
-                style={{display: show? "block" : "none"}}>
-                <DroppableArea key={droppableId} courseIds={ge.courses} text="" droppableId={droppableId}/>
-            </div>
-        </div>
+        <Section id={droppableId} name={ge.geId + ": " + ge.name} list={ge.courses}/>
     )
 }
 

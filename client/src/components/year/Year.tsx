@@ -42,7 +42,7 @@ function Year({yearId, index}:YearType) {
 
     return (
         <div 
-            className='shadow-0 round-15'
+            className='shadow round-15'
             style={{marginBottom: show? '2rem': '1.25rem'}}
             >
             <div 
@@ -51,7 +51,7 @@ function Year({yearId, index}:YearType) {
                 key={year.id} 
                 onClick={()=>setShow(!show)}
                 >
-                <div className="accordion-header m-0 s-1r25">
+                <div className="accordion-header m-0 sz-4">
                     <span> {year.name} </span>
                 </div>
 

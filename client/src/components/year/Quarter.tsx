@@ -52,10 +52,3 @@ function Quarter({droppableId, index}:quarter) {
 }
 
 export default memo(Quarter);
-/*
-<div className="quarter-column">
-<h2 className="quarter-header m-0"> 
-    {quarter.name} 
-</h2>
-
-</div> */

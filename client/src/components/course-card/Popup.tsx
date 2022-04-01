@@ -26,23 +26,42 @@ interface RenderPopupType {
 
 const RenderPopup = memo(({course, color}: RenderPopupType) => {
     let body = [];
-    body.push(<p key='description'> <b>{"Description: "}</b>{course.description}</p>);
+    body.push(<p key='description' className='m-0 sz-1'> <b>{"Description: "}</b>{course.description}</p>);
 
     if(course.prerequisite !== "")
-        body.push(<p key='prerequisite'> <b>{"Prerequisite: "}</b>{course.prerequisite}</p>)
+        body.push(
+            <p key='prerequisite' className='mt mb sz-1'> 
+                <b>{"Prerequisite: "}</b> {course.prerequisite}
+            </p>)
+
     if(course.restriction !== "")
-        body.push(<p key='restriction'> <b>{"Restriction: "}</b>{course.restriction}</p>)
+        body.push(
+            <p key='restriction' className='mt mb sz-1'> 
+                <b>{"Restriction: "}</b>{course.restriction}
+            </p>)
+
     if(course.corequisite !== "")
-        body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{course.corequisite}</p>)
+        body.push(
+            <p key='corequisite' className='mt mb sz-1'> 
+                <b>{"Corequisites: "}</b>{course.corequisite}
+            </p>)
+            
     if(course.repeatability > 1)
-        body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{course.repeatability}</p>)
+        body.push(
+            <p key='repeat' className='mt mb sz-1'> 
+                <b>{"Repeatability: "}</b>{course.repeatability}
+            </p>)
+
     if(course.ge !== "")
-        body.push(<p key='ge'> <b>{"GE: "}</b>{course.ge}</p>)
+        body.push(
+            <p key='ge' className='mt mb sz-1'> 
+                <b>{"GE: "}</b>{course.ge}
+            </p>)
 
     return (
         <>
         <div className='popup-header' style={{backgroundColor: color}}>
-            <p className='m-0'> 
+            <p className='m-0 sz-2'> 
                 <b>{course.id + '. ' + course.name}</b> 
                 <br/>
                 {course.units + " units"} 
@@ -52,7 +71,7 @@ const RenderPopup = memo(({course, color}: RenderPopupType) => {
         <div style={{padding:'0.5rem'}}> 
             {body}
         </div>
-    </>
+        </>
     )
 })
 
@@ -62,8 +81,7 @@ function Popup({id, showUnit, isCrossed}: PopUpType) {
     const colors = useSelector((state: RootState) => state.store.depts.byIds[course.department].colors);
 
     return ( 
-        <div className={"flex flex-wrap justify-between item-center h-36 round-1 " 
-                        + (showUnit? "": "w-125 mb-05 mr-1")} 
+        <div className={"flex flex-wrap justify-between item-center h-36 round-10"} 
                 onClick={()=>setShow(!show)} 
                 style={{backgroundColor: colors[2]}}>
             <div 
@@ -91,4 +109,4 @@ function Popup({id, showUnit, isCrossed}: PopUpType) {
 
 }
 
-export default Popup
+export default memo(Popup)

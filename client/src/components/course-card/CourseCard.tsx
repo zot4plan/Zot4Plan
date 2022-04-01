@@ -21,7 +21,7 @@ function CourseCard({index, droppableId, courseId}: courseType) {
   
     return (   
     <Draggable key={droppableId + courseId} draggableId={droppableId + courseId} index={index}>
-        {(provided, snapshot) => (
+        {(provided) => (
             <div>
               <div
                 ref={provided.innerRef}

@@ -3,7 +3,7 @@ import {Droppable} from 'react-beautiful-dnd';
 import {memo} from 'react'
 
 interface DroppableAreaType {
-    courseIds: (string|string[])[];
+    courseIds: any[];
     text: string;
     droppableId: string;
 }
