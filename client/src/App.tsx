@@ -26,7 +26,7 @@ const RenderYears = () => {
 const TotalUnits = () => {
   const units = useSelector((state:RootState)=> state.store.years.totalUnits);
   return (
-    <p>{"Total units: " + units}</p>
+    <p className='m-0 sz-4'>{"Total units: " + units}</p>
   )
 }
 
@@ -71,7 +71,7 @@ function App() {
     <div className="grid body-template-cols m-2">
       <div className="flex flex-column mr-2">
         <RenderYears/>
-        <div className='relative flex align-center justify-between'>
+        <div className='relative flex item-center justify-between'>
           <div className="round cl-blue icon" 
                onClick={refresh}> <Refresh/> </div>
           <div  className="absolute center-x round cl-blue icon" 

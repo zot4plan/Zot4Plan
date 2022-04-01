@@ -15,7 +15,8 @@
 
 body {
     margin: 0;
-    font-family: 'Roboto','Lato','Times New Roman',Times, serif;;
+    font-display: optional;
+    font-family: 'Roboto','Lato','Times New Roman',Times, serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: var(--text-color);
@@ -24,7 +25,7 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',monospace;
 }
-html {font-size: 10px;}
+html {font-size: 10px; color:#1F1F1F}
 html div, html p { font-size: 1.6rem;}
 
 html, body, #root { background-color: var(--primary-color);}
@@ -48,6 +49,7 @@ html, body, #root { background-color: var(--primary-color);}
 .mh-76 {min-height: 7.6rem;}
 .h-36 {height: 3.6rem;}
 .w-125 {width: 12.5rem;}
+.w-270 {width: 27rem;}
 
 /*** background color ***/
 .bg-black{background-color: var(--secondary-color);}
@@ -68,7 +70,7 @@ html, body, #root { background-color: var(--primary-color);}
 .m {margin: auto;}
 .m-0 {margin: 0;}
 .m-02{margin: 0.2rem;}
-.m-1 { margin: 1.6rem;}
+.m-1 { margin: 2rem 1.6rem;}
 .m-2 {margin: 2.4rem;}
 
 .mt-0 { margin-top: 0;}
@@ -104,7 +106,7 @@ html, body, #root { background-color: var(--primary-color);}
 .bd-r-wh {border-right: 0.2rem solid var(--primary-color);}
 
 /*** shadow ***/
-.shadow {box-shadow: 0.1rem 0.2rem 0.4rem 0rem rgb(0 0 0/50%);}
+.shadow {box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);}
 
 /*** position ***/
 .relative {position: relative;}
@@ -235,7 +237,7 @@ html, body, #root { background-color: var(--primary-color);}
 .tab-container{
     border-top: 1px solid white;
     background-color: white;
-    height: 700px;
+    height: 710px;
     overflow: scroll;
     border-radius: 1.5rem;
 }
@@ -284,11 +286,10 @@ html, body, #root { background-color: var(--primary-color);}
     background-color: white;
     border: 0.2rem solid;
     position: absolute;
-    top: 4.3rem;
-    left: 63%;
-    width: 21rem;
+    top: 4rem;
+    left: -15%;
+    width: 24rem;
     height: auto;
-    transform: translateX(-50%);
     cursor: default;
     z-index: 2;
     display: none;
@@ -300,10 +301,10 @@ html, body, #root { background-color: var(--primary-color);}
     content: '';
     width: 2.5rem;
     height: 2.5rem;
-    top: 4.5rem;
-    left: 60%;
+    top: 3.5rem;
+    left: 70%;
     margin: auto;
-    transform: rotate(45deg) translate(-40%);
+    transform: rotate(45deg);
     z-index: 2;
 }
 
@@ -335,12 +336,19 @@ html, body, #root { background-color: var(--primary-color);}
 }
 
 .add-btn {
-    margin-left: 0.8rem;
-    margin-right: 0.8rem;
+    position:absolute;
+    top: 52%;
+    right: 1%;
+    transform: translateY(-50%);
+    background-color: var(--accent-color-2);
+    color:white;
+    padding: 0.7rem;
     line-height: 0;
-    padding: 0.6rem;
-    background-color: white;
-    border-radius: 5px;
-    border-color: hsl(0, 0%, 80%);
-    border-style: solid;
+    border-radius: 50%;
+    border:none;
+    cursor: pointer;
+}
+
+.add-btn:hover{
+
 }

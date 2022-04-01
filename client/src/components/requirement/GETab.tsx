@@ -18,82 +18,63 @@ interface OptionType1 {
 
 interface OptionType2 {
     value: string;
-    lablel: string;
+    label: string;
 }
 
 const GEBarStyle: StylesConfig<OptionType1, false> =  {
+    container: (provided) => {
+        return {...provided, display:'inline-block', marginRight:'0.3rem'};
+    },
     menu: (provided) => {
-        return {
-            ...provided, 
-            width: '65px'
-        };
+        return {...provided, width: '63px'};
     },
-
     control: (provided) => {
-        return {
-            ...provided, 
-            width: '65px'
-        };
+        return {...provided, width: '63px', borderRadius: '18px'};
     },
-
+    placeholder: (provided) => {
+        return {...provided, color: '#1F1F1F'}
+    },
     valueContainer: (provided, state) => {
-        return {
-            ...provided, 
-            padding: '2px 4px'
-        };
+        return {...provided, padding: '0px 0px 0px 8px'};
     },
-
+    input: (provided) => {
+        return {...provided, margin: '0', padding:'0'};
+    },
     dropdownIndicator: (provided, state) => {
-        return {
-            ...provided, 
-            padding: '2px'
+        return {...provided, padding: '0px', marginRight: '5px'
         };
     }
 }
 
 const CourseBarStyle: StylesConfig<OptionType2, false> =  {
     container: (provided) => {
-        return {
-            ...provided, 
-            marginLeft: '0.5rem'
-        };
+        return {...provided, display:'inline-block'};
     },
     menu: (provided) => {
-        return {
-            ...provided, 
-            width: '170px'
-        };
+        return {...provided, width: '204px'};
     },
 
     control: (provided) => {
-        return {
-            ...provided, 
-            width: '170px'
-        };
+        return {...provided, width: '204px',  borderRadius: '18px'};
     },
 
-    valueContainer: (provided, state) => {
-        return {
-            ...provided, 
-            padding: '2px 4px'
-        };
+    valueContainer: (provided) => {
+        return {...provided, cursor: 'text'};
     },
-    dropdownIndicator: (provided, state) => {
-        return {
-            ...provided, 
-            padding: '2px'
-        };
-    }
+    indicatorsContainer: (provided)=> {
+        return {...provided, marginRight: '3.8rem'};
+    },
 }
 
 const GeSelectBar = () => {
     const geIds = useSelector((state:RootState)=>state.store.ge.geIds);
     const [geIndex, setGeIndex] = useState<number>(-1);
-    const [courseId, setCourseId] = useState<number | string>("");
+    const [selectCourse, setSelectCourse] = useState<OptionType2>({value:"", label: "Choose course"});
     const [courses, setCourses] = useState([]);
     const dispatch = useDispatch();
 
     const handleOnChange = async (option: OptionType1| null) => {
+        setSelectCourse({value:"", label:"Choose course"})
         if(option) {
             console.log(option);
             setTimeout(() => {
@@ -119,43 +100,48 @@ const GeSelectBar = () => {
 
     const handleOnAddCourse = async (option: OptionType2| null) => {
         if(option) 
-            setCourseId(option.value);
+            setSelectCourse({value: option.value, label: option.label});
         else 
-           setCourseId("");
+           setSelectCourse({value: "", label: "Choose course"});
     }
 
     const submitAddCourse = (event: MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
-        setTimeout(() => {
-            Axios.get('http://localhost:8080/api/getCourseById', {
-                params: { id: courseId } } ).then((res) => {
-                    console.log(res);
-                    if(res.data.message === 'success') {
-                        console.log(res.data);
-                        dispatch(addCourseGE({course: res.data.data, GEIndex: geIndex}));
-                    }
-            });
-        }, 500); 
+        if(selectCourse.value !== "") 
+            setTimeout(() => {
+                Axios.get('http://localhost:8080/api/getCourseById', {
+                    params: { id: selectCourse.value } } ).then((res) => {
+                        console.log(res);
+                        if(res.data.message === 'success') {
+                            console.log(res.data);
+                            dispatch(addCourseGE({course: res.data.data, GEIndex: geIndex}));
+
+                        }
+                });
+            }, 500); 
     };
 
     return (
-        <div 
-            className={'flex justify-center m-1'}
-            >
+        <div className='flex justify-center m-1'>
+            <div className='relative h-36 w-270'> 
             <Select
+                components={{IndicatorSeparator:() => null }}
                 styles={GEBarStyle}
                 options={geIds.map( (id,index) => ({label: id, value: index}))} 
                 onChange={handleOnChange}
+                maxMenuHeight={200}
                 placeholder='GE'              
             />
             <Select
-                isClearable={true} 
+                components={{ DropdownIndicator:() => null}}
                 options={courses} 
                 styles={CourseBarStyle}
-                placeholder="Choose course"
+                value={selectCourse}
+                maxMenuHeight={250}
                 onChange={handleOnAddCourse}
             />
             <button className='add-btn' onClick={submitAddCourse}> <AddIcon/> </button>
+            </div>
         </div>
     )
 }
@@ -163,7 +149,7 @@ const GeSelectBar = () => {
 const GESection = ({droppableId}:GESectionType) => {
     const ge = useSelector((state:RootState)=>state.store.ge.byIds[droppableId]);
     return (
-        <Section id={droppableId} name={ge.geId + ": " + ge.name} list={ge.courses}/>
+        <Section id={droppableId} name={ge.geId + ": " + ge.name} note={ge.note} list={ge.courses}/>
     )
 }
 

@@ -1,15 +1,30 @@
+import {memo} from 'react'
 import { useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
+import BrowseCourse from './BrowseCourse';
+import DroppableArea from './DroppableArea';
 import Section from './Section'
 
 interface MajorSectionType { id:string;}
 
-const MajorSection = ({id}:MajorSectionType) => {
+const MajorSection = memo(({id}:MajorSectionType) => {
     const sectionData = useSelector((state:RootState)=>state.store.major.byIds[id]);
     return (
-        <Section id={id} name={sectionData.name} list={sectionData.subList}/>
+        <Section id={id} name={sectionData.name} note="" list={sectionData.subList}/>
     )
-}
+})
+
+const AddCourse = memo(() => {
+    const other = useSelector((state:RootState)=> state.store.other)
+    return (
+        <>
+            <BrowseCourse/>
+            <div className='ml-3'>
+                <DroppableArea courseIds={other.courses} droppableId={other.id} text=""/>
+            </div>
+        </>
+    )
+})
 
 function MajorTab () {
     const sectionIds = useSelector((state:RootState)=>state.store.major.allIds);
@@ -34,7 +49,7 @@ function MajorTab () {
     let hyperLink;
     if(majorName !== '')
         hyperLink = 
-            <div className='flex justify-center item-center m-1'> 
+            <div className='flex justify-center item-center mb-3'> 
                 <a  className='hyperlink' 
                     href={majorUrl} 
                     target='_blank' 
@@ -43,10 +58,11 @@ function MajorTab () {
     
     return (
         <div className="tab-container">
+            <AddCourse/>
             {hyperLink}
             {content}
         </div>
     )
 }
 
-export default MajorTab
+export default memo(MajorTab);

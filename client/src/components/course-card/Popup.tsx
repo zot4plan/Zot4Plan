@@ -26,7 +26,7 @@ interface RenderPopupType {
 
 const RenderPopup = memo(({course, color}: RenderPopupType) => {
     let body = [];
-    body.push(<p key='description' className='m-0 sz-1'> <b>{"Description: "}</b>{course.description}</p>);
+    body.push(<p key='description' className='m-0 sz-1'>{course.description}</p>);
 
     if(course.prerequisite !== "")
         body.push(

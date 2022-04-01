@@ -3,12 +3,12 @@ import  { StylesConfig } from "react-select";
 import Axios from 'axios';
 import AsyncSelect  from 'react-select/async';
 
-import Add from '../../icons/Add'
+import Add from '../icons/Add'
 
 import { useSelector } from 'react-redux';
-import {RootState} from '../../../app/store';
+import {RootState} from '../../app/store';
 import { useDispatch } from 'react-redux';
-import {addCourseOther} from '../../../features/StoreSlice'
+import {addCourseOther} from '../../features/StoreSlice'
 
 interface OptionType {
     value: string;
@@ -20,19 +20,21 @@ interface CourseType{
 }
 
 const myStyle: StylesConfig<OptionType, false> =  {
-    menu: (provided, state) => {
-        const width ='200px';
-        return {
-            ...provided, width
-        };
+    control: (provided) => {
+        return {...provided, width: '27rem', borderRadius: '18px'};
     },
-
-    control: (provided, state) => {
-        const width ='200px';
-        return {
-            ...provided, width
-        };
-      }
+    menu: (provided) => {
+        return {...provided, width: '27rem'};
+    },
+    valueContainer: (provided) => {
+        return {...provided, cursor: 'text'};
+    },
+    clearIndicator: (provided) => {
+        return {...provided, padding:'0.4rem', cursor:'pointer'};
+    },
+    indicatorsContainer: (provided)=> {
+        return {...provided, marginRight: '3.8rem'};
+    },
 }
 
 const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => void) => {
@@ -56,6 +58,7 @@ function BrowseCourse() {
     console.log("add select");
 
     const submitAddCourse = (event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
         event.stopPropagation();
         if(!courses.includes(selectCourse))
             setTimeout(() => {
@@ -78,18 +81,23 @@ function BrowseCourse() {
     }
 
     return (
-        <div style={{display: 'flex', justifyContent:'center'}}>
-            <AsyncSelect
-                styles={myStyle}
-                isClearable={true}
-                cacheOptions 
-                defaultOptions
-                loadOptions={promiseOptions}
-                onChange={handleOnChange}
-                placeholder="Choose course"
-                aria-label="Browse and add Course"
-            />
-            <button className='add-btn' onClick={submitAddCourse}> <Add/> </button>
+        <div className='flex justify-center item-center m-1 h-36'>
+            <div className='relative h-36 w-250'>
+                <AsyncSelect
+                    components={{DropdownIndicator:()=>null}}
+                    styles={myStyle}
+                    isClearable={true}
+                    cacheOptions 
+                    defaultOptions
+                    loadOptions={promiseOptions}
+                    onChange={handleOnChange}
+                    isOptionDisabled={(option)=>courses.includes(option.label)}
+                    maxMenuHeight={250}
+                    placeholder="Choose course"
+                    aria-label="Browse and add Course"
+                />
+                <button className='add-btn' onClick={submitAddCourse}> <Add/> </button>
+            </div>
         </div>
     )
 };

@@ -11,10 +11,11 @@ interface ChildType {
 interface SectionType {
     list: ChildType[] | string[];
     id: string;
+    note: string;
     name:string;
 }
 
-const Section = ({id, name, list}:SectionType) => {
+const Section = ({id, name, note, list}:SectionType) => {
     const [show, setShow] = useState(false);
      return (
          <div className='m-1 mt-0 round-15 shadow'>  
@@ -43,7 +44,7 @@ const Section = ({id, name, list}:SectionType) => {
                 })}
 
                 {id.length === 5 &&  
-                    <DroppableArea key={id} courseIds={list} text="" droppableId={id}/>
+                    <DroppableArea key={id} courseIds={list} text={note} droppableId={id}/>
                 }
 
              </div>

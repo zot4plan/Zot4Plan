@@ -43,7 +43,7 @@ function Year({yearId, index}:YearType) {
     return (
         <div 
             className='shadow round-15'
-            style={{marginBottom: show? '2rem': '1.25rem'}}
+            style={{marginBottom: show? '3rem': '2rem'}}
             >
             <div 
                 className={'flex item-center color-black bg-grey pointer accordion round-top-left round-top-right ' 

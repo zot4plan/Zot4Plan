@@ -1,5 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import Axios from 'axios';
+
 interface FetchMajorType { 
     id:number 
 }

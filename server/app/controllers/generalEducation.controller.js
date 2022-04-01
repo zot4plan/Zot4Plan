@@ -2,7 +2,7 @@ const db = require("../models");
 const GeneralEducation = db.generalEducation;
 
 exports.getGeneralEducationCategories = (req, res) => {
-    GeneralEducation.findAll({ attributes: ['id','name']}).then(data => {
+    GeneralEducation.findAll().then(data => {
         res.send(data);
     })
     .catch(err => {

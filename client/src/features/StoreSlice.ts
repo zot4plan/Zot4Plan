@@ -35,6 +35,7 @@ interface ChildType {
 interface FetchGEPayload { 
     id:string; 
     name:string; 
+    note:string;
 }
 
 interface AddCourseOtherPayload { 
@@ -77,7 +78,7 @@ interface StoreType{
         error:string;
     }
     ge: {
-        byIds: {[propName:string]: {id:string, geId:string, name:string, courses:string[]}};
+        byIds: {[propName:string]: {id:string, geId:string, name:string, note:string, courses:string[]}};
         droppableIds: string[];
         geIds: string[];
         status: string;
@@ -172,7 +173,6 @@ export const storeSlice = createSlice ({
     reducers: {
         addCourseOther: (state, action: PayloadAction<AddCourseOtherPayload>) => {
             state.other.courses.push(action.payload.course.id);
-
             state.courses.byIds[action.payload.course.id] = {data: action.payload.course, repeatability: 1};
             state.courses.allIds.push(action.payload.course.id);
 
@@ -229,9 +229,7 @@ export const storeSlice = createSlice ({
             state.quarters[action.payload.quarterId].courses.splice(action.payload.index,1);
             state.courses.byIds[action.payload.courseId].repeatability += 1;
 
-            //let yearId = state.quarters[action.payload.quarterId].yearId;
             let units = state.courses.byIds[action.payload.courseId].data.units;
-
             state.years.totalUnits -= units;
         },
 
@@ -301,7 +299,7 @@ export const storeSlice = createSlice ({
                 const droppableId = nanoid(GE_ID_LENGTH);
                 state.ge.droppableIds.push(droppableId);
                 state.ge.geIds.push(ge.id);
-                state.ge.byIds[droppableId] = {id: droppableId, geId: ge.id, name:ge.name, courses:[]}
+                state.ge.byIds[droppableId] = {id: droppableId, geId: ge.id, name:ge.name, note: ge.note, courses:[]}
             });
             state.ge.status = "succeeded";
         });
