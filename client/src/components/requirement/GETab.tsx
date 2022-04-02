@@ -157,7 +157,7 @@ function GETab () {
     const dispatch = useDispatch()
     const droppableIds = useSelector((state:RootState)=>state.store.ge.droppableIds);
     const status = useSelector((state:RootState)=>state.store.ge.status);
-    const error = useSelector((state:RootState)=>state.store.ge.error);
+    //const error = useSelector((state:RootState)=>state.store.ge.error);
 
     useEffect(() => {
         if (status === 'idle') {
@@ -176,7 +176,7 @@ function GETab () {
         ))
     } 
     else if (status === 'failed') 
-        content = <div>{error}</div>
+        content = <div>cannot connect to server!</div>
     
   
     return (

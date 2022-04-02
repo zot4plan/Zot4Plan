@@ -10,7 +10,6 @@ interface DroppableAreaType {
 
 function DroppableArea({courseIds, droppableId, text}:DroppableAreaType) {
     let courseCards: JSX.Element[] = [];
-    
     let index = 0;
 
     courseIds.forEach((c) => {

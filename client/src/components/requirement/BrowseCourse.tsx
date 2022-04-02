@@ -8,7 +8,7 @@ import Add from '../icons/Add'
 import { useSelector } from 'react-redux';
 import {RootState} from '../../app/store';
 import { useDispatch } from 'react-redux';
-import {addCourseOther} from '../../features/StoreSlice'
+import {addCourseMajor} from '../../features/StoreSlice'
 
 interface OptionType {
     value: string;
@@ -55,7 +55,6 @@ function BrowseCourse() {
     const [selectCourse, setSelectCourse] = useState<string>("");
     const courses = useSelector((state:RootState)=> state.store.courses.allIds);
     const dispatch = useDispatch();
-    console.log("add select");
 
     const submitAddCourse = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -67,7 +66,7 @@ function BrowseCourse() {
                         console.log(res);
                         if(res.data.message === 'success') {
                             console.log(res.data);
-                            dispatch(addCourseOther({course: res.data.data}));
+                            dispatch(addCourseMajor({course: res.data.data}));
                         }
                 });
             }, 500); 

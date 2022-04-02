@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, MouseEvent } from 'react';
 import Popup from './Popup';
 import { useDispatch } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
@@ -15,9 +15,15 @@ function CourseCard({index, droppableId, courseId}: courseType) {
     const dispatch = useDispatch();
     const showUnit = droppableId.length === 3;
 
-    /*const submitRemoveCourse = (event: MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();     
-    }; */
+    const removeCourse = (event: MouseEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        dispatch(removeCourseFromQuarter({
+            quarterId: droppableId,
+            index: index, 
+            courseId: courseId
+        }))
+    }; 
   
     return (   
     <Draggable key={droppableId + courseId} draggableId={droppableId + courseId} index={index}>
@@ -33,9 +39,7 @@ function CourseCard({index, droppableId, courseId}: courseType) {
 
                 <div
                     className="xmark"    
-                    onClick = {() => dispatch(
-                    removeCourseFromQuarter({quarterId: droppableId,index: index, courseId: courseId
-                }))}>
+                    onClick = {removeCourse}>
                     <Xmark/>
                 </div>
               </div>

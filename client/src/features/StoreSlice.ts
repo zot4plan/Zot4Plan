@@ -38,13 +38,19 @@ interface FetchGEPayload {
     note:string;
 }
 
-interface AddCourseOtherPayload { 
+interface AddCourseMajorPayload { 
     course: CourseType; 
 }
 
 interface AddCourseGEPayload { 
     GEIndex: number; 
     course: CourseType; 
+}
+
+interface DeleteCoursePayload{
+    droppableId: string;
+    index: number;
+    courseId: string;
 }
 
 interface CourseQuarterPayload {
@@ -67,29 +73,29 @@ interface RemoveYearPayload {
 }
 
 interface StoreType{
-    years: {byIds: {[propName: string]: YearType}, allIds: string[], totalUnits: number};
-    quarters: {[propName: string]: QuarterType};
+    years: {byIds: {[yearId: string]: YearType}, allIds: string[], totalUnits: number};
+    quarters: {[quarterId: string]: QuarterType};
     major:{
         byIds:{[propName:string]:{id:string,name:string,subList:ChildType[]}}; 
         allIds: string[];
+        add: {id: string, courses: string[], status: string};
         name: string;
         url: string;
         status:string;
-        error:string;
     }
     ge: {
-        byIds: {[propName:string]: {id:string, geId:string, name:string, note:string, courses:string[]}};
+        byIds: {[droppableId:string]: {droppableId:string, geId:string, name:string, note:string, courses:string[]}};
         droppableIds: string[];
         geIds: string[];
         status: string;
-        error:string;
     };
-    other: {id: string, courses: string[];}
     courses: {
         byIds: {
             [propName:string]: {
                 data: CourseType, 
-                repeatability: number
+                repeatability: number,
+                removable: boolean,
+                quarterIds : string[],
             }
         },
         allIds: string[];
@@ -103,6 +109,7 @@ interface StoreType{
 const QUARTER_ID_LENGTH = 3;
 const MAJOR_ID_LENGTH = 4;
 const GE_ID_LENGTH = 5;
+const ADD_ID_LENGTH = 6;
 const YEAR_NAMES = ["Freshman","Sophomore","Junior","Senior"];
 const DEPT_COLORS = [
     ['#AFD3E9', '#70ADD7', '#3688BF'],
@@ -115,20 +122,20 @@ const DEPT_COLORS = [
 const generateInitialState = () => {
     let quarters:{[propName:string]:QuarterType} = {};
     let years:{[propName:string]:YearType} = {}
-    let yearAllIds:string[] = [];
+    let yearAllIds = [nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH), 
+                     nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH)];
 
     for(let i = 0; i < 4; i++){
-        let quarterIds:string[] = [];
-        let yearId = nanoid(QUARTER_ID_LENGTH);
+        let quarterIds = [nanoid(QUARTER_ID_LENGTH),nanoid(QUARTER_ID_LENGTH),
+                          nanoid(QUARTER_ID_LENGTH),nanoid(QUARTER_ID_LENGTH)];
+        let yearId = yearAllIds[i];
 
         for(let j = 0; j< 4; j++) {
-            let quarterId = nanoid(QUARTER_ID_LENGTH);
-            quarterIds.push(quarterId);
+            let quarterId = quarterIds[j];
             quarters[quarterId] = {id: quarterId, courses: [], yearId: yearId};
         }
 
         years[yearId] = {id: yearId, name: YEAR_NAMES[i], quarters: quarterIds};
-        yearAllIds.push(yearId);
     }
     
     return {
@@ -139,21 +146,19 @@ const generateInitialState = () => {
         }, 
         quarters: quarters,
         major: {
+            add: {id: nanoid(ADD_ID_LENGTH), courses: [], status: ""},
             byIds: {}, 
             allIds: [],
             name: '',
             url: '',
             status: "idle",
-            error:"",
         },
         ge: {
             byIds: {},
             droppableIds: [],
             geIds: [],
             status:"idle",
-            error:"",
         },
-        other: {id: nanoid(6), courses: []},
         courses: {
             byIds: {},
             allIds: [],
@@ -171,46 +176,108 @@ export const storeSlice = createSlice ({
     name: "store",
     initialState,
     reducers: {
-        addCourseOther: (state, action: PayloadAction<AddCourseOtherPayload>) => {
-            state.other.courses.push(action.payload.course.id);
-            state.courses.byIds[action.payload.course.id] = {data: action.payload.course, repeatability: 1};
+        /**
+         * Add course to state.major.add 
+         * Create an object for new course (course is guanrantee to be new)
+         * Add color for new course department
+         */
+        addCourseMajor: (state, action: PayloadAction<AddCourseMajorPayload>) => {
+            state.major.add.courses.push(action.payload.course.id);
+
+            state.courses.byIds[action.payload.course.id] = {
+                data: action.payload.course, 
+                repeatability: action.payload.course.repeatability,
+                removable: true,
+                quarterIds: [],
+            };
             state.courses.allIds.push(action.payload.course.id);
 
             if(state.depts.byIds[action.payload.course.department] === undefined) { 
-                let index = state.depts.size % DEPT_COLORS.length;
-                state.depts.byIds[action.payload.course.department] = 
-                    {id: action.payload.course.department, colors: DEPT_COLORS[index] }
+                state.depts.byIds[action.payload.course.department] = {
+                    id: action.payload.course.department, 
+                    colors: DEPT_COLORS[state.depts.size % DEPT_COLORS.length] 
+                }
                 state.depts.size += 1;
             }
         },
 
+        /**
+         * Add course to GE category
+         * Create new course Object (course can be already exist)
+         * Add color to new course department 
+         */
         addCourseGE: (state, action: PayloadAction<AddCourseGEPayload>) => {
             let droppableId = state.ge.droppableIds[action.payload.GEIndex],
                 courseId = action.payload.course.id;
+            
             if(!state.ge.byIds[droppableId].courses.includes(courseId)) {
                 state.ge.byIds[droppableId].courses.push(courseId);
-                if(state.courses.byIds[courseId] === undefined) {
-                    state.courses.byIds[courseId] = {data: action.payload.course, repeatability: action.payload.course.repeatability}
-                }
+
+                if(state.courses.byIds[courseId] === undefined) 
+                    state.courses.byIds[courseId] = {
+                        data: action.payload.course, 
+                        repeatability: action.payload.course.repeatability,
+                        removable: true,
+                        quarterIds: [], 
+                    }
 
                 if(state.depts.byIds[action.payload.course.department] === undefined) { 
-                    let index = state.depts.size % DEPT_COLORS.length;
-                    state.depts.byIds[action.payload.course.department] = 
-                        {id: action.payload.course.department, colors: DEPT_COLORS[index] }
+                    state.depts.byIds[action.payload.course.department] = {
+                            id: action.payload.course.department, 
+                            colors: DEPT_COLORS[state.depts.size % DEPT_COLORS.length] 
+                        }
                     state.depts.size += 1;
                 }
-            }
+            } 
+        },
+        
+        /**
+         * Delete course from sourceId
+         * Delete course in quarters and course data (if removable) or reset course state
+         */
+        deleteCourse: (state, action: PayloadAction<DeleteCoursePayload>) => {
+            let courseId = action.payload.courseId,
+                droppableId = action.payload.droppableId,
+                numOfQuartersTaken = state.courses.byIds[courseId].quarterIds.length;
+
+            // remove course from source
+            if(droppableId.length === GE_ID_LENGTH)
+                state.ge.byIds[droppableId].courses.splice(action.payload.index,1);
+            else if(droppableId.length === ADD_ID_LENGTH)
+                state.major.add.courses.splice(action.payload.index, 1); 
+
+            // remove course from quarters
+            state.courses.byIds[courseId].quarterIds.forEach(id => {
+                state.quarters[id].courses = state.quarters[id].courses.filter(id => id !== courseId);
+            })
+
+            if(numOfQuartersTaken > 0)
+                state.years.totalUnits -= (state.courses.byIds[courseId].data.units * numOfQuartersTaken);
             
+            if(state.courses.byIds[courseId].removable) {
+                state.courses.allIds = state.courses.allIds.filter(id => id !== courseId);
+                delete state.courses.byIds[courseId];
+            }
+            else {
+                state.courses.byIds[courseId].repeatability = state.courses.byIds[courseId].data.repeatability;
+                state.courses.byIds[courseId].quarterIds = [];
+            }
         },
 
+        /**
+         * Add course to quarter.courses by index
+         * reduce the course repeatability
+         * add quarterID to course.quarterIds
+         */
         addCourseToQuarter: (state, action: PayloadAction<CourseQuarterPayload>) => {   
-            let quarterId = action.payload.quarterId;
-            let courseId = action.payload.courseId;
-            let units = state.courses.byIds[courseId].data.units;
+            let quarterId = action.payload.quarterId,
+                courseId = action.payload.courseId;
+
             if(!state.quarters[quarterId].courses.includes(courseId)) {
-                state.years.totalUnits += units;
                 state.courses.byIds[courseId].repeatability -= 1;
-                state.quarters[quarterId].courses.splice(action.payload.index, 0,courseId);
+                state.courses.byIds[courseId].quarterIds.push(quarterId);
+                state.quarters[quarterId].courses.splice(action.payload.index, 0, courseId);
+                state.years.totalUnits += state.courses.byIds[courseId].data.units;
             }
         },
 
@@ -219,55 +286,64 @@ export const storeSlice = createSlice ({
                 destinationId = action.payload.destinationId,
                 courseId = action.payload.courseId;
 
+            // check if desination quarter does not include course
             if(!state.quarters[destinationId].courses.includes(courseId)) {
+
+                // remove sourceId and add destinationId to course.quarterIds
+                if(sourceId !== destinationId) {
+                    let quarterIds = state.courses.byIds[courseId].quarterIds.filter(id => id !== sourceId);
+                    quarterIds.push(destinationId);
+                    state.courses.byIds[courseId].quarterIds = quarterIds;
+                }
+
+                // remove course from sourceId and add course to destinationId
                 state.quarters[sourceId].courses.splice(action.payload.sourceIndex, 1);
                 state.quarters[destinationId].courses.splice(action.payload.destinationIndex, 0, courseId);
             }
         },
 
+        /**
+         * 
+         * @param state 
+         * @param action 
+         */
         removeCourseFromQuarter: (state, action: PayloadAction<CourseQuarterPayload>) => {
             state.quarters[action.payload.quarterId].courses.splice(action.payload.index,1);
             state.courses.byIds[action.payload.courseId].repeatability += 1;
-
-            let units = state.courses.byIds[action.payload.courseId].data.units;
-            state.years.totalUnits -= units;
+            state.years.totalUnits -= state.courses.byIds[action.payload.courseId].data.units;
         },
 
         addYear: (state) => {
-            let quarterIds:string[] = [];
-            let yearId = nanoid(4);
-            state.years.allIds.push(yearId);
-
+            let newYearId = nanoid(4);
+            let newQuarterIds = [ nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH),
+                               nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH) ];
+            
             for(let i = 0; i < 4; i++) {
-                let quarterId = nanoid(QUARTER_ID_LENGTH);
-                quarterIds.push(quarterId);
-
-                state.quarters[quarterId] = {
-                    id: quarterId,  
+                state.quarters[newQuarterIds[i]] = {
+                    id: newQuarterIds[i],  
                     courses: [], 
-                    yearId: yearId
+                    yearId: newYearId
                 };
             }
 
-            state.years.byIds[yearId] = {
-                id: yearId, 
+            state.years.allIds.push(newYearId);
+            state.years.byIds[newYearId] = {
+                id: newYearId, 
                 name: "Senior plus", 
-                quarters: quarterIds
+                quarters: newQuarterIds
             };
         },
 
         removeYear: (state, action:PayloadAction<RemoveYearPayload>) => { 
-            let id = action.payload.id;
-            state.years.byIds[id].quarters.forEach((id) => {
+            state.years.byIds[action.payload.id].quarters.forEach((id) => {
                 state.quarters[id].courses.forEach((courseId) => {
                     state.courses.byIds[courseId].repeatability += 1;
                     state.years.totalUnits -= state.courses.byIds[courseId].data.units;
-
                 })
-                delete state.quarters.id;
+                delete state.quarters[id];
             })
-            
-            delete state.years.byIds[id];
+           
+            delete state.years.byIds[action.payload.id];
             state.years.allIds.splice(action.payload.index,1);
         },
 
@@ -276,8 +352,9 @@ export const storeSlice = createSlice ({
                 state.years.byIds[yearId].quarters.forEach((quarterId)=>{
                     state.quarters[quarterId].courses.forEach(courseId => {
                         state.courses.byIds[courseId].repeatability += 1;
+                        state.courses.byIds[courseId].quarterIds = [];
                     })
-                    state.quarters[quarterId].courses = []
+                    state.quarters[quarterId].courses = [];
                 })
             })
             state.years.totalUnits = 0;
@@ -286,10 +363,9 @@ export const storeSlice = createSlice ({
     },
     extraReducers: (builder) => {
 
-///////////////////////////////////////////////////////////////////////////////
-/******************* fetch General Education Categories **********************/
-///////////////////////////////////////////////////////////////////////////////
-
+        /**
+         * 
+         */
         builder.addCase(fetchGECategories.pending, (state) => {
             state.ge.status = "loading";
         });
@@ -299,19 +375,24 @@ export const storeSlice = createSlice ({
                 const droppableId = nanoid(GE_ID_LENGTH);
                 state.ge.droppableIds.push(droppableId);
                 state.ge.geIds.push(ge.id);
-                state.ge.byIds[droppableId] = {id: droppableId, geId: ge.id, name:ge.name, note: ge.note, courses:[]}
+                state.ge.byIds[droppableId] = {
+                    droppableId: droppableId, 
+                    geId: ge.id, 
+                    name:ge.name, 
+                    note: ge.note, 
+                    courses:[]
+                }
             });
             state.ge.status = "succeeded";
         });
 
         builder.addCase( fetchGECategories.rejected,(state) => {
             state.ge.status = "error";
-            state.ge.error = "";
         });
 
-///////////////////////////////////////////////////////////////////////////////
-/********************** fetch Major Requirement courses **********************/
-///////////////////////////////////////////////////////////////////////////////
+        /**
+         * 
+         */
 
         builder.addCase(fetchMajor.pending, (state) => {
             state.major.status = "loading";
@@ -320,7 +401,8 @@ export const storeSlice = createSlice ({
             state.major.name = '';
             state.major.url = '';
 
-            state.other.courses = [];
+            state.major.add.courses = [];
+            state.major.add.status = 'idle';
 
             state.ge.droppableIds.forEach((id)=>{
                 state.ge.byIds[id].courses = [];
@@ -359,7 +441,9 @@ export const storeSlice = createSlice ({
             action.payload.courseData.forEach((course) => {
                 state.courses.byIds[course.id] = {
                     data: course,
-                    repeatability: course.repeatability
+                    repeatability: course.repeatability,
+                    removable: false,
+                    quarterIds: []
                 }
 
                 if(state.depts.byIds[course.department] === undefined) { 
@@ -376,11 +460,10 @@ export const storeSlice = createSlice ({
 
         builder.addCase(fetchMajor.rejected,(state) => {
             state.major.status = "error";
-            state.major.error = "";
         });
     },
 });
 
-export const {  addCourseOther, addCourseGE, addCourseToQuarter, moveCourse, 
+export const {  addCourseMajor, addCourseGE, deleteCourse, addCourseToQuarter, moveCourse, 
                 removeCourseFromQuarter, addYear, removeYear, refreshState } =  storeSlice.actions;
 export default  storeSlice.reducer;

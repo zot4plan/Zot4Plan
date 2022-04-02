@@ -15,7 +15,7 @@ const MajorSection = memo(({id}:MajorSectionType) => {
 })
 
 const AddCourse = memo(() => {
-    const other = useSelector((state:RootState)=> state.store.other)
+    const other = useSelector((state:RootState)=> state.store.major.add)
     return (
         <>
             <BrowseCourse/>
@@ -28,32 +28,32 @@ const AddCourse = memo(() => {
 
 function MajorTab () {
     const sectionIds = useSelector((state:RootState)=>state.store.major.allIds);
-    const majorStatus = useSelector((state:RootState)=>state.store.major.status);
-    const majorName = useSelector((state:RootState)=>state.store.major.name);
-    const majorUrl = useSelector((state:RootState)=>state.store.major.url);
-    const error = useSelector((state:RootState)=>state.store.major.error);
+    const status = useSelector((state:RootState)=>state.store.major.status);
+    const name = useSelector((state:RootState)=>state.store.major.name);
+    const url = useSelector((state:RootState)=>state.store.major.url);
+    //const error = useSelector((state:RootState)=>state.store.major.error);
 
     let content;
-    if(majorStatus === 'idle')
+    if( status === 'idle')
         content = <p className='center-p'>Select your major</p>
-    else if (majorStatus === 'loading') 
+
+    else if (status === 'loading') 
         content = <p className='center-p'>Loading....</p> 
-    else if (majorStatus === 'succeeded') {
-        content = sectionIds.map((id) => (
-           <MajorSection key={id} id={id}/>
-        ))
-    } 
-    else if (majorStatus === 'failed') 
-        content = <p className='center-p'>{error}</p>
+
+    else if (status === 'succeeded') 
+        content = sectionIds.map(id => <MajorSection key={id} id={id}/>)
+     
+    else if (status === 'failed') 
+        content = <p className='center-p'>Cannot connect to server!</p>
 
     let hyperLink;
-    if(majorName !== '')
+    if(name !== '')
         hyperLink = 
             <div className='flex justify-center item-center mb-3'> 
                 <a  className='hyperlink' 
-                    href={majorUrl} 
+                    href={url} 
                     target='_blank' 
-                    rel="noreferrer"> {majorName} </a>
+                    rel="noreferrer"> {name} </a>
             </div>
     
     return (

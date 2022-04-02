@@ -146,7 +146,7 @@ html, body, #root { background-color: var(--primary-color);}
 .accordion-header {
     flex-grow:2;
     font-weight: 600;
-    padding: 0.5rem 1.2rem;
+    padding: 0.6rem 1rem;
 }
 
 .rightIcon {
