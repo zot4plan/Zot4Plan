@@ -1,13 +1,15 @@
 import {useEffect, useState, MouseEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import {RootState} from '../../app/store'
-import {fetchGECategories} from '../../features/FetchData'
-import Section from './Section';
-
-import Axios from 'axios'
 import Select, { StylesConfig } from 'react-select';
-import AddIcon from '../icons/Add'
+import Axios from 'axios';
+
+import {RootState} from '../../app/store';
+import {fetchGECategories} from '../../features/FetchData';
 import {addCourseGE} from '../../features/StoreSlice';
+import Section from './Section';
+import Add from '../icons/Add';
+import Error from '../icons/Error';
+import Success from '../icons/Success';
 
 interface GESectionType { droppableId: string; }
 
@@ -67,80 +69,105 @@ const CourseBarStyle: StylesConfig<OptionType2, false> =  {
 }
 
 const GeSelectBar = () => {
-    const geIds = useSelector((state:RootState)=>state.store.ge.geIds);
-    const [geIndex, setGeIndex] = useState<number>(-1);
-    const [selectCourse, setSelectCourse] = useState<OptionType2>({value:"", label: "Choose course"});
-    const [courses, setCourses] = useState([]);
+    const [ge, setGE] = useState({index: -1, courses: []});
+    const [course, setCourse] = useState<OptionType2>({value:"", label: "Choose course"});
+    const [message, setMessage] = useState({content: "", status: 'idle'});
+
+    const all_ge_ids = useSelector((state:RootState) => state.store.ge.geIds);
+    const courses_in_current_ge = useSelector((state:RootState) => {
+        const droppableId = state.store.ge.droppableIds[ge.index];
+        return droppableId? state.store.ge.byIds[droppableId].courses : [];
+    });
+
     const dispatch = useDispatch();
 
-    const handleOnChange = async (option: OptionType1| null) => {
-        setSelectCourse({value:"", label:"Choose course"})
+    const handleOnGEChange = async (option: OptionType1| null) => {
         if(option) {
-            console.log(option);
             setTimeout(() => {
-            Axios
-                .get('http://localhost:8080/api/getGECourses', 
-                    {params: { id: option.label }})
+            Axios.get('http://localhost:8080/api/getGECourses',{params: {id: option.label}})
                 .then((res) => {
-                    console.log(res.data);
-                    const coursesArray = res.data.map( (course:{courseId : string}) =>({value: course.courseId, label: course.courseId}));
-                    setGeIndex(option.value);
-                    setCourses(coursesArray);
+                    setGE({
+                        index: option.value, 
+                        courses: res.data.map(
+                            (course:{courseId: string}) => ({value: course.courseId, label: course.courseId}))
+                    });
                 })
-                .catch(err => {
-                    setCourses([]);
+                .catch( () => {
+                    setGE({index: -1, courses: []});
                 });
             }, 500);
         }
-        else {
-            setGeIndex(-1);
-            setCourses([]);
-        }
-    }
-
-    const handleOnAddCourse = async (option: OptionType2| null) => {
-        if(option) 
-            setSelectCourse({value: option.value, label: option.label});
         else 
-           setSelectCourse({value: "", label: "Choose course"});
+            setGE({index: -1, courses: []});
+        setCourse({value: "", label: "Choose course"});
     }
 
-    const submitAddCourse = (event: MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
-        if(selectCourse.value !== "") 
-            setTimeout(() => {
-                Axios.get('http://localhost:8080/api/getCourseById', {
-                    params: { id: selectCourse.value } } ).then((res) => {
-                        console.log(res);
-                        if(res.data.message === 'success') {
-                            console.log(res.data);
-                            dispatch(addCourseGE({course: res.data.data, GEIndex: geIndex}));
+    const handleOnCourseChange = async (option: OptionType2| null) => {
+        if(option) 
+            setCourse({value: option.value, label: option.label});
+        else 
+            setCourse({value: "", label: "Choose course"});
+    }
 
-                        }
-                });
-            }, 500); 
+    const submitCourse = (event: MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        event.preventDefault();
+
+        if(course.value !== "") {
+            if(!courses_in_current_ge.includes(course.value)) {
+                setTimeout(() => {
+                    Axios.get('http://localhost:8080/api/getCourseById', {params: {id: course.value}})
+                        .then((res) => {
+                            if(res.data.message === 'succeed') {
+                                dispatch(addCourseGE({course: res.data.data, index: ge.index})); 
+                                setMessage({content: course.value + ' is added successfully!', status: 'succeed'});
+                            }
+                            else
+                                setMessage({content:'Cannot connect to server!', status: 'fail'});
+                    });
+                }, 500); 
+            }
+            else
+                setMessage({content: course.value + ' has already been added!', status: 'fail'});
+        }
+        else if(ge.index === -1)
+            setMessage({content: 'Please select a GE category!', status: 'fail'});
+        else
+            setMessage({content: 'Please select a course!', status: 'fail'});
     };
 
     return (
-        <div className='flex justify-center m-1'>
+        <div className='flex flex-column justify-center item-center m-1'>
             <div className='relative h-36 w-270'> 
-            <Select
-                components={{IndicatorSeparator:() => null }}
-                styles={GEBarStyle}
-                options={geIds.map( (id,index) => ({label: id, value: index}))} 
-                onChange={handleOnChange}
-                maxMenuHeight={200}
-                placeholder='GE'              
-            />
-            <Select
-                components={{ DropdownIndicator:() => null}}
-                options={courses} 
-                styles={CourseBarStyle}
-                value={selectCourse}
-                maxMenuHeight={250}
-                onChange={handleOnAddCourse}
-            />
-            <button className='add-btn' onClick={submitAddCourse}> <AddIcon/> </button>
+                <Select
+                    components={{IndicatorSeparator:() => null }}
+                    styles={GEBarStyle}
+                    options={all_ge_ids.map((id, index) => ({label: id, value: index}))} 
+                    onChange={handleOnGEChange}
+                    maxMenuHeight={200}
+                    placeholder='GE'              
+                />
+                <Select
+                    components={{ DropdownIndicator:() => null}}
+                    options={ge.courses} 
+                    styles={CourseBarStyle}
+                    value={course}
+                    maxMenuHeight={250}
+                    onChange={handleOnCourseChange}
+                />
+                <button className='add-btn' onClick={submitCourse}> <Add/> </button>
+            </div>
+            <div className={'relative h-16 w-270 '+ (message.status !== 'idle'? 'fade-message':'')}  
+                 onAnimationEnd={() => setMessage({content:"", status: 'idle'})}>
+                {message.status != 'idle' && 
+                <p className={'m-0 sz-1 pat-0 pal ' 
+                    + (message.status === 'succeed'? 'cl-green': 'cl-red')}> 
+                    <span className='absolute m-icon'> 
+                        {message.status === 'succeed' && <Success/>}
+                        {message.status === 'fail' && <Error/>}
+                    </span>
+                    {message.content}
+                </p>}
             </div>
         </div>
     )
@@ -157,7 +184,6 @@ function GETab () {
     const dispatch = useDispatch()
     const droppableIds = useSelector((state:RootState)=>state.store.ge.droppableIds);
     const status = useSelector((state:RootState)=>state.store.ge.status);
-    //const error = useSelector((state:RootState)=>state.store.ge.error);
 
     useEffect(() => {
         if (status === 'idle') {

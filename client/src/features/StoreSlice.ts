@@ -38,12 +38,8 @@ interface FetchGEPayload {
     note:string;
 }
 
-interface AddCourseMajorPayload { 
-    course: CourseType; 
-}
-
 interface AddCourseGEPayload { 
-    GEIndex: number; 
+    index: number; 
     course: CourseType; 
 }
 
@@ -73,18 +69,38 @@ interface RemoveYearPayload {
 }
 
 interface StoreType{
-    years: {byIds: {[yearId: string]: YearType}, allIds: string[], totalUnits: number};
-    quarters: {[quarterId: string]: QuarterType};
+    years: {
+        byIds: {
+            [yearId: string]: YearType;
+        }; 
+        allIds: string[]; 
+        totalUnits: number;
+    };
+    quarters: {
+        [quarterId: string]: QuarterType;
+    };
     major:{
-        byIds:{[propName:string]:{id:string,name:string,subList:ChildType[]}}; 
+        byIds:{
+            [propName:string]:{
+                id: string,
+                name: string,
+                subList: ChildType[]
+            }}; 
         allIds: string[];
         add: {id: string, courses: string[], status: string};
         name: string;
         url: string;
-        status:string;
+        status: string;
     }
     ge: {
-        byIds: {[droppableId:string]: {droppableId:string, geId:string, name:string, note:string, courses:string[]}};
+        byIds: {
+            [droppableId:string]: {
+                droppableId: string, 
+                geId: string, 
+                name: string, 
+                note: string, 
+                courses: string[]
+            }};
         droppableIds: string[];
         geIds: string[];
         status: string;
@@ -96,13 +112,16 @@ interface StoreType{
                 repeatability: number,
                 removable: boolean,
                 quarterIds : string[],
-            }
-        },
+            }},
         allIds: string[];
     };
     depts: {
-        byIds: {[propName:string]: {id:string, colors: string[]}}, 
-        size: number
+        byIds: {
+            [propName:string]: {
+                id: string;
+                colors: string[];
+            }}, 
+        size: number;
     }
 }
 
@@ -149,8 +168,8 @@ const generateInitialState = () => {
             add: {id: nanoid(ADD_ID_LENGTH), courses: [], status: ""},
             byIds: {}, 
             allIds: [],
-            name: '',
-            url: '',
+            name: "",
+            url: "",
             status: "idle",
         },
         ge: {
@@ -181,20 +200,21 @@ export const storeSlice = createSlice ({
          * Create an object for new course (course is guanrantee to be new)
          * Add color for new course department
          */
-        addCourseMajor: (state, action: PayloadAction<AddCourseMajorPayload>) => {
-            state.major.add.courses.push(action.payload.course.id);
+        addCourseMajor: (state, action: PayloadAction<CourseType>) => {
+            let course = action.payload
+            state.major.add.courses.push(course.id);
 
-            state.courses.byIds[action.payload.course.id] = {
-                data: action.payload.course, 
-                repeatability: action.payload.course.repeatability,
+            state.courses.byIds[course.id] = {
+                data: course, 
+                repeatability: course.repeatability,
                 removable: true,
                 quarterIds: [],
             };
-            state.courses.allIds.push(action.payload.course.id);
+            state.courses.allIds.push(course.id);
 
-            if(state.depts.byIds[action.payload.course.department] === undefined) { 
-                state.depts.byIds[action.payload.course.department] = {
-                    id: action.payload.course.department, 
+            if(state.depts.byIds[course.department] === undefined) { 
+                state.depts.byIds[course.department] = {
+                    id: course.department, 
                     colors: DEPT_COLORS[state.depts.size % DEPT_COLORS.length] 
                 }
                 state.depts.size += 1;
@@ -207,7 +227,7 @@ export const storeSlice = createSlice ({
          * Add color to new course department 
          */
         addCourseGE: (state, action: PayloadAction<AddCourseGEPayload>) => {
-            let droppableId = state.ge.droppableIds[action.payload.GEIndex],
+            let droppableId = state.ge.droppableIds[action.payload.index],
                 courseId = action.payload.course.id;
             
             if(!state.ge.byIds[droppableId].courses.includes(courseId)) {
@@ -228,7 +248,7 @@ export const storeSlice = createSlice ({
                         }
                     state.depts.size += 1;
                 }
-            } 
+            }
         },
         
         /**
@@ -393,7 +413,6 @@ export const storeSlice = createSlice ({
         /**
          * 
          */
-
         builder.addCase(fetchMajor.pending, (state) => {
             state.major.status = "loading";
             state.major.allIds = [];
@@ -418,12 +437,13 @@ export const storeSlice = createSlice ({
             })
 
             state.depts.byIds = {};
-            state.depts.size = 0;
+            state.depts.size = 0; 
         });
 
+        /**
+         * 
+         */
         builder.addCase(fetchMajor.fulfilled,(state, action) => {   
-            console.log(action.payload);
-            
             action.payload.major_requirement.forEach ((section)=>{
                 const sId = nanoid(MAJOR_ID_LENGTH);
                 state.major.allIds.push(sId);

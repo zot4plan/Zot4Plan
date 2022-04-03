@@ -49,7 +49,7 @@ exports.findOne = (req, res) => {
     const id = req.query.id;
     Courses.findByPk(id).then(data => {
         if(data) {
-            res.send( {message: "success", data});
+            res.send( {message: "succeed", data});
         }
         else {
             res.send( {message: 'fail'} );

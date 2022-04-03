@@ -81,12 +81,3 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
 
 export default memo(ReqCourseCard)
 
-/*
- <div
-                        className="xmark"    
-                        onClick = {() => dispatch(
-                        removeCourseFromQuarter({quarterId: droppableId,index: index, courseId: courseId
-                    }))}>
-                        <Xmark/>
-                </div> 
-*/
