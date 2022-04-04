@@ -6,7 +6,7 @@ interface SectionType {
     id: string;
     note: string;
     name:string;
-    sublist: { sectionId: string, name: string} [] | null;
+    sublist: { sectionId: string, note: string} [] | null;
 }
 
 const Section = ({id, name, note, sublist}:SectionType) => {
@@ -32,7 +32,7 @@ const Section = ({id, name, note, sublist}:SectionType) => {
                 
                 {!sublist && <DroppableArea key={id} text={note} droppableId={id}/>}
                 {sublist  && sublist.map((l)=> 
-                <DroppableArea key={l.sectionId} droppableId={l.sectionId} text={l.name} />         
+                <DroppableArea key={l.sectionId} droppableId={l.sectionId} text={l.note} />         
                 )}
                 
              </div>

@@ -10,7 +10,7 @@ interface quarter {
 }
 
 function Quarter({droppableId, index}:quarter) {
-  const courses = useSelector((state:RootState) => state.store.sections[droppableId]);
+  const courses = useSelector((state:RootState) => state.store.sectionCourses[droppableId]);
 
   const renderCard = useCallback(
       (id: string, droppableId: string, index: number) => {

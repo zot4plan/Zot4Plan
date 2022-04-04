@@ -9,7 +9,7 @@ interface MajorSectionType { id:string;}
 const MajorSection = memo(({id}:MajorSectionType) => {
     const section = useSelector((state:RootState)=>state.store.major.byIds[id]);
      return (
-        <Section id={section.id} name={section.name} note="" sublist={section.subList}/>
+        <Section id={section.id} name={section.title} note="" sublist={section.sectionIds}/>
      )
 })
 
@@ -18,8 +18,8 @@ const AddCourse = () => {
     
     return (
     <>
-    <BrowseCourseById id={custom.id}/>
-    <Section id={custom.id} name={custom.name} note="" sublist={null} />
+    <BrowseCourseById id={custom.sectionId}/>
+    <Section id={custom.sectionId} name={custom.title} note="" sublist={null} />
     </>
     )
 }

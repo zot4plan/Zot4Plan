@@ -11,7 +11,7 @@ interface GESectionType { id: string; }
 const GESection = ({id}:GESectionType) => {
     const ge = useSelector((state:RootState)=>state.store.ge.byIds[id]);
     return (
-        <Section id={id} name={ge.geId + ": " + ge.name} note={ge.note} sublist={null}/>
+        <Section id={id} name={ge.geId + ": " + ge.title} note={ge.note} sublist={null}/>
     )
 }
 

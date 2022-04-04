@@ -10,7 +10,7 @@ interface DroppableAreaType {
 }
 
 function DroppableArea({droppableId, text}:DroppableAreaType) {
-    const courseIds = useSelector((state:RootState)=> state.store.sections[droppableId])
+    const courseIds = useSelector((state:RootState)=> state.store.sectionCourses[droppableId])
     let courseCards: JSX.Element[] = [];
     let index = 0;
 

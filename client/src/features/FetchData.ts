@@ -10,15 +10,6 @@ interface MajorType {
     child: ({name:string, child:(string|string[])[]})[];
 }
 
-interface FetchMajorPayload {
-    status: string,
-    major_requirement: MajorType[],
-    name: string,
-    url: string, 
-    courseIds: string[], 
-    courseData: CourseType[],
-}
-
 interface CourseType { 
     id: string;
     name: string;
@@ -63,38 +54,38 @@ export const fetchMajor = createAsyncThunk(
                     })
                 })
             })
+
             return Axios
                 .get('http://localhost:8080/api/getCourses', {params: { ids: courseIds }})
                 .then (result => {
-                    const res: FetchMajorPayload = {
+                    return {
                         status: "succeed",
                         major_requirement: data,
                         url: response.data.url,
                         name: response.data.name, 
                         courseIds: courseIds, 
-                        courseData: result.data
+                        courseData: result.data as CourseType[]
                     };
-                    return res;
                 })
                 .catch((error:string) => {
-                    const res: FetchMajorPayload = {
+                    return {
                         status: error,
                         major_requirement: [],
                         name: '',
                         url: '', 
                         courseIds: [], 
-                        courseData: [] };
-                    return res;
+                        courseData: [] as CourseType[]
+                    };
                 });
         })
         .catch((error:string)=> {
-            const res: FetchMajorPayload = {
+            return {
                 status: error,
                 major_requirement: [],
                 name: '',
                 url: '',  
                 courseIds: [], 
-                courseData: [] };
-            return res;
+                courseData: [] as CourseType[]
+            };
         })
 ); 

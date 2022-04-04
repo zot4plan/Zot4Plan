@@ -71,7 +71,7 @@ const BrowseCourseByGE = () => {
     const geIds = useSelector((state:RootState) => state.store.ge.allGeIds);
     const sectionIds = useSelector((state:RootState) => state.store.ge.allSectionIds)
     const courses_in_current_ge = useSelector((state:RootState) => {
-        return ge.index < 0? [] : state.store.sections[sectionIds[ge.index]];
+        return ge.index < 0? [] : state.store.sectionCourses[sectionIds[ge.index]];
     });
     const dispatch = useDispatch();
 
