@@ -249,7 +249,8 @@ html, body, #root { background-color: var(--primary-color);}
 }
 
 .center-p{
-    margin-top: 10rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 

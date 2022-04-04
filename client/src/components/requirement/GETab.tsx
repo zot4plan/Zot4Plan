@@ -11,13 +11,13 @@ interface GESectionType { id: string; }
 const GESection = ({id}:GESectionType) => {
     const ge = useSelector((state:RootState)=>state.store.ge.byIds[id]);
     return (
-        <Section id={id} name={ge.geId + ": " + ge.title} note={ge.note} sublist={null}/>
+        <Section id={ge.sectionId} name={ge.geId + ": " + ge.title} note={ge.note} sublist={null}/>
     )
 }
 
 function GETab () {
     const dispatch = useDispatch()
-    const sectionIds = useSelector((state:RootState)=>state.store.ge.allSectionIds);
+    const geIds = useSelector((state:RootState)=>state.store.ge.allGeIds);
     const status = useSelector((state:RootState)=>state.store.ge.status);
 
     useEffect(() => {
@@ -32,7 +32,7 @@ function GETab () {
         content = <p>Loading....</p> 
    
     else if (status === 'succeeded') {
-        content = sectionIds.map((id) => (
+        content = geIds.map((id) => (
            <GESection key={id} id={id}/>
         ))
     } 

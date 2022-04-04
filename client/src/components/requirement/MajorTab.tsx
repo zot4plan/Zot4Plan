@@ -13,30 +13,20 @@ const MajorSection = memo(({id}:MajorSectionType) => {
      )
 })
 
-const AddCourse = () => {
-    const custom = useSelector((state:RootState)=> state.store.customAdd)
-    
-    return (
-    <>
-    <BrowseCourseById id={custom.sectionId}/>
-    <Section id={custom.sectionId} name={custom.title} note="" sublist={null} />
-    </>
-    )
-}
-
 function MajorTab () {
     const sectionIds = useSelector((state:RootState)=>state.store.major.allIds);
     const status = useSelector((state:RootState)=>state.store.major.status);
     const name = useSelector((state:RootState)=>state.store.major.name);
     const url = useSelector((state:RootState)=>state.store.major.url);
+    const customAdd = useSelector((state:RootState)=> state.store.customAdd)
     //const error = useSelector((state:RootState)=>state.store.major.error);
 
     let content;
     if( status === 'idle')
-        content = <p className='center-p'>Select your major</p>
+        content = <p className='center-p'>Select your major!</p>
 
     else if (status === 'loading') 
-        content = <p className='center-p'>Loading....</p> 
+        content = <p className='center-p'>Loading....!!!</p> 
 
     else if (status === 'succeeded') 
         content = sectionIds.map(id => <MajorSection key={id} id={id}/>)
@@ -56,8 +46,9 @@ function MajorTab () {
     
     return (
         <div className="tab-container">
-            <AddCourse/>
+            <BrowseCourseById id={customAdd.sectionId}/>
             {hyperLink}
+            <Section id={customAdd.sectionId} name={customAdd.title} note="" sublist={null} />
             {content}
         </div>
     )

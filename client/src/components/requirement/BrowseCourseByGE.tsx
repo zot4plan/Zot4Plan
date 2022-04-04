@@ -8,17 +8,12 @@ import Success from '../icons/Success';
 import {RootState} from '../../app/store';
 import {addCourse} from '../../features/StoreSlice';
 
-interface GeOptionType {
-    value: number;
-    label: string;
-}
-
-interface CourseOptionType {
+interface OptionType {
     value: string;
     label: string;
 }
 
-const GEBarStyle: StylesConfig<GeOptionType, false> =  {
+const GEBarStyle: StylesConfig<OptionType, false> =  {
     container: (provided) => {
         return {...provided, display:'inline-block', marginRight:'0.3rem'};
     },
@@ -43,7 +38,7 @@ const GEBarStyle: StylesConfig<GeOptionType, false> =  {
     }
 }
 
-const CourseBarStyle: StylesConfig<CourseOptionType, false> =  {
+const CourseBarStyle: StylesConfig<OptionType, false> =  {
     container: (provided) => {
         return {...provided, display:'inline-block'};
     },
@@ -64,39 +59,44 @@ const CourseBarStyle: StylesConfig<CourseOptionType, false> =  {
 }
 
 const BrowseCourseByGE = () => {
-    const [ge, setGE] = useState({index: -1, courses: []});
+    const [ge, setGE] = useState({id: "", courses: []});
     const [course, setCourse] = useState({value:"", label: "Choose course"});
     const [message, setMessage] = useState({content: "", status: 'idle'});
 
     const geIds = useSelector((state:RootState) => state.store.ge.allGeIds);
-    const sectionIds = useSelector((state:RootState) => state.store.ge.allSectionIds)
-    const courses_in_current_ge = useSelector((state:RootState) => {
-        return ge.index < 0? [] : state.store.sectionCourses[sectionIds[ge.index]];
+    const [sectionCourses, sectionId] = useSelector((state:RootState) => {
+        if(ge.id === "")
+            return [[], ""]
+        else {
+            let sectionId = state.store.ge.byIds[ge.id].sectionId;
+            return [state.store.sectionCourses[sectionId], sectionId]
+        }
+
     });
     const dispatch = useDispatch();
 
-    const handleOnGEChange = async (option: GeOptionType| null) => {
+    const handleOnGEChange = async (option: OptionType| null) => {
         if(option) {
             setTimeout(() => {
             Axios.get('http://localhost:8080/api/getGECourses',{params: {id: option.label}})
                 .then((res) => {
                     setGE({
-                        index: option.value, 
+                        id: option.value, 
                         courses: res.data.map(
                             (course:{courseId: string}) => ({value: course.courseId, label: course.courseId}))
                     });
                 })
                 .catch( () => {
-                    setGE({index: -1, courses: []});
+                    setGE({id: "", courses: []});
                 });
             }, 500);
         }
         else 
-            setGE({index: -1, courses: []});
+            setGE({id: "", courses: []});
         setCourse({value: "", label: "Choose course"});
     }
 
-    const handleOnCourseChange = async (option: CourseOptionType| null) => {
+    const handleOnCourseChange = async (option: OptionType| null) => {
         if(option) 
             setCourse({value: option.value, label: option.label});
         else 
@@ -108,12 +108,12 @@ const BrowseCourseByGE = () => {
         event.preventDefault();
 
         if(course.value !== "") {
-            if(!courses_in_current_ge.includes(course.value)) {
+            if(!sectionCourses.includes(course.value)) {
                 setTimeout(() => {
                     Axios.get('http://localhost:8080/api/getCourseById', {params: {id: course.value}})
                         .then((res) => {
                             if(res.data.message === 'succeed') {
-                                dispatch(addCourse({course: res.data.data, id: sectionIds[ge.index]})); 
+                                dispatch(addCourse({course: res.data.data, id: sectionId as string})); 
                                 setMessage({content: course.value + ' is added successfully!', status: 'succeed'});
                             }
                             else
@@ -124,7 +124,7 @@ const BrowseCourseByGE = () => {
             else
                 setMessage({content: course.value + ' has already been added!', status: 'fail'});
         }
-        else if(ge.index === -1)
+        else if(ge.id === "")
             setMessage({content: 'Please select a GE category!', status: 'fail'});
         else
             setMessage({content: 'Please select a course!', status: 'fail'});
@@ -136,7 +136,7 @@ const BrowseCourseByGE = () => {
                 <Select
                     components={{IndicatorSeparator:() => null }}
                     styles={GEBarStyle}
-                    options={geIds.map((id, index) => ({label: id, value: index}))} 
+                    options={geIds.map((id) => ({label: id, value: id}))} 
                     onChange={handleOnGEChange}
                     maxMenuHeight={200}
                     placeholder='GE'              
@@ -145,7 +145,7 @@ const BrowseCourseByGE = () => {
                     components={{ DropdownIndicator:() => null}}
                     options={ge.courses} 
                     styles={CourseBarStyle}
-                    isOptionDisabled={(option) => courses_in_current_ge.includes(option.label)}
+                    isOptionDisabled={(option) => sectionCourses.includes(option.label)}
                     value={course}
                     maxMenuHeight={250}
                     onChange={handleOnCourseChange}

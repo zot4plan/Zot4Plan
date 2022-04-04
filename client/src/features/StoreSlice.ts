@@ -83,13 +83,12 @@ interface StoreType{
     customAdd: {sectionId: string, title: string};
     ge: {
         byIds: {
-            [sectionId:string]: {
+            [geId:string]: {
                 sectionId: string, 
                 geId: string, 
                 title: string, 
                 note: string, 
             }};
-        allSectionIds: string[];
         allGeIds: string[];
         status: string;
     };
@@ -114,14 +113,15 @@ interface StoreType{
     }
 }
 const YEAR_NAMES = ["Freshman","Sophomore","Junior","Senior"];
-const QUARTER_ID_LENGTH = 3;
-const ID_LENGTH = 4;
+const QUARTER_ID_LENGTH = 3; // for function AddCourseToQuarter
+const MAJOR_ID_LENGTH = 4; // to differentiate course in major (which cannot be remove)
+const ID_LENGTH = 5; 
 const DEPT_COLORS = [
-    ['#AFD3E9', '#70ADD7', '#3688BF'],
-    ['#C2E9EA', '#76CFD0', '#38A3A5'],
-    ['#E4F1ED', '#C9E3DB', '#78BAA6'],
-    ['#B7D2E1', '#8CB7CF', '#6FA6C3'],
-    ['#C8DFE4', '#ADCFD7' ,'#5094A5']
+    ['#AFD3E9', '#70ADD7', '#3688BF'], // Columbia Blue
+    ['#C2E9EA', '#76CFD0', '#38A3A5'], // Powder Blue
+    ['#E4F1ED', '#C9E3DB', '#78BAA6'], // Mint Cream
+    ['#B7D2E1', '#8CB7CF', '#6FA6C3'], // Columnbia Blue
+    ['#C8DFE4', '#ADCFD7' ,'#5094A5'], // Columnbia Blue
 ]
 
 const generateInitialState = () => {
@@ -129,7 +129,7 @@ const generateInitialState = () => {
     let sections:SectionType = {};
     let customAdd =  {
         sectionId: nanoid(ID_LENGTH), 
-        title: "Additional: ",
+        title: "+ Courses: ",
     };
     let yearAllIds = [nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH), 
                      nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH)];
@@ -161,7 +161,6 @@ const generateInitialState = () => {
         },
         ge: {
             byIds: {},
-            allSectionIds: [],
             allGeIds: [],
             status:"idle",
         },
@@ -341,9 +340,8 @@ export const storeSlice = createSlice ({
         builder.addCase( fetchGECategories.fulfilled,(state,action:PayloadAction<FetchGEPayload[]>) => {    
             action.payload.forEach( (ge) => {
                 const id = nanoid(ID_LENGTH);
-                state.ge.allSectionIds.push(id);
                 state.ge.allGeIds.push(ge.id);
-                state.ge.byIds[id] = {
+                state.ge.byIds[ge.id] = {
                     sectionId: id, 
                     geId: ge.id, 
                     title:ge.name, 
@@ -367,8 +365,8 @@ export const storeSlice = createSlice ({
             state.major.url = '';
             state.sectionCourses[state.customAdd.sectionId] = [];
 
-            state.ge.allSectionIds.forEach((id)=>{
-                state.sectionCourses[id] = [];
+            state.ge.allGeIds.forEach((id)=>{
+                state.sectionCourses[state.ge.byIds[id].sectionId] = [] as string[];
             });
 
             state.courses.allIds = [];
@@ -386,12 +384,12 @@ export const storeSlice = createSlice ({
 
         builder.addCase(fetchMajor.fulfilled,(state, action) => {   
             action.payload.major_requirement.forEach ((section)=>{
-                const sId = nanoid(ID_LENGTH);
+                const sId = nanoid(MAJOR_ID_LENGTH);
                 state.major.allIds.push(sId);
                 state.major.byIds[sId] = {id: sId, title: section.name, sectionIds: []};
             
                 section.child.forEach((c) => {
-                    const cId = nanoid(ID_LENGTH);
+                    const cId = nanoid(MAJOR_ID_LENGTH);
                     state.major.byIds[sId].sectionIds.push({sectionId: cId, note: c.name})
                     state.sectionCourses[cId] = c.child;
                 })

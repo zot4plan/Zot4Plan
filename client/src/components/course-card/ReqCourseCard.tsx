@@ -12,8 +12,7 @@ interface courseType {
     index: number;
 }
 
-const ADD_ID_LENGTH = 6;
-const GE_ID_LENGTH = 5;
+const MAJOR_ID_LENGTH = 4;
 
 function getStyle(style: any, snapshot: { isDropAnimating: any; }) {
     if (!snapshot.isDropAnimating) {
@@ -61,8 +60,8 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
                 className="relative card w-125 mb-2 mr-2"
                 >
                     <Popup id={courseId} showUnit={false} isCrossed ={!isDraggable}/>
-                    {(droppableId.length === ADD_ID_LENGTH 
-                     || droppableId.length === GE_ID_LENGTH) &&
+                    {droppableId.length > MAJOR_ID_LENGTH 
+                     &&
                      <div
                         className="xmark"    
                         onClick = {removeCourse}>
