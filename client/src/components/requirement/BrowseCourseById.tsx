@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Axios from 'axios';
 
 import {RootState} from '../../app/store';
-import {addCourseMajor} from '../../features/StoreSlice'
+import {addCourse} from '../../features/StoreSlice'
 import Add from '../icons/Add';
 import Error from '../icons/Error';
 import Success from '../icons/Success';
@@ -17,6 +17,10 @@ interface OptionType {
 
 interface CourseType{
     id:string;
+}
+
+interface BrowseCourseType {
+    id: string;
 }
 
 const myStyle: StylesConfig<OptionType, false> =  {
@@ -51,10 +55,9 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
         }, 500);
 }
 
-function BrowseCourse() {
+function BrowseCourseById({id}: BrowseCourseType) {
     const [selectCourse, setSelectCourse] = useState<string>("");
     const [message, setMessage] = useState({content: "", status: 'idle'})
-
     const courses = useSelector((state:RootState)=> state.store.courses.allIds);
     const dispatch = useDispatch();
 
@@ -72,7 +75,7 @@ function BrowseCourse() {
                     params: { id: selectCourse }})
                     .then((res) => {
                         if(res.data.message === 'succeed') {
-                            dispatch(addCourseMajor(res.data.data));
+                            dispatch(addCourse({course: res.data.data, id: id}));
                             content += " is added successfully!";
                             status = "succeed";
                         }
@@ -111,7 +114,7 @@ function BrowseCourse() {
                     onChange={handleOnChange}
                     isOptionDisabled={(option)=>courses.includes(option.label)}
                     maxMenuHeight={250}
-                    placeholder="Choose course"
+                    placeholder="Find course"
                     aria-label="Browse and add Course"
                 />
                 <button className='add-btn' onClick={submitAddCourse}> <Add/> </button>
@@ -133,4 +136,4 @@ function BrowseCourse() {
     )
 };
 
-export default BrowseCourse;
+export default BrowseCourseById;

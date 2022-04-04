@@ -66,7 +66,7 @@ function Year({yearId, index}:YearType) {
             </div>
 
             <div className={'flex quarters-wrapper ease '+ (show?'':'hide')}>
-                {year.quarters.map((quarterId, index) => 
+                {year.quarterIds.map((quarterId, index) => 
                     <Quarter key={quarterId} droppableId={quarterId} index={index}/>
                 )}
             </div>

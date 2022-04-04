@@ -10,8 +10,7 @@ interface quarter {
 }
 
 function Quarter({droppableId, index}:quarter) {
-  const quarter = useSelector((state:RootState)=>state.store.quarters[droppableId]);
-  console.log(quarter)
+  const courses = useSelector((state:RootState) => state.store.sections[droppableId]);
 
   const renderCard = useCallback(
       (id: string, droppableId: string, index: number) => {
@@ -41,8 +40,10 @@ function Quarter({droppableId, index}:quarter) {
                     + (index === 0? 'round-bottom-left' : '')
                     + (index === 3? 'round-bottom-right' : '')}
         >
-          {quarter.courses.map(
-            (courseId , index) => renderCard(courseId, droppableId, index)
+          {courses.map(
+            (courseId , index) => 
+              typeof(courseId) === 'string' 
+              &&  renderCard(courseId, droppableId, index)
           )}
           {provided.placeholder}
       </div>

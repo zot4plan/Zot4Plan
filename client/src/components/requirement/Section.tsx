@@ -2,20 +2,14 @@ import {useState, memo} from 'react'
 import DroppableArea from './DroppableArea';
 import Right from '../icons/Right'
 
-interface ChildType {
-    id: string;
-    name: string;
-    courses: (string|string[])[];
-}
-
 interface SectionType {
-    list: ChildType[] | string[];
     id: string;
     note: string;
     name:string;
+    sublist: { sectionId: string, name: string} [] | null;
 }
 
-const Section = ({id, name, note, list}:SectionType) => {
+const Section = ({id, name, note, sublist}:SectionType) => {
     const [show, setShow] = useState(false);
      return (
          <div className='m-1 mt-0 round-15 shadow'>  
@@ -33,20 +27,14 @@ const Section = ({id, name, note, list}:SectionType) => {
                      </div>
              </div>
              <div 
-                 className='pab-1 pat-1'
-                 style={{display: show? "block" : "none"}}>
-
-                {id.length === 4 && list.map((c)=> {
-                    if(typeof(c) === 'object')
-                        return (
-                            <DroppableArea key={c.id} droppableId={c.id} text={c.name} courseIds={c.courses}/>
-                        )
-                })}
-
-                {id.length === 5 &&  
-                    <DroppableArea key={id} courseIds={list} text={note} droppableId={id}/>
-                }
-
+                className='pab-1 pat-1'
+                style={{display: show? "block" : "none"}}>
+                
+                {!sublist && <DroppableArea key={id} text={note} droppableId={id}/>}
+                {sublist  && sublist.map((l)=> 
+                <DroppableArea key={l.sectionId} droppableId={l.sectionId} text={l.name} />         
+                )}
+                
              </div>
          </div>
      )

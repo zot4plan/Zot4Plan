@@ -1,30 +1,28 @@
 import {memo} from 'react'
 import { useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
-import BrowseCourse from './BrowseCourse';
-import DroppableArea from './DroppableArea';
-import Section from './Section'
+import BrowseCourseById from './BrowseCourseById';
+import Section from './Section';
 
 interface MajorSectionType { id:string;}
 
 const MajorSection = memo(({id}:MajorSectionType) => {
-    const sectionData = useSelector((state:RootState)=>state.store.major.byIds[id]);
-    return (
-        <Section id={id} name={sectionData.name} note="" list={sectionData.subList}/>
-    )
+    const section = useSelector((state:RootState)=>state.store.major.byIds[id]);
+     return (
+        <Section id={section.id} name={section.name} note="" sublist={section.subList}/>
+     )
 })
 
-const AddCourse = memo(() => {
-    const other = useSelector((state:RootState)=> state.store.major.add)
+const AddCourse = () => {
+    const custom = useSelector((state:RootState)=> state.store.customAdd)
+    
     return (
-        <>
-            <BrowseCourse/>
-            <div className='ml-3'>
-                <DroppableArea courseIds={other.courses} droppableId={other.id} text=""/>
-            </div>
-        </>
+    <>
+    <BrowseCourseById id={custom.id}/>
+    <Section id={custom.id} name={custom.name} note="" sublist={null} />
+    </>
     )
-})
+}
 
 function MajorTab () {
     const sectionIds = useSelector((state:RootState)=>state.store.major.allIds);
