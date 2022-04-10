@@ -367,7 +367,8 @@ html, body, #root { background-color: var(--primary-color);}
     border: 0.2rem solid;
     position: absolute;
     top: 4rem;
-    left: -15%;
+    left: 80%;
+    transform: translateX(-50%);
     width: 24rem;
     height: auto;
     cursor: default;
