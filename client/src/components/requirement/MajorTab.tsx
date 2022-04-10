@@ -55,9 +55,9 @@ function MajorTab () {
     
     return (
         <div className="tab-container">
-            {status ==='succeeded' && <BrowseCourseById id={customAdd.sectionId}/>
-            && {hyperLink}
-            && <Section id={customAdd.sectionId} name={customAdd.title} note="" sublist={null} />}
+            {status ==='succeeded' && <BrowseCourseById id={customAdd.sectionId}/>}
+            {hyperLink}
+            {status ==='succeeded' && <Section id={customAdd.sectionId} name={customAdd.title} note="" sublist={null} />}
             {content}
         </div>
     )
