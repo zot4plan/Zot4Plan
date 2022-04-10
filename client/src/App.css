@@ -126,6 +126,13 @@ html, body, #root { background-color: var(--primary-color);}
 /***  transition ***/
 .ease { transition: all var(--transition-time) ease; }
 
+/*** images ***/
+#select-major-img {
+    margin-top: 18%;
+    width: 84%;
+    height: 74%;
+}
+
 /* Linkedin, github */
 .github {grid-column: 5;}
 .linkedin {grid-column: 4;}

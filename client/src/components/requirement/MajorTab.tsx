@@ -3,6 +3,7 @@ import { useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
 import BrowseCourseById from './BrowseCourseById';
 import Section from './Section';
+import ZotSelectMajor from '../../images/ZotSelectMajor.png'
 
 interface MajorSectionType { id:string;}
 
@@ -23,7 +24,15 @@ function MajorTab () {
 
     let content;
     if( status === 'idle')
-        content = <p className='center-p'>Select your major!</p>
+        content =
+        <div className='flex justify-center item-center'>
+            <img 
+                id='select-major-img' 
+                loading='lazy' 
+                src={ZotSelectMajor} 
+                alt='please select your major!' 
+            />
+        </div>
 
     else if (status === 'loading') 
         content = <p className='center-p'>Loading....!!!</p> 
@@ -46,9 +55,9 @@ function MajorTab () {
     
     return (
         <div className="tab-container">
-            <BrowseCourseById id={customAdd.sectionId}/>
-            {hyperLink}
-            <Section id={customAdd.sectionId} name={customAdd.title} note="" sublist={null} />
+            {status ==='succeeded' && <BrowseCourseById id={customAdd.sectionId}/>
+            && {hyperLink}
+            && <Section id={customAdd.sectionId} name={customAdd.title} note="" sublist={null} />}
             {content}
         </div>
     )
