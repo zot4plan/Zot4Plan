@@ -79,7 +79,7 @@ function App() {
           <div> <TotalUnits/> </div>
         </div>
       </div>
-      <div className='ml-2 shadow round-15'>
+      <div className='ml-2 shadow round-15 h-65'>
         <Tabs/>
       </div>
     </div>  

@@ -101,6 +101,7 @@ html, body, #root { background-color: var(--primary-color);}
 .w-125 {width: 12.5rem;}
 .w-270 {width: 27rem;}
 .line-height-0 {line-height: 0;}
+.h-65 {height: 65rem;}
 
 /*** background color ***/
 .bg-black{background-color: var(--secondary-color);}
@@ -317,7 +318,7 @@ html, body, #root { background-color: var(--primary-color);}
 .tab-container{
     border-top: 1px solid white;
     background-color: white;
-    height: 710px;
+    height: 604px;
     overflow: scroll;
 }
 
