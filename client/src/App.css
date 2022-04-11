@@ -43,9 +43,9 @@ html, body, #root { background-color: var(--primary-color);}
 }
 
 #tutorial-image-container {
-    max-width: 65rem;
+    max-width: 60rem;
     min-width: 40rem;
-    width: 42%;
+    width: 60%;
 }
 
 #x-circle {
