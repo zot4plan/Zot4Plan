@@ -218,22 +218,23 @@ export const storeSlice = createSlice ({
         deleteCourse: (state, action: PayloadAction<DeleteCoursePayload>) => {
             let courseId = action.payload.courseId,
                 sectionId = action.payload.droppableId,
-                numOfQuartersTaken = state.courses.byIds[courseId].sectionIds.length;
+                repeatability = state.courses.byIds[courseId].data.repeatability,
+                repeatabilityLeft = state.courses.byIds[courseId].repeatability,
+                courseUnits = state.courses.byIds[courseId].data.units;
 
             state.sectionCourses[sectionId].splice(action.payload.index,1);
             state.courses.byIds[courseId].sectionIds.forEach(id => {
                 state.sectionCourses[id] = state.sectionCourses[id].filter(id => id !== courseId);
             })
-
-            if(numOfQuartersTaken > 0)
-                state.years.totalUnits -= (state.courses.byIds[courseId].data.units * numOfQuartersTaken);
+            
+            state.years.totalUnits -= (repeatability - repeatabilityLeft)*courseUnits;
             
             if(state.courses.byIds[courseId].removable) {
                 state.courses.allIds = state.courses.allIds.filter(id => id !== courseId);
                 delete state.courses.byIds[courseId];
             }
             else {
-                state.courses.byIds[courseId].repeatability = state.courses.byIds[courseId].data.repeatability;
+                state.courses.byIds[courseId].repeatability = repeatability;
                 state.courses.byIds[courseId].sectionIds = [];
             }
         },
@@ -267,22 +268,27 @@ export const storeSlice = createSlice ({
                     quarterIds.push(destinationId);
                     state.courses.byIds[courseId].sectionIds = quarterIds;
                 }
+
                 state.sectionCourses[sourceId].splice(action.payload.sourceIndex, 1);
                 state.sectionCourses[destinationId].splice(action.payload.destinationIndex, 0, courseId);
             }
         },
 
         /**
-         * 
-         * @param state 
-         * @param action 
+         *  Remove the course from Quarter
          */
         removeCourseFromQuarter: (state, action: PayloadAction<CourseQuarterPayload>) => {
+            // remove course from quarter section
             state.sectionCourses[action.payload.quarterId].splice(action.payload.index,1);
+            // increase repeatability of course
             state.courses.byIds[action.payload.courseId].repeatability += 1;
+            // reduce the total units taken
             state.years.totalUnits -= state.courses.byIds[action.payload.courseId].data.units;
         },
 
+        /**
+         *  Add an aditional year and 4 quarters
+         */
         addYear: (state) => {
             let newYearId = nanoid(4);
             let newQuarterIds = [ nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH),
@@ -299,6 +305,11 @@ export const storeSlice = createSlice ({
             };
         },
 
+        /**
+         * Only  Remove additional years
+         * @param state 
+         * @param action: yearId and the position of year in the list 
+         */
         removeYear: (state, action:PayloadAction<RemoveYearPayload>) => { 
             state.years.byIds[action.payload.id].quarterIds.forEach((id) => {
                 state.sectionCourses[id].forEach((courseId) => {
@@ -314,6 +325,10 @@ export const storeSlice = createSlice ({
             state.years.allIds.splice(action.payload.index,1);
         },
 
+        /**
+         * Remove all chosen courses from quarters 
+         * @param state 
+         */
         refreshState: (state) => {
             state.years.allIds.forEach((yearId)=> {
                 state.years.byIds[yearId].quarterIds.forEach((quarterId)=>{
