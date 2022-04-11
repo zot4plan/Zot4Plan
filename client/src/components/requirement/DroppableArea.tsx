@@ -30,14 +30,21 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
             courseCards.push(
                 <div 
                     key={droppableId + 'div' + index} 
-                    className='flex justify-center item-center flex-basis-100'
+                    className='relative col-gap flex item-center flex-basis-100'
                 >
                     <ReqCourseCard 
                         key={droppableId+c[0]} 
                         courseId={c[0]}
                         droppableId = {droppableId} 
                         index={index}/>
-                    <span style={{paddingRight:'1rem', paddingBottom:'0.5rem'}}> or </span>
+                    <span 
+                        style={{position: 'absolute',
+                            top: '8px',
+                            left: '130px',
+                            zIndex: '1'}}
+                    > 
+                        or 
+                    </span>
                     <ReqCourseCard 
                         key={droppableId+c[1]} 
                         courseId={c[1]}
@@ -61,7 +68,7 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
             <div
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                className="flex flex-wrap mr-1 ml-1"
+                className="flex flex-wrap col-gap row-gap mr-1 ml-1"
             >
                 {courseCards}
                 <div style={{display:'none'}}>{provided.placeholder} </div>

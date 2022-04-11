@@ -57,7 +57,7 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 style={getStyle(provided.draggableProps.style, snapshot)}
-                className="relative card w-125 mb-2 mr-2"
+                className="relative card w-125"
                 >
                     <Popup id={courseId} showUnit={false} isCrossed ={!isDraggable}/>
                     {droppableId.length > MAJOR_ID_LENGTH 
@@ -70,7 +70,7 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
                     }
             </div>
             {snapshot.isDragging && (
-                <div className="h-36 w-125 mb-2 mr-2"/>
+                <div className="h-36 w-125"/>
             )}    
             </>
         )}

@@ -25,7 +25,7 @@ function MajorTab () {
     let content;
     if( status === 'idle')
         content =
-        <div className='flex justify-center item-center'>
+        <div className='flex flex-wrap justify-center item-center'>
             <img 
                 id='select-major-img' 
                 loading='lazy' 
@@ -46,7 +46,7 @@ function MajorTab () {
     let hyperLink;
     if(name !== '')
         hyperLink = 
-            <div className='flex justify-center item-center mb-3'> 
+            <div className='flex flex-wrap justify-center item-center mb-3'> 
                 <a  className='hyperlink' 
                     href={url} 
                     target='_blank' 
