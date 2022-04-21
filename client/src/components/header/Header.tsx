@@ -1,13 +1,13 @@
 import {memo} from 'react';
 
-import Logo from '../icons/Logo';
-import Github from '../icons/Github';
-import Linkedin from '../icons/Linkedin';
+import Logo from '../icon/Logo';
+import Github from '../icon/Github';
+import Linkedin from '../icon/Linkedin';
 
-import SelectMajor from './SelectMajor';
-import HelpButton from './HelpButton';
-import UploadFileButton from './UploadFileButton';
-import DownloadFileButton from './DownloadFileButton';
+import SelectMajor from '../input/SelectMajor';
+import HelpButton from '../button/HelpButton';
+import UploadFileButton from '../button/UploadFileButton';
+import DownloadFileButton from '../button/DownloadFileButton';
 
 import ReactTooltip from "react-tooltip";
 
@@ -44,10 +44,10 @@ const Header = () => {
       >
         <Github/>
       </a>
-
       <ReactTooltip id="githubTip" place="bottom" effect="solid">
         Github  
       </ReactTooltip>
+
     </header>
   )
 }

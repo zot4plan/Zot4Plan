@@ -1,15 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import Axios from 'axios';
-import {CourseType} from './StoreSlice'
-
-interface FetchMajorType { 
-    id:number; // the index of the major in select major list
-}
-
-export interface MajorType {
-    name: string;
-    child: ({name:string, child:(string|string[])[]})[]; // need to be rename 
-}
 
 /** 
  * Get All GE categories information.
@@ -53,15 +43,6 @@ export const fetchMajorById = createAsyncThunk("features/fetchMajorById", async 
         };
     })
 ); 
-
-interface InputFileType {
-    data: string;    // Json file content represent as string, expect object keys are
-                     // majorName: string             : name of the major
-                     // coursesAddByStudent: string[] : list of course add by student
-                     // geCourses: string [][];       : list of list of courses taken by each ge categorie
-                     // years: string[][][];          : list of quarters, each quarter contains a list of courses taken in the quarter
-   // geIds: string[];
-}
 
 export const fetchMajorByFile = createAsyncThunk("features/fetchMajorByFile", async ({data}: InputFileType) => 
     Axios.get('http://localhost:8080/api/getDataByFile',{params: {data: data}})
