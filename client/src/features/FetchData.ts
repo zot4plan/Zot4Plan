@@ -69,7 +69,7 @@ export const fetchMajorByFile = createAsyncThunk("features/fetchMajorByFile", as
         const fileContent = (JSON.parse(data)).data;
         return {
             // data receive from server
-            status: "succeed",
+            status: "succeeded",
             major_requirement: response.data.major[0].major_requirement as MajorType[],
             url: response.data.major[0].url, 
             name: response.data.major[0].name,
