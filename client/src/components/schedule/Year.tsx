@@ -1,30 +1,18 @@
 import {useState, memo} from "react";
-import Quarter from '../../components/year/Quarter';
 import { useDispatch, useSelector } from 'react-redux';
 import {removeYear} from '../../features/StoreSlice';
+import { RootState } from "../../app/store";
+
+import QuarterCourses from './QuarterCourses';
+import QuarterHeaderRow from "./QuarterHeaderRow";
 import Remove from '../icons/Remove';
 import Right from '../icons/Right';
-import { RootState } from "../../app/store";
 
 interface YearType {
     yearId: string;
     index: number;
 }
-const QuarterHeaders = memo (() => {
-    const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
-    return (
-        <>
-            {QUARTER_NAMES.map((name, index) => {
-                return (
-                <h2 key={name} 
-                    className={"quarter-header m-0 flex-basis-25 " 
-                                + (index < 3? 'bd-r ':'')}> 
-                    {name}
-                </h2>)
-            })}
-        </>
-    )
-})
+
 function Year({yearId, index}:YearType) {
     const [show, setShow] = useState (true);
     const year = useSelector((state:RootState) => state.store.years.byIds[yearId])
@@ -35,9 +23,7 @@ function Year({yearId, index}:YearType) {
     }
 
     const removeBtn = () => {
-        return (
-            <Remove deleteYear={deleteYear}/>
-        )
+        return (<Remove deleteYear={deleteYear}/>)
     }
 
     return (
@@ -46,15 +32,12 @@ function Year({yearId, index}:YearType) {
             style={{marginBottom: show? '3rem': '2rem'}}
             >
             <div 
-                className={'flex item-center color-black bg-grey pointer accordion round-top-left round-top-right ' 
-                            + (show? '': 'round-15')}  
+                className={'accordion flex item-center pointer ' 
+                    + (show? 'round-top-left round-top-right': 'round-15')}  
                 key={year.id} 
                 onClick={()=>setShow(!show)}
-                >
-                <div className="accordion-header m-0 sz-4">
-                    <span> {year.name} </span>
-                </div>
-
+            > 
+                <h1 className="accordion-header sz-4"> {year.name} </h1>
                 <div className="rightIcon">
                     <Right show ={show}/>
                 </div>
@@ -62,12 +45,12 @@ function Year({yearId, index}:YearType) {
             </div>
 
             <div className={"flex ease " + (show? '':'hide')} >
-                <QuarterHeaders />
+                <QuarterHeaderRow />
             </div>
 
-            <div className={'flex quarters-wrapper ease '+ (show?'':'hide')}>
+            <div className={'quarters-wrapper flex ease '+ (show?'':'hide')}>
                 {year.quarterIds.map((quarterId, index) => 
-                    <Quarter key={quarterId} droppableId={quarterId} index={index}/>
+                    <QuarterCourses key={quarterId} droppableId={quarterId} index={index}/>
                 )}
             </div>
         </div>

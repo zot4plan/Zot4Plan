@@ -14,16 +14,16 @@ const MajorSection = memo(({id}:MajorSectionType) => {
      )
 })
 
-function MajorTab () {
+function Major () {
     const sectionIds = useSelector((state:RootState)=>state.store.major.allIds);
     const status = useSelector((state:RootState)=>state.store.major.status);
     const name = useSelector((state:RootState)=>state.store.major.name);
     const url = useSelector((state:RootState)=>state.store.major.url);
-    const customAdd = useSelector((state:RootState)=> state.store.customAdd)
+    const coursesAddByStudent = useSelector((state:RootState)=> state.store.coursesAddByStudent)
     //const error = useSelector((state:RootState)=>state.store.major.error);
 
     let content;
-    if( status === 'idle')
+    if( status === 'idle' || status === 'failed')
         content =
         <div className='flex flex-wrap justify-center item-center'>
             <img 
@@ -35,18 +35,15 @@ function MajorTab () {
         </div>
 
     else if (status === 'loading') 
-        content = <p className='center-p'>Loading....!!!</p> 
+        content = <p>Loading....!!!</p> 
 
     else if (status === 'succeeded') 
         content = sectionIds.map(id => <MajorSection key={id} id={id}/>)
-     
-    else if (status === 'failed') 
-        content = <p className='center-p'>Cannot connect to server!</p>
 
     let hyperLink;
     if(name !== '')
         hyperLink = 
-            <div className='flex flex-wrap justify-center item-center mb-3'> 
+            <div className='flex flex-wrap justify-center item-center'> 
                 <a  className='hyperlink' 
                     href={url} 
                     target='_blank' 
@@ -54,13 +51,13 @@ function MajorTab () {
             </div>
     
     return (
-        <div className="tab-container">
-            {status ==='succeeded' && <BrowseCourseById id={customAdd.sectionId}/>}
+        <>
+            {status ==='succeeded' && <BrowseCourseById id={coursesAddByStudent.sectionId}/>}
             {hyperLink}
-            {status ==='succeeded' && <Section id={customAdd.sectionId} name={customAdd.title} note="" sublist={null} />}
+            {status ==='succeeded' && <Section id={coursesAddByStudent.sectionId} name={coursesAddByStudent.title} note="" sublist={null} />}
             {content}
-        </div>
+        </>
     )
 }
 
-export default memo(MajorTab);
+export default memo(Major);

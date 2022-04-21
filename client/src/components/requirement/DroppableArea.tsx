@@ -32,24 +32,20 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
                     key={droppableId + 'div' + index} 
                     className='relative col-gap flex item-center flex-basis-100'
                 >
-                    <ReqCourseCard 
-                        key={droppableId+c[0]} 
+                    <ReqCourseCard key={droppableId+c[0]} 
                         courseId={c[0]}
                         droppableId = {droppableId} 
-                        index={index}/>
-                    <span 
-                        style={{position: 'absolute',
-                            top: '8px',
-                            left: '130px',
-                            zIndex: '1'}}
-                    > 
+                        index={index}
+                    />
+                    <span style={{position: 'absolute', top: '8px', left: '130px', zIndex: '1'}}> 
                         or 
                     </span>
-                    <ReqCourseCard 
-                        key={droppableId+c[1]} 
+
+                    <ReqCourseCard key={droppableId+c[1]} 
                         courseId={c[1]}
                         droppableId={droppableId}
-                        index={index+1}/>
+                        index={index+1}
+                    />
                 </div>
             );
             index += 2;
@@ -58,20 +54,18 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
 
     return (
         <>
-        {text !== "" && <p key={droppableId +'p'} 
-                            style={{margin:'0.5rem 1rem'}}> {text} </p>}
-        <Droppable 
-            droppableId={droppableId}
+        {text !== "" && <p key={droppableId +'p'} style={{margin:'0.5rem 1rem'}}> {text} </p>}
+
+        <Droppable droppableId={droppableId}
             isDropDisabled={true}
         >
         {(provided) => (
-            <div
-                ref={provided.innerRef}
+            <div ref={provided.innerRef}
                 {...provided.droppableProps}
                 className="flex flex-wrap col-gap row-gap mr-1 ml-1"
             >
                 {courseCards}
-                <div style={{display:'none'}}>{provided.placeholder} </div>
+                <div style={{display:'none'}}> {provided.placeholder} </div>
             </div>
         )} 
         </Droppable>

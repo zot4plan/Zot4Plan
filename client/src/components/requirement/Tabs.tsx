@@ -1,31 +1,48 @@
-import {useState} from 'react';
-import GETab from './GETab';
-import MajorTab from './MajorTab';
+import {useState, useEffect} from 'react';
+import { useSelector, useDispatch} from 'react-redux';
+import { RootState } from '../../app/store';
+import { fetchGE } from '../../features/FetchData';
+import GeneralEducation from './GeneralEducation';
+import Major from './Major';
 
 function Tabs () {
-  const [tab, setTab] = useState<boolean>(true);
+  const [tabId, setTabId] = useState<number>(1); // Major-tabId === 1; GeneralEducation-tabId === 2 
+  const dispatch = useDispatch();
+  const status = useSelector((state:RootState)=>state.store.ge.status);
+
+    useEffect(() => {
+        if (status === 'idle') {
+            dispatch(fetchGE())
+        }
+    }, [status, dispatch])
 
   return (
-    <>
-      <ul className="flex tab-panel m-0">
-        <li className={'flex justify-center item-center tab round-top-left bd-r-wh ' 
-            + (tab?"tab-active":"bg-grey")} 
-            onClick={()=>setTab(!tab)}>
-              Major Requirement
+    <div id="tab-container" className='shadow round-15 '>
+      <ul id="tab-panel" className="flex">
+        <li 
+          onClick={()=>setTabId(1)}
+          className={'tab flex justify-center item-center round-top-left ' 
+                    + (tabId === 1?"tab-active":"")} 
+        >
+           Major Requirement
         </li>
-        <li className={'flex justify-center item-center tab round-top-right ' 
-            + (!tab?"tab-active":"bg-grey")} 
-            onClick={()=>setTab(!tab)}>
-              General Education
+        <li 
+          onClick={()=>setTabId(2)}
+          className={'tab flex justify-center item-center round-top-right ' 
+                    + (tabId === 2? "tab-active":"")} 
+        >
+          General Education
         </li>
-       
       </ul>
 
-      {tab  && <MajorTab/>}
-      {!tab && <GETab/>}
+      <div id="tab-body">
+        {tabId === 1 && <Major/>}
+        {tabId === 2 && <GeneralEducation/>}
+      </div>
 
+      {/** prevent x-scrollbar overlaying the border */}
       <div style={{height: '1rem'}}></div>
-    </>
+    </div>
   );
 }
 

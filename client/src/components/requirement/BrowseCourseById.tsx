@@ -6,7 +6,7 @@ import Axios from 'axios';
 
 import {RootState} from '../../app/store';
 import {addCourse} from '../../features/StoreSlice'
-import Add from '../icons/Add';
+import AddIcon from '../icons/AddIcon';
 import Error from '../icons/Error';
 import Success from '../icons/Success';
 
@@ -103,7 +103,7 @@ function BrowseCourseById({id}: BrowseCourseType) {
 
     return (
         <div className='flex flex-column justify-center item-center m-1'>
-            <div className='relative h-36 w-270'>
+            <div className='browse-container relative'>
                 <AsyncSelect
                     components={{DropdownIndicator:()=>null}}
                     styles={myStyle}
@@ -114,18 +114,19 @@ function BrowseCourseById({id}: BrowseCourseType) {
                     onChange={handleOnChange}
                     isOptionDisabled={(option)=>courses.includes(option.label)}
                     maxMenuHeight={250}
-                    placeholder="Find course"
-                    aria-label="Browse and add Course"
+                    placeholder="Type at least 3 characters"
+                    aria-label="Browse courses by ID"
                 />
-                <button className='add-btn' onClick={submitAddCourse}> <Add/> </button>
+                <button className='browse-add-btn' onClick={submitAddCourse}> <AddIcon/> </button>
             </div>
 
-            <div className={'relative h-16 w-270 '+ (message.status !== 'idle'? 'fade-message':'')}  
-                 onAnimationEnd={() => setMessage({content:"", status: 'idle'})}>
-                {message.status != 'idle' && 
-                <p className={'m-0 sz-1 pat-0 pal ' 
-                    + (message.status === 'succeed'? 'cl-green': 'cl-red')}> 
-                    <span className='absolute m-icon'> 
+            <div 
+                className={'message-container relative ' + (message.status !== 'idle'? 'fade-message':'')}  
+                onAnimationEnd={() => setMessage({content:"", status: 'idle'})}
+            >
+                {message.status !== 'idle' && 
+                <p className={'message ' + (message.status === 'succeed'? 'green': 'red')}> 
+                    <span className='message-icon absolute'> 
                         {message.status === 'succeed' && <Success/>}
                         {message.status === 'fail' && <Error/>}
                     </span>

@@ -35,7 +35,6 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
     const dispatch = useDispatch();
     const removeCourse = (event: MouseEvent<HTMLDivElement>) => {
         event.preventDefault();
-        event.stopPropagation();
         dispatch(deleteCourse({
             droppableId: droppableId,
             index: index,
@@ -44,34 +43,33 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
     }; 
   
     return (   
-    <Draggable 
-        key={droppableId + courseId} 
+    <Draggable key={droppableId + courseId} 
         draggableId={droppableId + courseId}
         isDragDisabled={!isDraggable} 
         index={index}
     >
         {(provided, snapshot) => (
             <>
-            <div
-                ref={provided.innerRef}
+            <div ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 style={getStyle(provided.draggableProps.style, snapshot)}
                 className="relative card w-125"
                 >
-                    <Popup id={courseId} showUnit={false} isCrossed ={!isDraggable}/>
-                    {droppableId.length > MAJOR_ID_LENGTH 
-                     &&
-                     <div
-                        className="xmark"    
-                        onClick = {removeCourse}>
-                            <Xmark/>
-                    </div>
+                    <Popup id={courseId} 
+                        showUnit={false} 
+                        isCrossed ={!isDraggable}
+                    />
+
+                    {droppableId.length > MAJOR_ID_LENGTH && 
+                        <div className="xmark"    
+                            onClick = {removeCourse}>
+                                <Xmark/>
+                        </div>
                     }
             </div>
-            {snapshot.isDragging && (
-                <div className="h-36 w-125"/>
-            )}    
+
+            {snapshot.isDragging && (<div className="h-36 w-125"/>)}    
             </>
         )}
     </Draggable>

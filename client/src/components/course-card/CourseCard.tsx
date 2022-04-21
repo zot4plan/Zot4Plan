@@ -13,38 +13,41 @@ interface courseType {
 
 function CourseCard({index, droppableId, courseId}: courseType) {
     const dispatch = useDispatch();
-    const showUnit = droppableId.length === 3;
 
     const removeCourse = (event: MouseEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        event.stopPropagation();
-        dispatch(removeCourseFromQuarter({
-            quarterId: droppableId,
-            index: index, 
-            courseId: courseId
-        }))
+      event.preventDefault();
+      dispatch(removeCourseFromQuarter({
+          quarterId: droppableId,
+          index: index, 
+          courseId: courseId
+      }))
     }; 
   
     return (   
-    <Draggable key={droppableId + courseId} draggableId={droppableId + courseId} index={index}>
-        {(provided) => (
-            <div>
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                className="relative card m-02"
-              >
-                 <Popup id={courseId} showUnit={showUnit} isCrossed={false}/>
+    <Draggable key={droppableId + courseId} 
+      draggableId={droppableId + courseId} index={index}
+    >
+      {(provided) => (
+        <div>
+          <div ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            className="relative card m-02"
+          >
+            <Popup id={courseId} 
+              showUnit={true} 
+              isCrossed={false}
+            />
 
-                <div
-                    className="xmark"    
-                    onClick = {removeCourse}>
-                    <Xmark/>
-                </div>
-              </div>
+            <div className="xmark"    
+              onClick = {removeCourse}
+            >
+              <Xmark/>
             </div>
-          )}
+
+          </div>
+        </div>
+      )}
     </Draggable>
     )
 }

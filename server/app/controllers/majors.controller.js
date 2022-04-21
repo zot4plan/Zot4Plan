@@ -1,8 +1,9 @@
 const db = require("../models");
-const GeneralEducation = db.generalEducation;
+const Majors = db.majors;
 
-exports.getGeneralEducationCategories = (req, res) => {
-    GeneralEducation.findAll().then(data => {
+// Return all majorID and majorName
+exports.getMajors = (req, res) => {
+    Majors.findAll({ attributes: ['id','name']}).then(data => {
         res.send(data);
     })
     .catch(err => {

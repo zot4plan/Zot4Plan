@@ -1,30 +1,25 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import Axios from 'axios';
+import {CourseType} from './StoreSlice'
 
 interface FetchMajorType { 
-    id:number 
+    id:number; // the index of the major in select major list
 }
 
-interface MajorType {
+export interface MajorType {
     name: string;
-    child: ({name:string, child:(string|string[])[]})[];
+    child: ({name:string, child:(string|string[])[]})[]; // need to be rename 
 }
 
-interface CourseType { 
-    id: string;
-    name: string;
-    department: string;
-    units: number;
-    repeatability: number;
-    corequisite:string;
-    description: string;
-    prerequisite: string;
-    restriction: string;
-    ge:string;
-}
-
-export const fetchGECategories = createAsyncThunk(
-    "features/fetchGECategories", async (_, thunkAPI) => {
+/** 
+ * Get All GE categories information.
+ * Return an array of GE.
+ *  Ge= { id:string;   : alias of ge
+ *       name:string; : full name of the ge
+ *       note:string; : describe how the GE can be completed } 
+ */
+export const fetchGE = createAsyncThunk(
+    "features/fetchGE", async (_, thunkAPI) => {
        try {
           const response = await Axios.get('http://localhost:8080/api/getGeneralEducation');
           return await response.data;
@@ -34,58 +29,70 @@ export const fetchGECategories = createAsyncThunk(
         }
 });
 
-export const fetchMajor = createAsyncThunk(
-    "features/fetchMajor", async ({id}:FetchMajorType) => 
-       Axios
-        .get('http://localhost:8080/api/getRequirement', {params: { id: id }})
-        .then((response) => {
-            const data:MajorType[] = response.data.major_requirement;
-            let courseIds:string[] = [];
+export const fetchMajorById = createAsyncThunk("features/fetchMajorById", async ({id}:FetchMajorType) => 
+    Axios.get('http://localhost:8080/api/getRequirementById', {params: {id: id}})
+    .then((response) => {
+        return {
+            status: "succeed",
+            major_requirement: response.data.major.major_requirement as MajorType[],
+            url: response.data.major.url, // link to the requirement page of major 
+            name: response.data.major.name, 
+            courseIds: response.data.allCourseIds, 
+            courseData: response.data.coursesData as CourseType[]
+        };
+            
+    })
+    .catch(()=> {
+        return {
+            status: "failed",
+            major_requirement: [],
+            name: '',
+            url: '',  
+            courseIds: [], 
+            courseData: [] as CourseType[],
+        };
+    })
+); 
 
-            data.forEach ((section)=> {
-                section.child.forEach((c) => {
-                    c.child.forEach((course) => {
-                        if(typeof(course) === 'string')
-                            courseIds.push(course);
-                        else {
-                            courseIds.push(course[0]);
-                            courseIds.push(course[1]);
-                        }
-                    })
-                })
-            })
+interface InputFileType {
+    data: string;    // Json file content represent as string, expect object keys are
+                     // majorName: string             : name of the major
+                     // coursesAddByStudent: string[] : list of course add by student
+                     // geCourses: string [][];       : list of list of courses taken by each ge categorie
+                     // years: string[][][];          : list of quarters, each quarter contains a list of courses taken in the quarter
+   // geIds: string[];
+}
 
-            return Axios
-                .get('http://localhost:8080/api/getCourses', {params: { ids: courseIds }})
-                .then (result => {
-                    return {
-                        status: "succeed",
-                        major_requirement: data,
-                        url: response.data.url,
-                        name: response.data.name, 
-                        courseIds: courseIds, 
-                        courseData: result.data as CourseType[]
-                    };
-                })
-                .catch((error:string) => {
-                    return {
-                        status: error,
-                        major_requirement: [],
-                        name: '',
-                        url: '', 
-                        courseIds: [], 
-                        courseData: [] as CourseType[]
-                    };
-                });
-        })
-        .catch((error:string)=> {
-            return {
-                status: error,
-                major_requirement: [],
-                name: '',
-                url: '',  
-                courseIds: [], 
-                courseData: [] as CourseType[]
-            };
-        })
+export const fetchMajorByFile = createAsyncThunk("features/fetchMajorByFile", async ({data}: InputFileType) => 
+    Axios.get('http://localhost:8080/api/getDataByFile',{params: {data: data}})
+    .then((response) => {
+        const fileContent = (JSON.parse(data)).data;
+        return {
+            // data receive from server
+            status: "succeed",
+            major_requirement: response.data.major[0].major_requirement as MajorType[],
+            url: response.data.major[0].url, 
+            name: response.data.major[0].name,
+            courseIds: response.data.allCourseIds as string[], 
+            courseData: response.data.courseData as CourseType[],
+
+            // data from input file after checking validity in combine_models.controller
+            years: fileContent.years as string[][][],
+            coursesAddByStudent: fileContent.coursesAddByStudent as string[],
+            geCourses: fileContent.geCourses as string[][],
+        };
+    })
+    .catch(()=> {
+        return {
+            status: "failed",
+            major_requirement: [],
+            name: '',
+            url: '',  
+            courseIds: [], 
+            courseData: [] as CourseType[],
+            years: [] as string[][][],
+            coursesAddByStudent:[] as string[],
+            geCourses: [] as string[][],
+        };
+    })
 ); 

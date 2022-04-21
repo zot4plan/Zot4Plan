@@ -15,11 +15,11 @@ const Section = ({id, name, note, sublist}:SectionType) => {
          <div className='m-1 mt-0 round-15 shadow'>  
              <div
                  key={id} 
-                 className={'flex item-center bg-grey pointer accordion round-top-left round-top-right ' 
-                             + (show? '': 'round-15')}
+                 className={'flex item-center pointer accordion ' 
+                         + (show? 'round-top-left round-top-right': 'round-15')}
                  onClick={() => setShow(!show)}
                  >
-                     <h1 className="accordion-header m-0 sz-3">
+                     <h1 className="accordion-header sz-3">
                          {name}
                      </h1>
                      <div className="rightIcon">
@@ -27,7 +27,7 @@ const Section = ({id, name, note, sublist}:SectionType) => {
                      </div>
              </div>
              <div 
-                className='pab-1 pat-1'
+                className='section-body'
                 style={{display: show? "block" : "none"}}>
                 
                 {!sublist && <DroppableArea key={id} text={note} droppableId={id}/>}

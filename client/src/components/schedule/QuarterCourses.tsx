@@ -1,15 +1,15 @@
 import CourseCard from '../course-card/CourseCard';
 import {useSelector} from 'react-redux';
-import {RootState} from './../../app/store';
+import {RootState} from '../../app/store';
 import {Droppable} from 'react-beautiful-dnd';
 import {useCallback,memo } from 'react'
 
-interface quarter { 
+interface QuarterType { 
   droppableId: string;
   index: number;
 }
 
-function Quarter({droppableId, index}:quarter) {
+function QuarterCourses({droppableId, index}:QuarterType) {
   const courses = useSelector((state:RootState) => state.store.sectionCourses[droppableId]);
 
   const renderCard = useCallback(
@@ -35,7 +35,7 @@ function Quarter({droppableId, index}:quarter) {
         {...provided.droppableProps}
         {...provided.droppableProps}
         style={{backgroundColor: snapshot.isDraggingOver?'lightblue':'white'}}
-        className={"flex-basis-25 mh-76 " 
+        className={"flex-basis-25 quarter-droppable-area " 
                     + (index < 3? 'bd-r ':'')
                     + (index === 0? 'round-bottom-left' : '')
                     + (index === 3? 'round-bottom-right' : '')}
@@ -52,4 +52,4 @@ function Quarter({droppableId, index}:quarter) {
   )
 }
 
-export default memo(Quarter);
+export default memo(QuarterCourses);

@@ -1,8 +1,6 @@
-import {useEffect} from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 
 import {RootState} from '../../app/store';
-import {fetchGECategories} from '../../features/FetchData';
 import Section from './Section';
 import BrowseCourseByGE from './BrowseCourseByGE'
 
@@ -15,16 +13,9 @@ const GESection = ({id}:GESectionType) => {
     )
 }
 
-function GETab () {
-    const dispatch = useDispatch()
+function GeneralEducation() {
     const geIds = useSelector((state:RootState)=>state.store.ge.allGeIds);
     const status = useSelector((state:RootState)=>state.store.ge.status);
-
-    useEffect(() => {
-        if (status === 'idle') {
-            dispatch(fetchGECategories())
-        }
-    }, [status, dispatch])
 
     let content
 
@@ -37,15 +28,15 @@ function GETab () {
         ))
     } 
     else if (status === 'failed') 
-        content = <div>cannot connect to server!</div>
+        content = <p>cannot connect to server!</p>
     
   
     return (
-        <div className="tab-container"  >
-            <BrowseCourseByGE/>
-            {content}
-        </div>
+    <>
+        <BrowseCourseByGE/>
+        {content}
+    </>
     )
 }
 
-export default GETab
+export default GeneralEducation;

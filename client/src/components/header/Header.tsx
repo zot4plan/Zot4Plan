@@ -1,34 +1,55 @@
+import {memo} from 'react';
+
 import Logo from '../icons/Logo';
 import Github from '../icons/Github';
 import Linkedin from '../icons/Linkedin';
-import QuestionMark from '../icons/QuestionMark';
+
 import SelectMajor from './SelectMajor';
-import { useState } from 'react';
-import TutorialSlider from '../tutorial/TutorialSlider';
+import HelpButton from './HelpButton';
+import UploadFileButton from './UploadFileButton';
+import DownloadFileButton from './DownloadFileButton';
+
+import ReactTooltip from "react-tooltip";
 
 const Header = () => {
+  return (
+    <header id="header">
+      <Logo/>
+      <SelectMajor/>
+      <HelpButton/>
+      <DownloadFileButton/>
+      <UploadFileButton/>
 
-  const [isShown, setisShown] = useState(false);
-  function handleOnClick( e: { preventDefault: () => void; }) {
-    e.preventDefault();
-    setisShown(!isShown)
-  }
+      <a target="_blank" 
+        href="https://www.linkedin.com/" 
+        rel="noreferrer"
+        id="linkedin" 
+        className="flex justify-center item-center"
+        aria-label="Linkedin"
+        data-tip data-for="linkedinTip"
+      >
+        <Linkedin/>
+      </a>
+      <ReactTooltip id="linkedinTip" place="bottom" effect="solid">
+        Linkedin   
+      </ReactTooltip>
 
-    return (
-      <>
-      <div className="grid header-template-cols pa bg-black">
-        <Logo/>
-        <SelectMajor/>
-        <button id='question-btn' onClick={handleOnClick}><QuestionMark/></button>
-        <a target="_blank" href="https://www.linkedin.com/" rel="noreferrer"
-        className="linkedin" aria-label="Linkedin"><Linkedin/></a>
-        <a target="_blank" href="https://github.com/" rel="noreferrer" 
-        className="github" aria-label="Github"><Github/></a>
-      </div>
-      {isShown && <TutorialSlider closedTutorial={handleOnClick}/> }
-      </>
-    )
-  }
+      <a target="_blank" 
+        href="https://github.com/" 
+        rel="noreferrer" 
+        id="github"
+        className="btn-outlined-header flex justify-center item-center" 
+        aria-label="Github"
+        data-tip data-for="githubTip"
+      >
+        <Github/>
+      </a>
 
+      <ReactTooltip id="githubTip" place="bottom" effect="solid">
+        Github  
+      </ReactTooltip>
+    </header>
+  )
+}
 
-export default Header;
+export default memo(Header);

@@ -2,7 +2,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import Select, { StylesConfig } from 'react-select';
 import Axios from 'axios';
 import {useState, MouseEvent } from 'react'
-import Add from '../icons/Add';
+import AddIcon from '../icons/AddIcon';
 import Error from '../icons/Error';
 import Success from '../icons/Success';
 import {RootState} from '../../app/store';
@@ -26,13 +26,13 @@ const GEBarStyle: StylesConfig<OptionType, false> =  {
     placeholder: (provided) => {
         return {...provided, color: '#1F1F1F'}
     },
-    valueContainer: (provided, state) => {
+    valueContainer: (provided) => {
         return {...provided, padding: '0px 0px 0px 8px'};
     },
     input: (provided) => {
         return {...provided, margin: '0', padding:'0'};
     },
-    dropdownIndicator: (provided, state) => {
+    dropdownIndicator: (provided) => {
         return {...provided, padding: '0px', marginRight: '5px'
         };
     }
@@ -78,7 +78,7 @@ const BrowseCourseByGE = () => {
     const handleOnGEChange = async (option: OptionType| null) => {
         if(option) {
             setTimeout(() => {
-            Axios.get('http://localhost:8080/api/getGECourses',{params: {id: option.label}})
+            Axios.get('http://localhost:8080/api/getCoursesByGE',{params: {id: option.label}})
                 .then((res) => {
                     setGE({
                         id: option.value, 
@@ -132,7 +132,7 @@ const BrowseCourseByGE = () => {
 
     return (
         <div className='flex flex-column justify-center item-center m-1'>
-            <div className='relative h-36 w-270'> 
+            <div className='browse-container relative '> 
                 <Select
                     components={{IndicatorSeparator:() => null }}
                     styles={GEBarStyle}
@@ -150,17 +150,21 @@ const BrowseCourseByGE = () => {
                     maxMenuHeight={250}
                     onChange={handleOnCourseChange}
                 />
-                <button className='add-btn' onClick={submitCourse}> <Add/> </button>
+                <button 
+                    className='browse-add-btn' 
+                    onClick={submitCourse}
+                > 
+                    <AddIcon/> 
+                </button>
             </div>
-            <div className={'relative h-16 w-270 '
-                            +(message.status !== 'idle'? 'fade-message' : '')}  
+            
+            <div 
+                className={'message-container relative '+ (message.status !== 'idle'? 'fade-message' : '')}  
                 onAnimationEnd={() => setMessage({content:"", status: 'idle'})}
             >
-                {message.status != 'idle' && 
-                <p className={'m-0 sz-1 pat-0 pal ' 
-                    + (message.status === 'succeed'? 'cl-green': 'cl-red')}
-                > 
-                    <span className='absolute m-icon'> 
+                {message.status !== 'idle' && 
+                <p className={'message ' + (message.status === 'succeed'? 'green': 'red')}> 
+                    <span className='message-icon absolute'> 
                         {message.status === 'succeed' && <Success/>}
                         {message.status === 'fail' && <Error/>}
                     </span>

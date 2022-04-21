@@ -18,8 +18,8 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.courses = require("./course.model.js")(sequelize, Sequelize);
-db.majors = require("./major.model.js")(sequelize,Sequelize);
-db.generalEducation=require("./generalEducation.model.js")(sequelize,Sequelize);
-db.courses_in_ges=require("./courses_in_ges.model.js")(sequelize, Sequelize);
+db.courses = require("./courses.model.js")(sequelize, Sequelize);
+db.majors = require("./majors.model.js")(sequelize,Sequelize);
+db.generalEducations = require("./generalEducations.model.js")(sequelize,Sequelize);
+db.courses_in_ges = require("./courses_in_ges.model.js")(sequelize, Sequelize);
 module.exports = db;

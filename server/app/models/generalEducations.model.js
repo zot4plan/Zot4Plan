@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const GeneralEducation = sequelize.define("generalEducations", {
+    const GeneralEducations = sequelize.define("generalEducations", {
         id: {
             type: Sequelize.STRING(5),
             primaryKey: true,
@@ -16,5 +16,5 @@ module.exports = (sequelize, Sequelize) => {
         timestamps: false
     });
   
-    return GeneralEducation;
+    return GeneralEducations;
   };

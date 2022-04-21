@@ -26,42 +26,37 @@ interface RenderPopupType {
 
 const RenderPopup = memo(({course, color}: RenderPopupType) => {
     let body = [];
-    body.push(<p key='description' className='m-0 sz-1'>{course.description}</p>);
+    body.push(<p key='description' className='sz-1'>{course.description}</p>);
 
     if(course.prerequisite !== "")
-        body.push(
-            <p key='prerequisite' className='mt mb sz-1'> 
-                <b>{"Prerequisite: "}</b> {course.prerequisite}
-            </p>)
+        body.push(<p key='prerequisite' className='m-3 sz-1'> 
+                    <b>{"Prerequisite: "}</b> {course.prerequisite}
+                </p>)
 
     if(course.restriction !== "")
-        body.push(
-            <p key='restriction' className='mt mb sz-1'> 
-                <b>{"Restriction: "}</b>{course.restriction}
-            </p>)
+        body.push(<p key='restriction' className='m-3 sz-1'> 
+                    <b>{"Restriction: "}</b> {course.restriction}
+                 </p>)
 
     if(course.corequisite !== "")
-        body.push(
-            <p key='corequisite' className='mt mb sz-1'> 
-                <b>{"Corequisites: "}</b>{course.corequisite}
-            </p>)
+        body.push(<p key='corequisite' className='m-3 sz-1'> 
+                    <b>{"Corequisites: "}</b>{course.corequisite}
+                </p>)
             
     if(course.repeatability > 1)
-        body.push(
-            <p key='repeat' className='mt mb sz-1'> 
-                <b>{"Repeatability: "}</b>{course.repeatability}
-            </p>)
+        body.push(<p key='repeat' className='m-3 sz-1'> 
+                    <b>{"Repeatability: "}</b>{course.repeatability}
+                </p>)
 
     if(course.ge !== "")
-        body.push(
-            <p key='ge' className='mt mb sz-1'> 
-                <b>{"GE: "}</b>{course.ge}
-            </p>)
+        body.push(<p key='ge' className='m-3 sz-1'> 
+                    <b>{"GE: "}</b>{course.ge}
+                </p>)
 
     return (
         <>
         <div className='popup-header' style={{backgroundColor: color}}>
-            <p className='m-0 sz-2'> 
+            <p className='sz-2'> 
                 <b>{course.id + '. ' + course.name}</b> 
                 <br/>
                 {course.units + " units"} 
@@ -82,11 +77,11 @@ function Popup({id, showUnit, isCrossed}: PopUpType) {
 
     return ( 
         <div className={"flex flex-wrap justify-between item-center h-36 round-10"} 
-                onClick={()=>setShow(!show)} 
-                style={{backgroundColor: colors[2]}}>
-            <div 
-                className='courseId' 
-                style={{textDecoration: isCrossed? "line-through":"none"}}
+            onClick={()=>setShow(!show)} 
+            style={{backgroundColor: colors[2]}}
+        >
+            <div className='course-id pointer' 
+                 style={{textDecoration: isCrossed? "line-through":"none"}}
             > 
                 {id}
             </div>
@@ -94,7 +89,7 @@ function Popup({id, showUnit, isCrossed}: PopUpType) {
             {showUnit && <div className='unit'>{course.units + ' units'}</div>}
             
             <div className="card-popup-before" 
-                style={{display: show? "block":"none",  
+                 style={{display: show? "block":"none",  
                         backgroundColor: colors[1]}}>
             </div>
 
