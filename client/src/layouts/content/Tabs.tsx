@@ -17,7 +17,7 @@ function Tabs () {
     }, [status, dispatch])
 
   return (
-    <div id="tab-container" className='shadow round-15 '>
+    <div id="tab-container">
       <ul id="tab-panel" className="flex">
         <li 
           onClick={()=>setTabId(1)}

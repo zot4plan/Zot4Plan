@@ -11,13 +11,13 @@ const Schedule = () => {
     const yearIds = useSelector((state: RootState) => state.store.years.allIds);
 
     return (
-      <div id="schedule" className="flex">
+      <div id="schedule">
         {yearIds.map( (id,index) => (
           <Year key={id} yearId= {id} index={index} isLast={index === yearIds.length - 1}/>
         ))}
 
         <div className='relative flex item-center justify-between' 
-          style={{marginTop: '2rem', marginBottom: '4rem'}}
+          style={{marginTop: '2rem'}}
         >
           <RefreshButton/>
           <AddYearButton/>
