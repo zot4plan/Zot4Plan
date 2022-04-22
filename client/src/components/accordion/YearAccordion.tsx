@@ -1,10 +1,10 @@
 import {useState, memo} from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import {removeYear} from '../../features/StoreSlice';
+import { useSelector } from 'react-redux';
+
 import { RootState } from "../../app/store";
 
 import QuarterCourses from '../droppable/QuarterDroppableBox';
-import Remove from '../icon/Remove';
+import RemoveYearButton from "../button/RemoveYearButton";
 import Right from '../icon/Right';
 
 interface YearType {
@@ -18,15 +18,6 @@ function Year({yearId, index, isLast}:YearType) {
 
     const [show, setShow] = useState (true);
     const year = useSelector((state:RootState) => state.store.years.byIds[yearId])
-    const dispatch = useDispatch();
-
-    const deleteYear = () => {
-        dispatch(removeYear({id: year.id, index: index}));
-    }
-
-    const removeBtn = () => {
-        return (<Remove deleteYear={deleteYear}/>)
-    }
 
     return (
         <div 
@@ -43,7 +34,7 @@ function Year({yearId, index, isLast}:YearType) {
                 <div className="rightIcon">
                     <Right show ={show}/>
                 </div>
-                {index > 3 && removeBtn()}
+                {index > 3 && <RemoveYearButton id={year.id} index={index}/>}
             </div>
 
             <div className={"flex ease " + (show? '':'hide')} >

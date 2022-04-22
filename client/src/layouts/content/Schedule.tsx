@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import {RootState} from '../../app/store';
 
-import Year from '../accordion/YearAccordion';
+import Year from '../../components/accordion/YearAccordion';
 
-import TotalUnits from '../info/TotalUnits';
-import RefreshButton from '../button/RefreshButton';
-import AddYearButton from '../button/AddYearButton';
+import TotalUnits from '../../components/info/TotalUnits';
+import RefreshButton from '../../components/button/RefreshButton';
+import AddYearButton from '../../components/button/AddYearButton';
 
 const Schedule = () => {
     const yearIds = useSelector((state: RootState) => state.store.years.allIds);
@@ -17,7 +17,7 @@ const Schedule = () => {
         ))}
 
         <div className='relative flex item-center justify-between' 
-          style={{marginTop: '2rem'}}
+          style={{marginTop: '2rem', marginBottom: '4rem'}}
         >
           <RefreshButton/>
           <AddYearButton/>

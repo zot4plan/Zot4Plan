@@ -4,9 +4,10 @@ import { useDispatch } from 'react-redux';
 import { moveCourse, addCourseToQuarter} from './features/StoreSlice';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
-import Header from './components/header/Header';
-import Schedule from './components/schedule/Schedule';
-import Tabs from './components/tab/Tabs';
+import NavBar from './layouts/navigation/NavBar';
+import Schedule from './layouts/content/Schedule';
+import Tabs from './layouts/content/Tabs';
+import Footer from './layouts/footer/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,13 +37,14 @@ function App() {
 
   return (
   <>
-  <Header/>
-  <DragDropContext onDragEnd={onDragEnd}>
-    <div id="body-container">
-        <Schedule/>
-        <Tabs/>
-    </div>  
-  </DragDropContext>
+    <NavBar/>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div id="body-container">
+          <Schedule/>
+          <Tabs/>
+      </div>  
+    </DragDropContext>
+    <Footer/>
   </> 
   );
 }

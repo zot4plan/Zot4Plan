@@ -1,15 +1,36 @@
-/*********************** 
+/***************************************************** 
     Table of Contents
 
 1. Global Styles
 2. Typography
 3. Layout
+    3.1 Navigation
+    3.2 Content
+        3.2.1 Schedule (left-column)
+        3.2.2 Courses Tabs (Right-column)
+    3.3 Footer
 4. Components
-    4.1 icons
-    4.2 buttons
-    4.3 
-************************/
-
+    4.1 accordion
+    4.2 button
+    4.3 card
+    4.4 droppable container
+    4.5 icon
+    4.6 info
+    4.7 input
+    4.8 tab
+    4.8 schedule
+5. Images
+    5.1
+    5.2
+    5.3
+    5.4
+6. Media Query
+    6.1
+    6.2
+    6.3
+    6.4
+    6.5
+******************************************************/
 
 /**********************************************
 *************  1. Global Styles  **************
@@ -40,11 +61,15 @@ html {font-size: 10px; color:#1F1F1F}
 
 html, body, #root { background-color: var(--primary-color);}
 
-h1, h2, h3, h4, h5, h6, p, div {
+h1, h2, h3, h4, h5, h6, p, div, ul {
     font-size: 1.6rem;
     margin: 0;
     padding: 0;
 }
+
+ul {list-style-type: none;}
+
+a {text-decoration: none;}
 
 button {
     padding: 0px;
@@ -54,10 +79,14 @@ button {
     border: none;
 }
 
-svg {font-size: 10px;}
+svg {
+    font-size: 10px;
+    cursor: pointer;
+}
 
-
-
+/**********************************************
+*****************  2. ????????  ***************
+***********************************************/
 
 /*** display Flex ***/
 .flex { display: flex; }
@@ -131,15 +160,40 @@ svg {font-size: 10px;}
 /***  transition ***/
 .ease { transition: all var(--transition-time) ease; }
 
-/********** Header **********/
-#header {
+/**********************************************
+*****************  3. Layout  *****************
+***********************************************/
+
+/*** 3.1 Navigation bar ***/
+#nav-bar {
     display: grid;
-    grid-template-columns: 2.5fr 5fr 0.5fr 0.5fr 0.5fr 2fr 0.5fr 0.5fr;
+    grid-template-columns: 2.5fr 5fr 3fr 0.5fr 0.5fr 0.5fr;
     padding: 2rem 2.4rem;
     background-color: var(--secondary-color);
 }
 
-#logo {
+/*** 3.2 content ***/
+#body-container {
+    display: grid; 
+    grid-template-columns: 7.5fr 4.5fr;
+    column-gap: 2rem;
+    margin: 2.4rem;
+}
+
+/*** footer ***/
+#footer {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 1rem 4rem;
+
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    column-gap: 12rem;
+}
+
+/********** Navigation **********/
+
+#logo-text-brand {
     color: var(--primary-color);
     margin-right: 1rem;
 }
@@ -263,10 +317,14 @@ svg {font-size: 10px;}
     border-radius: 50%;
 }
 
-#linkedin {grid-column: 7;}
-
-#github {grid-column: 8;}
-
+#download {grid-column: 4;}
+#upload {grid-column: 5;}
+#help-btn {
+    grid-column: 6;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}
 #linkedin svg{ 
     border-radius: 0.4rem;
     color:var(--secondary-color);
@@ -280,12 +338,7 @@ svg {font-size: 10px;}
 }
 
 /*********** body ***********/
-#body-container {
-    display: grid; 
-    grid-template-columns: 7.5fr 4.5fr;
-    column-gap: 2rem;
-    margin: 2.4rem;
-}
+
 
 #schedule {
     flex-direction: column;
@@ -310,10 +363,9 @@ svg {font-size: 10px;}
 
 .rotate { transform: rotate(90deg);}
 
-.removeIcon {
+#remove-btn {
     position: absolute;
     left: 150px;
-    border-radius: 50%;
     color: var(--accent-color-1);
     visibility: hidden;
     opacity: 0;
@@ -321,13 +373,14 @@ svg {font-size: 10px;}
                 visibility var(--transition-time) ease;
 }
 
-.removeIcon:hover {
+#remove-btn svg:hover {
+    border-radius: 50%;
     background-color: var(--accent-color-1);
     box-shadow: 0 0 2px 2px var(--accent-color-1);
     color:white;
 }   
 
-.accordion:hover .removeIcon{
+.accordion:hover #remove-btn{
     visibility: visible;
     opacity: 1;
 }
@@ -552,18 +605,107 @@ svg {font-size: 10px;}
     animation-fill-mode: forwards;
 }
 
-.tab-container div[data-rbd-placeholder-context-id] {display: none !important;}
-.tab-container div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
-.tab-container div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
-
 @keyframes fadeIn {
     to {opacity: 0; visibility: hidden;}
 }
-
 @-webkit-keyframes fadeIn {
     0% {opacity: 1; visibility: visible;}
     100% {opacity: 0; visibility: hidden;}
 }
+
+.tab-container div[data-rbd-placeholder-context-id] {display: none !important;}
+.tab-container div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
+.tab-container div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
+
+/**********************************************
+******************  5. Images  ****************
+***********************************************/
+#logo-image {
+    height: 8rem;
+    width: 8rem;
+    margin-right: 1rem;
+}
+
+.author-image {
+    height: 6.4rem;
+    width: 6.4rem;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color-2);
+}
+
+.author-name {
+    color: var(--primary-color);
+    margin-left: 1.6rem;
+    font-size: 2rem;
+}
+
+#footer-logo-container,
+.footer-header-container,
+.author-name {
+    display: flex;
+    align-items: center;
+}
+
+#footer-logo-container {
+    margin: 2rem 0rem;
+}
+
+
+.footer-header-container {
+    height: 6.4rem;
+    margin-top: 2rem;
+}
+
+.footer-header-container > h1 {
+    font-size: 2.6rem;
+    font-weight: 500;
+}
+
+#author-list-containter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+}
+
+#about-p {
+    text-align: justify;
+}
+
+.contact-list {
+    margin-left: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contact-item {
+    width:5rem;
+}
+
+.contact-item > a > svg {
+    font-size: 3.2rem;
+}
+
+#copyright {
+    margin-top: 5rem;
+    grid-column: 1/-1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#copyright > a > svg {
+    font-size: 3.6rem;
+    color: var(--primary-color);
+}
+
+#copyright > p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/**********************************************
+***************  6. Media quries  *************
+***********************************************/
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

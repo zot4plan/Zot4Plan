@@ -2,8 +2,8 @@ import {useState, useEffect} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { RootState } from '../../app/store';
 import { fetchGE } from '../../features/FetchData';
-import GeneralEducation from './GeneralEducation';
-import Major from './Major';
+import GeneralEducation from '../../components/tab/GeneralEducation';
+import Major from '../../components/tab/Major';
 
 function Tabs () {
   const [tabId, setTabId] = useState<number>(1); // Major-tabId === 1; GeneralEducation-tabId === 2 

@@ -42,7 +42,7 @@ function UploadFileButton () {
     }
 
     return (
-        <div className="relative flex justify-center item-center"
+        <div id="upload" className="relative flex justify-center item-center"
              style={{zIndex: '2'}}
         >
             <button data-tip data-for="uploadTip" className='btn-outlined-header' onClick={handleOnClick}>

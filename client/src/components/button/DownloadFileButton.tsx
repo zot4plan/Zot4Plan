@@ -65,7 +65,7 @@ function DownloadFileButton () {
     }
 
     return (
-    <div className="relative flex justify-center item-center">  
+    <div id="download" className="relative flex justify-center item-center">  
         <button data-tip data-for='downloadTip' className='btn-outlined-header' onClick ={download}>
             <DownloadIcon/>
         </button>

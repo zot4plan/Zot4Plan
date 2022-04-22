@@ -13,7 +13,7 @@ function HelpButton () {
     }
 
     return (
-    <>
+    <div id="help-btn">
         <button 
             data-tip data-for='helpTip'
             className='btn-outlined-header' 
@@ -23,11 +23,11 @@ function HelpButton () {
             <QuestionMark/>
         </button>
         <ReactTooltip id="helpTip" place="bottom" effect="solid">
-            Tutorial
+            Help
         </ReactTooltip>
 
         {showTutorial && <TutorialSlider closedTutorial={handleOnClick}/> }
-    </>
+    </div>
     )
 }
 
