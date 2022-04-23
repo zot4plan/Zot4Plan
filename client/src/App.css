@@ -2,7 +2,7 @@
     Table of Contents
 
 1. Global Styles
-2. Typography
+2. Common Styles
 3. Layout
     3.1 Navigation
     3.2 Content
@@ -11,7 +11,15 @@
     3.3 Footer
 4. Components
     4.1 accordion
+        4.1.1 year 
+        4.1.2 section
     4.2 button
+        4.2.1 AddYearButton
+        4.2.2 DownloadFileButton
+        4.2.3 HelpButton
+        4.2.4 RefreshButton
+        4.2.5 RemoveYearButton
+        4.2.6 UploadFileButton
     4.3 card
     4.4 droppable container
     4.5 icon
@@ -113,7 +121,6 @@ svg {
 /*** font-size ***/
 .sz-1 {font-size: 1.4rem;}
 .sz-2 {font-size: 1.5rem;}
-.sz-3 {font-size: 1.6rem;}
 .sz-4 {font-size: 2rem;}
 
 /*** spacing ***/
@@ -177,10 +184,23 @@ svg {
     display: grid; 
     grid-template-columns: 7.5fr 4.5fr;
     column-gap: 2rem;
-    margin: 2.4rem;
+    margin: 2.4rem 2.4rem 8rem 2.4rem;
 }
 
-/*** footer ***/
+/* 3.2.1 schedule (left-column) */
+#schedule {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 3.2.2 tab container (right-column)*/
+#tab-container {
+    height: 65rem;
+    border-radius: 1.5rem;
+    box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
+}
+
+/*** 3.3 footer ***/
 #footer {
     background-color: var(--secondary-color);
     color: var(--primary-color);
@@ -191,7 +211,154 @@ svg {
     column-gap: 12rem;
 }
 
+/**********************************************
+***************  4. Components  ***************
+***********************************************/
+
+/*** 4.1 accordion ***/
+.accordion-section,
+.accordion-year{
+    box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
+}
+
+.accordion-section {
+    margin: 0rem 1.6rem 2rem 1.6rem;
+}
+
+.accordion {
+    background-color: var(--primary-color-2);
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+}
+.accordion:hover {color: var(--accent-color-2)}
+
+.accordion > h1 {
+    flex-grow:2;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+}
+
+/*** 4.2 button ***/
+#upload-btn,
+#import-btn {
+    height: 100%;
+    width:100%;
+
+    font-size: 1.6rem;
+    border-radius: 18px;
+    color: var(--primary-color);
+    background-color: var(--accent-color-2);
+}
+
+#upload-btn{
+    top:0px;
+    left:0px;
+    height: 100%;
+    width:100%;
+    z-index: 2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+}
+
+.btn-header {
+    color: var(--accent-color-2);
+}
+
+.btn-header svg:hover {
+    color: var(--primary-color);
+}
+
+.btn-outlined-header {
+    background: transparent;
+    color: var(--accent-color-2);
+}
+
+.btn-outlined-header svg:hover {
+    color: var(--primary-color);
+    background-color: var(--accent-color-2);
+    box-shadow: 0 0 4px 4px var(--primary-color);
+    border-radius: 50%;
+}
+
+#download {grid-column: 4;}
+#upload {grid-column: 5;}
+#help-btn {
+    grid-column: 6;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}
+#linkedin svg{ 
+    border-radius: 0.4rem;
+    color:var(--secondary-color);
+    background-color: var(--accent-color-2);
+}
+
+#linkedin svg:hover{
+    color: var(--accent-color-2);
+    background-color: var(--primary-color);
+    box-shadow: 0 0 4px 4px var(--primary-color);
+}
+
+#remove-btn {
+    position: absolute;
+    left: 150px;
+    color: var(--accent-color-1);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity var(--transition-time) ease, 
+                visibility var(--transition-time) ease;
+}
+
+#remove-btn svg:hover {
+    border-radius: 50%;
+    background-color: var(--accent-color-1);
+    box-shadow: 0 0 2px 2px var(--accent-color-1);
+    color:white;
+}   
+
+.accordion:hover #remove-btn{
+    visibility: visible;
+    opacity: 1;
+}
+
+#outline-add-btn {
+    left: 50%; 
+    transform: translateX(-50%);
+}
+
+.outline-btn { 
+    line-height: 0;
+    color: var(--accent-color-2);
+    border-radius: 50%;
+}
+
+.outline-btn:hover {
+    color: white;
+    background-color: var(--accent-color-2);
+    box-shadow: 0 0 0.3rem 0.3rem var(--accent-color-2);
+}
+
+.browse-add-btn {
+    position:absolute;
+    top: 52%;
+    right: 1%;
+    transform: translateY(-50%);
+    background-color: var(--accent-color-2);
+    color:white;
+    padding: 0.7rem;
+    line-height: 0;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
 /********** Navigation **********/
+
 
 #logo-text-brand {
     color: var(--primary-color);
@@ -235,16 +402,8 @@ svg {
 .tutorial-img { 
     border-radius: 25px;
     border: 8px solid #5C9DD6;
-}
-
-#HowTo1 {
-    width: 100%; /* 65 */
-    height: auto; /* 82.4 */
-}
-
-#HowTo2{
     width: 100%; 
-    height: auto; /* 85.6 */
+    height: auto;
 }
 
 #upload-card{
@@ -266,30 +425,6 @@ svg {
     opacity: 0;
     cursor: pointer;
 }
-#upload-btn,
-#import-btn {
-    height: 100%;
-    width:100%;
-
-    font-size: 1.6rem;
-    border-radius: 18px;
-    color: var(--primary-color);
-    background-color: var(--accent-color-2);
-}
-
-#upload-btn{
-    top:0px;
-    left:0px;
-    height: 100%;
-    width:100%;
-    z-index: 2;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.6rem;
-}
-
 
 .arrow {
     background-color: transparent;
@@ -297,62 +432,8 @@ svg {
     color:#5C9DD6;
     cursor: pointer;
 }
-.btn-header {
-    color: var(--accent-color-2);
-}
-
-.btn-header svg:hover {
-    color: var(--primary-color);
-}
-
-.btn-outlined-header {
-    background: transparent;
-    color: var(--accent-color-2);
-}
-
-.btn-outlined-header svg:hover {
-    color: var(--primary-color);
-    background-color: var(--accent-color-2);
-    box-shadow: 0 0 4px 4px var(--primary-color);
-    border-radius: 50%;
-}
-
-#download {grid-column: 4;}
-#upload {grid-column: 5;}
-#help-btn {
-    grid-column: 6;
-    display: flex;
-    justify-self: center;
-    align-items: center;
-}
-#linkedin svg{ 
-    border-radius: 0.4rem;
-    color:var(--secondary-color);
-    background-color: var(--accent-color-2);
-}
-
-#linkedin svg:hover{
-    color: var(--accent-color-2);
-    background-color: var(--primary-color);
-    box-shadow: 0 0 4px 4px var(--primary-color);
-}
 
 /*********** body ***********/
-
-
-#schedule {
-    flex-direction: column;
-}
-/******** accordion *********/
-/****** (both years and section in requirements) ******/
-.accordion {background-color: var(--primary-color-2);}
-.accordion:hover {color: var(--accent-color-2)}
-
-.accordion-header {
-    flex-grow:2;
-    font-weight: 600;
-    padding: 0.6rem 1rem;
-}
 
 .rightIcon {
     padding-right:0.8rem;
@@ -362,28 +443,6 @@ svg {
 }
 
 .rotate { transform: rotate(90deg);}
-
-#remove-btn {
-    position: absolute;
-    left: 150px;
-    color: var(--accent-color-1);
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity var(--transition-time) ease, 
-                visibility var(--transition-time) ease;
-}
-
-#remove-btn svg:hover {
-    border-radius: 50%;
-    background-color: var(--accent-color-1);
-    box-shadow: 0 0 2px 2px var(--accent-color-1);
-    color:white;
-}   
-
-.accordion:hover #remove-btn{
-    visibility: visible;
-    opacity: 1;
-}
 
 .section-body { padding: 1.6rem 0rem;}
 
@@ -452,6 +511,7 @@ svg {
 }
 
 #tab-body{
+    position: relative;
     border-top: 1px solid white;
     height: calc(100% - 50px);
     overflow: scroll;
@@ -529,28 +589,10 @@ svg {
     border-top-right-radius: 0.7rem;
 }
 
-/*** Icons ***/
-#outline-add-btn {
-    left: 50%; 
-    transform: translateX(-50%);
-}
-
-.outline-btn { 
-    line-height: 0;
-    color: var(--accent-color-2);
-    border-radius: 50%;
-}
-
-.outline-btn:hover {
-    color: white;
-    background-color: var(--accent-color-2);
-    box-shadow: 0 0 0.3rem 0.3rem var(--accent-color-2);
-}
 
 .hyperlink {
     font-size: 2rem;
     text-align: center;
-    text-decoration: none;
     color: var(--accent-color-2);
     font-weight: 630;
     margin-bottom: 1.6rem;
@@ -566,19 +608,6 @@ svg {
     width: 27rem;
 }
 
-.browse-add-btn {
-    position:absolute;
-    top: 52%;
-    right: 1%;
-    transform: translateY(-50%);
-    background-color: var(--accent-color-2);
-    color:white;
-    padding: 0.7rem;
-    line-height: 0;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-}
 
 .message-container {
     height: 1.6rem;
@@ -701,6 +730,17 @@ svg {
 #copyright > p {
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+#spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#spinner > svg{
+    font-size: 5rem;
 }
 
 /**********************************************

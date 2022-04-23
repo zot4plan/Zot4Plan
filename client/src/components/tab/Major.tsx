@@ -1,9 +1,12 @@
 import {memo} from 'react'
 import { useSelector} from 'react-redux';
+
 import {RootState} from '../../app/store';
 import BrowseCourseById from '../input/BrowseCourseById';
 import Section from '../accordion/Section';
 import ZotSelectMajor from '../../assets/images/ZotSelectMajor.png'
+
+import Spinner from '../icon/Spinner';
 
 interface MajorSectionType { id:string;}
 
@@ -35,7 +38,7 @@ function Major () {
         </div>
 
     else if (status === 'loading') 
-        content = <p>Loading....!!!</p> 
+        content = <div id='spinner'> <Spinner/> </div> 
 
     else if (status === 'succeeded') 
         content = sectionIds.map(id => <MajorSection key={id} id={id}/>)

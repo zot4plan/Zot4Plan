@@ -21,16 +21,15 @@ function Year({yearId, index, isLast}:YearType) {
 
     return (
         <div 
-            className='shadow round-15'
+            className='accordion-year round-15'
             style={{marginBottom: isLast? '0rem': '2.5rem'}}
             >
             <div 
-                className={'accordion flex item-center pointer ' 
-                    + (show? 'round-top-left round-top-right': 'round-15')}  
+                className={'accordion ' + (show? 'round-top-left round-top-right': 'round-15')}  
                 key={year.id} 
                 onClick={()=>setShow(!show)}
             > 
-                <h1 className="accordion-header sz-4"> {year.name} </h1>
+                <h1 className="sz-4"> {year.name} </h1>
                 <div className="rightIcon">
                     <Right show ={show}/>
                 </div>

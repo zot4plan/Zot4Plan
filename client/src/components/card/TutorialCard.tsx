@@ -8,7 +8,7 @@ interface TutorialSliderType{
 }
 
 function TutorialCard ({ closedTutorial }: TutorialSliderType) {
-    const images = [require('../../assets/images/HowTo1.png'), require('../../assets/images/HowTo2.png')];
+    const images = [require('../../assets/images/HowTo1.jpg'), require('../../assets/images/HowTo2.jpg')];
     const [index, setIndex] = useState(1);
 
     function handleLeftClick( e: { preventDefault: () => void; }) {
@@ -42,7 +42,6 @@ function TutorialCard ({ closedTutorial }: TutorialSliderType) {
             </div>
             <img
                 className='tutorial-img'
-                id={'HowTo' + index} 
                 src={images[index - 1]} 
                 loading='lazy' 
                 alt='Website Tutorial Page 1'
