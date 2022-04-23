@@ -21,7 +21,7 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 
     - The additional year can be removed by clicking on the "-" button next to the year
 
-* A tab that display the Major Requirement of the chosen major
+* Major Requirement Tab
     
     - Each dropdown represents a section in the requirement
 
@@ -29,7 +29,7 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 
     - A search engine that users can use to include any additional courses
 
-* A tab that display General Education Requirement
+* General Education Requirement Tab
 
     - 10 main dropdowns - each represents a GE section (the number of required courses is also included)
 
