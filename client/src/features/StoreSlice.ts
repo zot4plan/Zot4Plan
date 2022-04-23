@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
-import { fetchMajorById, fetchMajorByFile, fetchGE} from './FetchData'
+import { fetchMajorById, fetchMajorByFile, fetchGE} from '../api/FetchData'
 
 const YEAR_NAMES = ["Freshman","Sophomore","Junior","Senior"];
 const QUARTER_ID_LENGTH = 3; // for function AddCourseToQuarter

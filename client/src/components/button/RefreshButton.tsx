@@ -16,7 +16,7 @@ function RefreshButton() {
 
     return ( 
     <>
-        <button className="outline-btn" 
+        <button className="btn-secondary" 
             onClick={refresh}
             data-tip data-for='refreshTip'
         >  

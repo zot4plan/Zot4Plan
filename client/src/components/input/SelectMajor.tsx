@@ -2,7 +2,7 @@ import { useState, useEffect, memo } from 'react';
 import Axios from 'axios';
 import Select from 'react-select';
 import { useDispatch } from 'react-redux';
-import {fetchMajorById} from '../../features/FetchData'
+import {fetchMajorById} from '../../api/FetchData'
 
 interface OptionType {
     value: number;

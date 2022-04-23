@@ -18,7 +18,7 @@ function RemoveYearButton({id, index}: RemoveYearType) {
 
     return ( 
     <>
-        <button id="remove-btn"
+        <button id="remove-year-btn"
             onClick={handleOnclick}
             data-tip data-for='removeYearTip'
         > 

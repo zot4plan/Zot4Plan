@@ -151,7 +151,7 @@ const BrowseCourseByGE = () => {
                     onChange={handleOnCourseChange}
                 />
                 <button 
-                    className='browse-add-btn' 
+                    className='add-course-btn' 
                     onClick={submitCourse}
                 > 
                     <AddIcon/> 

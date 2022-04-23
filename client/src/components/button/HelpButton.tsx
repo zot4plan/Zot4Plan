@@ -13,10 +13,10 @@ function HelpButton () {
     }
 
     return (
-    <div id="help-btn">
+    <div id="help">
         <button 
             data-tip data-for='helpTip'
-            className='btn-outlined-header' 
+            className='btn-primary' 
             onClick={handleOnClick}
             aria-label="open tutorial"
         >

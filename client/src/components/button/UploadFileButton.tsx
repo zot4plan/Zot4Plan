@@ -1,6 +1,6 @@
 import { ChangeEvent, useState, useRef} from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchMajorByFile } from '../../features/FetchData';
+import { fetchMajorByFile } from '../../api/FetchData';
 import UploadIcon from '../icon/UploadIcon';
 
 import ReactTooltip from "react-tooltip";
@@ -8,7 +8,6 @@ import ReactTooltip from "react-tooltip";
 function UploadFileButton () {
     const [showUploadCard, setShowUploadCard] = useState(false);
     const [file, setFile] = useState({content: "", name: ""});
-    const doUploadFile = useRef<HTMLInputElement>(null);
 
     const dispatch = useDispatch();
 
@@ -42,10 +41,11 @@ function UploadFileButton () {
     }
 
     return (
-        <div id="upload" className="relative flex justify-center item-center"
-             style={{zIndex: '2'}}
-        >
-            <button data-tip data-for="uploadTip" className='btn-outlined-header' onClick={handleOnClick}>
+        <div id="upload">
+            <button  className='btn-primary' 
+                onClick={handleOnClick}
+                data-tip data-for="uploadTip"
+            >
                 <UploadIcon/>
             </button>
             <ReactTooltip id="uploadTip" place="bottom" effect="solid">

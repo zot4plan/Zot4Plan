@@ -14,12 +14,14 @@
         4.1.1 year 
         4.1.2 section
     4.2 button
-        4.2.1 AddYearButton
-        4.2.2 DownloadFileButton
-        4.2.3 HelpButton
-        4.2.4 RefreshButton
-        4.2.5 RemoveYearButton
-        4.2.6 UploadFileButton
+        4.2.1 btn-primary
+        4.2.2 btn-secondary
+        4.2.3 upload and import button
+        4.2.4 remove-year-btn
+        4.2.5 add-year-btn
+        4.2.6 add-course-btn
+        4.2.7 remove-course-btn
+        4.2.8 close-tutorial-btn
     4.3 card
     4.4 droppable container
     4.5 icon
@@ -57,13 +59,13 @@
 body {
     margin: 0;
     font-display: optional;
-    font-family: 'Roboto','Lato','Times New Roman',Times, serif;
+    font-family: 'Roboto','Times New Roman',Times, serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: var(--text-color);
 }
   
-code { font-family: source-code-pro, Monaco, Consolas, 'Courier New',monospace;}
+code { font-family: 'Roboto','Times New Roman',Times, serif;}
 
 html {font-size: 10px; color:#1F1F1F}
 
@@ -83,17 +85,27 @@ button {
     padding: 0px;
     margin: 0px;
     background: transparent;
-    cursor: pointer;
     border: none;
 }
 
 svg {
     font-size: 10px;
+}
+
+a, 
+button,
+svg {
     cursor: pointer;
 }
 
+.green {color: #07B053;} /* success-message */
+.red {color: var(--accent-color-1);} /* fail-message*/
+
+.relative {position: relative;}
+.absolute {position: absolute;}
+
 /**********************************************
-*****************  2. ????????  ***************
+*************  2. Common styles  **************
 ***********************************************/
 
 /*** display Flex ***/
@@ -113,10 +125,6 @@ svg {
 .mh-76 {min-height: 7.6rem;} /* quarter-course-column*/
 .w-125 {width: 12.5rem;} /* requirement-course-card */
 .h-36 {height: 3.6rem;} /* course-card height */
-
-/*** color ***/
-.green {color: #07B053;} /* success-message */
-.red {color: var(--accent-color-1);} /* fail-message*/
 
 /*** font-size ***/
 .sz-1 {font-size: 1.4rem;}
@@ -157,13 +165,6 @@ svg {
 /*** shadow ***/
 .shadow {box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);}
 
-/*** position ***/
-.relative {position: relative;}
-.absolute {position: absolute;}
-
-/*** cursor ***/
-.pointer {cursor: pointer;}
-
 /***  transition ***/
 .ease { transition: all var(--transition-time) ease; }
 
@@ -174,9 +175,30 @@ svg {
 /*** 3.1 Navigation bar ***/
 #nav-bar {
     display: grid;
-    grid-template-columns: 2.5fr 5fr 3fr 0.5fr 0.5fr 0.5fr;
+    grid-template-columns: 2.5fr 5fr 2.7fr 0.6fr 0.6fr 0.6fr;
     padding: 2rem 2.4rem;
     background-color: var(--secondary-color);
+}
+
+#download {
+    grid-column: 4;
+    position: relative;
+}
+
+#upload {
+    position: relative;
+    grid-column: 5;
+    z-index: 2;
+}
+
+#help {grid-column: 6;}
+
+#download,
+#upload, 
+#help {
+    display: flex;
+    justify-self: center;
+    align-items: center;
 }
 
 /*** 3.2 content ***/
@@ -240,6 +262,31 @@ svg {
 }
 
 /*** 4.2 button ***/
+/* 4.2.1 btn-primary */
+.btn-primary {
+    color: var(--accent-color-2);
+}
+.btn-primary svg:hover{
+    color: var(--primary-color);
+    background-color: var(--accent-color-2);
+    box-shadow: 0 0 4px 4px var(--primary-color);
+    border-radius: 50%;
+}
+
+/* 4.2.2 btn-secondary */
+.btn-secondary { 
+    line-height: 0;
+    color: var(--accent-color-2);
+    border-radius: 50%;
+}
+
+.btn-secondary:hover {
+    color: white;
+    background-color: var(--accent-color-2);
+    box-shadow: 0 0 0.3rem 0.3rem var(--accent-color-2);
+}
+
+/* 4.2.3 upload and import button */
 #upload-btn,
 #import-btn {
     height: 100%;
@@ -264,47 +311,8 @@ svg {
     font-size: 1.6rem;
 }
 
-.btn-header {
-    color: var(--accent-color-2);
-}
-
-.btn-header svg:hover {
-    color: var(--primary-color);
-}
-
-.btn-outlined-header {
-    background: transparent;
-    color: var(--accent-color-2);
-}
-
-.btn-outlined-header svg:hover {
-    color: var(--primary-color);
-    background-color: var(--accent-color-2);
-    box-shadow: 0 0 4px 4px var(--primary-color);
-    border-radius: 50%;
-}
-
-#download {grid-column: 4;}
-#upload {grid-column: 5;}
-#help-btn {
-    grid-column: 6;
-    display: flex;
-    justify-self: center;
-    align-items: center;
-}
-#linkedin svg{ 
-    border-radius: 0.4rem;
-    color:var(--secondary-color);
-    background-color: var(--accent-color-2);
-}
-
-#linkedin svg:hover{
-    color: var(--accent-color-2);
-    background-color: var(--primary-color);
-    box-shadow: 0 0 4px 4px var(--primary-color);
-}
-
-#remove-btn {
+/* 4.2.4 remove-year-btn */
+#remove-year-btn {
     position: absolute;
     left: 150px;
     color: var(--accent-color-1);
@@ -314,52 +322,70 @@ svg {
                 visibility var(--transition-time) ease;
 }
 
-#remove-btn svg:hover {
+.accordion:hover #remove-year-btn{
+    visibility: visible;
+    opacity: 1;
+}
+
+#remove-year-btn svg:hover {
     border-radius: 50%;
     background-color: var(--accent-color-1);
     box-shadow: 0 0 2px 2px var(--accent-color-1);
     color:white;
 }   
 
-.accordion:hover #remove-btn{
-    visibility: visible;
-    opacity: 1;
-}
-
-#outline-add-btn {
+/* 4.2.5 add-year-button */
+#add-year-btn {
+    position:absolute;
     left: 50%; 
     transform: translateX(-50%);
 }
 
-.outline-btn { 
-    line-height: 0;
-    color: var(--accent-color-2);
-    border-radius: 50%;
-}
-
-.outline-btn:hover {
-    color: white;
-    background-color: var(--accent-color-2);
-    box-shadow: 0 0 0.3rem 0.3rem var(--accent-color-2);
-}
-
-.browse-add-btn {
+/* 4.2.6 add-course-btn */
+.add-course-btn {
     position:absolute;
     top: 52%;
     right: 1%;
     transform: translateY(-50%);
-    background-color: var(--accent-color-2);
+
     color:white;
+    background-color: var(--accent-color-2);
     padding: 0.7rem;
     line-height: 0;
     border-radius: 50%;
-    border: none;
-    cursor: pointer;
 }
 
+/* 4.2.7 remove-course-btn */
+.remove-course-btn{
+    position:absolute;
+    color: #F2F2F2;
+    top: 0.2rem;
+    right: 0.2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-time) ease, 
+                visibility var(--transition-time) ease;
+}
+.remove-course-btn svg:hover { color: white;}
+
+/* 4.2.8 close-tutorial-btn */
+#x-circle {
+    top: 2.8%;
+    right: 2%;
+    color:#307ABB;
+}
+
+#x-circle svg {
+    font-size: 3.6rem;
+}
+
+#x-circle:hover svg{ 
+    color:white;
+    background-color: #307ABB;
+    border-radius: 50%;
+ }
+
 /********** Navigation **********/
-
-
 #logo-text-brand {
     color: var(--primary-color);
     margin-right: 1rem;
@@ -382,22 +408,6 @@ svg {
     width: 60%;
 }
 
-#x-circle {
-    top: 2.8%;
-    right: 2%;
-    color:#307ABB;
-    cursor: pointer;
-}
-
-#x-circle svg {
-    font-size: 3.6rem;
-}
-
-#x-circle:hover svg{ 
-    color:white;
-    background-color: #307ABB;
-    border-radius: 50%;
- }
 
 .tutorial-img { 
     border-radius: 25px;
@@ -410,8 +420,8 @@ svg {
     background-color: white;
     width: 180px;
     height: 150px;
-    top: 80%;
-    left: 100%;
+    top: 75%;
+    left: 50%;
     transform: translate(-50%, 10%);
     border-radius: 15px;
     border: 1px solid lightgray;
@@ -423,14 +433,12 @@ svg {
     max-width:180px;
     height: 3.6rem;
     opacity: 0;
-    cursor: pointer;
 }
 
 .arrow {
     background-color: transparent;
     border:none;
     color:#5C9DD6;
-    cursor: pointer;
 }
 
 /*********** body ***********/
@@ -488,9 +496,7 @@ svg {
 }
 
 #tab-panel {
-    padding:0;
-    margin: 0;
-    list-style: none;
+    display: flex;
 }
 
 .tab{
@@ -500,6 +506,10 @@ svg {
     cursor: pointer;
     background-color: var(--primary-color-2);
     transition: background-color ease-in-out 0.4s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .tab:hover {color: var(--accent-color-2);}
@@ -510,7 +520,7 @@ svg {
     border-top: 0.4rem solid var(--accent-color-2);
 }
 
-#tab-body{
+#tab-content{
     position: relative;
     border-top: 1px solid white;
     height: calc(100% - 50px);
@@ -523,18 +533,6 @@ svg {
     height: auto;
 }
 
-.xmark{
-    position:absolute;
-    cursor: pointer;
-    color: #F2F2F2;
-    top: 0.2rem;
-    right: 0.2rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-time) ease, 
-                visibility var(--transition-time) ease;
-}
-.xmark svg:hover { color: white;}
 
 .card:hover .xmark {
     opacity: 1;
@@ -544,6 +542,7 @@ svg {
 .course-id {
     padding-left: 1rem;
     color:white;
+    cursor: pointer;
 }
 
 .unit {

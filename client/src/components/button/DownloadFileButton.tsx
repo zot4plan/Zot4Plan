@@ -65,8 +65,8 @@ function DownloadFileButton () {
     }
 
     return (
-    <div id="download" className="relative flex justify-center item-center">  
-        <button data-tip data-for='downloadTip' className='btn-outlined-header' onClick ={download}>
+    <div id="download" className="relative">  
+        <button data-tip data-for='downloadTip' className='btn-primary' onClick ={download}>
             <DownloadIcon/>
         </button>
         <ReactTooltip id="downloadTip" place="bottom" effect="solid">

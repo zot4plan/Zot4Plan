@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from '../../app/store';
 import Popup from './CardPopup';
 import { Draggable } from 'react-beautiful-dnd';
-import {memo, MouseEvent} from 'react'
+import {memo} from 'react'
 import { deleteCourse } from '../../features/StoreSlice'
 import Xmark from '../icon/Xmark';
 
@@ -33,8 +33,8 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
         isDraggable = false;
 
     const dispatch = useDispatch();
-    const removeCourse = (event: MouseEvent<HTMLDivElement>) => {
-        event.preventDefault();
+    const removeCourse = (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
         dispatch(deleteCourse({
             droppableId: droppableId,
             index: index,
@@ -60,11 +60,11 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
                         showUnit={false} 
                         isCrossed ={!isDraggable}
                     />
-
+                    {/* Only courses add by students are removable */}
                     {droppableId.length > MAJOR_ID_LENGTH && 
-                        <div className="xmark" onClick = {removeCourse}>
+                        <button className="remove-course-btn" onClick = {removeCourse}>
                             <Xmark/>
-                        </div>
+                        </button>
                     }
             </div>
 

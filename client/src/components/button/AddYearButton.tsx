@@ -16,8 +16,8 @@ function AddYearButton() {
 
     return ( 
     <>
-        <button id="outline-add-btn" 
-            className="outline-btn absolute" 
+        <button id="add-year-btn" 
+            className="btn-secondary" 
             onClick={addNewYear}
             data-tip data-for='addYearTip'
         > 

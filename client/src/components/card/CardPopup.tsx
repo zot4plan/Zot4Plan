@@ -69,7 +69,7 @@ function Popup({id, showUnit, isCrossed}: PopUpType) {
             onClick={()=>setShow(!show)} 
             style={{backgroundColor: colors[2]}}
         >
-            <div className='course-id pointer' 
+            <div className='course-id' 
                  style={{textDecoration: isCrossed? "line-through":"none"}}
             > 
                 {id}

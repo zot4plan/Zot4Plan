@@ -63,7 +63,6 @@ function BrowseCourseById({id}: BrowseCourseType) {
 
     const submitAddCourse =(event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        event.stopPropagation();
         let content = selectCourse, status = "fail";
 
         if(selectCourse === "")
@@ -117,7 +116,7 @@ function BrowseCourseById({id}: BrowseCourseType) {
                     placeholder="Type at least 3 characters"
                     aria-label="Browse courses by ID"
                 />
-                <button className='browse-add-btn' onClick={submitAddCourse}> <AddIcon/> </button>
+                <button className='add-course-btn' onClick={submitAddCourse}> <AddIcon/> </button>
             </div>
 
             <div 
