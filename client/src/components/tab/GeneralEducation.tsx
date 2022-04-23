@@ -17,7 +17,7 @@ function GeneralEducation() {
     const geIds = useSelector((state:RootState)=>state.store.ge.allGeIds);
     const status = useSelector((state:RootState)=>state.store.ge.status);
 
-    let content
+    let content;
 
     if (status === 'loading') 
         content = <p>Loading....</p> 
@@ -28,7 +28,7 @@ function GeneralEducation() {
         ))
     } 
     else if (status === 'failed') 
-        content = <p>cannot connect to server!</p>
+        content = <p className='fetch-error-message'>Cannot connect to server!!!</p>
     
   
     return (
