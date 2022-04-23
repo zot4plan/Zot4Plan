@@ -16,3 +16,6 @@ How to run the code?
 Open 2 terminals: one is for client and the other is for server
     cd to client folder: npm start
     cd to server folder: node server.js
+
+
+# Zot4Plan - Undergraduate Progress Tracker
