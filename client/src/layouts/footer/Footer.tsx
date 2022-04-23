@@ -21,10 +21,7 @@ const Footer = () => {
             </div>
             
             <p id="about-p"> 
-                Lorem ipsum odor amet, consectetuer adipiscing elit. Ac purus in massa egestas mollis varius;
-                dignissim elementum. Mollis tincidunt mattis hendrerit dolor eros enim, nisi ligula ornare.
-                Hendrerit parturient habitant pharetra rutrum gravida porttitor eros feugiat. Mollis elit
-                sodales taciti duis praesent id. Consequat urna vitae morbi nunc congue.
+            Welcome to Zot4Plan! Zot4Plan is a planner that helps Anteaters visualize their undergraduate journey. As a team, we aimed to make the task of organizing your schedule as simple as possible. Besides the planner tool, we also incorporated the major requirements tab to make the task of keeping progress much more efficient. Note that all of the information we obtained are from the UCI website. Please make sure to check your schedule with your academic counselor. Thank you.
             </p>
         </div>
 
