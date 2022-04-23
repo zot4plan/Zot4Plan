@@ -35,7 +35,7 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 
     - A combination of dropdown and search bar is implemented to help users find their courses in an efficient manner
 
-* Card pop-up that exhibits all of the information of that particular course
+* Card pop-up that exhibits necessary information of that particular course
 
     - Course name
 
@@ -51,7 +51,7 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 
 * Save and Load Implementation
 
-    - Users can save their calendar by selection the download button, which the schedule will be downloaded as a json file
+    - Users can save their calendar by selecting the download button, which the schedule will be downloaded as a json file
 
     - The upload feature will take a json file of the schedule and load that saved version
 
