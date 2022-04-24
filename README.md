@@ -61,7 +61,7 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 
 1. Open two terminal simultaneously
 
-
+2. cd
 
 
 ### **External Libraries**
@@ -91,8 +91,9 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 
 ---
 
-* Autocomplete feature: https://medium.com/swlh/implement-autocomplete-feature-in-react-9b2721a7deda
+* Autocomplete feature: [`Implement Autocomplete Feature in React
+`](#https://medium.com/swlh/implement-autocomplete-feature-in-react-9b2721a7deda)
 
-* Axios request: https://www.bezkoder.com/axios-request/
+* Axios request: [`Axios Tutorial`](#https://www.bezkoder.com/axios-request/)
 
-* NodeJs Rest APIs with Express, sequelize and MySQL: https://www.bezkoder.com/node-js-express-sequelize-mysql/#Test_the_APIs 
+* NodeJs Rest APIs with Express, sequelize and MySQL: [`Node.js Rest APIs`](#https://www.bezkoder.com/node-js-express-sequelize-mysql/#Test_the_APIs)
