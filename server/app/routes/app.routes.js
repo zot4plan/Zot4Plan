@@ -18,6 +18,10 @@ module.exports = app => {
 
     router.get("/getRequirementById", combine_models.getRequirementById);
     router.get("/getDataByFile", combine_models.getDataByFile);
+    
+    router.get('/health', async (_req, res) => {
+        res.send('OK');
+    });
 
     app.use('/api',router);
 };
