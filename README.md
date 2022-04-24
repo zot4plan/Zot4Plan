@@ -1,6 +1,14 @@
 ## **Zot4Plan - Undergraduate Progress Tracker**
 
-By: Tram La and Loc Khong
+By: [`Tram La`](#https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`](#https://www.linkedin.com/in/lockhong/)
+
+---
+
+
+<img src="https://media.giphy.com/media/rGVGxC1VKgIVSUtSlA/giphy.gif" width="400" height="200" /> <img src="https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif" width="400" height="200" />
+
+<img src="https://media.giphy.com/media/dT5pf9N0ZV7yTfUxje/giphy.gif" width="400" height="200" />
+
 
 ### **Description**
 
@@ -58,12 +66,19 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 ### **How to Run Program Locally**
 
 ---
+
 Open 2 terminals: one is for client and the other is for server
+
 * cd to client folder: 
+
     - npm install 
+
     - npm start
+
 * cd to server folder: 
+
     - npm install
+
     - node server.js
 
 ### **External Libraries**
@@ -71,14 +86,26 @@ Open 2 terminals: one is for client and the other is for server
 ---
 
 * Front-End
+
     - React-Beautiful-DnD
+
     - React-Redux
+
     - React-Select
+
     - React-tooltip
+
     - Axios 
 
 * Back-end
-    - Cors, Express, sequelize and mysql
+
+    - Cors
+
+    - Express
+
+    - Sequelize
+
+    - Mysql
 
 * Collect data
 
@@ -93,6 +120,6 @@ Open 2 terminals: one is for client and the other is for server
 
 ---
 
-* Axios request: https://www.bezkoder.com/axios-request/
+* Axios request: [`Axios Tutorial`](#https://www.bezkoder.com/axios-request/)
 
-* NodeJs Rest APIs with Express, sequelize and MySQL: https://www.bezkoder.com/node-js-express-sequelize-mysql/#Test_the_APIs 
+* NodeJs Rest APIs with Express, sequelize and MySQL: [`Node.js Rest APIs`](#https://www.bezkoder.com/node-js-express-sequelize-mysql/#Test_the_APIs)
