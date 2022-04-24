@@ -1,4 +1,4 @@
-import ReqCourseCard from '../card/ReqCourseCard';
+import RCourseCard from '../card/RCourseCard';
 import {Droppable} from 'react-beautiful-dnd';
 import {memo} from 'react';
 import { useSelector } from 'react-redux';
@@ -18,7 +18,7 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
     courseIds.forEach((c) => {
         if(typeof(c) === 'string') {
             courseCards.push(
-                <ReqCourseCard 
+                <RCourseCard 
                     key={droppableId+c} 
                     courseId={c}
                     droppableId={droppableId}
@@ -32,7 +32,7 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
                     key={droppableId + 'div' + index} 
                     className='relative col-gap flex item-center flex-basis-100'
                 >
-                    <ReqCourseCard key={droppableId+c[0]} 
+                    <RCourseCard key={droppableId+c[0]} 
                         courseId={c[0]}
                         droppableId = {droppableId} 
                         index={index}
@@ -41,7 +41,7 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
                         or 
                     </span>
 
-                    <ReqCourseCard key={droppableId+c[1]} 
+                    <RCourseCard key={droppableId+c[1]} 
                         courseId={c[1]}
                         droppableId={droppableId}
                         index={index+1}

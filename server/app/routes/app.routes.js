@@ -1,7 +1,7 @@
 module.exports = app => {
     const courses = require("../controllers/courses.controller.js");
     const majors = require("../controllers/majors.controller.js");
-    const generalEducations = require("../controllers/generalEducations.controller.js");
+    const general_educations = require("../controllers/general_educations.controller.js");
     const courses_in_ges = require("../controllers/courses_in_ges.controller.js")
     const combine_models = require("../controllers/combine_models.controller.js")
 
@@ -12,7 +12,7 @@ module.exports = app => {
 
     router.get("/getMajors", majors.getMajors);
 
-    router.get("/getGeneralEducation",generalEducations.getGeneralEducationCategories);
+    router.get("/getGeneralEducation",general_educations.getGeneralEducationCategories);
 
     router.get("/getCoursesByGE", courses_in_ges.getCourses);
 

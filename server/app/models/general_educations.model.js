@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const GeneralEducations = sequelize.define("generalEducations", {
+    const GeneralEducations = sequelize.define("general_educations", {
         id: {
             type: Sequelize.STRING(5),
             primaryKey: true,

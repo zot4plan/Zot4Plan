@@ -33,10 +33,10 @@ function TutorialCard ({ closedTutorial }: TutorialSliderType) {
             <LeftArrow/>
         </button>
         <div id='tutorial-image-container' 
-                className='flex justify-center relative'>
+            className='flex justify-center relative'>
             <div 
-                className='absolute' 
-                id='x-circle' 
+                className='btn-secondary' 
+                id='close-tutorial-btn' 
                 onClick={closedTutorial}>
                 <XCircle/>
             </div>

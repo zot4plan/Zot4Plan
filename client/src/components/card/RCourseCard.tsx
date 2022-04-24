@@ -24,7 +24,7 @@ function getStyle(style: any, snapshot: { isDropAnimating: any; }) {
     };
 }
 
-function ReqCourseCard({courseId, droppableId, index}: courseType) {
+function RCourseCard({courseId, droppableId, index}: courseType) {
     const repeatability = useSelector(
         (state: RootState) => state.store.courses.byIds[courseId].repeatability)
 
@@ -54,7 +54,7 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 style={getStyle(provided.draggableProps.style, snapshot)}
-                className="relative card w-125"
+                className="r-course-card"
                 >
                     <Popup id={courseId} 
                         showUnit={false} 
@@ -68,12 +68,12 @@ function ReqCourseCard({courseId, droppableId, index}: courseType) {
                     }
             </div>
 
-            {snapshot.isDragging && (<div className="h-36 w-125"/>)}    
+            {snapshot.isDragging && (<div className="r-course-card"/>)}    
             </>
         )}
     </Draggable>
     )
 }
 
-export default memo(ReqCourseCard)
+export default memo(RCourseCard)
 
