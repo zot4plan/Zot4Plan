@@ -5,7 +5,7 @@ By: [`Tram La`](#https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong
 ---
 
 
-<img src="https://media.giphy.com/media/rGVGxC1VKgIVSUtSlA/giphy.gif" width="220" height="120" />
+<img src="https://media.giphy.com/media/rGVGxC1VKgIVSUtSlA/giphy.gif" width="400" height="300" />
 
 <img src="https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif" width="220" height="120" />
 
