@@ -55,6 +55,7 @@ const generateInitialState = () => {
             name: "",
             url: "",
             status: "idle",
+            error: "",
         },
         ge: {
             byIds: {},
@@ -365,6 +366,7 @@ export const storeSlice = createSlice ({
 
         builder.addCase(fetchMajorById.rejected, (state) => {
             state.major.status = "failed";
+            state.major.error = "An error occurred while retrieving the data";
         });
 
         //////////////////////////////////////////////////////
@@ -474,12 +476,15 @@ export const storeSlice = createSlice ({
                     })
                 })
             } 
-            else
+            else {
                 state.major.status = "failed";
+                state.major.error = "Your upload file is invalid!";
+            }
         });
 
         builder.addCase(fetchMajorByFile.rejected, (state) => {
             state.major.status = "failed";
+            state.major.error = "An error occurred while retrieving the data";
         });
     },
 });

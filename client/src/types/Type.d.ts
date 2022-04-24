@@ -100,6 +100,7 @@ declare interface StoreType{
         name: string;
         url: string;
         status: string;
+        error: string;
     }
     coursesAddByStudent: {sectionId: string, title: string};
     ge: {

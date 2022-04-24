@@ -23,10 +23,10 @@ function Major () {
     const name = useSelector((state:RootState)=>state.store.major.name);
     const url = useSelector((state:RootState)=>state.store.major.url);
     const coursesAddByStudent = useSelector((state:RootState)=> state.store.coursesAddByStudent)
-    //const error = useSelector((state:RootState)=>state.store.major.error);
+    const error = useSelector((state:RootState)=>state.store.major.error);
 
     let content;
-    if( status === 'idle' || status === 'failed')
+    if(status === 'idle')
         content =
         <div className='flex flex-wrap justify-center item-center'>
             <img 
@@ -42,6 +42,8 @@ function Major () {
 
     else if (status === 'succeeded') 
         content = sectionIds.map(id => <MajorSection key={id} id={id}/>)
+    else 
+        content = <p className='fetch-error-message red'>{error}</p>
 
     let hyperLink;
     if(name !== '')

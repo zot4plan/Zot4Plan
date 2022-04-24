@@ -1,6 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux';
 import Select, { StylesConfig } from 'react-select';
-import Axios from 'axios';
+import Axios from '../../api/Axios';
 import {useState, MouseEvent } from 'react'
 import AddIcon from '../icon/AddIcon';
 import Error from '../icon/Error';
@@ -78,7 +78,7 @@ const BrowseCourseByGE = () => {
     const handleOnGEChange = async (option: OptionType| null) => {
         if(option) {
             setTimeout(() => {
-            Axios.get('http://localhost:8080/api/getCoursesByGE',{params: {id: option.label}})
+            Axios.get('/api/getCoursesByGE',{params: {id: option.label}})
                 .then((res) => {
                     setGE({
                         id: option.value, 
@@ -110,7 +110,7 @@ const BrowseCourseByGE = () => {
         if(course.value !== "") {
             if(!sectionCourses.includes(course.value)) {
                 setTimeout(() => {
-                    Axios.get('http://localhost:8080/api/getCourseById', {params: {id: course.value}})
+                    Axios.get('/api/getCourseById', {params: {id: course.value}})
                         .then((res) => {
                             if(res.data.message === 'succeed') {
                                 dispatch(addCourse({course: res.data.data, id: sectionId as string})); 

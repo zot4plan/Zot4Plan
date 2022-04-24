@@ -2,7 +2,7 @@ import {useState, MouseEvent} from 'react';
 import  { StylesConfig } from "react-select";
 import AsyncSelect  from 'react-select/async';
 import { useSelector, useDispatch } from 'react-redux';
-import Axios from 'axios';
+import Axios from '../../api/Axios';
 
 import {RootState} from '../../app/store';
 import {addCourse} from '../../features/StoreSlice'
@@ -47,7 +47,7 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
         callback(filterCourse);
     else 
         setTimeout(() => {
-            Axios.get('http://localhost:8080/api/filterCourses', {
+            Axios.get('/filterCourses', {
                 params: { id: inputValue }}).then((res) => {
                     res.data.forEach((course:CourseType) => filterCourse.push({value: course.id, label: course.id}))
                     callback(filterCourse);
@@ -70,7 +70,7 @@ function BrowseCourseById({id}: BrowseCourseType) {
 
         else if(!courses.includes(selectCourse))
             setTimeout(() => {
-                Axios.get('http://localhost:8080/api/getCourseById', {
+                Axios.get('/getCourseById', {
                     params: { id: selectCourse }})
                     .then((res) => {
                         if(res.data.message === 'succeed') {

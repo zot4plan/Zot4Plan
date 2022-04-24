@@ -1,5 +1,5 @@
 import { useState, useEffect, memo } from 'react';
-import Axios from 'axios';
+import Axios from '../../api/Axios';
 import Select from 'react-select';
 import { useDispatch } from 'react-redux';
 import {fetchMajorById} from '../../api/FetchData'
@@ -20,7 +20,7 @@ function SelectMajor() {
 
     useEffect( () => {
         async function fetchMajors() {
-            const res = await Axios('http://localhost:8080/api/getMajors');
+            const res = await Axios('/api/getMajors');
             const majorsArray = await res.data.map( (major:data) =>({value: major.id, label: major.name}));
             setMajors(majorsArray);
         }
@@ -55,7 +55,7 @@ function SelectMajor() {
             className='black mr-1'
             placeholder="Select major"
             onChange={handleOnChange}
-            aria-label="Select major"
+            aria-label="Select your major"
         />
     )
 };

@@ -40,7 +40,7 @@ function CourseCard({index, droppableId, courseId}: courseType) {
               isCrossed={false}
             />
 
-            <button className="remove-course-button" onClick = {removeCourse}>
+            <button className="remove-course-btn" onClick = {removeCourse}>
               <Xmark/>
             </button>
 

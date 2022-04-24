@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import Axios from 'axios';
+import Axios from '../api/Axios';
 
 /** 
  * Get All GE categories information.
@@ -11,7 +11,7 @@ import Axios from 'axios';
 export const fetchGE = createAsyncThunk(
     "features/fetchGE", async (_, thunkAPI) => {
        try {
-          const response = await Axios.get('http://localhost:8080/api/getGeneralEducation');
+          const response = await Axios.get('/api/getGeneralEducation');
           return await response.data;
         } 
         catch (error) {
@@ -20,7 +20,7 @@ export const fetchGE = createAsyncThunk(
 });
 
 export const fetchMajorById = createAsyncThunk("features/fetchMajorById", async ({id}:FetchMajorType) => 
-    Axios.get('http://localhost:8080/api/getRequirementById', {params: {id: id}})
+    Axios.get('/api/getRequirementById', {params: {id: id}})
     .then((response) => {
         return {
             status: "succeed",
@@ -45,7 +45,7 @@ export const fetchMajorById = createAsyncThunk("features/fetchMajorById", async 
 ); 
 
 export const fetchMajorByFile = createAsyncThunk("features/fetchMajorByFile", async ({data}: InputFileType) => 
-    Axios.get('http://localhost:8080/api/getDataByFile',{params: {data: data}})
+    Axios.get('/api/getDataByFile',{params: {data: data}})
     .then((response) => {
         const fileContent = (JSON.parse(data)).data;
         return {

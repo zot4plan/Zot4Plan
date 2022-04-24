@@ -442,7 +442,6 @@ svg {
 }
 
 /*********** body ***********/
-
 .rightIcon {
     padding-right:0.8rem;
     font-size: 2rem;
@@ -534,7 +533,7 @@ svg {
 }
 
 
-.card:hover .xmark {
+.card:hover .remove-course-btn {
     opacity: 1;
     visibility: visible;
 }
@@ -731,6 +730,7 @@ svg {
     margin-bottom: 1rem;
 }
 
+.fetch-error-message,
 #spinner {
     position: absolute;
     left: 50%;
@@ -738,9 +738,7 @@ svg {
     transform: translate(-50%, -50%);
 }
 
-#spinner > svg{
-    font-size: 5rem;
-}
+#spinner > svg{ font-size: 5rem;}
 
 /**********************************************
 ***************  6. Media quries  *************
