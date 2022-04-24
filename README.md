@@ -59,25 +59,28 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 
 ---
 Open 2 terminals: one is for client and the other is for server
-    cd to client folder: npm start
-    cd to server folder: node server.js
-
+* cd to client folder: 
+    - npm install 
+    - npm start
+* cd to server folder: 
+    - npm install
+    - node server.js
 
 ### **External Libraries**
 
 ---
 
 * Front-End
-
-    - React-DnD
-
+    - React-Beautiful-DnD
+    - React-Redux
+    - React-Select
+    - React-tooltip
     - Axios 
 
-    - Qs
+* Back-end
+    - Cors, Express, sequelize and mysql
 
-    - React-bootstrap
-
-* Back-End
+* Collect data
 
     - BeautifulSoup
 
@@ -89,8 +92,6 @@ Open 2 terminals: one is for client and the other is for server
 ### **Cited Sources**
 
 ---
-
-* Autocomplete feature: https://medium.com/swlh/implement-autocomplete-feature-in-react-9b2721a7deda
 
 * Axios request: https://www.bezkoder.com/axios-request/
 
