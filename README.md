@@ -1,6 +1,10 @@
 ## **Zot4Plan - Undergraduate Progress Tracker**
 
-By: Tram La and Loc Khong
+By: [`Tram La`](#https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`](#https://www.linkedin.com/in/lockhong/)
+
+![Major and Course Selection](https://media.giphy.com/media/rGVGxC1VKgIVSUtSlA/giphy.gif) ![Add Course](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif)
+
+![Select GE Course](https://media.giphy.com/media/dT5pf9N0ZV7yTfUxje/giphy.gif)
 
 ### **Description**
 
@@ -58,35 +62,46 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 ### **How to Run Program Locally**
 
 ---
-<<<<<<< HEAD
 
-1. Open two terminal simultaneously
-
-2. cd
-
-=======
 Open 2 terminals: one is for client and the other is for server
+
 * cd to client folder: 
+
     - npm install 
+
     - npm start
+
 * cd to server folder: 
+
     - npm install
+
     - node server.js
->>>>>>> fec481a758f837db10bdf32f03d06427082420b4
 
 ### **External Libraries**
 
 ---
 
 * Front-End
+
     - React-Beautiful-DnD
+
     - React-Redux
+
     - React-Select
+
     - React-tooltip
+
     - Axios 
 
 * Back-end
-    - Cors, Express, sequelize and mysql
+
+    - Cors
+
+    - Express
+
+    - Sequelize
+
+    - Mysql
 
 * Collect data
 
@@ -101,13 +116,6 @@ Open 2 terminals: one is for client and the other is for server
 
 ---
 
-<<<<<<< HEAD
-* Autocomplete feature: [`Implement Autocomplete Feature in React
-`](#https://medium.com/swlh/implement-autocomplete-feature-in-react-9b2721a7deda)
-
 * Axios request: [`Axios Tutorial`](#https://www.bezkoder.com/axios-request/)
-=======
-* Axios request: https://www.bezkoder.com/axios-request/
->>>>>>> fec481a758f837db10bdf32f03d06427082420b4
 
 * NodeJs Rest APIs with Express, sequelize and MySQL: [`Node.js Rest APIs`](#https://www.bezkoder.com/node-js-express-sequelize-mysql/#Test_the_APIs)
