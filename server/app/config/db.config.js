@@ -1,8 +1,8 @@
 module.exports = {
-    HOST: "DATABASE_URL",
-    USER: "USER_NAME",
+    HOST: "HOSTURL",
+    USER: "USERNAME",
     PASSWORD: "PASSWORD",
-    DB: "DATABASE",
+    DB: "database",
     dialect: "mysql",
     dialectOptions: {
         ssl:'Amazon RDS'

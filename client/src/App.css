@@ -42,13 +42,14 @@
     6.5
 **********************************************************/
 
-/**********************************************
-*************  1. Global Styles  **************
-***********************************************/
+/**** Cancel Drop and Drag animation ****/
 #tab-content div[data-rbd-placeholder-context-id] {display: none !important;}
 #tab-content div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
 #tab-content div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
 
+/**********************************************
+*************  1. Global Styles  **************
+***********************************************/
 :root {
     --transition-time: 400ms;
     --text-color: #000000; /* black */
@@ -770,5 +771,5 @@ svg { font-size: 10px; }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-
+    
 }
