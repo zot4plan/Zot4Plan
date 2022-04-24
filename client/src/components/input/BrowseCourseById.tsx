@@ -47,7 +47,7 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
         callback(filterCourse);
     else 
         setTimeout(() => {
-            Axios.get('/filterCourses', {
+            Axios.get('/api/filterCourses', {
                 params: { id: inputValue }}).then((res) => {
                     res.data.forEach((course:CourseType) => filterCourse.push({value: course.id, label: course.id}))
                     callback(filterCourse);
@@ -70,7 +70,7 @@ function BrowseCourseById({id}: BrowseCourseType) {
 
         else if(!courses.includes(selectCourse))
             setTimeout(() => {
-                Axios.get('/getCourseById', {
+                Axios.get('/api/getCourseById', {
                     params: { id: selectCourse }})
                     .then((res) => {
                         if(res.data.message === 'succeed') {

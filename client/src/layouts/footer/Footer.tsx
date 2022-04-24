@@ -16,7 +16,7 @@ const Footer = () => {
     <footer id="footer">
         <div>
             <div id='footer-logo-container'>
-                <img id="logo-image" src={Zot}/>
+                <img id="logo-image" src={Zot} alt='Anteater Logo brand'/>
                 <Logo/>
             </div>
             
@@ -35,7 +35,9 @@ const Footer = () => {
                 <li className='flex flex-column'>
                     <div className='flex'>
                         <img className="author-image"
-                            src={LocProfilePicture}/>
+                            src={LocProfilePicture}
+                            alt={'Loc Khong\'s profile picture'}
+                        />
 
                         <a target="_blank" 
                             href="https://www.linkedin.com/" 
@@ -49,19 +51,31 @@ const Footer = () => {
 
                     <ul className="contact-list">
                         <li className="contact-item">
-                            <a>
+                            <a target="_blank" 
+                                href="https://www.facebook.com/" 
+                                rel="noreferrer"
+                                aria-label="FaceBook"
+                            >
                                 <Facebook/>
                             </a>
                         </li>
 
                         <li className="contact-item">
-                            <a>
+                            <a target="_blank" 
+                                href="https://www.linkedin.com/" 
+                                rel="noreferrer"
+                                aria-label="Linkedin"
+                            >
                                 <Linkedin/>
                             </a>
                         </li>
 
                         <li className="contact-item">
-                            <a>
+                            <a target="_blank" 
+                                href="https://www.Github.com/" 
+                                rel="noreferrer"
+                                aria-label="Github"
+                            >
                                 <Github/>
                             </a>
                         </li>
@@ -71,7 +85,9 @@ const Footer = () => {
                 <li className='flex flex-column'>
                     <div className='flex'>
                         <img className="author-image"
-                            src={TramProfilePicture}/>
+                            src={TramProfilePicture}
+                            alt={'Tram La\'s profile picture'}
+                        />
                         <a target="_blank" 
                             href="https://www.linkedin.com/" 
                             rel="noreferrer"
@@ -84,19 +100,31 @@ const Footer = () => {
 
                     <ul className="contact-list">
                         <li className="contact-item">
-                            <a>
+                            <a target="_blank" 
+                                href="https://www.facebook.com/" 
+                                rel="noreferrer"
+                                aria-label="FaceBook"
+                            >
                                 <Facebook/>
                             </a>
                         </li>
 
                         <li className="contact-item">
-                            <a>
+                            <a target="_blank" 
+                                href="https://www.linkedin.com/" 
+                                rel="noreferrer"
+                                aria-label="Linkedin"
+                            >
                                 <Linkedin/>
                             </a>
                         </li>
                         
                         <li className="contact-item">
-                            <a>
+                            <a target="_blank" 
+                                href="https://www.Github.com/" 
+                                rel="noreferrer"
+                                aria-label="Github"
+                            >
                                 <Github/>
                             </a>
                         </li>
@@ -114,9 +142,11 @@ const Footer = () => {
             >
                 <Github/>
             </a>
+
             <ReactTooltip id="githubTip" place="bottom" effect="solid">
                 Github  
             </ReactTooltip>
+
             <p> &copy; Copyright 2022: zot4plan.com </p>
         </div>
 

@@ -41,7 +41,6 @@ function DownloadFileButton () {
     // Create JSON file and download URL
     const createDownloadFile = async () => {
         let output = JSON.stringify({data});
-        console.log(1)
         const blob = new Blob([output])
         const url = URL.createObjectURL(blob);
         setFile( prev => ({...prev, url: url }));
@@ -51,8 +50,6 @@ function DownloadFileButton () {
     const clickOnAnchor =  async () => {
         if(doFileDownload.current) {
             doFileDownload.current.click();
-            console.log(2)
-            console.log(file.url);
             URL.revokeObjectURL(file.url); // free up storage 
             setFile( prev => ({...prev, url: "" }));
         }
@@ -66,7 +63,11 @@ function DownloadFileButton () {
 
     return (
     <div id="download" className="relative">  
-        <button data-tip data-for='downloadTip' className='btn-primary' onClick ={download}>
+        <button data-tip data-for='downloadTip' 
+            className='btn-primary' 
+            onClick ={download}
+            aria-label="download your plan as a JSON file"
+        >
             <DownloadIcon/>
         </button>
         <ReactTooltip id="downloadTip" place="bottom" effect="solid">

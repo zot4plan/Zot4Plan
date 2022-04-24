@@ -20,6 +20,7 @@ function AddYearButton() {
             className="btn-secondary" 
             onClick={addNewYear}
             data-tip data-for='addYearTip'
+            aria-label='add year'
         > 
             <OutlineAdd/> 
         </button>
