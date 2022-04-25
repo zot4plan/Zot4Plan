@@ -122,6 +122,6 @@ Open 2 terminals: one is for client and the other is for server
 
 ---
 
-* Axios request: [`Axios Tutorial`](#https://www.bezkoder.com/axios-request/)
+* Axios request: [`Axios Tutorial`](https://www.bezkoder.com/axios-request/)
 
-* NodeJs Rest APIs with Express, sequelize and MySQL: [`Node.js Rest APIs`](#https://www.bezkoder.com/node-js-express-sequelize-mysql/#Test_the_APIs)
+* NodeJs Rest APIs with Express, sequelize and MySQL: [`Node.js Rest APIs`](https://www.bezkoder.com/node-js-express-sequelize-mysql/#Test_the_APIs)
