@@ -13,7 +13,7 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 
 ---
 
-<img src="https://media.giphy.com/media/rGVGxC1VKgIVSUtSlA/giphy.gif" width="400" height="200" /> <p align = "left"> Required courses will be displayed after major selection </p> <img src="https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif" width="400" height="200" />
+<img src="https://media.giphy.com/media/rGVGxC1VKgIVSUtSlA/giphy.gif" width="400" height="200" /> <p align = "left"> Required courses will be displayed after major selection </p> | <img src="https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif" width="400" height="200" />
 
 <img src="https://media.giphy.com/media/dT5pf9N0ZV7yTfUxje/giphy.gif" width="400" height="200" />
 
