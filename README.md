@@ -1,6 +1,6 @@
 ## **Zot4Plan - Undergraduate Progress Tracker**
 
-By: [`Tram La`](#https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`](#https://www.linkedin.com/in/lockhong/)
+By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`](https://www.linkedin.com/in/lockhong/)
 
 ---
 
