@@ -2,6 +2,8 @@
 
 By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`](https://www.linkedin.com/in/lockhong/)
 
+![Example Schdule](Images/mock_schedule.png)
+
 ### **Description**
 
 ---
