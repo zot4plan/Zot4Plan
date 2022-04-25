@@ -13,9 +13,11 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 
 ---
 
-<img src="https://media.giphy.com/media/rGVGxC1VKgIVSUtSlA/giphy.gif" width="400" height="200" /> <p align = "left"> Required courses will be displayed after major selection </p> | <img src="https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif" width="400" height="200" />
+![](https://media.giphy.com/media/rGVGxC1VKgIVSUtSlA/giphy.gif) |  ![](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif) | ![](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif)
+:--- |:----:|---:
+ Required courses displayed after major selection | Users can add courses by using the search bar | Select GE courses by section
 
-<img src="https://media.giphy.com/media/dT5pf9N0ZV7yTfUxje/giphy.gif" width="400" height="200" />
+
 
 * Search bar that allows users to either select or search their major of choice (B.A., B.S., or B.F.A.)
 
@@ -119,3 +121,7 @@ Open 2 terminals: one is for client and the other is for server
 * Axios request: [`Axios Tutorial`](https://www.bezkoder.com/axios-request/)
 
 * NodeJs Rest APIs with Express, sequelize and MySQL: [`Node.js Rest APIs`](https://www.bezkoder.com/node-js-express-sequelize-mysql/#Test_the_APIs)
+
+* Markdown general syntax: [`Markdown Basic Syntax`](https://www.markdownguide.org/extended-syntax/)
+
+* Markdown table syntax: [`Markdown Extended Syntax`](https://www.markdownguide.org/extended-syntax/)
