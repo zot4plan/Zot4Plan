@@ -13,7 +13,7 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 
 ---
 
-![](https://media.giphy.com/media/rGVGxC1VKgIVSUtSlA/giphy.gif) |  ![](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif) | ![](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif)
+![Required courses displayed after major selection](https://media.giphy.com/media/rGVGxC1VKgIVSUtSlA/giphy.gif) |  ![Users can add courses by using the search bar](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif) | ![Select GE courses by section](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif)
 :--- |:----:|---:
  Required courses displayed after major selection | Users can add courses by using the search bar | Select GE courses by section
 
