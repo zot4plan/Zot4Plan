@@ -2,7 +2,7 @@
 
 By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`](https://www.linkedin.com/in/lockhong/)
 
-![Example Schdule](Images/mock_schedule.PNG)
+![mock schedule](https://user-images.githubusercontent.com/70680546/165196022-10b8483c-fb8b-4ca1-96e1-19756dd659c5.PNG)
 
 ### **Description**
 
