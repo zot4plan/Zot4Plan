@@ -46,7 +46,7 @@ function Major () {
         content = <p className='fetch-error-message red'>{error}</p>
 
     let hyperLink;
-    if(name !== '')
+    if(name !== '' && status === 'succeeded')
         hyperLink = 
             <div className='flex flex-wrap justify-center item-center'> 
                 <a  className='hyperlink' 

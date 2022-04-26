@@ -2,7 +2,9 @@
 
 By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`](https://www.linkedin.com/in/lockhong/)
 
-![mock schedule](https://user-images.githubusercontent.com/70680546/165196022-10b8483c-fb8b-4ca1-96e1-19756dd659c5.PNG)
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/70680546/165196022-10b8483c-fb8b-4ca1-96e1-19756dd659c5.PNG" width="720" />
+</p>
 
 ### **Description**
 
@@ -15,13 +17,25 @@ Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. 
 
 ---
 
+ <!---div align="center">
 
-![Major Selection](https://media.giphy.com/media/snYqfS3lBIIVlZNbVP/giphy.gif) | ![Drag and Drop](https://media.giphy.com/media/qKIZtpMRtd0Ce0jKKC/giphy.gif)
-:---:|:---:
-Required courses will be displayed after major selection | Drag and drop feature that allows users to place a course in their planner
-![Users can add courses by using the search bar](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif) | ![Select GE courses by section](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif)
-Users can add courses by using the search bar | Select GE courses by section
+![Major Selection](https://media.giphy.com/media/snYqfS3lBIIVlZNbVP/giphy.gif))
 
+Required courses will be displayed after major selection
+
+![Drag and Drop](https://media.giphy.com/media/qKIZtpMRtd0Ce0jKKC/giphy.gif)
+
+Drag and drop feature that allows users to place a course in their planner)
+
+![Users can add courses by using the search bar](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif)
+
+Users can add courses by using the search bar
+
+![Select GE courses by section](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif)
+
+Select GE courses by section
+
+</div-->
 
 
 * Search bar that allows users to either select or search their major of choice (B.A., B.S., or B.F.A.)
@@ -66,6 +80,7 @@ Users can add courses by using the search bar | Select GE courses by section
 
     - The upload feature will take a json file of the schedule and load that saved version
 
+
 ### **How to Run Program Locally**
 
 ---
@@ -74,21 +89,23 @@ Open 2 terminals: one is for client and the other is for server
 
 * cd to client folder: 
 
-    - npm install 
-
-    - npm start
+```sh
+npm install 
+npm start
+```
 
 * cd to server folder: 
 
-    - npm install
+```sh
+npm install
+node server.js
+```
 
-    - node server.js
-
-### **External Libraries**
+### **Technologies**
 
 ---
 
-* Front-End
+* Front-End: React v17.0.39
 
     - React-Beautiful-DnD
 
@@ -100,7 +117,7 @@ Open 2 terminals: one is for client and the other is for server
 
     - Axios 
 
-* Back-end
+* Back-end: NodeJS v14.17.0
 
     - Cors
 
@@ -110,7 +127,7 @@ Open 2 terminals: one is for client and the other is for server
 
     - Mysql
 
-* Collect data
+* Scrape and build data: Python v3.8.5
 
     - BeautifulSoup
 
@@ -123,10 +140,8 @@ Open 2 terminals: one is for client and the other is for server
 
 ---
 
-* Axios request: [`Axios Tutorial`](https://www.bezkoder.com/axios-request/)
-
 * NodeJs Rest APIs with Express, sequelize and MySQL: [`Node.js Rest APIs`](https://www.bezkoder.com/node-js-express-sequelize-mysql/#Test_the_APIs)
 
-* Markdown general syntax: [`Markdown Basic Syntax`](https://www.markdownguide.org/extended-syntax/)
+<!--- * Markdown general syntax: [`Markdown Basic Syntax`](https://www.markdownguide.org/extended-syntax/)
 
-* Markdown table syntax: [`Markdown Extended Syntax`](https://www.markdownguide.org/extended-syntax/)
+* Markdown table syntax: [`Markdown Extended Syntax`](https://www.markdownguide.org/extended-syntax/) -->

@@ -2,7 +2,7 @@ const db = require("../models");
 const Majors = db.majors;
 
 // Return all majorID and majorName
-exports.getMajors = (req, res) => {
+exports.getMajors = (_req, res) => {
     Majors.findAll({ attributes: ['id','name']}).then(data => {
         res.send(data);
     })

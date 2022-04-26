@@ -23,7 +23,9 @@ exports.findAll = (req, res) => {
             }
         });
         id += "*";
-        condition = 'MATCH(id) AGAINST (:id IN BOOLEAN MODE) OR id =:queryId';
+
+        // Need to config innodb_ft_min_token_size to 1 to work properly
+        condition = 'MATCH(id) AGAINST (:id IN BOOLEAN MODE)';
     }
 
     Courses.findAll({ 
