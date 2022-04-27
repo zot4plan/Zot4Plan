@@ -1,7 +1,6 @@
 import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
 import { fetchMajorById, fetchMajorByFile, fetchGE} from '../api/FetchData'
 
-const YEAR_NAMES = ["Freshman","Sophomore","Junior","Senior"];
 const QUARTER_ID_LENGTH = 3; // for function AddCourseToQuarter
 const MAJOR_ID_LENGTH = 4; // to differentiate course in major (which cannot be remove)
 const ID_LENGTH = 5; 
@@ -37,7 +36,6 @@ const generateInitialState = () => {
 
         years[yearId] = {
             id: yearId, 
-            name: YEAR_NAMES[index], 
             quarterIds: quarterIds
         };
     })
@@ -203,8 +201,7 @@ export const storeSlice = createSlice ({
             
             state.years.allIds.push(newYearId);
             state.years.byIds[newYearId] = {
-                id: newYearId, 
-                name: "Senior plus", 
+                id: newYearId,  
                 quarterIds: newQuarterIds
             };
         },

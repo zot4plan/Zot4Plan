@@ -1,7 +1,6 @@
 /***** Object Type*****/
 declare interface YearType {
     id: string;
-    name: string;
     quarterIds: string[];
 }
 

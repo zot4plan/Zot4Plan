@@ -9,11 +9,12 @@ import Right from '../icon/Right';
 
 interface YearType {
     yearId: string;
+    yearName: string;
     index: number;
     isLast: boolean;
 }
 
-function Year({yearId, index, isLast}:YearType) {
+function Year({yearId, yearName, index, isLast}:YearType) {
     const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
 
     const [show, setShow] = useState (true);
@@ -29,7 +30,7 @@ function Year({yearId, index, isLast}:YearType) {
                 key={year.id} 
                 onClick={()=>setShow(!show)}
             > 
-                <h1 className="sz-4"> {year.name} </h1>
+                <h1 className="sz-4"> {yearName} </h1>
                 <div className="rightIcon">
                     <Right show ={show}/>
                 </div>

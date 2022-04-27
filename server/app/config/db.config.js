@@ -1,12 +1,9 @@
 module.exports = {
-    HOST: "...",
-    USER: "...",
-    PASSWORD: "...",
-    DB: "...",
+    HOST: "localhost",
+    USER: "mytestuser",
+    PASSWORD: "My6$Password",
+    DB: "zot4plandb",
     dialect: "mysql",
-    dialectOptions: {
-        ssl:'Amazon RDS'
-    },
     pool: {
         max: 5,
         min: 0,
