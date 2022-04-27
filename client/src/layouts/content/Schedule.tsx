@@ -9,7 +9,7 @@ import AddYearButton from '../../components/button/AddYearButton';
 
 const Schedule = () => {
     const yearIds = useSelector((state: RootState) => state.store.years.allIds);
-    const YEAR_NAMES = ["1st Year"," 2nd Year","3rd Year","4th Year", "5th Year", "6th Year", "7th Year", "8th Year", "9th Year"];
+    const YEAR_NAMES = ["1st","2nd","3rd","4th", "5th", "6th", "7th", "8th", "9th"];
 
     return (
       <div id="schedule">

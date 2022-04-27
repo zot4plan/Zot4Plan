@@ -192,18 +192,20 @@ export const storeSlice = createSlice ({
          *  Add a year and 4 quarters
          */
         addYear: (state) => {
-            let newYearId = nanoid(4);
-            let newQuarterIds = [ nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH),
-                               nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH) ];
-            
-            for(let i = 0; i < 4; i++) 
-                state.sectionCourses[newQuarterIds[i]] = [] as string[]
-            
-            state.years.allIds.push(newYearId);
-            state.years.byIds[newYearId] = {
-                id: newYearId,  
-                quarterIds: newQuarterIds
-            };
+            if(state.years.allIds.length < 9) {
+                let newYearId = nanoid(4);
+                let newQuarterIds = [ nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH),
+                                nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH) ];
+                
+                for(let i = 0; i < 4; i++) 
+                    state.sectionCourses[newQuarterIds[i]] = [] as string[]
+                
+                state.years.allIds.push(newYearId);
+                state.years.byIds[newYearId] = {
+                    id: newYearId,  
+                    quarterIds: newQuarterIds
+                };
+            }
         },
 
         /**

@@ -30,7 +30,7 @@ function Year({yearId, yearName, index, isLast}:YearType) {
                 key={year.id} 
                 onClick={()=>setShow(!show)}
             > 
-                <h1 className="sz-4"> {yearName} </h1>
+                <h1 className="sz-4"> {yearName + " Year"} </h1>
                 <div className="rightIcon">
                     <Right show ={show}/>
                 </div>

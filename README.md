@@ -105,7 +105,7 @@ node server.js
 
 ---
 
-* Front-End: React v17.0.39
+* Front-End: React 17.0.39
 
     - React-Beautiful-DnD
 
@@ -117,7 +117,7 @@ node server.js
 
     - Axios 
 
-* Back-end: NodeJS v14.17.0
+* Back-end: NodeJS 14.17.0
 
     - Cors
 
@@ -127,13 +127,15 @@ node server.js
 
     - Mysql
 
-* Scrape and build data: Python v3.8.5
+* Scrape and build data: Python 3.8.5
 
     - BeautifulSoup
 
     - Requests
 
     - Json
+
+* Database: MySql 8.0.28
 
 
 ### **Cited Sources**
