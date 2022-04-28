@@ -8,6 +8,7 @@ interface RemoveYearType {
     id: string;
     index: number;
 }
+
 function RemoveYearButton({id, index}: RemoveYearType) {
     const dispatch = useDispatch();
 
@@ -18,16 +19,16 @@ function RemoveYearButton({id, index}: RemoveYearType) {
 
     return ( 
     <>
-        <button id="remove-year-btn"
+        <button className="remove-year-btn"
             onClick={handleOnclick}
-            data-tip data-for='removeYearTip'
+            data-tip data-for={'removeYearTip' + index}
             aria-label='remove year'
         > 
             <Remove/> 
         </button>
 
-        <ReactTooltip id="removeYearTip" place="top" effect="solid">
-            remove year
+        <ReactTooltip id={"removeYearTip" + index} place="top" effect="solid">
+            Remove year
         </ReactTooltip>
     </>
     )

@@ -131,8 +131,8 @@ const BrowseCourseByGE = () => {
     };
 
     return (
-        <div className='flex flex-column justify-center item-center m-1'>
-            <div className='browse-container relative '> 
+        <div className="input-container">
+            <div className='browse-container'> 
                 <Select
                     components={{IndicatorSeparator:() => null }}
                     styles={GEBarStyle}
@@ -159,12 +159,12 @@ const BrowseCourseByGE = () => {
             </div>
             
             <div 
-                className={'message-container relative '+ (message.status !== 'idle'? 'fade-message' : '')}  
+                className={'message-container '+ (message.status !== 'idle'? 'fade-message' : '')}  
                 onAnimationEnd={() => setMessage({content:"", status: 'idle'})}
             >
                 {message.status !== 'idle' && 
                 <p className={'message ' + (message.status === 'succeed'? 'green': 'red')}> 
-                    <span className='message-icon absolute'> 
+                    <span className='message-icon'> 
                         {message.status === 'succeed' && <Success/>}
                         {message.status === 'fail' && <Error/>}
                     </span>

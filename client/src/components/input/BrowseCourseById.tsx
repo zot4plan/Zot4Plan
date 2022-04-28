@@ -90,7 +90,6 @@ function BrowseCourseById({id}: BrowseCourseType) {
                 content: content + " has already been added!",
                 status: status
             })
-
     };
 
     const handleOnChange = (option: OptionType | null) => {
@@ -101,8 +100,8 @@ function BrowseCourseById({id}: BrowseCourseType) {
     }
 
     return (
-        <div className='flex flex-column justify-center item-center m-1'>
-            <div className='browse-container relative'>
+        <div className='input-container'>
+            <div className='browse-container'>
                 <AsyncSelect
                     components={{DropdownIndicator:()=>null}}
                     styles={myStyle}
@@ -125,7 +124,7 @@ function BrowseCourseById({id}: BrowseCourseType) {
             >
                 {message.status !== 'idle' && 
                 <p className={'message ' + (message.status === 'succeed'? 'green': 'red')}> 
-                    <span className='message-icon absolute'> 
+                    <span className='message-icon'> 
                         {message.status === 'succeed' && <Success/>}
                         {message.status === 'fail' && <Error/>}
                     </span>

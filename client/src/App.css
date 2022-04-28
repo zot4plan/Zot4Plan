@@ -11,7 +11,7 @@
     3.3 Footer
 4. Components
     4.1 accordion
-        4.1.1 year 
+        4.1.1 yearAccordion 
         4.1.2 section
     4.2 button
         4.2.1 btn-primary
@@ -20,20 +20,19 @@
         4.2.4 remove-year-btn
         4.2.5 add-year-btn
         4.2.6 add-course-btn
-        4.2.7 remove-course-btn
-        4.2.8 close-tutorial-btn
+        4.2.7 course-btn
+        4.2.8 remove-course-btn
+        4.2.9 close-tutorial-btn
     4.3 card
-    4.4 droppable container
-    4.5 icon
-    4.6 info
-    4.7 input
-    4.8 tab
+        4.3.1 course-card
+        4.3.2 tutorial-card
+    4.4 draggable course
+        4.4.1 quarter-course
+        4.4.1 reuired-course
+    4.5 droppable container
+    4.6 input
+    4.7 tab
     4.8 schedule
-5. Images
-    5.1
-    5.2
-    5.3
-    5.4
 6. Media Query
     6.1
     6.2
@@ -70,16 +69,16 @@ body {
     color: var(--text-color);
 }
   
-code { font-family: 'Roboto','Times New Roman',Times, serif;}
+code {font-family: 'Roboto','Times New Roman',Times, serif;}
 
 html {font-size: 10px; color:#1F1F1F}
 
 html, body, #root { background-color: var(--primary-color);}
 
 h1, h2, h3, h4, h5, h6, p, div, ul, button {
-    font-size: 1.6rem;
     margin: 0;
     padding: 0;
+    font-size: 1.6rem;
 }
 
 a, button, svg {
@@ -111,41 +110,16 @@ svg { font-size: 10px; }
 .flex { display: flex; }
 .flex-column {flex-direction: column;}
 .flex-wrap {flex-wrap: wrap;}
-.flex-basis-100 {flex-basis: 100%;}
-.flex-basis-25 {flex-basis: 25%;}
 .justify-between {justify-content: space-between;}
 .justify-center {justify-content: center;}
 .item-center { align-items: center;}
 
-.col-gap {column-gap: 2.4rem;}
-.row-gap {row-gap: 1.6rem;}
-
-.h-36 {height: 3.6rem;} /* course-card height */
-
-/*** font-size ***/
-.sz-1 {font-size: 1.4rem;}
-.sz-2 {font-size: 1.5rem;}
-.sz-4 {font-size: 2rem;}
-
-/*** spacing ***/
-.m-1 { margin: 2rem 1.6rem;}
-.m-2 {margin: 2.4rem;}
-.m-3 {margin: 0.8rem 0rem;}
-
-.mt-0 { margin-top: 0;}
-.mt {margin-top: 0.8rem;}
-
-.mb {margin-bottom: 0.8rem;}
-.mb-1 {margin-bottom: 0.8rem;}
-.mb-3 { margin-bottom: 1.6rem;}
-
-.mr-0 {margin-right: 0.5rem;}
-.mr-1 {margin-right: 0.8rem;}
-.mr-3 {margin-right: 1.6rem;}
-
-.ml-1 {margin-left: 0.8rem;}
-.ml-2 {margin-left: 1.2rem}
-.ml-3 {margin-left: 1.6rem;}
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
 /*** round border and border ***/
 .round-10 {border-radius: 1rem;}
@@ -154,14 +128,6 @@ svg { font-size: 10px; }
 .round-top-right { border-top-right-radius: 1.5rem;}
 .round-bottom-left { border-bottom-left-radius: 1.5rem;}
 .round-bottom-right {border-bottom-right-radius: 1.5rem;}
-
-.bd-r {border-right: 0.2rem solid var(--border-color);}
-
-/*** shadow ***/
-.shadow {box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);}
-
-/***  transition ***/
-.ease { transition: all var(--transition-time) ease; }
 
 /**********************************************
 *****************  3. Layout  *****************
@@ -175,15 +141,20 @@ svg { font-size: 10px; }
     background-color: var(--secondary-color);
 }
 
+#logo-text-brand {
+    color: var(--primary-color);
+    margin-right: 1rem;
+}
+
 #download {
-    grid-column: 4;
     position: relative;
+    grid-column: 4;
 }
 
 #upload {
     position: relative;
-    grid-column: 5;
     z-index: 2;
+    grid-column: 5;
 }
 
 #help {grid-column: 6;}
@@ -212,20 +183,22 @@ svg { font-size: 10px; }
 
 /* 3.2.2 tab container (right-column)*/
 #tab-container {
-    height: 65rem;
     border-radius: 1.5rem;
     box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
+    height: 64.8rem;
+    /*height: calc(100% - 68px);*/
 }
 
 /*** 3.3 footer ***/
 #footer {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    padding: 1rem 4rem;
-
     display: grid;
     grid-template-columns: 1.5fr 2fr;
     column-gap: 12rem;
+
+    padding: 1rem 4rem;
+
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 /**********************************************
@@ -238,23 +211,66 @@ svg { font-size: 10px; }
     box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
 }
 
+.accordion-year > .accordion > h1 {font-size: 2rem;}
+
 .accordion-section {
     margin: 0rem 1.6rem 2rem 1.6rem;
 }
 
 .accordion {
-    background-color: var(--primary-color-2);
+    position: relative;
+
     display:flex;
     align-items: center;
     cursor: pointer;
+
+    background-color: var(--primary-color-2);
 }
 .accordion:hover {color: var(--accent-color-2)}
 
 .accordion > h1 {
-    flex-grow:2;
-    font-weight: 600;
+    flex-grow: 2;
     padding: 0.6rem 1rem;
+    font-weight: 600;
 }
+
+.right-icon {
+    padding-right:0.8rem;
+    font-size: 2rem;
+    line-height: 0;
+    transition: transform var(--transition-time);
+}
+
+.rotate { transform: rotate(90deg);}
+
+/* yearAccordion */
+.quarters-wrapper,
+.quarter-header-wrapper {
+    display:flex;
+    transition: all var(--transition-time) ease;
+}
+
+.quarter-header {
+    flex-basis: 25%;
+    padding: 0.15rem;
+   
+    border-bottom: 0.2rem solid var(--border-color);
+    border-top: 0.2rem solid var(--border-color);
+    background-color: #F8F8F8;
+
+    font-size: 1.8rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.quarters-wrapper {
+    opacity: 1;
+    max-height: 400px;
+}
+
+/* section */
+.section-body { padding: 1.6rem 0rem;}
+
 
 /*** 4.2 button ***/
 /* 4.2.1 btn-primary */
@@ -262,168 +278,67 @@ svg { font-size: 10px; }
     color: var(--accent-color-2);
 }
 .btn-primary svg:hover{
-    color: var(--primary-color);
-    background-color: var(--accent-color-2);
     box-shadow: 0 0 4px 4px var(--primary-color);
     border-radius: 50%;
+
+    background-color: var(--accent-color-2);
+    color: var(--primary-color);
 }
 
 /* 4.2.2 btn-secondary */
 .btn-secondary { 
+    border-radius: 50%;
     line-height: 0;
     color: var(--accent-color-2);
-    border-radius: 50%;
 }
 
 .btn-secondary:hover {
-    color: white;
-    background-color: var(--accent-color-2);
     box-shadow: 0 0 0.3rem 0.3rem var(--accent-color-2);
+    background-color: var(--accent-color-2);
+    color: white;
+}
+
+.hide {
+    opacity: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.hide div, .hide h2 {
+    min-height: 0px !important;
+    max-height: 0px !important;
+    min-width: 0px !important;
+    max-width: 0px !important;
+    border: none;
+    overflow: hidden;
 }
 
 /* 4.2.3 upload and import button */
 #upload-btn,
 #import-btn {
+    border-radius: 18px;
+    background-color: var(--accent-color-2);
+
     height: 100%;
     width:100%;
-
     font-size: 1.6rem;
-    border-radius: 18px;
     color: var(--primary-color);
-    background-color: var(--accent-color-2);
 }
 
 #upload-btn{
     position: absolute;
+    z-index: 2;
     top:0px;
     left:0px;
-    height: 100%;
-    width:100%;
-    z-index: 2;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.6rem;
-}
 
-/* 4.2.4 remove-year-btn */
-#remove-year-btn {
-    position: absolute;
-    left: 150px;
-    color: var(--accent-color-1);
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity var(--transition-time) ease, 
-                visibility var(--transition-time) ease;
-}
-
-.accordion:hover #remove-year-btn{
-    visibility: visible;
-    opacity: 1;
-}
-
-#remove-year-btn svg:hover {
-    border-radius: 50%;
-    background-color: var(--accent-color-1);
-    box-shadow: 0 0 2px 2px var(--accent-color-1);
-    color:white;
-}   
-
-/* 4.2.5 add-year-button */
-#add-year-btn {
-    position:absolute;
-    left: 50%; 
-    transform: translateX(-50%);
-}
-
-/* 4.2.6 add-course-btn */
-.add-course-btn {
-    position:absolute;
-    top: 52%;
-    right: 1%;
-    transform: translateY(-50%);
-
-    color:white;
-    background-color: var(--accent-color-2);
-    padding: 0.7rem;
-    line-height: 0;
-    border-radius: 50%;
-}
-
-/* 4.2.7 remove-course-btn */
-.remove-course-btn{
-    position:absolute;
-    color: #F2F2F2;
-    top: 0.2rem;
-    right: 0.2rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-time) ease, 
-                visibility var(--transition-time) ease;
-}
-.remove-course-btn svg:hover { color: white;}
-
-.course-card:hover .remove-course-btn,
-.r-course-card:hover .remove-course-btn {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* 4.2.8 close-tutorial-btn */
-#close-tutorial-btn {
-    position: absolute;
-    top: 2.5%;
-    right: 2.5%;
-}
-
-#close-tutorial-btn svg { font-size: 3rem;}
-
-/*** 4.3 Card ***/
-/* 4.1 CourseCard */
-.course-card {
-    position: relative;
-    margin: 0.2rem;
-}
-/* 4.2 RCourseCard */
-.r-course-card{
-    position: relative;
-    width: 12.5rem;
-    height: 3.6rem;
-}
-
-/* 4.3 CoursePopUpCard */
-/* 4.4 TutorialCard */
-
-/********** Navigation **********/
-#logo-text-brand {
-    color: var(--primary-color);
-    margin-right: 1rem;
-}
-
-#tutorial{ 
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 4;
-    background-color:rgba(0, 0, 0, 0.70);
-    width: 100%;
     height: 100%;
-    overflow: scroll;
-}
-
-#tutorial-image-container {
-    max-width: 60rem;
-    min-width: 50rem;
-    width: 60%;
-}
-
-
-.tutorial-img { 
-    border-radius: 25px;
-    border: 8px solid #5C9DD6;
-    width: 100%; 
-    height: auto;
+    width:100%;
+    font-size: 1.6rem;
 }
 
 #upload-card{
@@ -451,170 +366,266 @@ svg { font-size: 10px; }
     opacity: 0;
 }
 
+/* 4.2.4 remove-year-btn */
+.remove-year-btn {
+    position: absolute;
+    left: 9.6rem;
+    top: 0.8rem;
+    
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity var(--transition-time) ease, visibility var(--transition-time) ease;
+    color: var(--accent-color-1);
+}
+
+.accordion:hover .remove-year-btn{
+    visibility: visible;
+    opacity: 1;
+}
+
+.remove-year-btn svg:hover {
+    box-shadow: 0 0 2px 2px var(--accent-color-1);
+    border-radius: 50%;
+    background-color: var(--accent-color-1);
+    color:white;
+}   
+
+/* 4.2.5 add-year-button */
+#add-year-btn {
+    position:absolute;
+    left: 50%; 
+    transform: translateX(-50%);
+}
+
+/* 4.2.6 add-course-btn */
+.add-course-btn {
+    position:absolute;
+    top: 52%;
+    right: 1%;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+    padding: 0.7rem;
+   
+    background-color: var(--accent-color-2);
+
+    line-height: 0;
+    color:white;
+}
+
+/* 4.2.7 course-btn */
+.course-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    border-radius: 1rem;
+
+    width: 100%;
+    height: 3.6rem;
+}
+
+.course-id {
+    padding-left: 1rem;
+    cursor: pointer;
+    color:white;
+}
+
+.unit {
+    text-align: center;
+    cursor: grab;
+
+    padding-right: 2.2rem;
+    padding-left: 1rem;
+
+    font-size: 1.2rem;
+    color:snow;
+}
+
+/* 4.2.8 remove-course-btn */
+.remove-course-btn{
+    position:absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-time) ease, visibility var(--transition-time) ease;
+
+    color: #F2F2F2;
+}
+.remove-course-btn svg:hover { color: white;}
+
+.quarter-course:hover .remove-course-btn,
+.required-course:hover .remove-course-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 4.2.8 close-tutorial-btn */
+#close-tutorial-btn {
+    position: absolute;
+    top: 2.5%;
+    right: 2.5%;
+}
+
+#close-tutorial-btn svg { font-size: 3rem;}
+
+/*** 4.3 Card ***/
+/* 4.3.1 CourseCard */
+.course-card {
+    position: absolute;
+    z-index: 3;
+    top: 4rem;
+    left: 80%;
+    transform: translateX(-50%);
+
+    border: 0.2rem solid;
+    border-radius: 1rem;
+    background-color: white;
+
+    width: 24rem;
+    height: auto;
+}
+
+.course-card-before{
+    content: '';
+
+    position: absolute;
+    z-index: 2;
+    top: 3.5rem;
+    left: 70%;
+
+    transform: rotate(45deg);
+
+    margin: auto;
+
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.course-card-header {
+    padding: 0.6rem;
+    border-top-left-radius: 0.7rem;
+    border-top-right-radius: 0.7rem;
+    font-size: 1.5rem;
+}
+
+.course-card-body {
+    padding: 0.5rem;
+}
+
+.course-card-body > p {
+    margin: 0.8rem 0rem;
+    font-size: 1.4rem;
+}
+
+/* 4.3.2 TutorialCard */
+#tutorial {
+    position: absolute;
+    z-index: 4;
+    top: 0px;
+    left: 0px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: scroll;
+
+    width: 100%;
+    height: 100%;
+
+    background-color:rgba(0, 0, 0, 0.70);
+}
+
+#tutorial-image-container {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+
+    width: 60%;
+    max-width: 60rem;
+    min-width: 50rem;
+}
+
+.tutorial-img { 
+    border-radius: 25px;
+    border: 8px solid #5C9DD6;
+    width: 100%; 
+    height: auto;
+}
+
 .arrow { color:#5C9DD6; }
 
-/*********** body ***********/
-.rightIcon {
-    padding-right:0.8rem;
-    font-size: 2rem;
-    line-height: 0;
-    transition: transform var(--transition-time);
+/*** 4.4 draggable courses ***/
+/* 4.4.1 quater-course */
+.quarter-course {
+    position: relative;
+    margin: 0.2rem;
+}
+/* 4.4.2 required-course */
+.required-course {
+    position: relative;
+    width: 12.8rem;
+    height: 3.6rem;
 }
 
-.rotate { transform: rotate(90deg);}
-
-.section-body { padding: 1.6rem 0rem;}
-
-/**** quarter *****/
-.quarters-wrapper {
-    opacity: 1;
-    max-height: 400px;
-}
-
-.hide {
-    opacity: 0;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-}
-
-.quarter-header {
-    padding: 0.15rem;
-    text-align: center;
-    font-size: 1.8rem;
-    font-weight: 500;
-    border-bottom: 0.2rem solid var(--border-color);
-    border-top: 0.2rem solid var(--border-color);
-    background-color: #F8F8F8;
-}
+/*** 4.5 droppable container ***/
+/* quater */
 .quarter-droppable-area {
+    flex-basis: 25%;
     min-height: 7.9rem;
     /*min-width: 12.5rem;*/
 }
 
-.hide div, .hide h2 {
-    min-height: 0px !important;
-    max-height: 0px !important;
-    min-width: 0px !important;
-    max-width: 0px !important;
-    border: none;
-    overflow: hidden;
+/* requirement sections */
+.droppable-area {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 12.8rem);
+    column-gap: 2.4rem;
+    row-gap: 1.6rem;
 }
 
-/* Tabs */
-#tab-container {
-    height: 65rem;
+
+.sub-droppable-area {
+    position: relative;
+    grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 12.8rem);
+    column-gap: 2.4rem;
 }
 
-#tab-panel {
+.sub-droppable-area > span {
+    position: absolute;
+    z-index: 1;
+    top: 0.8rem;
+    left: 13.3rem;
+}
+
+/*** 4.6 input ***/
+.input-container {
     display: flex;
-}
-
-.tab{
-    flex-grow: 1;
-    padding: 0.5rem;
-    font-weight: 600;
-    cursor: pointer;
-    background-color: var(--primary-color-2);
-    transition: background-color ease-in-out 0.4s;
-
-    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-}
 
-.tab:hover {color: var(--accent-color-2);}
-
-.tab-active {
-    background-color: var(--primary-color);
-    color: var(--accent-color-2);
-    border-top: 0.4rem solid var(--accent-color-2);
-}
-
-#tab-content{
-    position: relative;
-    border-top: 1px solid white;
-    height: calc(100% - 50px);
-    overflow: scroll;
-}
-
-#select-major-img {
-    margin-top: 18%;
-    width:84%;
-    height: auto;
-}
-
-
-.course-id {
-    padding-left: 1rem;
-    color:white;
-    cursor: pointer;
-}
-
-.unit {
-    font-size: 1.2rem;
-    text-align: center;
-    text-decoration: none;
-    cursor: grab;
-    color:snow;
-    padding-right: 2.2rem;
-    padding-left: 1rem;
-}
-
-.card-popup {
-    background-color: white;
-    border: 0.2rem solid;
-    position: absolute;
-    top: 4rem;
-    left: 80%;
-    transform: translateX(-50%);
-    width: 24rem;
-    height: auto;
-    cursor: default;
-    z-index: 2;
-    display: none;
-    border-radius: 1rem;
-}
-
-.card-popup-before{
-    position: absolute;
-    content: '';
-    width: 2.5rem;
-    height: 2.5rem;
-    top: 3.5rem;
-    left: 70%;
-    margin: auto;
-    transform: rotate(45deg);
-    z-index: 2;
-}
-
-.popup-header {
-    padding: 0.8rem;
-    border-top-left-radius: 0.7rem;
-    border-top-right-radius: 0.7rem;
-}
-
-
-.hyperlink {
-    font-size: 2rem;
-    text-align: center;
-    color: var(--accent-color-2);
-    font-weight: 630;
-    margin-bottom: 1.6rem;
-}
-
-.hyperlink:hover {
-    color:#FF934F;
-    text-decoration: underline; 
+    margin: 3rem 1.6rem 1.8rem 1.6rem;;
 }
 
 .browse-container {
+    position: relative;
+
     height: 3.6rem;
     width: 27rem;
 }
 
-
 .message-container {
+    position: relative;
     height: 1.6rem;
     max-width: 27rem;
 }
@@ -626,6 +637,7 @@ svg { font-size: 10px; }
 }
 
 .message-icon { 
+    position: absolute;
     left: 0px; 
     top: 6px; 
 }
@@ -642,9 +654,74 @@ svg { font-size: 10px; }
 @keyframes fadeIn {
     to {opacity: 0; visibility: hidden;}
 }
+
 @-webkit-keyframes fadeIn {
     0% {opacity: 1; visibility: visible;}
     100% {opacity: 0; visibility: hidden;}
+}
+
+/*** 4.7 tabs ***/
+#tab-panel {
+    display: flex;
+}
+
+.tab{
+    flex-grow: 1;
+    
+    transition: background-color ease-in-out 0.4s;
+    padding: 0.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--primary-color-2);
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+#tab-content{
+    position: relative;
+    overflow: scroll;
+    border-top: 1px solid white;
+    height: calc(100% - 50px);
+}
+
+.tab:hover {color: var(--accent-color-2);}
+
+.tab-active {
+    border-top: 0.4rem solid var(--accent-color-2);
+    background-color: var(--primary-color);
+    color: var(--accent-color-2);
+}
+
+
+#select-major-img {
+    margin-top: 18%;
+    width:84%;
+    height: auto;
+}
+
+#major-img-container {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.hyperlink {
+    margin-bottom: 1.6rem;
+
+    font-size: 2rem;
+    font-weight: 630;
+    text-align: center;
+    color: var(--accent-color-2);
+}
+
+.hyperlink:hover {
+    text-decoration: underline; 
+    color:#FF934F;
 }
 
 
@@ -731,8 +808,7 @@ svg { font-size: 10px; }
 }
 
 #copyright > p {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem 0rem;
 }
 
 .fetch-error-message,
@@ -746,7 +822,7 @@ svg { font-size: 10px; }
 #spinner > svg{ font-size: 5rem;}
 
 /**********************************************
-***************  6. Media quries  *************
+**************  5. Media quries  **************
 ***********************************************/
 
 /* Extra small devices (phones, 600px and down) */

@@ -13,7 +13,7 @@ function TutorialCard ({ closedTutorial }: TutorialSliderType) {
 
     function handleLeftClick( e: { preventDefault: () => void; }) {
         e.preventDefault();
-        if(index == 1)
+        if(index === 1)
             setIndex(images.length);
         else 
             setIndex(index - 1);
@@ -21,23 +21,23 @@ function TutorialCard ({ closedTutorial }: TutorialSliderType) {
     
     function handleRightClick( e: { preventDefault: () => void; }) {
         e.preventDefault();
-        if(index == images.length)
+        if(index === images.length)
             setIndex(1);
         else 
             setIndex(index + 1);
     }
       
     return (
-    <div id='tutorial' className='flex justify-center item-center'>
+    <div id='tutorial'>
         <button className='arrow' onClick={handleLeftClick}>
             <LeftArrow/>
         </button>
-        <div id='tutorial-image-container' 
-            className='flex justify-center relative'>
+        <div id='tutorial-image-container'>
             <div 
                 className='btn-secondary' 
                 id='close-tutorial-btn' 
-                onClick={closedTutorial}>
+                onClick={closedTutorial}
+            >
                 <XCircle/>
             </div>
             <img

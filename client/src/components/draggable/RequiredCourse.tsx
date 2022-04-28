@@ -1,9 +1,11 @@
+import {memo} from 'react';
+import { Draggable } from 'react-beautiful-dnd';
+
 import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from '../../app/store';
-import Popup from './CardPopup';
-import { Draggable } from 'react-beautiful-dnd';
-import {memo} from 'react'
-import { deleteCourse } from '../../features/StoreSlice'
+import { deleteCourse } from '../../features/StoreSlice';
+
+import CourseButton from '../button/CourseButton';
 import Xmark from '../icon/Xmark';
 
 interface courseType {
@@ -24,7 +26,7 @@ function getStyle(style: any, snapshot: { isDropAnimating: any; }) {
     };
 }
 
-function RCourseCard({courseId, droppableId, index}: courseType) {
+function RequiredCourse({courseId, droppableId, index}: courseType) {
     const repeatability = useSelector(
         (state: RootState) => state.store.courses.byIds[courseId].repeatability)
 
@@ -54,9 +56,9 @@ function RCourseCard({courseId, droppableId, index}: courseType) {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 style={getStyle(provided.draggableProps.style, snapshot)}
-                className="r-course-card"
+                className="required-course"
                 >
-                    <Popup id={courseId} 
+                    <CourseButton id={courseId} 
                         showUnit={false} 
                         isCrossed ={!isDraggable}
                     />
@@ -68,12 +70,12 @@ function RCourseCard({courseId, droppableId, index}: courseType) {
                     }
             </div>
 
-            {snapshot.isDragging && (<div className="r-course-card"/>)}    
+            {snapshot.isDragging && (<div className="required-course"/>)}    
             </>
         )}
     </Draggable>
     )
 }
 
-export default memo(RCourseCard)
+export default memo(RequiredCourse)
 

@@ -1,54 +1,55 @@
-import { memo } from 'react';
-import Popup from './CardPopup';
-import { useDispatch } from 'react-redux';
-import { Draggable } from 'react-beautiful-dnd';
-import { removeCourseFromQuarter } from '../../features/StoreSlice'
-import Xmark from '../icon/Xmark';
+import {memo} from 'react';
 
-interface courseType {
-    courseId: string;
-    index: number;
-    droppableId: string;
+interface CourseCardType {
+    course: CourseType;
+    color: string;
+    boxShadowColor: string;
 }
 
-function CourseCard({index, droppableId, courseId}: courseType) {
-    const dispatch = useDispatch();
+function CourseCard({course, color, boxShadowColor}: CourseCardType) {
 
-    const removeCourse = (e: { preventDefault: () => void; }) => {
-      e.preventDefault();
-      dispatch(removeCourseFromQuarter({
-          quarterId: droppableId,
-          index: index, 
-          courseId: courseId
-      }))
-    }; 
-   
-  
-    return (   
-    <Draggable key={droppableId + courseId} 
-      draggableId={droppableId + courseId} index={index}
-    >
-      {(provided) => (
-        <div>
-          <div ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            className="course-card"
-          >
-            <Popup id={courseId} 
-              showUnit={true} 
-              isCrossed={false}
-            />
+    let body = [];
+    body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
 
-            <button className="remove-course-btn" onClick = {removeCourse}>
-              <Xmark/>
-            </button>
+    if(course.prerequisite !== "")
+        body.push(<p key='prerequisite'> <b>{"Prerequisite: "}</b> {course.prerequisite} </p>)
 
-          </div>
+    if(course.restriction !== "")
+        body.push(<p key='restriction'> <b>{"Restriction: "}</b> {course.restriction} </p>)
+
+    if(course.corequisite !== "")
+        body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{course.corequisite} </p>)
+            
+    if(course.repeatability > 1)
+        body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{course.repeatability} </p>)
+
+    if(course.ge !== "")
+        body.push(<p key='ge'> <b>{"GE: "}</b>{course.ge} </p>)
+
+    return ( 
+    <>
+        <div className="course-card-before" 
+            style={{backgroundColor: color}}>
         </div>
-      )}
-    </Draggable>
+
+        <div className="course-card" 
+            style={{borderColor: color, boxShadow: '4px 4px 0px 0px' + boxShadowColor}}
+        >   
+            <p className='course-card-header'
+                style={{backgroundColor: color}}
+            > 
+                <b>{course.id + '. ' + course.name}</b> 
+                <br/>
+                {course.units + " units"} 
+            </p>
+            
+            <div className="course-card-body"> 
+                {body}
+            </div>  
+        </div>
+    </>
     )
+
 }
 
 export default memo(CourseCard)

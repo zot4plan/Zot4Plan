@@ -36,6 +36,7 @@ function Tabs () {
       <div id="tab-content">
         {tabId === 1 && <Major/>}
         {tabId === 2 && <GeneralEducation/>}
+        <div style={{height:'60rem'}}></div>
       </div>
 
     </div>

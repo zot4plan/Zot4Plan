@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from "../../app/store";
 
-import QuarterCourses from '../droppable/QuarterDroppableBox';
+import QuarterDroppableArea from '../droppable/QuarterDroppableArea';
 import RemoveYearButton from "../button/RemoveYearButton";
 import Right from '../icon/Right';
 
@@ -30,27 +30,28 @@ function Year({yearId, yearName, index, isLast}:YearType) {
                 key={year.id} 
                 onClick={()=>setShow(!show)}
             > 
-                <h1 className="sz-4"> {yearName + " Year"} </h1>
-                <div className="rightIcon">
+                <h1> {yearName + " Year"} </h1>
+                <div className="right-icon">
                     <Right show ={show}/>
                 </div>
                 {index > 3 && <RemoveYearButton id={year.id} index={index}/>}
             </div>
 
-            <div className={"flex ease " + (show? '':'hide')} >
-                {QUARTER_NAMES.map((name, index) => {
+            <div className={"quarter-header-wrapper " + (show? '':'hide')} >
+                {QUARTER_NAMES.map((quarterName, index) => {
                     return (
-                    <h2 key={name} 
-                        className={"quarter-header flex-basis-25 " 
-                                    + (index < 3? 'bd-r ':'')}> 
-                        {name}
+                    <h2 key={quarterName} 
+                        className="quarter-header"
+                        style={{borderRight: index < 3? '0.2rem solid var(--border-color)':''}}
+                    > 
+                        {quarterName}
                     </h2>)
                 })}
             </div>
 
-            <div className={'quarters-wrapper flex ease '+ (show?'':'hide')}>
+            <div className={'quarters-wrapper ' + (show? '':'hide')}>
                 {year.quarterIds.map((quarterId, index) => 
-                    <QuarterCourses key={quarterId} droppableId={quarterId} index={index}/>
+                    <QuarterDroppableArea key={quarterId} droppableId={quarterId} index={index}/>
                 )}
             </div>
         </div>

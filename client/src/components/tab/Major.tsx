@@ -28,7 +28,7 @@ function Major () {
     let content;
     if(status === 'idle')
         content =
-        <div className='flex flex-wrap justify-center item-center'>
+        <div className='flex-container'>
             <img 
                 id='select-major-img' 
                 loading='lazy' 
@@ -48,7 +48,7 @@ function Major () {
     let hyperLink;
     if(name !== '' && status === 'succeeded')
         hyperLink = 
-            <div className='flex flex-wrap justify-center item-center'> 
+            <div className='flex-container'> 
                 <a  className='hyperlink' 
                     href={url} 
                     target='_blank' 

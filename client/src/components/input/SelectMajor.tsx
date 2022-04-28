@@ -1,6 +1,6 @@
 import { useState, useEffect, memo } from 'react';
 import Axios from '../../api/Axios';
-import Select from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 import { useDispatch } from 'react-redux';
 import {fetchMajorById} from '../../api/FetchData'
 
@@ -12,6 +12,12 @@ interface OptionType {
 interface data {
     id: string;
     name: string;
+}
+
+const myStyle: StylesConfig<OptionType, false> =  {
+    container: (provided) => {
+        return {...provided, marginRight: '0.8rem'};
+    },
 }
 
 function SelectMajor() {
@@ -32,19 +38,12 @@ function SelectMajor() {
     const handleOnChange = async (option: OptionType | null) => {
         if(option){
             try {
-            //    setStatus('pending')
                 await dispatch(fetchMajorById({id: option.value}));
-            //    setOption(option.label);
             }
             catch (err) {
                 console.error('Failed to retrieve major: ', err)
             } 
-            //finally {
-            ///    setStatus('idle')
-           // }
         }
-    //    else
-    //       setOption("");
     }
 
 
@@ -52,7 +51,7 @@ function SelectMajor() {
         <Select 
             isClearable={true}
             options={majors} 
-            className='mr-1'
+            styles={myStyle}
             placeholder="Select your major"
             onChange={handleOnChange}
             aria-label="Select your major"

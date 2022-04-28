@@ -19,7 +19,7 @@ const Section = ({id, name, note, sublist}:SectionType) => {
                 onClick={() => setShow(!show)}
                 >
                 <h1> {name} </h1>
-                <div className="rightIcon">
+                <div className="right-icon">
                     <Right show={show}/>
                 </div>
             </div>

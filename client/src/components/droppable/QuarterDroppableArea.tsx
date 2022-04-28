@@ -1,16 +1,16 @@
-import CourseCard from '../card/CourseCard';
+import QuarterCourse from '../draggable/QuarterCourse';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
 import {Droppable} from 'react-beautiful-dnd';
 import {useCallback,memo } from 'react'
 
-function QuarterDroppableBox({droppableId, index}:QuarterType) {
+function QuarterDroppableArea({droppableId, index}:QuarterType) {
   const courses = useSelector((state:RootState) => state.store.sectionCourses[droppableId]);
 
   const renderCard = useCallback(
       (id: string, droppableId: string, index: number) => {
         return (
-          <CourseCard 
+          <QuarterCourse 
               key={id} 
               index={index} 
               droppableId={droppableId}
@@ -29,16 +29,16 @@ function QuarterDroppableBox({droppableId, index}:QuarterType) {
         ref={provided.innerRef}
         {...provided.droppableProps}
         {...provided.droppableProps}
-        style={{backgroundColor: snapshot.isDraggingOver?'lightblue':'white'}}
-        className={"flex-basis-25 quarter-droppable-area " 
-                    + (index < 3? 'bd-r ':'')
+        style={{backgroundColor: snapshot.isDraggingOver?'lightblue':'white',
+                borderRight: index < 3? '0.2rem solid var(--border-color)':''}}
+
+        className={"quarter-droppable-area " 
                     + (index === 0? 'round-bottom-left' : '')
                     + (index === 3? 'round-bottom-right' : '')}
         >
           {courses.map(
-            (courseId , index) => 
-              typeof(courseId) === 'string' 
-              &&  renderCard(courseId, droppableId, index)
+            (courseId, index) => 
+              typeof(courseId) === 'string' && renderCard(courseId, droppableId, index)
           )}
           {provided.placeholder}
       </div>
@@ -47,4 +47,4 @@ function QuarterDroppableBox({droppableId, index}:QuarterType) {
   )
 }
 
-export default memo(QuarterDroppableBox);
+export default memo(QuarterDroppableArea);

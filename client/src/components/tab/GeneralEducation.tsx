@@ -3,6 +3,7 @@ import { useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
 import Section from '../accordion/Section';
 import BrowseCourseByGE from '../input/BrowseCourseByGE'
+import Spinner from '../icon/Spinner';
 
 interface GESectionType { id: string; }
 
@@ -20,7 +21,7 @@ function GeneralEducation() {
     let content;
 
     if (status === 'loading') 
-        content = <p>Loading....</p> 
+        content = <div id='spinner'> <Spinner/> </div>  
    
     else if (status === 'succeeded') {
         content = geIds.map((id) => (
@@ -35,6 +36,7 @@ function GeneralEducation() {
     <>
         <BrowseCourseByGE/>
         {content}
+        <div style={{height:'48rem'}}></div>
     </>
     )
 }
