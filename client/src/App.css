@@ -32,13 +32,16 @@
     4.5 droppable container
     4.6 input
     4.7 tab
-    4.8 schedule
+5. Images
+    5.1 Major
+    5,2 Footer logo
+    5,3 Author 
 6. Media Query
-    6.1
-    6.2
-    6.3
-    6.4
-    6.5
+    6.1 Extra small devices (phones, 600px and down)
+    6.2 Small devices (portrait tablets and large phones, 600px and up)
+    6.3 Medium devices (landscape tablets, 768px and up)
+    6.4 Large devices (laptops/desktops, 992px and up)
+    6.5 Extra large devices (large laptops and desktops, 1200px and up)
 **********************************************************/
 
 /**** Cancel Drop and Drag animation ****/
@@ -81,9 +84,7 @@ h1, h2, h3, h4, h5, h6, p, div, ul, button {
     font-size: 1.6rem;
 }
 
-a, button, svg {
-    cursor: pointer;
-}
+a, button, svg { cursor: pointer; }
 
 ul {list-style-type: none;}
 
@@ -96,23 +97,11 @@ button {
 
 svg { font-size: 10px; }
 
-.green {color: #07B053;} /* success-message */
-.red {color: var(--accent-color-1);} /* fail-message*/
-
-.relative {position: relative;}
-.absolute {position: absolute;}
-
 /**********************************************
 *************  2. Common styles  **************
 ***********************************************/
 
-/*** display Flex ***/
 .flex { display: flex; }
-.flex-column {flex-direction: column;}
-.flex-wrap {flex-wrap: wrap;}
-.justify-between {justify-content: space-between;}
-.justify-center {justify-content: center;}
-.item-center { align-items: center;}
 
 .flex-container {
     display: flex;
@@ -121,7 +110,12 @@ svg { font-size: 10px; }
     flex-wrap: wrap;
 }
 
-/*** round border and border ***/
+.green {color: #07B053;} /* success-message */
+.red {color: var(--accent-color-1);} /* fail-message*/
+
+.relative {position: relative;}
+.absolute {position: absolute;}
+
 .round-10 {border-radius: 1rem;}
 .round-15 { border-radius: 1.5rem;}
 .round-top-left { border-top-left-radius: 1.5rem;}
@@ -143,7 +137,6 @@ svg { font-size: 10px; }
 
 #logo-text-brand {
     color: var(--primary-color);
-    margin-right: 1rem;
 }
 
 #download {
@@ -175,10 +168,25 @@ svg { font-size: 10px; }
     margin: 2.4rem 2.4rem 8rem 2.4rem;
 }
 
-/* 3.2.1 schedule (left-column) */
-#schedule {
+.tab,
+#tab-panel,
+#schedule,
+#schedule-function-row {
     display: flex;
-    flex-direction: column;
+}
+
+.tab, #schedule-function-row{
+    align-items: center;
+}
+
+/* 3.2.1 schedule (left-column) */
+#schedule {flex-direction: column;}
+
+#schedule-function-row{
+    position: relative;
+    justify-content: space-between;
+
+    margin-top: 2rem;
 }
 
 /* 3.2.2 tab container (right-column)*/
@@ -189,16 +197,113 @@ svg { font-size: 10px; }
     /*height: calc(100% - 68px);*/
 }
 
+.tab {
+    flex-grow: 1;
+    transition: background-color ease-in-out 0.4s;
+    padding: 0.5rem;
+    justify-content: center;
+    background-color: var(--primary-color-2);
+    cursor: pointer;
+    font-weight: 600;
+}
+.tab:hover {color: var(--accent-color-2);}
+
+.tab-active {
+    border-top: 0.4rem solid var(--accent-color-2);
+    background-color: var(--primary-color);
+    color: var(--accent-color-2);
+}
+
+#tab-content{
+    position: relative;
+    overflow: scroll;
+    border-top: 1px solid white;
+    height: calc(100% - 50px);
+}
+
 /*** 3.3 footer ***/
 #footer {
     display: grid;
-    grid-template-columns: 1.5fr 2fr;
-    column-gap: 12rem;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10rem;
 
-    padding: 1rem 4rem;
-
+    padding: 0rem 4rem;
     background-color: var(--secondary-color);
     color: var(--primary-color);
+}
+
+.author-name {
+    color: var(--primary-color);
+    margin-left: 1.6rem;
+    font-size: 2rem;
+}
+
+#copyright,
+#footer-logo-container,
+.footer-header-container,
+.author-name {
+    display: flex;
+    align-items: center;
+}
+
+.footer-header-container,
+#footer-logo-container {
+    margin: 2rem 0rem;
+}
+
+.footer-header-container {
+    height: 6.4rem;
+}
+
+.footer-header-container > h1 {
+    font-size: 2.6rem;
+    font-weight: 500;
+}
+
+#author-list-containter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+}
+
+#author-list-containter > li {
+    display: flex;
+    flex-direction: column;
+}
+
+#about-p {
+    text-align: justify;
+}
+
+.contact-list {
+    margin-left: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contact-item {
+    width:5rem;
+}
+
+.contact-item > a > svg {
+    font-size: 3.2rem;
+    color: var(--primary-color);
+}
+
+#copyright {
+    margin-top: 5rem;
+    grid-column: 1/-1;
+    
+    flex-direction: column;
+}
+
+#copyright > a > svg {
+    font-size: 3.6rem;
+    color: var(--primary-color);
+}
+
+#copyright > p {
+    margin: 1rem 0rem;
 }
 
 /**********************************************
@@ -315,6 +420,21 @@ svg { font-size: 10px; }
 }
 
 /* 4.2.3 upload and import button */
+#upload-card{
+    width: 180px;
+    height: 150px;
+
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, 10%);
+    
+    border-radius: 15px;
+    border: 1px solid lightgray;
+    box-shadow: 0px 0px 3px 1px #0000001f;
+    background-color: white;
+}
+
 #upload-btn,
 #import-btn {
     border-radius: 18px;
@@ -341,29 +461,15 @@ svg { font-size: 10px; }
     font-size: 1.6rem;
 }
 
-#upload-card{
-    width: 180px;
-    height: 150px;
-
-    position: absolute;
-    top: 75%;
-    left: 50%;
-    transform: translate(-50%, 10%);
-    
-    border-radius: 15px;
-    border: 1px solid lightgray;
-    box-shadow: 0px 0px 3px 1px #0000001f;
-    background-color: white;
-}
-
 #upload-input {
-    max-width:180px;
-    height: 3.6rem;
-
     position: relative;
     z-index: 3;
 
     opacity: 0;
+    cursor: pointer;
+
+    max-width:180px;
+    height: 3.6rem;
 }
 
 /* 4.2.4 remove-year-btn */
@@ -546,10 +652,6 @@ svg { font-size: 10px; }
 
     display: flex;
     justify-content: center;
-
-    width: 60%;
-    max-width: 60rem;
-    min-width: 50rem;
 }
 
 .tutorial-img { 
@@ -590,7 +692,6 @@ svg { font-size: 10px; }
     row-gap: 1.6rem;
 }
 
-
 .sub-droppable-area {
     position: relative;
     grid-column: 1 / -1;
@@ -598,6 +699,7 @@ svg { font-size: 10px; }
     display: grid;
     grid-template-columns: repeat(auto-fill, 12.8rem);
     column-gap: 2.4rem;
+    row-gap: 1.6rem;
 }
 
 .sub-droppable-area > span {
@@ -661,55 +763,6 @@ svg { font-size: 10px; }
 }
 
 /*** 4.7 tabs ***/
-#tab-panel {
-    display: flex;
-}
-
-.tab{
-    flex-grow: 1;
-    
-    transition: background-color ease-in-out 0.4s;
-    padding: 0.5rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-color: var(--primary-color-2);
-    cursor: pointer;
-
-    font-weight: 600;
-}
-
-#tab-content{
-    position: relative;
-    overflow: scroll;
-    border-top: 1px solid white;
-    height: calc(100% - 50px);
-}
-
-.tab:hover {color: var(--accent-color-2);}
-
-.tab-active {
-    border-top: 0.4rem solid var(--accent-color-2);
-    background-color: var(--primary-color);
-    color: var(--accent-color-2);
-}
-
-
-#select-major-img {
-    margin-top: 18%;
-    width:84%;
-    height: auto;
-}
-
-#major-img-container {
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
 .hyperlink {
     margin-bottom: 1.6rem;
 
@@ -724,93 +777,6 @@ svg { font-size: 10px; }
     color:#FF934F;
 }
 
-
-/**********************************************
-******************  5. Images  ****************
-***********************************************/
-#logo-image {
-    height: 8rem;
-    width: 8rem;
-    margin-right: 1rem;
-}
-
-.author-image {
-    height: 6.4rem;
-    width: 6.4rem;
-    border-radius: 50%;
-    border: 3px solid var(--accent-color-2);
-}
-
-.author-name {
-    color: var(--primary-color);
-    margin-left: 1.6rem;
-    font-size: 2rem;
-}
-
-#footer-logo-container,
-.footer-header-container,
-.author-name {
-    display: flex;
-    align-items: center;
-}
-
-#footer-logo-container {
-    margin: 2rem 0rem;
-}
-
-
-.footer-header-container {
-    height: 6.4rem;
-    margin-top: 2rem;
-}
-
-.footer-header-container > h1 {
-    font-size: 2.6rem;
-    font-weight: 500;
-}
-
-#author-list-containter {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 2rem;
-}
-
-#about-p {
-    text-align: justify;
-}
-
-.contact-list {
-    margin-left: 8rem;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.contact-item {
-    width:5rem;
-}
-
-.contact-item > a > svg {
-    font-size: 3.2rem;
-    color: var(--primary-color);
-}
-
-#copyright {
-    margin-top: 5rem;
-    grid-column: 1/-1;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-#copyright > a > svg {
-    font-size: 3.6rem;
-    color: var(--primary-color);
-}
-
-#copyright > p {
-    margin: 1rem 0rem;
-}
-
 .fetch-error-message,
 #spinner {
     position: absolute;
@@ -820,6 +786,33 @@ svg { font-size: 10px; }
 }
 
 #spinner > svg{ font-size: 5rem;}
+
+
+/**********************************************
+******************  5. Images  ****************
+***********************************************/
+
+/* major tab */
+#select-major-img {
+    margin-top: 18%;
+    width:43.2rem;
+    height: 38rem;
+}
+
+/* 5.1 logo - footer */
+#logo-image {
+    height: 7.2rem;
+    width: 7.2rem;
+    margin-right: 1rem;
+}
+
+/* authors */
+.author-image {
+    height: 6.4rem;
+    width: 6.4rem;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color-2);
+}
 
 /**********************************************
 **************  5. Media quries  **************

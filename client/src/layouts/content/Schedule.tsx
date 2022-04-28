@@ -21,13 +21,12 @@ const Schedule = () => {
             isLast={index === yearIds.length - 1}/>
         ))}
 
-        <div className='relative flex item-center justify-between' 
-          style={{marginTop: '2rem'}}
-        >
+        <div id='schedule-function-row'>
           <RefreshButton/>
           <AddYearButton/>
           <TotalUnits/>
         </div>
+        
       </div>
     )
 }

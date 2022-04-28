@@ -16,7 +16,7 @@ interface data {
 
 const myStyle: StylesConfig<OptionType, false> =  {
     container: (provided) => {
-        return {...provided, marginRight: '0.8rem'};
+        return {...provided, margin: '0 1rem', minWidth: '200px'};
     },
 }
 
@@ -33,7 +33,8 @@ function SelectMajor() {
         
         if(majors.length === 0)
             fetchMajors();
-    },[]); 
+            
+    },[majors]); 
 
     const handleOnChange = async (option: OptionType | null) => {
         if(option){
@@ -45,7 +46,6 @@ function SelectMajor() {
             } 
         }
     }
-
 
     return (
         <Select 

@@ -26,13 +26,12 @@ const Footer = () => {
         </div>
 
         <div>
-            
             <div className="footer-header-container">
                 <h1>Authors</h1>
             </div>
 
             <ul id='author-list-containter'>    
-                <li className='flex flex-column'>
+                <li>
                     <div className='flex'>
                         <img className="author-image"
                             src={LocProfilePicture}
@@ -82,7 +81,7 @@ const Footer = () => {
                     </ul>
                 </li>
 
-                <li className='flex flex-column'>
+                <li>
                     <div className='flex'>
                         <img className="author-image"
                             src={TramProfilePicture}

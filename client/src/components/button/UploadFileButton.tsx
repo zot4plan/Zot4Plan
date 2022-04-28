@@ -55,10 +55,9 @@ function UploadFileButton () {
 
             {/* upload-card */}
             <div id="upload-card" 
-                className="absolute"
                 style={{display: showUploadCard? "block":" none"}}
             >   
-                <div className="relative flex justify-center item-center"
+                <div className="relative flex-container"
                     style={{margin: '1rem 2rem 0.5rem 2rem'}}
                 >
                     <input id="upload-input"
@@ -72,6 +71,7 @@ function UploadFileButton () {
                         Upload
                     </button>
                 </div>
+
                 <p style={{textAlign:'center', fontSize:'1.2rem', color: '#307ABB', marginBottom: '1rem'}}>
                     Only JSON files
                 </p>
@@ -80,7 +80,7 @@ function UploadFileButton () {
                     {file.name}
                 </p>
 
-                <div className="flex justify-center item-center"
+                <div className="flex-container"
                     style={{margin: '1rem 4rem', height:'3.6rem'}}
                 > 
                     <button id="import-btn" onClick={handleOnSubmit} arial-label='Import file'> Import </button>
