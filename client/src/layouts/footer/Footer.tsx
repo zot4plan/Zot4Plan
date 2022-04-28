@@ -15,7 +15,7 @@ const Footer = () => {
     return (
     <footer id="footer">
         <div>
-            <div id='footer-logo-container'>
+            <div id='footer-logo-container' className='flex-container'>
                 <img id="logo-image" src={Zot} alt='Anteater Logo brand'/>
                 <Logo/>
             </div>
@@ -26,7 +26,7 @@ const Footer = () => {
         </div>
 
         <div>
-            <div className="footer-header-container">
+            <div id="footer-header-container" className='flex-container'>
                 <h1>Authors</h1>
             </div>
 
@@ -35,7 +35,7 @@ const Footer = () => {
                     <div className='flex'>
                         <img className="author-image"
                             src={LocProfilePicture}
-                            alt={'Loc Khong\'s profile picture'}
+                            alt={'Loc Khong\'s profile'}
                         />
 
                         <a target="_blank" 
@@ -85,7 +85,7 @@ const Footer = () => {
                     <div className='flex'>
                         <img className="author-image"
                             src={TramProfilePicture}
-                            alt={'Tram La\'s profile picture'}
+                            alt={'Tram La\'s profile'}
                         />
                         <a target="_blank" 
                             href="https://www.linkedin.com/" 

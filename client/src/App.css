@@ -1,6 +1,5 @@
-/***************************************************** 
-    Table of Contents
-
+/***************************************************************************** 
+                                Table of Contents
 1. Global Styles
 2. Common Styles
 3. Layout
@@ -42,7 +41,7 @@
     6.3 Medium devices (landscape tablets, 768px and up)
     6.4 Large devices (laptops/desktops, 992px and up)
     6.5 Extra large devices (large laptops and desktops, 1200px and up)
-**********************************************************/
+**************************************************************************************/
 
 /**** Cancel Drop and Drag animation ****/
 #tab-content div[data-rbd-placeholder-context-id] {display: none !important;}
@@ -61,6 +60,9 @@
     --secondary-color:#1F1F1F; /* Eerie Black */
     --accent-color-1:#DF2935; /* Rose Madder */
     --accent-color-2:#307ABB; /* French Blue */
+}
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -100,21 +102,18 @@ svg { font-size: 10px; }
 /**********************************************
 *************  2. Common styles  **************
 ***********************************************/
+.relative {position: relative;}
+.absolute {position: absolute;}
 
 .flex { display: flex; }
 
+/* upload, download, help, tutorial, browse, major */
 .flex-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
-
-.green {color: #07B053;} /* success-message */
-.red {color: var(--accent-color-1);} /* fail-message*/
-
-.relative {position: relative;}
-.absolute {position: absolute;}
 
 .round-10 {border-radius: 1rem;}
 .round-15 { border-radius: 1.5rem;}
@@ -123,69 +122,39 @@ svg { font-size: 10px; }
 .round-bottom-left { border-bottom-left-radius: 1.5rem;}
 .round-bottom-right {border-bottom-right-radius: 1.5rem;}
 
+.green {color: #07B053;} /* success-message */
+.red {color: var(--accent-color-1);} /* fail-message*/
+
 /**********************************************
 *****************  3. Layout  *****************
 ***********************************************/
-
 /*** 3.1 Navigation bar ***/
 #nav-bar {
     display: grid;
     grid-template-columns: 2.5fr 5fr 2.7fr 0.6fr 0.6fr 0.6fr;
-    padding: 2rem 2.4rem;
+    padding: 2rem 2.4rem 1.6rem 2.4rem;
     background-color: var(--secondary-color);
 }
 
-#logo-text-brand {
-    color: var(--primary-color);
-}
-
-#download {
-    position: relative;
-    grid-column: 4;
-}
-
-#upload {
-    position: relative;
-    z-index: 2;
-    grid-column: 5;
-}
-
+#logo-text-brand {color: var(--primary-color);}
+#download { grid-column: 4;}
+#upload { z-index: 2; grid-column: 5; }
 #help {grid-column: 6;}
-
-#download,
-#upload, 
-#help {
-    display: flex;
-    justify-self: center;
-    align-items: center;
-}
 
 /*** 3.2 content ***/
 #body-container {
     display: grid; 
-    grid-template-columns: 7.5fr 4.5fr;
+    grid-template-columns: 1fr 1fr;
     column-gap: 2rem;
     margin: 2.4rem 2.4rem 8rem 2.4rem;
-}
-
-.tab,
-#tab-panel,
-#schedule,
-#schedule-function-row {
-    display: flex;
-}
-
-.tab, #schedule-function-row{
-    align-items: center;
 }
 
 /* 3.2.1 schedule (left-column) */
 #schedule {flex-direction: column;}
 
 #schedule-function-row{
-    position: relative;
     justify-content: space-between;
-
+    align-items: center;
     margin-top: 2rem;
 }
 
@@ -194,18 +163,17 @@ svg { font-size: 10px; }
     border-radius: 1.5rem;
     box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
     height: 64.8rem;
-    /*height: calc(100% - 68px);*/
 }
 
 .tab {
     flex-grow: 1;
     transition: background-color ease-in-out 0.4s;
     padding: 0.5rem;
-    justify-content: center;
     background-color: var(--primary-color-2);
     cursor: pointer;
     font-weight: 600;
 }
+
 .tab:hover {color: var(--accent-color-2);}
 
 .tab-active {
@@ -215,21 +183,28 @@ svg { font-size: 10px; }
 }
 
 #tab-content{
-    position: relative;
     overflow: scroll;
     border-top: 1px solid white;
     height: calc(100% - 50px);
 }
 
 /*** 3.3 footer ***/
-#footer {
+#footer, #author-list-containter {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 10rem;
+    align-items: center;
+}
 
+#footer {
+    justify-items: center;
     padding: 0rem 4rem;
     background-color: var(--secondary-color);
     color: var(--primary-color);
+}
+
+#author-list-containter {row-gap: 2rem;}
+#author-list-containter > li {
+    display: flex;
+    flex-direction: column;
 }
 
 .author-name {
@@ -239,59 +214,41 @@ svg { font-size: 10px; }
 }
 
 #copyright,
-#footer-logo-container,
-.footer-header-container,
 .author-name {
     display: flex;
     align-items: center;
 }
 
-.footer-header-container,
-#footer-logo-container {
-    margin: 2rem 0rem;
-}
+#footer-logo-container { margin: 2rem 0rem;}
 
-.footer-header-container {
+#footer-header-container {
+    margin-top: 2rem;
     height: 6.4rem;
 }
-
-.footer-header-container > h1 {
+#footer-header-container > h1 {
     font-size: 2.6rem;
     font-weight: 500;
 }
 
-#author-list-containter {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 4rem;
-}
-
-#author-list-containter > li {
-    display: flex;
-    flex-direction: column;
-}
-
 #about-p {
     text-align: justify;
+    line-height: 1.4;
 }
 
 .contact-list {
-    margin-left: 8rem;
     display: flex;
     flex-wrap: wrap;
+    margin-left: 7rem;
 }
 
-.contact-item {
-    width:5rem;
-}
-
+.contact-item {width:5rem;}
 .contact-item > a > svg {
     font-size: 3.2rem;
     color: var(--primary-color);
 }
 
 #copyright {
-    margin-top: 5rem;
+    margin-top: 10rem;
     grid-column: 1/-1;
     
     flex-direction: column;
@@ -302,9 +259,7 @@ svg { font-size: 10px; }
     color: var(--primary-color);
 }
 
-#copyright > p {
-    margin: 1rem 0rem;
-}
+#copyright > p { margin: 1rem 0rem;}
 
 /**********************************************
 ***************  4. Components  ***************
@@ -323,8 +278,6 @@ svg { font-size: 10px; }
 }
 
 .accordion {
-    position: relative;
-
     display:flex;
     align-items: center;
     cursor: pointer;
@@ -348,31 +301,6 @@ svg { font-size: 10px; }
 
 .rotate { transform: rotate(90deg);}
 
-/* yearAccordion */
-.quarters-wrapper,
-.quarter-header-wrapper {
-    display:flex;
-    transition: all var(--transition-time) ease;
-}
-
-.quarter-header {
-    flex-basis: 25%;
-    padding: 0.15rem;
-   
-    border-bottom: 0.2rem solid var(--border-color);
-    border-top: 0.2rem solid var(--border-color);
-    background-color: #F8F8F8;
-
-    font-size: 1.8rem;
-    font-weight: 500;
-    text-align: center;
-}
-
-.quarters-wrapper {
-    opacity: 1;
-    max-height: 400px;
-}
-
 /* section */
 .section-body { padding: 1.6rem 0rem;}
 
@@ -380,10 +308,11 @@ svg { font-size: 10px; }
 /*** 4.2 button ***/
 /* 4.2.1 btn-primary */
 .btn-primary {
+    padding: 0.4rem 1rem;
     color: var(--accent-color-2);
 }
 .btn-primary svg:hover{
-    box-shadow: 0 0 4px 4px var(--primary-color);
+    box-shadow: 0 0 4px 3px var(--primary-color);
     border-radius: 50%;
 
     background-color: var(--accent-color-2);
@@ -398,33 +327,13 @@ svg { font-size: 10px; }
 }
 
 .btn-secondary:hover {
-    box-shadow: 0 0 0.3rem 0.3rem var(--accent-color-2);
+    box-shadow: 0 0 3px 3px var(--accent-color-2);
     background-color: var(--accent-color-2);
     color: white;
 }
 
-.hide {
-    opacity: 0;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-}
-
-.hide div, .hide h2 {
-    min-height: 0px !important;
-    max-height: 0px !important;
-    min-width: 0px !important;
-    max-width: 0px !important;
-    border: none;
-    overflow: hidden;
-}
-
 /* 4.2.3 upload and import button */
 #upload-card{
-    width: 180px;
-    height: 150px;
-
-    position: absolute;
     top: 75%;
     left: 50%;
     transform: translate(-50%, 10%);
@@ -433,6 +342,9 @@ svg { font-size: 10px; }
     border: 1px solid lightgray;
     box-shadow: 0px 0px 3px 1px #0000001f;
     background-color: white;
+
+    width: 180px;
+    height: 150px;
 }
 
 #upload-btn,
@@ -447,14 +359,9 @@ svg { font-size: 10px; }
 }
 
 #upload-btn{
-    position: absolute;
     z-index: 2;
     top:0px;
     left:0px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     height: 100%;
     width:100%;
@@ -462,7 +369,6 @@ svg { font-size: 10px; }
 }
 
 #upload-input {
-    position: relative;
     z-index: 3;
 
     opacity: 0;
@@ -474,7 +380,6 @@ svg { font-size: 10px; }
 
 /* 4.2.4 remove-year-btn */
 .remove-year-btn {
-    position: absolute;
     left: 9.6rem;
     top: 0.8rem;
     
@@ -498,14 +403,12 @@ svg { font-size: 10px; }
 
 /* 4.2.5 add-year-button */
 #add-year-btn {
-    position:absolute;
     left: 50%; 
     transform: translateX(-50%);
 }
 
 /* 4.2.6 add-course-btn */
 .add-course-btn {
-    position:absolute;
     top: 52%;
     right: 1%;
 
@@ -572,7 +475,6 @@ svg { font-size: 10px; }
 
 /* 4.2.8 close-tutorial-btn */
 #close-tutorial-btn {
-    position: absolute;
     top: 2.5%;
     right: 2.5%;
 }
@@ -582,7 +484,6 @@ svg { font-size: 10px; }
 /*** 4.3 Card ***/
 /* 4.3.1 CourseCard */
 .course-card {
-    position: absolute;
     z-index: 3;
     top: 4rem;
     left: 80%;
@@ -599,13 +500,11 @@ svg { font-size: 10px; }
 .course-card-before{
     content: '';
 
-    position: absolute;
     z-index: 2;
     top: 3.5rem;
     left: 70%;
 
     transform: rotate(45deg);
-
     margin: auto;
 
     width: 2.5rem;
@@ -630,14 +529,9 @@ svg { font-size: 10px; }
 
 /* 4.3.2 TutorialCard */
 #tutorial {
-    position: absolute;
     z-index: 4;
     top: 0px;
     left: 0px;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     overflow: scroll;
 
@@ -647,41 +541,52 @@ svg { font-size: 10px; }
     background-color:rgba(0, 0, 0, 0.70);
 }
 
-#tutorial-image-container {
-    position: relative;
-
-    display: flex;
-    justify-content: center;
-}
-
 .tutorial-img { 
     border-radius: 25px;
     border: 8px solid #5C9DD6;
-    width: 100%; 
-    height: auto;
+    width: 550px;
+    height: 726px;
 }
 
 .arrow { color:#5C9DD6; }
 
 /*** 4.4 draggable courses ***/
 /* 4.4.1 quater-course */
-.quarter-course {
-    position: relative;
-    margin: 0.2rem;
-}
+
+.quarter-course { margin: 0.2rem; }
+
 /* 4.4.2 required-course */
 .required-course {
-    position: relative;
     width: 12.8rem;
     height: 3.6rem;
 }
 
 /*** 4.5 droppable container ***/
 /* quater */
+
+.quarter-header {
+    padding: 0.15rem;
+   
+    border-bottom: 0.2rem solid var(--border-color);
+    border-top: 0.2rem solid var(--border-color);
+    background-color: #F8F8F8;
+
+    font-size: 1.8rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.quarters-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    opacity: 1;
+    max-height: 400px;
+}
+
 .quarter-droppable-area {
-    flex-basis: 25%;
     min-height: 7.9rem;
-    /*min-width: 12.5rem;*/
+    min-width: 12.8rem;
 }
 
 /* requirement sections */
@@ -693,7 +598,6 @@ svg { font-size: 10px; }
 }
 
 .sub-droppable-area {
-    position: relative;
     grid-column: 1 / -1;
 
     display: grid;
@@ -703,31 +607,35 @@ svg { font-size: 10px; }
 }
 
 .sub-droppable-area > span {
-    position: absolute;
     z-index: 1;
     top: 0.8rem;
     left: 13.3rem;
 }
 
+.hide, .hide div, .hide h2 {
+    opacity: 0;
+    min-height: 0px !important;
+    max-height: 0px !important;
+    min-width: 0px !important;
+    max-width: 0px !important;
+    overflow: hidden;
+}
+
+.hide div, .hide h2 {
+    border: none;
+}
 /*** 4.6 input ***/
 .input-container {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
     margin: 3rem 1.6rem 1.8rem 1.6rem;;
 }
 
 .browse-container {
-    position: relative;
-
     height: 3.6rem;
     width: 27rem;
 }
 
 .message-container {
-    position: relative;
     height: 1.6rem;
     max-width: 27rem;
 }
@@ -739,7 +647,6 @@ svg { font-size: 10px; }
 }
 
 .message-icon { 
-    position: absolute;
     left: 0px; 
     top: 6px; 
 }
@@ -779,7 +686,6 @@ svg { font-size: 10px; }
 
 .fetch-error-message,
 #spinner {
-    position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -787,16 +693,14 @@ svg { font-size: 10px; }
 
 #spinner > svg{ font-size: 5rem;}
 
-
 /**********************************************
 ******************  5. Images  ****************
 ***********************************************/
-
-/* major tab */
 #select-major-img {
-    margin-top: 18%;
-    width:43.2rem;
-    height: 38rem;
+    margin-top: 25%;
+    height: auto;
+    width: 94%;
+    aspect-ratio: attr(width) / attr(height);
 }
 
 /* 5.1 logo - footer */
@@ -820,25 +724,59 @@ svg { font-size: 10px; }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-
+   
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-
+    .quarters-wrapper{
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+    #select-major-img{
+        margin-top: 16%;
+    }
 
+    /*** footer responsive ***/
+    #footer-logo-container, #footer-header-container{
+        justify-content: start;
+    }
+
+    #footer {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 4rem;
+    }
+    #author-list-containter { grid-template-columns: 1fr; } 
+    #footer-header-container { margin: 2rem 0rem;}
+    #copyright {margin-top: 5rem;}
 }
+
+@media only screen and (min-width: 900px) {
+    #body-container {
+        grid-template-columns: 7.5fr 4.5fr;
+    }
+
+    .quarters-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-
+    /*** footer responsive ***/
+    #author-list-containter {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 4rem;
+    }
+    #footer{ column-gap: 10rem;}
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    
+  
 }

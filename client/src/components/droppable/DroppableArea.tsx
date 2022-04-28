@@ -30,14 +30,14 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
                 courseCards.push(
                     <div 
                         key={droppableId + 'div' + index} 
-                        className='sub-droppable-area'
+                        className='relative sub-droppable-area'
                     >
                         <RequiredCourse key={droppableId+c[0]} 
                             courseId={c[0]}
                             droppableId={droppableId} 
                             index={index}
                         />
-                        <span> or </span>
+                        <span className="absolute"> or </span>
 
                         <RequiredCourse key={droppableId+c[1]} 
                             courseId={c[1]}

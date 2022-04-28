@@ -21,7 +21,7 @@ function GeneralEducation() {
     let content;
 
     if (status === 'loading') 
-        content = <div id='spinner'> <Spinner/> </div>  
+        content = <div id='spinner' className="aboslute"> <Spinner/> </div>  
    
     else if (status === 'succeeded') {
         content = geIds.map((id) => (
@@ -29,7 +29,7 @@ function GeneralEducation() {
         ))
     } 
     else if (status === 'failed') 
-        content = <p className='fetch-error-message'>Cannot connect to server!!!</p>
+        content = <p className='absolute fetch-error-message'>Cannot connect to server!!!</p>
     
   
     return (

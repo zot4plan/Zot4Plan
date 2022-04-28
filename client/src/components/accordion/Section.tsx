@@ -15,7 +15,7 @@ const Section = ({id, name, note, sublist}:SectionType) => {
         <div className='accordion-section round-15'>  
             <div
                 key={id} 
-                className={'accordion ' + (show? 'round-top-left round-top-right': 'round-15')}
+                className={'relative accordion ' + (show? 'round-top-left round-top-right': 'round-15')}
                 onClick={() => setShow(!show)}
                 >
                 <h1> {name} </h1>

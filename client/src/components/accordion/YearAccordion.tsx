@@ -26,7 +26,7 @@ function Year({yearId, yearName, index, isLast}:YearType) {
             style={{marginBottom: isLast? '0rem': '2.5rem'}}
             >
             <div 
-                className={'accordion ' + (show? 'round-top-left round-top-right': 'round-15')}  
+                className={'relative accordion ' + (show? 'round-top-left round-top-right': 'round-15')}  
                 key={year.id} 
                 onClick={()=>setShow(!show)}
             > 
@@ -37,7 +37,7 @@ function Year({yearId, yearName, index, isLast}:YearType) {
                 {index > 3 && <RemoveYearButton id={year.id} index={index}/>}
             </div>
 
-            <div className={"quarter-header-wrapper " + (show? '':'hide')} >
+            <div className={'quarters-wrapper ' + (show? '':'hide')}>
                 {QUARTER_NAMES.map((quarterName, index) => {
                     return (
                     <h2 key={quarterName} 
@@ -47,11 +47,12 @@ function Year({yearId, yearName, index, isLast}:YearType) {
                         {quarterName}
                     </h2>)
                 })}
-            </div>
-
-            <div className={'quarters-wrapper ' + (show? '':'hide')}>
                 {year.quarterIds.map((quarterId, index) => 
-                    <QuarterDroppableArea key={quarterId} droppableId={quarterId} index={index}/>
+                    <QuarterDroppableArea key={quarterId} 
+                        droppableId={quarterId} 
+                        index={index}
+                        quarterName={QUARTER_NAMES[index]}
+                    />
                 )}
             </div>
         </div>

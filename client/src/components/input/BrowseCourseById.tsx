@@ -100,8 +100,8 @@ function BrowseCourseById({id}: BrowseCourseType) {
     }
 
     return (
-        <div className='input-container'>
-            <div className='browse-container'>
+        <div className='input-container flex-container'>
+            <div className='relative browse-container'>
                 <AsyncSelect
                     components={{DropdownIndicator:()=>null}}
                     styles={myStyle}
@@ -115,7 +115,7 @@ function BrowseCourseById({id}: BrowseCourseType) {
                     placeholder="Type at least 3 characters"
                     aria-label="Browse courses by ID"
                 />
-                <button className='add-course-btn' onClick={submitAddCourse}> <AddIcon/> </button>
+                <button className='absolute add-course-btn' onClick={submitAddCourse}> <AddIcon/> </button>
             </div>
 
             <div 
@@ -124,7 +124,7 @@ function BrowseCourseById({id}: BrowseCourseType) {
             >
                 {message.status !== 'idle' && 
                 <p className={'message ' + (message.status === 'succeed'? 'green': 'red')}> 
-                    <span className='message-icon'> 
+                    <span className='absolute message-icon'> 
                         {message.status === 'succeed' && <Success/>}
                         {message.status === 'fail' && <Error/>}
                     </span>

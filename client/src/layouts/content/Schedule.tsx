@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import {RootState} from '../../app/store';
 
-import Year from '../../components/accordion/YearAccordion';
+import YearAccordion from '../../components/accordion/YearAccordion';
 
 import TotalUnits from '../../components/info/TotalUnits';
 import RefreshButton from '../../components/button/RefreshButton';
@@ -12,16 +12,16 @@ const Schedule = () => {
     const YEAR_NAMES = ["1st","2nd","3rd","4th", "5th", "6th", "7th", "8th", "9th"];
 
     return (
-      <div id="schedule">
+      <div id="schedule" className="flex">
         {yearIds.map( (id,index) => (
-          <Year key={id} 
+          <YearAccordion key={id} 
             yearId={id}
             yearName={YEAR_NAMES[index]} 
             index={index} 
             isLast={index === yearIds.length - 1}/>
         ))}
 
-        <div id='schedule-function-row'>
+        <div id='schedule-function-row' className="relative flex">
           <RefreshButton/>
           <AddYearButton/>
           <TotalUnits/>

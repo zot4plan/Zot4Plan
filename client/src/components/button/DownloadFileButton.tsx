@@ -6,7 +6,7 @@ import DownloadIcon from '../icon/DownloadIcon';
 import ReactTooltip from "react-tooltip";
 
 function DownloadFileButton () {
-    const [file, setFile] = useState({fileType: "json", name:"zotplan", url: ""});
+    const [file, setFile] = useState({fileType: "json", name:"zotplan", url: "/"});
     const doFileDownload = useRef<HTMLAnchorElement>(null);
 
     /**
@@ -51,7 +51,7 @@ function DownloadFileButton () {
         if(doFileDownload.current) {
             doFileDownload.current.click();
             URL.revokeObjectURL(file.url); // free up storage 
-            setFile( prev => ({...prev, url: "" }));
+            setFile( prev => ({...prev, url: "/" }));
         }
     }
 
@@ -62,7 +62,7 @@ function DownloadFileButton () {
     }
 
     return (
-    <div id="download" className="relative">  
+    <div id="download" className="relative flex-container">  
         <button data-tip data-for='downloadTip' 
             className='btn-primary' 
             onClick ={download}

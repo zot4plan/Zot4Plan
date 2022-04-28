@@ -56,7 +56,7 @@ function RequiredCourse({courseId, droppableId, index}: courseType) {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 style={getStyle(provided.draggableProps.style, snapshot)}
-                className="required-course"
+                className="relative required-course"
                 >
                     <CourseButton id={courseId} 
                         showUnit={false} 

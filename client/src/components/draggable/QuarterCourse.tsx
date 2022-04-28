@@ -33,7 +33,7 @@ function QuarterCourse({index, droppableId, courseId}: courseType) {
           <div ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
-            className="quarter-course"
+            className="relative quarter-course"
           >
             <CourseButton id={courseId} 
               showUnit={true} 

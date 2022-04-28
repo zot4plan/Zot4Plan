@@ -41,7 +41,7 @@ function UploadFileButton () {
     }
 
     return (
-        <div id="upload">
+        <div id="upload" className="relative flex-container">
             <button  className='btn-primary' 
                 onClick={handleOnClick}
                 data-tip data-for="uploadTip"
@@ -54,20 +54,21 @@ function UploadFileButton () {
              </ReactTooltip>
 
             {/* upload-card */}
-            <div id="upload-card" 
+            <div className="absolute" id="upload-card" 
                 style={{display: showUploadCard? "block":" none"}}
             >   
                 <div className="relative flex-container"
                     style={{margin: '1rem 2rem 0.5rem 2rem'}}
                 >
-                    <input id="upload-input"
+                    <input className="relative" 
+                        id="upload-input"
                         type="file" 
                         name="uploadFile"
                         multiple={false}
                         accept=".json"
                         onChange={changeHandler}
                     />
-                    <button id="upload-btn" aria-label='browse local file'>
+                    <button className="absolute flex-container" id="upload-btn" aria-label='browse local file'>
                         Upload
                     </button>
                 </div>

@@ -18,22 +18,22 @@ function Tabs () {
 
   return (
     <div id="tab-container">
-      <ul id="tab-panel">
+      <ul id="tab-panel" className="flex">
         <li 
           onClick={()=>setTabId(1)}
-          className={'tab round-top-left ' + (tabId === 1?"tab-active":"")} 
+          className={'tab flex-container round-top-left ' + (tabId === 1?"tab-active":"")} 
         >
            Major Requirement
         </li>
 
         <li onClick={()=>setTabId(2)}
-          className={'tab round-top-right ' + (tabId === 2? "tab-active":"")} 
+          className={'tab flex-container round-top-right ' + (tabId === 2? "tab-active":"")} 
         >
           General Education
         </li>
       </ul>
 
-      <div id="tab-content">
+      <div id="tab-content" className="relative">
         {tabId === 1 && <Major/>}
         {tabId === 2 && <GeneralEducation/>}
         <div style={{height:'60rem'}}></div>

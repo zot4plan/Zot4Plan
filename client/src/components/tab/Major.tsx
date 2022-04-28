@@ -30,8 +30,7 @@ function Major () {
         content =
         <div className='flex-container'>
             <img 
-                id='select-major-img' 
-                loading='lazy' 
+                id='select-major-img'
                 src={ZotSelectMajor} 
                 alt='please select your major!' 
             />

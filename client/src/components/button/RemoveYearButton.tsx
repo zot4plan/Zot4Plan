@@ -19,7 +19,7 @@ function RemoveYearButton({id, index}: RemoveYearType) {
 
     return ( 
     <>
-        <button className="remove-year-btn"
+        <button className="absolute remove-year-btn"
             onClick={handleOnclick}
             data-tip data-for={'removeYearTip' + index}
             aria-label='remove year'

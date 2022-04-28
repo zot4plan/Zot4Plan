@@ -131,8 +131,8 @@ const BrowseCourseByGE = () => {
     };
 
     return (
-        <div className="input-container">
-            <div className='browse-container'> 
+        <div className="input-container flex-container">
+            <div className='relative browse-container'> 
                 <Select
                     components={{IndicatorSeparator:() => null }}
                     styles={GEBarStyle}
@@ -151,7 +151,7 @@ const BrowseCourseByGE = () => {
                     onChange={handleOnCourseChange}
                 />
                 <button 
-                    className='add-course-btn' 
+                    className='absolute add-course-btn' 
                     onClick={submitCourse}
                 > 
                     <AddIcon/> 
@@ -164,7 +164,7 @@ const BrowseCourseByGE = () => {
             >
                 {message.status !== 'idle' && 
                 <p className={'message ' + (message.status === 'succeed'? 'green': 'red')}> 
-                    <span className='message-icon'> 
+                    <span className='absolute message-icon'> 
                         {message.status === 'succeed' && <Success/>}
                         {message.status === 'fail' && <Error/>}
                     </span>

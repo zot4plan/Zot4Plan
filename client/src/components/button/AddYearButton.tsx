@@ -17,7 +17,7 @@ function AddYearButton() {
     return ( 
     <>
         <button id="add-year-btn" 
-            className="btn-secondary" 
+            className="absolute btn-secondary" 
             onClick={addNewYear}
             data-tip data-for='addYearTip'
             aria-label='add year'

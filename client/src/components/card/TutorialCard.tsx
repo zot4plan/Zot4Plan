@@ -28,13 +28,13 @@ function TutorialCard ({ closedTutorial }: TutorialSliderType) {
     }
       
     return (
-    <div id='tutorial'>
+    <div id='tutorial' className="absolute flex-container">
         <button className='arrow' onClick={handleLeftClick}>
             <LeftArrow/>
         </button>
-        <div id='tutorial-image-container'>
+        <div className="relative flex-container">
             <div 
-                className='btn-secondary' 
+                className='absolute btn-secondary' 
                 id='close-tutorial-btn' 
                 onClick={closedTutorial}
             >

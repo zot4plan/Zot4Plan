@@ -28,11 +28,11 @@ function CourseCard({course, color, boxShadowColor}: CourseCardType) {
 
     return ( 
     <>
-        <div className="course-card-before" 
+        <div className="absolute course-card-before" 
             style={{backgroundColor: color}}>
         </div>
 
-        <div className="course-card" 
+        <div className="absolute course-card" 
             style={{borderColor: color, boxShadow: '4px 4px 0px 0px' + boxShadowColor}}
         >   
             <p className='course-card-header'
