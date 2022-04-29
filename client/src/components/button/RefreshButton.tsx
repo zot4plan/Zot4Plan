@@ -16,7 +16,7 @@ function RefreshButton() {
 
     return ( 
     <>
-        <button className="btn-secondary" 
+        <button id="refresh-btn" className="btn-secondary" 
             onClick={refresh}
             data-tip data-for='refreshTip'
             aria-label='remove all courses'

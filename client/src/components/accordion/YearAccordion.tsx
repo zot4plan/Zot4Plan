@@ -16,6 +16,7 @@ interface YearType {
 
 function Year({yearId, yearName, index, isLast}:YearType) {
     const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
+    const LOWERCASE= ["fall", "winter","spring","summer"];
 
     const [show, setShow] = useState (true);
     const year = useSelector((state:RootState) => state.store.years.byIds[yearId])
@@ -23,7 +24,7 @@ function Year({yearId, yearName, index, isLast}:YearType) {
     return (
         <div 
             className='accordion-year round-15'
-            style={{marginBottom: isLast? '0rem': '2.5rem'}}
+            style={{marginBottom: isLast? '0rem':'2.5rem'}}
             >
             <div 
                 className={'relative accordion ' + (show? 'round-top-left round-top-right': 'round-15')}  
@@ -38,20 +39,15 @@ function Year({yearId, yearName, index, isLast}:YearType) {
             </div>
 
             <div className={'quarters-wrapper ' + (show? '':'hide')}>
-                {QUARTER_NAMES.map((quarterName, index) => {
-                    return (
-                    <h2 key={quarterName} 
-                        className="quarter-header"
-                        style={{borderRight: index < 3? '0.2rem solid var(--border-color)':''}}
-                    > 
-                        {quarterName}
-                    </h2>)
-                })}
+                {QUARTER_NAMES.map((quarterName, index) => 
+                        <h2 key={quarterName} className={"quarter-header-"+LOWERCASE[index] + " quarter-header"}> 
+                            {quarterName}
+                        </h2>
+                )}
                 {year.quarterIds.map((quarterId, index) => 
                     <QuarterDroppableArea key={quarterId} 
                         droppableId={quarterId} 
-                        index={index}
-                        quarterName={QUARTER_NAMES[index]}
+                        quarterName={LOWERCASE[index]}
                     />
                 )}
             </div>

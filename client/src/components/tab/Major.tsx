@@ -55,10 +55,18 @@ function Major () {
             </div>
     
     return (
-        <>
-            {status ==='succeeded' && <BrowseCourseById id={coursesAddByStudent.sectionId}/>}
+        <>  
+            <div id="browse-id-container" style={{display: status === 'succeeded'? "block": "none"}} >
+                <BrowseCourseById id={coursesAddByStudent.sectionId} majorStatus={status}/>  
+            </div>
+
             {hyperLink}
-            {status ==='succeeded' && <Section id={coursesAddByStudent.sectionId} name={coursesAddByStudent.title} note="" sublist={null} />}
+            {status ==='succeeded' 
+                && <Section id={coursesAddByStudent.sectionId} 
+                        name={coursesAddByStudent.title} 
+                        note="" 
+                        sublist={null} 
+            />}
             {content}
         </>
     )

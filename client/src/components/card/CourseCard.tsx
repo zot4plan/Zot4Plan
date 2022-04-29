@@ -1,12 +1,14 @@
-import {memo} from 'react';
+import {memo, MouseEvent} from 'react';
+import XCircle from '../icon/XCircle';
 
 interface CourseCardType {
     course: CourseType;
     color: string;
     boxShadowColor: string;
+    closeCard: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
-function CourseCard({course, color, boxShadowColor}: CourseCardType) {
+function CourseCard({course, color, boxShadowColor, closeCard}: CourseCardType) {
 
     let body = [];
     body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
@@ -28,11 +30,12 @@ function CourseCard({course, color, boxShadowColor}: CourseCardType) {
 
     return ( 
     <>
+        <div className="course-card-background"> </div>
         <div className="absolute course-card-before" 
             style={{backgroundColor: color}}>
         </div>
 
-        <div className="absolute course-card" 
+        <div className="course-card" 
             style={{borderColor: color, boxShadow: '4px 4px 0px 0px' + boxShadowColor}}
         >   
             <p className='course-card-header'
@@ -45,7 +48,9 @@ function CourseCard({course, color, boxShadowColor}: CourseCardType) {
             
             <div className="course-card-body"> 
                 {body}
-            </div>  
+            </div> 
+
+            <div onClick={closeCard} className="absolute close-card" > <XCircle/> </div> 
         </div>
     </>
     )

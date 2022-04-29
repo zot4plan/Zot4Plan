@@ -36,7 +36,7 @@ function CourseButton({id, showUnit, isCrossed}: CourseButtonType) {
         </div>
         
         <div style={{display: show? "block":"none"}}>
-            <CourseCard course={course} color={colors[1]} boxShadowColor={colors[0]}/>
+            <CourseCard course={course} color={colors[1]} boxShadowColor={colors[0]} closeCard={handleOnClick}/>
         </div>
     </>
     )

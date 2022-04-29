@@ -6,9 +6,8 @@ declare interface YearType {
 
 declare interface QuarterType { 
     droppableId: string;
-    index: number;
     quarterName: string;
-  }
+}
 
 declare interface SectionType {
     [id:string]: (string|string[])[];

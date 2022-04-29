@@ -39,7 +39,7 @@ function App() {
   <>
     <NavBar/>
     <DragDropContext onDragEnd={onDragEnd}>
-      <div id="body-container">
+      <div id="body-container" className="relative">
           <Schedule/>
           <Tabs/>
       </div>  

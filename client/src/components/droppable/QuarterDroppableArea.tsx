@@ -4,7 +4,7 @@ import {RootState} from '../../app/store';
 import {Droppable} from 'react-beautiful-dnd';
 import {useCallback,memo } from 'react'
 
-function QuarterDroppableArea({droppableId, index, quarterName}:QuarterType) {
+function QuarterDroppableArea({droppableId, quarterName}:QuarterType) {
   const courses = useSelector((state:RootState) => state.store.sectionCourses[droppableId]);
 
   const renderCard = useCallback(
@@ -27,12 +27,8 @@ function QuarterDroppableArea({droppableId, index, quarterName}:QuarterType) {
             ref={provided.innerRef}
             {...provided.droppableProps}
             {...provided.droppableProps}
-            style={{backgroundColor: snapshot.isDraggingOver?'lightblue':'white',
-                    borderRight: index < 3? '0.2rem solid var(--border-color)':''}}
-            className={"quarter-droppable-area " 
-                        + (index === 0? 'round-bottom-left' : '')
-                        + (index === 3? 'round-bottom-right' : '')}
-            >
+            style={{backgroundColor: snapshot.isDraggingOver?'lightblue':'white'}}
+            className={quarterName + " quarter-droppable-area"}>
               {courses.map(
                 (courseId, index) => 
                   typeof(courseId) === 'string' && renderCard(courseId, droppableId, index)

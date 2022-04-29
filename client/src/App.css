@@ -104,6 +104,7 @@ svg { font-size: 10px; }
 ***********************************************/
 .relative {position: relative;}
 .absolute {position: absolute;}
+.static {position: static;}
 
 .flex { display: flex; }
 
@@ -131,26 +132,28 @@ svg { font-size: 10px; }
 /*** 3.1 Navigation bar ***/
 #nav-bar {
     display: grid;
-    grid-template-columns: 2.5fr 5fr 2.7fr 0.6fr 0.6fr 0.6fr;
-    padding: 2rem 2.4rem 1.6rem 2.4rem;
+    padding: 2rem 2.4rem;
     background-color: var(--secondary-color);
 }
 
-#logo-text-brand {color: var(--primary-color);}
-#download { grid-column: 4;}
-#upload { z-index: 2; grid-column: 5; }
-#help {grid-column: 6;}
+#logo-text-brand {align-items: center;  color: var(--primary-color);}
+#download { grid-column: 3;}
+#upload { z-index: 2; grid-column: 4; }
+#help {grid-column: 5;}
 
 /*** 3.2 content ***/
 #body-container {
     display: grid; 
-    grid-template-columns: 1fr 1fr;
-    column-gap: 2rem;
-    margin: 2.4rem 2.4rem 8rem 2.4rem;
 }
 
 /* 3.2.1 schedule (left-column) */
-#schedule {flex-direction: column;}
+#schedule {
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: visible;
+
+    height: 65rem;
+}
 
 #schedule-function-row{
     justify-content: space-between;
@@ -210,7 +213,6 @@ svg { font-size: 10px; }
 .author-name {
     color: var(--primary-color);
     margin-left: 1.6rem;
-    font-size: 2rem;
 }
 
 #copyright,
@@ -238,7 +240,7 @@ svg { font-size: 10px; }
 .contact-list {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 7rem;
+    margin-left: 6.5rem;
 }
 
 .contact-item {width:5rem;}
@@ -248,7 +250,7 @@ svg { font-size: 10px; }
 }
 
 #copyright {
-    margin-top: 10rem;
+    margin-top: 8rem;
     grid-column: 1/-1;
     
     flex-direction: column;
@@ -264,17 +266,15 @@ svg { font-size: 10px; }
 /**********************************************
 ***************  4. Components  ***************
 ***********************************************/
+#total-units, .author-name, 
+.right-icon, .close-card > svg,
+.hyperlink,
+.accordion-year > .accordion > h1 {font-size: 2rem;}
 
 /*** 4.1 accordion ***/
 .accordion-section,
 .accordion-year{
     box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
-}
-
-.accordion-year > .accordion > h1 {font-size: 2rem;}
-
-.accordion-section {
-    margin: 0rem 1.6rem 2rem 1.6rem;
 }
 
 .accordion {
@@ -294,7 +294,6 @@ svg { font-size: 10px; }
 
 .right-icon {
     padding-right:0.8rem;
-    font-size: 2rem;
     line-height: 0;
     transition: transform var(--transition-time);
 }
@@ -302,7 +301,7 @@ svg { font-size: 10px; }
 .rotate { transform: rotate(90deg);}
 
 /* section */
-.section-body { padding: 1.6rem 0rem;}
+.section-body { padding: 1.6rem 0.8rem;}
 
 
 /*** 4.2 button ***/
@@ -430,6 +429,7 @@ svg { font-size: 10px; }
     align-items: center;
     flex-wrap: wrap;
 
+    overflow: overlay;
     border-radius: 1rem;
 
     width: 100%;
@@ -437,8 +437,9 @@ svg { font-size: 10px; }
 }
 
 .course-id {
-    padding-left: 1rem;
+    padding-left: 0.8rem;
     cursor: pointer;
+    font-size: 1.4rem;
     color:white;
 }
 
@@ -446,8 +447,8 @@ svg { font-size: 10px; }
     text-align: center;
     cursor: grab;
 
-    padding-right: 2.2rem;
-    padding-left: 1rem;
+    padding-right: 1.6rem;
+    padding-left: 0.8rem;
 
     font-size: 1.2rem;
     color:snow;
@@ -465,6 +466,7 @@ svg { font-size: 10px; }
 
     color: #F2F2F2;
 }
+
 .remove-course-btn svg:hover { color: white;}
 
 .quarter-course:hover .remove-course-btn,
@@ -483,36 +485,45 @@ svg { font-size: 10px; }
 
 /*** 4.3 Card ***/
 /* 4.3.1 CourseCard */
-.course-card {
-    z-index: 3;
-    top: 4rem;
-    left: 80%;
-    transform: translateX(-50%);
+.course-card-background {
+    position: fixed;
+    z-index:3;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    cursor: default;
 
-    border: 0.2rem solid;
-    border-radius: 1rem;
+    background-color:rgba(0, 0, 0, 0.2);
+}
+
+.course-card {
+    position: fixed;
+    z-index: 3;
+
+    border: 0.5rem solid;
+    border-radius: 1.6rem;
     background-color: white;
 
-    width: 24rem;
+    width: 32rem;
     height: auto;
 }
 
+.course-card,
+.fetch-error-message,
+#spinner {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .course-card-before{
-    content: '';
-
-    z-index: 2;
-    top: 3.5rem;
-    left: 70%;
-
-    transform: rotate(45deg);
-    margin: auto;
-
-    width: 2.5rem;
-    height: 2.5rem;
+    display:none;
 }
 
 .course-card-header {
     padding: 0.6rem;
+    padding-right: 3rem;
     border-top-left-radius: 0.7rem;
     border-top-right-radius: 0.7rem;
     font-size: 1.5rem;
@@ -527,18 +538,23 @@ svg { font-size: 10px; }
     font-size: 1.4rem;
 }
 
+.close-card {
+    top: 4px;
+    right: 4px;
+}
+
+.close-card:hover > svg {color: var(--primary-color);}
+
 /* 4.3.2 TutorialCard */
 #tutorial {
     z-index: 4;
     top: 0px;
     left: 0px;
-
     overflow: scroll;
 
+    background-color:rgba(0, 0, 0, 0.60);
     width: 100%;
     height: 100%;
-
-    background-color:rgba(0, 0, 0, 0.70);
 }
 
 .tutorial-img { 
@@ -557,12 +573,38 @@ svg { font-size: 10px; }
 
 /* 4.4.2 required-course */
 .required-course {
-    width: 12.8rem;
+    width: 12rem;
     height: 3.6rem;
 }
 
+
 /*** 4.5 droppable container ***/
 /* quater */
+.quarters-wrapper {
+    display: grid;
+    grid-template-areas:"hfall" "fall"
+                        "hwinter" "winter"    
+                        "hspring" "spring"
+                        "hsummer" "summer";
+    grid-template-columns: 1fr;
+    opacity: 1;
+}
+.quarter-header-fall { grid-area: hfall;}
+.quarter-header-winter {grid-area: hwinter;}
+.quarter-header-spring {grid-area: hspring;}
+.quarter-header-summer {grid-area: hsummer;}
+.fall {grid-area: fall;}
+.winter {grid-area: winter;}
+.spring{grid-area: spring;}
+.summer{
+    grid-area: summer;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+
+.quarter-header, .quarter-droppable-area, .accordion-year {
+    min-width: 12rem;
+}
 
 .quarter-header {
     padding: 0.15rem;
@@ -576,40 +618,26 @@ svg { font-size: 10px; }
     text-align: center;
 }
 
-.quarters-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-
-    opacity: 1;
-    max-height: 400px;
-}
-
 .quarter-droppable-area {
     min-height: 7.9rem;
-    min-width: 12.8rem;
 }
 
 /* requirement sections */
-.droppable-area {
+.droppable-area, .sub-droppable-area {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 12.8rem);
-    column-gap: 2.4rem;
-    row-gap: 1.6rem;
+    grid-template-columns: repeat(auto-fill, 12rem);
+    gap: 1.7rem;
 }
 
 .sub-droppable-area {
     grid-column: 1 / -1;
-
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 12.8rem);
-    column-gap: 2.4rem;
-    row-gap: 1.6rem;
 }
 
 .sub-droppable-area > span {
     z-index: 1;
     top: 0.8rem;
-    left: 13.3rem;
+    left: 12.2rem;
+    font-size: 1.5rem;
 }
 
 .hide, .hide div, .hide h2 {
@@ -625,9 +653,10 @@ svg { font-size: 10px; }
     border: none;
 }
 /*** 4.6 input ***/
-.input-container {
+#select-major, .input-container {
+    display:flex;
     flex-direction: column;
-    margin: 3rem 1.6rem 1.8rem 1.6rem;;
+    margin: 3rem 0.6rem 1.8rem 0.6rem;;
 }
 
 .browse-container {
@@ -673,7 +702,6 @@ svg { font-size: 10px; }
 .hyperlink {
     margin-bottom: 1.6rem;
 
-    font-size: 2rem;
     font-weight: 630;
     text-align: center;
     color: var(--accent-color-2);
@@ -682,13 +710,6 @@ svg { font-size: 10px; }
 .hyperlink:hover {
     text-decoration: underline; 
     color:#FF934F;
-}
-
-.fetch-error-message,
-#spinner {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
 }
 
 #spinner > svg{ font-size: 5rem;}
@@ -724,21 +745,206 @@ svg { font-size: 10px; }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-   
+    /* nav-bar */
+    #nav-bar{ grid-template-columns: 2.5fr 0.5fr 0.5fr 0.5fr;}
+
+    .btn-primary {padding: 0.5rem;}
+
+    #logo-text-brand > svg,
+    .btn-primary > svg, 
+    .btn-secondary > svg {
+        font-size: 9px
+    }
+
+    #schedule {
+        flex-direction: row;
+    
+        padding: 1rem;
+        border-radius: 1.5rem;
+        border: 1px solid #D6D6D6;
+        box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
+    
+        height: 65rem;
+    }
+
+    .accordion-year {
+        margin-bottom: 0 !important;
+        margin-right: 2rem;
+        height: fit-content;
+    }
+
+    .quarter-header, .quarter-droppable-area, .accordion-year {
+        min-width: 14rem;
+    }
+
+    /* typoraphy */
+    .accordion > h1 { font-size: 1.4rem;}
+    .accordion-year > .accordion > h1, .quarter-hear, .hyperlink {
+        font-size: 1.6rem;
+    }
+
+    /* Navigation Bar */ 
+    #select-major {
+        position: absolute;
+        z-index: 1;
+        top: 7.4rem;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 27rem;
+    }
+
+    /* body */
+    #body-container {
+        grid-template-columns: minmax(16rem, auto) minmax(auto, 30rem);
+        column-gap: 1rem;
+        margin: 13.6rem 1rem 8.6rem 1rem;
+    }
+    
+    #browse-id-container {display: block !important;} 
+
+    .input-container {
+        position: absolute;
+        top: -9.8rem;
+        left: 50%;
+        transform: translateX(-50%);
+    } 
+
+    /* hyperlink */
+    .hyperlink {
+        margin: 1rem 1rem 0 1rem;
+    }
+
+    .accordion-section { margin: 2rem 1.2rem; }
+
+    #schedule-function-row {
+        position:static;
+        margin-bottom:50rem;
+    }
+
+    #total-units {
+        position: absolute;
+        top: 68.5rem;
+        right: 1rem;
+        font-size: 1.8rem;
+    }
+
+    #refresh-btn, #add-year-btn{
+        position: absolute;
+        top: 67rem;
+    }
+
+    #refresh-btn {left: 1px;}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    .quarters-wrapper{
+@media only screen and (min-width: 601px) {
+    /* nav-bar */ 
+    #nav-bar{ grid-template-columns: 3fr 7.5fr 0.5fr 0.5fr 0.5fr;}
+
+    #select-major {
+        flex-direction: row;
+        align-items: center;
+        margin: 0 2rem;
+        flex-basis: 100%;
+    }
+
+    #body-container {
         grid-template-columns: 1fr 1fr;
+        column-gap: 1rem;
+        margin: 2.4rem 1rem 6rem 1rem;
+    }
+    #schedule {padding: 0 0.5rem; }
+
+    .accordion-section { margin: 0rem 1.2rem 2rem 1.2rem; }
+
+    /** 4x2 quarters **/
+    .quarters-wrapper{
+        grid-template-areas:"hfall hwinter"
+                            "fall winter"    
+                            "hspring hsummer"
+                            "spring summer";
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .quarter-header-fall, .quarter-header-spring, 
+    .fall, .spring {
+        border-right: 0.2rem solid var(--border-color);
+    }
+
+    .spring { border-bottom-left-radius: 1.5rem;}
+    .summer { 
+        border-bottom-left-radius: 0rem;
+        border-bottom-right-radius: 1.5rem;
     }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 800px) {
+    #nav-bar{
+        grid-template-columns: 2.5fr 5fr 1.5fr 0.6fr 0.6fr 0.6fr;
+    }
+    #download { grid-column: 4;}
+    #upload { grid-column: 5; }
+    #help {grid-column: 6;}
+
     #select-major-img{
         margin-top: 16%;
     }
+
+    #body-container {
+        grid-template-columns: 7.5fr 4.5fr;
+    }
+
+    #schedule {overflow: visible; height: auto; padding: 0;}
+
+    /* 2x4 quarters */
+    .quarters-wrapper {
+        grid-template-areas:"hfall hwinter hspring hsummer"
+                            "fall winter spring summer";
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    .spring {border-bottom-left-radius: 0rem;}
+    .fall {border-bottom-left-radius: 1.5rem;}
+    .summer {border-bottom-right-radius: 1.5rem;}
+
+    .quarter-header-fall, .quarter-header-winter, .quarter-header-spring, 
+    .fall, .winter, .spring {
+        border-right: 0.2rem solid var(--border-color);
+    }
+
+    /* display course-card as tooltip */
+    .course-card-background, .close-card {
+        display: none;
+    }
+
+    .course-card-before{
+        content: '';
+        z-index: 2;
+        top: 3.5rem;
+        left: 70%;
+        
+        display: block;
+        transform: rotate(45deg);
+        margin: auto;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .course-card {
+        position: absolute;
+        top: 4rem;
+        left: 80%;
+        transform: translateX(-50%);
+
+        border: 0.2rem solid;
+        border-radius: 1rem;
+        width: 24rem;
+    }
+
+    .course-card-header {padding-right: 0.6rem;}
+    .contact-list {margin-left: 8rem;}
 
     /*** footer responsive ***/
     #footer-logo-container, #footer-header-container{
@@ -749,25 +955,24 @@ svg { font-size: 10px; }
         grid-template-columns: 1fr 1fr;
         column-gap: 4rem;
     }
+    
     #author-list-containter { grid-template-columns: 1fr; } 
     #footer-header-container { margin: 2rem 0rem;}
-    #copyright {margin-top: 5rem;}
+    #copyright {margin-top: 4rem;}
 }
-
-@media only screen and (min-width: 900px) {
-    #body-container {
-        grid-template-columns: 7.5fr 4.5fr;
-    }
-
-    .quarters-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-}
-
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+    #nav-bar{ grid-template-columns: 2.5fr 5fr 2.4fr 0.6fr 0.6fr 0.6fr;}
+
+    #body-container {
+        column-gap: 2rem;
+        margin: 2.4rem 2rem 8.6rem 2rem;
+    }
+
+    .accordion-section { margin: 0rem 1.6rem 2rem 1.6rem;}
+    .section-body{padding: 1.6rem 1rem;}
+
     /*** footer responsive ***/
     #author-list-containter {
         grid-template-columns: 1fr 1fr;

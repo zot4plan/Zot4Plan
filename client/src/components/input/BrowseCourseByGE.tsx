@@ -1,7 +1,7 @@
 import {useSelector, useDispatch} from 'react-redux';
 import Select, { StylesConfig } from 'react-select';
 import Axios from '../../api/Axios';
-import {useState, MouseEvent } from 'react'
+import {useState, memo, MouseEvent } from 'react'
 import AddIcon from '../icon/AddIcon';
 import Error from '../icon/Error';
 import Success from '../icon/Success';
@@ -63,38 +63,19 @@ const BrowseCourseByGE = () => {
     const [course, setCourse] = useState({value:"", label: "Choose course"});
     const [message, setMessage] = useState({content: "", status: 'idle'});
 
+    const dispatch = useDispatch();
     const geIds = useSelector((state:RootState) => state.store.ge.allGeIds);
+    
+    //Get all courses in selected GE category that have been added
     const [sectionCourses, sectionId] = useSelector((state:RootState) => {
         if(ge.id === "")
-            return [[], ""]
-        else {
-            let sectionId = state.store.ge.byIds[ge.id].sectionId;
-            return [state.store.sectionCourses[sectionId], sectionId]
-        }
+            return [[], ""];
+        
+        let sectionId = state.store.ge.byIds[ge.id].sectionId,
+            sectionCourses = state.store.sectionCourses[sectionId];
 
+        return [sectionCourses, sectionId];
     });
-    const dispatch = useDispatch();
-
-    const handleOnGEChange = async (option: OptionType| null) => {
-        if(option) {
-            setTimeout(() => {
-            Axios.get('/api/getCoursesByGE',{params: {id: option.label}})
-                .then((res) => {
-                    setGE({
-                        id: option.value, 
-                        courses: res.data.map(
-                            (course:{courseId: string}) => ({value: course.courseId, label: course.courseId}))
-                    });
-                })
-                .catch( () => {
-                    setGE({id: "", courses: []});
-                });
-            }, 500);
-        }
-        else 
-            setGE({id: "", courses: []});
-        setCourse({value: "", label: "Choose course"});
-    }
 
     const handleOnCourseChange = async (option: OptionType| null) => {
         if(option) 
@@ -103,29 +84,53 @@ const BrowseCourseByGE = () => {
             setCourse({value: "", label: "Choose course"});
     }
 
+    //Retrieve all courses in selected GE category
+    const handleOnGEChange = async (option: OptionType| null) => {
+        if(option) 
+            setTimeout(() => {
+                Axios.get('/api/getCoursesByGE',{params: {id: option.label}})
+                .then((res) => {
+                    setGE({
+                        id: option.value, 
+                        courses: res.data.map(
+                            (course:{courseId: string}) => ({value: course.courseId, label: course.courseId}))
+                    });
+                })
+                .catch( () => { setGE({id: "", courses:[]}) });
+            }, 500);
+        
+        else 
+            setGE({id: "", courses: []});
+            
+        setCourse({value: "", label: "Choose course"});
+    }
+
+    // If added course is valid, retrieve course data and add it to redux store
     const submitCourse = (event: MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
         event.preventDefault();
 
         if(course.value !== "") {
-            if(!sectionCourses.includes(course.value)) {
+            if(!sectionCourses.includes(course.value)) 
                 setTimeout(() => {
                     Axios.get('/api/getCourseById', {params: {id: course.value}})
-                        .then((res) => {
-                            if(res.data.message === 'succeed') {
-                                dispatch(addCourse({course: res.data.data, id: sectionId as string})); 
-                                setMessage({content: course.value + ' is added successfully!', status: 'succeed'});
-                            }
-                            else
-                                setMessage({content:'Cannot connect to server!', status: 'fail'});
+                    .then((res) => {
+                        if(res.data.message === 'succeed') {
+                            dispatch(addCourse({course: res.data.data, id: sectionId as string})); 
+                            setMessage({content: course.value + ' is added successfully!', status: 'succeed'});
+                        }
+                        else
+                            setMessage({content:'Cannot connect to server!', status: 'fail'});
                     });
                 }, 500); 
-            }
+            
             else
                 setMessage({content: course.value + ' has already been added!', status: 'fail'});
         }
+
         else if(ge.id === "")
             setMessage({content: 'Please select a GE category!', status: 'fail'});
+
         else
             setMessage({content: 'Please select a course!', status: 'fail'});
     };
@@ -135,8 +140,8 @@ const BrowseCourseByGE = () => {
             <div className='relative browse-container'> 
                 <Select
                     components={{IndicatorSeparator:() => null }}
-                    styles={GEBarStyle}
                     options={geIds.map((id) => ({label: id, value: id}))} 
+                    styles={GEBarStyle}
                     onChange={handleOnGEChange}
                     maxMenuHeight={200}
                     placeholder='GE'              
@@ -150,16 +155,13 @@ const BrowseCourseByGE = () => {
                     maxMenuHeight={250}
                     onChange={handleOnCourseChange}
                 />
-                <button 
-                    className='absolute add-course-btn' 
-                    onClick={submitCourse}
-                > 
+                <button className='absolute add-course-btn' onClick={submitCourse}> 
                     <AddIcon/> 
                 </button>
             </div>
             
             <div 
-                className={'message-container '+ (message.status !== 'idle'? 'fade-message' : '')}  
+                className={'message-container relative '+ (message.status !== 'idle'? 'fade-message' : '')}  
                 onAnimationEnd={() => setMessage({content:"", status: 'idle'})}
             >
                 {message.status !== 'idle' && 
@@ -175,4 +177,4 @@ const BrowseCourseByGE = () => {
     )
 }
 
-export default BrowseCourseByGE;
+export default memo(BrowseCourseByGE);

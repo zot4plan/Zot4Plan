@@ -16,7 +16,13 @@ interface data {
 
 const myStyle: StylesConfig<OptionType, false> =  {
     container: (provided) => {
-        return {...provided, margin: '0 1rem', minWidth: '200px'};
+        return {...provided, width: '100%', height: '3.6rem'};
+    },
+    control: (provided) => {
+        return {...provided, borderRadius: '18px'};
+    },
+    valueContainer: (provided) => {
+        return {...provided, cursor: 'text'};
     },
 }
 
@@ -24,6 +30,7 @@ function SelectMajor() {
     const [majors, setMajors] = useState([]);
     const dispatch = useDispatch();
 
+    // Retrieve all majors after rendering
     useEffect( () => {
         async function fetchMajors() {
             const res = await Axios('/api/getMajors');
@@ -36,6 +43,7 @@ function SelectMajor() {
             
     },[majors]); 
 
+    // Get Major Requirement Courses
     const handleOnChange = async (option: OptionType | null) => {
         if(option){
             try {
@@ -48,14 +56,16 @@ function SelectMajor() {
     }
 
     return (
+    <div id="select-major">
         <Select 
             isClearable={true}
             options={majors} 
             styles={myStyle}
-            placeholder="Select your major"
             onChange={handleOnChange}
+            placeholder="Select your major"
             aria-label="Select your major"
         />
+    </div>
     )
 };
 

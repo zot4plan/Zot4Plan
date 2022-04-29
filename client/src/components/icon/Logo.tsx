@@ -2,7 +2,7 @@ function Logo () {
     return (
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
          width="17.6em" height="3.6em" viewBox="0 0 317 65"
-         preserveAspectRatio="xMidYMid meet" id="logo-text-brand">
+         preserveAspectRatio="xMidYMid meet">
         
         <g transform="translate(0,65) scale(0.1,-0.1)"
         fill="currentColor" stroke="none">

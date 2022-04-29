@@ -9,7 +9,9 @@ import DownloadFileButton from '../../components/button/DownloadFileButton';
 const Header = () => {
   return (
     <nav id="nav-bar">
-      <Logo/>
+      <div id="logo-text-brand" className="flex">
+        <Logo/>
+      </div>
       <SelectMajor/>
       <DownloadFileButton/>
       <UploadFileButton/>

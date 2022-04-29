@@ -39,7 +39,7 @@ const Footer = () => {
                         />
 
                         <a target="_blank" 
-                            href="https://www.linkedin.com/" 
+                            href="https://www.linkedin.com/in/lockhong/" 
                             rel="noreferrer"
                             className="author-name"
                             aria-label="Linkedin"
@@ -51,7 +51,7 @@ const Footer = () => {
                     <ul className="contact-list">
                         <li className="contact-item">
                             <a target="_blank" 
-                                href="https://www.facebook.com/" 
+                                href="https://www.facebook.com/loc.khong.512" 
                                 rel="noreferrer"
                                 aria-label="FaceBook"
                             >
@@ -61,7 +61,7 @@ const Footer = () => {
 
                         <li className="contact-item">
                             <a target="_blank" 
-                                href="https://www.linkedin.com/" 
+                                href="https://www.linkedin.com/in/lockhong/" 
                                 rel="noreferrer"
                                 aria-label="Linkedin"
                             >
@@ -71,7 +71,7 @@ const Footer = () => {
 
                         <li className="contact-item">
                             <a target="_blank" 
-                                href="https://www.Github.com/" 
+                                href="https://github.com/ldkhong" 
                                 rel="noreferrer"
                                 aria-label="Github"
                             >
@@ -88,7 +88,7 @@ const Footer = () => {
                             alt={'Tram La\'s profile'}
                         />
                         <a target="_blank" 
-                            href="https://www.linkedin.com/" 
+                            href="https://www.linkedin.com/in/tram-la-680417200/" 
                             rel="noreferrer"
                             className="author-name"
                             aria-label="Linkedin"
@@ -110,7 +110,7 @@ const Footer = () => {
 
                         <li className="contact-item">
                             <a target="_blank" 
-                                href="https://www.linkedin.com/" 
+                                href="https://www.linkedin.com/in/tram-la-680417200/" 
                                 rel="noreferrer"
                                 aria-label="Linkedin"
                             >
@@ -120,7 +120,7 @@ const Footer = () => {
                         
                         <li className="contact-item">
                             <a target="_blank" 
-                                href="https://www.Github.com/" 
+                                href="https://github.com/tramla123" 
                                 rel="noreferrer"
                                 aria-label="Github"
                             >
@@ -134,7 +134,7 @@ const Footer = () => {
 
         <div id='copyright'>
             <a target="_blank" 
-                href="https://github.com/" 
+                href="https://github.com/zot4plan" 
                 rel="noreferrer"  
                 aria-label="Github"
                 data-tip data-for="githubTip"

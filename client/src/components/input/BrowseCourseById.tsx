@@ -1,4 +1,4 @@
-import {useState, MouseEvent} from 'react';
+import {useState,memo, MouseEvent} from 'react';
 import  { StylesConfig } from "react-select";
 import AsyncSelect  from 'react-select/async';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,6 +21,7 @@ interface CourseType{
 
 interface BrowseCourseType {
     id: string;
+    majorStatus: string;
 }
 
 const myStyle: StylesConfig<OptionType, false> =  {
@@ -41,8 +42,10 @@ const myStyle: StylesConfig<OptionType, false> =  {
     },
 }
 
+// Search courses from databases
 const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => void) => {
     let filterCourse:OptionType[] = [];
+
     if(inputValue.length < 3)
         callback(filterCourse);
     else 
@@ -55,10 +58,10 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
         }, 500);
 }
 
-function BrowseCourseById({id}: BrowseCourseType) {
+function BrowseCourseById({id, majorStatus}: BrowseCourseType) {
     const [selectCourse, setSelectCourse] = useState<string>("");
-    const [message, setMessage] = useState({content: "", status: 'idle'})
-    const courses = useSelector((state:RootState)=> state.store.courses.allIds);
+    const [message, setMessage] = useState({content: "", status: 'idle'});
+    const courses = useSelector((state:RootState)=> state.store.courses.allIds); 
     const dispatch = useDispatch();
 
     const submitAddCourse =(event: MouseEvent<HTMLButtonElement>) => {
@@ -67,6 +70,9 @@ function BrowseCourseById({id}: BrowseCourseType) {
 
         if(selectCourse === "")
             setMessage({content: "Please select a course!", status: status})
+
+        else if ( majorStatus !== 'succeeded')
+            setMessage({content: "Please select your major first!", status: status})
 
         else if(!courses.includes(selectCourse))
             setTimeout(() => {
@@ -86,10 +92,7 @@ function BrowseCourseById({id}: BrowseCourseType) {
             }, 500);
 
         else 
-            setMessage({
-                content: content + " has already been added!",
-                status: status
-            })
+            setMessage({content: content + " has already been added!", status: status})
     };
 
     const handleOnChange = (option: OptionType | null) => {
@@ -103,23 +106,24 @@ function BrowseCourseById({id}: BrowseCourseType) {
         <div className='input-container flex-container'>
             <div className='relative browse-container'>
                 <AsyncSelect
-                    components={{DropdownIndicator:()=>null}}
-                    styles={myStyle}
                     isClearable={true}
                     cacheOptions 
                     defaultOptions
                     loadOptions={promiseOptions}
-                    onChange={handleOnChange}
                     isOptionDisabled={(option)=>courses.includes(option.label)}
+
+                    onChange={handleOnChange}
+
+                    styles={myStyle}
                     maxMenuHeight={250}
-                    placeholder="Type at least 3 characters"
+                    components={{DropdownIndicator:()=>null}}
+                    placeholder="Find Course"
                     aria-label="Browse courses by ID"
                 />
                 <button className='absolute add-course-btn' onClick={submitAddCourse}> <AddIcon/> </button>
             </div>
 
-            <div 
-                className={'message-container relative ' + (message.status !== 'idle'? 'fade-message':'')}  
+            <div className={'message-container relative ' + (message.status !== 'idle'? 'fade-message':'')}  
                 onAnimationEnd={() => setMessage({content:"", status: 'idle'})}
             >
                 {message.status !== 'idle' && 
@@ -135,4 +139,4 @@ function BrowseCourseById({id}: BrowseCourseType) {
     )
 };
 
-export default BrowseCourseById;
+export default memo(BrowseCourseById);

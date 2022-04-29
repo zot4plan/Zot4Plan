@@ -1,9 +1,10 @@
+import {memo} from 'react';
 import { useSelector} from 'react-redux';
 
 import {RootState} from '../../app/store';
 import Section from '../accordion/Section';
-import BrowseCourseByGE from '../input/BrowseCourseByGE'
 import Spinner from '../icon/Spinner';
+import BrowseCourseByGE from '../input/BrowseCourseByGE';
 
 interface GESectionType { id: string; }
 
@@ -36,9 +37,8 @@ function GeneralEducation() {
     <>
         <BrowseCourseByGE/>
         {content}
-        <div style={{height:'48rem'}}></div>
     </>
     )
 }
 
-export default GeneralEducation;
+export default memo(GeneralEducation);
