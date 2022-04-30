@@ -473,7 +473,7 @@ svg { font-size: 10px; }
     visibility: visible;
 }
 
-/* 4.2.8 close-tutorial-btn */
+/* 4.2.8 close-tutorial-btn see more in Media query*/
 #close-tutorial-btn {
     top: 2.5%;
     right: 2.5%;
@@ -553,13 +553,6 @@ svg { font-size: 10px; }
     background-color:rgba(0, 0, 0, 0.60);
     width: 100%;
     height: 100%;
-}
-
-.tutorial-img { 
-    border-radius: 25px;
-    border: 8px solid #5C9DD6;
-    width: 550px;
-    height: 726px;
 }
 
 .arrow { color:#5C9DD6; }
@@ -792,6 +785,26 @@ svg { font-size: 10px; }
         width: 27rem;
     }
 
+    .tutorial-img { 
+        border-radius: 15px;
+        border: 6px solid #5C9DD6;
+        width: 350px;
+        height: 462px;
+    }
+
+    #close-tutorial-btn > svg { font-size: 2rem;}
+    .arrow > svg {font-size: 0.5rem;}
+    .arrow {
+        position : absolute;
+        z-index: 3;
+        top: calc(50% + 25rem);
+        left: 59%;
+        transform: translateX(-50%);
+    }
+    .arrow:nth-child(1) {
+        left: 41%;
+    }
+
     /* body */
     #body-container {
         grid-template-columns: minmax(15rem, auto) minmax(auto, 30rem);
@@ -852,7 +865,18 @@ svg { font-size: 10px; }
         column-gap: 1rem;
         margin: 2.4rem 1rem 6rem 1rem;
     }
-    #schedule {padding: 0 0.5rem; }
+
+    .tutorial-img { 
+        border-radius: 15px;
+        border: 6px solid #5C9DD6;
+        width: 475px;
+        height: 627px;
+    }
+
+    #close-tutorial-btn > svg { font-size: 2.4rem;}
+    .arrow > svg {font-size: 0.7rem;}
+
+    #schedule {padding: 0 0.5rem;}
 
     .accordion-section { margin: 0rem 1.2rem 2rem 1.2rem; }
 
@@ -965,6 +989,16 @@ svg { font-size: 10px; }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     #nav-bar{ grid-template-columns: 2.5fr 5fr 2.4fr 0.6fr 0.6fr 0.6fr;}
+
+    .tutorial-img { 
+        border-radius: 15px;
+        border: 6px solid #5C9DD6;
+        width: 550px;
+        height: 726px;
+    }
+
+    #close-tutorial-btn > svg { font-size: 2.6rem;}
+    .arrow > svg {font-size: 1rem;}
 
     #body-container {
         column-gap: 2rem;
