@@ -56,7 +56,8 @@ function Major () {
     
     return (
         <>  
-            <div id="browse-id-container" style={{display: status === 'succeeded'? "block": "none"}} >
+            <div id="browse-id-container"
+                style={{display: status === 'succeeded'? "flex": "none", flexDirection:'column'}} >
                 <BrowseCourseById id={coursesAddByStudent.sectionId} majorStatus={status}/>  
             </div>
 

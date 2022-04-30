@@ -61,9 +61,7 @@
     --accent-color-1:#DF2935; /* Rose Madder */
     --accent-color-2:#307ABB; /* French Blue */
 }
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box;}
 
 body {
     margin: 0;
@@ -796,7 +794,7 @@ svg { font-size: 10px; }
 
     /* body */
     #body-container {
-        grid-template-columns: minmax(16rem, auto) minmax(auto, 30rem);
+        grid-template-columns: minmax(15rem, auto) minmax(auto, 30rem);
         column-gap: 1rem;
         margin: 13.6rem 1rem 8.6rem 1rem;
     }
@@ -877,6 +875,8 @@ svg { font-size: 10px; }
         border-bottom-left-radius: 0rem;
         border-bottom-right-radius: 1.5rem;
     }
+
+    #total-units{font-size: 1.6rem;}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -945,6 +945,7 @@ svg { font-size: 10px; }
 
     .course-card-header {padding-right: 0.6rem;}
     .contact-list {margin-left: 8rem;}
+    #total-units{font-size: 2rem;}
 
     /*** footer responsive ***/
     #footer-logo-container, #footer-header-container{
@@ -979,9 +980,4 @@ svg { font-size: 10px; }
         column-gap: 4rem;
     }
     #footer{ column-gap: 10rem;}
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  
 }
