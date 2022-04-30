@@ -61,7 +61,7 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
             <div ref={provided.innerRef}
                 {...provided.droppableProps}
                 className="droppable-area "
-                style={{marginBottom: courseIds !== undefined && courseIds.length > 0? '1rem' : '0rem'}}
+                style={{marginBottom: courseIds !== undefined && courseIds.length > 0? '2.5rem' : '0rem'}}
             >
                 {courseCards}
                 <div style={{display:'none'}}> {provided.placeholder} </div>
