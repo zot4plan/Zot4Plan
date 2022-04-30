@@ -14,14 +14,10 @@ By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`
 
 ## **Description** 📖
 
----
-
 Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. In order to make the planning process easier for users, our program will also display the ge/course requirements for the chosen major. All of the data we acquired for this program are collected from the UCI General Catalogue. Please make sure to check your schedule with your academic advisor. Thank you.
 
 
 ## **Features**
-
----
 
  <!---div align="center">
 
@@ -42,7 +38,6 @@ Users can add courses by using the search bar
 Select GE courses by section
 
 </div-->
-
 
 * Search bar that allows users to either select or search their major of choice. 💖
 
@@ -89,8 +84,6 @@ Select GE courses by section
 
 ## **How to Run Program Locally**
 
----
-
 Open 2 terminals: one is for client and the other is for server
 
 * cd to client folder: 
@@ -108,8 +101,6 @@ node server.js
 ```
 
 ## **Technologies** ⛄
-
----
 
 * Front-End: React 17.0.39
 
@@ -145,17 +136,13 @@ node server.js
 
 ## **Performance** 🚀
 
----
-
-* 
-
 <p align="center">
+
+<img src="https://user-images.githubusercontent.com/48174888/166126044-ecbf9ed8-cde0-4c24-8c83-90426cd81bb4.jpg" width="720"/> 
     
 </p>
 
 ## **Creators & Maintainers** 😈
-
----
 
 - Loc Duc Minh Khong [@lockhong](https://www.linkedin.com/in/lockhong/)
 - Tram Bao La [@tramla](https://www.linkedin.com/in/tram-la-680417200/)
