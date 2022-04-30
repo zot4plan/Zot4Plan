@@ -580,6 +580,7 @@ svg { font-size: 10px; }
     grid-template-columns: 1fr;
     opacity: 1;
 }
+
 .quarter-header-fall { grid-area: hfall;}
 .quarter-header-winter {grid-area: hwinter;}
 .quarter-header-spring {grid-area: hspring;}
@@ -647,7 +648,18 @@ svg { font-size: 10px; }
 #select-major, .input-container {
     display:flex;
     flex-direction: column;
-    margin: 3rem 0.6rem 1.8rem 0.6rem;;
+    margin: 3rem 0.6rem 1.8rem 0.6rem;
+}
+
+.input-container{
+    left: 80%;
+    top: 1rem;
+    transition: left 1s, top 1s;
+}
+
+#select-major {
+    top: 1rem;
+    transition: top 1s;
 }
 
 .browse-container {
