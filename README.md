@@ -57,7 +57,7 @@ Select GE courses by section
 
 * General Education Requirement Tab ❄️
 
-    - 10 main dropdowns - each represents a GE section (the number of required courses is also included)
+    - 10 main dropdowns - each represents a GE category.
 
     - A combination of dropdown and search bar is implemented to help users find their courses in an efficient manner
 
@@ -82,7 +82,7 @@ Select GE courses by section
     - The upload feature will take a json file of the schedule and load that saved version
 
 
-## **How to Run Program Locally**
+## **How to Run Program Locally** 🏃
 
 Open 2 terminals: one is for client and the other is for server
 
@@ -138,15 +138,11 @@ node server.js
 
 <p align="center">
 
-<img src="https://user-images.githubusercontent.com/48174888/166126044-ecbf9ed8-cde0-4c24-8c83-90426cd81bb4.jpg" width="720"/> 
-    
+<img src="https://user-images.githubusercontent.com/48174888/166136392-f0748915-123a-4d18-b92d-d4958168b880.jpg" width="720"/> 
+
 </p>
 
 ## **Creators & Maintainers** 😈
 
 - Loc Duc Minh Khong [@lockhong](https://www.linkedin.com/in/lockhong/)
 - Tram Bao La [@tramla](https://www.linkedin.com/in/tram-la-680417200/)
-
-<!--- * Markdown general syntax: [`Markdown Basic Syntax`](https://www.markdownguide.org/extended-syntax/)
-
-* Markdown table syntax: [`Markdown Extended Syntax`](https://www.markdownguide.org/extended-syntax/) -->
