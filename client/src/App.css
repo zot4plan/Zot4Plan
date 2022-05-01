@@ -741,6 +741,7 @@ svg { font-size: 10px; }
     width: 6.4rem;
     border-radius: 50%;
     border: 3px solid var(--accent-color-2);
+    cursor: pointer;
 }
 
 /**********************************************
@@ -909,6 +910,10 @@ svg { font-size: 10px; }
     }
 
     #refresh-btn {left: 1px;}
+
+    #footer {
+        margin-top: 18rem;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
