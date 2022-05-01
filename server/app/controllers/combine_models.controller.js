@@ -9,7 +9,7 @@ const Majors = db.majors;
  * @param id: number  // majorId
  */
 exports.getRequirementById = (req, res) => {
-    const id = req.query.id;
+    const id = req.body.id;
     Majors.findByPk(id, {attributes: ['major_requirement','name','url']}).then(data => {
         if(data) {
             // Put all courses in major_requirement template into an array
@@ -59,7 +59,8 @@ exports.getRequirementById = (req, res) => {
  * @param years: string[][][]             // list of quarters, each quarter contains a list of courses taken in the quarter
  */
  exports.getDataByFile = (req, res) => {
-    const fileContent = JSON.parse(req.query.data);
+    console.log(req.body);
+    const fileContent = JSON.parse(req.body.data);
     const majorName = fileContent.data.majorName;
     const geCourses = fileContent.data.geCourses;
     const coursesAdded = fileContent.data.coursesAddByStudent;

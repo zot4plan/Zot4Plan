@@ -1,19 +1,36 @@
 import {memo} from 'react';
-
-import Github from '../../components/icon/Github';
-import Linkedin from '../../components/icon/Linkedin';
-import Facebook from '../../components/icon/Facebook';
-
 import ReactTooltip from "react-tooltip";
 
+import Github from '../../components/icon/Github';
 import Logo from '../../components/icon/Logo';
+import Author from '../../components/author/Author';
+
 import Zot from '../../assets/images/Zot.png';
-import LocProfilePicture from '../../assets/images/loc.jpg';
-import TramProfilePicture from '../../assets/images/tram.jpg';
+import PictureOfLoc from '../../assets/images/loc.jpg';
+import PictureOfTram from '../../assets/images/tram.jpg';
+import Tree from '../../assets/images/tree.png';
+import ZotWalk from '../../assets/images/zot-walk.png';
 
 const Footer = () => {
+    const authors = [
+        {
+            name: "Loc Duc Minh Khong",
+            profile: PictureOfLoc,
+            linkedin: "https://www.linkedin.com/in/lockhong",
+            github: "https://github.com/ldkhong",
+            facebook: "https://www.facebook.com/loc.khong.512" 
+        },
+        {
+            name: "Tram Bao La",
+            profile: PictureOfTram,
+            linkedin: "https://www.linkedin.com/in/tram-la-680417200",
+            github: "https://github.com/tramla123",
+            facebook: "https://www.facebook.com" 
+        }
+    ]
+    
     return (
-    <footer id="footer">
+    <footer id="footer" className="relative">
         <div>
             <div id='footer-logo-container' className='flex-container'>
                 <img id="logo-image" src={Zot} alt='Anteater Logo brand'/>
@@ -21,7 +38,7 @@ const Footer = () => {
             </div>
             
             <p id="about-p"> 
-            Welcome to Zot4Plan! Zot4Plan is a planner that helps Anteaters visualize their undergraduate journey. As a team, we aimed to make the task of organizing your schedule as simple as possible. Besides the planner tool, we also incorporated the major requirements tab to make the task of keeping progress much more efficient. Note that all of the information we obtained are from the UCI website. Please make sure to check your schedule with your academic counselor. Thank you.
+            Welcome to Zot4Plan! Zot4Plan is a planner that helps Anteaters visualize their undergraduate journey. As a team, we aimed to make the task of organizing your schedule as simple as possible. Besides the planner tool, we also incorporated the major requirements tab to make the task of keeping progress much more efficient. Note that all of the information we obtained are from the UCI website. Please make sure to check your schedule with your academic counselor. Thank you - Zot! Zot! Zot!
             </p>
         </div>
 
@@ -31,104 +48,7 @@ const Footer = () => {
             </div>
 
             <ul id='author-list-containter'>    
-                <li>
-                    <div className='flex'>
-                        <img className="author-image"
-                            src={LocProfilePicture}
-                            alt={'Loc Khong\'s profile'}
-                        />
-
-                        <a target="_blank" 
-                            href="https://www.linkedin.com/in/lockhong/" 
-                            rel="noreferrer"
-                            className="author-name"
-                            aria-label="Linkedin"
-                        >
-                            Loc Duc Minh Khong
-                        </a>
-                    </div>
-
-                    <ul className="contact-list">
-                        <li className="contact-item">
-                            <a target="_blank" 
-                                href="https://www.facebook.com/loc.khong.512" 
-                                rel="noreferrer"
-                                aria-label="FaceBook"
-                            >
-                                <Facebook/>
-                            </a>
-                        </li>
-
-                        <li className="contact-item">
-                            <a target="_blank" 
-                                href="https://www.linkedin.com/in/lockhong/" 
-                                rel="noreferrer"
-                                aria-label="Linkedin"
-                            >
-                                <Linkedin/>
-                            </a>
-                        </li>
-
-                        <li className="contact-item">
-                            <a target="_blank" 
-                                href="https://github.com/ldkhong" 
-                                rel="noreferrer"
-                                aria-label="Github"
-                            >
-                                <Github/>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <div className='flex'>
-                        <img className="author-image"
-                            src={TramProfilePicture}
-                            alt={'Tram La\'s profile'}
-                        />
-                        <a target="_blank" 
-                            href="https://www.linkedin.com/in/tram-la-680417200/" 
-                            rel="noreferrer"
-                            className="author-name"
-                            aria-label="Linkedin"
-                        >
-                            Tram Bao La
-                        </a>
-                    </div>
-
-                    <ul className="contact-list">
-                        <li className="contact-item">
-                            <a target="_blank" 
-                                href="https://www.facebook.com/" 
-                                rel="noreferrer"
-                                aria-label="FaceBook"
-                            >
-                                <Facebook/>
-                            </a>
-                        </li>
-
-                        <li className="contact-item">
-                            <a target="_blank" 
-                                href="https://www.linkedin.com/in/tram-la-680417200/" 
-                                rel="noreferrer"
-                                aria-label="Linkedin"
-                            >
-                                <Linkedin/>
-                            </a>
-                        </li>
-                        
-                        <li className="contact-item">
-                            <a target="_blank" 
-                                href="https://github.com/tramla123" 
-                                rel="noreferrer"
-                                aria-label="Github"
-                            >
-                                <Github/>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                {authors.map((author) => <Author author={author} />)}
             </ul>
         </div>
 
@@ -143,12 +63,16 @@ const Footer = () => {
             </a>
 
             <ReactTooltip id="githubTip" place="bottom" effect="solid">
-                Github  
+                View source code here!!!
             </ReactTooltip>
 
             <p> &copy; Copyright 2022: zot4plan.com </p>
         </div>
 
+        <div style={{position:"absolute", top: '-128px', right:'12%'}}>
+            <img src={ZotWalk} style={{width: '64px', height:'64px'}}/>
+            <img src={Tree} style={{width: '128px', height:'128px'}}/>
+        </div>
     </footer>
     )
 }

@@ -88,7 +88,7 @@ const BrowseCourseByGE = () => {
     const handleOnGEChange = async (option: OptionType| null) => {
         if(option) 
             setTimeout(() => {
-                Axios.get('/api/getCoursesByGE',{params: {id: option.label}})
+                Axios.post('/api/getCoursesByGE', {id: option.label})
                 .then((res) => {
                     setGE({
                         id: option.value, 
@@ -113,7 +113,7 @@ const BrowseCourseByGE = () => {
         if(course.value !== "") {
             if(!sectionCourses.includes(course.value)) 
                 setTimeout(() => {
-                    Axios.get('/api/getCourseById', {params: {id: course.value}})
+                    Axios.post('/api/getCourseById', {id: course.value})
                     .then((res) => {
                         if(res.data.message === 'succeed') {
                             dispatch(addCourse({course: res.data.data, id: sectionId as string})); 

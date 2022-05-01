@@ -5,7 +5,7 @@ exports.getCourses = (req, res) => {
     Courses_in_ges.findAll({ 
         attributes: ['courseId'],
         where: {
-            geId: req.query.id
+            geId: req.body.id
         }
     }).then(data => {
         res.send(data);

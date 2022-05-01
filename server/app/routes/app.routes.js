@@ -7,18 +7,23 @@ module.exports = app => {
 
     var router = require("express").Router();
 
+    // GET method
     router.get("/filterCourses", courses.findAll);
-    router.get("/getCourseById", courses.findOne);
 
     router.get("/getMajors", majors.getMajors);
 
     router.get("/getGeneralEducation",general_educations.getGeneralEducationCategories);
 
-    router.get("/getCoursesByGE", courses_in_ges.getCourses);
+    // POST method
+    router.post("/getRequirementById", combine_models.getRequirementById);
 
-    router.get("/getRequirementById", combine_models.getRequirementById);
-    router.get("/getDataByFile", combine_models.getDataByFile);
+    router.post("/getDataByFile", combine_models.getDataByFile);
+
+    router.post("/getCourseById", courses.findOne);
+
+    router.post("/getCoursesByGE", courses_in_ges.getCourses);
     
+    // Health check
     router.get('/health', async (_req, res) => {
         res.send('OK');
     });

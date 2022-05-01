@@ -14,7 +14,7 @@ By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`
 
 ## **Description** 📖
 
-Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. In order to make the planning process easier for users, our program will also display the ge/course requirements for the chosen major. All of the data we acquired for this program are collected from the UCI General Catalogue. Please make sure to check your schedule with your academic advisor. Thank you.
+Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. In order to make the planning process easier for users, our program will also display the ge/course requirements for the chosen major. All of the data we acquired for this program are collected from the UCI General Catalogue. Please make sure to check your schedule with your academic advisor. Thank you - Zot Zot Zot!
 
 
 ## **Features**
@@ -138,7 +138,7 @@ node server.js
 
 <p align="center">
 
-<img src="https://user-images.githubusercontent.com/48174888/166136392-f0748915-123a-4d18-b92d-d4958168b880.jpg" width="720"/> 
+<img src="https://user-images.githubusercontent.com/48174888/166165232-0a0a871b-cab5-4d87-8b4d-d821d2691860.jpg" width="720"/> 
 
 </p>
 

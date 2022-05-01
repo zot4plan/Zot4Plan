@@ -76,8 +76,7 @@ function BrowseCourseById({id, majorStatus}: BrowseCourseType) {
 
         else if(!courses.includes(selectCourse))
             setTimeout(() => {
-                Axios.get('/api/getCourseById', {
-                    params: { id: selectCourse }})
+                Axios.post('/api/getCourseById', {id: selectCourse })
                     .then((res) => {
                         if(res.data.message === 'succeed') {
                             dispatch(addCourse({course: res.data.data, id: id}));

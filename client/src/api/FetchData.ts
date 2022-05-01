@@ -20,7 +20,7 @@ export const fetchGE = createAsyncThunk(
 });
 
 export const fetchMajorById = createAsyncThunk("features/fetchMajorById", async ({id}:FetchMajorType) => 
-    Axios.get('/api/getRequirementById', {params: {id: id}})
+    Axios.post('/api/getRequirementById', {id: id})
     .then((response) => {
         return {
             status: "succeed",
@@ -45,7 +45,7 @@ export const fetchMajorById = createAsyncThunk("features/fetchMajorById", async 
 ); 
 
 export const fetchMajorByFile = createAsyncThunk("features/fetchMajorByFile", async ({data}: InputFileType) => 
-    Axios.get('/api/getDataByFile',{params: {data: data}})
+    Axios.post('/api/getDataByFile',{data: data})
     .then((response) => {
         const fileContent = (JSON.parse(data)).data;
         return {

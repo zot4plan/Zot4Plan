@@ -52,7 +52,9 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
 
     return (
         <>
-        {text !== "" && <p key={droppableId +'p'} style={{marginBottom:'1rem'}}> {text} </p>}
+        {text !== "" && 
+        <p key={droppableId +'p'} 
+            style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> {text} </p>}
 
         <Droppable droppableId={droppableId}
             isDropDisabled={true}
@@ -61,7 +63,7 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
             <div ref={provided.innerRef}
                 {...provided.droppableProps}
                 className="droppable-area "
-                style={{marginBottom: courseIds !== undefined && courseIds.length > 0? '2.5rem' : '0rem'}}
+                style={{marginBottom: courseIds.length > 0? '1.5rem' : '0rem'}}
             >
                 {courseCards}
                 <div style={{display:'none'}}> {provided.placeholder} </div>
