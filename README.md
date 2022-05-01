@@ -89,8 +89,6 @@ Select GE courses by section
 
 ## **How to Run Program Locally**
 
----
-
 Open 2 terminals: one is for client and the other is for server
 
 * cd to client folder: 
@@ -108,8 +106,6 @@ node server.js
 ```
 
 ## **Technologies** ⛄
-
----
 
 * Front-End: React 17.0.39
 
@@ -145,8 +141,6 @@ node server.js
 
 ## **Performance** 🚀
 
----
-
 * 
 
 <p align="center">
@@ -154,8 +148,6 @@ node server.js
 </p>
 
 ## **Creators & Maintainers** 😈
-
----
 
 - Loc Duc Minh Khong [@lockhong](https://www.linkedin.com/in/lockhong/)
 - Tram Bao La [@tramla](https://www.linkedin.com/in/tram-la-680417200/)

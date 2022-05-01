@@ -113,22 +113,26 @@ export const storeSlice = createSlice ({
         },
         
         /**
-         * Delete courseId from sections and courseData in courses
+         * @param courseId
+         * @param droppableId
          */
         deleteCourse: (state, action: PayloadAction<DeleteCoursePayload>) => {
             let courseId = action.payload.courseId,
                 sectionId = action.payload.droppableId,
                 repeatability = state.courses.byIds[courseId].data.repeatability,
-                repeatabilityLeft = state.courses.byIds[courseId].repeatability,
+                remainRepeatability = state.courses.byIds[courseId].repeatability,
                 courseUnits = state.courses.byIds[courseId].data.units;
 
+            //Delete courseId from sections
             state.sectionCourses[sectionId].splice(action.payload.index,1);
             state.courses.byIds[courseId].sectionIds.forEach(id => {
                 state.sectionCourses[id] = state.sectionCourses[id].filter(id => id !== courseId);
             })
             
-            state.years.totalUnits -= (repeatability - repeatabilityLeft)*courseUnits;
+            //Subtract course's units from total units if course is selected
+            state.years.totalUnits -= (repeatability - remainRepeatability) * courseUnits;
             
+            //Delete courseData in courses
             if(state.courses.byIds[courseId].removable) {
                 state.courses.allIds = state.courses.allIds.filter(id => id !== courseId);
                 delete state.courses.byIds[courseId];
@@ -140,7 +144,7 @@ export const storeSlice = createSlice ({
         },
 
         /**
-         * Add course to quarter.courses by index
+         * Add course to quarter according to the dropping position
          * reduce the course repeatability
          * add quarterID to course.quarterIds
          */
@@ -160,9 +164,9 @@ export const storeSlice = createSlice ({
             let sourceId = action.payload.sourceId,
                 destinationId = action.payload.destinationId,
                 courseId = action.payload.courseId;
-
-            if(!state.sectionCourses[destinationId].includes(courseId)) {
-
+            
+            //prevent same course from being added to the same quarter
+            if(!state.sectionCourses[destinationId].includes(courseId) || sourceId === destinationId) {
                 if(sourceId !== destinationId) {
                     let quarterIds = state.courses.byIds[courseId].sectionIds.filter(id => id !== sourceId);
                     quarterIds.push(destinationId);
