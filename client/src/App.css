@@ -97,6 +97,24 @@ button {
 
 svg { font-size: 10px; }
 
+::-webkit-scrollbar
+{
+    width: 9px;  /* for vertical scrollbars */
+    height: 10px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.16);
+
+}
+
 /**********************************************
 *************  2. Common styles  **************
 ***********************************************/
@@ -186,7 +204,7 @@ svg { font-size: 10px; }
 #tab-content{
     overflow: scroll;
     border-top: 1px solid white;
-    height: calc(100% - 50px);
+    height: calc(100% - 45px);
 }
 
 /*** 3.3 footer ***/
@@ -261,6 +279,12 @@ svg { font-size: 10px; }
 }
 
 #copyright > p { margin: 1rem 0rem;}
+
+#zot-tree {
+    top:-12.8rem;
+    left: 75%;
+    transition: left 0.5s;
+}
 
 /**********************************************
 ***************  4. Components  ***************
@@ -627,7 +651,7 @@ svg { font-size: 10px; }
 }
 
 .sub-droppable-area > span {
-    z-index: 1;
+    z-index: 0;
     top: 0.8rem;
     left: 12.2rem;
     font-size: 1.5rem;
@@ -913,6 +937,11 @@ svg { font-size: 10px; }
 
     #footer {
         margin-top: 18rem;
+    }
+
+    #zot-tree{
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 

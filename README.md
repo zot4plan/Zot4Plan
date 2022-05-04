@@ -1,4 +1,4 @@
-# **Zot4Plan - Undergraduate Progress Tracker**
+# **Zot4Plan - UCI Undergraduate Progress Tracker**
 
 By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`](https://www.linkedin.com/in/lockhong/)
 
@@ -8,13 +8,13 @@ By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`
 
 <div align="center"> 
 
-[Start building your UCI plan here!!!](https://zot4plan.com) 🎉
+[Start building your UCI plan here!!!](https://www.zot4plan.com) 🎉
 
 </div>
 
 ## **Description** 📖
 
-Zot4Plan is a tool that allows Anteaters to plan out their undergraduate years. In order to make the planning process easier for users, our program will also display the ge/course requirements for the chosen major. All of the data we acquired for this program are collected from the UCI General Catalogue. Please make sure to check your schedule with your academic advisor. Thank you - Zot Zot Zot!
+Zot4Plan is a schedule planning tool that allows Anteaters to plan out their undergraduate years. In order to make the planning process easier for users, our program will also display the ge/course requirements for the chosen major. All of the data we acquired for this program are collected from the UCI General Catalogue. Please make sure to check your schedule with your academic advisor. Thank you - Zot Zot Zot!
 
 
 ## **Features**

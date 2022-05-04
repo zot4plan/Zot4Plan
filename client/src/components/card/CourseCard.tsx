@@ -13,14 +13,14 @@ function CourseCard({course, color, boxShadowColor, closeCard}: CourseCardType) 
     let body = [];
     body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
 
+    if(course.corequisite !== "")
+        body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{course.corequisite} </p>)
+
     if(course.prerequisite !== "")
         body.push(<p key='prerequisite'> <b>{"Prerequisite: "}</b> {course.prerequisite} </p>)
 
     if(course.restriction !== "")
         body.push(<p key='restriction'> <b>{"Restriction: "}</b> {course.restriction} </p>)
-
-    if(course.corequisite !== "")
-        body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{course.corequisite} </p>)
             
     if(course.repeatability > 1)
         body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{course.repeatability} </p>)
