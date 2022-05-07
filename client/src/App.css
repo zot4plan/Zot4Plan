@@ -460,7 +460,8 @@ svg { font-size: 10px; }
 }
 
 .course-id {
-    padding-left: 0.8rem;
+    overflow: hidden;
+    padding-left: 0.6rem;
     cursor: pointer;
     font-size: 1.4rem;
     color:white;
@@ -584,15 +585,12 @@ svg { font-size: 10px; }
 
 /*** 4.4 draggable courses ***/
 /* 4.4.1 quater-course */
-
 .quarter-course { margin: 0.2rem; }
 
 /* 4.4.2 required-course */
 .required-course {
-    width: 12rem;
     height: 3.6rem;
 }
-
 
 /*** 4.5 droppable container ***/
 /* quater */
@@ -642,8 +640,8 @@ svg { font-size: 10px; }
 /* requirement sections */
 .droppable-area, .sub-droppable-area {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 12rem);
-    gap: 1.7rem;
+    grid-template-columns: repeat(auto-fill, 10.6rem);
+    gap: 1.8rem;
 }
 
 .sub-droppable-area {
@@ -653,7 +651,7 @@ svg { font-size: 10px; }
 .sub-droppable-area > span {
     z-index: 0;
     top: 0.8rem;
-    left: 12.2rem;
+    left: 10.8rem;
     font-size: 1.5rem;
 }
 
@@ -856,8 +854,12 @@ svg { font-size: 10px; }
     .hyperlink {
         margin: 1rem 1rem 0 1rem;
     }
-
-    .accordion-section { margin: 2rem 1.2rem; }
+    .accordion-section {margin: 2rem 1rem;}
+    .droppable-area, .sub-droppable-area {
+        grid-template-columns: repeat(auto-fill, 11rem);
+        gap: 1.5rem;
+    }
+    .sub-droppable-area > span {left: 11.1rem;}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -915,7 +917,7 @@ svg { font-size: 10px; }
     #total-units{font-size: 1.6rem;}
 }
 
-@media only screen and (max-width: 800px) { 
+@media only screen and (max-width: 799px) { 
     #schedule-function-row {
         position:static;
         margin-bottom:50rem;
@@ -1001,7 +1003,7 @@ svg { font-size: 10px; }
     .course-card {
         position: absolute;
         top: 4rem;
-        left: 80%;
+        left: 90%;
         transform: translateX(-50%);
 
         border: 0.2rem solid;
@@ -1011,6 +1013,11 @@ svg { font-size: 10px; }
 
     .course-card-header {padding-right: 0.6rem;}
     .contact-list {margin-left: 8rem;}
+
+    #schedule-function-row {
+        margin-bottom:2rem;
+    }
+
     #total-units{font-size: 2rem;}
 
     /*** footer responsive ***/

@@ -65,7 +65,7 @@ function Major () {
             {status ==='succeeded' 
                 && <Section id={coursesAddByStudent.sectionId} 
                         name={coursesAddByStudent.title} 
-                        note="" 
+                        note="(Added courses by students)" 
                         sublist={null} 
             />}
             {content}

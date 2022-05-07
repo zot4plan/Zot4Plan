@@ -42,7 +42,7 @@ function Tabs () {
           <GeneralEducation/>
         </div>
       
-        <div style={{height:'48rem'}}></div>
+        <div style={{height:'36rem'}}></div>
       </div>
 
     </div>

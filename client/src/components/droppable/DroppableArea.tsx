@@ -50,27 +50,31 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
             }
         })
 
-    return (
-        <>
-        {text !== "" && 
-        <p key={droppableId +'p'} 
-            style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> {text} </p>}
+    let p;
+    if(text.length > 3 && text.substring(0,3) === "(b)") 
+        p =  <p key={droppableId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> <b>{text.substring(3)}</b> </p>
+    else if(text !== "")
+        p = <p key={droppableId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> {text}</p>
 
-        <Droppable droppableId={droppableId}
-            isDropDisabled={true}
-        >
-        {(provided) => (
-            <div ref={provided.innerRef}
-                {...provided.droppableProps}
-                className="droppable-area "
-                style={{marginBottom: courseIds.length > 0? '1.5rem' : '0rem'}}
+    return (
+        <div>
+            {p}
+
+            <Droppable droppableId={droppableId}
+                isDropDisabled={true}
             >
-                {courseCards}
-                <div style={{display:'none'}}> {provided.placeholder} </div>
-            </div>
-        )} 
-        </Droppable>
-        </>
+            {(provided) => (
+                <div ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className="droppable-area "
+                    style={{marginBottom: courseIds.length > 0? '1.5rem' : '0rem'}}
+                >
+                    {courseCards}
+                    <div style={{display:'none'}}> {provided.placeholder} </div>
+                </div>
+            )} 
+            </Droppable>
+        </div>
     )
 }
 
