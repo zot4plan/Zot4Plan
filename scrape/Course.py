@@ -1,3 +1,5 @@
+import requests
+
 """
 Course is a class is responsible for storing information of each individual
 UCI courses. 
@@ -18,6 +20,7 @@ class Course:
         self.restriction = ''
         self.ge_string = ''
         self.ge_list = []
+        self.past_terms = ''
 
 
     def set_header_info(self, header_info):
@@ -92,7 +95,7 @@ class Course:
         set_repeatability takes in a raw text scraped from the UCI course catalogue and
         determines how many time a course can be taken for credit
         :param raw_info: a string that contains course's information regarding course repeatability
-        """
+        """ 
 
         if 'Unlimited' in raw_info or 'unlimited' in raw_info:
             self.repeatability = '9'
@@ -102,3 +105,11 @@ class Course:
                 if char.isdigit():
                     self.repeatability = char
                     break
+
+    def set_terms(self, all_terms):
+        """
+        set_terms takes in a list of past terms and convert it into a string
+        :param all_terms: list of past terms that offered the course
+        """
+
+        self.past_terms = ", ".join(all_terms)
