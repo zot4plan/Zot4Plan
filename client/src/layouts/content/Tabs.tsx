@@ -17,7 +17,7 @@ function Tabs () {
 
   return (
     <div id="tab-container">
-      <ul id="tab-panel" className="flex">
+      <ul style={{display: "flex"}}>
         <li 
           onClick={()=>setTabId(1)}
           className={'tab flex-container round-top-left ' + (tabId === 1?"tab-active":"")} 
@@ -41,10 +41,7 @@ function Tabs () {
         <div style={{display: tabId === 2? "block": "none"}}>
           <GeneralEducation/>
         </div>
-      
-        <div style={{height:'36rem'}}></div>
       </div>
-
     </div>
   );
 }

@@ -23,7 +23,6 @@ function QuarterCourse({index, droppableId, courseId}: courseType) {
       }))
     }; 
    
-  
     return (   
     <Draggable key={droppableId + courseId} 
       draggableId={droppableId + courseId} index={index}

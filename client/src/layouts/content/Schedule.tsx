@@ -12,16 +12,16 @@ const Schedule = () => {
     const YEAR_NAMES = ["1st","2nd","3rd","4th", "5th", "6th", "7th", "8th", "9th"];
 
     return (
-      <div id="schedule" className="flex">
+      <div id="schedule">
         {yearIds.map( (id,index) => (
           <YearAccordion key={id} 
             yearId={id}
-            yearName={YEAR_NAMES[index]} 
+            yearName={YEAR_NAMES[index] + " Year"} 
             index={index} 
-            isLast={index === yearIds.length - 1}/>
+          />
         ))}
 
-        <div id='schedule-function-row' className="relative flex">
+        <div id='schedule-function-row'>
           <RefreshButton/>
           <AddYearButton/>
           <TotalUnits/>

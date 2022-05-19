@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from "../../app/store";
 import Summary from './summary/Summary';
 import QuarterDroppableArea from '../droppable/QuarterDroppableArea';
+import Section from './Section';
 
 interface YearType {
     yearId: string;
@@ -11,7 +12,25 @@ interface YearType {
     index: number;
 }
 
-function Year({yearId, yearName, index}:YearType) {
+interface MajorSectionType { id:string;}
+
+const MajorAccordion = memo(({id}:MajorSectionType) => {
+    const section = useSelector((state:RootState)=>state.store.major.byIds[id]);
+    return (
+        <Section id={section.id} name={section.title} note="" sublist={section.sectionIds}/> 
+    )
+})
+
+interface GESectionType { id: string; }
+
+const GESection = ({id}:GESectionType) => {
+    const ge = useSelector((state:RootState)=>state.store.ge.byIds[id]);
+    return (
+        <Section id={ge.sectionId} name={ge.geId + "-" + ge.title} note={ge.note} sublist={null}/>
+    )
+}
+
+function Details({yearId, yearName, index}:YearType) {
     const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
     const QUARTER_CLASS= ["fall", "winter","spring","summer"];
 
@@ -43,4 +62,4 @@ function Year({yearId, yearName, index}:YearType) {
     )
 }
 
-export default memo(Year);
+export default memo(Details);
