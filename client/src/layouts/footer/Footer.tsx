@@ -38,7 +38,7 @@ const Footer = () => {
             </div>
             
             <p id="about-p"> 
-            Welcome to Zot4Plan! Zot4Plan is a planner that helps Anteaters visualize their undergraduate journey. As a team, we aimed to make the task of organizing your schedule as simple as possible. Besides the schedule planning tool, we also incorporated the major requirements tab to make the task of keeping progress much more efficient. Note that all of the information we obtained are from the UCI website. Please make sure to check your schedule with your academic counselor. Thank you - Zot! Zot! Zot!
+            Welcome to Zot4Plan! Zot4Plan is a schedule planner that helps Anteaters visualize their undergraduate journey. As a team, we aimed to make the task of organizing your schedule as simple as possible. Besides the schedule planning tool, we also incorporated the major requirements tab to make the task of keeping progress much more efficient. Note that all of the information we obtained are from the UCI website. Please make sure to check your schedule with your academic counselor. Thank you - Zot! Zot! Zot!
             </p>
         </div>
 

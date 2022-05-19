@@ -11,7 +11,7 @@ interface GESectionType { id: string; }
 const GESection = ({id}:GESectionType) => {
     const ge = useSelector((state:RootState)=>state.store.ge.byIds[id]);
     return (
-        <Section id={ge.sectionId} name={ge.geId + ": " + ge.title} note={ge.note} sublist={null}/>
+        <Section id={ge.sectionId} name={ge.geId + "-" + ge.title} note={ge.note} sublist={null}/>
     )
 }
 
@@ -25,9 +25,8 @@ function GeneralEducation() {
         content = <div id='spinner' className="aboslute"> <Spinner/> </div>  
    
     else if (status === 'succeeded') {
-        content = geIds.map((id) => (
-           <GESection key={id} id={id}/>
-        ))
+        content = geIds.map((id) => (<GESection key={id} id={id}/>))
+        content.push(<div key="empty" style={{height:'20rem'}}></div>);
     } 
     else if (status === 'failed') 
         content = <p className='absolute fetch-error-message'>Cannot connect to server!!!</p>

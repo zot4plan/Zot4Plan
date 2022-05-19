@@ -1,6 +1,8 @@
-import {useState, memo} from 'react'
+import {memo} from 'react'
+
 import DroppableArea from '../droppable/DroppableArea';
-import Right from '../icon/Right'
+import Summary from './summary/Summary';
+
 
 interface SectionType {
     id: string;
@@ -10,30 +12,21 @@ interface SectionType {
 }
 
 const Section = ({id, name, note, sublist}:SectionType) => {
-    const [show, setShow] = useState(false);
+    let detail;
+
+    if(!sublist)
+        detail = <DroppableArea key={id} text={note} droppableId={id}/>
+    else
+        detail = sublist.map( l => <DroppableArea key={l.sectionId} droppableId={l.sectionId} text={l.note}/>)
+  
     return (
-        <div className='accordion-section round-15'>  
-            <div
-                key={id} 
-                className={'relative accordion ' + (show? 'round-top-left round-top-right': 'round-15')}
-                onClick={() => setShow(!show)}
-                >
-                <h1> {name} </h1>
-                <div className="right-icon">
-                    <Right show={show}/>
-                </div>
+        <details className='accordion-section' key={id}>  
+            <Summary id ={id} name={name} index={0} isYear={false}/>
+
+            <div className='section-body'>
+               {detail}
             </div>
-            <div 
-            className='section-body'
-            style={{display: show? "block" : "none"}}>
-            
-            {!sublist && <DroppableArea key={id} text={note} droppableId={id}/>}
-            {sublist  && sublist.map((l)=> 
-                <DroppableArea key={l.sectionId} droppableId={l.sectionId} text={l.note} />         
-            )}
-            
-            </div>
-        </div>
+        </details>
      )
  }
 

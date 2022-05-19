@@ -16,7 +16,7 @@ interface AuthorType {
 const Author = ({author}: AuthorType) => {
     return (
         <li>
-            <div className='flex'>
+            <div style={{display: 'flex'}}>
                 <img className="author-image"
                     src={author.profile}
                     alt={author.name}

@@ -10,15 +10,15 @@ import Spinner from '../icon/Spinner';
 
 interface MajorSectionType { id:string;}
 
-const MajorSection = memo(({id}:MajorSectionType) => {
+const MajorAccordion = memo(({id}:MajorSectionType) => {
     const section = useSelector((state:RootState)=>state.store.major.byIds[id]);
-     return (
-        <Section id={section.id} name={section.title} note="" sublist={section.sectionIds}/>
-     )
+    return (
+        <Section id={section.id} name={section.title} note="" sublist={section.sectionIds}/> 
+    )
 })
 
 function Major () {
-    const sectionIds = useSelector((state:RootState)=>state.store.major.allIds);
+    const accordionIds = useSelector((state:RootState)=>state.store.major.allIds);
     const status = useSelector((state:RootState)=>state.store.major.status);
     const name = useSelector((state:RootState)=>state.store.major.name);
     const url = useSelector((state:RootState)=>state.store.major.url);
@@ -39,8 +39,10 @@ function Major () {
     else if (status === 'loading') 
         content = <div id='spinner'> <Spinner/> </div> 
 
-    else if (status === 'succeeded') 
-        content = sectionIds.map(id => <MajorSection key={id} id={id}/>)
+    else if (status === 'succeeded')  {
+        content = accordionIds.map(id => <MajorAccordion key={id} id={id}/>);
+        content.push(<div key="empty" style={{height:'20rem'}}></div>);
+    }
     else 
         content = <p className='fetch-error-message red'>{error}</p>
 

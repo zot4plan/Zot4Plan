@@ -97,22 +97,33 @@ button {
 
 svg { font-size: 10px; }
 
+/* scrollbar */
 ::-webkit-scrollbar
 {
     width: 9px;  /* for vertical scrollbars */
     height: 10px; /* for horizontal scrollbars */
 }
 
-::-webkit-scrollbar-track
-{
-    background-color: transparent;
-}
+::-webkit-scrollbar-track { background-color: transparent;}
 
-::-webkit-scrollbar-thumb
-{
+::-webkit-scrollbar-thumb {
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.16);
+}
 
+/* details & summary */
+details { 
+    border-radius: 1.6rem;
+    box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
+    background-color: var(--primary-color-2);
+}
+
+summary { list-style-type: none;}
+summary:focus { outline: none !important;}
+summary::-webkit-details-marker { display: none; }
+
+details[open] .right-icon > svg {
+    transform: rotate(90deg);
 }
 
 /**********************************************
@@ -122,8 +133,6 @@ svg { font-size: 10px; }
 .absolute {position: absolute;}
 .static {position: static;}
 
-.flex { display: flex; }
-
 /* upload, download, help, tutorial, browse, major */
 .flex-container {
     display: flex;
@@ -132,12 +141,8 @@ svg { font-size: 10px; }
     flex-wrap: wrap;
 }
 
-.round-10 {border-radius: 1rem;}
-.round-15 { border-radius: 1.5rem;}
 .round-top-left { border-top-left-radius: 1.5rem;}
 .round-top-right { border-top-right-radius: 1.5rem;}
-.round-bottom-left { border-bottom-left-radius: 1.5rem;}
-.round-bottom-right {border-bottom-right-radius: 1.5rem;}
 
 .green {color: #07B053;} /* success-message */
 .red {color: var(--accent-color-1);} /* fail-message*/
@@ -152,7 +157,7 @@ svg { font-size: 10px; }
     background-color: var(--secondary-color);
 }
 
-#logo-text-brand {align-items: center;  color: var(--primary-color);}
+#logo-text-brand {display: flex; align-items: center;  color: var(--primary-color);}
 #download { grid-column: 3;}
 #upload { z-index: 2; grid-column: 4; }
 #help {grid-column: 5;}
@@ -164,17 +169,12 @@ svg { font-size: 10px; }
 
 /* 3.2.1 schedule (left-column) */
 #schedule {
+    display: flex;
     flex-direction: column;
     overflow-y: scroll;
     overflow-x: visible;
 
-    height: 65rem;
-}
-
-#schedule-function-row{
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2rem;
+    padding: 0 0.5rem;
 }
 
 /* 3.2.2 tab container (right-column)*/
@@ -182,6 +182,7 @@ svg { font-size: 10px; }
     border-radius: 1.5rem;
     box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
     height: 64.8rem;
+    margin-bottom : 22rem;
 }
 
 .tab {
@@ -218,7 +219,6 @@ svg { font-size: 10px; }
     padding: 0rem 4rem;
     background-color: var(--secondary-color);
     color: var(--primary-color);
-    margin-top: 7.8rem;
 }
 
 #author-list-containter {row-gap: 2rem;}
@@ -238,7 +238,7 @@ svg { font-size: 10px; }
     align-items: center;
 }
 
-#footer-logo-container { margin: 2rem 0rem;}
+#footer-logo-container { margin: 5rem 0rem 2rem 0rem;}
 
 #footer-header-container {
     margin-top: 2rem;
@@ -280,52 +280,43 @@ svg { font-size: 10px; }
 
 #copyright > p { margin: 1rem 0rem;}
 
-#zot-tree {
-    top:-12.8rem;
-    left: 75%;
-    transition: left 0.5s;
-}
-
 /**********************************************
 ***************  4. Components  ***************
 ***********************************************/
-#total-units, .author-name, 
-.right-icon, .close-card > svg,
+.author-name, 
+.right-icon, 
+.close-card > svg,
 .hyperlink,
-.accordion-year > .accordion > h1 {font-size: 2rem;}
-
-/*** 4.1 accordion ***/
-.accordion-section,
-.accordion-year{
-    box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
+.year-header {
+    font-size: 2rem;
 }
 
+/*** 4.1 accordion ***/
 .accordion {
     display:flex;
     align-items: center;
     cursor: pointer;
-
-    background-color: var(--primary-color-2);
 }
+
 .accordion:hover {color: var(--accent-color-2)}
 
-.accordion > h1 {
+.year-header, .section-header {
     flex-grow: 2;
-    padding: 0.6rem 1rem;
     font-weight: 600;
 }
 
 .right-icon {
-    padding-right:0.8rem;
     line-height: 0;
     transition: transform var(--transition-time);
 }
 
-.rotate { transform: rotate(90deg);}
-
 /* section */
-.section-body { padding: 1.6rem 0.8rem;}
-
+.section-body { 
+    padding: 1.6rem 0.8rem;
+    border-bottom-left-radius: 1.6rem;
+    border-bottom-right-radius: 1.6rem;
+    background-color: white;
+}
 
 /*** 4.2 button ***/
 /* 4.2.1 btn-primary */
@@ -402,8 +393,8 @@ svg { font-size: 10px; }
 
 /* 4.2.4 remove-year-btn */
 .remove-year-btn {
-    left: 9.6rem;
-    top: 0.8rem;
+    left: 9rem;
+    top: 0.2rem;
     
     visibility: hidden;
     opacity: 0;
@@ -616,15 +607,7 @@ svg { font-size: 10px; }
 .fall {grid-area: fall;}
 .winter {grid-area: winter;}
 .spring{grid-area: spring;}
-.summer{
-    grid-area: summer;
-    border-bottom-left-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
-}
-
-.quarter-header, .quarter-droppable-area, .accordion-year {
-    min-width: 12rem;
-}
+.summer{ grid-area: summer;}
 
 .quarter-header {
     padding: 0.15rem;
@@ -645,7 +628,7 @@ svg { font-size: 10px; }
 /* requirement sections */
 .droppable-area, .sub-droppable-area {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 10.6rem);
+    grid-template-columns: repeat(auto-fill, 10.8rem);
     gap: 1.8rem;
 }
 
@@ -656,7 +639,7 @@ svg { font-size: 10px; }
 .sub-droppable-area > span {
     z-index: 0;
     top: 0.8rem;
-    left: 10.8rem;
+    left: 11rem;
     font-size: 1.5rem;
 }
 
@@ -674,19 +657,19 @@ svg { font-size: 10px; }
 }
 /*** 4.6 input ***/
 #select-major, .input-container {
+    top: 1rem;
+
     display:flex;
     flex-direction: column;
-    margin: 3rem 0.6rem 1.8rem 0.6rem;
+    margin: 2rem 0rem 1.4rem 0rem;
 }
 
 .input-container{
     left: 80%;
-    top: 1rem;
     transition: left 1s, top 1s;
 }
 
 #select-major {
-    top: 1rem;
     transition: top 1s;
 }
 
@@ -768,15 +751,44 @@ svg { font-size: 10px; }
     width: 6.4rem;
     border-radius: 50%;
     border: 3px solid var(--accent-color-2);
-    cursor: pointer;
+}
+
+#schedule-function-row {
+    display: flex;
+    position: static;
+    margin-bottom:30rem;
+}
+
+#total-units {
+    position: absolute;
+    top: 47.5rem;
+    right: 1rem;
+    font-size: 1.8rem;
+}
+
+#refresh-btn, #add-year-btn{
+    position: absolute;
+    top: 46.5rem;
+}
+
+#refresh-btn {left: 1px;}
+
+#zot-tree{
+    top:-12.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: left 0.5s;
 }
 
 /**********************************************
 **************  5. Media quries  **************
 ***********************************************/
+@media only screen and (max-width: 450px) {
+    .unit {display: none;}
+}
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 599px) {
     /* nav-bar */
     #nav-bar{ grid-template-columns: 2.5fr 0.5fr 0.5fr 0.5fr;}
 
@@ -784,39 +796,9 @@ svg { font-size: 10px; }
 
     #logo-text-brand > svg,
     .btn-primary > svg, 
-    .btn-secondary > svg {
-        font-size: 9px
-    }
-
-    #schedule {
-        padding-left: 0.4rem;
-        padding-right: 1rem;
-        height: 64.8rem;
-    }
-
-    .accordion-year {
-        height: fit-content;
-    }
-
-    .quarter-header, .quarter-droppable-area, .accordion-year {
-        min-width: 14rem;
-    }
-
-    /* typoraphy */
-    .accordion > h1 { font-size: 1.4rem;}
-    .accordion-year > .accordion > h1, .quarter-hear, .hyperlink {
-        font-size: 1.6rem;
-    }
-
-    /* Navigation Bar */ 
-    #select-major {
-        position: absolute;
-        z-index: 1;
-        top: 7.4rem;
-        left: 50%;
-        transform: translateX(-50%);
-
-        width: 27rem;
+    .btn-secondary > svg,
+    .right-icon > svg {
+        font-size: 0.8rem;
     }
 
     .tutorial-img { 
@@ -835,40 +817,75 @@ svg { font-size: 10px; }
         left: 59%;
         transform: translateX(-50%);
     }
-    .arrow:nth-child(1) {
-        left: 41%;
-    }
+    .arrow:nth-child(1) { left: 41%; }
 
     /* body */
+    #schedule {
+        padding: 0 0.3rem 0 0.2rem;
+        overflow-x: hidden;
+        height: 45rem;
+    }
+
+    .summer { 
+        border-bottom-left-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+    }
+
+    #tab-container {height: 44.6rem}
+
+    /* typoraphy */
+    p {font-size: 1.4rem; word-break: break-word;}
+
+    summary { padding: 0.6rem 0.2rem 0.6rem 0.5rem;}
+    .section-header {
+        font-size: 1.4rem;
+    }
+
+    .year-header, .quarter-header, .tab {font-size: 1.5rem;}
+    .hyperlink { font-size: 1.6rem;}
+
     #body-container {
-        grid-template-columns: minmax(15rem, auto) minmax(auto, 30rem);
-        column-gap: 0.8rem;
+        grid-template-columns: minmax(12rem,20rem) minmax(24rem, 35rem);
+        column-gap: 0.3rem;
         margin: 13.6rem 1rem 0rem 1rem;
     }
     
     #browse-id-container {display: block !important;} 
 
-    .input-container {
+    #select-major, .input-container {
         position: absolute;
-        top: -9.8rem;
         left: 50%;
         transform: translateX(-50%);
+    }
+
+    #select-major {
+        z-index: 2;
+        top: 8rem;
+        width: 27rem;
+    }
+    
+    .input-container {
+        top: -9rem;
+        z-index: 1;
     } 
 
     /* hyperlink */
-    .hyperlink {
-        margin: 1rem 1rem 0 1rem;
-    }
+    .hyperlink { margin: 1rem 1rem 0 1rem;}
     .accordion-section {margin: 2rem 1rem;}
+
     .droppable-area, .sub-droppable-area {
-        grid-template-columns: repeat(auto-fill, 11rem);
-        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fill, 9rem);
+        column-gap: 1.4rem;
+        row-gap: 1.2rem;
     }
-    .sub-droppable-area > span {left: 11.1rem;}
+    .sub-droppable-area > span {left: 9.1rem; font-size: 1.2rem;}
+    
+    .course-btn { height: 3.2rem;}
+    .course-id {font-size: 1.2rem;}
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 601px) {
+/* Small devices (portrait tablets and large phones, 500px and up) */
+@media only screen and (min-width: 600px) {
     /* nav-bar */ 
     #nav-bar{ grid-template-columns: 3fr 7.5fr 0.5fr 0.5fr 0.5fr;}
 
@@ -892,14 +909,15 @@ svg { font-size: 10px; }
         height: 627px;
     }
 
+    summary {padding: 0.6rem 1rem;}
+
     #close-tutorial-btn > svg { font-size: 2.4rem;}
     .arrow > svg {font-size: 0.7rem;}
 
-    #schedule {padding: 0 0.5rem;}
-
-    .accordion-section { margin: 0rem 1.2rem 2rem 1.2rem; }
+    .accordion-section { margin: 0rem 1.6rem 2rem 1.6rem; }
 
     /** 4x2 quarters **/
+    #schedule {height: 65rem;}
     .quarters-wrapper{
         grid-template-areas:"hfall hwinter"
                             "fall winter"    
@@ -914,62 +932,28 @@ svg { font-size: 10px; }
     }
 
     .spring { border-bottom-left-radius: 1.5rem;}
-    .summer { 
-        border-bottom-left-radius: 0rem;
-        border-bottom-right-radius: 1.5rem;
-    }
+    .summer { border-bottom-right-radius: 1.5rem; }
 
     #total-units{font-size: 1.6rem;}
-}
 
-@media only screen and (max-width: 799px) { 
-    #schedule-function-row {
-        position:static;
-        margin-bottom:50rem;
-    }
+    #total-units { top: 68.5rem;}
 
-    #total-units {
-        position: absolute;
-        top: 68.5rem;
-        right: 1rem;
-        font-size: 1.8rem;
-    }
-
-    #refresh-btn, #add-year-btn{
-        position: absolute;
-        top: 67rem;
-    }
-
-    #refresh-btn {left: 1px;}
-
-    #footer {
-        margin-top: 18rem;
-    }
-
-    #zot-tree{
-        left: 50%;
-        transform: translateX(-50%);
-    }
+    #refresh-btn, #add-year-btn{ top: 67rem;}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 800px) {
-    #nav-bar{
-        grid-template-columns: 2.5fr 5fr 1.5fr 0.6fr 0.6fr 0.6fr;
-    }
-    #download { grid-column: 4;}
+    #nav-bar{grid-template-columns: 2.5fr 5fr 1.5fr 0.6fr 0.6fr 0.6fr;}
+    #download { grid-column: 4; }
     #upload { grid-column: 5; }
-    #help {grid-column: 6;}
+    #help { grid-column: 6; }
 
-    #select-major-img{
-        margin-top: 16%;
-    }
+    #select-major-img{ margin-top: 16%;}
 
-    #body-container {
-        grid-template-columns: 7.5fr 4.5fr;
-    }
+    #body-container { grid-template-columns: 7.5fr 4.5fr;}
 
-    #schedule {overflow: visible; height: auto; padding: 0;}
+    #schedule {overflow: visible; height: auto;}
+    #tab-container { margin-bottom: 14rem;}
 
     /* 2x4 quarters */
     .quarters-wrapper {
@@ -980,7 +964,6 @@ svg { font-size: 10px; }
 
     .spring {border-bottom-left-radius: 0rem;}
     .fall {border-bottom-left-radius: 1.5rem;}
-    .summer {border-bottom-right-radius: 1.5rem;}
 
     .quarter-header-fall, .quarter-header-winter, .quarter-header-spring, 
     .fall, .winter, .spring {
@@ -1020,12 +1003,25 @@ svg { font-size: 10px; }
     .contact-list {margin-left: 8rem;}
 
     #schedule-function-row {
+        position: relative;
+
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+   
         margin-bottom:2rem;
     }
 
-    #total-units{font-size: 2rem;}
+    #refresh-btn, #total-units {
+        position: relative;
+        top: 0;
+    }
+
+    #add-year-btn {top: 0;}
+    #total-units{ font-size: 2rem; }
 
     /*** footer responsive ***/
+    #footer-logo-container { margin: 2rem 0rem;}
     #footer-logo-container, #footer-header-container{
         justify-content: start;
     }
@@ -1033,12 +1029,13 @@ svg { font-size: 10px; }
     #footer {
         grid-template-columns: 1fr 1fr;
         column-gap: 4rem;
-        margin-top: 7.8rem;
     }
     
     #author-list-containter { grid-template-columns: 1fr; } 
     #footer-header-container { margin: 2rem 0rem;}
     #copyright {margin-top: 4rem;}
+
+    #zot-tree { left: 75%; transform: translateX(0);}
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -1061,12 +1058,13 @@ svg { font-size: 10px; }
     }
 
     .accordion-section { margin: 0rem 1.6rem 2rem 1.6rem;}
-    .section-body{padding: 1.6rem 1rem;}
+    .section-body{padding: 1.6rem 1.2rem;}
 
     /*** footer responsive ***/
     #author-list-containter {
         grid-template-columns: 1fr 1fr;
         column-gap: 4rem;
     }
+
     #footer{ column-gap: 8rem;}
 }
