@@ -562,6 +562,11 @@ svg { font-size: 10px; }
     font-size: 1.4rem;
 }
 
+.explan-or-hide{
+    color: rbg(192, 192, 192);
+    cursor: pointer;
+}
+
 .close-card {
     top: 4px;
     right: 4px;

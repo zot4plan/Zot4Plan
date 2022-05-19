@@ -29,6 +29,7 @@ declare interface CourseType {
     prerequisite: string;
     restriction: string;
     ge:string;
+    terms:string;
 }
 
 /***** Payload Type ****/

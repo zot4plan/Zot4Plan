@@ -1,5 +1,6 @@
 import {memo, MouseEvent} from 'react';
 import XCircle from '../icon/XCircle';
+import React, { useState } from "react";
 
 interface CourseCardType {
     course: CourseType;
@@ -8,25 +9,53 @@ interface CourseCardType {
     closeCard: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
+interface ExpandTextType {
+    content: string;
+}
+
+// Source: https://www.geeksforgeeks.org/how-to-create-a-read-more-component-in-reactjs/
+const ExpandText = ( {content}:ExpandTextType ) => {
+    const text = content;
+    const [isExpand, setIsExpand] = useState(true);
+    const toggleExpand = () => {
+        setIsExpand(!isExpand)
+    };
+    return (
+        <span className="text">
+            {isExpand ? text.slice(0, 100) : text}
+            <span onClick={ toggleExpand } style={{color:'#307ABB', cursor: 'pointer'}}>
+                {isExpand ? "...See More" : " See Less"}
+            </span>
+        </span>
+    )
+}
+
 function CourseCard({course, color, boxShadowColor, closeCard}: CourseCardType) {
 
     let body = [];
+    const checkLength = (text:string) => {
+        return (text.length < 100)? text: < ExpandText content={text}/>;
+    }
+
     body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
 
     if(course.corequisite !== "")
-        body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{course.corequisite} </p>)
+        body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{checkLength(course.corequisite)} </p>)
 
     if(course.prerequisite !== "")
-        body.push(<p key='prerequisite'> <b>{"Prerequisite: "}</b> {course.prerequisite} </p>)
+        body.push(<p key='prerequisite'> <b>{"Prerequisite: "}</b> {checkLength(course.prerequisite)} </p>)
 
     if(course.restriction !== "")
-        body.push(<p key='restriction'> <b>{"Restriction: "}</b> {course.restriction} </p>)
+        body.push(<p key='restriction'> <b>{"Restriction: "}</b> {checkLength(course.restriction)} </p>)
             
     if(course.repeatability > 1)
         body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{course.repeatability} </p>)
 
     if(course.ge !== "")
-        body.push(<p key='ge'> <b>{"GE: "}</b>{course.ge} </p>)
+        body.push(<p key='ge'> <b>{"GE: "}</b>{checkLength(course.ge)} </p>)
+    
+    if(course.terms !== "")
+        body.push(<p key='terms'><b>{"Last Offered: "}</b>{checkLength(course.terms)} </p>)
 
     return ( 
     <>
