@@ -24,11 +24,11 @@ declare interface CourseType {
     department: string;
     units: number;
     repeatability: number;
-    corequisite:string;
+    corequisite: string;
     description: string;
     prerequisite: string;
     restriction: string;
-    ge:string;
+    ge: string;
 }
 
 /***** Payload Type ****/
@@ -82,6 +82,19 @@ interface InputFileType {
 }
 
 /************* Slice **************/
+declare interface GEType {
+    sectionId: string;
+    geId: string; 
+    title: string; 
+    note: string; 
+}
+
+declare interface MajorSectionType {
+    id: string;
+    title: string;
+    sectionIds: { sectionId: string, note: string} [];
+}
+
 declare interface StoreType{
     years: {
         byIds: { [id: string]: YearType }; 
@@ -90,26 +103,18 @@ declare interface StoreType{
     };
     major:{
         byIds:{
-            [id:string]:{
-                id: string,
-                title: string,
-                sectionIds: { sectionId: string, note: string} []
-            }}; 
+            [id:string]: MajorSectionType
+        }; 
         allIds: string[];
         name: string;
         url: string;
         status: string;
         error: string;
     }
-    coursesAddByStudent: {sectionId: string, title: string};
+    coursesAddByStudent: {sectionId: string};
     ge: {
         byIds: {
-            [geId:string]: {
-                sectionId: string, 
-                geId: string, 
-                title: string, 
-                note: string, 
-            }};
+            [geId:string]: GEType};
         allGeIds: string[];
         status: string;
     };

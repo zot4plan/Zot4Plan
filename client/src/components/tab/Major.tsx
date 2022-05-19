@@ -3,73 +3,54 @@ import { useSelector} from 'react-redux';
 
 import {RootState} from '../../app/store';
 import BrowseCourseById from '../input/BrowseCourseById';
-import Section from '../accordion/Section';
+import Accordion from '../accordion/Accordion';
 import ZotSelectMajor from '../../assets/images/ZotSelectMajor.png'
 
 import Spinner from '../icon/Spinner';
-
-interface MajorSectionType { id:string;}
-
-const MajorAccordion = memo(({id}:MajorSectionType) => {
-    const section = useSelector((state:RootState)=>state.store.major.byIds[id]);
-    return (
-        <Section id={section.id} name={section.title} note="" sublist={section.sectionIds}/> 
-    )
-})
 
 function Major () {
     const accordionIds = useSelector((state:RootState)=>state.store.major.allIds);
     const status = useSelector((state:RootState)=>state.store.major.status);
     const name = useSelector((state:RootState)=>state.store.major.name);
     const url = useSelector((state:RootState)=>state.store.major.url);
-    const coursesAddByStudent = useSelector((state:RootState)=> state.store.coursesAddByStudent)
+    const coursesAddByStudentId = useSelector((state:RootState)=> state.store.coursesAddByStudent.sectionId);
     const error = useSelector((state:RootState)=>state.store.major.error);
 
-    let content;
-    if(status === 'idle')
-        content =
-        <div className='flex-container'>
-            <img 
-                id='select-major-img'
-                src={ZotSelectMajor} 
-                alt='please select your major!' 
-            />
-        </div>
+    let content = [] as JSX.Element [];
 
+    if(status === 'idle') {
+        content.push(<div key="img" className='flex-container'>
+                        <img 
+                            id='select-major-img'
+                            src={ZotSelectMajor} 
+                            alt='please select your major!' 
+                        />
+                    </div>)
+    }
+    
     else if (status === 'loading') 
-        content = <div id='spinner'> <Spinner/> </div> 
+        content.push(<div key="spinner" id='spinner'> <Spinner/> </div>)
 
-    else if (status === 'succeeded')  {
-        content = accordionIds.map(id => <MajorAccordion key={id} id={id}/>);
+    else if (status === 'succeeded' && name !== '')  {
+        content.push(<div key="hyperlink" className='flex-container'> 
+                        <a  className='hyperlink' href={url} 
+                            target='_blank' rel="noreferrer"> {name} </a>
+                    </div>);
+        content.push(<Accordion key={coursesAddByStudentId} id={coursesAddByStudentId} type="other"/>)
+        accordionIds.forEach(id => {content.push(<Accordion key={id} id={id} type="major" />)});
         content.push(<div key="empty" style={{height:'20rem'}}></div>);
     }
-    else 
-        content = <p className='fetch-error-message red'>{error}</p>
 
-    let hyperLink;
-    if(name !== '' && status === 'succeeded')
-        hyperLink = 
-            <div className='flex-container'> 
-                <a  className='hyperlink' 
-                    href={url} 
-                    target='_blank' 
-                    rel="noreferrer"> {name} </a>
-            </div>
+    else 
+        content.push(<p className='fetch-error-message red'>{error}</p>)
     
     return (
         <>  
-            <div id="browse-id-container"
+            <div key="browse" id="browse-id-container"
                 style={{display: status === 'succeeded'? "flex": "none", flexDirection:'column'}} >
-                <BrowseCourseById id={coursesAddByStudent.sectionId} majorStatus={status}/>  
+                <BrowseCourseById id={coursesAddByStudentId} majorStatus={status}/>  
             </div>
 
-            {hyperLink}
-            {status ==='succeeded' 
-                && <Section id={coursesAddByStudent.sectionId} 
-                        name={coursesAddByStudent.title} 
-                        note="(Added courses by students)" 
-                        sublist={null} 
-            />}
             {content}
         </>
     )

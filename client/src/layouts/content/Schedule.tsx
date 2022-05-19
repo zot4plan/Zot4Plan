@@ -15,8 +15,8 @@ const Schedule = () => {
       <div id="schedule">
         {yearIds.map( (id,index) => (
           <YearAccordion key={id} 
-            yearId={id}
-            yearName={YEAR_NAMES[index] + " Year"} 
+            id={id}
+            name={YEAR_NAMES[index] + " Year"} 
             index={index} 
           />
         ))}

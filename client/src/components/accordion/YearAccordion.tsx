@@ -2,27 +2,24 @@ import {memo} from "react";
 import { useSelector } from 'react-redux';
 
 import { RootState } from "../../app/store";
-import Summary from './summary/Summary';
 import QuarterDroppableArea from '../droppable/QuarterDroppableArea';
+import Summary from './summary/Summary';
 
 interface YearType {
-    yearId: string;
-    yearName: string;
+    id: string;
+    name: string;
     index: number;
 }
 
-function Year({yearId, yearName, index}:YearType) {
+function Year({id, name, index}:YearType) {
     const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
     const QUARTER_CLASS= ["fall", "winter","spring","summer"];
 
-    const quarterIds = useSelector((state:RootState) => state.store.years.byIds[yearId].quarterIds)
+    const quarterIds = useSelector((state:RootState) => state.store.years.byIds[id].quarterIds)
 
     return (
-        <details open
-            key={yearId}
-            style={{marginBottom: '2.5rem'}}
-        >
-            <Summary id={yearId} name={yearName} index={index} isYear={true}/>
+        <details open key={id} style={{marginBottom: '2.5rem'}}>
+            <Summary id={id} name={name} index={index} isYear={true}/>
 
             <div className='quarters-wrapper'>
                 {QUARTER_NAMES.map((name, index) => 

@@ -15,10 +15,7 @@ const DEPT_COLORS = [
 const generateInitialState = () => {
     let years:{[id:string]:YearType} = {};
     let sections:SectionType = {}; // sections courses (include quarters, GE, major and courses added by students)
-    let coursesAddByStudent =  {
-        sectionId: nanoid(ID_LENGTH), 
-        title: "+ Courses: ",
-    };
+    let coursesAddByStudent =  { sectionId: nanoid(ID_LENGTH) };
 
     // Generate IDs for years
     let yearIds = [nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH), 

@@ -1,5 +1,6 @@
 import {memo, MouseEvent} from 'react';
 import XCircle from '../icon/XCircle';
+import ReadMore from '../readmore/ReadMore';
 
 interface CourseCardType {
     course: CourseType;
@@ -9,18 +10,21 @@ interface CourseCardType {
 }
 
 function CourseCard({course, color, boxShadowColor, closeCard}: CourseCardType) {
-
     let body = [];
     body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
 
-    if(course.corequisite !== "")
-        body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{course.corequisite} </p>)
+    const checkLength = (text:string) => {
+        return (text.length < 100)? text : <ReadMore text={text}/>;
+    }
+
+    if(course.corequisite !== "") 
+        body.push(<p key='corequisite'> <b>{"Corequisites: "} </b>{checkLength(course.corequisite)}</p>)
 
     if(course.prerequisite !== "")
-        body.push(<p key='prerequisite'> <b>{"Prerequisite: "}</b> {course.prerequisite} </p>)
+        body.push(<p key='prerequisite'> <b>{"Prerequisite: "}</b>{checkLength(course.prerequisite)}</p>)
 
     if(course.restriction !== "")
-        body.push(<p key='restriction'> <b>{"Restriction: "}</b> {course.restriction} </p>)
+        body.push(<p key='restriction'> <b>{"Restriction: "}</b>{checkLength(course.restriction)} </p>)
             
     if(course.repeatability > 1)
         body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{course.repeatability} </p>)
@@ -38,9 +42,7 @@ function CourseCard({course, color, boxShadowColor, closeCard}: CourseCardType) 
         <div className="course-card" 
             style={{borderColor: color, boxShadow: '4px 4px 0px 0px' + boxShadowColor}}
         >   
-            <p className='course-card-header'
-                style={{backgroundColor: color}}
-            > 
+            <p className='course-card-header' style={{backgroundColor: color}}> 
                 <b>{course.id + '. ' + course.name}</b> 
                 <br/>
                 {course.units + " units"} 
@@ -54,7 +56,6 @@ function CourseCard({course, color, boxShadowColor, closeCard}: CourseCardType) 
         </div>
     </>
     )
-
 }
 
 export default memo(CourseCard)
