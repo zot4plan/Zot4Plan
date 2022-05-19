@@ -11,26 +11,29 @@ interface CourseCardType {
 
 function CourseCard({course, color, boxShadowColor, closeCard}: CourseCardType) {
     let body = [];
-    body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
-
     const checkLength = (text:string) => {
-        return (text.length < 100)? text : <ReadMore text={text}/>;
+        return (text.length < 100)? text: <ReadMore text={text}/>;
     }
 
-    if(course.corequisite !== "") 
-        body.push(<p key='corequisite'> <b>{"Corequisites: "} </b>{checkLength(course.corequisite)}</p>)
+    body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
+
+    if(course.corequisite !== "")
+        body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{checkLength(course.corequisite)} </p>)
 
     if(course.prerequisite !== "")
-        body.push(<p key='prerequisite'> <b>{"Prerequisite: "}</b>{checkLength(course.prerequisite)}</p>)
+        body.push(<p key='prerequisite'> <b>{"Prerequisite: "}</b> {checkLength(course.prerequisite)} </p>)
 
     if(course.restriction !== "")
-        body.push(<p key='restriction'> <b>{"Restriction: "}</b>{checkLength(course.restriction)} </p>)
+        body.push(<p key='restriction'> <b>{"Restriction: "}</b> {checkLength(course.restriction)} </p>)
             
     if(course.repeatability > 1)
         body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{course.repeatability} </p>)
 
     if(course.ge !== "")
-        body.push(<p key='ge'> <b>{"GE: "}</b>{course.ge} </p>)
+        body.push(<p key='ge'> <b>{"GE: "}</b>{checkLength(course.ge)} </p>)
+    
+    if(course.terms !== "")
+        body.push(<p key='terms'><b>{"Last Offered: "}</b>{checkLength(course.terms)} </p>)
 
     return ( 
     <>

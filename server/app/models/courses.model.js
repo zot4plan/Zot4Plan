@@ -40,7 +40,11 @@ module.exports = (sequelize, Sequelize) => {
         ge: {
             type: Sequelize.STRING(25),
             allowNull:false,
-        }, 
+        },
+        terms: {
+            type: Sequelize.STRING(350),
+            allowNull:false,
+        }
     }, {
         timestamps: false
     });
