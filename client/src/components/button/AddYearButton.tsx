@@ -15,8 +15,8 @@ function AddYearButton() {
     }
 
     return ( 
-    <>
-        <button id="add-year-btn" 
+    <div>
+        <button
             className="absolute btn-secondary" 
             onClick={addNewYear}
             data-tip data-for='addYearTip'
@@ -28,7 +28,7 @@ function AddYearButton() {
         <ReactTooltip id="addYearTip" place="top" effect="solid">
             Add year
         </ReactTooltip>
-    </>
+    </div>
     )
 
 }

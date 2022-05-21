@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from "../../app/store";
 
 import DroppableArea from '../droppable/DroppableArea';
-import Right from '../icon/Right';
+import Right from '../icon/ArrowRightSmall';
 
 import './Accordion.css';
 

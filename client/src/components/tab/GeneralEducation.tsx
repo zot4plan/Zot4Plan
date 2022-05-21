@@ -23,10 +23,12 @@ function GeneralEducation() {
         content = <p className='absolute fetch-error-message'>Cannot connect to server!!!</p>
     
     return (
-    <>
+    <div>
         <BrowseCourseByGE/>
-        {content}
-    </>
+        <div className="accordion-container">
+            {content}
+        </div>
+    </div>
     )
 }
 

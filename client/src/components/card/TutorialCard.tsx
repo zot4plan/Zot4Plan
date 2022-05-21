@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import LeftArrow from '../icon/LeftArrow';
-import RightArrow from '../icon/RightArrow';
+import LeftArrow from '../icon/ArrowLeft';
+import RightArrow from '../icon/ArrowRight';
 import XCircle from '../icon/XCircle';
 
 interface TutorialSliderType{

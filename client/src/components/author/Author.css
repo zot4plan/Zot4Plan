@@ -1,0 +1,16 @@
+.author-name {
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.contact-list {
+    display:flex;
+    align-items: center;
+}
+
+
+.contact-item > a > svg {
+    font-size: 2rem;
+    color: var(--primary-color);
+}

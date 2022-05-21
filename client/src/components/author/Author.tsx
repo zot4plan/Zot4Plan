@@ -2,7 +2,9 @@ import {memo} from 'react';
 
 import Github from '../../components/icon/Github';
 import Linkedin from '../../components/icon/Linkedin';
-import Facebook from '../../components/icon/Facebook';
+import Gmail from '../../components/icon/Gmail';
+
+import './Author.css';
 
 interface AuthorType {
     author: {
@@ -16,7 +18,7 @@ interface AuthorType {
 const Author = ({author}: AuthorType) => {
     return (
         <li>
-            <div className='flex-container'>
+            <div>
                 <a target="_blank" 
                     href={author.linkedin} 
                     rel="noreferrer"
@@ -27,7 +29,7 @@ const Author = ({author}: AuthorType) => {
                 </a>
             </div>
 
-            <ul className="flex-container" style={{marginTop: "1rem"}}>
+            <ul className="contact-list" style={{marginTop: "1rem"}}>
                 <li className="contact-item" style={{marginRight: "0.5rem"}}>
                     <a target="_blank" 
                         href={author.linkedin}
@@ -48,13 +50,13 @@ const Author = ({author}: AuthorType) => {
                     </a>
                 </li>
 
-                <li className="contact-item" style={{marginLeft:"0.5rem"}}>
+                <li className="contact-item" style={{marginLeft:"0.1rem"}}>
                     <a target="_blank" 
-                        href={"mailto:" + author.email}
+                        href= {"mailto: " + author.email}
                         rel="noreferrer"
-                        aria-label="Linkedin"
+                        aria-label="Gmail"
                     >
-                        <Facebook/>
+                        <Gmail/>
                     </a>
                 </li>
             </ul>

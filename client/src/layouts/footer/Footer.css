@@ -2,9 +2,23 @@
     position: relative;
     display: grid;
     justify-items: center;
-    padding: 0rem 4rem;
+    padding: 4rem 4rem 0 4rem;
     background-color: var(--secondary-color);
     color: var(--primary-color);
+}
+
+.header {
+    height: 3.2rem;
+    font-size: 2.4rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+#about-us-content > p {
+    line-height: 1.2;
+    font-size: 1.4rem;
+    text-align: justify;
+    margin-top: 1rem;
 }
 
 #zot-tree{
@@ -20,16 +34,18 @@
 }
 
 #logo-image {
-    height: 7.2rem;
-    width: 7.2rem;
-    margin-right: 1rem;
+    position: absolute;
+    top:-5px;
+    left: 100px;
+
+    height: 3.6rem;
+    width: 3.6rem;
 }
 
 #author-list-container {
     display: grid;
     grid-template-columns: 1fr; 
-    row-gap: 4rem;
-    margin-bottom:7rem;
+    row-gap: 2rem;
 }
 
 #copyright {
@@ -42,17 +58,24 @@
     margin-top: 8rem;
 }
 
-#copyright > a > svg {
-    font-size: 3.6rem;
-    color: var(--primary-color);
+#contact-us > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#copyright > p { margin: 1rem 0rem;}
+#contact-us > a > svg {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+#copyright > p { font-size:1.4rem; margin: 1rem 0rem;}
 
 
 @media only screen and (min-width: 800px) { 
     #footer {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         column-gap: 4rem;
     }
 
@@ -63,17 +86,10 @@
 }
 
 @media only screen and (min-width: 992px) { 
-    #footer{ column-gap: 6rem;}
+    #footer{ column-gap: 3rem;}
 
-    #author-list-container {
-        grid-template-columns: 1.1fr 0.9fr;
-        column-gap: 1.6rem;
-    }
 }
 
 @media only screen and (min-width: 1160px) {
-    #author-list-container {
-        grid-template-columns: 1fr 1fr;
-        column-gap: 4rem;
-    }
+  
 }

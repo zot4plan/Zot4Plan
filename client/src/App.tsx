@@ -5,8 +5,8 @@ import { moveCourse, addCourseToQuarter} from './features/StoreSlice';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 import NavBar from './layouts/navigation/NavBar';
-import Schedule from './layouts/content/Schedule';
-import Tabs from './layouts/content/Tabs';
+import Schedule from './layouts/schedule/Schedule';
+import Tabs from './layouts/tabs/Tabs';
 import Footer from './layouts/footer/Footer';
 
 function App() {

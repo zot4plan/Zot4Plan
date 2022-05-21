@@ -15,8 +15,8 @@ function RefreshButton() {
     }
 
     return ( 
-    <>
-        <button id="refresh-btn" className="btn-secondary" 
+    <div>
+        <button className="btn-secondary" 
             onClick={refresh}
             data-tip data-for='refreshTip'
             aria-label='remove all courses'
@@ -27,7 +27,7 @@ function RefreshButton() {
         <ReactTooltip id="refreshTip" place="left" effect="solid">
             Remove all courses
         </ReactTooltip>
-    </>
+    </div>
     )
 
 }

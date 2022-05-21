@@ -2,15 +2,10 @@
                                 Table of Contents
 1. Global Styles
 2. Common Styles
-3. Layout
-    3.2 Content
-        3.2.1 Schedule (left-column)
-        3.2.2 Courses Tabs (Right-column)
 4. Components
     4.2 button
         4.2.3 upload and import button
         4.2.4 remove-year-btn
-        4.2.5 add-year-btn
         4.2.6 add-course-btn
         4.2.7 course-btn
         4.2.8 remove-course-btn
@@ -23,7 +18,6 @@
         4.4.1 reuired-course
     4.5 droppable container
     4.6 input
-    4.7 tab
 5. Images
     5.1 Major
     5.2 Footer logo
@@ -34,11 +28,6 @@
     6.4 Large devices (laptops/desktops, 992px and up)
     6.5 Extra large devices (large laptops and desktops, 1200px and up)
 **************************************************************************************/
-
-/**** Cancel Drop and Drag animation ****/
-#tab-content div[data-rbd-placeholder-context-id] {display: none !important;}
-#tab-content div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
-#tab-content div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
 
 /**********************************************
 *************  1. Global Styles  **************
@@ -158,59 +147,6 @@ svg { font-size: 10px; }
     display: grid; 
 }
 
-/* 3.2.1 schedule (left-column) */
-#schedule {
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    overflow-x: visible;
-
-    padding: 0 0.5rem;
-}
-
-/* 3.2.2 tab container (right-column)*/
-#tab-container {
-    border-radius: 1.5rem;
-    box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
-    height: 64.8rem;
-    margin-bottom : 22rem;
-}
-
-.tab {
-    flex-grow: 1;
-    transition: background-color ease-in-out 0.4s;
-    padding: 0.5rem;
-    background-color: var(--primary-color-2);
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.tab:hover {color: var(--accent-color-2);}
-
-.tab-active {
-    border-top: 0.4rem solid var(--accent-color-2);
-    background-color: var(--primary-color);
-    color: var(--accent-color-2);
-}
-
-#tab-content{
-    overflow: scroll;
-    border-top: 1px solid white;
-    height: calc(100% - 45px);
-}
-
-/*** 3.3 footer ***/
-.author-name {
-    color: var(--primary-color);
-    font-size: 2.4rem;
-    font-weight: 500;
-}
-
-.contact-item > a > svg {
-    font-size: 2.6rem;
-    color: var(--primary-color);
-}
-
 /**********************************************
 ***************  4. Components  ***************
 ***********************************************/
@@ -292,12 +228,6 @@ svg { font-size: 10px; }
     background-color: var(--accent-color-1);
     color:white;
 }   
-
-/* 4.2.5 add-year-button */
-#add-year-btn {
-    left: 50%; 
-    transform: translateX(-50%);
-}
 
 /* 4.2.6 add-course-btn */
 .add-course-btn {
@@ -578,27 +508,6 @@ svg { font-size: 10px; }
     aspect-ratio: attr(width) / attr(height);
 }
 
-
-#schedule-function-row {
-    display: flex;
-    position: static;
-    margin-bottom:30rem;
-}
-
-#total-units {
-    position: absolute;
-    top: 47.5rem;
-    right: 1rem;
-    font-size: 1.8rem;
-}
-
-#refresh-btn, #add-year-btn{
-    position: absolute;
-    top: 46.5rem;
-}
-
-#refresh-btn {left: 1px;}
-
 /**********************************************
 **************  5. Media quries  **************
 ***********************************************/
@@ -633,19 +542,10 @@ svg { font-size: 10px; }
     }
     .arrow:nth-child(1) { left: 41%; }
 
-    /* body */
-    #schedule {
-        padding: 0 0.3rem 0 0.2rem;
-        overflow-x: hidden;
-        height: 45rem;
-    }
-
-    #tab-container {height: 44.6rem}
 
     /* typoraphy */
     p {font-size: 1.4rem; word-break: break-word;}
 
-    .tab {font-size: 1.5rem;}
     .hyperlink { font-size: 1.6rem;}
 
     #body-container {
@@ -698,14 +598,6 @@ svg { font-size: 10px; }
     #close-tutorial-btn > svg { font-size: 2.4rem;}
     .arrow > svg {font-size: 0.7rem;}
 
-    /** 4x2 quarters **/
-    #schedule {height: 65rem;}
-
-    #total-units{font-size: 1.6rem;}
-
-    #total-units { top: 68.5rem;}
-
-    #refresh-btn, #add-year-btn{ top: 67rem;}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -714,9 +606,6 @@ svg { font-size: 10px; }
     #select-major-img{ margin-top: 16%;}
 
     #body-container { grid-template-columns: 7.5fr 4.5fr;}
-
-    #schedule {overflow: visible; height: auto;}
-    #tab-container { margin-bottom: 14rem;}
 
     /* display course-card as tooltip */
     .course-card-background, .close-card {
@@ -748,24 +637,6 @@ svg { font-size: 10px; }
     }
 
     .course-card-header {padding-right: 0.6rem;}
-
-    #schedule-function-row {
-        position: relative;
-
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 2rem;
-   
-        margin-bottom:2rem;
-    }
-
-    #refresh-btn, #total-units {
-        position: relative;
-        top: 0;
-    }
-
-    #add-year-btn {top: 0;}
-    #total-units{ font-size: 2rem; }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

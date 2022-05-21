@@ -4,7 +4,7 @@ import {RootState} from '../../app/store';
 const TotalUnits = () => {
     const units = useSelector((state:RootState)=> state.store.years.totalUnits);
     return (
-      <p id="total-units">{"Total units: " + units}</p>
+      <p>{"Total units: " + units}</p>
     )
 }
 

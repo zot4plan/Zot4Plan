@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from "../../app/store";
 import QuarterDroppableArea from '../droppable/QuarterDroppableArea';
 import RemoveYearButton from "../button/RemoveYearButton";
-import Right from '../icon/Right';
+import Right from '../icon/ArrowRightSmall';
 
 import './Accordion.css';
 

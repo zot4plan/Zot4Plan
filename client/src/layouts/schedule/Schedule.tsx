@@ -7,6 +7,8 @@ import TotalUnits from '../../components/info/TotalUnits';
 import RefreshButton from '../../components/button/RefreshButton';
 import AddYearButton from '../../components/button/AddYearButton';
 
+import './Schedule.css';
+
 const Schedule = () => {
     const yearIds = useSelector((state: RootState) => state.store.years.allIds);
     const YEAR_NAMES = ["1st","2nd","3rd","4th", "5th", "6th", "7th", "8th", "9th"];
@@ -21,10 +23,20 @@ const Schedule = () => {
           />
         ))}
 
-        <div id='schedule-function-row'>
-          <RefreshButton/>
-          <AddYearButton/>
-          <TotalUnits/>
+        <div id='function-row'>
+
+          <div id="refresh-btn">
+            <RefreshButton/>
+          </div>
+          
+          <div id="add-year-btn" >
+            <AddYearButton/>
+          </div>
+          
+          <div id="total-units">
+            <TotalUnits/>
+          </div>
+      
         </div>
         
       </div>

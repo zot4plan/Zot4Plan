@@ -46,15 +46,15 @@ function Major () {
         content.push(<div key="error" className='fetch-error-message red'>{error}</div>)
     
     return (
-        <>  
+        <div>  
             <div key="browse" id="browse-id-container"
                 style={{display: status === 'succeeded'? "flex": "none", flexDirection:'column'}} >
                 <BrowseCourseById id={coursesAddByStudentId} majorStatus={status}/>  
             </div>
-            <div> 
+            <div className="accordion-container"> 
                 {content}
             </div>
-        </>
+        </div>
     )
 }
 
