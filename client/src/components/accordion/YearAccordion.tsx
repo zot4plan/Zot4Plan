@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from "../../app/store";
 import QuarterDroppableArea from '../droppable/QuarterDroppableArea';
-import Summary from './summary/Summary';
+import RemoveYearButton from "../button/RemoveYearButton";
+import Right from '../icon/Right';
+
+import './Accordion.css';
 
 interface YearType {
     id: string;
@@ -19,7 +22,15 @@ function Year({id, name, index}:YearType) {
 
     return (
         <details open key={id} style={{marginBottom: '2.5rem'}}>
-            <Summary id={id} name={name} index={index} isYear={true}/>
+            <summary> 
+                <span className='relative accordion'>
+                    <h1 className="year-header"> {name} </h1>
+                    <div className="right-icon">
+                        <Right />
+                    </div>
+                    {index > 3 && <RemoveYearButton id={id} index={index}/>}
+                </span>
+            </summary>
 
             <div className='quarters-wrapper'>
                 {QUARTER_NAMES.map((name, index) => 

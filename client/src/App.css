@@ -9,12 +9,7 @@
         3.2.2 Courses Tabs (Right-column)
     3.3 Footer
 4. Components
-    4.1 accordion
-        4.1.1 yearAccordion 
-        4.1.2 section
     4.2 button
-        4.2.1 btn-primary
-        4.2.2 btn-secondary
         4.2.3 upload and import button
         4.2.4 remove-year-btn
         4.2.5 add-year-btn
@@ -33,8 +28,7 @@
     4.7 tab
 5. Images
     5.1 Major
-    5,2 Footer logo
-    5,3 Author 
+    5.2 Footer logo
 6. Media Query
     6.1 Extra small devices (phones, 600px and down)
     6.2 Small devices (portrait tablets and large phones, 600px and up)
@@ -111,21 +105,6 @@ svg { font-size: 10px; }
     background-color: rgba(0, 0, 0, 0.16);
 }
 
-/* details & summary */
-details { 
-    border-radius: 1.6rem;
-    box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
-    background-color: var(--primary-color-2);
-}
-
-summary { list-style-type: none;}
-summary:focus { outline: none !important;}
-summary::-webkit-details-marker { display: none; }
-
-details[open] .right-icon > svg {
-    transform: rotate(90deg);
-}
-
 /**********************************************
 *************  2. Common styles  **************
 ***********************************************/
@@ -147,21 +126,35 @@ details[open] .right-icon > svg {
 .green {color: #07B053;} /* success-message */
 .red {color: var(--accent-color-1);} /* fail-message*/
 
+/* btn-primary */
+.btn-primary {
+    padding: 0.4rem 1rem;
+    color: var(--accent-color-2);
+}
+.btn-primary svg:hover{
+    box-shadow: 0 0 4px 3px var(--primary-color);
+    border-radius: 50%;
+
+    background-color: var(--accent-color-2);
+    color: var(--primary-color);
+}
+
+/* btn-secondary */
+.btn-secondary { 
+    border-radius: 50%;
+    line-height: 0;
+    color: var(--accent-color-2);
+}
+
+.btn-secondary:hover {
+    box-shadow: 0 0 3px 3px var(--accent-color-2);
+    background-color: var(--accent-color-2);
+    color: white;
+}
+
 /**********************************************
 *****************  3. Layout  *****************
 ***********************************************/
-/*** 3.1 Navigation bar ***/
-#nav-bar {
-    display: grid;
-    padding: 2rem 2.4rem;
-    background-color: var(--secondary-color);
-}
-
-#logo-text-brand {display: flex; align-items: center;  color: var(--primary-color);}
-#download { grid-column: 3;}
-#upload { z-index: 2; grid-column: 4; }
-#help {grid-column: 5;}
-
 /*** 3.2 content ***/
 #body-container {
     display: grid; 
@@ -209,105 +202,23 @@ details[open] .right-icon > svg {
 }
 
 /*** 3.3 footer ***/
-#footer, #author-list-containter {
-    display: grid;
-    align-items: center;
-}
-
-#footer {
-    justify-items: center;
-    padding: 0rem 4rem;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-}
-
-#author-list-containter {row-gap: 2rem;}
-#author-list-containter > li {
-    display: flex;
-    flex-direction: column;
-}
-
 .author-name {
     color: var(--primary-color);
-    margin-left: 1.6rem;
-}
-
-#copyright,
-.author-name {
-    display: flex;
-    align-items: center;
-}
-
-#footer-logo-container { margin: 5rem 0rem 2rem 0rem;}
-
-#footer-header-container {
-    margin-top: 2rem;
-    height: 6.4rem;
-}
-#footer-header-container > h1 {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     font-weight: 500;
 }
 
-#about-p {
-    text-align: justify;
-    line-height: 1.4;
-}
-
-.contact-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 6.5rem;
-}
-
-.contact-item {width:5rem;}
 .contact-item > a > svg {
-    font-size: 3.2rem;
+    font-size: 2.6rem;
     color: var(--primary-color);
 }
-
-#copyright {
-    margin-top: 8rem;
-    grid-column: 1/-1;
-    
-    flex-direction: column;
-}
-
-#copyright > a > svg {
-    font-size: 3.6rem;
-    color: var(--primary-color);
-}
-
-#copyright > p { margin: 1rem 0rem;}
 
 /**********************************************
 ***************  4. Components  ***************
 ***********************************************/
-.author-name, 
-.right-icon, 
 .close-card > svg,
-.hyperlink,
-.year-header {
+.hyperlink {
     font-size: 2rem;
-}
-
-/*** 4.1 accordion ***/
-.accordion {
-    display:flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.accordion:hover {color: var(--accent-color-2)}
-
-.year-header, .section-header {
-    flex-grow: 2;
-    font-weight: 600;
-}
-
-.right-icon {
-    line-height: 0;
-    transition: transform var(--transition-time);
 }
 
 /* section */
@@ -319,31 +230,6 @@ details[open] .right-icon > svg {
 }
 
 /*** 4.2 button ***/
-/* 4.2.1 btn-primary */
-.btn-primary {
-    padding: 0.4rem 1rem;
-    color: var(--accent-color-2);
-}
-.btn-primary svg:hover{
-    box-shadow: 0 0 4px 3px var(--primary-color);
-    border-radius: 50%;
-
-    background-color: var(--accent-color-2);
-    color: var(--primary-color);
-}
-
-/* 4.2.2 btn-secondary */
-.btn-secondary { 
-    border-radius: 50%;
-    line-height: 0;
-    color: var(--accent-color-2);
-}
-
-.btn-secondary:hover {
-    box-shadow: 0 0 3px 3px var(--accent-color-2);
-    background-color: var(--accent-color-2);
-    color: white;
-}
 
 /* 4.2.3 upload and import button */
 #upload-card{
@@ -400,11 +286,6 @@ details[open] .right-icon > svg {
     opacity: 0;
     transition: opacity var(--transition-time) ease, visibility var(--transition-time) ease;
     color: var(--accent-color-1);
-}
-
-.accordion:hover .remove-year-btn{
-    visibility: visible;
-    opacity: 1;
 }
 
 .remove-year-btn svg:hover {
@@ -589,41 +470,6 @@ details[open] .right-icon > svg {
 }
 
 /*** 4.5 droppable container ***/
-/* quater */
-.quarters-wrapper {
-    display: grid;
-    grid-template-areas:"hfall" "fall"
-                        "hwinter" "winter"    
-                        "hspring" "spring"
-                        "hsummer" "summer";
-    grid-template-columns: 1fr;
-    opacity: 1;
-}
-
-.quarter-header-fall { grid-area: hfall;}
-.quarter-header-winter {grid-area: hwinter;}
-.quarter-header-spring {grid-area: hspring;}
-.quarter-header-summer {grid-area: hsummer;}
-.fall {grid-area: fall;}
-.winter {grid-area: winter;}
-.spring{grid-area: spring;}
-.summer{ grid-area: summer;}
-
-.quarter-header {
-    padding: 0.15rem;
-   
-    border-bottom: 0.2rem solid var(--border-color);
-    border-top: 0.2rem solid var(--border-color);
-    background-color: #F8F8F8;
-
-    font-size: 1.8rem;
-    font-weight: 500;
-    text-align: center;
-}
-
-.quarter-droppable-area {
-    min-height: 7.9rem;
-}
 
 /* requirement sections */
 .droppable-area, .sub-droppable-area {
@@ -656,7 +502,7 @@ details[open] .right-icon > svg {
     border: none;
 }
 /*** 4.6 input ***/
-#select-major, .input-container {
+.input-container {
     top: 1rem;
 
     display:flex;
@@ -667,10 +513,6 @@ details[open] .right-icon > svg {
 .input-container{
     left: 80%;
     transition: left 1s, top 1s;
-}
-
-#select-major {
-    transition: top 1s;
 }
 
 .browse-container {
@@ -738,20 +580,6 @@ details[open] .right-icon > svg {
     aspect-ratio: attr(width) / attr(height);
 }
 
-/* 5.1 logo - footer */
-#logo-image {
-    height: 7.2rem;
-    width: 7.2rem;
-    margin-right: 1rem;
-}
-
-/* authors */
-.author-image {
-    height: 6.4rem;
-    width: 6.4rem;
-    border-radius: 50%;
-    border: 3px solid var(--accent-color-2);
-}
 
 #schedule-function-row {
     display: flex;
@@ -773,13 +601,6 @@ details[open] .right-icon > svg {
 
 #refresh-btn {left: 1px;}
 
-#zot-tree{
-    top:-12.8rem;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: left 0.5s;
-}
-
 /**********************************************
 **************  5. Media quries  **************
 ***********************************************/
@@ -789,15 +610,10 @@ details[open] .right-icon > svg {
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 599px) {
-    /* nav-bar */
-    #nav-bar{ grid-template-columns: 2.5fr 0.5fr 0.5fr 0.5fr;}
-
     .btn-primary {padding: 0.5rem;}
 
-    #logo-text-brand > svg,
     .btn-primary > svg, 
-    .btn-secondary > svg,
-    .right-icon > svg {
+    .btn-secondary > svg {
         font-size: 0.8rem;
     }
 
@@ -826,22 +642,12 @@ details[open] .right-icon > svg {
         height: 45rem;
     }
 
-    .summer { 
-        border-bottom-left-radius: 1.5rem;
-        border-bottom-right-radius: 1.5rem;
-    }
-
     #tab-container {height: 44.6rem}
 
     /* typoraphy */
     p {font-size: 1.4rem; word-break: break-word;}
 
-    summary { padding: 0.6rem 0.2rem 0.6rem 0.5rem;}
-    .section-header {
-        font-size: 1.4rem;
-    }
-
-    .year-header, .quarter-header, .tab {font-size: 1.5rem;}
+    .tab {font-size: 1.5rem;}
     .hyperlink { font-size: 1.6rem;}
 
     #body-container {
@@ -852,26 +658,17 @@ details[open] .right-icon > svg {
     
     #browse-id-container {display: block !important;} 
 
-    #select-major, .input-container {
+    .input-container {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-    }
-
-    #select-major {
-        z-index: 2;
-        top: 8rem;
-        width: 27rem;
-    }
-    
-    .input-container {
+  
         top: -9rem;
         z-index: 1;
     } 
 
     /* hyperlink */
     .hyperlink { margin: 1rem 1rem 0 1rem;}
-    .accordion-section {margin: 2rem 1rem;}
 
     .droppable-area, .sub-droppable-area {
         grid-template-columns: repeat(auto-fill, 9rem);
@@ -886,15 +683,6 @@ details[open] .right-icon > svg {
 
 /* Small devices (portrait tablets and large phones, 500px and up) */
 @media only screen and (min-width: 600px) {
-    /* nav-bar */ 
-    #nav-bar{ grid-template-columns: 3fr 7.5fr 0.5fr 0.5fr 0.5fr;}
-
-    #select-major {
-        flex-direction: row;
-        align-items: center;
-        margin: 0 2rem;
-        flex-basis: 100%;
-    }
 
     #body-container {
         grid-template-columns: 1fr 1fr;
@@ -909,30 +697,11 @@ details[open] .right-icon > svg {
         height: 627px;
     }
 
-    summary {padding: 0.6rem 1rem;}
-
     #close-tutorial-btn > svg { font-size: 2.4rem;}
     .arrow > svg {font-size: 0.7rem;}
 
-    .accordion-section { margin: 0rem 1.6rem 2rem 1.6rem; }
-
     /** 4x2 quarters **/
     #schedule {height: 65rem;}
-    .quarters-wrapper{
-        grid-template-areas:"hfall hwinter"
-                            "fall winter"    
-                            "hspring hsummer"
-                            "spring summer";
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .quarter-header-fall, .quarter-header-spring, 
-    .fall, .spring {
-        border-right: 0.2rem solid var(--border-color);
-    }
-
-    .spring { border-bottom-left-radius: 1.5rem;}
-    .summer { border-bottom-right-radius: 1.5rem; }
 
     #total-units{font-size: 1.6rem;}
 
@@ -943,10 +712,6 @@ details[open] .right-icon > svg {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 800px) {
-    #nav-bar{grid-template-columns: 2.5fr 5fr 1.5fr 0.6fr 0.6fr 0.6fr;}
-    #download { grid-column: 4; }
-    #upload { grid-column: 5; }
-    #help { grid-column: 6; }
 
     #select-major-img{ margin-top: 16%;}
 
@@ -954,21 +719,6 @@ details[open] .right-icon > svg {
 
     #schedule {overflow: visible; height: auto;}
     #tab-container { margin-bottom: 14rem;}
-
-    /* 2x4 quarters */
-    .quarters-wrapper {
-        grid-template-areas:"hfall hwinter hspring hsummer"
-                            "fall winter spring summer";
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-
-    .spring {border-bottom-left-radius: 0rem;}
-    .fall {border-bottom-left-radius: 1.5rem;}
-
-    .quarter-header-fall, .quarter-header-winter, .quarter-header-spring, 
-    .fall, .winter, .spring {
-        border-right: 0.2rem solid var(--border-color);
-    }
 
     /* display course-card as tooltip */
     .course-card-background, .close-card {
@@ -1000,7 +750,6 @@ details[open] .right-icon > svg {
     }
 
     .course-card-header {padding-right: 0.6rem;}
-    .contact-list {margin-left: 8rem;}
 
     #schedule-function-row {
         position: relative;
@@ -1019,29 +768,10 @@ details[open] .right-icon > svg {
 
     #add-year-btn {top: 0;}
     #total-units{ font-size: 2rem; }
-
-    /*** footer responsive ***/
-    #footer-logo-container { margin: 2rem 0rem;}
-    #footer-logo-container, #footer-header-container{
-        justify-content: start;
-    }
-
-    #footer {
-        grid-template-columns: 1fr 1fr;
-        column-gap: 4rem;
-    }
-    
-    #author-list-containter { grid-template-columns: 1fr; } 
-    #footer-header-container { margin: 2rem 0rem;}
-    #copyright {margin-top: 4rem;}
-
-    #zot-tree { left: 75%; transform: translateX(0);}
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    #nav-bar{ grid-template-columns: 2.5fr 5fr 2.4fr 0.6fr 0.6fr 0.6fr;}
-
     .tutorial-img { 
         border-radius: 15px;
         border: 6px solid #5C9DD6;
@@ -1057,14 +787,5 @@ details[open] .right-icon > svg {
         margin: 2.4rem 2rem 0rem 2rem;
     }
 
-    .accordion-section { margin: 0rem 1.6rem 2rem 1.6rem;}
     .section-body{padding: 1.6rem 1.2rem;}
-
-    /*** footer responsive ***/
-    #author-list-containter {
-        grid-template-columns: 1fr 1fr;
-        column-gap: 4rem;
-    }
-
-    #footer{ column-gap: 8rem;}
 }

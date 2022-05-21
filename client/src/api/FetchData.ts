@@ -4,7 +4,7 @@ import Axios from '../api/Axios';
 /** 
  * Get All GE categories information.
  * Return an array of GE.
- *  Ge= { id:string;   : alias of ge
+ *  Ge = { id:string;   : alias of ge
  *       name:string; : full name of the ge
  *       note:string; : describe how the GE can be completed } 
  */

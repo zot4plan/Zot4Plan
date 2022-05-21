@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from "../../app/store";
 
 import DroppableArea from '../droppable/DroppableArea';
-import Summary from './summary/Summary';
+import Right from '../icon/Right';
+
+import './Accordion.css';
 
 interface SectionType {
     id: string;
@@ -38,7 +40,14 @@ const Accordion = ({id, type}:SectionType) => {
 
     return (
         <details className='accordion-section' key={id}>  
-            <Summary id ={id} name={name} index={0} isYear={false}/>
+            <summary> 
+                <span className='relative accordion'>
+                    <h1 className="section-header"> {name} </h1>
+                    <div className="right-icon">
+                        <Right />
+                    </div>
+                </span>
+            </summary>
 
             <div className='section-body'>
                {detail}

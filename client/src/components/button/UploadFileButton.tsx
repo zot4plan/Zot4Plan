@@ -41,7 +41,7 @@ function UploadFileButton () {
     }
 
     return (
-        <div id="upload" className="relative flex-container">
+        <div className="relative flex-container">
             <button  className='btn-primary' 
                 onClick={handleOnClick}
                 data-tip data-for="uploadTip"

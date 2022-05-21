@@ -27,8 +27,7 @@ function getStyle(style: any, snapshot: { isDropAnimating: any; }) {
 }
 
 function RequiredCourse({courseId, droppableId, index}: courseType) {
-    const repeatability = useSelector(
-        (state: RootState) => state.store.courses.byIds[courseId].repeatability)
+    const repeatability = useSelector((state: RootState) => state.store.courses.byIds[courseId].repeatability)
 
     let isDraggable = true;
     if(repeatability === 0)
@@ -45,35 +44,35 @@ function RequiredCourse({courseId, droppableId, index}: courseType) {
     }; 
   
     return (   
-    <Draggable key={droppableId + courseId} 
-        draggableId={droppableId + courseId}
-        isDragDisabled={!isDraggable} 
-        index={index}
-    >
-        {(provided, snapshot) => (
-            <>
-            <div ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                style={getStyle(provided.draggableProps.style, snapshot)}
-                className="relative required-course"
-                >
-                    <CourseButton id={courseId} 
-                        showUnit={false} 
-                        isCrossed ={!isDraggable}
-                    />
-                    {/* Only courses add by students are removable */}
-                    {droppableId.length > MAJOR_ID_LENGTH && 
-                        <button className="remove-course-btn" onClick = {removeCourse}>
-                            <Xmark/>
-                        </button>
-                    }
-            </div>
+        <Draggable key={droppableId + courseId} 
+            draggableId={droppableId + courseId}
+            isDragDisabled={!isDraggable} 
+            index={index}
+        >
+            {(provided, snapshot) => (
+                <>
+                <div ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    style={getStyle(provided.draggableProps.style, snapshot)}
+                    className="relative required-course"
+                    >
+                        <CourseButton id={courseId} 
+                            showUnit={false} 
+                            isCrossed ={!isDraggable}
+                        />
+                        {/* Only courses add by students are removable */}
+                        {droppableId.length > MAJOR_ID_LENGTH && 
+                            <button className="remove-course-btn" onClick = {removeCourse}>
+                                <Xmark/>
+                            </button>
+                        }
+                </div>
 
-            {snapshot.isDragging && (<div className="required-course"/>)}    
-            </>
-        )}
-    </Draggable>
+                {snapshot.isDragging && (<div className="required-course"/>)}    
+                </>
+            )}
+        </Draggable>
     )
 }
 

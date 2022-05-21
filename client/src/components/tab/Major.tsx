@@ -37,12 +37,13 @@ function Major () {
                             target='_blank' rel="noreferrer"> {name} </a>
                     </div>);
         content.push(<Accordion key={coursesAddByStudentId} id={coursesAddByStudentId} type="other"/>)
+
         accordionIds.forEach(id => {content.push(<Accordion key={id} id={id} type="major" />)});
         content.push(<div key="empty" style={{height:'20rem'}}></div>);
     }
 
     else 
-        content.push(<p className='fetch-error-message red'>{error}</p>)
+        content.push(<div key="error" className='fetch-error-message red'>{error}</div>)
     
     return (
         <>  
@@ -50,8 +51,9 @@ function Major () {
                 style={{display: status === 'succeeded'? "flex": "none", flexDirection:'column'}} >
                 <BrowseCourseById id={coursesAddByStudentId} majorStatus={status}/>  
             </div>
-
-            {content}
+            <div> 
+                {content}
+            </div>
         </>
     )
 }

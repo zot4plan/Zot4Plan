@@ -1,0 +1,125 @@
+details { 
+    border-radius: 1.6rem;
+    box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
+    background-color: var(--primary-color-2);
+}
+
+summary { list-style-type: none;}
+summary:focus { outline: none !important;}
+summary::-webkit-details-marker { display: none; }
+
+details[open] .right-icon > svg {
+    transform: rotate(90deg);
+}
+
+.accordion {
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.accordion:hover {color: var(--accent-color-2)}
+.accordion:hover .remove-year-btn{
+    visibility: visible;
+    opacity: 1;
+}
+
+.year-header {font-size: 2rem;}
+.year-header, .section-header {
+    flex-grow: 2;
+    font-weight: 600;
+}
+
+.right-icon {
+    line-height: 0;
+    transition: transform var(--transition-time);
+}
+
+/* quater */
+.quarters-wrapper {
+    display: grid;
+}
+
+.quarter-header-fall { grid-area: hfall;}
+.quarter-header-winter {grid-area: hwinter;}
+.quarter-header-spring {grid-area: hspring;}
+.quarter-header-summer {grid-area: hsummer;}
+.fall {grid-area: fall;}
+.winter {grid-area: winter;}
+.spring{grid-area: spring;}
+.summer{ grid-area: summer;}
+
+.quarter-header {
+    padding: 0.15rem;
+   
+    border-bottom: 0.2rem solid var(--border-color);
+    border-top: 0.2rem solid var(--border-color);
+    background-color: #F8F8F8;
+
+    font-size: 1.8rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.quarter-droppable-area {
+    min-height: 7.9rem;
+}
+
+@media only screen and (max-width: 599px) { 
+    summary { padding: 0.6rem 0.4rem;}
+    .accordion-section {margin: 2rem 1rem;}
+
+    .year-header, .quarter-header {font-size: 1.5rem;}
+    .section-header {font-size: 1.4rem;}
+    .right-icon > svg {font-size: 0.9rem;}
+
+    .quarters-wrapper {
+        grid-template-areas:"hfall" "fall"
+                            "hwinter" "winter"    
+                            "hspring" "spring"
+                            "hsummer" "summer";
+        grid-template-columns: 1fr;
+    }
+
+    .summer { 
+        border-bottom-left-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    summary {padding: 0.6rem 1rem;}
+    .accordion-section { margin: 0rem 1.6rem 2rem 1.6rem; }
+
+    .quarters-wrapper{
+        grid-template-areas:"hfall hwinter"
+                            "fall winter"    
+                            "hspring hsummer"
+                            "spring summer";
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .quarter-header-fall, .quarter-header-spring, 
+    .fall, .spring {
+        border-right: 0.2rem solid var(--border-color);
+    }
+
+    .spring { border-bottom-left-radius: 1.5rem;}
+    .summer { border-bottom-right-radius: 1.5rem; }
+}
+
+@media only screen and (min-width: 800px) { 
+    .quarters-wrapper {
+        grid-template-areas:"hfall hwinter hspring hsummer"
+                            "fall winter spring summer";
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    .spring {border-bottom-left-radius: 0rem;}
+    .fall {border-bottom-left-radius: 1.5rem;}
+
+    .quarter-header-fall, .quarter-header-winter, .quarter-header-spring, 
+    .fall, .winter, .spring {
+        border-right: 0.2rem solid var(--border-color);
+    }
+}

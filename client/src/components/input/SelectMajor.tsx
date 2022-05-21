@@ -56,7 +56,6 @@ function SelectMajor() {
     }
 
     return (
-    <div id="select-major">
         <Select 
             isClearable={true}
             options={majors} 
@@ -65,7 +64,6 @@ function SelectMajor() {
             placeholder="Select your major"
             aria-label="Select your major"
         />
-    </div>
     )
 };
 

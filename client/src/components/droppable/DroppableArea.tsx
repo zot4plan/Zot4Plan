@@ -52,7 +52,7 @@ function DroppableArea({droppableId, text}:DroppableAreaType) {
 
     let p;
     if(text.length > 3 && text.substring(0,3) === "(b)") 
-        p =  <p key={droppableId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> <b>{text.substring(3)}</b> </p>
+        p = <p key={droppableId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> <b>{text.substring(3)}</b> </p>
     else if(text !== "")
         p = <p key={droppableId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> {text}</p>
 

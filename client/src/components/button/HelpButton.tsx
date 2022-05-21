@@ -13,7 +13,7 @@ function HelpButton () {
     }
 
     return (
-    <div id='help' className='flex-container'>
+    <div className='flex-container'>
         <button 
             data-tip data-for='helpTip'
             className='btn-primary' 

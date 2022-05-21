@@ -6,50 +6,70 @@ import Logo from '../../components/icon/Logo';
 import Author from '../../components/author/Author';
 
 import Zot from '../../assets/images/Zot.png';
-import PictureOfLoc from '../../assets/images/loc.jpg';
-import PictureOfTram from '../../assets/images/tram.jpg';
 import Tree from '../../assets/images/tree.png';
 import ZotWalk from '../../assets/images/zot-walk.png';
+
+import './Footer.css';
 
 const Footer = () => {
     const authors = [
         {
             name: "Loc Duc Minh Khong",
-            profile: PictureOfLoc,
             linkedin: "https://www.linkedin.com/in/lockhong",
             github: "https://github.com/ldkhong",
-            facebook: "https://www.facebook.com/loc.khong.512" 
+            email: "ldkhong@uci.edu"
         },
         {
             name: "Tram Bao La",
-            profile: PictureOfTram,
             linkedin: "https://www.linkedin.com/in/tram-la-680417200",
             github: "https://github.com/tramla123",
-            facebook: "https://www.facebook.com" 
+            email: "latb@uci.edu"
         }
     ]
     
     return (
-    <footer id="footer" className="relative">
-        <div>
-            <div id='footer-logo-container' className='flex-container'>
-                <img id="logo-image" src={Zot} alt='Anteater Logo brand'/>
-                <Logo/>
-            </div>
-            
-            <p id="about-p"> 
-            Welcome to Zot4Plan! Zot4Plan is a schedule planner that helps Anteaters visualize their undergraduate journey. As a team, we aimed to make the task of organizing your schedule as simple as possible. Besides the schedule planning tool, we also incorporated the major requirements tab to make the task of keeping progress much more efficient. Note that all of the information we obtained are from the UCI website. Please make sure to check your schedule with your academic counselor. Thank you - Zot! Zot! Zot!
-            </p>
+    <footer id="footer">
+        <div id="zot-tree">
+            <img src={ZotWalk} style={{width: '6.4rem', height:'6.4rem'}} alt="A walking aneater"/>
+            <img src={Tree} style={{width: '12.8rem', height:'12.8rem'}} alt="A black tree"/>
         </div>
 
         <div>
-            <div id="footer-header-container" className='flex-container'>
-                <h1>Authors</h1>
+            <div id='logo-container' className='flex-container'>
+                <img id="logo-image" 
+                    src={Zot} 
+                    alt='Anteater Logo brand'
+                />
+                <Logo/>
             </div>
+            
+            <p style={{textAlign: 'justify', lineHeight: '1.4'}}> 
+                Welcome to Zot4Plan! Zot4Plan is a schedule planner that helps Anteaters visualize their undergraduate journey. As a team, we aimed to make the task of organizing your schedule as simple as possible. Besides the schedule planning tool, we also incorporated the major requirements tab to make the task of keeping progress much more efficient. Note that all of the information we obtained are from the UCI website. Please make sure to check your schedule with your academic counselor. Thank you - Zot! Zot! Zot! </p>
+        </div>
 
-            <ul id='author-list-containter'>    
+        <div>    
+            <h1 style={{margin:'2rem 0rem', 
+                        height:'6.4rem', 
+                        fontSize:'3.6rem', 
+                        fontWeight:'500'}}
+                className='flex-container'
+            >
+                Authors
+            </h1>
+           
+            <ul id='author-list-container'>    
                 {authors.map((author) => <Author key={author.name} author={author} />)}
             </ul>
+
+            <a target="_blank"
+                href="https://forms.gle/vak9jPNBMMYsRHAX9"
+                rel="noreferrer" 
+                style={{color:"white", fontSize:"1.6rem"}}
+                className='flex-container'
+            > 
+                Give Feedback or Report a Bug
+            </a>
+           
         </div>
 
         <div id='copyright'>
@@ -63,15 +83,10 @@ const Footer = () => {
             </a>
 
             <ReactTooltip id="githubTip" place="top" effect="solid">
-                View source code here!!!
+                View source code!
             </ReactTooltip>
 
             <p> &copy; Copyright 2022: zot4plan.com </p>
-        </div>
-
-        <div id="zot-tree" className="absolute">
-            <img src={ZotWalk} style={{width: '6.4rem', height:'6.4rem'}} alt="A walking aneater"/>
-            <img src={Tree} style={{width: '12.8rem', height:'12.8rem'}} alt="A black tree"/>
         </div>
     </footer>
     )

@@ -62,25 +62,25 @@ function DownloadFileButton () {
     }
 
     return (
-    <div id="download" className="relative flex-container">  
-        <button data-tip data-for='downloadTip' 
-            className='btn-primary' 
-            onClick ={download}
-            aria-label="download your plan as a JSON file"
-        >
-            <DownloadIcon/>
-        </button>
-        <ReactTooltip id="downloadTip" place="bottom" effect="solid">
-            Download File
-        </ReactTooltip>
+        <div className="relative flex-container">  
+            <button data-tip data-for='downloadTip' 
+                className='btn-primary' 
+                onClick ={download}
+                aria-label="download your plan as a JSON file"
+            >
+                <DownloadIcon/>
+            </button>
+            <ReactTooltip id="downloadTip" place="bottom" effect="solid">
+                Download File
+            </ReactTooltip>
 
-        <div className="absolute" style={{display: "none"}}>   
-            <a download={file.name + '.' + file.fileType}
-               href={file.url}
-               ref={doFileDownload}
-            />
+            <div className="absolute" style={{display: "none"}}>   
+                <a download={file.name + '.' + file.fileType}
+                href={file.url}
+                ref={doFileDownload}
+                />
+            </div>
         </div>
-    </div>
     )
 }
 

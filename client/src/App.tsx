@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 
 import { useDispatch } from 'react-redux';
@@ -37,7 +36,7 @@ function App() {
   }
 
   return (
-  <>
+  <div>
     <NavBar/>
     <DragDropContext onDragEnd={onDragEnd}>
       <div id="body-container" className="relative">
@@ -46,7 +45,7 @@ function App() {
       </div>  
     </DragDropContext>
     <Footer/>
-  </> 
+  </div> 
   );
 }
 

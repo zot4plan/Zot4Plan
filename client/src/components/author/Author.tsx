@@ -7,21 +7,15 @@ import Facebook from '../../components/icon/Facebook';
 interface AuthorType {
     author: {
         name: string;
-        profile: string;
         linkedin: string;
-        facebook: string;
         github: string;
+        email: string;
     }
 }
 const Author = ({author}: AuthorType) => {
     return (
         <li>
-            <div style={{display: 'flex'}}>
-                <img className="author-image"
-                    src={author.profile}
-                    alt={author.name}
-                />
-
+            <div className='flex-container'>
                 <a target="_blank" 
                     href={author.linkedin} 
                     rel="noreferrer"
@@ -32,18 +26,8 @@ const Author = ({author}: AuthorType) => {
                 </a>
             </div>
 
-            <ul className="contact-list">
-                <li className="contact-item">
-                    <a target="_blank" 
-                        href={author.facebook} 
-                        rel="noreferrer"
-                        aria-label="FaceBook"
-                    >
-                        <Facebook/>
-                    </a>
-                </li>
-
-                <li className="contact-item">
+            <ul className="flex-container" style={{marginTop: "1rem"}}>
+                <li className="contact-item" style={{marginRight: "0.5rem"}}>
                     <a target="_blank" 
                         href={author.linkedin}
                         rel="noreferrer"
@@ -53,13 +37,23 @@ const Author = ({author}: AuthorType) => {
                     </a>
                 </li>
 
-                <li className="contact-item">
+                <li className="contact-item" style={{marginLeft: "0.5rem",marginRight: "0.5rem"}}>
                     <a target="_blank" 
                         href={author.github}
                         rel="noreferrer"
                         aria-label="Github"
                     >
                         <Github/>
+                    </a>
+                </li>
+
+                <li className="contact-item" style={{marginLeft:"0.5rem"}}>
+                    <a target="_blank" 
+                        href={author.linkedin}
+                        rel="noreferrer"
+                        aria-label="Linkedin"
+                    >
+                        <Facebook/>
                     </a>
                 </li>
             </ul>
