@@ -67,7 +67,7 @@ const Footer = () => {
                 style={{color:"white", fontSize:"1.6rem"}}
                 className='flex-container'
             > 
-                Give Feedback or Report a Bug
+                Give Feedback or Report a Bug <span role="img" aria-label="bug" style={{marginLeft:"0.3rem"}}>🐛</span>
             </a>
            
         </div>

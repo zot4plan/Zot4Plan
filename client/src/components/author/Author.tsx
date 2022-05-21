@@ -12,6 +12,7 @@ interface AuthorType {
         email: string;
     }
 }
+
 const Author = ({author}: AuthorType) => {
     return (
         <li>
@@ -49,7 +50,7 @@ const Author = ({author}: AuthorType) => {
 
                 <li className="contact-item" style={{marginLeft:"0.5rem"}}>
                     <a target="_blank" 
-                        href={author.linkedin}
+                        href={"mailto:" + author.email}
                         rel="noreferrer"
                         aria-label="Linkedin"
                     >
