@@ -2,7 +2,6 @@ import {memo} from 'react';
 import ReactTooltip from "react-tooltip";
 
 import Github from '../../components/icon/Github';
-import Logo from '../../components/icon/Logo';
 import Author from '../../components/author/Author';
 
 import Zot from '../../assets/images/Zot.png';
@@ -20,7 +19,7 @@ const Footer = () => {
             email: "ldkhong@uci.edu"
         },
         {
-            name: "Tram Bao La",
+            name: "Tram La",
             linkedin: "https://www.linkedin.com/in/tram-la-680417200",
             github: "https://github.com/tramla123",
             email: "latb@uci.edu"
@@ -35,25 +34,30 @@ const Footer = () => {
         </div>
 
         <div>
-            <div id='logo-container' className='flex-container'>
+            <div className='flex-container'>
+                <h1 className='header'>
+                    About Us
+                </h1>
                 <img id="logo-image" 
-                    src={Zot} 
-                    alt='Anteater Logo brand'
-                />
-                <Logo/>
+                        src={Zot} 
+                        alt='Anteater Logo brand'
+                    />
             </div>
-            
-            <p style={{textAlign: 'justify', lineHeight: '1.4'}}> 
-                Welcome to Zot4Plan! Zot4Plan is a schedule planner that helps Anteaters visualize their undergraduate journey. As a team, we aimed to make the task of organizing your schedule as simple as possible. Besides the schedule planning tool, we also incorporated the major requirements tab to make the task of keeping progress much more efficient. Note that all of the information we obtained are from the UCI website. Please make sure to check your schedule with your academic counselor. Thank you - Zot! Zot! Zot! </p>
+            <p className='paragraph'> 
+                Welcome to Zot4Plan! Zot4Plan is a schedule planner that helps 
+                Anteaters visualize their undergraduate journey. As a team, 
+                we aimed to make the task of organizing your schedule as simple 
+                as possible. Besides the schedule planning tool, we also 
+                incorporated the major requirements tab to make the task of 
+                keeping progress much more efficient. Note that all of the 
+                information we obtained are from the UCI website. 
+                Please make sure to check your schedule with your academic counselor. 
+                Thank you - Zot! Zot! Zot! 
+            </p>
         </div>
 
         <div>    
-            <h1 style={{margin:'2rem 0rem', 
-                        height:'6.4rem', 
-                        fontSize:'3.6rem', 
-                        fontWeight:'500'}}
-                className='flex-container'
-            >
+            <h1 className='header'>
                 Authors
             </h1>
            

@@ -2,7 +2,7 @@ import {memo} from 'react';
 
 import Github from '../../components/icon/Github';
 import Linkedin from '../../components/icon/Linkedin';
-import Facebook from '../../components/icon/Facebook';
+import Gmail from '../../components/icon/Gmail';
 
 interface AuthorType {
     author: {
@@ -49,11 +49,10 @@ const Author = ({author}: AuthorType) => {
 
                 <li className="contact-item" style={{marginLeft:"0.5rem"}}>
                     <a target="_blank" 
-                        href={author.linkedin}
                         rel="noreferrer"
-                        aria-label="Linkedin"
-                    >
-                        <Facebook/>
+                        aria-label="Gmail"
+                        href= {"mailto:" + author.email}>
+                        <Gmail/>
                     </a>
                 </li>
             </ul>
