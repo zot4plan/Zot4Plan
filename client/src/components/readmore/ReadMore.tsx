@@ -14,7 +14,7 @@ const ReadMore = ({ text }: ReadMoreType) => {
     return (
       <span>
         {isReadMore ? text.slice(0, 100) : text}
-        <span onClick={toggleReadMore} style={{color:'blue', cursor:'pointer'}}>
+        <span onClick={toggleReadMore} style={{color:'#307ABB', cursor:'pointer'}}>
           {isReadMore ? "... read more" : " show less"}
         </span>
       </span>
