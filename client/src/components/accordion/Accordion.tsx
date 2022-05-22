@@ -34,8 +34,8 @@ const Accordion = ({id, type}:SectionType) => {
                 <DroppableArea key={l.sectionId} droppableId={l.sectionId} text={l.note}/> )
     }
     else {
-        name = '+ courses';
-        detail = <DroppableArea key={id} droppableId={id} text= {"(Added courses by students)"}/>
+        name = 'Added Courses';
+        detail = <DroppableArea key={id} droppableId={id} text= {""}/>
     }
 
     return (
