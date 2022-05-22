@@ -7,6 +7,7 @@ import Author from '../../components/author/Author';
 import Zot from '../../assets/images/Zot.png';
 import Tree from '../../assets/images/tree.png';
 import ZotWalk from '../../assets/images/zot-walk.png';
+import Bug from '../../components/icon/Bug';
 
 import './Footer.css';
 
@@ -84,12 +85,10 @@ const Footer = () => {
                 style={{color:"white", fontSize:"1.6rem"}}
                 className='flex-container'
             > 
-                Give Feedback or Report a Bug
+                Give Feedback or Report a <Bug/>
             </a>
            
         </div>
-
-        
 
         <div id='copyright'>
             <p> &copy; Copyright 2022: zot4plan.com </p>

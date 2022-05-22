@@ -17,7 +17,7 @@ function GeneralEducation() {
    
     else if (status === 'succeeded') {
         content = geIds.map((id) => (<Section key={id} id={id} type="ge"/>))
-        content.push(<div key="empty" style={{height:'20rem'}}></div>);
+        content.push(<div key="empty" style={{height:'18rem'}}></div>);
     } 
     else if (status === 'failed') 
         content = <p className='absolute fetch-error-message'>Cannot connect to server!!!</p>

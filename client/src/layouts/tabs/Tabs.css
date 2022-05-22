@@ -27,15 +27,16 @@
     color: var(--accent-color-2);
 }
 
-#tab-content{
+.accordion-container {
     overflow: scroll;
-    height: calc(100% - 45px);
+    height: 52rem;
 }
 
 @media only screen and (max-width: 599px) { 
     #tab-container {height: 44.6rem}
 
     .tab {font-size: 1.5rem;}
+    .accordion-container { height: 40.5rem;}
 }
 
 @media only screen and (min-width: 800px) { 

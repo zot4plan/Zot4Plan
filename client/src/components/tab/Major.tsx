@@ -39,7 +39,7 @@ function Major () {
         content.push(<Accordion key={coursesAddByStudentId} id={coursesAddByStudentId} type="other"/>)
 
         accordionIds.forEach(id => {content.push(<Accordion key={id} id={id} type="major" />)});
-        content.push(<div key="empty" style={{height:'20rem'}}></div>);
+        content.push(<div key="empty" style={{height:'18rem'}}></div>);
     }
 
     else 
