@@ -4,8 +4,6 @@ import Github from '../../components/icon/Github';
 import Linkedin from '../../components/icon/Linkedin';
 import Gmail from '../../components/icon/Gmail';
 
-import './Author.css';
-
 interface AuthorType {
     author: {
         name: string;

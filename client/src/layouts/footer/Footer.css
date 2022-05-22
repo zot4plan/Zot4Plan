@@ -48,20 +48,27 @@
     row-gap: 2rem;
 }
 
-#copyright {
-    grid-column: 1/-1;
+.author-name {
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: 400;
+}
 
+#contact-us > a, .contact-list, #copyright {
     display: flex;
     align-items: center;
+}
+
+.contact-item > a > svg {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+#copyright {
+    grid-column: 1/-1;
     flex-direction: column;
 
     margin-top: 8rem;
-}
-
-#contact-us > a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #contact-us > a > svg {
@@ -72,6 +79,32 @@
 
 #copyright > p { font-size:1.4rem; margin: 1rem 0rem;}
 
+@media only screen and (max-width: 799px) { 
+    #about-us-content > p {text-align: center;}
+
+    .header{
+        text-align: center;
+    }
+
+    .author-name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contact-list, #contact-us > a {
+        justify-content: center;
+    }
+
+    #contact-us, #author {
+        margin-top: 4rem;
+    }
+
+    #about-us-content > p {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+}
 
 @media only screen and (min-width: 800px) { 
     #footer {
@@ -87,9 +120,4 @@
 
 @media only screen and (min-width: 992px) { 
     #footer{ column-gap: 3rem;}
-
-}
-
-@media only screen and (min-width: 1160px) {
-  
 }
