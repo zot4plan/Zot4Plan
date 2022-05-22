@@ -2,11 +2,13 @@ import {memo} from 'react';
 import ReactTooltip from "react-tooltip";
 
 import Github from '../../components/icon/Github';
+import Tools from '../../components/icon/Tools';
 import Author from '../../components/author/Author';
 
 import Zot from '../../assets/images/Zot.png';
 import Tree from '../../assets/images/tree.png';
 import ZotWalk from '../../assets/images/zot-walk.png';
+
 
 import './Footer.css';
 
@@ -64,7 +66,9 @@ const Footer = () => {
             <h1 className='header'>
                 Contact Us
             </h1>
-           
+            <p style={{fontSize:'2rem', marginBottom:'1rem'}}>
+                GitHub
+            </p>
             <a target="_blank" 
                 href="https://github.com/zot4plan/Zot4Plan#readme" 
                 rel="noreferrer"  
@@ -78,13 +82,14 @@ const Footer = () => {
                 View source code!
             </ReactTooltip>
 
+            <p style={{fontSize:'2rem', marginBottom:'1rem'}}>
+                Give Feedback or Report a Bug
+            </p>
             <a target="_blank"
                 href="https://forms.gle/vak9jPNBMMYsRHAX9"
                 rel="noreferrer" 
-                style={{color:"white", fontSize:"1.6rem"}}
-                className='flex-container'
             > 
-                Give Feedback or Report a Bug
+                <Tools/>
             </a>
            
         </div>
