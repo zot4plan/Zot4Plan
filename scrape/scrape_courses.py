@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
 import requests
-from major_requirements import request_websites, scrape_courses
+from scrape_requirements import request_websites
 from Course import Course
 import json
-import time
+
 
 ALL_TERMS = {}
 

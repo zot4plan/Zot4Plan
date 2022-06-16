@@ -106,7 +106,6 @@ class Course:
                     self.repeatability = char
                     break
 
-
     def set_terms(self, all_terms):
         """
         set_terms takes in a list of past terms and convert it into a string

@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 import json 
 
+MAJOR_TAGS = ['bs/', 'ba/', 'bfa/']
+MINOR_TAGS = ['minor/']
 
 f = open('../data/data.json')   
 in_list = json.load(f)
@@ -37,7 +39,7 @@ def request_websites(url):
     return soup
 
 
-def get_websites():
+def get_websites(preferred):
     """
     get_websites scrapes all the redirected websites in the main page of UCI major requirements.
     return: a list of all the URL addresses that display UCI major requirements
@@ -45,7 +47,6 @@ def get_websites():
 
     major_urls = {}
     all_href = []
-    prefered = ['bs/', 'ba/', 'bfa/']
     soup = request_websites("http://catalogue.uci.edu/undergraduatedegrees/")
     for elem in soup.find_all('ul'):
         for each in elem.find_all('a'):
@@ -53,11 +54,14 @@ def get_websites():
             get_type = href.split('_')
             website = 'http://catalogue.uci.edu/' + href
             name = each.text
-            if get_type[-1] in prefered and website not in major_urls:
+            if get_type[-1] in preferred and website not in major_urls:
                 all_href.append([each.text, website])
                 major_urls[name] = website
-
-    write_url(major_urls)
+    
+    if len(preferred) > 1:
+        write_url(major_urls, 'major')
+    else:
+        write_url(major_urls, 'minor_reqs_')
     return all_href
 
 
@@ -150,12 +154,11 @@ def scrape_courses(url):
         print(url)
 
 
-def write_url(all_url):
+def write_url(all_url, tag_type):
     """
     write_url will saves all of the major requirement urls into a json file.
     """
-
-    with open('../database/majorUrls.json', 'w') as f:
+    with open('../database/' + tag_type + 'Urls.json', 'w') as f:
         json.dump(all_url, f, indent=4)
 
 
@@ -165,7 +168,7 @@ def write_to_json(name, info):
     into a JSON file
     """
     
-    name = name.replace(' ', '_').replace(',', '').replace('/', '-')
+    name = name.replace(' ', '_').replace('/', '-')
     with open('../data/' + name + 'json', 'w') as f:
         json_version = []
         for elem in info:
@@ -176,8 +179,15 @@ def write_to_json(name, info):
 
 
 if __name__ == "__main__":
-    all_websites = get_websites()
-    for elem in all_websites:
+    
+    all_major_reqs = get_websites(MAJOR_TAGS)
+    for elem in all_major_reqs:
         major_info = scrape_courses(elem[1])
         if major_info != None:
             write_to_json(elem[0], major_info)
+
+    all_minor_reqs = get_websites(MINOR_TAGS)
+    for elem in all_minor_reqs:
+        minor_req_info = scrape_courses(elem[1])
+        if minor_req_info != None:
+            write_to_json(elem[0] + '.', minor_req_info)
