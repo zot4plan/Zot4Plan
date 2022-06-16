@@ -1,0 +1,66 @@
+#tutorial {
+    position: fixed;
+    z-index: 4;
+    top: 0px;
+    left: 0px;
+    overflow: scroll;
+
+    background-color:rgba(0, 0, 0, 0.60);
+    width: 100%;
+    height: 100%;
+}
+
+.arrow { color:#5C9DD6; }
+
+#close-tutorial-btn {
+    top: 2.5%;
+    right: 2.5%;
+}
+
+#close-tutorial-btn svg { font-size: 3rem;}
+
+@media only screen and (max-width: 599px) { 
+    .arrow > svg {font-size: 0.5rem;}
+    .arrow {
+        position : absolute;
+        z-index: 3;
+        top: calc(50% + 25rem);
+        left: 59%;
+        transform: translateX(-50%);
+    }
+    .arrow:nth-child(1) { left: 41%; }
+
+    #close-tutorial-btn > svg { font-size: 2rem;}
+
+    .tutorial-img { 
+        border-radius: 15px;
+        border: 6px solid #5C9DD6;
+        width: 350px;
+        height: 462px;
+    }
+}
+
+@media only screen and (min-width: 600px) { 
+    #close-tutorial-btn > svg { font-size: 2.4rem;}
+    .arrow > svg {font-size: 0.7rem;}
+
+    .tutorial-img { 
+        border-radius: 15px;
+        border: 6px solid #5C9DD6;
+        width: 475px;
+        height: 627px;
+    }
+
+}
+
+@media only screen and (min-width: 992px) { 
+    #close-tutorial-btn > svg { font-size: 2.6rem;}
+    .arrow > svg {font-size: 1rem;}
+
+    .tutorial-img { 
+        border-radius: 15px;
+        border: 6px solid #5C9DD6;
+        width: 550px;
+        height: 726px;
+    }
+}

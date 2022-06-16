@@ -1,0 +1,16 @@
+.remove-year-btn {
+    left: 9rem;
+    top: 0.2rem;
+    
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity var(--transition-time) ease, visibility var(--transition-time) ease;
+    color: var(--accent-color-1);
+}
+
+.remove-year-btn svg:hover {
+    box-shadow: 0 0 2px 2px var(--accent-color-1);
+    border-radius: 50%;
+    background-color: var(--accent-color-1);
+    color:white;
+}   

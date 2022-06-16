@@ -3,7 +3,7 @@ import ReactTooltip from "react-tooltip";
 
 import Github from '../../components/icon/Github';
 import Tools from '../../components/icon/Tools';
-import Author from '../../components/author/Author';
+import Author from './Author';
 
 import Zot from '../../assets/images/Zot.png';
 import Tree from '../../assets/images/tree.png';
@@ -38,7 +38,7 @@ const Footer = () => {
 
 
         <div>
-            <h1 className='header' style={{position: "relative"}}>
+            <h1 className='header'>
                 About Us
             </h1>
 
@@ -57,7 +57,7 @@ const Footer = () => {
                 Authors
             </h1>
            
-            <ul id='author-list-container'>    
+            <ul className='list-container'>    
                 {authors.map((author) => <Author key={author.name} author={author} />)}
             </ul>
            
@@ -67,32 +67,44 @@ const Footer = () => {
             <h1 className='header'>
                 Contact Us
             </h1>
-            <p style={{fontSize:'2rem', marginBottom:'1rem'}}>
-                GitHub
-            </p>
-            <a target="_blank" 
-                href="https://github.com/zot4plan/Zot4Plan#readme" 
-                rel="noreferrer"  
-                aria-label="Github"
-                data-tip data-for="githubTip"
-            >
-                <Github/>
-            </a>
 
-            <ReactTooltip id="githubTip" place="top" effect="solid">
-                View source code!
-            </ReactTooltip>
+            <ul className='list-container'>
+                <li>
+                    <p className='name'> GitHub </p>
+                    <ul className='list'>
+                        <li className='item'>
+                            <a target="_blank" 
+                                href="https://github.com/zot4plan/Zot4Plan#readme" 
+                                rel="noreferrer"  
+                                aria-label="Github"
+                                data-tip data-for="githubTip"
+                            >
+                                <Github/>
+                            </a>
 
-            <p style={{fontSize:'2rem', marginBottom:'1rem'}}>
-                Give Feedback or Report a Bug
-            </p>
-            <a target="_blank"
-                href="https://forms.gle/vak9jPNBMMYsRHAX9"
-                rel="noreferrer" 
-            > 
-                <Tools/>
-            </a>
-           
+                            <ReactTooltip id="githubTip" place="top" effect="solid">
+                                View source code!
+                            </ReactTooltip>
+                        </li>  
+                    </ul>  
+                </li>
+
+                <li>
+                    <p className='name'> Give Feedback or Report a Bug </p>
+
+                    <ul className='list'>
+                        <li className='item' style={{height: '3rem'}}>
+                            <a target="_blank"
+                                href="https://forms.gle/vak9jPNBMMYsRHAX9"
+                                rel="noreferrer" 
+                                aria-label="Give Feedback or Report a Bug"
+                            > 
+                                <Tools/>
+                            </a>
+                        </li>  
+                    </ul>  
+                </li>
+            </ul>           
         </div>
 
         <div id='copyright'>

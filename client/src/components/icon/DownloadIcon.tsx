@@ -1,13 +1,11 @@
 /**  
- * Source: https://icon-sets.iconify.design/iconoir/download-circled-outline/
- * Author: Luca Burgio
+ * Source: https://icon-sets.iconify.design/bi/arrow-down-circle/
+ * Author: The Bootstrap Authors
  * License: MIT
 */
 function DownloadIcon () {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="3.6em" height="3.6em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-            <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 17h6M12 6v7m0 0l3.5-3.5M12 13L8.5 9.5M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10Z"/>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill="currentColor" fillRule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/></svg>
     )
 }
 

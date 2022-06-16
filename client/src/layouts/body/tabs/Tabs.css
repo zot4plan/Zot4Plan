@@ -1,0 +1,129 @@
+/**** Cancel Drop and Drag animation ****/
+.accordion-container div[data-rbd-placeholder-context-id] {display: none !important;}
+.accordion-container div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
+.accordion-container div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
+
+#tab-container {
+    border-radius: 1.5rem;
+    box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
+    height: 64.8rem;
+    margin-bottom : 22rem;
+}
+
+.tab {
+    flex-grow: 1;
+    transition: background-color ease-in-out 0.4s;
+    padding: 0.5rem;
+    background-color: var(--primary-color-2);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.tab:hover {color: var(--accent-color-2);}
+
+.active {
+    border-top: 0.4rem solid var(--accent-color-2);
+    background-color: var(--primary-color);
+    color: var(--accent-color-2);
+}
+
+.accordion-container {
+    overflow: scroll;
+    height: 52rem;
+}
+
+.fetch-error-message,
+.spinner {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spinner > svg{ font-size: 5rem;}
+
+.browse-container {
+    height: 3.6rem;
+    width: 27rem;
+}
+
+/* add-course-btn */
+.add-course-btn {
+    top: 52%;
+    right: 1%;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+    padding: 0.7rem;
+   
+    background-color: var(--accent-color-2);
+
+    line-height: 0;
+    color:white;
+}
+
+/* input-container */
+.input-container {
+    top: 1rem;
+    left: 80%;
+    transition: left 1s, top 1s;
+
+    display:flex;
+    flex-direction: column;
+    margin: 2rem 0rem 1.4rem 0rem;
+}
+
+/* message */
+.message-container {
+    height: 1.6rem;
+    max-width: 27rem;
+}
+
+.message {
+    padding-top: 0.8rem;
+    padding-left: 2.4rem;
+    font-size: 1.4rem;
+}
+
+.message-icon { 
+    left: 0px; 
+    top: 6px; 
+}
+
+.fade-message {
+    -moz-animation: fadeIn 1s ease-in 4s forwards;
+    -webkit-animation: fadeIn 1s ease-in 4s forwards;
+    -o-animation: fadeIn 1s ease-in 4s forwards;
+    animation: fadeIn 1s ease-in 4s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    to {opacity: 0; visibility: hidden;}
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 1; visibility: visible;}
+    100% {opacity: 0; visibility: hidden;}
+}
+
+@media only screen and (max-width: 599px) { 
+    #tab-container {height: 44.6rem}
+
+    .tab {font-size: 1.5rem;}
+    .accordion-container { height: 40rem;}
+
+    .input-container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+  
+        top: -9rem;
+        z-index: 1;
+    } 
+}
+
+@media only screen and (min-width: 800px) { 
+    #tab-container { margin-bottom: 14rem;}
+}

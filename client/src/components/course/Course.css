@@ -1,0 +1,63 @@
+.remove-course-btn{
+    position:absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-time) ease, visibility var(--transition-time) ease;
+
+    color: #F2F2F2;
+}
+
+.remove-course-btn svg:hover { color: white;}
+
+.required-course { height: 3.6rem;}
+.quarter-course { margin: 0.2rem; }
+
+.quarter-course:hover .remove-course-btn,
+.required-course:hover .remove-course-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+.course-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    overflow: overlay;
+    border-radius: 1rem;
+
+    width: 100%;
+    height: 3.6rem;
+}
+
+.course-id {
+    overflow: hidden;
+    padding-left: 0.6rem;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color:white;
+}
+
+.unit {
+    text-align: center;
+    cursor: grab;
+
+    padding-right: 1.6rem;
+    padding-left: 0.8rem;
+
+    font-size: 1.2rem;
+    color:snow;
+}
+
+@media only screen and (max-width: 450px) {
+    .unit {display: none;}
+}
+
+@media only screen and (max-width: 599px) { 
+    .course-btn { height: 3.2rem;}
+    .course-id {font-size: 1.2rem;}
+}

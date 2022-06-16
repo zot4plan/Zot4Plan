@@ -35,6 +35,13 @@ details[open] .right-icon > svg {
     transition: transform var(--transition-time);
 }
 
+.section-body { 
+    padding: 1.6rem 0.8rem;
+    border-bottom-left-radius: 1.6rem;
+    border-bottom-right-radius: 1.6rem;
+    background-color: white;
+}
+
 /* quater */
 .quarters-wrapper {
     display: grid;
@@ -65,9 +72,27 @@ details[open] .right-icon > svg {
     min-height: 7.9rem;
 }
 
+/* AccordionDetail */
+.accordion-detail, .sub-area {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 10.8rem);
+    gap: 1.8rem;
+}
+
+.sub-area {
+    grid-column: 1 / -1;
+}
+
+.sub-area > span {
+    z-index: 0;
+    top: 0.8rem;
+    left: 11rem;
+    font-size: 1.5rem;
+}
+
 @media only screen and (max-width: 599px) { 
     summary { padding: 0.6rem 0.4rem;}
-    .accordion-section {margin: 2rem 1rem;}
+    .section {margin: 2rem 1rem;}
 
     .year-header, .quarter-header {font-size: 1.5rem;}
     .section-header {font-size: 1.4rem;}
@@ -85,11 +110,19 @@ details[open] .right-icon > svg {
         border-bottom-left-radius: 1.5rem;
         border-bottom-right-radius: 1.5rem;
     }
+
+    .accordion-detail, .sub-area {
+        grid-template-columns: repeat(auto-fill, 9rem);
+        column-gap: 1.4rem;
+        row-gap: 1.2rem;
+    }
+
+    .sub-area > span {left: 9.1rem; font-size: 1.2rem;}
 }
 
 @media only screen and (min-width: 600px) {
     summary {padding: 0.6rem 1rem;}
-    .accordion-section { margin: 0rem 1.6rem 2rem 1.6rem; }
+    .section { margin: 0rem 1.6rem 2rem 1.6rem; }
 
     .quarters-wrapper{
         grid-template-areas:"hfall hwinter"
@@ -122,4 +155,8 @@ details[open] .right-icon > svg {
     .fall, .winter, .spring {
         border-right: 0.2rem solid var(--border-color);
     }
+}
+
+@media only screen and (min-width: 992px) {
+    .section-body{padding: 1.6rem 1.2rem;}
 }

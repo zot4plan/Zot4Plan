@@ -23,4 +23,6 @@ db.courses = require("./courses.model.js")(sequelize, Sequelize);
 db.majors = require("./majors.model.js")(sequelize,Sequelize);
 db.general_educations = require("./general_educations.model.js")(sequelize,Sequelize);
 db.courses_in_ges = require("./courses_in_ges.model.js")(sequelize, Sequelize);
+db.visits = require("./visits.model.js")(sequelize, Sequelize);
+
 module.exports = db;

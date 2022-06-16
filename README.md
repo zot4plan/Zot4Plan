@@ -17,7 +17,7 @@ By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`
 Zot4Plan is a schedule planning tool that allows Anteaters to plan out their undergraduate years. In order to make the planning process easier for users, our program will also display the ge/course requirements for the chosen major. All of the data we acquired for this program are collected from the UCI General Catalogue. Please make sure to check your schedule with your academic advisor. Thank you - Zot Zot Zot!
 
 
-## **Features**
+## **Features** 💻
 
  <!---div align="center">
 
@@ -146,3 +146,8 @@ node server.js
 
 - Loc Duc Minh Khong [@lockhong](https://www.linkedin.com/in/lockhong/)
 - Tram Bao La [@tramla](https://www.linkedin.com/in/tram-la-680417200/)
+
+## **Art Creators** 🎨
+
+- Leyna Nguyen ♥️
+- https://www.etsy.com/listing/797921174/anteater-stickers
