@@ -6,6 +6,7 @@ import json
 
 
 ALL_TERMS = {}
+ALL_PREREQ_INFO = {}
 
 def get_courses_websites():
     """
@@ -24,7 +25,7 @@ def get_courses_websites():
     return sorted(all_websites)[1:]
 
 
-def get_all_terms():
+def get_all_terms_prereq():
     """
     get_all_terms sends an API request to PeterPortal API and retrieve all information
     regarding UCI courses and save past terms that offered the course
@@ -35,6 +36,7 @@ def get_all_terms():
         all_info = response.json()
         for course in all_info:
             ALL_TERMS[course['id']] = course['terms']
+            ALL_PREREQ_INFO[course['id']] = {'tree': course['prerequisite_tree'], 'prereq_for': course['prerequisite_for']}
 
     except:
         print("Failed to attain API Request")
@@ -69,6 +71,7 @@ def get_courses(url):
 
             course_info.set_ge(ge)
             course_info.set_terms(ALL_TERMS[course_info.course_key.replace(' ', '')])
+            course_info.set_prereq_info(ALL_PREREQ_INFO[course_info.course_key.replace(' ', '')])
 
         course_dict[course_info.course_key] = course_info
     return course_dict
@@ -92,9 +95,9 @@ def write_courses():
             for key,value in uci_course.items():
                 course_names.append(key)
                 f.write('INSERT INTO courses VALUES ("' + key + '","' + value.name.strip() +  '","' + value.department + '","' + 
-                        value.units + '","' + value.description + '","' + value.prerequisite + '","' + 
-                        value.restriction + '","' + value.repeatability + '","' + value.corequisite + '","' + 
-                        value.ge_string + '","' + value.past_terms + '");' + '\n')
+                        value.units + '","' + value.description + '","' + value.prerequisite +  '","' + value.prerequisite_tree + '","' +
+                        value.prerequisite_for + '","' + value.restriction + '","' + value.repeatability + '","' + 
+                        value.corequisite + '","' + value.ge_string + '","' + value.past_terms + '");' + '\n')
                 for cat in value.ge_list:
                     write_ge.write('INSERT INTO courses_in_ges (courseId, geId) VALUES ("' + key + '","' + cat + '");' + '\n')
     
@@ -106,5 +109,5 @@ def write_courses():
 
 if __name__ == "__main__":
 
-    get_all_terms()
+    get_all_terms_prereq()
     write_courses()
