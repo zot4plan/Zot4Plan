@@ -6,8 +6,7 @@ MAJOR_TAGS = ['bs/', 'ba/', 'bfa/']
 MINOR_TAGS = ['minor/']
 
 f = open('../data/data.json')   
-in_list = json.load(f)
-Data = {elem for elem in in_list}
+Data = {elem for elem in json.load(f)}
 f.close()
 
 """
@@ -59,7 +58,7 @@ def get_websites(preferred):
                 major_urls[name] = website
     
     if len(preferred) > 1:
-        write_url(major_urls, 'major')
+        write_url(major_urls, 'major_reqs_')
     else:
         write_url(major_urls, 'minor_reqs_')
     return all_href

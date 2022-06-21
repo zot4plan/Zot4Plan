@@ -15,11 +15,29 @@ def get_paths(req_type):
     all_paths = {}
     path_name = Path(sys.argv[1])
     for addie in path_name.iterdir():
-        find_name = str(addie).split('/')[-1].replace('.json', '').split('_')
+        find_name = ''
+        if len(req_type) == 3:
+            find_name = str(addie).split('/')[-1].replace('json', '').split('_')
+        else:
+            find_name = str(addie).split('/')[-1].replace('.json', '').split('_')
         name = " ".join(find_name[:-1]) + ", " + find_name[-1]
         if find_name[-1] in req_type:
             all_paths[name] = addie
     return all_paths
+
+
+def get_course_id(info):
+    
+    all_id = set()
+    for header in info:
+        for section in header['child']:
+            for course in section['child']:    
+                if type(course) == str:
+                    all_id.add(course)
+                else:
+                    for elem in course:
+                        all_id.add(elem)
+    return all_id
 
 
 def write_requirements(req_type, req_string, file_names, out_file):
@@ -35,9 +53,12 @@ def write_requirements(req_type, req_string, file_names, out_file):
     sorted_files = sorted(file_names)
     for name in sorted_files: 
         with open(file_names[name], 'r') as f: 
-            requirement = str(json.load(f)).replace("'", '"')
-            write_majors.write("INSERT INTO " + req_type + " (name, " + req_string + " , url) VALUES (" + 
-                                "'" + name + "', " + "'" + requirement + "', '" + all_urls[name.replace('-', '/')] + '#requirementstext' + "');" + "\n")
+            all_info = json.load(f)
+            requirement = str(all_info).replace("'", '"')
+            course_id = ", ".join(get_course_id(all_info)).replace("'", '"')
+            write_majors.write("INSERT INTO " + req_type + " (name, " + req_string + ", required_courses, url) VALUES (" + 
+                                "'" + name + "', " + "'" + requirement + "', '" + course_id + "', '" +  
+                                all_urls[name.replace('-', '/')] + '#requirementstext' + "');" + "\n")
 
     open_urls.close()
     write_majors.close()
