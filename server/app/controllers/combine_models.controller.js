@@ -1,7 +1,7 @@
 const { Sequelize } = require("../models");
 const db = require("../models");
 const Courses = db.courses;
-const Majors = db.majors;
+const Programs = db.programs;
 
 /**
  * Return major requirement template, majorName, majorURL from majors table
@@ -10,10 +10,10 @@ const Majors = db.majors;
  */
 exports.getRequirementById = (req, res) => {
     const id = req.body.id;
-    Majors.findByPk(id, {attributes: ['major_requirement','name','url']}).then(data => {
+    Programs.findByPk(id, {attributes: ['requirement','name','url']}).then(data => {
         if(data) {
             // Put all courses in major_requirement template into an array
-            const majorData = data.dataValues.major_requirement;
+            const majorData = data.dataValues.requirement;
             let setOfCourses = new Set();
     
             majorData.forEach((section)=> {
@@ -67,12 +67,12 @@ exports.getRequirementById = (req, res) => {
     const years = fileContent.data.years;
 
     Majors.findAll({ 
-        attributes: ['major_requirement','name','url'],  
+        attributes: ['requirement','name','url'],  
         where: {name: {[Sequelize.Op.eq]:  majorName}}
     }).then(data => {
         // Check whether major name is valid
         if(data) {
-            const majorData = data[0].major_requirement; 
+            const majorData = data[0].requirement; 
             let setOfCourses = new Set();     
             // Put all courses in major_requirement template into an array
             majorData.forEach((section)=> {

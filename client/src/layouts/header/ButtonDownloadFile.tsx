@@ -17,7 +17,7 @@ function ButtonDownloadFile () {
      * }
      */
     const data = useSelector( (state:RootState) => {
-        let majorName = state.store.major.name;
+        let majorName = state.store.programs.name;
         let geCourses = state.store.ge.allGeIds.map(id => {
             let geSectionId = state.store.ge.byIds[id].sectionId;
             return state.store.sectionCourses[geSectionId];

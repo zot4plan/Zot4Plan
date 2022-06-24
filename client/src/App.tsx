@@ -8,7 +8,6 @@ import Header from './layouts/header/Header';
 import Schedule from './layouts/body/schedule/Schedule';
 import Tabs from './layouts/body/tabs/Tabs';
 import Footer from './layouts/footer/Footer';
-import SelectMajor from './layouts/selectMajor/SelectMajor';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,7 +38,6 @@ function App() {
   return (
   <div>
     <Header/>
-    <SelectMajor /> 
     <DragDropContext onDragEnd={onDragEnd}>
       <div id="body-container" className="relative">
           <Schedule/>

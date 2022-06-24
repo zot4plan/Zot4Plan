@@ -70,7 +70,7 @@ declare interface RemoveYearPayload {
 }
 
 /*********** Fetch Input Types ************/
-declare interface FetchMajorType { 
+declare interface FetchProgramType { 
     id:number; // the index of the major in select major list
 }
 
@@ -102,16 +102,28 @@ declare interface StoreType{
         allIds: string[]; 
         totalUnits: number;
     };
-    major:{
+    programs:{
         byIds:{
             [id:string]: MajorSectionType
         }; 
         allIds: string[];
         name: string;
+        isMajor: boolean;
         url: string;
         status: string;
         error: string;
-    }
+    };
+        programs:{
+        byIds:{
+            [id:string]: MajorSectionType
+        }; 
+        allIds: string[];
+        name: string;
+        isMajor: boolean;
+        url: string;
+        status: string;
+        error: string;
+    };
     coursesAddByStudent: {sectionId: string};
     ge: {
         byIds: {

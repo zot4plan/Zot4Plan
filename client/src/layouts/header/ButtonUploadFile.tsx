@@ -1,6 +1,6 @@
 import { ChangeEvent, useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchMajorByFile } from '../../api/FetchData';
+import { fetchProgramByFile } from '../../api/FetchData';
 import UploadIcon from '../../components/icon/UploadIcon';
 
 import './ButtonUploadFile.css'
@@ -37,7 +37,7 @@ function ButtonUploadFile () {
 
     const handleOnSubmit = ( e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        dispatch(fetchMajorByFile({data: file.content}));
+        dispatch(fetchProgramByFile({data: file.content}));
     }
 
     return (

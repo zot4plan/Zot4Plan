@@ -1,15 +1,19 @@
 module.exports = (sequelize, Sequelize) => {
-    const Majors = sequelize.define("majors", {
+    const Programs = sequelize.define("programs", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
-        },  
+        },
         name: {
             type: Sequelize.STRING(50),
             allowNull:false,
         },
-        major_requirement: {
+        isMajor: {
+            type: Sequelize.BOOLEAN,
+            allowNull:false,
+        },
+        requirement: {
             type: Sequelize.JSON,
             allowNull:false,
         },
@@ -21,5 +25,5 @@ module.exports = (sequelize, Sequelize) => {
         timestamps: false
     });
   
-    return Majors;
+    return Programs;
   };

@@ -4,6 +4,7 @@ import { RootState } from "../../app/store";
 
 import AccordionDetail from './AccordionDetail';
 import Right from '../icon/ArrowRightSmall';
+import BrowseCourseById from '../../layouts/body/tabs/major/BrowseCourseById';
 
 import './Accordion.css';
 
@@ -17,12 +18,14 @@ const Accordion = ({id, type}:SectionType) => {
         if(type === 'ge')
             return state.store.ge.byIds[id];
         else if (type === 'major') 
-            return state.store.major.byIds[id];
+            return state.store.programs.byIds[id];
         else
             return state.store.coursesAddByStudent;
     });
 
     let detail, name;
+    const coursesAddByStudentId = useSelector((state:RootState)=> state.store.coursesAddByStudent.sectionId);
+    const status = useSelector((state:RootState)=>state.store.programs.status);
 
     if(type === 'ge') {
         name = id + "-" + section.title;
@@ -34,8 +37,15 @@ const Accordion = ({id, type}:SectionType) => {
                 <AccordionDetail key={l.sectionId} droppableId={l.sectionId} text={l.note}/> )
     }
     else {
-        name = 'Added Courses';
-        detail = <AccordionDetail key={id} droppableId={id} text= {""}/>
+        name = 'Add  Courses';
+        detail =
+            <div> 
+                <div key="browse" id="browse-id-container"
+                    style={{display: status === 'succeeded'? "flex": "none", flexDirection:'column'}} >
+                    <BrowseCourseById id={coursesAddByStudentId} majorStatus={status}/>  
+                </div>
+                <AccordionDetail key={id} droppableId={id} text= {""}/>
+            </div>
     }
 
     return (

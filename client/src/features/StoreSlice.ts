@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
-import { fetchMajorById, fetchMajorByFile, fetchGE} from '../api/FetchData'
+import { fetchProgramById, fetchProgramByFile, fetchGE} from '../api/FetchData'
 
 const QUARTER_ID_LENGTH = 3; // for function AddCourseToQuarter
 const MAJOR_ID_LENGTH = 4; // to differentiate course in major (which cannot be remove)
@@ -44,10 +44,11 @@ const generateInitialState = () => {
             allIds: yearIds, 
             totalUnits: 0
         }, 
-        major: {
+        programs: {
             byIds: {}, 
             allIds: [],
             name: "",
+            isMajor: true,
             url: "",
             status: "idle",
             error: "",
@@ -286,21 +287,22 @@ export const storeSlice = createSlice ({
         /*************** FetchMajorById ***************/
         ///////////////////////////////////////////////////
 
-        builder.addCase(fetchMajorById.pending, (state) => {
-            state.major.status = "loading";
+        builder.addCase(fetchProgramById.pending, (state) => {
+            state.programs.status = "loading";
         });
 
         /**
          * Reset current state and assign new major to state
          * 
-         * @param major_requirement: MajorType[]
+         * @param requirement: MajorType[]
          * @param url: string
          * @param name: string
+         * @param isMajor: boolean
          * @param courseIds: string[]
          * @param courseData: CourseType[]
          */
-        builder.addCase(fetchMajorById.fulfilled, (state, action) => {  
-            state.major.status = "succeeded";
+        builder.addCase(fetchProgramById.fulfilled, (state, action) => {  
+            state.programs.status = "succeeded";
             
             // Reset CouresInSections 
             state.sectionCourses = {};
@@ -319,20 +321,20 @@ export const storeSlice = createSlice ({
             })
             
             // Replace with new major
-            state.major.name = action.payload.name;
-            state.major.url = action.payload.url;
+            state.programs.name = action.payload.name;
+            state.programs.url = action.payload.url;
 
-            state.major.allIds = [];
-            state.major.byIds = {};
+            state.programs.allIds = [];
+            state.programs.byIds = {};
 
-            action.payload.major_requirement.forEach ((section)=>{
+            action.payload.requirement.forEach ((section)=>{
                 const sId = nanoid(MAJOR_ID_LENGTH);
-                state.major.allIds.push(sId);
-                state.major.byIds[sId] = {id: sId, title: section.name, sectionIds: []};
+                state.programs.allIds.push(sId);
+                state.programs.byIds[sId] = {id: sId, title: section.name, sectionIds: []};
             
                 section.child.forEach((c) => {
                     const cId = nanoid(MAJOR_ID_LENGTH);
-                    state.major.byIds[sId].sectionIds.push({sectionId: cId, note: c.name})
+                    state.programs.byIds[sId].sectionIds.push({sectionId: cId, note: c.name})
                     state.sectionCourses[cId] = c.child;
                 })
             })
@@ -364,23 +366,23 @@ export const storeSlice = createSlice ({
             state.years.totalUnits = 0;
         });
 
-        builder.addCase(fetchMajorById.rejected, (state) => {
-            state.major.status = "failed";
-            state.major.error = "An error occurred while retrieving the data";
+        builder.addCase(fetchProgramById.rejected, (state) => {
+            state.programs.status = "failed";
+            state.programs.error = "An error occurred while retrieving the data";
         });
 
         //////////////////////////////////////////////////////
         /************  fetchMajorByFile ************/
         //////////////////////////////////////////////////////
-        builder.addCase(fetchMajorByFile.pending, (state) => {
-            state.major.status = "loading";
+        builder.addCase(fetchProgramByFile.pending, (state) => {
+            state.programs.status = "loading";
         });
 
         /**
          * Reset current state and import information from input file to state
          * Still need to check for Validity of ge_course and quarter_course
          * 
-         * @param major_requirement: MajorType[]
+         * @param requirement: MajorType[]
          * @param url: string
          * @param name: string
          * @param courseIds: string[]
@@ -390,9 +392,9 @@ export const storeSlice = createSlice ({
          * @param coursesAddByStudent: string[]
          */
 
-        builder.addCase(fetchMajorByFile.fulfilled, (state, action) => {  
+        builder.addCase(fetchProgramByFile.fulfilled, (state, action) => {  
             if(action.payload.status === "succeeded") {
-                state.major.status = "succeeded";
+                state.programs.status = "succeeded";
 
                 console.log(action.payload);
                 // Reset CouresInSections 
@@ -423,21 +425,21 @@ export const storeSlice = createSlice ({
                 })
                 
                 // Assign major name and website url
-                state.major.name = action.payload.name;
-                state.major.url = action.payload.url;
+                state.programs.name = action.payload.name;
+                state.programs.url = action.payload.url;
 
-                state.major.allIds = [];
-                state.major.byIds = {};
+                state.programs.allIds = [];
+                state.programs.byIds = {};
                 
                 // Get major_requirement structure 
-                action.payload.major_requirement.forEach((section)=>{
+                action.payload.requirement.forEach((section)=>{
                     const sId = nanoid(MAJOR_ID_LENGTH);
-                    state.major.allIds.push(sId);
-                    state.major.byIds[sId] = {id: sId, title: section.name, sectionIds: []};
+                    state.programs.allIds.push(sId);
+                    state.programs.byIds[sId] = {id: sId, title: section.name, sectionIds: []};
                 
                     section.child.forEach((c) => {
                         const cId = nanoid(MAJOR_ID_LENGTH);
-                        state.major.byIds[sId].sectionIds.push({sectionId: cId, note: c.name})
+                        state.programs.byIds[sId].sectionIds.push({sectionId: cId, note: c.name})
                         state.sectionCourses[cId] = c.child;
 
                         // Mark courses in major requirement as unremovable
@@ -477,14 +479,14 @@ export const storeSlice = createSlice ({
                 })
             } 
             else {
-                state.major.status = "failed";
-                state.major.error = "Your upload file is invalid!";
+                state.programs.status = "failed";
+                state.programs.error = "Your upload file is invalid!";
             }
         });
 
-        builder.addCase(fetchMajorByFile.rejected, (state) => {
-            state.major.status = "failed";
-            state.major.error = "An error occurred while retrieving the data";
+        builder.addCase(fetchProgramByFile.rejected, (state) => {
+            state.programs.status = "failed";
+            state.programs.error = "An error occurred while retrieving the data";
         });
     },
 });

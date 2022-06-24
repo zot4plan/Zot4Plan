@@ -19,13 +19,14 @@ export const fetchGE = createAsyncThunk(
         }
 });
 
-export const fetchMajorById = createAsyncThunk("features/fetchMajorById", async ({id}:FetchMajorType) => 
+export const fetchProgramById = createAsyncThunk("features/fetchProgramById", async ({id}:FetchProgramType) => 
     Axios.post('/api/getRequirementById', {id: id})
     .then((response) => {
         return {
             status: "succeed",
-            major_requirement: response.data.major.major_requirement as MajorType[],
-            url: response.data.major.url, // link to the requirement page of major 
+            requirement: response.data.major.requirement as MajorType[],
+            url: response.data.major.url, // link to the requirement page of major
+            isMajor: response.data.major.isMajor,
             name: response.data.major.name, 
             courseIds: response.data.allCourseIds, 
             courseData: response.data.coursesData as CourseType[]
@@ -35,25 +36,26 @@ export const fetchMajorById = createAsyncThunk("features/fetchMajorById", async 
     .catch(()=> {
         return {
             status: "failed",
-            major_requirement: [],
+            requirement: [],
             name: '',
-            url: '',  
+            url: '',
             courseIds: [], 
             courseData: [] as CourseType[],
         };
     })
 ); 
 
-export const fetchMajorByFile = createAsyncThunk("features/fetchMajorByFile", async ({data}: InputFileType) => 
+export const fetchProgramByFile = createAsyncThunk("features/fetchProgramByFile", async ({data}: InputFileType) => 
     Axios.post('/api/getDataByFile',{data: data})
     .then((response) => {
         const fileContent = (JSON.parse(data)).data;
         return {
             // data receive from server
             status: "succeeded",
-            major_requirement: response.data.major[0].major_requirement as MajorType[],
+            requirement: response.data.major[0].requirement as MajorType[],
             url: response.data.major[0].url, 
             name: response.data.major[0].name,
+            isMajor: response.data.major[0].isMajor,
             courseIds: response.data.allCourseIds as string[], 
             courseData: response.data.courseData as CourseType[],
 
@@ -66,7 +68,7 @@ export const fetchMajorByFile = createAsyncThunk("features/fetchMajorByFile", as
     .catch(()=> {
         return {
             status: "failed",
-            major_requirement: [],
+            requirement: [],
             name: '',
             url: '',  
             courseIds: [], 

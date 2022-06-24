@@ -56,7 +56,7 @@ const myStyle: StylesConfig<OptionType, false> =  {
     }),
 }
 
-function SelectMajor() {
+function SelectMinor() {
     const [majors, setPrograms] = useState([]);
     const dispatch = useDispatch();
 
@@ -65,13 +65,10 @@ function SelectMajor() {
         async function fetchMajors() {
             const res = await Axios('/api/getMajors');
             const programsArray = await res.data.map( (major:data) =>({value: major.id,label: major.name,isMajor: major.isMajor,}));
-            const majorsArray = programsArray.filter(function(program:any) {
-                return program.isMajor
-            })
             const minorsArray = programsArray.filter(function(program:any) {
-                return program.isMajor
+                return !program.isMajor
             })
-            setPrograms(majorsArray);
+            setPrograms(minorsArray);
         }
         
         if(majors.length === 0)
@@ -80,6 +77,7 @@ function SelectMajor() {
     },[majors]); 
 
 
+    
     // Get Major Requirement Courses
     const handleOnChange = async (option: OptionType | null) => {
         if(option){
@@ -112,4 +110,4 @@ function SelectMajor() {
     )
 };
 
-export default memo(SelectMajor);
+export default memo(SelectMinor);
