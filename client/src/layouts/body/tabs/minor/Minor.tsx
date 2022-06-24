@@ -4,10 +4,10 @@ import { useSelector} from 'react-redux';
 import {RootState} from '../../../../app/store';
 import Accordion from '../../../../components/accordion/Accordion';
 import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
-import SelectMinor from '../../../selectMajor/SelectMinor';
+import SelectMinor from '../../../selectProgram/SelectMinor';
 
 import Spinner from '../../../../components/icon/Spinner';
-import '../major/Major.css';
+import '../program/Major.css';
 
 
 function Minor () {

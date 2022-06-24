@@ -4,12 +4,12 @@ import { useSelector} from 'react-redux';
 import {RootState} from '../../../../app/store';
 import Accordion from '../../../../components/accordion/Accordion';
 import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
-import SelectMajor from '../../../selectMajor/SelectMajor';
+import SelectMajor from '../../../selectProgram/SelectProgram';
 
 import Spinner from '../../../../components/icon/Spinner';
-import './Major.css';
+import './Program.css';
 
-function Major () {
+function Program () {
     const accordionIds = useSelector((state:RootState)=>state.store.programs.allIds);
     const status = useSelector((state:RootState)=>state.store.programs.status);
     const name = useSelector((state:RootState)=>state.store.programs.name);
@@ -57,4 +57,4 @@ function Major () {
     )
 }
 
-export default memo(Major);
+export default memo(Program);

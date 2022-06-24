@@ -4,7 +4,6 @@ import { useSelector} from 'react-redux';
 import {RootState} from '../../../../app/store';
 import Section from '../../../../components/accordion/Accordion';
 import Spinner from '../../../../components/icon/Spinner';
-import BrowseCourseByGE from './BrowseCourseByGE';
 
 function GeneralEducation() {
     const geIds = useSelector((state:RootState)=>state.store.ge.allGeIds);
@@ -24,7 +23,6 @@ function GeneralEducation() {
     
     return (
     <div>
-        <BrowseCourseByGE/>
         <div className="accordion-container">
             {content}
         </div>

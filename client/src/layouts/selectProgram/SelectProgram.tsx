@@ -56,28 +56,33 @@ const myStyle: StylesConfig<OptionType, false> =  {
     }),
 }
 
-function SelectMajor() {
-    const [majors, setPrograms] = useState([]);
+function SelectProgram() {
+    const [majors, setMajors] = useState([]);
+    const [minors, setMinors] = useState([]);
+
     const dispatch = useDispatch();
 
     // Retrieve all majors after rendering
     useEffect( () => {
-        async function fetchMajors() {
-            const res = await Axios('/api/getMajors');
-            const programsArray = await res.data.map( (major:data) =>({value: major.id,label: major.name,isMajor: major.isMajor,}));
+        async function fetchAllPrograms() {
+            const res = await Axios('/api/getAllPrograms');
+            const programsArray = await res.data.map( (major:data) =>({value: major.id,label: major.name, isMajor: major.isMajor,}));
+
             const majorsArray = programsArray.filter(function(program:any) {
-                return program.isMajor
+                return program.isMajor;
             })
             const minorsArray = programsArray.filter(function(program:any) {
-                return program.isMajor
+                return !program.isMajor;
             })
-            setPrograms(majorsArray);
+
+            setMajors(majorsArray);
+            setMinors(minorsArray)
         }
         
-        if(majors.length === 0)
-            fetchMajors();
+        if(majors.length === 0 && minors.length === 0)
+            fetchAllPrograms();
             
-    },[majors]); 
+    },[majors, minors]); 
 
 
     // Get Major Requirement Courses
@@ -112,4 +117,4 @@ function SelectMajor() {
     )
 };
 
-export default memo(SelectMajor);
+export default memo(SelectProgram);

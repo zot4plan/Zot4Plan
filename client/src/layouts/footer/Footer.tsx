@@ -5,11 +5,8 @@ import Github from '../../components/icon/Github';
 import Tools from '../../components/icon/Tools';
 import Author from './Author';
 
-import Zot from '../../assets/images/Zot.png';
 import Tree from '../../assets/images/tree.png';
 import ZotWalk from '../../assets/images/zot-walk.png';
-import Bug from '../../components/icon/Bug';
-
 
 import './Footer.css';
 

@@ -5,6 +5,9 @@ const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
     dialect: dbConfig.dialect,
+    dialectOptions: {
+        multipleStatements: true
+    },
     operatorsAliases: 0,
     pool: {
         max: dbConfig.pool.max,
@@ -21,8 +24,9 @@ db.sequelize = sequelize;
 
 db.courses = require("./courses.model.js")(sequelize, Sequelize);
 db.programs = require("./programs.model.js")(sequelize,Sequelize);
-db.general_educations = require("./general_educations.model.js")(sequelize,Sequelize);
-db.courses_in_ges = require("./courses_in_ges.model.js")(sequelize, Sequelize);
+db.general_education = require("./general_education.model.js")(sequelize,Sequelize);
+db.courses_in_ge = require("./courses_in_ge.model.js")(sequelize, Sequelize);
 db.visits = require("./visits.model.js")(sequelize, Sequelize);
+
 
 module.exports = db;

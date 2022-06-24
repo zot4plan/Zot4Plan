@@ -1,11 +1,11 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, DataType) => {
     const Visits = sequelize.define("visits", {
         id: {
-            type: Sequelize.STRING(5),
+            type: DataType.STRING(5),
             primaryKey: true,
         },  
         total: {
-            type: Sequelize.INTEGER,
+            type: DataType.INTEGER,
             allowNull:false,
         }
     }, {

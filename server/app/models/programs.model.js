@@ -1,24 +1,24 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, DataType) => {
     const Programs = sequelize.define("programs", {
         id: {
-            type: Sequelize.INTEGER,
+            type: DataType.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         name: {
-            type: Sequelize.STRING(50),
+            type: DataType.STRING(50),
             allowNull:false,
         },
         isMajor: {
-            type: Sequelize.BOOLEAN,
+            type: DataType.BOOLEAN,
             allowNull:false,
         },
         requirement: {
-            type: Sequelize.JSON,
+            type: DataType.JSON,
             allowNull:false,
         },
         url: {
-            type: Sequelize.STRING(200),
+            type: DataType.STRING(200),
             allowNull:false,
         }
     }, {

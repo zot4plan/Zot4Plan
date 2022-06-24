@@ -1,8 +1,8 @@
 const db = require("../models");
-const Courses_in_ges = db.courses_in_ges;
+const CoursesInGe = db.courses_in_ge;
 
 exports.getCourses = (req, res) => {
-    Courses_in_ges.findAll({ 
+    CourseInGe.findAll({ 
         attributes: ['courseId'],
         where: {
             geId: req.body.id

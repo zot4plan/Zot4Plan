@@ -4,7 +4,7 @@ import { RootState } from "../../app/store";
 
 import AccordionDetail from './AccordionDetail';
 import Right from '../icon/ArrowRightSmall';
-import BrowseCourseById from '../../layouts/body/tabs/major/BrowseCourseById';
+import BrowseCourseById from '../../layouts/body/tabs/program/BrowseCourseById';
 
 import './Accordion.css';
 
