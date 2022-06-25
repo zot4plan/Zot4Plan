@@ -1,3 +1,5 @@
+const { Sequelize } = require("sequelize");
+
 module.exports = (sequelize, DataType) => {
     const Courses = sequelize.define("courses", {
         id: {
@@ -35,6 +37,10 @@ module.exports = (sequelize, DataType) => {
         },
         prerequisite_for: {
             type: DataType.STRING(750),
+            allowNull:false,
+        },
+        prerequisite_tree: {
+            type: Sequelize.STRING(300),
             allowNull:false,
         },
         restriction: {

@@ -3,19 +3,28 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
 
 import CourseCard from '../courseCard/CourseCard'
+import Error from '../icon/Error'
 
 interface CourseButtonType {
     id: string;
     showUnit: boolean;
     isCrossed: boolean;
+    isWarning: boolean;
 }
 
-function CourseButton({id, showUnit, isCrossed}: CourseButtonType) {
+function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
     const [show, setShow] = useState(false);
     const course = useSelector((state: RootState) => state.store.courses.byIds[id].data)
     const colors = useSelector((state: RootState) => state.store.depts.byIds[course.department].colors);
 
-    console.log(course);
+    // console.log(course);
+
+    let warningSpan = <></>
+    let color = colors[2]
+    if (isWarning) {
+        warningSpan = <span className='course-warning'>{Error()}</span>
+        color = '#8B8000'                                            // Yellow color for unfulfilled prereqs warning
+    }
     
     function handleOnClick( e: MouseEvent<HTMLDivElement> ) {
         e.preventDefault();
@@ -34,7 +43,7 @@ function CourseButton({id, showUnit, isCrossed}: CourseButtonType) {
                 {id}
             </p>
 
-            {showUnit && <p className='unit'>{course.units + ' units'}</p>}
+            {showUnit && <p className='unit'>{isWarning && warningSpan}{course.units + ' units'}</p>}
         </div>
         
         <div style={{display: show? "block":"none"}}>

@@ -62,6 +62,7 @@ function RequiredCourse({courseId, droppableId, index}: courseType) {
                         <CourseButton id={courseId} 
                             showUnit={false} 
                             isCrossed ={!isDraggable}
+                            isWarning ={false}
                         />
                         {/* Only courses add by students are removable */}
                         {droppableId.length > MAJOR_ID_LENGTH && 

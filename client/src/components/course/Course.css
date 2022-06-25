@@ -42,6 +42,11 @@
     color:white;
 }
 
+.course-warning {
+    margin-right: 1.5rem;
+    color: white;
+}
+
 .unit {
     text-align: center;
     cursor: grab;
@@ -52,6 +57,7 @@
     font-size: 1.2rem;
     color:snow;
 }
+
 
 @media only screen and (max-width: 450px) {
     .unit {display: none;}
