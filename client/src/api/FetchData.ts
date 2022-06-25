@@ -22,11 +22,12 @@ export const fetchGE = createAsyncThunk(
 export const fetchProgramById = createAsyncThunk("features/fetchProgramById", async ({id}:FetchProgramType) => 
     Axios.post('/api/getRequirementById', {id: id})
     .then((response) => {
+        console.log(response.data.major.isMajor);
         return {
             status: "succeed",
-            requirement: response.data.major.requirement as MajorType[],
+            requirement: response.data.major.requirement as RequirementType[],
             url: response.data.major.url, // link to the requirement page of major
-            isMajor: response.data.major.isMajor,
+            isMajor: response.data.major.isMajor as boolean,
             name: response.data.major.name, 
             courseIds: response.data.allCourseIds, 
             courseData: response.data.coursesData as CourseType[]
@@ -39,6 +40,7 @@ export const fetchProgramById = createAsyncThunk("features/fetchProgramById", as
             requirement: [],
             name: '',
             url: '',
+            isMajor: false,
             courseIds: [], 
             courseData: [] as CourseType[],
         };
@@ -52,7 +54,7 @@ export const fetchProgramByFile = createAsyncThunk("features/fetchProgramByFile"
         return {
             // data receive from server
             status: "succeeded",
-            requirement: response.data.major[0].requirement as MajorType[],
+            requirement: response.data.major[0].requirement as RequirementType[],
             url: response.data.major[0].url, 
             name: response.data.major[0].name,
             isMajor: response.data.major[0].isMajor,

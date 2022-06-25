@@ -1,7 +1,7 @@
 const db = require("../models");
 const GeneralEducation = db.general_education;
 
-exports.getAllGEs = (_req, res) => {
+exports.getAllGE = (_req, res) => {
     GeneralEducation.findAll().then(data => {
         res.send(data);
     })

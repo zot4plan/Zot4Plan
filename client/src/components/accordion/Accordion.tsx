@@ -4,46 +4,42 @@ import { RootState } from "../../app/store";
 
 import AccordionDetail from './AccordionDetail';
 import Right from '../icon/ArrowRightSmall';
-import BrowseCourseById from '../../layouts/body/tabs/program/BrowseCourseById';
 
 import './Accordion.css';
 
 interface SectionType {
     id: string;
     type: string;
+    programId?: string;
 }
 
-const Accordion = ({id, type}:SectionType) => {
-    const section:any = useSelector((state: RootState) => {
+const Accordion = ({id, type,  programId=""}:SectionType) => {
+    const accordion:any = useSelector((state: RootState) => {
         if(type === 'ge')
             return state.store.ge.byIds[id];
-        else if (type === 'major') 
-            return state.store.programs.byIds[id];
+        else if (type === 'major' && programId !== "") 
+            return state.store.programs.byIds[programId].byIds[id];
         else
-            return state.store.coursesAddByStudent;
+            return state.store.programs.addedCourses;
     });
 
     let detail, name;
-    const coursesAddByStudentId = useSelector((state:RootState)=> state.store.coursesAddByStudent.sectionId);
+    const coursesAddByStudentId = useSelector((state:RootState)=> state.store.programs.addedCourses.sectionId);
     const status = useSelector((state:RootState)=>state.store.programs.status);
 
     if(type === 'ge') {
-        name = id + "-" + section.title;
-        detail = <AccordionDetail key={section.id} droppableId={section.sectionId} text={section.note}/>
+        name = id + "-" + accordion.name;
+        detail = <AccordionDetail key={accordion.id} droppableId={accordion.sectionId} text={accordion.note}/>
     }
     else if (type === 'major') {
-        name= section.title;
-        detail = section.sectionIds.map( (l:{sectionId: string, note: string}) => 
-                <AccordionDetail key={l.sectionId} droppableId={l.sectionId} text={l.note}/> )
+        name = accordion.name;
+        detail = accordion.sectionIds.map(( section:{sectionId: string, nameChild: string}) => 
+                <AccordionDetail key={section.sectionId} droppableId={section.sectionId} text={section.nameChild}/> )
     }
     else {
-        name = 'Add  Courses';
+        name = 'Add Courses';
         detail =
             <div> 
-                <div key="browse" id="browse-id-container"
-                    style={{display: status === 'succeeded'? "flex": "none", flexDirection:'column'}} >
-                    <BrowseCourseById id={coursesAddByStudentId} majorStatus={status}/>  
-                </div>
                 <AccordionDetail key={id} droppableId={id} text= {""}/>
             </div>
     }

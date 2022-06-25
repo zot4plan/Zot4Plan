@@ -15,6 +15,8 @@ function CourseButton({id, showUnit, isCrossed}: CourseButtonType) {
     const course = useSelector((state: RootState) => state.store.courses.byIds[id].data)
     const colors = useSelector((state: RootState) => state.store.depts.byIds[course.department].colors);
 
+    console.log(course);
+    
     function handleOnClick( e: MouseEvent<HTMLDivElement> ) {
         e.preventDefault();
         setShow(!show)

@@ -2,13 +2,13 @@ import {useState,memo, MouseEvent} from 'react';
 import  { StylesConfig } from "react-select";
 import AsyncSelect  from 'react-select/async';
 import { useSelector, useDispatch } from 'react-redux';
-import Axios from '../../../../api/Axios';
+import Axios from '../../../../../api/Axios';
 
-import {RootState} from '../../../../app/store';
-import {addCourse} from '../../../../features/StoreSlice'
-import AddIcon from '../../../../components/icon/AddIcon';
-import Error from '../../../../components/icon/Error';
-import Success from '../../../../components/icon/Success';
+import {RootState} from '../../../../../app/store';
+import {addCourse} from '../../../../../features/StoreSlice'
+import AddIcon from '../../../../../components/icon/AddIcon';
+import Error from '../../../../../components/icon/Error';
+import Success from '../../../../../components/icon/Success';
 
 interface OptionType {
     value: string;
@@ -58,7 +58,7 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
         }, 500);
 }
 
-function BrowseCourseById({id, majorStatus}: BrowseCourseType) {
+function SelectCourses({id, majorStatus}: BrowseCourseType) {
     const [selectCourse, setSelectCourse] = useState<string>("");
     const [message, setMessage] = useState({content: "", status: 'idle'});
     const courses = useSelector((state:RootState)=> state.store.courses.allIds); 
@@ -138,4 +138,4 @@ function BrowseCourseById({id, majorStatus}: BrowseCourseType) {
     )
 };
 
-export default memo(BrowseCourseById);
+export default memo(SelectCourses);

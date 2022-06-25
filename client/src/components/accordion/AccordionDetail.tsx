@@ -10,7 +10,7 @@ interface AccordionDetailType {
 }
 
 function AccordionDetail ({droppableId, text}:AccordionDetailType) {
-    const courseIds = useSelector((state:RootState)=> state.store.sectionCourses[droppableId])
+    const courseIds = useSelector((state:RootState)=> state.store.sections[droppableId])
     let courseCards: JSX.Element[] = [];
     let index = 0;
 
@@ -59,7 +59,6 @@ function AccordionDetail ({droppableId, text}:AccordionDetailType) {
     return (
         <div>
             {p}
-
             <Droppable droppableId={droppableId}
                 isDropDisabled={true}
             >
@@ -70,6 +69,7 @@ function AccordionDetail ({droppableId, text}:AccordionDetailType) {
                     style={{marginBottom: courseIds.length > 0? '1.5rem' : '0rem'}}
                 >
                     {courseCards}
+
                     <div style={{display:'none'}}> {provided.placeholder} </div>
                 </div>
             )} 

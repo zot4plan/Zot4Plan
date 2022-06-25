@@ -9,11 +9,7 @@ declare interface QuarterType {
     quarterName: string;
 }
 
-declare interface SectionType {
-    [id:string]: (string|string[])[];
-}
-
-declare interface MajorType {
+declare interface RequirementType {
     name: string;
     child: ({name:string, child:(string|string[])[]})[]; // need to be rename 
 }
@@ -22,21 +18,23 @@ declare interface CourseType {
     id: string;
     name: string;
     department: string;
-    units: number;
-    repeatability: number;
     corequisite: string;
     description: string;
     prerequisite: string;
+    prerequisite_tree: string;
+    prerequisite_for: string;
     restriction: string;
     ge:string;
     terms:string;
+    units: number;
+    repeatability: number;
 }
 
 /***** Payload Type ****/
 declare interface FetchGEPayload { 
     id:string; 
     name:string; 
-    note:string;
+    accordion:string;
 }
 
 declare interface AddCoursePayload { 
@@ -84,16 +82,26 @@ interface InputFileType {
 
 /************* Slice **************/
 declare interface GEType {
+    id: string; 
     sectionId: string;
-    geId: string; 
-    title: string; 
-    note: string; 
+    name: string; 
+    nameChild: string; 
 }
 
-declare interface MajorSectionType {
+declare interface AccordionType {
     id: string;
-    title: string;
-    sectionIds: { sectionId: string, note: string} [];
+    name: string;
+    sectionIds: { sectionId: string, nameChild: string} [];
+}
+
+declare interface ProgramType {
+    id: string;
+    byIds:{ [id:string]: AccordionType}; 
+    allIds: string[];
+    name: string;
+    url: string;
+    courses: string[];
+    isMajor: boolean;
 }
 
 declare interface StoreType{
@@ -102,37 +110,21 @@ declare interface StoreType{
         allIds: string[]; 
         totalUnits: number;
     };
-    programs:{
-        byIds:{
-            [id:string]: MajorSectionType
-        }; 
-        allIds: string[];
-        name: string;
-        isMajor: boolean;
-        url: string;
+    programs: {
+        byIds: {[id: string]: ProgramType };
+        allMinors: string[];
+        allMajors: string[];
+        addedCourses: { sectionId: string};
         status: string;
         error: string;
     };
-        programs:{
-        byIds:{
-            [id:string]: MajorSectionType
-        }; 
-        allIds: string[];
-        name: string;
-        isMajor: boolean;
-        url: string;
-        status: string;
-        error: string;
-    };
-    coursesAddByStudent: {sectionId: string};
     ge: {
-        byIds: {
-            [geId:string]: GEType};
-        allGeIds: string[];
+        byIds: { [id:string]: GEType};
+        allIds: string[];
         status: string;
+        error: string;
     };
-    sectionCourses: SectionType;
-
+    sections: {[id:string]: (string|string[])[]};
     courses: {
         byIds: {
             [id:string]: {

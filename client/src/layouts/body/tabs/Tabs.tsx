@@ -11,21 +11,21 @@ import './Tabs.css';
 
 
 function Tabs () {
-  const [tabId, setTabId] = useState<number>(1); // Major tabId === 1; GeneralEducation tabId === 2 
+  const [tabId, setTabId] = useState<number>(1); // Major: 1, minor: 2, GE: 3 
   const status = useSelector((state:RootState)=>state.store.ge.status);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+/*  useEffect(() => {
       if (status === 'idle') 
           dispatch(fetchGE());
-  }, [status, dispatch])
+  }, [status, dispatch]) */
 
   return (
     <div id="tab-container">
       <ul style={{display: "flex"}}>
 
         <li style={{ borderRight:'1px solid white' }}
-          onClick={()=>setTabId(1)}
+          onClick={()=> setTabId(1)}
           className={'tab flex-container round-top-left ' + (tabId === 1?"active":"")} 
         >
            Major
@@ -47,11 +47,13 @@ function Tabs () {
       </ul>
 
       <div style={{display: tabId === 1? "block": "none"}}>
-        <Program/>
+        <Program key="major" isMajor={true}/>
       </div>
+
       <div style={{display: tabId === 2? "block": "none"}}>
-      
+        <Program key="minor" isMajor={false}/>
       </div>
+
       <div style={{display: tabId === 3? "block": "none"}}>
         <GeneralEducation/>
       </div>

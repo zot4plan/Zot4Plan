@@ -12,7 +12,7 @@ module.exports = app => {
 
     router.get("/getAllPrograms", programs.getAllPrograms);
 
-    router.get("/getAllGes",general_education.getAllGes);
+    router.get("/getAllGE",general_education.getAllGE);
 
     // POST method
     router.post("/getRequirementById", combine_models.getRequirementById);

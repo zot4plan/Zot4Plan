@@ -5,7 +5,7 @@ import {Droppable} from 'react-beautiful-dnd';
 import {useCallback,memo } from 'react'
 
 function Quarter({droppableId, quarterName}:QuarterType) {
-  const courses = useSelector((state:RootState) => state.store.sectionCourses[droppableId]);
+  const courses = useSelector((state:RootState) => state.store.sections[droppableId]);
 
   const renderCard = useCallback(
       (id: string, droppableId: string, index: number) => {

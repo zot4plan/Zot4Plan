@@ -1,10 +1,10 @@
 import { useState, useEffect, memo } from 'react';
-import Axios from '../../api/Axios';
+import Axios from '../../../../../api/Axios';
 import Select, { StylesConfig } from 'react-select';
 import { useDispatch } from 'react-redux';
-import {fetchProgramById} from '../../api/FetchData';
+import {fetchProgramById} from '../../../../../api/FetchData';
 
-import './SelectMajor.css';
+import './SelectProgram.css';
 
 interface OptionType {
     value: number;
@@ -56,7 +56,11 @@ const myStyle: StylesConfig<OptionType, false> =  {
     }),
 }
 
-function SelectProgram() {
+interface SelectProgramType {
+    isMajor: boolean;
+}
+
+function SelectProgram({isMajor}: SelectProgramType) {
     const [majors, setMajors] = useState([]);
     const [minors, setMinors] = useState([]);
 
@@ -92,7 +96,7 @@ function SelectProgram() {
                 await dispatch(fetchProgramById({id: option.value}));
             }
             catch (err) {
-                console.error('Failed to retrieve major: ', err)
+                console.error('Failed to retrieve program: ', err)
             } 
         }
     }
@@ -104,14 +108,14 @@ function SelectProgram() {
             justifyContent: 'center',
             alignItems: 'center',
             margin: '2rem 15%',
-    }}> 
+        }}> 
         <Select 
             isClearable={true}
-            options={majors} 
+            options={(isMajor)? majors : minors} 
             styles={myStyle}
             onChange={handleOnChange}
-            placeholder="Select Your Major"
-            aria-label="Select your major"
+            placeholder= {"Select Your " + (isMajor)? " Major" : "Minor"}
+            aria-label= {"Select Your " + (isMajor)? " Major" : "Minor"}
         />
     </div>
     )

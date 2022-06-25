@@ -16,7 +16,7 @@ function ButtonDownloadFile () {
      *  years: string[][][]    // list of quarters, each quarter contains a list of courses taken in the quarter
      * }
      */
-    const data = useSelector( (state:RootState) => {
+/*    const data = useSelector( (state:RootState) => {
         let majorName = state.store.programs.name;
         let geCourses = state.store.ge.allGeIds.map(id => {
             let geSectionId = state.store.ge.byIds[id].sectionId;
@@ -42,7 +42,7 @@ function ButtonDownloadFile () {
         const blob = new Blob([output])
         const url = URL.createObjectURL(blob);
         setFile( prev => ({...prev, url: url }));
-    }
+    } 
 
     // Download file and free up the storage after finishing
     const clickOnAnchor =  async () => {
@@ -59,17 +59,18 @@ function ButtonDownloadFile () {
             await createDownloadFile();
             await clickOnAnchor();
         }
-    }
+    } */
 
     return (
-        <div className="relative flex-container">  
+        <div className="relative flex-container">
+            {/*  
             <button 
                 className='btn-nav' 
-                onClick ={download}
+                onClick ={download} 
                 aria-label="download your plan as a JSON file"
             >   
                 <DownloadIcon/>
-            </button>
+            </button> */}
 
             <div style={{position: "absolute", display: "none"}}>   
                 <a download={file.name + '.' + file.fileType}

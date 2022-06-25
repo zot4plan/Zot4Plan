@@ -6,7 +6,7 @@ import Section from '../../../../components/accordion/Accordion';
 import Spinner from '../../../../components/icon/Spinner';
 
 function GeneralEducation() {
-    const geIds = useSelector((state:RootState)=>state.store.ge.allGeIds);
+    const geIds = useSelector((state:RootState)=>state.store.ge.allIds);
     const status = useSelector((state:RootState)=>state.store.ge.status);
 
     let content;

@@ -10,7 +10,7 @@ const Programs = db.programs;
  */
 exports.getRequirementById = (req, res) => {
     const id = req.body.id;
-    Programs.findByPk(id, {attributes: ['requirement','name','url']}).then(data => {
+    Programs.findByPk(id, {attributes: ['id','name','isMajor','requirement','url']}).then(data => {
         if(data) {
             // Put all courses in major_requirement template into an array
             const majorData = data.dataValues.requirement;

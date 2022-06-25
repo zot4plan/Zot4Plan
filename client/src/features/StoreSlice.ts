@@ -14,8 +14,8 @@ const DEPT_COLORS = [
 
 const generateInitialState = () => {
     let years:{[id:string]:YearType} = {};
-    let sections:SectionType = {}; // sections courses (include quarters, GE, major and courses added by students)
-    let coursesAddByStudent =  { sectionId: nanoid(ID_LENGTH) };
+    let sections:{[id:string]: (string|string[])[]}= {}; // sections courses (include quarters, GE, major and courses added by students)
+    let addedCourses =  nanoid(ID_LENGTH);
 
     // Generate IDs for years
     let yearIds = [nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH), 
@@ -36,7 +36,7 @@ const generateInitialState = () => {
             quarterIds: quarterIds
         };
     })
-    sections[coursesAddByStudent.sectionId] = [] as string [];
+    sections[addedCourses] = [] as string [];
     
     return {
         years: {
@@ -45,21 +45,20 @@ const generateInitialState = () => {
             totalUnits: 0
         }, 
         programs: {
-            byIds: {}, 
-            allIds: [],
-            name: "",
-            isMajor: true,
-            url: "",
-            status: "idle",
+            byIds: {},
+            allMinors:[],
+            allMajors:[],
+            addedCourses: {sectionId: addedCourses},
+            status:"idle",
             error: "",
         },
         ge: {
             byIds: {},
-            allGeIds: [],
+            allIds: [],
             status:"idle",
+            error: "",
         },
-        coursesAddByStudent: coursesAddByStudent,
-        sectionCourses: sections,
+        sections: sections,
         courses: {
             byIds: {},
             allIds: [],
@@ -89,7 +88,7 @@ export const storeSlice = createSlice ({
         addCourse: (state, action: PayloadAction<AddCoursePayload>) => {
             let course = action.payload.course,
                 id = action.payload.id;
-            state.sectionCourses[id].push(course.id);
+            state.sections[id].push(course.id);
 
             if(state.courses.byIds[course.id] === undefined) {
                 state.courses.byIds[course.id] = {
@@ -122,9 +121,9 @@ export const storeSlice = createSlice ({
                 courseUnits = state.courses.byIds[courseId].data.units;
 
             //Delete courseId from sections
-            state.sectionCourses[sectionId].splice(action.payload.index,1);
+            state.sections[sectionId].splice(action.payload.index,1);
             state.courses.byIds[courseId].sectionIds.forEach(id => {
-                state.sectionCourses[id] = state.sectionCourses[id].filter(id => id !== courseId);
+                state.sections[id] = state.sections[id].filter(id => id !== courseId);
             })
             
             //Subtract course's units from total units if course is selected
@@ -150,10 +149,10 @@ export const storeSlice = createSlice ({
             let quarterId = action.payload.quarterId,
                 courseId = action.payload.courseId;
 
-            if(!state.sectionCourses[quarterId].includes(courseId)) {
+            if(!state.sections[quarterId].includes(courseId)) {
                 state.courses.byIds[courseId].repeatability -= 1;
                 state.courses.byIds[courseId].sectionIds.push(quarterId);
-                state.sectionCourses[quarterId].splice(action.payload.index, 0, courseId);
+                state.sections[quarterId].splice(action.payload.index, 0, courseId);
                 state.years.totalUnits += state.courses.byIds[courseId].data.units;
             }
         },
@@ -164,15 +163,15 @@ export const storeSlice = createSlice ({
                 courseId = action.payload.courseId;
             
             //prevent same course from being added to the same quarter
-            if(!state.sectionCourses[destinationId].includes(courseId) || sourceId === destinationId) {
+            if(!state.sections[destinationId].includes(courseId) || sourceId === destinationId) {
                 if(sourceId !== destinationId) {
                     let quarterIds = state.courses.byIds[courseId].sectionIds.filter(id => id !== sourceId);
                     quarterIds.push(destinationId);
                     state.courses.byIds[courseId].sectionIds = quarterIds;
                 }
 
-                state.sectionCourses[sourceId].splice(action.payload.sourceIndex, 1);
-                state.sectionCourses[destinationId].splice(action.payload.destinationIndex, 0, courseId);
+                state.sections[sourceId].splice(action.payload.sourceIndex, 1);
+                state.sections[destinationId].splice(action.payload.destinationIndex, 0, courseId);
             }
         },
 
@@ -181,7 +180,7 @@ export const storeSlice = createSlice ({
          */
         removeCourseFromQuarter: (state, action: PayloadAction<CourseQuarterPayload>) => {
             // remove course from quarter section
-            state.sectionCourses[action.payload.quarterId].splice(action.payload.index,1);
+            state.sections[action.payload.quarterId].splice(action.payload.index,1);
 
             // increase repeatability of course
             state.courses.byIds[action.payload.courseId].repeatability += 1;
@@ -200,7 +199,7 @@ export const storeSlice = createSlice ({
                                 nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH) ];
                 
                 for(let i = 0; i < 4; i++) 
-                    state.sectionCourses[newQuarterIds[i]] = [] as string[]
+                    state.sections[newQuarterIds[i]] = [] as string[]
                 
                 state.years.allIds.push(newYearId);
                 state.years.byIds[newYearId] = {
@@ -217,13 +216,13 @@ export const storeSlice = createSlice ({
          */
         removeYear: (state, action:PayloadAction<RemoveYearPayload>) => { 
             state.years.byIds[action.payload.id].quarterIds.forEach((id) => {
-                state.sectionCourses[id].forEach((courseId) => {
+                state.sections[id].forEach((courseId) => {
                     if(typeof(courseId) === 'string') {
                         state.courses.byIds[courseId].repeatability += 1;
                         state.years.totalUnits -= state.courses.byIds[courseId].data.units;
                     }
                 })
-                delete state.sectionCourses[id];
+                delete state.sections[id];
             })
            
             delete state.years.byIds[action.payload.id];
@@ -237,13 +236,13 @@ export const storeSlice = createSlice ({
         refreshState: (state) => {
             state.years.allIds.forEach((yearId)=> {
                 state.years.byIds[yearId].quarterIds.forEach((quarterId)=>{
-                    state.sectionCourses[quarterId].forEach(courseId => {
+                    state.sections[quarterId].forEach(courseId => {
                         if(typeof(courseId) === 'string') {
                             state.courses.byIds[courseId].repeatability += 1;
                             state.courses.byIds[courseId].sectionIds = [];
                         }
                     })
-                    state.sectionCourses[quarterId] = [];
+                    state.sections[quarterId] = [];
                 })
             })
             state.years.totalUnits = 0;
@@ -259,7 +258,7 @@ export const storeSlice = createSlice ({
         //////////////////////////////////////////////
         /*********** Fetch General Education ********/
         //////////////////////////////////////////////
-
+/*
         builder.addCase(fetchGE.pending, (state) => {
             state.ge.status = "loading";
         });
@@ -267,14 +266,14 @@ export const storeSlice = createSlice ({
         builder.addCase( fetchGE.fulfilled,(state,action:PayloadAction<FetchGEPayload[]>) => {    
             action.payload.forEach( (ge) => {
                 const id = nanoid(ID_LENGTH);
-                state.ge.allGeIds.push(ge.id);
+                state.ge.allIds.push(ge.id);
                 state.ge.byIds[ge.id] = {
                     sectionId: id, 
-                    geId: ge.id, 
+                    id: ge.id, 
                     title:ge.name, 
-                    note: ge.note, 
+                    nameChild: ge.note, 
                 }
-                state.sectionCourses[id] = [] as string[];
+                state.sections[id] = [] as string[];
             });
             state.ge.status = "succeeded";
         });
@@ -287,9 +286,9 @@ export const storeSlice = createSlice ({
         /*************** FetchMajorById ***************/
         ///////////////////////////////////////////////////
 
-        builder.addCase(fetchProgramById.pending, (state) => {
+  /*      builder.addCase(fetchProgramById.pending, (state) => {
             state.programs.status = "loading";
-        });
+        }); */
 
         /**
          * Reset current state and assign new major to state
@@ -304,55 +303,52 @@ export const storeSlice = createSlice ({
         builder.addCase(fetchProgramById.fulfilled, (state, action) => {  
             state.programs.status = "succeeded";
             
-            // Reset CouresInSections 
-            state.sectionCourses = {};
+            // create new program 
+            let program: ProgramType = {
+                id: nanoid(1),
+                byIds: {}, 
+                allIds: [],
+                name: action.payload.name,
+                url: action.payload.url,
+                courses: action.payload.courseIds,
+                isMajor: action.payload.isMajor,
+            };
+            console.log(program.isMajor);
 
-            // Initalize courseAddByStudent, geCourses, quarterCourses to empty
-            state.sectionCourses[state.coursesAddByStudent.sectionId] = [];
+            if(program.isMajor)
+                state.programs.allMajors.push(program.id);
+            else
+                state.programs.allMinors.push(program.id);
 
-            state.ge.allGeIds.forEach((id)=>{
-                state.sectionCourses[state.ge.byIds[id].sectionId] = [] as string[];
-            });
-
-            state.years.allIds.forEach((yearId)=> {
-                state.years.byIds[yearId].quarterIds.forEach((quarterId)=>{
-                    state.sectionCourses[quarterId] = [] as string []
+            action.payload.requirement.forEach ((accordion)=>{
+                const accordionId = nanoid(MAJOR_ID_LENGTH);
+                program.allIds.push(accordionId);
+                program.byIds[accordionId] = {id: accordionId, name: accordion.name, sectionIds: []};
+            
+                accordion.child.forEach((section) => {
+                    const sectionId = nanoid(MAJOR_ID_LENGTH);
+                    program.byIds[accordionId].sectionIds.push({sectionId: sectionId, nameChild: section.name})
+                    state.sections[sectionId] = section.child;
                 })
             })
-            
-            // Replace with new major
-            state.programs.name = action.payload.name;
-            state.programs.url = action.payload.url;
 
-            state.programs.allIds = [];
-            state.programs.byIds = {};
+            state.programs.byIds[program.id] = program;
 
-            action.payload.requirement.forEach ((section)=>{
-                const sId = nanoid(MAJOR_ID_LENGTH);
-                state.programs.allIds.push(sId);
-                state.programs.byIds[sId] = {id: sId, title: section.name, sectionIds: []};
-            
-                section.child.forEach((c) => {
-                    const cId = nanoid(MAJOR_ID_LENGTH);
-                    state.programs.byIds[sId].sectionIds.push({sectionId: cId, note: c.name})
-                    state.sectionCourses[cId] = c.child;
-                })
-            })
-            
-            // Reset departments and courses
-            state.depts.byIds = {};
-            state.depts.size = 0; 
-
-            state.courses.byIds = {};
-            state.courses.allIds = action.payload.courseIds;
-            
+            // assign new courses information
             action.payload.courseData.forEach((course) => {
-                state.courses.byIds[course.id] = {
-                    data: course,
-                    repeatability: course.repeatability,
-                    removable: false, // Cannot remove courses in major requirement
-                    sectionIds: []    
+                // check if course has already existed in courses.
+                if(state.courses.byIds[course.id] === undefined) {
+                    state.courses.byIds[course.id] = {
+                        data: course,
+                        repeatability: course.repeatability,
+                        removable: false, // Cannot remove courses in major requirement
+                        sectionIds: []    
+                    }
+
+                    state.courses.allIds.push(course.id);
                 }
+                else 
+                    state.courses.byIds[course.id].removable = false;
                 
                 // Assign color for department
                 if(state.depts.byIds[course.department] === undefined) { 
@@ -362,8 +358,6 @@ export const storeSlice = createSlice ({
                 }
             })
             
-            // Reset total units taken
-            state.years.totalUnits = 0;
         });
 
         builder.addCase(fetchProgramById.rejected, (state) => {
@@ -374,9 +368,9 @@ export const storeSlice = createSlice ({
         //////////////////////////////////////////////////////
         /************  fetchMajorByFile ************/
         //////////////////////////////////////////////////////
-        builder.addCase(fetchProgramByFile.pending, (state) => {
+/*        builder.addCase(fetchProgramByFile.pending, (state) => {
             state.programs.status = "loading";
-        });
+        }); */
 
         /**
          * Reset current state and import information from input file to state
@@ -391,14 +385,14 @@ export const storeSlice = createSlice ({
          * @param geCourses: string[][]
          * @param coursesAddByStudent: string[]
          */
-
+/*
         builder.addCase(fetchProgramByFile.fulfilled, (state, action) => {  
             if(action.payload.status === "succeeded") {
                 state.programs.status = "succeeded";
 
                 console.log(action.payload);
                 // Reset CouresInSections 
-                state.sectionCourses = {};
+                state.sections = {};
 
                 // Reset departments and courses 
                 state.depts.byIds = {};
@@ -439,8 +433,8 @@ export const storeSlice = createSlice ({
                 
                     section.child.forEach((c) => {
                         const cId = nanoid(MAJOR_ID_LENGTH);
-                        state.programs.byIds[sId].sectionIds.push({sectionId: cId, note: c.name})
-                        state.sectionCourses[cId] = c.child;
+                        state.programs.byIds[sId].sectionIds.push({sectionId: cId, nameChild: c.name})
+                        state.sections[cId] = c.child;
 
                         // Mark courses in major requirement as unremovable
                         c.child.forEach((course) => {
@@ -458,18 +452,18 @@ export const storeSlice = createSlice ({
                 state.years.totalUnits = 0; 
 
                 // Assign data get from input file to courseAddByStudent, geCourses, quarterCourses 
-                state.sectionCourses[state.coursesAddByStudent.sectionId] = action.payload.coursesAddByStudent;
+                state.sections[state.coursesAddByStudent.sectionId] = action.payload.coursesAddByStudent;
 
                 state.ge.allGeIds.forEach((id,index)=>{
-                    state.sectionCourses[state.ge.byIds[id].sectionId] = action.payload.geCourses[index];
+                    state.sections[state.ge.byIds[id].sectionId] = action.payload.geCourses[index];
                 });
 
                 state.years.allIds.forEach((yearId, yearIndex)=> {
                     state.years.byIds[yearId].quarterIds.forEach((quarterId, quarterIndex)=>{
-                        state.sectionCourses[quarterId] = action.payload.years[yearIndex][quarterIndex];
+                        state.sections[quarterId] = action.payload.years[yearIndex][quarterIndex];
 
                         // remove repeatability of course and calculate total units
-                        state.sectionCourses[quarterId].forEach((course) => {
+                        state.sections[quarterId].forEach((course) => {
                             if(typeof(course) === 'string') {
                                 state.courses.byIds[course].repeatability -= 1;
                                 state.years.totalUnits += state.courses.byIds[course].data.units;
@@ -487,7 +481,7 @@ export const storeSlice = createSlice ({
         builder.addCase(fetchProgramByFile.rejected, (state) => {
             state.programs.status = "failed";
             state.programs.error = "An error occurred while retrieving the data";
-        });
+        });  */
     },
 });
 
