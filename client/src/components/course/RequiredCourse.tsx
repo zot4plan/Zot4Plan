@@ -29,11 +29,7 @@ function getStyle(style: any, snapshot: { isDropAnimating: any; }) {
 }
 
 function RequiredCourse({courseId, droppableId, index}: courseType) {
-    const repeatability = useSelector((state: RootState) => state.store.courses.byIds[courseId].repeatability)
-
-    let isDraggable = true;
-    if(repeatability === 0)
-        isDraggable = false;
+    const isDraggable = useSelector((state: RootState) => state.store.courses.byIds[courseId].remains > 0)
 
     const dispatch = useDispatch();
     const removeCourse = (e: { preventDefault: () => void; }) => {
@@ -64,6 +60,7 @@ function RequiredCourse({courseId, droppableId, index}: courseType) {
                             isCrossed ={!isDraggable}
                             isWarning ={false}
                         />
+
                         {/* Only courses add by students are removable */}
                         {droppableId.length > MAJOR_ID_LENGTH && 
                             <button className="remove-course-btn" onClick = {removeCourse}>

@@ -10,22 +10,20 @@ import './Accordion.css';
 interface SectionType {
     id: string;
     type: string;
-    programId?: string;
+    programId?: number;
 }
 
-const Accordion = ({id, type,  programId=""}:SectionType) => {
+const Accordion = ({id, type, programId = -1}:SectionType) => {
     const accordion:any = useSelector((state: RootState) => {
         if(type === 'ge')
             return state.store.ge.byIds[id];
-        else if (type === 'major' && programId !== "") 
+        else if (type === 'major' && programId >= 0) 
             return state.store.programs.byIds[programId].byIds[id];
         else
-            return state.store.programs.addedCourses;
+            return state.store.addedCourses;
     });
 
     let detail, name;
-    const coursesAddByStudentId = useSelector((state:RootState)=> state.store.programs.addedCourses.sectionId);
-    const status = useSelector((state:RootState)=>state.store.programs.status);
 
     if(type === 'ge') {
         name = id + "-" + accordion.name;

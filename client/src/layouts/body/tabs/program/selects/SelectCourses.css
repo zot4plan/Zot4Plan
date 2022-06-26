@@ -1,0 +1,69 @@
+
+.input-container {
+    /* top: 1rem;
+    left: 80%;
+    transition: left 1s, top 1s; */
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 0rem 5% 1.4rem 5%;
+} 
+
+.browse-container {
+    height: 3.6rem;
+    width: 100%;
+} 
+
+/* add-course-btn */
+.add-course-btn {
+    top: 52%;
+    right: 3px;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+    padding: 0.7rem;
+   
+    background-color: var(--accent-color-2);
+
+    line-height: 0;
+    color:white;
+}
+
+/* message */
+.message-container {
+    height: 1.6rem;
+    max-width: 27rem;
+}
+
+.message {
+    padding-top: 0.8rem;
+    padding-left: 2.4rem;
+    font-size: 1.4rem;
+}
+
+.message-icon { 
+    left: 0px; 
+    top: 6px; 
+}
+
+.fade-message {
+    -moz-animation: fadeIn 1s ease-in 4s forwards;
+    -webkit-animation: fadeIn 1s ease-in 4s forwards;
+    -o-animation: fadeIn 1s ease-in 4s forwards;
+    animation: fadeIn 1s ease-in 4s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    to {opacity: 0; visibility: hidden;}
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 1; visibility: visible;}
+    100% {opacity: 0; visibility: hidden;}
+}

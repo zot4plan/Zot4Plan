@@ -5,10 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import Axios from '../../../../../api/Axios';
 
 import {RootState} from '../../../../../app/store';
-import {addCourse} from '../../../../../features/StoreSlice'
+import {addCourse} from '../../../../../features/StoreSlice';
 import AddIcon from '../../../../../components/icon/AddIcon';
 import Error from '../../../../../components/icon/Error';
 import Success from '../../../../../components/icon/Success';
+
+import './SelectCourses.css';
 
 interface OptionType {
     value: string;
@@ -19,17 +21,11 @@ interface CourseType{
     id:string;
 }
 
-interface BrowseCourseType {
-    id: string;
-    majorStatus: string;
-}
-
 const myStyle: StylesConfig<OptionType, false> =  {
     control: (provided) => {
-        return {...provided, width: '27rem', borderRadius: '18px'};
-    },
-    menu: (provided) => {
-        return {...provided, width: '27rem'};
+        return {...provided, 
+                width: '100%', 
+                borderRadius: '18px'};
     },
     valueContainer: (provided) => {
         return {...provided, cursor: 'text'};
@@ -58,10 +54,13 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
         }, 500);
 }
 
-function SelectCourses({id, majorStatus}: BrowseCourseType) {
+function SelectCourses() {
     const [selectCourse, setSelectCourse] = useState<string>("");
     const [message, setMessage] = useState({content: "", status: 'idle'});
-    const courses = useSelector((state:RootState)=> state.store.courses.allIds); 
+    const addedCourses = useSelector((state:RootState) => {
+        let sectionId = state.store.addedCourses.sectionId;
+        return state.store.sections[sectionId];
+    }); 
     const dispatch = useDispatch();
 
     const submitAddCourse =(event: MouseEvent<HTMLButtonElement>) => {
@@ -71,15 +70,12 @@ function SelectCourses({id, majorStatus}: BrowseCourseType) {
         if(selectCourse === "")
             setMessage({content: "Please select a course!", status: status})
 
-        else if ( majorStatus !== 'succeeded')
-            setMessage({content: "Please select your major first!", status: status})
-
-        else if(!courses.includes(selectCourse))
+        else if(!addedCourses.includes(selectCourse))
             setTimeout(() => {
                 Axios.post('/api/getCourseById', {id: selectCourse })
                     .then((res) => {
                         if(res.data.message === 'succeed') {
-                            dispatch(addCourse({course: res.data.data, id: id}));
+                            dispatch(addCourse(res.data.data));
                             content += " is added successfully!";
                             status = "succeed";
                         }
@@ -102,21 +98,21 @@ function SelectCourses({id, majorStatus}: BrowseCourseType) {
     }
 
     return (
-        <div className='input-container flex-container'>
+        <div className='input-container'>
             <div className='relative browse-container'>
                 <AsyncSelect
                     isClearable={true}
                     cacheOptions 
                     defaultOptions
                     loadOptions={promiseOptions}
-                    isOptionDisabled={(option)=>courses.includes(option.label)}
+                    isOptionDisabled={(option)=> addedCourses.includes(option.label)}
 
                     onChange={handleOnChange}
 
                     styles={myStyle}
                     maxMenuHeight={250}
                     components={{DropdownIndicator:()=>null}}
-                    placeholder="Find Course"
+                    placeholder="Add Course"
                     aria-label="Browse courses by ID"
                 />
                 <button className='absolute add-course-btn' onClick={submitAddCourse}> <AddIcon/> </button>

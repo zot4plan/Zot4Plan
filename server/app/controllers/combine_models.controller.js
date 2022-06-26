@@ -2,6 +2,7 @@ const { Sequelize } = require("../models");
 const db = require("../models");
 const Courses = db.courses;
 const Programs = db.programs;
+const courses_in_programs = db.courses_in_programs;
 
 /**
  * Return major requirement template, majorName, majorURL from majors table
@@ -81,7 +82,7 @@ exports.getRequirementById = (req, res) => {
                         if(typeof(course) === 'string')
                             setOfCourses.add(course);
 
-                        // Case: student can take course A or B
+                        // Case: course A or B
                         else { 
                             setOfCourses.add(course[0]);
                             setOfCourses.add(course[1]);

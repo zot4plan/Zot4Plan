@@ -1,5 +1,5 @@
 import {memo} from 'react';
-import { useSelector} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 
 import {RootState} from '../../../../app/store';
 import Section from '../../../../components/accordion/Accordion';
@@ -9,6 +9,13 @@ function GeneralEducation() {
     const geIds = useSelector((state:RootState)=>state.store.ge.allIds);
     const status = useSelector((state:RootState)=>state.store.ge.status);
 
+    const dispatch = useDispatch();
+
+/*  useEffect(() => {
+      if (status === 'idle') 
+          dispatch(fetchGE());
+  }, [status, dispatch]) */
+  
     let content;
 
     if (status === 'loading') 

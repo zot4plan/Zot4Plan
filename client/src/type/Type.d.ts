@@ -4,6 +4,12 @@ declare interface YearType {
     quarterIds: string[];
 }
 
+declare interface ProgramOption {
+    value: number;
+    label: string;
+    isMajor: boolean;
+}
+
 declare interface QuarterType { 
     droppableId: string;
     quarterName: string;
@@ -30,16 +36,13 @@ declare interface CourseType {
     repeatability: number;
 }
 
+/************************/
 /***** Payload Type ****/
+/************************/
 declare interface FetchGEPayload { 
     id:string; 
     name:string; 
     accordion:string;
-}
-
-declare interface AddCoursePayload { 
-    id: string;
-    course: CourseType; 
 }
 
 declare interface DeleteCoursePayload{
@@ -65,6 +68,11 @@ declare interface MoveCoursePayload {
 declare interface RemoveYearPayload {
     id: string;
     index: number;
+}
+
+declare interface ProgramOptionPayload {
+    value: ProgramOption[];
+    isMajor: boolean;
 }
 
 /*********** Fetch Input Types ************/
@@ -95,7 +103,7 @@ declare interface AccordionType {
 }
 
 declare interface ProgramType {
-    id: string;
+    id: number;
     byIds:{ [id:string]: AccordionType}; 
     allIds: string[];
     name: string;
@@ -112,9 +120,9 @@ declare interface StoreType{
     };
     programs: {
         byIds: {[id: string]: ProgramType };
-        allMinors: string[];
-        allMajors: string[];
-        addedCourses: { sectionId: string};
+        selectedMinors: ProgramOption[];
+        selectedMajors: ProgramOption[];
+        allIds: number[];
         status: string;
         error: string;
     };
@@ -124,14 +132,15 @@ declare interface StoreType{
         status: string;
         error: string;
     };
+    addedCourses: { sectionId: string};
+
     sections: {[id:string]: (string|string[])[]};
+
     courses: {
         byIds: {
             [id:string]: {
                 data: CourseType, 
-                repeatability: number,
-                removable: boolean,
-                sectionIds : string[],
+                remains: number,
             }},
         allIds: string[];
     };

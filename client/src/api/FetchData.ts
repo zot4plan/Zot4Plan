@@ -19,30 +19,32 @@ export const fetchGE = createAsyncThunk(
         }
 });
 
-export const fetchProgramById = createAsyncThunk("features/fetchProgramById", async ({id}:FetchProgramType) => 
-    Axios.post('/api/getRequirementById', {id: id})
+export const fetchProgramById = createAsyncThunk("features/fetchProgramById", async (payload: {id: number, programs: ProgramOption[]}) => 
+    Axios.post('/api/getRequirementById', {id: payload.id})
     .then((response) => {
-        console.log(response.data.major.isMajor);
         return {
             status: "succeed",
-            requirement: response.data.major.requirement as RequirementType[],
-            url: response.data.major.url, // link to the requirement page of major
+            id: payload.id,
             isMajor: response.data.major.isMajor as boolean,
             name: response.data.major.name, 
+            requirement: response.data.major.requirement as RequirementType[],
+            url: response.data.major.url, // link to the requirement page of major
             courseIds: response.data.allCourseIds, 
-            courseData: response.data.coursesData as CourseType[]
+            courseData: response.data.coursesData as CourseType[],
+            programs: payload.programs
         };
-            
     })
     .catch(()=> {
         return {
             status: "failed",
+            id: payload.id,
             requirement: [],
             name: '',
             url: '',
             isMajor: false,
             courseIds: [], 
             courseData: [] as CourseType[],
+            programs: payload.programs
         };
     })
 ); 

@@ -1,9 +1,10 @@
 import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
 import { fetchProgramById, fetchProgramByFile, fetchGE} from '../api/FetchData'
 
-const QUARTER_ID_LENGTH = 3; // for function AddCourseToQuarter
-const MAJOR_ID_LENGTH = 4; // to differentiate course in major (which cannot be remove)
-const ID_LENGTH = 5; 
+export const QUARTER_ID_LENGTH = 3; // for function AddCourseToQuarter
+export const MAJOR_ID_LENGTH = 4; // to differentiate course in major (which cannot be remove)
+export const ID_LENGTH = 5; 
+
 const DEPT_COLORS = [
     ['#AFD3E9', '#70ADD7', '#3688BF'], // Columbia Blue
     ['#C2E9EA', '#76CFD0', '#38A3A5'], // Powder Blue
@@ -46,9 +47,9 @@ const generateInitialState = () => {
         }, 
         programs: {
             byIds: {},
-            allMinors:[],
-            allMajors:[],
-            addedCourses: {sectionId: addedCourses},
+            selectedMinors:[],
+            selectedMajors:[],
+            allIds: [],
             status:"idle",
             error: "",
         },
@@ -58,6 +59,7 @@ const generateInitialState = () => {
             status:"idle",
             error: "",
         },
+        addedCourses: {sectionId: addedCourses},
         sections: sections,
         courses: {
             byIds: {},
@@ -81,21 +83,19 @@ export const storeSlice = createSlice ({
 *********************************************************/
     reducers: {
         /**
-         * Add course to sections
-         * Add course to courses 
-         * Add color for new course department
+         * Add course to AddedCourses
+         * @param course 
          */
-        addCourse: (state, action: PayloadAction<AddCoursePayload>) => {
-            let course = action.payload.course,
-                id = action.payload.id;
-            state.sections[id].push(course.id);
+        addCourse: (state, action: PayloadAction<CourseType>) => {
+            let course = action.payload,
+                sectionId = state.addedCourses.sectionId;
+
+            state.sections[sectionId].push(course.id);
 
             if(state.courses.byIds[course.id] === undefined) {
                 state.courses.byIds[course.id] = {
                     data: course, 
-                    repeatability: course.repeatability,
-                    removable: true,
-                    sectionIds: [],
+                    remains: course.repeatability
                 };
                 state.courses.allIds.push(course.id);
 
@@ -109,35 +109,10 @@ export const storeSlice = createSlice ({
             }
         },
         
-        /**
-         * @param courseId
-         * @param droppableId
-         */
+       
         deleteCourse: (state, action: PayloadAction<DeleteCoursePayload>) => {
-            let courseId = action.payload.courseId,
-                sectionId = action.payload.droppableId,
-                repeatability = state.courses.byIds[courseId].data.repeatability,
-                remainRepeatability = state.courses.byIds[courseId].repeatability,
-                courseUnits = state.courses.byIds[courseId].data.units;
-
-            //Delete courseId from sections
+            let sectionId = state.addedCourses.sectionId;
             state.sections[sectionId].splice(action.payload.index,1);
-            state.courses.byIds[courseId].sectionIds.forEach(id => {
-                state.sections[id] = state.sections[id].filter(id => id !== courseId);
-            })
-            
-            //Subtract course's units from total units if course is selected
-            state.years.totalUnits -= (repeatability - remainRepeatability) * courseUnits;
-            
-            //Delete courseData in courses
-            if(state.courses.byIds[courseId].removable) {
-                state.courses.allIds = state.courses.allIds.filter(id => id !== courseId);
-                delete state.courses.byIds[courseId];
-            }
-            else {
-                state.courses.byIds[courseId].repeatability = repeatability;
-                state.courses.byIds[courseId].sectionIds = [];
-            }
         },
 
         /**
@@ -150,8 +125,7 @@ export const storeSlice = createSlice ({
                 courseId = action.payload.courseId;
 
             if(!state.sections[quarterId].includes(courseId)) {
-                state.courses.byIds[courseId].repeatability -= 1;
-                state.courses.byIds[courseId].sectionIds.push(quarterId);
+                state.courses.byIds[courseId].remains -= 1;
                 state.sections[quarterId].splice(action.payload.index, 0, courseId);
                 state.years.totalUnits += state.courses.byIds[courseId].data.units;
             }
@@ -164,12 +138,6 @@ export const storeSlice = createSlice ({
             
             //prevent same course from being added to the same quarter
             if(!state.sections[destinationId].includes(courseId) || sourceId === destinationId) {
-                if(sourceId !== destinationId) {
-                    let quarterIds = state.courses.byIds[courseId].sectionIds.filter(id => id !== sourceId);
-                    quarterIds.push(destinationId);
-                    state.courses.byIds[courseId].sectionIds = quarterIds;
-                }
-
                 state.sections[sourceId].splice(action.payload.sourceIndex, 1);
                 state.sections[destinationId].splice(action.payload.destinationIndex, 0, courseId);
             }
@@ -183,15 +151,12 @@ export const storeSlice = createSlice ({
             state.sections[action.payload.quarterId].splice(action.payload.index,1);
 
             // increase repeatability of course
-            state.courses.byIds[action.payload.courseId].repeatability += 1;
+            state.courses.byIds[action.payload.courseId].remains += 1;
 
             // reduce the total units taken
             state.years.totalUnits -= state.courses.byIds[action.payload.courseId].data.units;
         },
 
-        /**
-         *  Add a year and 4 quarters
-         */
         addYear: (state) => {
             if(state.years.allIds.length < 9) {
                 let newYearId = nanoid(4);
@@ -218,7 +183,7 @@ export const storeSlice = createSlice ({
             state.years.byIds[action.payload.id].quarterIds.forEach((id) => {
                 state.sections[id].forEach((courseId) => {
                     if(typeof(courseId) === 'string') {
-                        state.courses.byIds[courseId].repeatability += 1;
+                        state.courses.byIds[courseId].remains += 1;
                         state.years.totalUnits -= state.courses.byIds[courseId].data.units;
                     }
                 })
@@ -229,25 +194,26 @@ export const storeSlice = createSlice ({
             state.years.allIds.splice(action.payload.index,1);
         },
 
-        /**
-         * Remove all chosen courses from quarters 
-         * @param state 
-         */
         refreshState: (state) => {
             state.years.allIds.forEach((yearId)=> {
                 state.years.byIds[yearId].quarterIds.forEach((quarterId)=>{
                     state.sections[quarterId].forEach(courseId => {
-                        if(typeof(courseId) === 'string') {
-                            state.courses.byIds[courseId].repeatability += 1;
-                            state.courses.byIds[courseId].sectionIds = [];
-                        }
+                        if(typeof(courseId) === 'string') 
+                            state.courses.byIds[courseId].remains += 1;
                     })
+
                     state.sections[quarterId] = [];
                 })
             })
             state.years.totalUnits = 0;
-        }
+        },
 
+        handleChangeProgram: (state, action: PayloadAction<ProgramOptionPayload>) => { 
+            if(action.payload.isMajor)
+                state.programs.selectedMajors = action.payload.value;
+            else
+                state.programs.selectedMinors = action.payload.value;
+        },
     },
 
 /********************************************************
@@ -286,9 +252,9 @@ export const storeSlice = createSlice ({
         /*************** FetchMajorById ***************/
         ///////////////////////////////////////////////////
 
-  /*      builder.addCase(fetchProgramById.pending, (state) => {
+        builder.addCase(fetchProgramById.pending, (state) => {
             state.programs.status = "loading";
-        }); */
+        }); 
 
         /**
          * Reset current state and assign new major to state
@@ -305,7 +271,7 @@ export const storeSlice = createSlice ({
             
             // create new program 
             let program: ProgramType = {
-                id: nanoid(1),
+                id: action.payload.id,
                 byIds: {}, 
                 allIds: [],
                 name: action.payload.name,
@@ -313,12 +279,6 @@ export const storeSlice = createSlice ({
                 courses: action.payload.courseIds,
                 isMajor: action.payload.isMajor,
             };
-            console.log(program.isMajor);
-
-            if(program.isMajor)
-                state.programs.allMajors.push(program.id);
-            else
-                state.programs.allMinors.push(program.id);
 
             action.payload.requirement.forEach ((accordion)=>{
                 const accordionId = nanoid(MAJOR_ID_LENGTH);
@@ -333,6 +293,13 @@ export const storeSlice = createSlice ({
             })
 
             state.programs.byIds[program.id] = program;
+            
+            state.programs.allIds.push(program.id);
+
+           if(action.payload.isMajor)
+                state.programs.selectedMajors = action.payload.programs;
+            else
+                state.programs.selectedMinors = action.payload.programs;
 
             // assign new courses information
             action.payload.courseData.forEach((course) => {
@@ -340,15 +307,11 @@ export const storeSlice = createSlice ({
                 if(state.courses.byIds[course.id] === undefined) {
                     state.courses.byIds[course.id] = {
                         data: course,
-                        repeatability: course.repeatability,
-                        removable: false, // Cannot remove courses in major requirement
-                        sectionIds: []    
+                        remains: course.repeatability,
                     }
 
                     state.courses.allIds.push(course.id);
                 }
-                else 
-                    state.courses.byIds[course.id].removable = false;
                 
                 // Assign color for department
                 if(state.depts.byIds[course.department] === undefined) { 
@@ -485,6 +448,6 @@ export const storeSlice = createSlice ({
     },
 });
 
-export const {  addCourse, deleteCourse, addCourseToQuarter, moveCourse, 
+export const {  addCourse, deleteCourse, addCourseToQuarter, moveCourse, handleChangeProgram,
                 removeCourseFromQuarter, addYear, removeYear, refreshState } =  storeSlice.actions;
 export default  storeSlice.reducer;
