@@ -10,7 +10,7 @@ import { handleChangeProgram } from '../../../../../features/StoreSlice';
 interface data {
     id: string;
     name: string;
-    isMajor: boolean;
+    is_major: boolean;
 }
 
 const myStyle: StylesConfig<ProgramOption, true> =  {
@@ -66,7 +66,7 @@ function SelectProgram({isMajor}: SelectProgramType) {
     useEffect( () => {
         async function fetchAllPrograms() {
             const res = await Axios('/api/getAllPrograms');
-            const programsArray = await res.data.map( (major:data) =>({value: major.id, label: major.name, isMajor: major.isMajor}));
+            const programsArray = await res.data.map( (major:data) =>({value: major.id, label: major.name, isMajor: major.is_major}));
             setPrograms(programsArray);   
         }
         

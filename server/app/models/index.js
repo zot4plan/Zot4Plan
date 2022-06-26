@@ -28,5 +28,16 @@ db.general_education = require("./general_education.model.js")(sequelize,Sequeli
 db.courses_in_ge = require("./courses_in_ge.model.js")(sequelize, Sequelize);
 db.visits = require("./visits.model.js")(sequelize, Sequelize);
 
+db.courses.belongsToMany(db.general_education, {
+    through: "courses_in_ge",
+    as: "courses",
+    foreignKey: "courseId",
+  });
+
+db.general_education.belongsToMany(db.courses, {
+    through: "courses_in_ge",
+    as: "general_education",
+    foreignKey: "geId",
+});
 
 module.exports = db;

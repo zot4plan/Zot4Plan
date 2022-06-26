@@ -9,7 +9,7 @@ module.exports = (sequelize, DataType) => {
             type: DataType.STRING(50),
             allowNull:false,
         },
-        isMajor: {
+        is_major: {
             type: DataType.BOOLEAN,
             allowNull:false,
         },

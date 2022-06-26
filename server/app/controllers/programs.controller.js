@@ -6,7 +6,7 @@ const Visits = db.visits;
 exports.getAllPrograms = (_req, res) => {
     // Visits.increment({total: 1}, { where: { id: "12345" } })
 
-    Programs.findAll({ attributes: ['id','name','isMajor']}).then(data => {
+    Programs.findAll({ attributes: ['id','name','is_major']}).then(data => {
         res.send(data);
     })
     .catch(err => {

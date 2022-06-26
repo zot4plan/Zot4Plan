@@ -5,11 +5,11 @@ module.exports = (sequelize, DataType) => {
             primaryKey: true,
             autoIncrement: true
         },  
-        courseId: {
+        course_id: {
             type: DataType.STRING(25),
             allowNull: false,
         },  
-        geId: {
+        ge_id: {
             type: DataType.STRING(5),
             allowNull:false,
         },

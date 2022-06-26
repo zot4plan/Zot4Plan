@@ -25,7 +25,7 @@ export const fetchProgramById = createAsyncThunk("features/fetchProgramById", as
         return {
             status: "succeed",
             id: payload.id,
-            isMajor: response.data.major.isMajor as boolean,
+            isMajor: response.data.major.is_major as boolean,
             name: response.data.major.name, 
             requirement: response.data.major.requirement as RequirementType[],
             url: response.data.major.url, // link to the requirement page of major
@@ -59,7 +59,7 @@ export const fetchProgramByFile = createAsyncThunk("features/fetchProgramByFile"
             requirement: response.data.major[0].requirement as RequirementType[],
             url: response.data.major[0].url, 
             name: response.data.major[0].name,
-            isMajor: response.data.major[0].isMajor,
+            isMajor: response.data.major[0].is_major,
             courseIds: response.data.allCourseIds as string[], 
             courseData: response.data.courseData as CourseType[],
 
