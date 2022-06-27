@@ -2,7 +2,6 @@ const { Sequelize } = require("../models");
 const db = require("../models");
 const Courses = db.courses;
 const Programs = db.programs;
-const courses_in_programs = db.courses_in_programs;
 
 /**
  * Return major requirement template, majorName, majorURL from majors table

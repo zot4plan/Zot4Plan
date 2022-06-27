@@ -2,8 +2,7 @@ import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
 import { fetchProgramById, fetchProgramByFile, fetchGE} from '../api/FetchData'
 
 export const QUARTER_ID_LENGTH = 3; // for function AddCourseToQuarter
-export const MAJOR_ID_LENGTH = 4; // to differentiate course in major (which cannot be remove)
-export const ID_LENGTH = 5; 
+export const REQ_ID_LENGTH = 4; // to differentiate course in major (which cannot be remove)
 
 const DEPT_COLORS = [
     ['#AFD3E9', '#70ADD7', '#3688BF'], // Columbia Blue
@@ -16,7 +15,7 @@ const DEPT_COLORS = [
 const generateInitialState = () => {
     let years:{[id:string]:YearType} = {};
     let sections:{[id:string]: (string|string[])[]}= {}; // sections courses (include quarters, GE, major and courses added by students)
-    let addedCourses =  nanoid(ID_LENGTH);
+    let addedCourses =  nanoid(5);
 
     // Generate IDs for years
     let yearIds = [nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH), 
@@ -224,32 +223,52 @@ export const storeSlice = createSlice ({
         //////////////////////////////////////////////
         /*********** Fetch General Education ********/
         //////////////////////////////////////////////
-/*
+
         builder.addCase(fetchGE.pending, (state) => {
             state.ge.status = "loading";
         });
 
-        builder.addCase( fetchGE.fulfilled,(state,action:PayloadAction<FetchGEPayload[]>) => {    
-            action.payload.forEach( (ge) => {
-                const id = nanoid(ID_LENGTH);
-                state.ge.allIds.push(ge.id);
-                state.ge.byIds[ge.id] = {
-                    sectionId: id, 
-                    id: ge.id, 
-                    title:ge.name, 
-                    nameChild: ge.note, 
-                }
-                state.sections[id] = [] as string[];
-            });
+        builder.addCase(fetchGE.fulfilled,(state, action) => {    
             state.ge.status = "succeeded";
+            action.payload.ge.forEach((category) => {
+                const sectionId = nanoid(REQ_ID_LENGTH);
+                state.ge.byIds[category.id] = {
+                    id: category.id,
+                    sectionId: sectionId,
+                    name: category.name,
+                    nameChild: category.nameChild
+                }
+
+                state.sections[sectionId] = category.courses;
+                console.log(category.courses);
+                state.ge.allIds.push(category.id);
+            })
+
+            action.payload.courses.forEach((course) => {
+                // check if course has already existed in courses.
+                if(state.courses.byIds[course.id] === undefined) {
+                    state.courses.byIds[course.id] = {
+                        data: course,
+                        remains: course.repeatability,
+                    }
+                    state.courses.allIds.push(course.id);
+                }
+                
+                // Assign color for department
+                if(state.depts.byIds[course.department] === undefined) { 
+                    let index = state.depts.size % DEPT_COLORS.length;
+                    state.depts.byIds[course.department] = {id: course.department, colors: DEPT_COLORS[index] }
+                    state.depts.size += 1;
+                }
+            })
         });
 
         builder.addCase(fetchGE.rejected,(state) => {
             state.ge.status = "failed";
-        });
+        }); 
 
         ///////////////////////////////////////////////////
-        /*************** FetchMajorById ***************/
+        /*************** FetchProgramById ****************/
         ///////////////////////////////////////////////////
 
         builder.addCase(fetchProgramById.pending, (state) => {
@@ -281,19 +300,18 @@ export const storeSlice = createSlice ({
             };
 
             action.payload.requirement.forEach ((accordion)=>{
-                const accordionId = nanoid(MAJOR_ID_LENGTH);
+                const accordionId = nanoid(REQ_ID_LENGTH);
                 program.allIds.push(accordionId);
                 program.byIds[accordionId] = {id: accordionId, name: accordion.name, sectionIds: []};
             
                 accordion.child.forEach((section) => {
-                    const sectionId = nanoid(MAJOR_ID_LENGTH);
+                    const sectionId = nanoid(REQ_ID_LENGTH);
                     program.byIds[accordionId].sectionIds.push({sectionId: sectionId, nameChild: section.name})
                     state.sections[sectionId] = section.child;
                 })
             })
 
-            state.programs.byIds[program.id] = program;
-            
+            state.programs.byIds[program.id] = program;         
             state.programs.allIds.push(program.id);
 
            if(action.payload.isMajor)
@@ -309,7 +327,6 @@ export const storeSlice = createSlice ({
                         data: course,
                         remains: course.repeatability,
                     }
-
                     state.courses.allIds.push(course.id);
                 }
                 

@@ -24,10 +24,10 @@ const Accordion = ({id, type, programId = -1}:SectionType) => {
     });
 
     let detail, name;
-
+    console.log(accordion);
     if(type === 'ge') {
         name = id + "-" + accordion.name;
-        detail = <AccordionDetail key={accordion.id} droppableId={accordion.sectionId} text={accordion.note}/>
+        detail = <AccordionDetail key={accordion.id} droppableId={accordion.sectionId} text={accordion.nameChild}/>
     }
     else if (type === 'major') {
         name = accordion.name;

@@ -4,9 +4,9 @@ const Visits = db.visits;
 
 // Return all majorID, majorName, and isMajor
 exports.getAllPrograms = (_req, res) => {
-    // Visits.increment({total: 1}, { where: { id: "12345" } })
+    Visits.increment({total: 1}, { where: { id: "12345" } })
 
-    Programs.findAll({ attributes: ['id','name','is_major']}).then(data => {
+    Programs.findAll({ attributes: [['id','value'],['name','label'],'is_major']}).then(data => {
         res.send(data);
     })
     .catch(err => {

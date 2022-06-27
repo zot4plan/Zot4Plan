@@ -4,7 +4,7 @@ import { useSelector} from 'react-redux';
 import {RootState} from '../../../../app/store';
 import Accordion from '../../../../components/accordion/Accordion';
 import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
-import SelectCourses from './selects/SelectCourses';
+import SelectCourses from '../selects/SelectCourses';
 
 import Spinner from '../../../../components/icon/Spinner';
 import './Program.css';

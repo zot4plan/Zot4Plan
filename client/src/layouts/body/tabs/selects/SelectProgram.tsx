@@ -1,17 +1,11 @@
 import { useState, useEffect, memo } from 'react';
-import Axios from '../../../../../api/Axios';
+import Axios from '../../../../api/Axios';
 import { useDispatch, useSelector } from 'react-redux';
-import {fetchProgramById} from '../../../../../api/FetchData';
+import {fetchProgramById} from '../../../../api/FetchData';
 import Select, { OnChangeValue, StylesConfig} from 'react-select';
 import './SelectProgram.css';
-import { RootState } from '../../../../../app/store';
-import { handleChangeProgram } from '../../../../../features/StoreSlice';
-
-interface data {
-    id: string;
-    name: string;
-    is_major: boolean;
-}
+import { RootState } from '../../../../app/store';
+import { handleChangeProgram } from '../../../../features/StoreSlice';
 
 const myStyle: StylesConfig<ProgramOption, true> =  {
     container: (provided) => ({
@@ -54,7 +48,7 @@ const myStyle: StylesConfig<ProgramOption, true> =  {
 interface SelectProgramType { isMajor: boolean;}
 
 function SelectProgram({isMajor}: SelectProgramType) {
-    const [programs, setPrograms] = useState<ProgramOption[] >([]);
+    const [programs, setPrograms] = useState<ProgramOption[]>([]);
     const allIds = useSelector((state: RootState) => new Set(state.store.programs.allIds));
     const selectedPrograms = useSelector((state: RootState) => {
         return isMajor? state.store.programs.selectedMajors : state.store.programs.selectedMinors;
@@ -66,22 +60,23 @@ function SelectProgram({isMajor}: SelectProgramType) {
     useEffect( () => {
         async function fetchAllPrograms() {
             const res = await Axios('/api/getAllPrograms');
-            const programsArray = await res.data.map( (major:data) =>({value: major.id, label: major.name, isMajor: major.is_major}));
+            const programsArray = await res.data.map((program:ProgramOption) => program);
             setPrograms(programsArray);   
         }
         
-        if(programs.length === 0)
+        if(programs.length === 0) {
             fetchAllPrograms();
-
+            console.log("fetch program");
+        }
+            
     },[programs]); 
 
+    console.log(programs)
     // Get Major Requirement Courses
     const handleOnChange = async (selectedOptions: OnChangeValue<ProgramOption, true>) => {
         let isFetch = false;
         if(selectedOptions){
            try {
-                console.log(allIds);
-
                 selectedOptions.forEach(option => {
                     console.log(allIds.has(option.value));
                     
@@ -108,7 +103,7 @@ function SelectProgram({isMajor}: SelectProgramType) {
             isClearable = {false}
             value = {selectedPrograms}
             onChange={handleOnChange}
-            options = {programs.filter((program:ProgramOption) => program.isMajor === isMajor)} 
+            options = {programs.filter((program:ProgramOption) => program.is_major === isMajor)} 
             isOptionDisabled={() => selectedPrograms.length >= 3 }
             styles={myStyle}
             placeholder = {"Select Your " + (isMajor? " Major" : "Minor")}

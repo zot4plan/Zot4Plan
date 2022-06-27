@@ -4,24 +4,19 @@ import Axios from '../api/Axios';
 /** 
  * Get All GE categories information.
  * Return an array of GE.
- *  Ge = { id:string;   : alias of ge
- *       name:string; : full name of the ge
- *       note:string; : describe how the GE can be completed } 
  */
-export const fetchGE = createAsyncThunk(
-    "features/fetchGE", async (_, thunkAPI) => {
-       try {
-          const response = await Axios.get('/api/getGeneralEducation');
-          return await response.data;
-        } 
-        catch (error) {
-           return thunkAPI.rejectWithValue({ error: ""});
-        }
-});
+export const fetchGE = createAsyncThunk("features/fetchGE", async () => 
+    Axios.get('/api/getAllGE').then(response => {
+        console.log(response.data.ge);
+        return {ge: response.data.ge as GEPayload[], courses: response.data.courses as CourseType[]}
+    }).catch(() => {
+        return {ge: [] as GEPayload[], courses: [] as CourseType[]} 
+    })
+);
 
 export const fetchProgramById = createAsyncThunk("features/fetchProgramById", async (payload: {id: number, programs: ProgramOption[]}) => 
     Axios.post('/api/getRequirementById', {id: payload.id})
-    .then((response) => {
+    .then( response => {
         return {
             status: "succeed",
             id: payload.id,

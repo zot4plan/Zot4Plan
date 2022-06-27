@@ -1,9 +1,8 @@
 module.exports = app => {
     const courses = require("../controllers/courses.controller.js");
-    const programs = require("../controllers/programs.controller.js");
-    const general_education = require("../controllers/general_education.controller.js");
-    const courses_in_ge = require("../controllers/courses_in_ge.controller.js")
+    const programs = require("../controllers/programs.controller.js")
     const combine_models = require("../controllers/combine_models.controller.js")
+    const stored_procedures = require("../controllers/stored_procedures.controller.js")
 
     var router = require("express").Router();
 
@@ -12,7 +11,7 @@ module.exports = app => {
 
     router.get("/getAllPrograms", programs.getAllPrograms);
 
-    router.get("/getAllGE",general_education.getAllGE);
+    router.get("/getAllGE",stored_procedures.getAllGE);
 
     // POST method
     router.post("/getRequirementById", combine_models.getRequirementById);
@@ -20,8 +19,6 @@ module.exports = app => {
     router.post("/getDataByFile", combine_models.getDataByFile);
 
     router.post("/getCourseById", courses.findOne);
-
-    router.post("/getCoursesByGE", courses_in_ge.getCourses);
     
     // Health check
     router.get('/health', async (_req, res) => {

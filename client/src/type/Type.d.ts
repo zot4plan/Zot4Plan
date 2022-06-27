@@ -7,7 +7,7 @@ declare interface YearType {
 declare interface ProgramOption {
     value: number;
     label: string;
-    isMajor: boolean;
+    is_major: boolean;
 }
 
 declare interface QuarterType { 
@@ -40,9 +40,15 @@ declare interface CourseType {
 /***** Payload Type ****/
 /************************/
 declare interface FetchGEPayload { 
-    id:string; 
-    name:string; 
-    accordion:string;
+   ge: GEPayload[];
+   courses: CourseType[];
+}
+
+declare interface GEPayload {
+    id: string; 
+    name: string; 
+    nameChild: string;
+    courses: string[];
 }
 
 declare interface DeleteCoursePayload{
