@@ -33,13 +33,12 @@
 }
 
 .fetch-error-message,
-.spinner {
+.loading {
+    position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
-
-.spinner > svg{ font-size: 5rem;}
 
 @media only screen and (max-width: 599px) { 
     #tab-container {height: 44.6rem}

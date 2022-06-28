@@ -47,8 +47,7 @@ declare interface FetchGEPayload {
 declare interface GEPayload {
     id: string; 
     name: string; 
-    nameChild: string;
-    courses: string[];
+    note: string;
 }
 
 declare interface DeleteCoursePayload{
@@ -99,7 +98,8 @@ declare interface GEType {
     id: string; 
     sectionId: string;
     name: string; 
-    nameChild: string; 
+    nameChild: string;
+    status: string; 
 }
 
 declare interface AccordionType {

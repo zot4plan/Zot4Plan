@@ -1,6 +1,6 @@
 import {memo, useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGE } from '../../../api/FetchData';
+import { fetchAllGE } from '../../../api/FetchData';
 import { RootState } from '../../../app/store';
 
 import GeneralEducation from './generalEducation/GeneralEducation';
@@ -18,7 +18,7 @@ function Tabs () {
   
   useEffect( () => {  
     if(tab.id === 3 && status === 'idle') 
-      dispatch(fetchGE());
+      dispatch(fetchAllGE());
   },[tab.id, status]); 
 
   return (

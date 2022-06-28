@@ -6,7 +6,6 @@ import Accordion from '../../../../components/accordion/Accordion';
 import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
 import SelectCourses from '../selects/SelectCourses';
 
-import Spinner from '../../../../components/icon/Spinner';
 import './Program.css';
 
 interface Type {
@@ -48,7 +47,7 @@ function Program ({isMajor, addedCourses}:Type) {
     }
     
     else if (status === 'loading') 
-        content.push(<div key="spinner" className='spinner'> <Spinner/> </div>)
+        content.push(<div key="spinner" className='loading'> loading...!!! </div>)
 
     else if (status === 'succeeded' && program !== undefined)  {
         content.push(<div key="hyperlink" className='flex-container'> 
@@ -66,7 +65,7 @@ function Program ({isMajor, addedCourses}:Type) {
         content.push(<div key="error" className='fetch-error-message absolute red'>{error}</div>) 
     
     return (
-        <div> 
+        <div style={{position: 'relative'}}> 
             <div key="browse" style={{display: status === 'succeeded'? "flex": "none", flexDirection:'column'}} >
                 <SelectCourses />  
             </div> 

@@ -5,12 +5,19 @@ import Axios from '../api/Axios';
  * Get All GE categories information.
  * Return an array of GE.
  */
-export const fetchGE = createAsyncThunk("features/fetchGE", async () => 
+export const fetchAllGE = createAsyncThunk("features/fetchAllGE", async () => 
     Axios.get('/api/getAllGE').then(response => {
-        console.log(response.data.ge);
-        return {ge: response.data.ge as GEPayload[], courses: response.data.courses as CourseType[]}
+        return response.data as GEPayload[];
     }).catch(() => {
-        return {ge: [] as GEPayload[], courses: [] as CourseType[]} 
+        return [] as GEPayload[];
+    })
+);
+
+export const fetchGE = createAsyncThunk("features/fetchGE", async (id: string) => 
+    Axios.post('/api/getGE', {id: id}).then(response => {
+        return response.data as CourseType[];
+    }).catch(() => {
+        return [] as CourseType[];
     })
 );
 

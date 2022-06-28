@@ -15,9 +15,7 @@ interface SectionType {
 
 const Accordion = ({id, type, programId = -1}:SectionType) => {
     const accordion:any = useSelector((state: RootState) => {
-        if(type === 'ge')
-            return state.store.ge.byIds[id];
-        else if (type === 'major' && programId >= 0) 
+        if (type === 'major' && programId >= 0) 
             return state.store.programs.byIds[programId].byIds[id];
         else
             return state.store.addedCourses;
@@ -25,11 +23,7 @@ const Accordion = ({id, type, programId = -1}:SectionType) => {
 
     let detail, name;
     console.log(accordion);
-    if(type === 'ge') {
-        name = id + "-" + accordion.name;
-        detail = <AccordionDetail key={accordion.id} droppableId={accordion.sectionId} text={accordion.nameChild}/>
-    }
-    else if (type === 'major') {
+    if (type === 'major') {
         name = accordion.name;
         detail = accordion.sectionIds.map(( section:{sectionId: string, nameChild: string}) => 
                 <AccordionDetail key={section.sectionId} droppableId={section.sectionId} text={section.nameChild}/> )
@@ -43,7 +37,7 @@ const Accordion = ({id, type, programId = -1}:SectionType) => {
     }
 
     return (
-        <details className='section' key={id}>  
+        <details key={id} className='section'>  
             <summary> 
                 <span className='relative accordion'>
                     <h1 className="section-header"> {name} </h1>

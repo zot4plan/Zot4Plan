@@ -2,8 +2,7 @@ import {memo} from 'react';
 import {useSelector} from 'react-redux';
 
 import {RootState} from '../../../../app/store';
-import Accordion from '../../../../components/accordion/Accordion';
-import Spinner from '../../../../components/icon/Spinner';
+import AccordionGE from '../../../../components/accordion/AccordionGE';
 
 function GeneralEducation() {
     const allIds = useSelector((state:RootState)=> state.store.ge.allIds);
@@ -11,10 +10,10 @@ function GeneralEducation() {
   
     let content;
     if (status === 'loading') 
-        content = <div className="spinner aboslute"> <Spinner/> </div>  
+        content = <div className="loading"> Loading...!!! </div>  
    
     else if (status === 'succeeded') {
-        content = allIds.map((id) => (<Accordion key={id} id={id} type="ge"/>))
+        content = allIds.map((id) => (<AccordionGE key={id} id={id}/>))
         content.push(<div key="empty" style={{height:'18rem'}}></div>);
     } 
     else if (status === 'failed') 
@@ -26,7 +25,7 @@ function GeneralEducation() {
             <a className='hyperlink' href='https://catalogue.uci.edu/informationforadmittedstudents/requirementsforabachelorsdegree/#generaleducationrequirementtext'
                 target='_blank' rel="noreferrer"> General Education </a>
         </div>
-        <div className="accordion-container">
+        <div className="accordion-container" style={{position: 'relative'}}>
             {content}
         </div>
     </div>

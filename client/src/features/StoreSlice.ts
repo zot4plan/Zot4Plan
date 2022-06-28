@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
-import { fetchProgramById, fetchProgramByFile, fetchGE} from '../api/FetchData'
+import { fetchProgramById, fetchProgramByFile, fetchAllGE, fetchGE} from '../api/FetchData'
 
 export const QUARTER_ID_LENGTH = 3; // for function AddCourseToQuarter
 export const REQ_ID_LENGTH = 4; // to differentiate course in major (which cannot be remove)
@@ -220,57 +220,74 @@ export const storeSlice = createSlice ({
 *********************************************************/
     extraReducers: (builder) => {
 
-        //////////////////////////////////////////////
         /*********** Fetch General Education ********/
-        //////////////////////////////////////////////
-
-        builder.addCase(fetchGE.pending, (state) => {
+        builder.addCase(fetchAllGE.pending, (state) => {
             state.ge.status = "loading";
         });
 
-        builder.addCase(fetchGE.fulfilled,(state, action) => {    
+        builder.addCase(fetchAllGE.fulfilled,(state, action) => {    
             state.ge.status = "succeeded";
-            action.payload.ge.forEach((category) => {
+
+            action.payload.forEach((category) => {
                 const sectionId = nanoid(REQ_ID_LENGTH);
                 state.ge.byIds[category.id] = {
                     id: category.id,
                     sectionId: sectionId,
                     name: category.name,
-                    nameChild: category.nameChild
+                    nameChild: category.note,
+                    status: 'idle'
                 }
 
-                state.sections[sectionId] = category.courses;
-                console.log(category.courses);
+                state.sections[sectionId] =[];
                 state.ge.allIds.push(category.id);
-            })
-
-            action.payload.courses.forEach((course) => {
-                // check if course has already existed in courses.
-                if(state.courses.byIds[course.id] === undefined) {
-                    state.courses.byIds[course.id] = {
-                        data: course,
-                        remains: course.repeatability,
-                    }
-                    state.courses.allIds.push(course.id);
-                }
-                
-                // Assign color for department
-                if(state.depts.byIds[course.department] === undefined) { 
-                    let index = state.depts.size % DEPT_COLORS.length;
-                    state.depts.byIds[course.department] = {id: course.department, colors: DEPT_COLORS[index] }
-                    state.depts.size += 1;
-                }
             })
         });
 
-        builder.addCase(fetchGE.rejected,(state) => {
+        builder.addCase(fetchAllGE.rejected,(state) => {
             state.ge.status = "failed";
         }); 
 
-        ///////////////////////////////////////////////////
-        /*************** FetchProgramById ****************/
-        ///////////////////////////////////////////////////
+         /*********** Fetch GE Courses ********/
+        builder.addCase(fetchGE.pending,(state, action) => {
+            console.log(action.meta);
+            state.ge.byIds[action.meta.arg].status = "loading";
+        });
 
+        builder.addCase(fetchGE.fulfilled,(state, action) => {    
+            const geId = action.meta.arg;
+            state.ge.byIds[geId].status = "succeeded";
+
+            const sectionId = state.ge.byIds[geId].sectionId;
+            // assign new courses information
+            action.payload.forEach((course) => {
+            // check if course has already existed in courses.
+            if(state.courses.byIds[course.id] === undefined) {
+                state.courses.byIds[course.id] = {
+                    data: course,
+                    remains: course.repeatability,
+                }
+                state.courses.allIds.push(course.id);
+            }
+            
+            // Assign color for department
+            if(state.depts.byIds[course.department] === undefined) { 
+                let index = state.depts.size % DEPT_COLORS.length;
+                state.depts.byIds[course.department] = {id: course.department, colors: DEPT_COLORS[index] }
+                state.depts.size += 1;
+            }
+
+            state.sections[sectionId].push(course.id);
+        })
+            
+            
+        });
+
+        builder.addCase(fetchGE.rejected,(state, action) => {
+            state.ge.byIds[action.meta.arg].status = "failed";
+        }); 
+
+       
+        /*************** FetchProgramById ****************/
         builder.addCase(fetchProgramById.pending, (state) => {
             state.programs.status = "loading";
         }); 
