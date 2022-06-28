@@ -1,9 +1,8 @@
 import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
 import { fetchProgramById, fetchProgramByFile, fetchAllGE, fetchGE} from '../api/FetchData'
 
-export const QUARTER_ID_LENGTH = 3; // for function AddCourseToQuarter
-export const REQ_ID_LENGTH = 4; // to differentiate course in major (which cannot be remove)
-
+export const SECTION_ID_QUARTER_LEN = 3; // for function AddCourseToQuarter
+export const SECTION_ID_PROGRAM_LEN = 4; // to differentiate course in major (which cannot be remove)
 const DEPT_COLORS = [
     ['#AFD3E9', '#70ADD7', '#3688BF'], // Columbia Blue
     ['#C2E9EA', '#76CFD0', '#38A3A5'], // Powder Blue
@@ -18,13 +17,13 @@ const generateInitialState = () => {
     let addedCourses =  nanoid(5);
 
     // Generate IDs for years
-    let yearIds = [nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH), 
-                     nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH)];
+    let yearIds = [nanoid(SECTION_ID_QUARTER_LEN), nanoid(SECTION_ID_QUARTER_LEN), 
+                     nanoid(SECTION_ID_QUARTER_LEN), nanoid(SECTION_ID_QUARTER_LEN)];
     
     //  Generate IDs for quarters of each year
     yearIds.forEach( (yearId, index) => {
-        let quarterIds = [nanoid(QUARTER_ID_LENGTH),nanoid(QUARTER_ID_LENGTH),
-                          nanoid(QUARTER_ID_LENGTH),nanoid(QUARTER_ID_LENGTH)];
+        let quarterIds = [nanoid(SECTION_ID_QUARTER_LEN),nanoid(SECTION_ID_QUARTER_LEN),
+                          nanoid(SECTION_ID_QUARTER_LEN),nanoid(SECTION_ID_QUARTER_LEN)];
         
         // initalize each quarter with empty courses array
         quarterIds.forEach(quarterId => {
@@ -108,12 +107,6 @@ export const storeSlice = createSlice ({
             }
         },
         
-       
-        deleteCourse: (state, action: PayloadAction<DeleteCoursePayload>) => {
-            let sectionId = state.addedCourses.sectionId;
-            state.sections[sectionId].splice(action.payload.index,1);
-        },
-
         /**
          * Add course to quarter according to the dropping position
          * reduce the course repeatability
@@ -142,25 +135,22 @@ export const storeSlice = createSlice ({
             }
         },
 
-        /**
-         *  Remove the course from Quarter
-         */
-        removeCourseFromQuarter: (state, action: PayloadAction<CourseQuarterPayload>) => {
-            // remove course from quarter section
-            state.sections[action.payload.quarterId].splice(action.payload.index,1);
+        removeCourse: (state, action: PayloadAction<CoursePayload>) => {
+            let sectionId = action.payload.sectionId;
+            state.sections[sectionId].splice(action.payload.index,1);
 
-            // increase repeatability of course
-            state.courses.byIds[action.payload.courseId].remains += 1;
-
-            // reduce the total units taken
-            state.years.totalUnits -= state.courses.byIds[action.payload.courseId].data.units;
+            if(sectionId.length === SECTION_ID_QUARTER_LEN) { // remove course from quarter
+                state.courses.byIds[action.payload.courseId].remains += 1; // increase repeatability
+                state.years.totalUnits -= state.courses.byIds[action.payload.courseId].data.units; 
+            }
         },
+      
 
         addYear: (state) => {
             if(state.years.allIds.length < 9) {
-                let newYearId = nanoid(4);
-                let newQuarterIds = [ nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH),
-                                nanoid(QUARTER_ID_LENGTH), nanoid(QUARTER_ID_LENGTH) ];
+                let newYearId = nanoid(1);
+                let newQuarterIds = [ nanoid(SECTION_ID_QUARTER_LEN), nanoid(SECTION_ID_QUARTER_LEN),
+                                nanoid(SECTION_ID_QUARTER_LEN), nanoid(SECTION_ID_QUARTER_LEN) ];
                 
                 for(let i = 0; i < 4; i++) 
                     state.sections[newQuarterIds[i]] = [] as string[]
@@ -229,7 +219,7 @@ export const storeSlice = createSlice ({
             state.ge.status = "succeeded";
 
             action.payload.forEach((category) => {
-                const sectionId = nanoid(REQ_ID_LENGTH);
+                const sectionId = nanoid(SECTION_ID_PROGRAM_LEN);
                 state.ge.byIds[category.id] = {
                     id: category.id,
                     sectionId: sectionId,
@@ -317,12 +307,12 @@ export const storeSlice = createSlice ({
             };
 
             action.payload.requirement.forEach ((accordion)=>{
-                const accordionId = nanoid(REQ_ID_LENGTH);
+                const accordionId = nanoid(SECTION_ID_PROGRAM_LEN);
                 program.allIds.push(accordionId);
                 program.byIds[accordionId] = {id: accordionId, name: accordion.name, sectionIds: []};
             
                 accordion.child.forEach((section) => {
-                    const sectionId = nanoid(REQ_ID_LENGTH);
+                    const sectionId = nanoid(SECTION_ID_PROGRAM_LEN);
                     program.byIds[accordionId].sectionIds.push({sectionId: sectionId, nameChild: section.name})
                     state.sections[sectionId] = section.child;
                 })
@@ -482,6 +472,13 @@ export const storeSlice = createSlice ({
     },
 });
 
-export const {  addCourse, deleteCourse, addCourseToQuarter, moveCourse, handleChangeProgram,
-                removeCourseFromQuarter, addYear, removeYear, refreshState } =  storeSlice.actions;
+export const {  
+    addCourse,
+    addCourseToQuarter, 
+    moveCourse,  
+    removeCourse,
+    addYear, 
+    removeYear, 
+    refreshState,  
+    handleChangeProgram } =  storeSlice.actions;
 export default  storeSlice.reducer;

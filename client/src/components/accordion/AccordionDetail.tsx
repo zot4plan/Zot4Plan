@@ -6,11 +6,11 @@ import { RootState } from '../../app/store';
 
 interface AccordionDetailType {
     text: string;
-    droppableId: string;
+    sectionId: string;
 }
 
-function AccordionDetail ({droppableId, text}:AccordionDetailType) {
-    const courseIds = useSelector((state:RootState)=> state.store.sections[droppableId])
+function AccordionDetail ({sectionId, text}:AccordionDetailType) {
+    const courseIds = useSelector((state:RootState)=> state.store.sections[sectionId])
     let courseCards: JSX.Element[] = [];
     let index = 0;
 
@@ -19,9 +19,9 @@ function AccordionDetail ({droppableId, text}:AccordionDetailType) {
             if(typeof(c) === 'string') {
                 courseCards.push(
                     <RequiredCourse 
-                        key={droppableId+c} 
+                        key={sectionId+c} 
                         courseId={c}
-                        droppableId={droppableId}
+                        sectionId={sectionId}
                         index={index}/>
                 )
                 index++;
@@ -29,19 +29,19 @@ function AccordionDetail ({droppableId, text}:AccordionDetailType) {
             else {
                 courseCards.push(
                     <div 
-                        key={droppableId + 'div' + index} 
+                        key={sectionId + 'div' + index} 
                         className='relative sub-area'
                     >
-                        <RequiredCourse key={droppableId+c[0]} 
+                        <RequiredCourse key={sectionId+c[0]} 
                             courseId={c[0]}
-                            droppableId={droppableId} 
+                            sectionId={sectionId} 
                             index={index}
                         />
                         <span className="absolute"> or </span>
 
-                        <RequiredCourse key={droppableId+c[1]} 
+                        <RequiredCourse key={sectionId+c[1]} 
                             courseId={c[1]}
-                            droppableId={droppableId}
+                            sectionId={sectionId}
                             index={index+1}
                         />
                     </div>
@@ -52,14 +52,14 @@ function AccordionDetail ({droppableId, text}:AccordionDetailType) {
 
     let p;
     if(text.length > 3 && text.substring(0,3) === "(b)") 
-        p = <p key={droppableId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> <b>{text.substring(3)}</b> </p>
+        p = <p key={sectionId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> <b>{text.substring(3)}</b> </p>
     else if(text !== "")
-        p = <p key={droppableId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> {text}</p>
+        p = <p key={sectionId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> {text}</p>
 
     return (
         <div>
             {p}
-            <Droppable droppableId={droppableId}
+            <Droppable droppableId={sectionId}
                 isDropDisabled={true}
             >
             {(provided) => (

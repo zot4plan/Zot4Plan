@@ -11,8 +11,8 @@ declare interface ProgramOption {
 }
 
 declare interface QuarterType { 
-    droppableId: string;
-    quarterName: string;
+    sectionId: string;
+    name: string;
 }
 
 declare interface RequirementType {
@@ -50,10 +50,10 @@ declare interface GEPayload {
     note: string;
 }
 
-declare interface DeleteCoursePayload{
-    droppableId: string;
-    index: number;
+declare interface CoursePayload{
+    sectionId: string;
     courseId: string;
+    index: number;
 }
 
 declare interface CourseQuarterPayload {

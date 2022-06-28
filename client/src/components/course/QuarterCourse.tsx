@@ -1,19 +1,11 @@
 import { memo } from 'react';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../app/store';
-import CourseButton from './CourseButton';
-import { useDispatch } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
-import { removeCourseFromQuarter } from '../../features/StoreSlice'
-import Xmark from '../icon/Xmark';
+import {RootState} from '../../app/store';
+import ButtonRemoveCourse from '../button/ButtonRemoveCourse';
+import CourseButton from './CourseButton';
 
 import './Course.css';
-
-interface courseType {
-    courseId: string;
-    index: number;
-    droppableId: string;
-}
 
 function checkPrereqs(prereqs: any, taken:Set<string>) {
   if (Object.keys(prereqs).length === 0) return true          // No prereqs
@@ -51,10 +43,7 @@ function checkPrereqs(prereqs: any, taken:Set<string>) {
   }
 }
 
-function QuarterCourse({index, droppableId, courseId}: courseType) {
-    const dispatch = useDispatch();
-
-
+function QuarterCourse({index, sectionId, courseId}: CoursePayload) {
     const pastCourses = useSelector((state:RootState) => {
       const pastCourses = new Array()
       const yearIds = state.store.years.allIds
@@ -63,7 +52,7 @@ function QuarterCourse({index, droppableId, courseId}: courseType) {
         const yearId = yearIds[i]
         const quarterIds = state.store.years.byIds[yearId].quarterIds
         for (let j = 0; j < quarterIds.length; j++) {
-          if (quarterIds[j] === droppableId) {
+          if (quarterIds[j] === sectionId) {
             ended = true
             break
           } else {
@@ -92,19 +81,11 @@ function QuarterCourse({index, droppableId, courseId}: courseType) {
     const prereqsFulfilled = checkPrereqs(prereqs, pastCoursesSet)
 
     // pastCourses.forEach(x => {console.log(x)});
-
-    const removeCourse = (e: { preventDefault: () => void; }) => {
-      e.preventDefault();
-      dispatch(removeCourseFromQuarter({
-          quarterId: droppableId,
-          index: index, 
-          courseId: courseId
-      }))
-    }; 
+   console.log(sectionId);
    
     return (   
-    <Draggable key={droppableId + courseId} 
-      draggableId={droppableId + courseId} index={index}
+    <Draggable key={sectionId + courseId} 
+      draggableId={sectionId + courseId} index={index}
     >
       {(provided) => (
         <div>
@@ -118,11 +99,7 @@ function QuarterCourse({index, droppableId, courseId}: courseType) {
               isCrossed={false}
               isWarning={!prereqsFulfilled}
             />
-
-            <button className="remove-course-btn" onClick = {removeCourse}>
-              <Xmark/>
-            </button>
-
+            <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>
           </div>
         </div>
       )}

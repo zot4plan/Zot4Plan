@@ -42,8 +42,8 @@ function Year({id, name, index}:YearType) {
                 {quarterIds.map((id, index) => 
                     <Quarter
                         key={id} 
-                        droppableId={id} 
-                        quarterName={QUARTER_CLASS[index]}
+                        sectionId={id} 
+                        name={QUARTER_CLASS[index]}
                     />
                 )}
             </div>

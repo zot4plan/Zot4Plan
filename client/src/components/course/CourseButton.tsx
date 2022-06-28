@@ -17,9 +17,7 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
     const course = useSelector((state: RootState) => state.store.courses.byIds[id].data)
     const colors = useSelector((state: RootState) => state.store.depts.byIds[course.department].colors);
 
-    // console.log(course);
-
-    let warningSpan = <></>
+    let warningSpan;
     let color = colors[2]
     if (isWarning) {
         warningSpan = <span className='course-warning'>{Error()}</span>

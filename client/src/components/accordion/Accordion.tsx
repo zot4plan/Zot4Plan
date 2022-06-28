@@ -26,14 +26,11 @@ const Accordion = ({id, type, programId = -1}:SectionType) => {
     if (type === 'major') {
         name = accordion.name;
         detail = accordion.sectionIds.map(( section:{sectionId: string, nameChild: string}) => 
-                <AccordionDetail key={section.sectionId} droppableId={section.sectionId} text={section.nameChild}/> )
+                <AccordionDetail key={section.sectionId} sectionId={section.sectionId} text={section.nameChild}/> )
     }
     else {
         name = 'Add Courses';
-        detail =
-            <div> 
-                <AccordionDetail key={id} droppableId={id} text= {""}/>
-            </div>
+        detail = <AccordionDetail key={id} sectionId={id} text= {""}/>
     }
 
     return (

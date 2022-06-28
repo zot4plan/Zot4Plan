@@ -23,13 +23,13 @@ const AccordionGE = ({id}:SectionType) => {
     useEffect(() => {  
         if(isOpen && status === 'idle') 
           dispatch(fetchGE(id));
-      },[isOpen, status]); 
+      },[isOpen, status, dispatch, id]); 
     
     let detail;
     if(status === 'loading')
         detail = <div> Loading...!!! </div>
     else if ( status === 'succeeded')  
-        detail = <AccordionDetail key={id} droppableId={ge.sectionId} text={ge.nameChild}/>
+        detail = <AccordionDetail key={id} sectionId={ge.sectionId} text={ge.nameChild}/>
     else
         detail = <div> Cannot connect to server...!!! </div>
 
@@ -41,7 +41,7 @@ const AccordionGE = ({id}:SectionType) => {
         >  
             <summary> 
                 <span className='relative accordion'>
-                    <h1 className="section-header"> {ge.name} </h1>
+                    <h1 className="section-header"> {ge.id + '-' + ge.name} </h1>
                     <div className="right-icon">
                         <Right />
                     </div>
