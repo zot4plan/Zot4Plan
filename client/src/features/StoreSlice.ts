@@ -2,7 +2,7 @@ import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
 import { fetchProgramById, fetchProgramByFile, fetchAllGE, fetchGE} from '../api/FetchData'
 
 export const SECTION_ID_QUARTER_LEN = 3; // for function AddCourseToQuarter
-export const SECTION_ID_PROGRAM_LEN = 4; // to differentiate course in major (which cannot be remove)
+export const SECTION_ID_LEN = 4; // to differentiate course in major (which cannot be remove)
 const DEPT_COLORS = [
     ['#AFD3E9', '#70ADD7', '#3688BF'], // Columbia Blue
     ['#C2E9EA', '#76CFD0', '#38A3A5'], // Powder Blue
@@ -219,16 +219,13 @@ export const storeSlice = createSlice ({
             state.ge.status = "succeeded";
 
             action.payload.forEach((category) => {
-                const sectionId = nanoid(SECTION_ID_PROGRAM_LEN);
                 state.ge.byIds[category.id] = {
                     id: category.id,
-                    sectionId: sectionId,
+                    sectionIds: [],
                     name: category.name,
                     nameChild: category.note,
                     status: 'idle'
                 }
-
-                state.sections[sectionId] =[];
                 state.ge.allIds.push(category.id);
             })
         });
@@ -247,27 +244,34 @@ export const storeSlice = createSlice ({
             const geId = action.meta.arg;
             state.ge.byIds[geId].status = "succeeded";
 
-            const sectionId = state.ge.byIds[geId].sectionId;
+            let dept = "";
+            let sectionId = "";
             // assign new courses information
             action.payload.forEach((course) => {
-            // check if course has already existed in courses.
-            if(state.courses.byIds[course.id] === undefined) {
-                state.courses.byIds[course.id] = {
-                    data: course,
-                    remains: course.repeatability,
+                if(state.courses.byIds[course.id] === undefined) {
+                    state.courses.byIds[course.id] = {
+                        data: course,
+                        remains: course.repeatability,
+                    }
+                    state.courses.allIds.push(course.id);
                 }
-                state.courses.allIds.push(course.id);
-            }
-            
-            // Assign color for department
-            if(state.depts.byIds[course.department] === undefined) { 
-                let index = state.depts.size % DEPT_COLORS.length;
-                state.depts.byIds[course.department] = {id: course.department, colors: DEPT_COLORS[index] }
-                state.depts.size += 1;
-            }
+                
+                // Assign color for department
+                if(state.depts.byIds[course.department] === undefined) { 
+                    let index = state.depts.size % DEPT_COLORS.length;
+                    state.depts.byIds[course.department] = {id: course.department, colors: DEPT_COLORS[index] }
+                    state.depts.size += 1;
+                }
 
-            state.sections[sectionId].push(course.id);
-        })
+                if(course.department !== dept) {
+                    sectionId = nanoid(SECTION_ID_LEN);
+                    dept = course.department;
+                    state.ge.byIds[geId].sectionIds.push({sectionId: sectionId, nameChild: dept});
+                    state.sections[sectionId] = [];
+                }
+
+                state.sections[sectionId].push(course.id);
+            })
             
             
         });
@@ -307,12 +311,12 @@ export const storeSlice = createSlice ({
             };
 
             action.payload.requirement.forEach ((accordion)=>{
-                const accordionId = nanoid(SECTION_ID_PROGRAM_LEN);
+                const accordionId = nanoid(SECTION_ID_LEN);
                 program.allIds.push(accordionId);
                 program.byIds[accordionId] = {id: accordionId, name: accordion.name, sectionIds: []};
             
                 accordion.child.forEach((section) => {
-                    const sectionId = nanoid(SECTION_ID_PROGRAM_LEN);
+                    const sectionId = nanoid(SECTION_ID_LEN);
                     program.byIds[accordionId].sectionIds.push({sectionId: sectionId, nameChild: section.name})
                     state.sections[sectionId] = section.child;
                 })

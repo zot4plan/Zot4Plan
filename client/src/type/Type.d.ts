@@ -96,7 +96,7 @@ interface InputFileType {
 /************* Slice **************/
 declare interface GEType {
     id: string; 
-    sectionId: string;
+    sectionIds: { sectionId: string, nameChild: string} [];
     name: string; 
     nameChild: string;
     status: string; 

@@ -25,11 +25,13 @@ const AccordionGE = ({id}:SectionType) => {
           dispatch(fetchGE(id));
       },[isOpen, status, dispatch, id]); 
     
+    console.log(ge);
     let detail;
     if(status === 'loading')
         detail = <div> Loading...!!! </div>
     else if ( status === 'succeeded')  
-        detail = <AccordionDetail key={id} sectionId={ge.sectionId} text={ge.nameChild}/>
+        detail = ge.sectionIds.map(( section:{sectionId: string, nameChild: string}) => 
+                <AccordionDetail key={section.sectionId} sectionId={section.sectionId} text={section.nameChild}/> )
     else
         detail = <div> Cannot connect to server...!!! </div>
 
@@ -49,6 +51,7 @@ const AccordionGE = ({id}:SectionType) => {
             </summary>
 
             <div className='section-body'>
+                <p style={{marginBottom: '1rem'}}> <b>{ge.nameChild}</b> </p>
                {detail}
             </div>
         </details>
