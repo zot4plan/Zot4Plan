@@ -1,8 +1,7 @@
 .hyperlink {
-    margin-bottom: 1.6rem;
-
-    font-size: 2rem;
-    font-weight: 630;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 600;
     text-align: center;
     color: var(--accent-color-2);
 }
@@ -12,11 +11,16 @@
     color:#FF934F;
 }
 
-#select-major-img {
+#program-img {
     margin-top: 8%;
     height: auto;
     width: 94%;
     aspect-ratio: attr(width) / attr(height);
+}
+
+.program-container {
+    overflow: scroll;
+    height: 49rem;
 }
 
 @media only screen and (max-width: 599px) {
@@ -25,5 +29,5 @@
         font-size: 1.6rem;
     }
 
-   /* #browse-id-container {display: block !important;} */
+    .program-container { height: 40rem;}
 }

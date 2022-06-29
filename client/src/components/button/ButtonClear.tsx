@@ -1,12 +1,10 @@
 import {memo, useState} from 'react';
 import {useDispatch} from 'react-redux';
-
-import Refresh from '../../../components/icon/Refresh';
-import {refreshState } from '../../../features/StoreSlice';
+import {refreshState } from '../../features/StoreSlice';
 
 import ReactTooltip from "react-tooltip";
 
-function RefreshButton() {
+function ButtonClear() {
     const [isShow, setIsShow] = useState(false);
     const dispatch = useDispatch();
 
@@ -23,15 +21,15 @@ function RefreshButton() {
 
     return ( 
     <div>
-        <button className="btn-outlined" 
+        <button className="btn" 
             onClick={toggleShow}
             data-tip data-for='refreshTip'
             aria-label='remove all courses'
         >  
-            <Refresh/> 
+            Clear
         </button>
 
-        <ReactTooltip id="refreshTip" place="left" effect="solid">
+        <ReactTooltip id="refreshTip" place="top" effect="solid">
             Remove all courses
         </ReactTooltip>
 
@@ -105,4 +103,4 @@ function RefreshButton() {
 
 }
 
-export default memo(RefreshButton);
+export default memo(ButtonClear);

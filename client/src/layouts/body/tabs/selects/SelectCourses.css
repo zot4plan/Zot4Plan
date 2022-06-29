@@ -1,15 +1,11 @@
 
 .input-container {
-    /* top: 1rem;
-    left: 80%;
-    transition: left 1s, top 1s; */
-
     display:flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
-    margin: 0rem 5% 1.4rem 5%;
+    margin: 0rem 5% 0.5rem 5%;
 } 
 
 .browse-container {

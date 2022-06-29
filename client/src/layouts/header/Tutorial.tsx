@@ -1,9 +1,7 @@
 import { useState } from 'react';
+import TutorialCard from './TutorialCard';
 
-import QuestionMark from '../../components/icon/QuestionMark';
-import TutorialSlider from './TutorialCard';
-
-function ButtonHelp () {
+function Tutorial () {
     const [showTutorial, setShowTutorial] = useState(false);
 
     function handleOnClick( e: { preventDefault: () => void; }) {
@@ -14,16 +12,16 @@ function ButtonHelp () {
     return (
     <div className='flex-container'>
         <button 
-            className='btn-nav' 
+            style={{color:'white', fontSize: '2rem'}} 
             onClick={handleOnClick}
             aria-label="open tutorial"
         >
-            <QuestionMark/>
+            Tutorial
         </button>
 
-        {showTutorial && <TutorialSlider closedTutorial={handleOnClick}/> }
+        {showTutorial && <TutorialCard  closedTutorial={handleOnClick}/> }
     </div>
     )
 }
 
-export default ButtonHelp;
+export default Tutorial;

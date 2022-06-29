@@ -16,17 +16,15 @@ const AccordionGE = ({id}:SectionType) => {
     const ge = useSelector((state: RootState) => state.store.ge.byIds[id]);
     const status = useSelector((state: RootState) => state.store.ge.byIds[id].status);
     const [isOpen, setIsOpen] = useState(false);
-    
     const dispatch = useDispatch();
-    console.log(isOpen);
     
     useEffect(() => {  
         if(isOpen && status === 'idle') 
           dispatch(fetchGE(id));
       },[isOpen, status, dispatch, id]); 
     
-    console.log(ge);
     let detail;
+
     if(status === 'loading')
         detail = <div> Loading...!!! </div>
     else if ( status === 'succeeded')  
@@ -40,7 +38,7 @@ const AccordionGE = ({id}:SectionType) => {
             className='section' 
             open={isOpen} 
             onToggle={()=> setIsOpen(!isOpen)}
-        >  
+            >  
             <summary> 
                 <span className='relative accordion'>
                     <h1 className="section-header"> {ge.id + '-' + ge.name} </h1>

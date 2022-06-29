@@ -8,7 +8,6 @@ import Header from './layouts/header/Header';
 import Schedule from './layouts/body/schedule/Schedule';
 import Tabs from './layouts/body/tabs/Tabs';
 import Footer from './layouts/footer/Footer';
-
 function App() {
   const dispatch = useDispatch();
    
@@ -40,8 +39,8 @@ function App() {
     <Header/>
     <DragDropContext onDragEnd={onDragEnd}>
       <div id="body-container" className="relative">
-          <Schedule/>
-          <Tabs/>
+        <Schedule/>
+        <Tabs/>
       </div>  
     </DragDropContext>
     <Footer/>

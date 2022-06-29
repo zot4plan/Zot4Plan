@@ -21,11 +21,10 @@
     opacity: 0;
     cursor: pointer;
 
-    max-width:18rem;
+    max-width:3rem;
     height: 3.6rem;
 }
 
-#upload-btn,
 #import-btn {
     border-radius: 1.6rem;
     background-color: var(--accent-color-2);
@@ -34,12 +33,5 @@
     width:100%;
     font-size: 1.4rem;
     color: var(--primary-color);
-}
-
-#upload-btn{
-    position: absolute;
-    z-index: 2;
-    top:0px;
-    left:0px;
 }
 

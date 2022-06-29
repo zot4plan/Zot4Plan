@@ -1,10 +1,6 @@
 .remove-year-btn {
-    left: 9rem;
-    top: 0.2rem;
-    
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity var(--transition-time) ease, visibility var(--transition-time) ease;
+    left: 8rem;
+    top: 0rem;
     color: var(--accent-color-1);
 }
 

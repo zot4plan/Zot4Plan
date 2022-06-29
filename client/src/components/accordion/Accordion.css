@@ -24,7 +24,9 @@ details[open] .right-icon > svg {
     opacity: 1;
 }
 
-.year-header {font-size: 2rem;}
+.year-header {font-size: 1.8rem;}
+.section-header {font-size: 1.5rem;}
+
 .year-header, .section-header {
     flex-grow: 2;
     font-weight: 600;
@@ -63,13 +65,12 @@ details[open] .right-icon > svg {
     border-top: 0.2rem solid var(--border-color);
     background-color: #F8F8F8;
 
-    font-size: 1.8rem;
     font-weight: 500;
     text-align: center;
 }
 
 .quarter-droppable-area {
-    min-height: 7.9rem;
+    min-height: 8.4rem;
 }
 
 /* AccordionDetail */
@@ -83,19 +84,17 @@ details[open] .right-icon > svg {
     grid-column: 1 / -1;
 }
 
-.sub-area > span {
+.or-container > span {
     z-index: 0;
     top: 0.8rem;
     left: 11rem;
     font-size: 1.5rem;
-}
+} 
 
 @media only screen and (max-width: 599px) { 
     summary { padding: 0.6rem 0.4rem;}
     .section {margin: 2rem 1rem;}
 
-    .year-header, .quarter-header {font-size: 1.5rem;}
-    .section-header {font-size: 1.4rem;}
     .right-icon > svg {font-size: 0.9rem;}
 
     .quarters-wrapper {
@@ -111,13 +110,17 @@ details[open] .right-icon > svg {
         border-bottom-right-radius: 1.5rem;
     }
 
+    .quarter-droppable-area {
+        min-height: 10rem;
+    }
+
     .accordion-detail, .sub-area {
         grid-template-columns: repeat(auto-fill, 9rem);
         column-gap: 1.4rem;
         row-gap: 1.2rem;
     }
 
-    .sub-area > span {left: 9.1rem; font-size: 1.2rem;}
+    .or-container > span {left: 9.1rem; font-size: 1.2rem;}
 }
 
 @media only screen and (min-width: 600px) {

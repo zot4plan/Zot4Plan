@@ -18,19 +18,17 @@ function ButtonRemoveYear({id, index}: RemoveYearType) {
     }
 
     return ( 
-    <>
-        <button className="absolute remove-year-btn"
-            onClick={handleOnclick}
-            data-tip data-for={'removeYearTip' + index}
-            aria-label='remove year'
-        > 
-            <Remove/> 
-        </button>
+    <button className="absolute remove-year-btn"
+        onClick={handleOnclick}
+        data-tip data-for={'removeYearTip' + index}
+        aria-label='remove year'
+    > 
+        <Remove/> 
 
         <ReactTooltip id={"removeYearTip" + index} place="top" effect="solid">
             Remove year
         </ReactTooltip>
-    </>
+    </button>
     )
 
 }

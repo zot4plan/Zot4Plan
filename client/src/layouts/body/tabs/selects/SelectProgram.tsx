@@ -11,15 +11,16 @@ const myStyle: StylesConfig<ProgramOption, true> =  {
     container: (provided) => ({
         ...provided, 
         width: '100%',
-        minWidth: "27rem", 
-    /*"@media only screen and (max-width:  599px)": {
-            ...provided,
-            width: "27rem", 
-        },*/
+        minWidth: "27rem",
     }),
     
     control: (provided) => ({
-        ...provided, borderRadius: '18px',
+        ...provided, 
+        borderColor: '#1F1F1F',
+        borderRadius: '18px',
+        "&:hover": {
+            borderColor: '#1F1F1F',
+        }
     }),
     
     valueContainer: (provided) => ({
@@ -36,8 +37,17 @@ const myStyle: StylesConfig<ProgramOption, true> =  {
 
     placeholder: (provided) => ({
         ...provided, 
-        fontWeight:'400', 
-        fontSize:'1.6rem',
+        color: '#1F1F1F',
+    }),
+
+    indicatorSeparator: (provided) => ({
+        ...provided,
+        backgroundColor: '#1F1F1F'
+    }),
+
+    dropdownIndicator: (provided) => ({
+        ...provided,
+        color: "inherit"
     }),
 
     menu: (provided) => ({
@@ -56,6 +66,7 @@ function SelectProgram({isMajor}: SelectProgramType) {
 
     const dispatch = useDispatch();
 
+    console.log("select program");
     // Retrieve all majors after rendering
     useEffect( () => {
         async function fetchAllPrograms() {
@@ -89,7 +100,7 @@ function SelectProgram({isMajor}: SelectProgramType) {
             if(!isFetch)
                 dispatch(handleChangeProgram({value: selectedOptions as ProgramOption[], isMajor: isMajor}));
         }
-    },[selectedPrograms])
+    },[allIds, dispatch, isMajor])
     
     return (
     <div id="select-major"> 

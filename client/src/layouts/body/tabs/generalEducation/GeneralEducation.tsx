@@ -10,14 +10,14 @@ function GeneralEducation() {
   
     let content;
     if (status === 'loading') 
-        content = <div className="loading"> Loading...!!! </div>  
+        content = <div className="loading-message"> Loading...!!! </div>  
    
     else if (status === 'succeeded') {
         content = allIds.map((id) => (<AccordionGE key={id} id={id}/>))
-        content.push(<div key="empty" style={{height:'18rem'}}></div>);
+        content.push(<div key="empty" style={{height:'48rem'}}></div>);
     } 
     else if (status === 'failed') 
-        content = <p className='absolute fetch-error-message'>Cannot connect to server!!!</p>
+        content = <p className='loading-message red'>Cannot connect to server!!!</p>
     
     return (
     <div>
@@ -25,7 +25,7 @@ function GeneralEducation() {
             <a className='hyperlink' href='https://catalogue.uci.edu/informationforadmittedstudents/requirementsforabachelorsdegree/#generaleducationrequirementtext'
                 target='_blank' rel="noreferrer"> General Education </a>
         </div>
-        <div className="accordion-container" style={{position: 'relative'}}>
+        <div className="ge-container" style={{position: 'relative'}}>
             {content}
         </div>
     </div>

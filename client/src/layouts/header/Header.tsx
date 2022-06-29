@@ -1,10 +1,6 @@
 import {memo} from 'react';
-
 import Logo from '../../components/icon/Logo';
-import ButtonHelp from './ButtonHelp';
-import ButtonUploadFile from './ButtonUploadFile';
-import ButtonDownloadFile from './ButtonDownloadFile';
-
+import Tutorial from './Tutorial';
 import './Header.css';
 
 const Header = () => {
@@ -16,13 +12,16 @@ const Header = () => {
 
       <ul id="nav-list">
         <li>
-          <ButtonDownloadFile />
+          <a href="#footer">Team</a>
         </li>
         <li>
-          <ButtonUploadFile />
+          <a href="#footer">Contact</a>
         </li>
         <li>
-          <ButtonHelp /> 
+          <Tutorial/> 
+        </li>
+        <li>
+          Resources
         </li>
       </ul>
     </nav>

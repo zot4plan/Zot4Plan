@@ -5,70 +5,61 @@
     overflow-x: visible;
 
     padding: 0 0.5rem;
+    margin-bottom: 1rem;
+}
+#left-side {
+    margin-bottom: 2rem;
 }
 
-#function-row {
-    display: flex;
-    position: static;
-    margin-bottom:30rem;
+#left-side ul {
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
-#refresh-btn, #add-year-btn, #total-units {
-    position: absolute;
+.btn {
+    border: 1px solid;
+    border-radius: 1.2rem;
+    box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.25);
+    width: 9rem;
+    height: 2.8rem;
+    font-size: 1.6rem;
+    color: var(--accent-color-2);
 }
 
-#refresh-btn {
-    left: 1px;
+.btn:hover{
+    background-color: var(--accent-color-2);
+    border-color: var(--accent-color-2);
+    color: white;
 }
 
-#add-year-btn {
-    left: 50%; 
-    transform: translateX(-50%);
+#total-units > p {
+    font-size: 1.8rem;
+    margin-right: 1rem;
 }
-
-#total-units {
-    top: 47.5rem;
-    right: 1rem;
-}
-
-#total-units > p {font-size: 1.8rem;}
 
 @media only screen and (max-width: 599px) { 
     #schedule {
         padding: 0 0.3rem 0 0.2rem;
         overflow-x: hidden;
-        height: 45rem;
+        height: 54rem;
+        margin-top: 5.3rem ;
     }
 
-    #refresh-btn, #add-year-btn { top: 46.5rem; }
+    #left-side > ul:first-child {
+        position: absolute;
+    }
+
+    #total-units > p {
+        font-size: 1.6rem;
+        margin-right: 7.5rem;
+    }
 }
 
 @media only screen and (min-width: 600px) { 
     #schedule {height: 65rem;}
-
-    #refresh-btn, #add-year-btn{ top: 67rem;}
-    #total-units { top: 68.5rem;}
-
-    #total-units > p {font-size: 1.6rem;}
 }
 
 @media only screen and (min-width: 800px) { 
-    #schedule {overflow: visible; height: auto;}
-
-    #function-row {
-        position: relative;
-
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
-    }
-
-    #refresh-btn, #total-units {
-        position: relative;
-        top: 0;
-    }
-
-    #add-year-btn {top: 0;}
-
-    #total-units > p { font-size: 2rem; }
+    #schedule {overflow: visible; height: auto; margin-bottom: 0;}
 }

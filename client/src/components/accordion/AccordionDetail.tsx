@@ -13,40 +13,38 @@ function AccordionDetail ({sectionId, text}:AccordionDetailType) {
     const courseIds = useSelector((state:RootState)=> state.store.sections[sectionId])
     let courseCards: JSX.Element[] = [];
     let index = 0;
-
     if(courseIds !== undefined)
-        courseIds.forEach((c) => {
-            if(typeof(c) === 'string') {
+        courseIds.forEach((child) => {
+            if(typeof(child) === 'string') {
                 courseCards.push(
                     <RequiredCourse 
-                        key={sectionId+c} 
-                        courseId={c}
+                        key={sectionId+child} 
+                        courseId={child}
                         sectionId={sectionId}
                         index={index}/>
                 )
                 index++;
             }
             else {
-                courseCards.push(
-                    <div 
-                        key={sectionId + 'div' + index} 
-                        className='relative sub-area'
-                    >
-                        <RequiredCourse key={sectionId+c[0]} 
-                            courseId={c[0]}
-                            sectionId={sectionId} 
-                            index={index}
-                        />
-                        <span className="absolute"> or </span>
+                let length = child.length - 1;
+                let content:JSX.Element[] = [];
+                for(let i = 0; i < length; i++) {
+                    content.push(<div key={'div' + i + sectionId} className='or-container relative'>
+                                    <RequiredCourse key={sectionId+child[i]} 
+                                        courseId={child[i]}
+                                        sectionId={sectionId} 
+                                        index={index}/>
+                                    <span style={{position: 'absolute'}}> or </span>
+                                </div>)
+                    index++;
+                }
 
-                        <RequiredCourse key={sectionId+c[1]} 
-                            courseId={c[1]}
-                            sectionId={sectionId}
-                            index={index+1}
-                        />
-                    </div>
-                );
-                index += 2;
+                content.push(<RequiredCourse key={sectionId+child[length]} 
+                                courseId={child[length]}
+                                sectionId={sectionId}
+                                index={index}/>)
+                index++;
+                courseCards.push(<div key={sectionId + index + 'div'} className='sub-area'> {content}</div>);
             }
         })
 
@@ -69,7 +67,6 @@ function AccordionDetail ({sectionId, text}:AccordionDetailType) {
                     style={{marginBottom: courseIds.length > 0? '1.5rem' : '0rem'}}
                 >
                     {courseCards}
-
                     <div style={{display:'none'}}> {provided.placeholder} </div>
                 </div>
             )} 

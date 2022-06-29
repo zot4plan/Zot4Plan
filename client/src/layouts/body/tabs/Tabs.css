@@ -7,7 +7,8 @@
     border-radius: 1.5rem;
     box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
     height: 64.8rem;
-    margin-bottom : 22rem;
+    margin-top: 5.3rem;
+    margin-bottom : 14rem;
 }
 
 .tab {
@@ -27,13 +28,12 @@
     color: var(--accent-color-2);
 }
 
-.accordion-container {
+.ge-container {
     overflow: scroll;
-    height: 52rem;
+    height: 55.4rem;
 }
 
-.fetch-error-message,
-.loading {
+.loading-message {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -41,21 +41,6 @@
 }
 
 @media only screen and (max-width: 599px) { 
-    #tab-container {height: 44.6rem}
-
+    #tab-container {height: 53.7rem}
     .tab {font-size: 1.5rem;}
-    .accordion-container { height: 40rem;}
-
-  /*  .input-container {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-  
-        top: -9rem;
-        z-index: 1;
-    } */
-}
-
-@media only screen and (min-width: 800px) { 
-    #tab-container { margin-bottom: 14rem;}
 }

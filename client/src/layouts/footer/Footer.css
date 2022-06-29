@@ -11,14 +11,14 @@
     height: 3.2rem;
     font-size: 2.4rem;
     font-weight: 500;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 #about-us-content > p {
     line-height: 1.2;
     font-size: 1.4rem;
     text-align: justify;
-    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 #zot-tree{

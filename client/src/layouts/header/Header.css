@@ -9,19 +9,25 @@
 #brand {
     display: flex; 
     align-items: center;  
-    margin-right: 8rem;
     color: var(--primary-color);
 }
 
 #nav-list {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
 }
 
 #nav-list > li {
-    margin: 0rem 1.2rem;
+    margin: 0rem 2rem;
     padding-top: 0.5rem;
+    font-size: 2rem;
+    color: white;
+}
+
+#nav-list > li > a {
+    color: white;;
 }
 
 #upload { z-index: 2;}
@@ -40,8 +46,6 @@
 }
 
 @media only screen and (max-width: 599px) {
-    
     #brand > svg {font-size: 0.9rem;}
-
 }
 

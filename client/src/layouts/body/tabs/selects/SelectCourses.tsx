@@ -24,18 +24,26 @@ interface CourseType{
 const myStyle: StylesConfig<OptionType, false> =  {
     control: (provided) => {
         return {...provided, 
-                width: '100%', 
-                borderRadius: '18px'};
+                width: '100%',
+                borderColor: '#1F1F1F',
+                borderRadius: '18px',
+                "&:hover": {
+                    borderColor: '#1F1F1F',
+                }
+            };
     },
-    valueContainer: (provided) => {
-        return {...provided, cursor: 'text'};
-    },
-    clearIndicator: (provided) => {
-        return {...provided, padding:'0.4rem', cursor:'pointer'};
-    },
-    indicatorsContainer: (provided)=> {
-        return {...provided, marginRight: '3.8rem'};
-    },
+    valueContainer: (provided) => ({
+        ...provided, cursor: 'text'}
+    ),
+    placeholder: (provided) => ({
+        ...provided, color: '#1F1F1F',
+    }),
+    indicatorSeparator: (provided) => ({
+        ...provided, backgroundColor: '#1F1F1F'
+    }),
+    indicatorsContainer: (provided)=> ({
+        ...provided, marginRight: '3.7rem'
+    }),
 }
 
 // Search courses from databases

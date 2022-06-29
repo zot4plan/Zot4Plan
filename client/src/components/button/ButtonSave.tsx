@@ -1,9 +1,8 @@
 import { useState, useRef} from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import DownloadIcon from '../../components/icon/DownloadIcon';
 
-function ButtonDownloadFile () {
+function ButtonSave () {
     const [file, setFile] = useState({fileType: "json", name:"zotplan", url: "/"});
     const doFileDownload = useRef<HTMLAnchorElement>(null);
 
@@ -62,15 +61,14 @@ function ButtonDownloadFile () {
     } */
 
     return (
-        <div className="relative flex-container">
-            {/*  
+        <div className="relative flex-container">    
             <button 
-                className='btn-nav' 
-                onClick ={download} 
+                className='btn' 
+                //onClick ={download} 
                 aria-label="download your plan as a JSON file"
             >   
-                <DownloadIcon/>
-            </button> */}
+                Save
+            </button> 
 
             <div style={{position: "absolute", display: "none"}}>   
                 <a download={file.name + '.' + file.fileType}
@@ -82,4 +80,4 @@ function ButtonDownloadFile () {
     )
 }
 
-export default ButtonDownloadFile;
+export default ButtonSave;
