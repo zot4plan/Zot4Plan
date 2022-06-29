@@ -1,5 +1,5 @@
 import {memo, useState} from 'react'
-import { useSelector} from 'react-redux';
+import { shallowEqual, useSelector} from 'react-redux';
 
 import {RootState} from '../../../../app/store';
 import Accordion from '../../../../components/accordion/Accordion';
@@ -16,25 +16,29 @@ function Program ({isMajor, addedCourses}:Type) {
     const [majorIndex, setMajorIndex] = useState<number>(0); 
     const [minorIndex, setMinorIndex] = useState<number>(0);
 
-    const program = useSelector((state:RootState) => {  
+    const programId = useSelector((state:RootState) => {  
         let selectedPrograms = isMajor? state.store.programs.selectedMajors : state.store.programs.selectedMinors;
 
         if(selectedPrograms.length === 0) 
             return undefined;
 
-        let programId = isMajor? selectedPrograms[majorIndex].value : selectedPrograms[minorIndex].value;
-        let program = state.store.programs.byIds[programId];
-
-        console.log(program);  
-
-        return program;
+        return isMajor? selectedPrograms[majorIndex].value : selectedPrograms[minorIndex].value;
     });
+
+    const allIds = useSelector((state:RootState) => {
+        return programId !== undefined ? state.store.programs.byIds[programId].allIds : []
+    }, shallowEqual);
+    const name = useSelector((state:RootState) => programId !== undefined ? state.store.programs.byIds[programId].name : "");
+    const url = useSelector((state:RootState) => programId !== undefined ? state.store.programs.byIds[programId].url : "");
+    
 
     const status = useSelector((state:RootState)=>state.store.programs.status);
     const error = useSelector((state:RootState)=>state.store.programs.error);
 
     let content = [] as JSX.Element [];
     
+    console.log('program')
+
     if(status === 'idle') {
         content.push(
                 <div key="img" className='flex-container'>
@@ -49,14 +53,14 @@ function Program ({isMajor, addedCourses}:Type) {
     else if (status === 'loading') 
         content.push(<div key="spinner" className='loading'> loading...!!! </div>)
 
-    else if (status === 'succeeded' && program !== undefined)  {
+    else if (status === 'succeeded' && programId !== undefined)  {
         content.push(<div key="hyperlink" className='flex-container'> 
-                        <a  className='hyperlink' href={program.url} 
-                            target='_blank' rel="noreferrer"> {program.name} </a>
+                        <a  className='hyperlink' href={url} 
+                            target='_blank' rel="noreferrer"> {name} </a>
                     </div>);
 
-        program.allIds.forEach(id => {
-            content.push(<Accordion key={id} id={id} type="major" programId={program.id} />)
+        allIds.forEach(id => {
+            content.push(<Accordion key={id} id={id} type="major" programId={programId} />)
         });
         content.push(<Accordion key={addedCourses} id={addedCourses} type="other"/>)
         content.push(<div key="empty" style={{height:'30rem'}}></div>);

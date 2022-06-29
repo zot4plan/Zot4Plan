@@ -1,6 +1,6 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, memo, useCallback } from 'react';
 import Axios from '../../../../api/Axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {fetchProgramById} from '../../../../api/FetchData';
 import Select, { OnChangeValue, StylesConfig} from 'react-select';
 import './SelectProgram.css';
@@ -49,10 +49,10 @@ interface SelectProgramType { isMajor: boolean;}
 
 function SelectProgram({isMajor}: SelectProgramType) {
     const [programs, setPrograms] = useState<ProgramOption[]>([]);
-    const allIds = useSelector((state: RootState) => new Set(state.store.programs.allIds));
+    const allIds = useSelector((state: RootState) => new Set(state.store.programs.allIds), shallowEqual);
     const selectedPrograms = useSelector((state: RootState) => {
         return isMajor? state.store.programs.selectedMajors : state.store.programs.selectedMinors;
-    })
+    }, shallowEqual)
 
     const dispatch = useDispatch();
 
@@ -64,22 +64,18 @@ function SelectProgram({isMajor}: SelectProgramType) {
             setPrograms(programsArray);   
         }
         
-        if(programs.length === 0) {
+        if(programs.length === 0) 
             fetchAllPrograms();
-            console.log("fetch program");
-        }
             
     },[programs]); 
 
-    console.log(programs)
     // Get Major Requirement Courses
-    const handleOnChange = async (selectedOptions: OnChangeValue<ProgramOption, true>) => {
+    const handleOnChange = useCallback((selectedOptions: OnChangeValue<ProgramOption, true>) => {
         let isFetch = false;
+
         if(selectedOptions){
            try {
                 selectedOptions.forEach(option => {
-                    console.log(allIds.has(option.value));
-                    
                     if(!allIds.has(option.value)) {
                         dispatch(fetchProgramById({id: option.value, programs: selectedOptions as ProgramOption[]}));
                         isFetch = true;
@@ -93,7 +89,7 @@ function SelectProgram({isMajor}: SelectProgramType) {
             if(!isFetch)
                 dispatch(handleChangeProgram({value: selectedOptions as ProgramOption[], isMajor: isMajor}));
         }
-    }
+    },[selectedPrograms])
     
     return (
     <div id="select-major"> 

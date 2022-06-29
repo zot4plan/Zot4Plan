@@ -46,7 +46,7 @@ function Tabs () {
         </li>
       </ul>
 
-      <div style={{display: tab.id < 3? "block": "none"}}>
+      <div style={{display: tab.id !== 3? "block": "none"}}>
             <SelectProgram key="selectProgram" isMajor={tab.isMajor} />
             <Program key="program" isMajor={tab.isMajor} addedCourses={addedCourses}/>
       </div>
