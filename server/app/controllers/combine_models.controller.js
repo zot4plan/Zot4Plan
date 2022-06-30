@@ -22,8 +22,9 @@ exports.getRequirementById = (req, res) => {
                         if(typeof(course) === 'string')
                             setOfCourses.add(course);
                         else {
-                            setOfCourses.add(course[0]);
-                            setOfCourses.add(course[1]);
+                            course.forEach(id =>{
+                                setOfCourses.add(id);
+                            })
                         }
                     })
                 })

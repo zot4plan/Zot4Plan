@@ -1,17 +1,3 @@
-.remove-course-btn{
-    position:absolute;
-    top: 0.2rem;
-    right: 0.2rem;
-
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-time) ease, visibility var(--transition-time) ease;
-
-    color: #F2F2F2;
-}
-
-.remove-course-btn svg:hover { color: white;}
-
 .required-course { height: 3.6rem;}
 .quarter-course { margin: 0.2rem; }
 

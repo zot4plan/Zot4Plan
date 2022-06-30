@@ -1,12 +1,24 @@
-.hyperlink {
-    margin-bottom: 1rem;
+.hyperlink, .hyperlink > button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.hyperlink { 
+    margin: 0 0.5rem 1rem 0.5rem;
+}
+
+.hyperlink > a, .hyperlink > button > svg{
     font-size: 1.8rem;
     font-weight: 600;
-    text-align: center;
     color: var(--accent-color-2);
 }
 
-.hyperlink:hover {
+.hyperlink > a {
+    text-align: center;
+}
+
+.hyperlink > a:hover {
     text-decoration: underline; 
     color:#FF934F;
 }
@@ -24,10 +36,6 @@
 }
 
 @media only screen and (max-width: 599px) {
-    .hyperlink { 
-        margin: 1rem 1rem 0 1rem;
-        font-size: 1.6rem;
-    }
-
+    .hyperlink > a, .hyperlink > svg { font-size: 1.6rem;}
     .program-container { height: 40rem;}
 }

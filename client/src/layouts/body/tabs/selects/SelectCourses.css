@@ -24,27 +24,24 @@
     padding: 0.7rem;
    
     background-color: var(--accent-color-2);
-
     line-height: 0;
     color:white;
 }
 
 /* message */
 .message-container {
-    height: 1.6rem;
+    height: 1.4rem;
     max-width: 27rem;
 }
 
 .message {
-    padding-top: 0.8rem;
-    padding-left: 2.4rem;
-    font-size: 1.4rem;
+    padding-top: 0.4rem;
+    padding-left: 2rem;
+    font-size: 1.3rem;
 }
 
-.message-icon { 
-    left: 0px; 
-    top: 6px; 
-}
+.message-icon { left: 0px; top: 4px; }
+.message-icon > svg { font-size: 0.8rem; }
 
 .fade-message {
     -moz-animation: fadeIn 1s ease-in 4s forwards;

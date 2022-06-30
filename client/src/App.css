@@ -47,6 +47,8 @@ h1, h2, h3, h4, h5, h6, p, div, ul, button {
     font-size: 1.6rem;
 }
 
+p {word-break: break-word;}
+
 a, button, svg { cursor: pointer; }
 
 ul {list-style-type: none;}
@@ -113,8 +115,8 @@ svg { font-size: 10px; }
 /* 2. Media quries */
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 599px) {
-    p {font-size: 1.4rem; word-break: break-word;}
-
+    p {font-size: 1.4rem;}
+    
     #body-container {
         grid-template-columns: minmax(12rem,20rem) minmax(24rem, 35rem);
         column-gap: 0.3rem;

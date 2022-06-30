@@ -60,13 +60,13 @@ interface SelectProgramType { isMajor: boolean;}
 function SelectProgram({isMajor}: SelectProgramType) {
     const [programs, setPrograms] = useState<ProgramOption[]>([]);
     const allIds = useSelector((state: RootState) => new Set(state.store.programs.allIds), shallowEqual);
-    const selectedPrograms = useSelector((state: RootState) => {
-        return isMajor? state.store.programs.selectedMajors : state.store.programs.selectedMinors;
-    }, shallowEqual)
+    const selectedPrograms = useSelector((state: RootState) => (
+        state.store.programs.selectedPrograms[Number(isMajor)]
+    ), shallowEqual)
 
     const dispatch = useDispatch();
 
-    console.log("select program");
+    console.log('selected program');
     // Retrieve all majors after rendering
     useEffect( () => {
         async function fetchAllPrograms() {
@@ -74,7 +74,6 @@ function SelectProgram({isMajor}: SelectProgramType) {
             const programsArray = await res.data.map((program:ProgramOption) => program);
             setPrograms(programsArray);   
         }
-        
         if(programs.length === 0) 
             fetchAllPrograms();
             

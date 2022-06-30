@@ -1,4 +1,6 @@
-/***** Object Type*****/
+/*************************/
+/******* Object Type *****/
+/*************************/
 declare interface YearType {
     id: string;
     quarterIds: string[];
@@ -80,6 +82,11 @@ declare interface ProgramOptionPayload {
     isMajor: boolean;
 }
 
+declare interface SwitchProgramPayload {
+    move: number;
+    isMajor: boolean;
+}
+
 /*********** Fetch Input Types ************/
 declare interface FetchProgramType { 
     id:number; // the index of the major in select major list
@@ -126,17 +133,15 @@ declare interface StoreType{
     };
     programs: {
         byIds: {[id: string]: ProgramType };
-        selectedMinors: ProgramOption[];
-        selectedMajors: ProgramOption[];
         allIds: number[];
+        selectedPrograms: ProgramOption[][]; // 0-index is minors, 1-index is majors 
+        index: number[]; // 0-index is the current minor displaying, 1-index is for major
         status: string;
-        error: string;
     };
     ge: {
         byIds: { [id:string]: GEType};
         allIds: string[];
         status: string;
-        error: string;
     };
     addedCourses: { sectionId: string};
 

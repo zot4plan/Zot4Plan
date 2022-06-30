@@ -2,6 +2,7 @@ import {memo} from 'react';
 import { useDispatch } from 'react-redux';
 import { removeCourse } from '../../features/StoreSlice';
 import Xmark from '../icon/Xmark';
+import './ButtonRemoveCourse.css';
 
 function ButtonRemoveCourse({courseId, sectionId, index}: CoursePayload) {
     console.log(sectionId);

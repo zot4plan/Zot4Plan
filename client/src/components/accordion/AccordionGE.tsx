@@ -29,7 +29,9 @@ const AccordionGE = ({id}:SectionType) => {
         detail = <div> Loading...!!! </div>
     else if ( status === 'succeeded')  
         detail = ge.sectionIds.map(( section:{sectionId: string, nameChild: string}) => 
-                <AccordionDetail key={section.sectionId} sectionId={section.sectionId} text={section.nameChild}/> )
+                    <AccordionDetail key={section.sectionId} 
+                                    sectionId={section.sectionId} 
+                                    text={section.nameChild}/> )
     else
         detail = <div> Cannot connect to server...!!! </div>
 

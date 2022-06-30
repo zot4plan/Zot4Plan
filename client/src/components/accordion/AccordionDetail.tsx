@@ -11,6 +11,7 @@ interface AccordionDetailType {
 
 function AccordionDetail ({sectionId, text}:AccordionDetailType) {
     const courseIds = useSelector((state:RootState)=> state.store.sections[sectionId])
+
     let courseCards: JSX.Element[] = [];
     let index = 0;
     if(courseIds !== undefined)

@@ -17,7 +17,6 @@ function getStyle(style: any, snapshot: { isDropAnimating: any; }) {
 }
 
 function RequiredCourse({courseId, sectionId, index}: CoursePayload) {
-    //console.log(courseId);
     const isDraggable = useSelector((state: RootState) => state.store.courses.byIds[courseId].remains > 0)
   
     return (   

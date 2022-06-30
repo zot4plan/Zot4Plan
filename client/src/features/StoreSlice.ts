@@ -45,17 +45,15 @@ const generateInitialState = () => {
         }, 
         programs: {
             byIds: {},
-            selectedMinors:[],
-            selectedMajors:[],
+            selectedPrograms:[[],[]],
+            index: [-1,-1],
             allIds: [],
             status:"idle",
-            error: "",
         },
         ge: {
             byIds: {},
             allIds: [],
             status:"idle",
-            error: "",
         },
         addedCourses: {sectionId: addedCourses},
         sections: sections,
@@ -198,11 +196,29 @@ export const storeSlice = createSlice ({
         },
 
         handleChangeProgram: (state, action: PayloadAction<ProgramOptionPayload>) => { 
-            if(action.payload.isMajor)
-                state.programs.selectedMajors = action.payload.value;
-            else
-                state.programs.selectedMinors = action.payload.value;
+            let i = action.payload.isMajor? 1 : 0,
+                currentIndex = state.programs.index[i],
+                len = action.payload.value.length;
+            
+            if(currentIndex >= len)
+                state.programs.index[i] = len - 1;
+
+            state.programs.selectedPrograms[i] = action.payload.value;
         },
+
+        handleSwitchProgram: (state, action: PayloadAction<SwitchProgramPayload>) => { 
+            let i = action.payload.isMajor? 1 : 0,
+                nextIndex = state.programs.index[i] + action.payload.move,
+                currentLength = state.programs.selectedPrograms[i].length;
+
+            if(nextIndex < 0)
+                state.programs.index[i] = currentLength - 1;
+            else if(nextIndex >= currentLength)
+                state.programs.index[i] = 0;
+            else
+                state.programs.index[i] = nextIndex;
+        },
+
     },
 
 /********************************************************
@@ -324,11 +340,18 @@ export const storeSlice = createSlice ({
 
             state.programs.byIds[program.id] = program;         
             state.programs.allIds.push(program.id);
+            
+            // assign new selected programs
+            let i = action.payload.isMajor? 1 : 0,
+            currentIndex = state.programs.index[i],
+            len = action.payload.programs.length;
+            
+            if(currentIndex === -1)
+                state.programs.index[i] = 0;
+            else if(currentIndex >= len)
+                state.programs.index[i] = len - 1;
 
-           if(action.payload.isMajor)
-                state.programs.selectedMajors = action.payload.programs;
-            else
-                state.programs.selectedMinors = action.payload.programs;
+            state.programs.selectedPrograms[i] = action.payload.programs;
 
             // assign new courses information
             action.payload.courseData.forEach((course) => {
@@ -353,7 +376,6 @@ export const storeSlice = createSlice ({
 
         builder.addCase(fetchProgramById.rejected, (state) => {
             state.programs.status = "failed";
-            state.programs.error = "An error occurred while retrieving the data";
         });
 
         //////////////////////////////////////////////////////
@@ -484,5 +506,6 @@ export const {
     addYear, 
     removeYear, 
     refreshState,  
-    handleChangeProgram } =  storeSlice.actions;
+    handleChangeProgram,
+    handleSwitchProgram } =  storeSlice.actions;
 export default  storeSlice.reducer;
