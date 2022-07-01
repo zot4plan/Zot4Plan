@@ -5,7 +5,6 @@ import Xmark from '../icon/Xmark';
 import './ButtonRemoveCourse.css';
 
 function ButtonRemoveCourse({courseId, sectionId, index}: CoursePayload) {
-    console.log(sectionId);
     const dispatch = useDispatch();
     const handleOnClick = (e: { preventDefault: () => void; }) => {
         e.preventDefault();

@@ -225,7 +225,6 @@ export const storeSlice = createSlice ({
 ********************* ExtraReducers ********************* 
 *********************************************************/
     extraReducers: (builder) => {
-
         /*********** Fetch General Education ********/
         builder.addCase(fetchAllGE.pending, (state) => {
             state.ge.status = "loading";

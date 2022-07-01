@@ -66,7 +66,6 @@ function SelectProgram({isMajor}: SelectProgramType) {
 
     const dispatch = useDispatch();
 
-    console.log('selected program');
     // Retrieve all majors after rendering
     useEffect( () => {
         async function fetchAllPrograms() {

@@ -50,9 +50,8 @@ function Program ({isMajor, addedCourses}:Type) {
                         <a href={url} target='_blank' rel="noreferrer"> {name} </a>
                         <button key={'ChevronRight'} value={1} onClick={handleOnClick}> <ChevronRight/> </button>
                     </div>);
-
-        allIds.forEach(id => { content.push(<Accordion key={id} id={id} type="major" programId={programId} />) });
         content.push(<Accordion key={addedCourses} id={addedCourses} type="other"/>)
+        allIds.forEach(id => { content.push(<Accordion key={id} id={id} type="major" programId={programId} />) });
         content.push(<div key="empty" style={{height:'42rem'}}></div>);
     }
 

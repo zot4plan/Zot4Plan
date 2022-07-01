@@ -81,7 +81,7 @@ function QuarterCourse({index, sectionId, courseId}: CoursePayload) {
     const prereqsFulfilled = checkPrereqs(prereqs, pastCoursesSet)
 
     // pastCourses.forEach(x => {console.log(x)});
-   console.log(sectionId);
+   console.log(courseId);
    
     return (   
     <Draggable key={sectionId + courseId} 

@@ -23,6 +23,7 @@
     --secondary-color:#1F1F1F; /* Eerie Black */
     --accent-color-1:#DF2935; /* Rose Madder */
     --accent-color-2:#307ABB; /* French Blue */
+    --red: #DA1E37; /* note */
 }
 * { box-sizing: border-box;}
 

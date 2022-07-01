@@ -164,3 +164,28 @@ declare interface StoreType{
         size: number;
     }
 }
+
+declare interface CoursesSliceType{
+    years: {
+        byIds: { [id: string]: YearType }; 
+        allIds: string[]; 
+    };
+    sections: {[id:string]: (string|string[])[]};
+    totalUnits: number,
+    courses: {
+        byIds: {
+            [id:string]: {
+                data: CourseType, 
+                remains: number,
+            }},
+        allIds: string[];
+    };
+    depts: {
+        byIds: {
+            [propName:string]: {
+                id: string;
+                colors: string[];
+            }}, 
+        size: number;
+    }
+}

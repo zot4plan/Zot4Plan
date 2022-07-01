@@ -50,7 +50,7 @@ function AccordionDetail ({sectionId, text}:AccordionDetailType) {
         })
 
     let p;
-    if(text.length > 3 && text.substring(0,3) === "(b)") 
+    if(text.length > 3 && text.substring(0,3) === "(b)")
         p = <p key={sectionId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> <b>{text.substring(3)}</b> </p>
     else if(text !== "")
         p = <p key={sectionId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> {text}</p>
