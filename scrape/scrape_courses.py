@@ -87,7 +87,7 @@ def write_courses():
 
     websites = get_courses_websites()
     course_names = []
-    write_ge = open('../database/all_GEs.sql', 'w')
+    write_ge = open('../database/all_GE.sql', 'w')
 
     with open('../database/uci_courses.sql', 'w') as f:
         for each_url in websites:
@@ -99,11 +99,11 @@ def write_courses():
                         value.prerequisite_for + '","' + value.restriction + '","' + value.repeatability + '","' + 
                         value.corequisite + '","' + value.ge_string + '","' + value.past_terms + '");' + '\n')
                 for cat in value.ge_list:
-                    write_ge.write('INSERT INTO courses_in_ges (courseId, geId) VALUES ("' + key + '","' + cat + '");' + '\n')
+                    write_ge.write('INSERT INTO courses_in_ge (courseId, geId) VALUES ("' + key + '","' + cat + '");' + '\n')
     
     write_ge.close()
 
-    with open('../data/data.json', 'w') as f: 
+    with open('../database/courseIDs.json', 'w') as f: 
         json.dump(course_names, f,indent=4)
 
 

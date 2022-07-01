@@ -2,10 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import json 
 
-MAJOR_TAGS = ['bs/', 'ba/', 'bfa/']
-MINOR_TAGS = ['minor/']
-
-f = open('../data/data.json')   
+f = open('../other/courseIDs.json')   
 Data = {elem for elem in json.load(f)}
 f.close()
 
@@ -38,7 +35,7 @@ def request_websites(url):
     return soup
 
 
-def get_websites(preferred):
+def get_websites():
     """
     get_websites scrapes all the redirected websites in the main page of UCI major requirements.
     return: a list of all the URL addresses that display UCI major requirements
@@ -53,14 +50,11 @@ def get_websites(preferred):
             get_type = href.split('_')
             website = 'http://catalogue.uci.edu/' + href
             name = each.text
-            if get_type[-1] in preferred and website not in major_urls:
+            if get_type[-1] in ['minor/', 'bs/', 'ba/', 'bfa/'] and website not in major_urls:
                 all_href.append([each.text, website])
                 major_urls[name] = website
-    
-    if len(preferred) > 1:
-        write_url(major_urls, 'major_reqs_')
-    else:
-        write_url(major_urls, 'minor_reqs_')
+
+    write_url(major_urls)
     return all_href
 
 
@@ -96,7 +90,7 @@ def expand_series(courses):
     return items
 
 
-def scrape_courses(url):
+def scrape_programs(url):
     """
     scrape_courses takes in one parameter, major's url, and attain the information from the provided link.
     It sort the information by headers/courses and adjust the data model accordingly.
@@ -153,11 +147,11 @@ def scrape_courses(url):
         print(url)
 
 
-def write_url(all_url, tag_type):
+def write_url(all_url):
     """
     write_url will saves all of the major requirement urls into a json file.
     """
-    with open('../database/' + tag_type + 'Urls.json', 'w') as f:
+    with open('../database/program_Urls.json', 'w') as f:
         json.dump(all_url, f, indent=4)
 
 
@@ -166,9 +160,13 @@ def write_to_json(name, info):
     write_to_json takes in a Header object and writes the information out
     into a JSON file
     """
-    
-    name = name.replace(' ', '_').replace('/', '-')
-    with open('../data/' + name + 'json', 'w') as f:
+    if "Criminology" in name:
+        name = name.replace(' ', '_').replace('/', '-')
+    else:
+        name = name.replace(' ', '_').replace('/', '-').replace(',', '')
+    if "Minor" in name:
+            name += '.'
+    with open('../test/' + name + 'json', 'w') as f:
         json_version = []
         for elem in info:
             if elem.typeParent == "Header":
@@ -179,14 +177,10 @@ def write_to_json(name, info):
 
 if __name__ == "__main__":
     
-    all_major_reqs = get_websites(MAJOR_TAGS)
-    for elem in all_major_reqs:
-        major_info = scrape_courses(elem[1])
-        if major_info != None:
-            write_to_json(elem[0], major_info)
+    all_program_reqs = get_websites()
+    print(all_program_reqs)
+    for elem in all_program_reqs:
+        program_info = scrape_programs(elem[1])
+        if program_info != None:
+            write_to_json(elem[0], program_info)
 
-    all_minor_reqs = get_websites(MINOR_TAGS)
-    for elem in all_minor_reqs:
-        minor_req_info = scrape_courses(elem[1])
-        if minor_req_info != None:
-            write_to_json(elem[0] + '.', minor_req_info)
