@@ -43,68 +43,63 @@ function checkPrereqs(prereqs: any, taken:Set<string>) {
   }
 }
 
+
 function QuarterCourse({index, sectionId, courseId}: CoursePayload) {
-    const pastCourses = useSelector((state:RootState) => {
-      const pastCourses = new Array()
-      const yearIds = state.store.years.allIds
-      let ended = false
-      for (let i = 0; i < yearIds.length; i++) {
-        const yearId = yearIds[i]
-        const quarterIds = state.store.years.byIds[yearId]
-        for (let j = 0; j < quarterIds.length; j++) {
-          if (quarterIds[j] === sectionId) {
-            ended = true
-            break
-          } else {
-            pastCourses.push(...state.store.sections[quarterIds[j]])
-          }
-        }
-        if (ended) {
+  const prereqsFulfilled = useSelector((state:RootState) => {
+    const pastCourses = new Array()
+    const yearIds = state.store.years.allIds
+    let ended = false
+    for (let i = 0; i < yearIds.length; i++) {
+      const yearId = yearIds[i]
+      const quarterIds = state.store.years.byIds[yearId]
+      for (let j = 0; j < quarterIds.length; j++) {
+        if (quarterIds[j] === sectionId) {
+          ended = true
           break
+        } else {
+          pastCourses.push(...state.store.sections[quarterIds[j]])
         }
       }
-
-      return pastCourses
-    })
+      if (ended) {
+        break
+      }
+    }
 
     const pastCoursesSet = new Set<string>(pastCourses)
 
-    const prereqs = useSelector((state:RootState) => {
-      let prereqs = state.store.courses.byIds[courseId].data['prerequisite_tree']
-      prereqs = prereqs.replace(/'/g, '"')                                               // Replacing with double quotes to use JSON.parse
-      if (prereqs === '') {
-        prereqs = '{}'
-      }
-      return JSON.parse(prereqs)
-    })
-    
-    const prereqsFulfilled = checkPrereqs(prereqs, pastCoursesSet)
+    let prereqs = state.store.courses.byIds[courseId].data['prerequisite_tree']
+    prereqs = prereqs.replace(/'/g, '"')                                               // Replacing with double quotes to use JSON.parse
+    if (prereqs === '') {
+      prereqs = '{}'
+    }
+    prereqs = JSON.parse(prereqs)
 
-    // pastCourses.forEach(x => {console.log(x)});
-   console.log(courseId);
-   
-    return (   
-    <Draggable key={sectionId + courseId} 
-      draggableId={sectionId + courseId} index={index}
-    >
-      {(provided) => (
-        <div>
-          <div ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            className="relative quarter-course"
-          >
-            <CourseButton id={courseId} 
-              showUnit={true} 
-              isCrossed={false}
-              isWarning={!prereqsFulfilled}
-            />
-            <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>
-          </div>
+    return checkPrereqs(prereqs, pastCoursesSet)
+  })
+
+
+  return (   
+  <Draggable key={sectionId + courseId} 
+    draggableId={sectionId + courseId} index={index}
+  >
+    {(provided) => (
+      <div>
+        <div ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          className="relative quarter-course"
+        >
+          <CourseButton id={courseId} 
+            showUnit={true} 
+            isCrossed={false}
+            isWarning={!prereqsFulfilled}
+          />
+          <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>
         </div>
-      )}
-    </Draggable>
-    )
+      </div>
+    )}
+  </Draggable>
+  )
 }
 
 export default memo(QuarterCourse)

@@ -19,9 +19,13 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
 
     let warningSpan;
     let color = colors[2]
+    let textColor = 'white'
     if (isWarning) {
         warningSpan = <span className='course-warning'>{Error()}</span>
         color = '#8B8000'                                            // Yellow color for unfulfilled prereqs warning
+    } else if (isCrossed) {
+        color = '#D3D3D3'
+        textColor = 'black'
     }
     
     function handleOnClick( e: MouseEvent<HTMLDivElement> ) {
@@ -33,10 +37,10 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
     <>
         <div className="course-btn"
             onClick={handleOnClick} 
-            style={{backgroundColor: colors[2]}}
+            style={{backgroundColor: color}}
         >
             <p className='course-id' 
-              style={{textDecoration: isCrossed? "line-through":"none"}}
+              style={{textDecoration: isCrossed? "line-through":"none", color: textColor}}
             > 
                 {id}
             </p>
@@ -49,7 +53,6 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
         </div>
     </>
     )
-
 }
 
 export default memo(CourseButton)
