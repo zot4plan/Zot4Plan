@@ -66,7 +66,7 @@ export const storeSlice = createSlice ({
                 courseId = action.payload.courseId;
 
             //prevent same course from being added to a quarter
-            if(!state.sections[destinationId].includes(courseId)) {
+            if(!state.sections[destinationId].includes(courseId) || sourceId === destinationId) {
                 state.sections[destinationId].splice(action.payload.destinationIndex, 0, courseId); //add course to destination
 
                 if(sourceId.length === 3)  //source is a quarter

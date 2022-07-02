@@ -43,7 +43,6 @@ function checkPrereqs(prereqs: any, taken:Set<string>) {
   }
 }
 
-
 function QuarterCourse({index, sectionId, courseId}: CoursePayload) {
   const prereqsFulfilled = useSelector((state:RootState) => {
     const pastCourses = new Array()
