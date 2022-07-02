@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
 
 import CourseCard from '../courseCard/CourseCard'
+import ReactTooltip from "react-tooltip";
 import Error from '../icon/Error'
 
 interface CourseButtonType {
@@ -22,7 +23,7 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
     let textColor = 'white'
     if (isWarning) {
         warningSpan = <span className='course-warning'>{Error()}</span>
-        color = '#8B8000'                                            // Yellow color for unfulfilled prereqs warning
+        color = '#8B8000'                                       // Yellow color for unfulfilled prereqs warning                             
     } else if (isCrossed) {
         color = '#D3D3D3'
         textColor = 'black'
@@ -35,10 +36,16 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
 
     return ( 
     <>
+        <ReactTooltip id={"prereqTip"+id} place="top" effect="solid" disable={!isWarning}>
+            Missing prerequisites
+        </ReactTooltip>
+
         <div className="course-btn"
             onClick={handleOnClick} 
             style={{backgroundColor: color}}
+            data-tip data-for={'prereqTip'+id}
         >
+
             <p className='course-id' 
               style={{textDecoration: isCrossed? "line-through":"none", color: textColor}}
             > 
