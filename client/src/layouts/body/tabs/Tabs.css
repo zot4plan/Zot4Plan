@@ -28,9 +28,46 @@
     color: var(--accent-color-2);
 }
 
+.hyperlink, .hyperlink > button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.hyperlink { 
+    margin: 0 0.5rem 1rem 0.5rem;
+}
+
+.hyperlink > a, .hyperlink > button > svg{
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--accent-color-2);
+}
+
+.hyperlink > a {
+    text-align: center;
+}
+
+.hyperlink > a:hover {
+    text-decoration: underline; 
+    color:#FF934F;
+}
+
+#program-img {
+    margin-top: 8%;
+    height: auto;
+    width: 94%;
+    aspect-ratio: attr(width) / attr(height);
+}
+
+.program-container {
+    overflow: scroll;
+    height: 49rem;
+}
+
 .ge-container {
     overflow: scroll;
-    height: 55.4rem;
+    height: 60rem;
 }
 
 .loading-message {
@@ -38,9 +75,12 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-}
 
+}
 @media only screen and (max-width: 599px) { 
-    #tab-container {height: 53.7rem}
+    #tab-container {height: 53.7rem;}
     .tab {font-size: 1.5rem;}
+    .hyperlink > a, .hyperlink > svg { font-size: 1.6rem;}
+    .ge-container {height: 49rem;}
+    .program-container { height: 39rem;}
 }

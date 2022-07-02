@@ -1,37 +1,37 @@
 import {memo} from 'react'
 import { useSelector } from 'react-redux';
 import { RootState } from "../../app/store";
-
-import AccordionDetail from './AccordionDetail';
+import Detail from './Detail';
 import Right from '../icon/ArrowRightSmall';
 
 import './Accordion.css';
 
 interface SectionType {
     id: string;
-    type: string;
     programId?: number;
 }
 
-const Accordion = ({id, type, programId = -1}:SectionType) => {
+const Accordion = ({id, programId = -1}:SectionType) => {
     const accordion:any = useSelector((state: RootState) => {
-        if (type === 'major' && programId >= 0) 
-            return state.store.programs.byIds[programId].byIds[id];
+        if (programId !== -1) 
+            return state.programs.byIds[programId].byIds[id];
         else
-            return state.store.addedCourses;
+            return id;
     });
 
     let detail, name;
-    if (type === 'major') {
+    if (programId !== -1) {
         name = accordion.name;
         detail = accordion.sectionIds.map(( section:{sectionId: string, nameChild: string}) => 
-                    <AccordionDetail key={section.sectionId} 
-                                    sectionId={section.sectionId} 
-                                    text={section.nameChild}/> )
+                    <Detail key={section.sectionId} 
+                        sectionId={section.sectionId} 
+                        text={section.nameChild}
+                        isGE={false}
+                    />)
     }
     else {
-        name = 'Add Courses';
-        detail = <AccordionDetail key={id} sectionId={id} text= {""}/>
+        name = 'Added Courses';
+        detail = <Detail key={id} sectionId={id} text= {""} isGE={false}/>
     }
 
     return (
@@ -39,15 +39,10 @@ const Accordion = ({id, type, programId = -1}:SectionType) => {
             <summary> 
                 <span className='relative accordion'>
                     <h1 className="section-header"> {name} </h1>
-                    <div className="right-icon">
-                        <Right />
-                    </div>
+                    <div className="right-icon"> <Right /> </div>
                 </span>
             </summary>
-
-            <div className='section-body'>
-               {detail}
-            </div>
+            <div className='section-body'> {detail} </div>
         </details>
      )
  }

@@ -50,7 +50,7 @@ function QuarterCourse({index, sectionId, courseId}: CoursePayload) {
       let ended = false
       for (let i = 0; i < yearIds.length; i++) {
         const yearId = yearIds[i]
-        const quarterIds = state.store.years.byIds[yearId].quarterIds
+        const quarterIds = state.store.years.byIds[yearId]
         for (let j = 0; j < quarterIds.length; j++) {
           if (quarterIds[j] === sectionId) {
             ended = true

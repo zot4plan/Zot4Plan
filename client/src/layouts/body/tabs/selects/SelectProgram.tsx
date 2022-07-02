@@ -5,7 +5,7 @@ import {fetchProgramById} from '../../../../api/FetchData';
 import Select, { OnChangeValue, StylesConfig} from 'react-select';
 import './SelectProgram.css';
 import { RootState } from '../../../../app/store';
-import { handleChangeProgram } from '../../../../features/StoreSlice';
+import { handleChangeProgram } from '../../../../features/ProgramsSlice';
 
 const myStyle: StylesConfig<ProgramOption, true> =  {
     container: (provided) => ({
@@ -59,9 +59,9 @@ interface SelectProgramType { isMajor: boolean;}
 
 function SelectProgram({isMajor}: SelectProgramType) {
     const [programs, setPrograms] = useState<ProgramOption[]>([]);
-    const allIds = useSelector((state: RootState) => new Set(state.store.programs.allIds), shallowEqual);
+    const allIds = useSelector((state: RootState) => new Set(state.programs.allIds), shallowEqual);
     const selectedPrograms = useSelector((state: RootState) => (
-        state.store.programs.selectedPrograms[Number(isMajor)]
+        state.programs.selectedPrograms[Number(isMajor)]
     ), shallowEqual)
 
     const dispatch = useDispatch();

@@ -17,8 +17,7 @@ interface YearType {
 function Year({id, name, index}:YearType) {
     const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
     const QUARTER_CLASS= ["fall", "winter","spring","summer"];
-
-    const quarterIds = useSelector((state:RootState) => state.store.years.byIds[id].quarterIds)
+    const quarterIds = useSelector((state:RootState) => state.store.years.byIds[id])
 
     return (
         <details open key={id} style={{marginBottom: '2.5rem'}}>
@@ -34,9 +33,9 @@ function Year({id, name, index}:YearType) {
 
             <div className='quarters-wrapper'>
                 {QUARTER_NAMES.map((name, index) => 
-                        <h2 key={name} className={"quarter-header-"+ QUARTER_CLASS[index] + " quarter-header"}> 
-                            {name}
-                        </h2>
+                    <h2 key={name} className={"quarter-header-"+ QUARTER_CLASS[index] + " quarter-header"}> 
+                        {name}
+                    </h2>
                 )}
 
                 {quarterIds.map((id, index) => 

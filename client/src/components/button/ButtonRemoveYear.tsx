@@ -1,5 +1,5 @@
 import {useDispatch} from 'react-redux';
-import {removeYear} from '../../features/StoreSlice';
+import { removeYear } from '../../features/StoreSlice';
 import Remove from '../icon/Remove';
 import ReactTooltip from "react-tooltip";
 import './ButtonRemoveYear.css';

@@ -8,8 +8,7 @@ import SelectCourses from '../selects/SelectCourses';
 import ChevronLeft from '../../../../components/icon/ChervonLeft';
 import ChevronRight from '../../../../components/icon/ChervonRight';
 
-import './Program.css';
-import { handleSwitchProgram } from '../../../../features/StoreSlice';
+import { handleSwitchProgram } from '../../../../features/ProgramsSlice';
 
 interface Type {
     isMajor: boolean;
@@ -19,17 +18,17 @@ interface Type {
 function Program ({isMajor, addedCourses}:Type) {
     const programId = useSelector((state:RootState) => {
         let i = isMajor? 1 : 0;
-        let index = state.store.programs.index[i];
-        return (index < 0)? 0 : state.store.programs.selectedPrograms[i][index].value;
+        let index = state.programs.index[i];
+        return (index < 0)? 0 : state.programs.selectedPrograms[i][index].value;
     });
 
     const allIds = useSelector((state:RootState) => (
-        programId > 0 ? state.store.programs.byIds[programId].allIds : []
+        programId > 0 ? state.programs.byIds[programId].allIds : []
     ), shallowEqual);
 
-    const name = useSelector((state:RootState) => programId > 0 ? state.store.programs.byIds[programId].name : "");
-    const url = useSelector((state:RootState) => programId > 0 ? state.store.programs.byIds[programId].url : "");
-    const status = useSelector((state:RootState) => state.store.programs.status);
+    const name = useSelector((state:RootState) => programId > 0 ? state.programs.byIds[programId].name : "");
+    const url = useSelector((state:RootState) => programId > 0 ? state.programs.byIds[programId].url : "");
+    const status = useSelector((state:RootState) => state.programs.status);
 
     const dispatch = useDispatch();
 
@@ -50,8 +49,8 @@ function Program ({isMajor, addedCourses}:Type) {
                         <a href={url} target='_blank' rel="noreferrer"> {name} </a>
                         <button key={'ChevronRight'} value={1} onClick={handleOnClick}> <ChevronRight/> </button>
                     </div>);
-        content.push(<Accordion key={addedCourses} id={addedCourses} type="other"/>)
-        allIds.forEach(id => { content.push(<Accordion key={id} id={id} type="major" programId={programId} />) });
+        content.push(<Accordion key={addedCourses} id={addedCourses}/>)
+        allIds.forEach(id => { content.push(<Accordion key={id} id={id} programId={programId} />) });
         content.push(<div key="empty" style={{height:'42rem'}}></div>);
     }
 
@@ -60,14 +59,13 @@ function Program ({isMajor, addedCourses}:Type) {
 
     else
         content.push(<div key="img" className='flex-container'>
-                        <img id='program-img' src={ZotSelectMajor} 
-                        alt='please select your major!' />
+                        <img id='program-img' src={ZotSelectMajor} alt='please select your major!'/>
                     </div>)
     
     return (
         <div style={{position: 'relative'}}> 
             <div key="browse" style={{display: status === 'succeeded'? "flex": "none", flexDirection:'column'}} >
-                <SelectCourses />  
+                <SelectCourses/>  
             </div> 
             <div className="program-container relative"> 
                 {content}

@@ -15,7 +15,7 @@ interface CourseButtonType {
 function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
     const [show, setShow] = useState(false);
     const course = useSelector((state: RootState) => state.store.courses.byIds[id].data)
-    const colors = useSelector((state: RootState) => state.store.depts.byIds[course.department].colors);
+    const colors = useSelector((state: RootState) => state.store.depts.byIds[course.department]);
 
     let warningSpan;
     let color = colors[2]

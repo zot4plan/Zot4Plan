@@ -6,7 +6,6 @@ import {useCallback,memo } from 'react'
 
 function Quarter({sectionId, name}:QuarterType) {
   const courses = useSelector((state:RootState) => state.store.sections[sectionId]);
-  
   const renderCard = useCallback((id: string, sectionId: string, index: number) => {
     return (
       <QuarterCourse 

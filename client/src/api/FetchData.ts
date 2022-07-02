@@ -15,9 +15,9 @@ export const fetchAllGE = createAsyncThunk("features/fetchAllGE", async () =>
 
 export const fetchGE = createAsyncThunk("features/fetchGE", async (id: string) => 
     Axios.post('/api/getGE', {id: id}).then(response => {
-        return response.data as CourseType[];
+        return {courses: response.data as CourseType[]};
     }).catch(() => {
-        return [] as CourseType[];
+        return {courses: [] as CourseType[]};
     })
 );
 
@@ -32,7 +32,7 @@ export const fetchProgramById = createAsyncThunk("features/fetchProgramById", as
             requirement: response.data.major.requirement as RequirementType[],
             url: response.data.major.url, // link to the requirement page of major
             courseIds: response.data.allCourseIds, 
-            courseData: response.data.coursesData as CourseType[],
+            courses: response.data.coursesData as CourseType[],
             programs: payload.programs
         };
     })
@@ -45,7 +45,7 @@ export const fetchProgramById = createAsyncThunk("features/fetchProgramById", as
             url: '',
             isMajor: false,
             courseIds: [], 
-            courseData: [] as CourseType[],
+            courses: [] as CourseType[],
             programs: payload.programs
         };
     })

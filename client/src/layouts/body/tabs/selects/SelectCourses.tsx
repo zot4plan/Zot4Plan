@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Axios from '../../../../api/Axios';
 
 import {RootState} from '../../../../app/store';
-import {addCourse} from '../../../../features/StoreSlice';
+import {addCourse} from '../../../../features/ProgramsSlice';
 import AddIcon from '../../../../components/icon/AddIcon';
 import Error from '../../../../components/icon/Error';
 import Success from '../../../../components/icon/Success';
@@ -66,8 +66,8 @@ function SelectCourses() {
     const [selectCourse, setSelectCourse] = useState<string>("");
     const [message, setMessage] = useState({content: "", status: 'idle'});
     const addedCourses = useSelector((state:RootState) => {
-        let sectionId = state.store.addedCourses.sectionId;
-        return state.store.sections[sectionId];
+        let sectionId = state.programs.addedCourses;
+        return state.programs.sections[sectionId];
     }); 
     const dispatch = useDispatch();
 
@@ -83,7 +83,7 @@ function SelectCourses() {
                 Axios.post('/api/getCourseById', {id: selectCourse })
                     .then((res) => {
                         if(res.data.message === 'succeed') {
-                            dispatch(addCourse(res.data.data));
+                            dispatch(addCourse({courses: [res.data.data]}));
                             content += " is added successfully!";
                             status = "succeed";
                         }

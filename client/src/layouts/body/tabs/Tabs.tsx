@@ -11,8 +11,8 @@ import './Tabs.css';
 
 function Tabs () {
   const [tab, setTab] = useState({id: 1, isMajor: true}); // Major: 1, minor: 2, GE: 3 
-  const addedCourses = useSelector((state:RootState)=> state.store.addedCourses.sectionId);
-  const status = useSelector((state:RootState)=> state.store.ge.status);
+  const addedCourses = useSelector((state:RootState)=> state.programs.addedCourses);
+  const status = useSelector((state:RootState)=> state.ge.status);
 
   const dispatch = useDispatch();
   
@@ -43,7 +43,7 @@ function Tabs () {
           className={'tab flex-container round-top-right ' + (tab.id === 3?"active":"")} 
         >
           GE
-        </li>
+        </li> 
       </ul>
 
       <div style={{display: tab.id !== 3? "block": "none"}}>

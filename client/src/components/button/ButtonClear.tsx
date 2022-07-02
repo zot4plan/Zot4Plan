@@ -1,8 +1,7 @@
 import {memo, useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {refreshState } from '../../features/StoreSlice';
-
 import ReactTooltip from "react-tooltip";
+import { clearYears } from '../../features/StoreSlice';
 
 function ButtonClear() {
     const [isShow, setIsShow] = useState(false);
@@ -10,7 +9,7 @@ function ButtonClear() {
 
     const refresh = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        dispatch(refreshState());
+        dispatch(clearYears());
         setIsShow(!isShow);
     }
 

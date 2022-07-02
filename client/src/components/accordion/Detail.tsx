@@ -7,25 +7,27 @@ import { RootState } from '../../app/store';
 interface AccordionDetailType {
     text: string;
     sectionId: string;
+    isGE?: boolean;
 }
 
-function AccordionDetail ({sectionId, text}:AccordionDetailType) {
-    const courseIds = useSelector((state:RootState)=> state.store.sections[sectionId])
+function Detail ({sectionId, text, isGE }:AccordionDetailType) {
+    const courseIds = useSelector((state:RootState) => (
+        isGE? state.ge.sections[sectionId]: state.programs.sections[sectionId]
+    ))
 
     let courseCards: JSX.Element[] = [];
     let index = 0;
-    if(courseIds !== undefined)
+    if(courseIds !== undefined) 
         courseIds.forEach((child) => {
-            if(typeof(child) === 'string') {
+            if(typeof(child) === 'string') 
                 courseCards.push(
                     <RequiredCourse 
                         key={sectionId+child} 
                         courseId={child}
                         sectionId={sectionId}
-                        index={index}/>
-                )
-                index++;
-            }
+                        index={index}
+                    />)
+            
             else {
                 let length = child.length - 1;
                 let content:JSX.Element[] = [];
@@ -44,14 +46,16 @@ function AccordionDetail ({sectionId, text}:AccordionDetailType) {
                                 courseId={child[length]}
                                 sectionId={sectionId}
                                 index={index}/>)
-                index++;
                 courseCards.push(<div key={sectionId + index + 'div'} className='sub-area'> {content}</div>);
             }
+            index++;
         })
 
     let p;
     if(text.length > 3 && text.substring(0,3) === "(b)")
-        p = <p key={sectionId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> <b>{text.substring(3)}</b> </p>
+        p = <p key={sectionId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> 
+                <b>{text.substring(3)}</b> 
+            </p>
     else if(text !== "")
         p = <p key={sectionId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> {text}</p>
 
@@ -76,4 +80,4 @@ function AccordionDetail ({sectionId, text}:AccordionDetailType) {
     )
 }
 
-export default memo(AccordionDetail);
+export default memo(Detail);

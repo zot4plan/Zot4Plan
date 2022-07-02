@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import {RootState} from '../../../app/store';
-import YearAccordion from '../../../components/accordion/Year';
+import Year from '../../../components/accordion/Year';
 import ButtonAddYear from '../../../components/button/ButtonAddYear';
 import ButtonClear from '../../../components/button/ButtonClear';
 import ButtonLoad from '../../../components/button/ButtonLoad';
@@ -26,7 +26,7 @@ const Schedule = () => {
 
         <div id="schedule">
           {yearIds.map( (id,index) => (
-            <YearAccordion key={id} 
+            <Year key={id} 
               id={id}
               name={YEAR_NAMES[index] + " Year"} 
               index={index} 

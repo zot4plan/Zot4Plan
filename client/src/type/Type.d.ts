@@ -121,56 +121,32 @@ declare interface ProgramType {
     allIds: string[];
     name: string;
     url: string;
-    courses: string[];
     isMajor: boolean;
 }
 
-declare interface StoreType{
-    years: {
-        byIds: { [id: string]: YearType }; 
-        allIds: string[]; 
-        totalUnits: number;
-    };
-    programs: {
-        byIds: {[id: string]: ProgramType };
-        allIds: number[];
-        selectedPrograms: ProgramOption[][]; // 0-index is minors, 1-index is majors 
-        index: number[]; // 0-index is the current minor displaying, 1-index is for major
-        status: string;
-    };
-    ge: {
-        byIds: { [id:string]: GEType};
-        allIds: string[];
-        status: string;
-    };
-    addedCourses: { sectionId: string};
-
+declare interface ProgramsSliceType{
+    byIds: {[id: string]: ProgramType };
+    allIds: number[];
+    selectedPrograms: ProgramOption[][]; // 0-index is minors, 1-index is majors 
+    index: number[]; // 0-index is the current minor displaying, 1-index is for major
+    status: string;
+    addedCourses: string,
     sections: {[id:string]: (string|string[])[]};
-
-    courses: {
-        byIds: {
-            [id:string]: {
-                data: CourseType, 
-                remains: number,
-            }},
-        allIds: string[];
-    };
-    depts: {
-        byIds: {
-            [propName:string]: {
-                id: string;
-                colors: string[];
-            }}, 
-        size: number;
-    }
 }
 
-declare interface CoursesSliceType{
-    years: {
-        byIds: { [id: string]: YearType }; 
-        allIds: string[]; 
-    };
+declare interface GESliceType{
+    byIds: { [id:string]: GEType};
+    allIds: string[];
+    status: string;
     sections: {[id:string]: (string|string[])[]};
+}
+
+declare interface StoreSliceType {
+    years: {
+        byIds: { [id: string]: string[] },
+        allIds: string[],
+    },
+    sections: {[id:string]: (string|string[])[]},
     totalUnits: number,
     courses: {
         byIds: {
@@ -178,14 +154,10 @@ declare interface CoursesSliceType{
                 data: CourseType, 
                 remains: number,
             }},
-        allIds: string[];
-    };
+        allIds: string[],
+    },
     depts: {
-        byIds: {
-            [propName:string]: {
-                id: string;
-                colors: string[];
-            }}, 
-        size: number;
+        byIds: {[id:string]: string[];}, 
+        size: number,
     }
 }
