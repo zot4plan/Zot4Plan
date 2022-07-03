@@ -122,14 +122,13 @@ declare interface ProgramType {
     name: string;
     url: string;
     isMajor: boolean;
+    status: string;
 }
 
 declare interface ProgramsSliceType{
     byIds: {[id: string]: ProgramType };
-    allIds: number[];
     selectedPrograms: ProgramOption[][]; // 0-index is minors, 1-index is majors 
     index: number[]; // 0-index is the current minor displaying, 1-index is for major
-    status: string;
     addedCourses: string,
     sections: {[id:string]: (string|string[])[]};
 }

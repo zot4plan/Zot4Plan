@@ -1,11 +1,12 @@
 import { useState, useEffect, memo, useCallback } from 'react';
 import Axios from '../../../../api/Axios';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import {fetchProgramById} from '../../../../api/FetchData';
 import Select, { OnChangeValue, StylesConfig} from 'react-select';
 import './SelectProgram.css';
 import { RootState } from '../../../../app/store';
 import { handleChangeProgram } from '../../../../features/ProgramsSlice';
+import SelectCourses from './SelectCourses';
+import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
 
 const myStyle: StylesConfig<ProgramOption, true> =  {
     container: (provided) => ({
@@ -59,7 +60,6 @@ interface SelectProgramType { isMajor: boolean;}
 
 function SelectProgram({isMajor}: SelectProgramType) {
     const [programs, setPrograms] = useState<ProgramOption[]>([]);
-    const allIds = useSelector((state: RootState) => new Set(state.programs.allIds), shallowEqual);
     const selectedPrograms = useSelector((state: RootState) => (
         state.programs.selectedPrograms[Number(isMajor)]
     ), shallowEqual)
@@ -74,46 +74,37 @@ function SelectProgram({isMajor}: SelectProgramType) {
             setPrograms(programsArray);   
         }
         if(programs.length === 0) 
-            fetchAllPrograms();
-            
+            fetchAllPrograms();  
     },[programs]); 
 
     // Get Major Requirement Courses
     const handleOnChange = useCallback((selectedOptions: OnChangeValue<ProgramOption, true>) => {
-        let isFetch = false;
-
-        if(selectedOptions){
-           try {
-                selectedOptions.forEach(option => {
-                    if(!allIds.has(option.value)) {
-                        dispatch(fetchProgramById({id: option.value, programs: selectedOptions as ProgramOption[]}));
-                        isFetch = true;
-                    }
-                })
-            }
-            catch (err) {
-                console.error('Failed to retrieve program: ', err)
-            } 
-
-            if(!isFetch)
-                dispatch(handleChangeProgram({value: selectedOptions as ProgramOption[], isMajor: isMajor}));
-        }
-    },[allIds, dispatch, isMajor])
+        if(selectedOptions)
+            dispatch(handleChangeProgram({value: selectedOptions as ProgramOption[], isMajor: isMajor}));
+    },[dispatch, isMajor])
     
     return (
-    <div id="select-major"> 
-        <Select
-            defaultValue={[]}
-            isMulti 
-            isClearable = {false}
-            value = {selectedPrograms}
-            onChange={handleOnChange}
-            options = {programs.filter((program:ProgramOption) => program.is_major === isMajor)} 
-            isOptionDisabled={() => selectedPrograms.length >= 3 }
-            styles={myStyle}
-            placeholder = {"Select Your " + (isMajor? " Major" : "Minor")}
-            aria-label = {"Select Your " + (isMajor? " Major" : "Minor")}
-        />
+    <div>
+        <div id="select-major"> 
+            <Select
+                defaultValue={[]}
+                isMulti 
+                isClearable = {false}
+                value = {selectedPrograms}
+                onChange={handleOnChange}
+                options = {programs.filter((program:ProgramOption) => program.is_major === isMajor)} 
+                isOptionDisabled={() => selectedPrograms.length >= 3 }
+                styles={myStyle}
+                placeholder = {"Select Your " + (isMajor? " Major" : "Minor")}
+                aria-label = {"Select Your " + (isMajor? " Major" : "Minor")}
+            />
+        </div>
+        {selectedPrograms.length > 0 && <SelectCourses/>}
+        {selectedPrograms.length === 0 && 
+        <div key="img" className='flex-container'>
+            <img id='program-img' src={ZotSelectMajor} alt='please select your major!'/>
+        </div>
+        }
     </div>
     )
 };

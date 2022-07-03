@@ -3,12 +3,11 @@ import { shallowEqual, useDispatch, useSelector} from 'react-redux';
 
 import {RootState} from '../../../../app/store';
 import Accordion from '../../../../components/accordion/Accordion';
-import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
-import SelectCourses from '../selects/SelectCourses';
 import ChevronLeft from '../../../../components/icon/ChervonLeft';
 import ChevronRight from '../../../../components/icon/ChervonRight';
 
 import { handleSwitchProgram } from '../../../../features/ProgramsSlice';
+import { fetchProgramById } from '../../../../api/FetchData';
 
 interface Type {
     isMajor: boolean;
@@ -28,7 +27,7 @@ function Program ({isMajor, addedCourses}:Type) {
 
     const name = useSelector((state:RootState) => programId > 0 ? state.programs.byIds[programId].name : "");
     const url = useSelector((state:RootState) => programId > 0 ? state.programs.byIds[programId].url : "");
-    const status = useSelector((state:RootState) => state.programs.status);
+    const status = useSelector((state:RootState) => programId > 0 ? state.programs.byIds[programId].status : "");
 
     const dispatch = useDispatch();
 
@@ -40,10 +39,10 @@ function Program ({isMajor, addedCourses}:Type) {
 
     let content = [] as JSX.Element [];
 
-    if (status === 'loading') 
-        content.push(<div key="spinner" className='loading-message'> loading...!!! </div>)
+    if (status === 'idle') 
+        dispatch(fetchProgramById(programId));
 
-    else if (status === 'succeeded' && programId > 0)  {
+    else if (status === 'succeeded')  {
         content.push(<div key="hyperlink" className='hyperlink'>
                         <button key={'ChevronLeft'} value={-1} onClick={handleOnClick}> <ChevronLeft/> </button>
                         <a href={url} target='_blank' rel="noreferrer"> {name} </a>
@@ -53,23 +52,12 @@ function Program ({isMajor, addedCourses}:Type) {
         allIds.forEach(id => { content.push(<Accordion key={id} id={id} programId={programId} />) });
         content.push(<div key="empty" style={{height:'42rem'}}></div>);
     }
-
     else if( status === 'error')
         content.push(<div key="error" className='loading-message red'>Cannot retrieve the data...!!!</div>) 
-
-    else
-        content.push(<div key="img" className='flex-container'>
-                        <img id='program-img' src={ZotSelectMajor} alt='please select your major!'/>
-                    </div>)
     
     return (
-        <div style={{position: 'relative'}}> 
-            <div key="browse" style={{display: status === 'succeeded'? "flex": "none", flexDirection:'column'}} >
-                <SelectCourses/>  
-            </div> 
-            <div className="program-container relative"> 
-                {content}
-            </div>
+        <div className="program-container relative"> 
+            {content}
         </div>
     )
 }

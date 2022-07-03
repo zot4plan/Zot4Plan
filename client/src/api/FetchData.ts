@@ -21,32 +21,26 @@ export const fetchGE = createAsyncThunk("features/fetchGE", async (id: string) =
     })
 );
 
-export const fetchProgramById = createAsyncThunk("features/fetchProgramById", async (payload: {id: number, programs: ProgramOption[]}) => 
-    Axios.post('/api/getRequirementById', {id: payload.id})
+export const fetchProgramById = createAsyncThunk("features/fetchProgramById", async (id: number) => 
+    Axios.post('/api/getRequirementById', {id: id})
     .then( response => {
         return {
-            status: "succeed",
-            id: payload.id,
-            isMajor: response.data.major.is_major as boolean,
-            name: response.data.major.name, 
+            status: "succeeded",
+            id: id,
             requirement: response.data.major.requirement as RequirementType[],
             url: response.data.major.url, // link to the requirement page of major
             courseIds: response.data.allCourseIds, 
             courses: response.data.coursesData as CourseType[],
-            programs: payload.programs
         };
     })
     .catch(()=> {
         return {
             status: "failed",
-            id: payload.id,
+            id: id,
             requirement: [],
-            name: '',
             url: '',
-            isMajor: false,
             courseIds: [], 
             courses: [] as CourseType[],
-            programs: payload.programs
         };
     })
 ); 

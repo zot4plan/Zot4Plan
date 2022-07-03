@@ -12,8 +12,6 @@ const getInitialState = () => {
         byIds: {},
         selectedPrograms:[[],[]],
         index: [-1,-1],
-        allIds: [],
-        status:"idle",
         addedCourses: addedCourses,
         sections: sections,
     }
@@ -39,10 +37,24 @@ export const storeSlice = createSlice ({
                 currentIndex = state.index[i],
                 len = action.payload.value.length;
             
-            if(currentIndex >= len)
+            if(currentIndex >= len || currentIndex === -1)
                 state.index[i] = len - 1;
-
+                
+            action.payload.value.forEach(program => {
+                if(state.byIds[program.value] === undefined) {
+                    state.byIds[program.value] = {
+                        id: program.value,
+                        byIds: {}, 
+                        allIds: [],
+                        name: program.label,
+                        url: "",
+                        isMajor: program.is_major,
+                        status: "idle"
+                    }
+                }
+            })
             state.selectedPrograms[i] = action.payload.value;
+            
         },
 
         handleSwitchProgram: (state, action: PayloadAction<SwitchProgramPayload>) => { 
@@ -60,56 +72,36 @@ export const storeSlice = createSlice ({
     },
 /********************************** ExtraReducers ********************************/ 
     extraReducers: (builder) => {
+        builder.addCase(fetchProgramById.pending, (state,action) => {
+            state.byIds[action.meta.arg].status = "loading";
+        });
         /**
          * @param requirement: MajorType[]
          * @param url: string
-         * @param name: string
-         * @param isMajor: boolean
          * @param courseIds: string[]
          * @param courseData: CourseType[]
          */
         builder.addCase(fetchProgramById.fulfilled, (state, action) => {  
-            state.status = "succeeded";
-   
-            let program: ProgramType = {
-                id: action.payload.id,
-                byIds: {}, 
-                allIds: [],
-                name: action.payload.name,
-                url: action.payload.url,
-                isMajor: action.payload.isMajor,
-            };
-
+            let id = action.payload.id;
+            
+            state.byIds[id].status = action.payload.status;
+            state.byIds[id].url = action.payload.url;
+            
             action.payload.requirement.forEach ((accordion)=>{
                 const accordionId = nanoid(SECTION_ID_LEN);
-                program.allIds.push(accordionId);
-                program.byIds[accordionId] = {id: accordionId, name: accordion.name, sectionIds: []};
+                state.byIds[id].allIds.push(accordionId);
+                state.byIds[id].byIds[accordionId] = {id: accordionId, name: accordion.name, sectionIds: []};
             
                 accordion.child.forEach((section) => {
                     const sectionId = nanoid(SECTION_ID_LEN);
-                    program.byIds[accordionId].sectionIds.push({sectionId: sectionId, nameChild: section.name})
+                    state.byIds[id].byIds[accordionId].sectionIds.push({sectionId: sectionId, nameChild: section.name})
                     state.sections[sectionId] = section.child;
                 })
-            })
-
-            state.byIds[program.id] = program;         
-            state.allIds.push(program.id);
-            
-            // assign new selected programs
-            let i = action.payload.isMajor? 1 : 0,
-            currentIndex = state.index[i],
-            len = action.payload.programs.length;
-            
-            if(currentIndex === -1)
-                state.index[i] = 0;
-            else if(currentIndex >= len)
-                state.index[i] = len - 1;
-
-            state.selectedPrograms[i] = action.payload.programs;
+            })  
         });
 
-        builder.addCase(fetchProgramById.rejected, (state) => {
-            state.status = "failed";
+        builder.addCase(fetchProgramById.rejected, (state, action) => {
+            state.byIds[action.meta.arg].status = "failed";
         });
     },
 });
