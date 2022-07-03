@@ -1,5 +1,3 @@
-import requests
-
 """
 Course is a class is responsible for storing information of each individual
 UCI courses. 
@@ -65,7 +63,7 @@ class Course:
         """
 
         raw_info = raw_info.replace('"', "'")
-        
+
         if 'Restriction:' in raw_info:
             self.restriction = raw_info.replace('Restriction:', '')
         elif 'Prerequisite:' in raw_info:
@@ -75,10 +73,10 @@ class Course:
                 self.corequisite = separate[0].replace('Corequisite:','')
             else:
                 self.prerequisite = raw_info.replace('\n', '').replace('"', "'").replace('Prerequisite:','').replace('\xa0ENG\xa0', ' ')
-        elif self.corequisite != '' and 'Corequisite:' in raw_info:
+        elif self.corequisite == '' and 'Corequisite:' in raw_info:
             self.corequisite = raw_info.replace('\n', '').replace('Corequisite:','')
     
-    
+
     def set_ge(self, raw_text_ge=None):
         """
         set_ge takes in a raw text that contains information regarding course's GE category. The string

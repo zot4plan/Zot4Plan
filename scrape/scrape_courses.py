@@ -82,14 +82,14 @@ def write_courses():
     write_courses calls get_courses_websites to collect all current UCI courses from UCI General Catalogue.
     Using those collected websites, get_courses will be called to scrape all of the courses offered at UCI by departments.
     All information regarding courses will be saved in uci_courses.sql.
-    All information regarding GE courses will be saved in alll_GEs.sql.
+    All information regarding GE courses will be saved in courses_in_ge.sql.
     """
 
     websites = get_courses_websites()
     course_names = []
-    write_ge = open('../database/all_GE.sql', 'w')
+    write_ge = open('../database/courses_in_ge.sql', 'w')
 
-    with open('../database/uci_courses.sql', 'w') as f:
+    with open('../database/courses.sql', 'w') as f:
         for each_url in websites:
             uci_course = get_courses(each_url)
             for key,value in uci_course.items():
@@ -99,11 +99,11 @@ def write_courses():
                         value.prerequisite_for + '","' + value.restriction + '","' + value.repeatability + '","' + 
                         value.corequisite + '","' + value.ge_string + '","' + value.past_terms + '");' + '\n')
                 for cat in value.ge_list:
-                    write_ge.write('INSERT INTO courses_in_ge (courseId, geId) VALUES ("' + key + '","' + cat + '");' + '\n')
+                    write_ge.write('INSERT INTO courses_in_ge (course_id, ge_id) VALUES ("' + key + '","' + cat + '");' + '\n')
     
     write_ge.close()
 
-    with open('../database/courseIDs.json', 'w') as f: 
+    with open('../other/courseIDs.json', 'w') as f: 
         json.dump(course_names, f,indent=4)
 
 
