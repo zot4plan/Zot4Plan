@@ -67,15 +67,15 @@ export const storeSlice = createSlice ({
 
             //prevent same course from being added to a quarter
             if(!state.sections[destinationId].includes(courseId) || sourceId === destinationId) {
-                state.sections[destinationId].splice(action.payload.destinationIndex, 0, courseId); //add course to destination
-
-                if(sourceId.length === 3)  //source is a quarter
-                    state.sections[sourceId].splice(action.payload.sourceIndex, 1); //remove course 
+                if(sourceId.length === 3) // remove course
+                    state.sections[sourceId].splice(action.payload.sourceIndex, 1); 
                 
-                else { //source is from programs, then increase total units and decrease remains
+                else { // source is from programs
                     state.courses.byIds[courseId].remains -= 1;
                     state.totalUnits += state.courses.byIds[courseId].data.units;
                 } 
+
+                state.sections[destinationId].splice(action.payload.destinationIndex, 0, courseId); // add course
             }
         },
 
