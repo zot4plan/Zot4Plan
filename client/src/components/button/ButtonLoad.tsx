@@ -57,7 +57,7 @@ function ButtonLoad () {
                         accept=".json"
                         onChange={changeHandler}
                     />
-                    <button id="upload-btn" 
+                    <button id="upload-btn"
                         className="flex-container" 
                         aria-label='browse local file' > Upload </button>
                 </div> 

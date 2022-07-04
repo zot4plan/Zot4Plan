@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
+import ReactToPrint from 'react-to-print';
 import {RootState} from '../../../app/store';
 import Year from '../../../components/accordion/Year';
 import ButtonAddYear from '../../../components/button/ButtonAddYear';
@@ -11,6 +13,7 @@ import './Schedule.css';
 const Schedule = () => {
     const yearIds = useSelector((state: RootState) => state.store.years.allIds);
     const YEAR_NAMES = ["1st","2nd","3rd","4th", "5th", "6th", "7th", "8th", "9th"];
+    const printRef = useRef(null);
 
     return (
       <div id="left-side">
@@ -19,12 +22,17 @@ const Schedule = () => {
           <li>
             <ul>
               <li style={{marginRight: '1rem'}}> <ButtonSave/> </li>
-              <li> <ButtonLoad/> </li>
+              <li style={{marginRight: '1rem'}}> <ButtonLoad/> </li>
+              <li> <ReactToPrint 
+                    trigger={() => <button className="btn">Print</button>}
+                    content={() => printRef.current}
+                   />
+              </li>
             </ul>
           </li>
         </ul>
 
-        <div id="schedule">
+        <div id="schedule" ref={printRef}>
           {yearIds.map( (id,index) => (
             <Year key={id} 
               id={id}

@@ -160,12 +160,37 @@ details[open] .quarter-droppable-area {
     .spring {border-bottom-left-radius: 0rem;}
     .fall {border-bottom-left-radius: 1.5rem;}
 
-    .quarter-header-fall, .quarter-header-winter, .quarter-header-spring, 
-    .fall, .winter, .spring {
+    .quarter-header-winter, .winter {
         border-right: 0.2rem solid var(--border-color);
     }
 }
 
 @media only screen and (min-width: 992px) {
     .section-body{padding: 1.6rem 1.2rem;}
+}
+
+@media print {
+    details {
+        box-shadow: none;
+        border: 0.2rem solid #D6D6D6 !important;
+        margin-bottom: 2.5rem !important;
+    }
+    summary {
+        padding: 0.6rem 1rem;
+    }
+    .quarters-wrapper {
+        grid-template-areas:"hfall hwinter hspring hsummer"
+                            "fall winter spring summer";
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    .quarter-header { padding: 0.25rem;}
+
+    .quarter-header-fall, .quarter-header-spring, .quarter-header-winter,
+    .fall, .spring, .winter {
+        border-right: 0.2rem solid var(--border-color);
+    }
+
+    .fall {border-bottom-left-radius: 1.5rem;}
+    .summer { border-bottom-right-radius: 1.5rem; }
 }

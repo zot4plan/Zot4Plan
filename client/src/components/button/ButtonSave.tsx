@@ -1,43 +1,29 @@
 import { useState, useRef} from 'react';
-import { useSelector } from 'react-redux';
+import { useStore } from 'react-redux';
 import { RootState } from '../../app/store';
 
 function ButtonSave () {
-    const [file, setFile] = useState({fileType: "json", name:"zotplan", url: "/"});
+    const [file, setFile] = useState({fileType: "json", name:"zot4plan", url: "/"});
     const doFileDownload = useRef<HTMLAnchorElement>(null);
+    const store = useStore();
 
-    /**
-     * Prepare file data - get collection of data from StoreSlice 
-     * Return an Object {
-     *  majorName: string      // name of the major
-     *  geCourses: string[][]  // list of list of courses taken by each ge categorie
-     *  coursesAddByStudent: string[] // list of courses added by student
-     *  years: string[][][]    // list of quarters, each quarter contains a list of courses taken in the quarter
-     * }
-     */
-/*    const data = useSelector( (state:RootState) => {
-        let majorName = state.store.programs.name;
-        let geCourses = state.store.ge.allGeIds.map(id => {
-            let geSectionId = state.store.ge.byIds[id].sectionId;
-            return state.store.sectionCourses[geSectionId];
-        });
-        let coursesAdded = state.store.sectionCourses[state.store.coursesAddByStudent.sectionId];
+    const getData = () => {
+        let state:RootState = store.getState()
         let years = state.store.years.allIds.map(id => 
-                        state.store.years.byIds[id].quarterIds.map(id => 
-                            state.store.sectionCourses[id]
+                        state.store.years.byIds[id].map(id => 
+                            state.store.sections[id]
                     ));
-       
         return {
-            majorName: majorName,
-            geCourses: geCourses as string[][],
-            coursesAddByStudent: coursesAdded as string[],
+            selectedProgram: state.programs.selectedPrograms,
+            addedCourses: state.programs.sections[state.programs.addedCourses],
             years: years as string[][][],
         }
-    });
+    }
 
     // Create JSON file and download URL
     const createDownloadFile = async () => {
-        let output = JSON.stringify({data});
+        const data = getData();
+        let output = JSON.stringify(data);
         const blob = new Blob([output])
         const url = URL.createObjectURL(blob);
         setFile( prev => ({...prev, url: url }));
@@ -54,17 +40,16 @@ function ButtonSave () {
 
     const download = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        if(data.majorName !== "") {
-            await createDownloadFile();
-            await clickOnAnchor();
-        }
-    } */
+        await createDownloadFile();
+        await clickOnAnchor();
+        
+    } 
 
     return (
         <div className="relative flex-container">    
             <button 
                 className='btn' 
-                //onClick ={download} 
+                onClick ={download} 
                 aria-label="download your plan as a JSON file"
             >   
                 Save

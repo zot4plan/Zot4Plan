@@ -25,7 +25,14 @@
     height: 3.6rem;
 }
 
-#import-btn {
+#upload-btn{
+    position: absolute;
+    z-index: 2;
+    top:0px;
+    left:0px;
+}
+
+#import-btn, #upload-btn {
     border-radius: 1.6rem;
     background-color: var(--accent-color-2);
 
