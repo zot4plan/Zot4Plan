@@ -24,24 +24,23 @@ function Tabs () {
   return (
     <div id="tab-container">
       <ul style={{display: "flex"}}>
-
         <li style={{ borderRight:'1px solid white' }}
           onClick={() => setTab({id: 1, isMajor: true})}
-          className={'tab flex-container round-top-left ' + (tab.id === 1?"active":"")} 
-        >
+          className={'tab flex-container round-top-left ' + (tab.id === 1?"active":"")}
+          >
            Major
-        </li>
+          </li>
 
-        <li style={ {borderRight:'1px solid white'} }
+        <li style={{ borderRight:'1px solid white' }}
           onClick={()=>setTab({id: 2, isMajor: false})}
           className={'tab flex-container ' + (tab.id === 2?"active":"")} 
-        >
+          >
            Minor
         </li>
 
         <li onClick={()=>setTab( prev => ({...prev, id: 3}) )}
           className={'tab flex-container round-top-right ' + (tab.id === 3?"active":"")} 
-        >
+          >
           GE
         </li> 
       </ul>

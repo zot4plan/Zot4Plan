@@ -71,6 +71,25 @@
         height: auto;
         overflow: visible;
         padding: 0rem;
-        margin: 8rem auto auto 2.5rem;
+        margin: 4rem auto;
+    }
+
+    .printUnit {
+        display: block !important;
+        height: 24px;
+        width: 200px;
+        margin-bottom : 1rem;
+        padding-left: 1rem;
+    }
+
+    .printPrograms {
+        display: block !important;
+        height: 50px;
+        width: 700px;
+        padding-left: 1rem;
+    }
+
+    .printPrograms > p {
+        margin-bottom : 0.5rem;
     }
 }

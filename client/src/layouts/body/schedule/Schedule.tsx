@@ -7,7 +7,8 @@ import ButtonAddYear from '../../../components/button/ButtonAddYear';
 import ButtonClear from '../../../components/button/ButtonClear';
 import ButtonLoad from '../../../components/button/ButtonLoad';
 import ButtonSave from '../../../components/button/ButtonSave';
-import TotalUnits from '../../../components/button/TotalUnits';
+import TotalUnits from './TotalUnits';
+import PrintPrograms from './PrintPrograms';
 import './Schedule.css';
 
 const Schedule = () => {
@@ -17,7 +18,7 @@ const Schedule = () => {
 
     return (
       <div id="left-side">
-        <ul style={{justifyContent: 'space-between', margin: '1.5rem 0.5rem 1rem 1rem'}}>
+        <ul style={{justifyContent: 'space-between', margin: '1rem 0.5rem 1rem 1rem'}}>
           <li id="total-units"> <TotalUnits/> </li>
           <li>
             <ul>
@@ -33,6 +34,8 @@ const Schedule = () => {
         </ul>
 
         <div id="schedule" ref={printRef}>
+          <PrintPrograms/>
+          <div style={{display: 'none'}} className="printUnit"> <TotalUnits/> </div>
           {yearIds.map( (id,index) => (
             <Year key={id} 
               id={id}

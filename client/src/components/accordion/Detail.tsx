@@ -52,12 +52,18 @@ function Detail ({sectionId, text, isGE }:AccordionDetailType) {
         })
 
     let p;
-    if(text.length > 3 && text.substring(0,3) === "(b)")
-        p = <p key={sectionId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> 
-                <b>{text.substring(3)}</b> 
+    if(text != "") {
+        let sub = text.substring(0,3);
+        let content = (sub === "(b)" || sub === "(r)")? text.substring(3) : text;
+        p = <p key={sectionId +'p'}  
+               style={{
+                marginBottom:courseIds.length > 0? '0.5rem' : '1rem',
+                fontWeight: sub === "(b)"? 'bold' : 'normal',
+                color: sub === "(r)"? '#DA1E37':'black' ,
+            }}> 
+                {content}
             </p>
-    else if(text !== "")
-        p = <p key={sectionId +'p'}  style={{marginBottom:courseIds.length > 0? '0.5rem' : '1rem'}}> {text}</p>
+    }
 
     return (
         <div>
