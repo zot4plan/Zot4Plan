@@ -23,7 +23,7 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
     let textColor = 'white'
     if (isWarning) {
         warningSpan = <span className='course-warning'>{Error()}</span>
-        color = '#8B8000'                                       // Yellow color for unfulfilled prereqs warning                             
+        // color = '#8B8000'                                       // Yellow color for unfulfilled prereqs warning                             
     } else if (isCrossed) {
         color = '#D3D3D3'
         textColor = 'black'
@@ -51,8 +51,8 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
             > 
                 {id}
             </p>
-
-            {showUnit && <p className='unit'>{isWarning && warningSpan}{course.units + ' units'}</p>}
+            {isWarning && warningSpan}
+            {showUnit && !isWarning && <p className='unit'>{course.units + ' units'}</p>}
         </div>
         
         <div style={{display: show? "block":"none"}}>

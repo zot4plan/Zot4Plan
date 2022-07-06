@@ -29,10 +29,14 @@
 }
 
 .course-warning {
-    margin-right: 1rem;
     color: white;
+    margin-right: 12%;
+    margin-left: 0.5rem;
 }
 
+.course-warning > svg {
+    font-size: 1.9rem;
+}
 .unit {
     text-align: center;
     cursor: grab;
