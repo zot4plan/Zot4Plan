@@ -22,7 +22,12 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
     let color = colors[2]
     let textColor = 'white'
     if (isWarning) {
-        warningSpan = <span className='course-warning'>{Error()}</span>
+        warningSpan = 
+        <span className='course-warning' data-tip data-for={'prereqTip'+id} >{Error()}
+            <ReactTooltip id={"prereqTip"+id} place="top" effect="solid" disable={!isWarning}>
+                Missing prerequisites
+            </ReactTooltip>
+        </span>
         // color = '#8B8000'                                       // Yellow color for unfulfilled prereqs warning                             
     } else if (isCrossed) {
         color = '#D3D3D3'
@@ -36,16 +41,10 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
 
     return ( 
     <>
-        <ReactTooltip id={"prereqTip"+id} place="top" effect="solid" disable={!isWarning}>
-            Missing prerequisites
-        </ReactTooltip>
-
         <div className="course-btn"
             onClick={handleOnClick} 
             style={{backgroundColor: color}}
-            data-tip data-for={'prereqTip'+id}
         >
-
             <p className='course-id' 
               style={{textDecoration: isCrossed? "line-through":"none", color: textColor}}
             > 
