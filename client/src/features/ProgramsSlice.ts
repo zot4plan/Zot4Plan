@@ -108,7 +108,12 @@ export const storeSlice = createSlice ({
     /***************************** fetchSchedule *******************************/
         builder.addCase(fetchSchedule.fulfilled, (state, action) => {  
             state.selectedPrograms = action.payload.selectedPrograms;
-            state.selectedPrograms.forEach(programs => {
+            state.selectedPrograms.forEach((programs, i) => {
+                if(programs.length > 0)
+                    state.index[i] = 0;
+                else
+                    state.index[i] = -1;
+                    
                 programs.forEach(program => {
                     if(state.byIds[program.value] === undefined) {
                         state.byIds[program.value] = {
@@ -124,7 +129,7 @@ export const storeSlice = createSlice ({
                 })
             })
             state.sections[state.addedCourses] = action.payload.addedCourses;
-            state.index =[0,0];
+            
         });
 
     },
