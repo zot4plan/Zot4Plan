@@ -45,7 +45,7 @@ const Schedule = () => {
           ))}  
         </div> 
 
-        <ul style={{justifyContent: 'end', marginRight: '0.5rem'}}>
+        <ul style={{justifyContent:'end', marginRight:'0.5rem'}}>
           <li style={{marginRight: '1rem'}}> <ButtonAddYear/> </li>  
           <li> <ButtonClear/> </li>    
         </ul>     

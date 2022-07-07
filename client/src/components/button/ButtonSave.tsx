@@ -1,66 +1,79 @@
-import { useState, useRef} from 'react';
+import { useState, ChangeEvent} from 'react';
 import { useStore } from 'react-redux';
 import { RootState } from '../../app/store';
+import ReactTooltip from 'react-tooltip';
+import Axios from '../../api/Axios';
 
 function ButtonSave () {
-    const [file, setFile] = useState({fileType: "json", name:"zot4plan", url: "/"});
-    const doFileDownload = useRef<HTMLAnchorElement>(null);
+    const [name, setName] = useState("");
+    const [message, setMessage] = useState({content: "", status: 'idle'});
+
     const store = useStore();
 
-    const getData = () => {
+    const getSchedule = () => {
         let state:RootState = store.getState()
         let years = state.store.years.allIds.map(id => 
                         state.store.years.byIds[id].map(id => 
                             state.store.sections[id]
                     ));
         return {
-            selectedProgram: state.programs.selectedPrograms,
+            selectedPrograms: state.programs.selectedPrograms,
             addedCourses: state.programs.sections[state.programs.addedCourses],
             years: years as string[][][],
         }
     }
 
-    // Create JSON file and download URL
-    const createDownloadFile = async () => {
-        const data = getData();
-        let output = JSON.stringify(data);
-        const blob = new Blob([output])
-        const url = URL.createObjectURL(blob);
-        setFile( prev => ({...prev, url: url }));
-    } 
-
-    // Download file and free up the storage after finishing
-    const clickOnAnchor =  async () => {
-        if(doFileDownload.current) {
-            doFileDownload.current.click();
-            URL.revokeObjectURL(file.url); // free up storage 
-            setFile( prev => ({...prev, url: "/" }));
-        }
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setName(e.target.value);
     }
 
-    const download = async (e: { preventDefault: () => void; }) => {
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        await createDownloadFile();
-        await clickOnAnchor();
+        setTimeout(() => {
+            let schedule = getSchedule();
+            Axios.post('/api/saveSchedule', {id: name, schedule: schedule}).then(response => {
+                setMessage({status: "success", content: "saved!"})
+            }).catch(() => {
+                setMessage({status: "failed", content: "failed"})
+            })
+        }, 500);
         
-    } 
+    }
 
     return (
         <div className="relative flex-container">    
             <button 
                 className='btn' 
-                onClick ={download} 
+                data-tip data-for='save'
                 aria-label="download your plan as a JSON file"
             >   
                 Save
             </button> 
 
-            <div style={{position: "absolute", display: "none"}}>   
-                <a download={file.name + '.' + file.fileType}
-                    href={file.url}
-                    ref={doFileDownload}
-                />
-            </div>
+            <ReactTooltip 
+                id="save" 
+                place="bottom" 
+                effect="solid" 
+                event='click' 
+                globalEventOff='click' 
+                clickable = {true}  
+                type="light"
+                borderColor='black'
+            >
+                <div onClick={e => e.stopPropagation()}>
+                    <input type="text"
+                        name="saveName"
+                        value = {name}
+                        onChange = {handleInputChange}
+                    />
+
+                    <button className='btn' onClick={handleSubmit}>
+                        Submit
+                    </button>
+                </div>
+
+                {message.status != "idle" && <p> {message.content} </p>}
+            </ReactTooltip>
         </div>
     )
 }

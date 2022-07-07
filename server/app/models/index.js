@@ -21,6 +21,7 @@ db.courses = require("./courses.model.js")(sequelize, Sequelize);
 db.programs = require("./programs.model.js")(sequelize,Sequelize);
 db.general_education = require("./general_education.model.js")(sequelize,Sequelize);
 db.courses_in_ge = require("./courses_in_ge.model.js")(sequelize, Sequelize);
+db.schedules= require("./schedules.model.js")(sequelize, Sequelize);
 db.visits = require("./visits.model.js")(sequelize, Sequelize);
 
 // courses_in_ge associations

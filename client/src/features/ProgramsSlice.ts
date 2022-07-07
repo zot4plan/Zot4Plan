@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
-import { fetchProgramById } from '../api/FetchData'
+import { fetchProgramById, fetchSchedule } from '../api/FetchData'
 
 export const SECTION_ID_LEN = 4; // to differentiate course in major (which cannot be remove)
 
@@ -72,11 +72,12 @@ export const storeSlice = createSlice ({
     },
 /********************************** ExtraReducers ********************************/ 
     extraReducers: (builder) => {
+    /************************* fetchProgramById ****************************/
         builder.addCase(fetchProgramById.pending, (state,action) => {
             state.byIds[action.meta.arg].status = "loading";
         });
         /**
-         * @param requirement: MajorType[]
+         * @param requirement: []
          * @param url: string
          * @param courseIds: string[]
          * @param courseData: CourseType[]
@@ -103,6 +104,29 @@ export const storeSlice = createSlice ({
         builder.addCase(fetchProgramById.rejected, (state, action) => {
             state.byIds[action.meta.arg].status = "failed";
         });
+
+    /***************************** fetchSchedule *******************************/
+        builder.addCase(fetchSchedule.fulfilled, (state, action) => {  
+            state.selectedPrograms = action.payload.selectedPrograms;
+            state.selectedPrograms.forEach(programs => {
+                programs.forEach(program => {
+                    if(state.byIds[program.value] === undefined) {
+                        state.byIds[program.value] = {
+                            id: program.value,
+                            byIds: {}, 
+                            allIds: [],
+                            name: program.label,
+                            url: "",
+                            isMajor: program.is_major,
+                            status: "idle"
+                        }
+                    }
+                })
+            })
+            state.sections[state.addedCourses] = action.payload.addedCourses;
+            state.index =[0,0];
+        });
+
     },
 });
 
