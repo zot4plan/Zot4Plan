@@ -7,6 +7,11 @@
     padding: 0 0.5rem;
     margin-bottom: 1rem;
 }
+
+details:last-of-type {
+    margin-bottom: 0rem !important;
+}
+
 #left-side {
     margin-bottom: 2rem;
 }
@@ -33,10 +38,24 @@
     color: white;
 }
 
-#total-units > p {
-    font-size: 1.8rem;
-    margin-right: 1rem;
+#total-units > div > p {
+    font-size: 1rem;
 }
+
+.unit-text {
+    position: absolute;
+    bottom: 2rem;
+    right: -2rem;
+    color: white;
+    transform: translate(-50%, -50%);
+    font-family:'courier';
+  }
+
+.container {
+    position: relative;
+    text-align: center;
+    color:white;
+  }
 
 
 @media only screen and (max-width: 599px) { 
@@ -78,7 +97,7 @@
         display: block !important;
         height: 24px;
         width: 200px;
-        margin-bottom : 1rem;
+        margin-bottom : 2rem;
         padding-left: 1rem;
     }
 
@@ -91,5 +110,9 @@
 
     .printPrograms > p {
         margin-bottom : 0.5rem;
+    }
+
+    img {
+        display: none;
     }
 }

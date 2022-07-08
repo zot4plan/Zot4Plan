@@ -44,9 +44,9 @@ function Program ({isMajor, addedCourses}:Type) {
 
     else if (status === 'succeeded')  {
         content.push(<div key="hyperlink" className='hyperlink'>
-                        <button key={'ChevronLeft'} value={-1} onClick={handleOnClick}> <ChevronLeft/> </button>
+                        <button key={'ChevronLeft'} style={ {paddingLeft:'1.5rem'} } value={-1} onClick={handleOnClick}> <ChevronLeft/> </button>
                         <a href={url} target='_blank' rel="noreferrer"> {name} </a>
-                        <button key={'ChevronRight'} value={1} onClick={handleOnClick}> <ChevronRight/> </button>
+                        <button key={'ChevronRight'} style={ {paddingRight:'3rem'} } value={1} onClick={handleOnClick}> <ChevronRight/> </button>
                     </div>);
         content.push(<Accordion key={addedCourses} id={addedCourses}/>)
         allIds.forEach(id => { content.push(<Accordion key={id} id={id} programId={programId} />) });

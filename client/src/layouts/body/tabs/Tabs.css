@@ -28,15 +28,20 @@
     color: var(--accent-color-2);
 }
 
-.hyperlink, .hyperlink > button {
+.hyperlink {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0.5rem 1.5rem 0.5rem;
+    width: 100%;
+}
+
+.hyperlink > button {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-.hyperlink { 
-    margin: 0 0.5rem 1.5rem 0.5rem;
-}
 
 .hyperlink > a, .hyperlink > button > svg{
     font-size: 1.8rem;

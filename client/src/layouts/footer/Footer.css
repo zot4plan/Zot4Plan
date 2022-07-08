@@ -29,6 +29,7 @@
     transition: left 0.5s;
 }
 
+
 #logo-container {
     margin: 5rem 0rem 2rem 0rem;
 }
@@ -75,6 +76,7 @@
 }
 
 #copyright > p { font-size:1.4rem; margin: 1rem 0rem;}
+
 
 @media only screen and (max-width: 799px) {
     .header {
