@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction, nanoid, isAnyOf } from "@reduxjs/toolkit";
-import { fetchProgramById, fetchGE} from '../api/FetchData'
+import { fetchProgramById, fetchGE, fetchSchedule} from '../api/FetchData'
+import Quarter from "../components/accordion/Quarter";
 import { addCourse } from "./ProgramsSlice";
 
 export const ID_LENGTH = 3; // for function AddCourseToQuarter
@@ -127,11 +128,78 @@ export const storeSlice = createSlice ({
             })
             state.totalUnits = 0;
         }, 
-
     },
 
 /********************* ExtraReducers *********************/
     extraReducers: (builder) => {
+        builder.addCase(fetchSchedule.fulfilled, (state, action) => {  
+            action.payload.courses.forEach((course) => {
+                if(state.courses.byIds[course.id] === undefined) {
+                    state.courses.byIds[course.id] = {
+                        data: course,
+                        remains: course.repeatability,
+                    }
+                    state.courses.allIds.push(course.id);
+                }
+                
+                if(state.depts.byIds[course.department] === undefined) { 
+                    let index = state.depts.size % DEPT_COLORS.length;
+                    state.depts.byIds[course.department] = DEPT_COLORS[index]
+                    state.depts.size += 1;
+                }
+            })
+
+            let numOfYears = action.payload.years.length;
+            
+            // Clear Year
+            state.years.allIds.forEach((yearId)=> {
+                state.years.byIds[yearId].forEach((quarterId) => {
+                    state.sections[quarterId].forEach(courseId => {
+                        if(typeof(courseId) === 'string') 
+                            state.courses.byIds[courseId].remains += 1;
+                    })
+                    state.sections[quarterId] = [];
+                })
+            })
+            state.totalUnits = 0;
+
+            // Add Year
+            for(let i = 4; i < numOfYears; i++) {
+                let yearId = nanoid(ID_LENGTH);
+                let quarterIds = []
+        
+                for(let j = 0; j < 4; j++) {
+                   quarterIds.push(nanoid(ID_LENGTH));
+                   state.sections[quarterIds[j]] = [] as string[];
+                }
+                state.years.allIds.push(yearId);
+                state.years.byIds[yearId] = quarterIds;
+            }
+
+            // RemoveYear
+            for(let i = state.years.allIds.length - 1; i >= numOfYears; i--) {
+                let yearId = state.years.allIds[i];
+                state.years.byIds[yearId].forEach((id) => {
+                    delete state.sections[id];
+                })
+                delete state.years.byIds[yearId];
+                state.years.allIds.pop();
+            }
+
+            // Add Courses
+            action.payload.years.forEach((year, i) => {
+                let yearId = state.years.allIds[i];
+                year.forEach((quarter, j) => {
+                    let quarterId = state.years.byIds[yearId][j];
+                    quarter.forEach(course => {
+                        state.sections[quarterId].push(course);
+                        state.courses.byIds[course].remains -= 1;
+                        state.totalUnits += state.courses.byIds[course].data.units;
+                    })
+                })
+            })
+        });
+
         builder.addMatcher(isAnyOf(fetchProgramById.fulfilled, fetchGE.fulfilled, addCourse), (state, action)=> {
             action.payload.courses.forEach((course) => {
                 if(state.courses.byIds[course.id] === undefined) {

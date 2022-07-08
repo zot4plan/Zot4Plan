@@ -45,37 +45,25 @@ export const fetchProgramById = createAsyncThunk("features/fetchProgramById", as
     })
 ); 
 
-export const fetchProgramByFile = createAsyncThunk("features/fetchProgramByFile", async ({data}: InputFileType) => 
-    Axios.post('/api/getDataByFile',{data: data})
+export const fetchSchedule = createAsyncThunk("features/fetchSchedule", async (id: string) => 
+    Axios.post('/api/getSchedule',{id: id})
     .then((response) => {
-        const fileContent = (JSON.parse(data)).data;
+        console.log(response);
         return {
-            // data receive from server
             status: "succeeded",
-            requirement: response.data.major[0].requirement as RequirementType[],
-            url: response.data.major[0].url, 
-            name: response.data.major[0].name,
-            isMajor: response.data.major[0].is_major,
-            courseIds: response.data.allCourseIds as string[], 
-            courseData: response.data.courseData as CourseType[],
-
-            // data from input file after checking validity in combine_models.controller
-            years: fileContent.years as string[][][],
-            coursesAddByStudent: fileContent.coursesAddByStudent as string[],
-            geCourses: fileContent.geCourses as string[][],
+            selectedPrograms: response.data.selectedPrograms as ProgramOption[][],
+            years: response.data.years as string[][][],
+            addedCourses: response.data.addedCourses as string[],
+            courses: response.data.courses as CourseType[],
         };
     })
     .catch(()=> {
         return {
             status: "failed",
-            requirement: [],
-            name: '',
-            url: '',  
-            courseIds: [], 
-            courseData: [] as CourseType[],
+            selectedPrograms: [] as ProgramOption[][],
+            courses: [] as CourseType[],
             years: [] as string[][][],
-            coursesAddByStudent:[] as string[],
-            geCourses: [] as string[][],
+            addedCourses: [] as string[],
         };
     })
 ); 
