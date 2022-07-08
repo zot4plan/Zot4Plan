@@ -22,7 +22,7 @@ function GeneralEducation() {
     
     return (
         <div className="ge-container" style={{position: 'relative'}}>
-            <div key="GE" className='hyperlink' style={{marginTop: '1.5rem'}}> 
+            <div key="GE" className='hyperlink' style={{marginTop: '1.5rem', justifyContent:'center'}}> 
                 <a style={{ fontSize: '2rem'}}
                     href={url} target='_blank' rel="noreferrer"> General Education </a>
             </div>

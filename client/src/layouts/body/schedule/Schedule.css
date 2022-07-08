@@ -58,6 +58,7 @@ details:last-of-type {
   }
 
 
+
 @media only screen and (max-width: 599px) { 
     #schedule {
         padding: 0 0.3rem 0 0.2rem;
@@ -95,21 +96,32 @@ details:last-of-type {
 
     .printUnit {
         display: block !important;
-        height: 24px;
+        height: auto;
         width: 200px;
-        margin-bottom : 2rem;
+        margin-bottom : 1rem;
         padding-left: 1rem;
     }
 
+    .printUnit > div {
+        display: flex;
+    }
+
+    .printUnit p {
+        margin-right: 0.5rem;
+        font-size: 12px;
+    }
+
+
     .printPrograms {
         display: block !important;
-        height: 50px;
-        width: 700px;
+        height: auto;
+        width: 750px;
         padding-left: 1rem;
     }
 
     .printPrograms > p {
         margin-bottom : 0.5rem;
+        font-size: 14px;
     }
 
     img {
