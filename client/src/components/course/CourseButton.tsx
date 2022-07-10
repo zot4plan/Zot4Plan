@@ -1,10 +1,10 @@
 import {useState, memo, MouseEvent} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
+import ReactTooltip from "react-tooltip";
 
 import CourseCard from '../courseCard/CourseCard'
-import ReactTooltip from "react-tooltip";
-import Error from '../icon/Error'
+import Error from '../icon/Error';
 
 interface CourseButtonType {
     id: string;
@@ -19,16 +19,17 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
     const colors = useSelector((state: RootState) => state.store.depts.byIds[course.department]);
 
     let warningSpan;
-    let color = colors[2]
-    let textColor = 'white'
+    let color = colors[2];
+    let textColor = 'white';
+
     if (isWarning) {
         warningSpan = 
-        <span className='course-warning' data-tip data-for={'prereqTip'+id} >{Error()}
+        <span className='course-warning' data-tip data-for={'prereqTip'+id} > <Error/>
             <ReactTooltip id={"prereqTip"+id} place="top" effect="solid" disable={!isWarning}>
                 Missing prerequisites
             </ReactTooltip>
         </span>
-        // color = '#8B8000'                                       // Yellow color for unfulfilled prereqs warning                             
+                                   
     } else if (isCrossed) {
         color = '#D3D3D3'
         textColor = 'black'
@@ -52,6 +53,10 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
             </p>
             {isWarning && warningSpan}
             {showUnit && !isWarning && <p className='unit'>{course.units + ' units'}</p>}
+
+            <ReactTooltip id={"prereqTip"+id} place="top" effect="solid" disable={!isWarning}>
+                Missing prerequisites
+            </ReactTooltip>
         </div>
         
         <div style={{display: show? "block":"none"}}>

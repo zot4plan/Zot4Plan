@@ -30,18 +30,20 @@ const Schedule = () => {
             <ul>
               <li style={{marginRight: '1rem'}}> <ButtonSave/> </li>
               <li style={{marginRight: '1rem'}}> <ButtonLoad/> </li>
-              <li> <ReactToPrint 
-                    trigger={() => <button className="btn">Print</button>}
-                    content={() => printRef.current}
-                   />
+              <li> 
+                <ReactToPrint 
+                  trigger={() => <button className="btn">Print</button>}
+                  content={() => printRef.current}/>
               </li>
             </ul>
           </li>
         </ul>
 
         <div id="schedule" ref={printRef}>
-          <PrintPrograms/>
-          <div style={{display: 'none'}} className="printUnit"> <TotalUnits/> </div>
+          <div className="print">
+            <PrintPrograms/>
+            <div className="printUnit"> <TotalUnits/> </div>
+          </div>
           {yearIds.map( (id,index) => (
             <Year key={id} 
               id={id}
@@ -49,11 +51,9 @@ const Schedule = () => {
               index={index} 
             />
           ))}
-          <div className={'container'}>
-            <img style={{width:'16.5rem', height:'14rem', float:'right'}} src={Chalkboard} alt="Chalkboard that displays unit count" />
-            <div className={'unit-text'}>
-              <TotalUnits/>
-            </div>
+          <div style={{position: 'relative'}}>
+            <img id='chalkboard' src={Chalkboard} alt="Chalkboard that displays unit count" />
+            <div className='unit-text'> <TotalUnits/> </div>
           </div>
         </div>   
       </div>

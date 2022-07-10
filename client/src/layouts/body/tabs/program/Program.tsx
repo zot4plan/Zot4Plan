@@ -1,13 +1,9 @@
 import {memo} from 'react'
 import { shallowEqual, useDispatch, useSelector} from 'react-redux';
-
 import {RootState} from '../../../../app/store';
 import Accordion from '../../../../components/accordion/Accordion';
-import ChevronLeft from '../../../../components/icon/ChervonLeft';
-import ChevronRight from '../../../../components/icon/ChervonRight';
-
-import { handleSwitchProgram } from '../../../../features/ProgramsSlice';
 import { fetchProgramById } from '../../../../api/FetchData';
+import ProgramName from './ProgramName';
 
 interface Type {
     isMajor: boolean;
@@ -31,23 +27,13 @@ function Program ({isMajor, addedCourses}:Type) {
 
     const dispatch = useDispatch();
 
-    function handleOnClick(event: React.MouseEvent<HTMLButtonElement>) {  
-        event.preventDefault();
-        const move = Number(event.currentTarget.value);
-        dispatch(handleSwitchProgram({move: move, isMajor: isMajor}));
-    }
-
     let content = [] as JSX.Element [];
 
     if (status === 'idle') 
         dispatch(fetchProgramById(programId));
 
     else if (status === 'succeeded')  {
-        content.push(<div key="hyperlink" className='hyperlink'>
-                        <button key={'ChevronLeft'} style={ {paddingLeft:'1.5rem'} } value={-1} onClick={handleOnClick}> <ChevronLeft/> </button>
-                        <a href={url} target='_blank' rel="noreferrer"> {name} </a>
-                        <button key={'ChevronRight'} style={ {paddingRight:'3rem'} } value={1} onClick={handleOnClick}> <ChevronRight/> </button>
-                    </div>);
+        content.push(<ProgramName key="hyperlink" url={url} name={name} isMajor={isMajor}/>);
         content.push(<Accordion key={addedCourses} id={addedCourses}/>)
         allIds.forEach(id => { content.push(<Accordion key={id} id={id} programId={programId} />) });
         content.push(<div key="empty" style={{height:'42rem'}}></div>);
