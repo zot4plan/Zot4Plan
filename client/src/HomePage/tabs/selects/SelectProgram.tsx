@@ -1,12 +1,12 @@
 import { useState, useEffect, memo, useCallback } from 'react';
-import Axios from '../../../../api/Axios';
+import Axios from '../../../api/Axios';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import Select, { OnChangeValue, StylesConfig} from 'react-select';
 import './SelectProgram.css';
-import { RootState } from '../../../../app/store';
-import { handleChangeProgram } from '../../../../features/ProgramsSlice';
+import { RootState } from '../../../app/store';
+import { handleChangeProgram } from '../../../features/ProgramsSlice';
 import SelectCourses from './SelectCourses';
-import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
+import ZotSelectMajor from '../../../assets/images/ZotSelectMajor.png';
 
 const myStyle: StylesConfig<ProgramOption, true> =  {
     container: (provided) => ({
@@ -14,7 +14,6 @@ const myStyle: StylesConfig<ProgramOption, true> =  {
         width: '100%',
         minWidth: "27rem",
     }),
-    
     control: (provided) => ({
         ...provided, 
         borderColor: '#1F1F1F',
@@ -23,34 +22,28 @@ const myStyle: StylesConfig<ProgramOption, true> =  {
             borderColor: '#1F1F1F',
         }
     }),
-    
     valueContainer: (provided) => ({
         ...provided, 
         padding: '0rem 1rem', 
         cursor: 'text'
     }),
-
     input: (provided) => ({
         ...provided, 
         padding: '0rem',
         margin: '0rem,' 
     }),
-
     placeholder: (provided) => ({
         ...provided, 
         color: '#1F1F1F',
     }),
-
     indicatorSeparator: (provided) => ({
         ...provided,
         backgroundColor: '#1F1F1F'
     }),
-
     dropdownIndicator: (provided) => ({
         ...provided,
         color: "inherit"
     }),
-
     menu: (provided) => ({
         ...provided, zIndex: '999',
     }),

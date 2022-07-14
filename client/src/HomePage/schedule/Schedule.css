@@ -38,6 +38,14 @@ details:last-of-type {
     color: white;
 }
 
+.margin-right-1 {margin-right: 1rem;}
+
+.popup {
+    border-radius: 10px !important;
+    height: auto;
+    width: 240px;
+}
+
 .print {display: none;}
 
 #chalkboard{
@@ -66,7 +74,7 @@ details:last-of-type {
         padding: 0 0.3rem 0 0.2rem;
         overflow-x: hidden;
         height: 54rem;
-        margin-top: 5.3rem ;
+        margin-top: 4.8rem ;
     }
 
     #left-side > ul:first-child {
@@ -84,10 +92,17 @@ details:last-of-type {
 }
 
 @media print {
+    div, details, summary, p {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        overflow: visible !important;
+    }
+
     #schedule {
+        display: block !important;
         width: 766px;
         height: auto;
-        overflow: visible;
+        overflow: visible !important;
         padding: 0rem;
         margin: 2rem auto;
     }

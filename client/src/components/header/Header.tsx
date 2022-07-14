@@ -1,5 +1,5 @@
 import {memo} from 'react';
-import Logo from '../../components/icon/Logo';
+import Logo from '../icon/Logo';
 import Tutorial from './Tutorial';
 import './Header.css';
 

@@ -1,20 +1,11 @@
 import QuarterCourse from '../course/QuarterCourse';
-import {useSelector} from 'react-redux';
+import {shallowEqual, useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
 import {Droppable} from 'react-beautiful-dnd';
-import {useCallback,memo } from 'react'
+import {memo} from 'react'
 
 function Quarter({sectionId, name}:QuarterType) {
-  const courses = useSelector((state:RootState) => state.store.sections[sectionId]);
-  const renderCard = useCallback((id: string, sectionId: string, index: number) => {
-    return (
-      <QuarterCourse 
-        key={id} 
-        index={index} 
-        sectionId={sectionId}
-        courseId = {id}
-      />
-    )},[])
+  const courses = useSelector((state:RootState) => (state.store.sections[sectionId]),shallowEqual);
 
   return (
     <Droppable droppableId={sectionId}>
@@ -24,10 +15,15 @@ function Quarter({sectionId, name}:QuarterType) {
             {...provided.droppableProps}
             {...provided.droppableProps}
             style={{backgroundColor: snapshot.isDraggingOver?'lightblue':'white'}}
-            className={name + " quarter-droppable-area"}>
-              {courses.map(
-                (courseId, index) => 
-                  typeof(courseId) === 'string' && renderCard(courseId, sectionId, index)
+            className={name + " quarter-droppable-area"}
+          >
+              {courses.map((id, index) => 
+                  <QuarterCourse 
+                    key={id} 
+                    index={index} 
+                    sectionId={sectionId}
+                    courseId = {id}
+                  />
               )}
               {provided.placeholder}
           </div>

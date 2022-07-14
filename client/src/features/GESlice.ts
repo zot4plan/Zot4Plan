@@ -1,7 +1,7 @@
 import {createSlice, nanoid } from "@reduxjs/toolkit";
 import {fetchAllGE, fetchGE} from '../api/FetchData'
 
-export const SECTION_ID_LEN = 4; // to differentiate course in major (which cannot be remove)
+const SECTION_ID_LEN = 5; // to differentiate course in major (which cannot be remove)
 
 const initialState:GESliceType = {
     byIds: {},
@@ -42,27 +42,20 @@ export const geSlice = createSlice ({
 
     /************************** FetchGE ************************/
         builder.addCase(fetchGE.pending,(state, action) => {
-            console.log(action.meta);
             state.byIds[action.meta.arg].status = "loading";
         });
 
         builder.addCase(fetchGE.fulfilled,(state, action) => {    
             const geId = action.meta.arg;
-            state.byIds[geId].status = "succeeded";
+            state.byIds[geId].status = action.payload.status;
 
-            // group courses by dept
-            let dept = "";
-            let sectionId = ""
-
-            action.payload.courses.forEach((course) => {
-                if(course.department !== dept) {
-                    sectionId = nanoid(SECTION_ID_LEN);
-                    dept = course.department;
+            if(state.byIds[geId].status === "succeeded") {
+                action.payload.departments.forEach((dept) => {
+                    let sectionId = nanoid(SECTION_ID_LEN);
                     state.byIds[geId].sectionIds.push({sectionId: sectionId, nameChild: dept});
-                    state.sections[sectionId] = [];
-                }
-                state.sections[sectionId].push(course.id);
-            })
+                    state.sections[sectionId] = action.payload.courses_in_depts[dept];
+                })
+            }
         });
 
         builder.addCase(fetchGE.rejected,(state, action) => {

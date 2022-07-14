@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataType) => {
     const Schedules = sequelize.define("schedules", {
         id: {
-            type: DataType.STRING(32),
+            type: DataType.STRING(64),
             allowNull:false,
             primaryKey: true
         },
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataType) => {
             type: DataType.JSON,
             allowNull:false,
         },
-        saved_date: {
+        last_access_date: {
             type: DataType.DATEONLY,
             allowNull:false,
         }

@@ -1,15 +1,13 @@
 import {useState,memo, MouseEvent} from 'react';
 import  { StylesConfig } from "react-select";
 import AsyncSelect  from 'react-select/async';
-import { useSelector, useDispatch } from 'react-redux';
-import Axios from '../../../../api/Axios';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import Axios from '../../../api/Axios';
 
-import {RootState} from '../../../../app/store';
-import {addCourse} from '../../../../features/ProgramsSlice';
-import AddIcon from '../../../../components/icon/AddIcon';
-import Error from '../../../../components/icon/Error';
-import Success from '../../../../components/icon/Success';
-
+import {RootState} from '../../../app/store';
+import {addCourse} from '../../../features/ProgramsSlice';
+import AddIcon from '../../../components/icon/AddIcon';
+import Message from '../../../components/message/Message';
 import './SelectCourses.css';
 
 interface OptionType {
@@ -33,8 +31,8 @@ const myStyle: StylesConfig<OptionType, false> =  {
             };
     },
     valueContainer: (provided) => ({
-        ...provided, cursor: 'text'}
-    ),
+        ...provided, cursor: 'text',
+    }),
     placeholder: (provided) => ({
         ...provided, color: '#1F1F1F',
     }),
@@ -65,34 +63,22 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
 function SelectCourses() {
     const [selectCourse, setSelectCourse] = useState<string>("");
     const [message, setMessage] = useState({content: "", status: 'idle'});
-    const addedCourses = useSelector((state:RootState) => {
-        let sectionId = state.programs.addedCourses;
-        return state.programs.sections[sectionId];
-    }); 
+    
+    const addedCourses = useSelector((state:RootState) => (
+        state.programs.sections[state.programs.addedCourses]
+    ), shallowEqual); 
+
     const dispatch = useDispatch();
 
     const submitAddCourse =(event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        let content = selectCourse, status = "fail";
+        let content = selectCourse, status = "failed";
 
         if(selectCourse === "")
             setMessage({content: "Please select a course!", status: status})
 
         else if(!addedCourses.includes(selectCourse))
-            setTimeout(() => {
-                Axios.post('/api/getCourseById', {id: selectCourse })
-                    .then((res) => {
-                        if(res.data.message === 'succeed') {
-                            dispatch(addCourse({courses: [res.data.data]}));
-                            content += " is added successfully!";
-                            status = "succeed";
-                        }
-                        else 
-                            content += " cannot retrieve data from server!";
-
-                        setMessage({content: content, status: status})   
-                    });
-            }, 500);
+            dispatch(addCourse(selectCourse));
 
         else 
             setMessage({content: content + " has already been added!", status: status})
@@ -114,9 +100,7 @@ function SelectCourses() {
                     defaultOptions
                     loadOptions={promiseOptions}
                     isOptionDisabled={(option)=> addedCourses.includes(option.label)}
-
                     onChange={handleOnChange}
-
                     styles={myStyle}
                     maxMenuHeight={250}
                     components={{DropdownIndicator:()=>null}}
@@ -130,13 +114,7 @@ function SelectCourses() {
                 onAnimationEnd={() => setMessage({content:"", status: 'idle'})}
             >
                 {message.status !== 'idle' && 
-                <p className={'message ' + (message.status === 'succeed'? 'green': 'red')}> 
-                    <span className='absolute message-icon'> 
-                        {message.status === 'succeed' && <Success/>}
-                        {message.status === 'fail' && <Error/>}
-                    </span>
-                    {message.content}
-                </p>}
+                <Message status={message.status} content={message.content} />}
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, MouseEvent } from 'react';
 import {useSelector} from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 import {RootState} from '../../app/store';
@@ -66,7 +66,7 @@ function QuarterCourse({index, sectionId, courseId}: CoursePayload) {
 
     const pastCoursesSet = new Set<string>(pastCourses)
 
-    let prereqs = state.store.courses.byIds[courseId].data['prerequisite_tree']
+    let prereqs = state.store.courses[courseId].data['prerequisite_tree']
     prereqs = prereqs.replace(/'/g, '"')                                               // Replacing with double quotes to use JSON.parse
     if (prereqs === '') {
       prereqs = '{}'
@@ -76,28 +76,29 @@ function QuarterCourse({index, sectionId, courseId}: CoursePayload) {
     return checkPrereqs(prereqs, pastCoursesSet)
   })
 
-
   return (   
-  <Draggable key={sectionId + courseId} 
-    draggableId={sectionId + courseId} index={index}
-  >
-    {(provided) => (
-      <div>
-        <div ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          className="relative quarter-course"
-        >
-          <CourseButton id={courseId} 
-            showUnit={true} 
-            isCrossed={false}
-            isWarning={!prereqsFulfilled}
-          />
-          <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>
-        </div>
-      </div>
-    )}
-  </Draggable>
+    <Draggable 
+      key={sectionId + courseId} 
+      draggableId={sectionId + courseId} index={index}
+    >
+      {(provided) => (
+          <div ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            className="relative quarter-course"
+            //onClick={handleOnClick}
+          >
+            <CourseButton id={courseId} 
+              sectionId={sectionId}
+              showUnit={true} 
+              isCrossed={false}
+              isWarning={!prereqsFulfilled}
+            />
+            <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>
+            
+          </div>
+      )}
+    </Draggable>
   )
 }
 

@@ -1,5 +1,5 @@
 import {memo} from "react";
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import { RootState } from "../../app/store";
 import Quarter from './Quarter';
@@ -15,7 +15,7 @@ interface YearType {
 function Year({id, name, index}:YearType) {
     const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
     const QUARTER_CLASS= ["fall", "winter","spring","summer"];
-    const quarterIds = useSelector((state:RootState) => state.store.years.byIds[id])
+    const quarterIds = useSelector((state:RootState) => (state.store.years.byIds[id]), shallowEqual);
 
     return (
         <details open key={id} style={{marginBottom: '2.5rem'}}>

@@ -1,0 +1,14 @@
+.message {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.green {color: #07B053;} 
+.red {color: var(--accent-color-1);} 
+
+.message-icon > svg { font-size: 1.6rem;}
+.message-icon {margin-right: 0.5rem;}

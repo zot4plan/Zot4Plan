@@ -1,8 +1,8 @@
 import {memo} from 'react';
 import ReactTooltip from "react-tooltip";
 
-import Github from '../../components/icon/Github';
-import Tools from '../../components/icon/Tools';
+import Github from '../icon/Github';
+import Tools from '../icon/Tools';
 import Author from './Author';
 
 import Tree from '../../assets/images/tree.png';
@@ -27,10 +27,8 @@ const Footer = () => {
         }
     ]
     
-
     return (
     <footer id="footer">
-
         <div id="zot-tree">
             <img src={ZotWalk} style={{width: '6.4rem', height:'6.4rem'}} alt="A walking aneater"/>
             <img src={Tree} style={{width: '12.8rem', height:'12.8rem'}} alt="A black tree"/>
@@ -46,7 +44,7 @@ const Footer = () => {
                     Zot4Plan is a schedule planner that helps Anteaters visualize their undergraduate journey. As a team, we aimed to  make the task of organizing your schedule as simple as possible. 
                 </p>
                 <p>
-                    Disclaimer: Note that all of the information we obtained are from the UCI catalogue. Please make sure to check your schedule with your academic counselor. Thank you - Zot! Zot! Zot! 
+                    Disclaimer: All of the information we obtained are from the UCI catalogue. Please make sure to check your schedule with your academic counselor. Thank you - Zot! Zot! Zot! 
                 </p>
             </div>
         </div>

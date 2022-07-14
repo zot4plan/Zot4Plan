@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import LeftArrow from '../../components/icon/ArrowLeft';
-import RightArrow from '../../components/icon/ArrowRight';
-import XCircle from '../../components/icon/XCircle';
+import LeftArrow from '../icon/ArrowLeft';
+import RightArrow from '../icon/ArrowRight';
+import XCircle from '../icon/XCircle';
 
 import './TutorialCard.css';
 

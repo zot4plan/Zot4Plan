@@ -89,15 +89,13 @@ declare interface SwitchProgramPayload {
 
 /*********** Fetch Input Types ************/
 declare interface FetchProgramType { 
-    id:number; // the index of the major in select major list
+    id:number; 
 }
 
-interface InputFileType {
-    data: string;    // Json file content represent as string, expect object keys are
-                     // majorName: string             : name of the major
-                     // coursesAddByStudent: string[] : list of course add by student
-                     // geCourses: string [][];       : list of list of courses taken by each ge categorie
-                     // years: string[][][];          : list of quarters, each quarter contains a list of courses taken in the quarter
+declare interface FetchCourseType { 
+    destinationId: string;
+    destinationIndex: number;  
+    courseId: string;
 }
 
 /************* Slice **************/
@@ -137,7 +135,7 @@ declare interface GESliceType{
     byIds: { [id:string]: GEType};
     allIds: string[];
     status: string;
-    sections: {[id:string]: (string|string[])[]};
+    sections: {[id:string]: string[]};
 }
 
 declare interface StoreSliceType {
@@ -145,18 +143,17 @@ declare interface StoreSliceType {
         byIds: { [id: string]: string[] },
         allIds: string[],
     },
-    sections: {[id:string]: (string|string[])[]},
+    sections: {[id:string]: string[]},
     totalUnits: number,
     courses: {
-        byIds: {
-            [id:string]: {
-                data: CourseType, 
-                remains: number,
-            }},
-        allIds: string[],
+        [id:string]: {
+            data: CourseType, 
+            remains: number,
+        }
     },
     depts: {
         byIds: {[id:string]: string[];}, 
         size: number,
-    }
+    },
+    status: string,
 }

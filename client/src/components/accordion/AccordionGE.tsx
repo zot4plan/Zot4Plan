@@ -2,8 +2,8 @@ import {memo, useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../app/store";
 import { fetchGE } from '../../api/FetchData';
-import Detail from './Detail';
 import Right from '../icon/ArrowRightSmall';
+import Detail from './Detail';
 import './Accordion.css';
 
 interface SectionType {
@@ -25,6 +25,7 @@ const AccordionGE = ({id}:SectionType) => {
 
     if(status === 'loading')
         detail = <div> Loading...!!! </div>
+
     else if ( status === 'succeeded')  
         detail = ge.sectionIds.map(( section:{sectionId: string, nameChild: string}) => 
                     <Detail key={section.sectionId} 
@@ -50,7 +51,7 @@ const AccordionGE = ({id}:SectionType) => {
 
             <div className='section-body'>
                 <p style={{marginBottom: '1rem'}}> <b>{ge.nameChild}</b> </p>
-                {detail}
+                {isOpen && detail}
             </div>
         </details>
     )

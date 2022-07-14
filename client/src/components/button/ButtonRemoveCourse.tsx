@@ -21,8 +21,6 @@ function ButtonRemoveCourse({courseId, sectionId, index}: CoursePayload) {
                 index: index,
                 courseId: courseId
             }))
-            
-
     }; 
   
     return (      

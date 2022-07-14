@@ -1,8 +1,8 @@
 import {memo} from 'react'
 import { shallowEqual, useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../../../app/store';
-import Accordion from '../../../../components/accordion/Accordion';
-import { fetchProgramById } from '../../../../api/FetchData';
+import {RootState} from '../../../app/store';
+import Accordion from '../../../components/accordion/Accordion';
+import { fetchProgram } from '../../../api/FetchData';
 import ProgramName from './ProgramName';
 
 interface Type {
@@ -30,7 +30,7 @@ function Program ({isMajor, addedCourses}:Type) {
     let content = [] as JSX.Element [];
 
     if (status === 'idle') 
-        dispatch(fetchProgramById(programId));
+        dispatch(fetchProgram(programId));
 
     else if (status === 'succeeded')  {
         content.push(<ProgramName key="hyperlink" url={url} name={name} isMajor={isMajor}/>);

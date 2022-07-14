@@ -6,21 +6,23 @@ import CourseButton from './CourseButton';
 import ButtonRemoveCourse from '../button/ButtonRemoveCourse';
 import './Course.css';
 
-function getStyle(style: any, snapshot: { isDropAnimating: any; }) {
-    if (!snapshot.isDropAnimating) {
-      return style;
-    }
+function getStyle(style: any, snapshot: { isDragging: any; isDropAnimating: any;}) {
+    if (!snapshot.isDropAnimating) 
+        return {...style, transform: snapshot.isDragging ? style?.transform : 'translate(0px, 0px)'};
+    
     return {
-      ...style,
-      transitionDuration: '0.0001s',
+        ...style,
+        transform: snapshot.isDragging ? style?.transform : 'translate(0px, 0px)',
+        transitionDuration: '0.0001s',
     };
 }
 
 function RequiredCourse({courseId, sectionId, index}: CoursePayload) {
-    const isDraggable = useSelector((state: RootState) => state.store.courses.byIds[courseId].remains > 0)
+    const isDraggable = useSelector((state: RootState) => state.store.courses[courseId] === undefined)
   
     return (   
-        <Draggable key={sectionId + courseId} 
+        <Draggable 
+            key={sectionId + courseId} 
             draggableId={sectionId + courseId}
             isDragDisabled={!isDraggable} 
             index={index}
@@ -32,19 +34,20 @@ function RequiredCourse({courseId, sectionId, index}: CoursePayload) {
                     {...provided.dragHandleProps}
                     style={getStyle(provided.draggableProps.style, snapshot)}
                     className="relative required-course"
-                    >
+                >
                         <CourseButton id={courseId} 
+                            sectionId = {sectionId}
                             showUnit={false} 
                             isCrossed={!isDraggable}
                             isWarning={false}
                         />
 
-                        {/* Only courses add by students are removable */}
-                        {sectionId.length === 5 && 
+                    {/* Only courses add by students are removable */}
+                        {sectionId.length === 6 && 
                             <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>}
                 </div>
 
-                {snapshot.isDragging && (<div className="required-course"/>)}    
+                {snapshot.isDragging && (<div className="required-course" style={{ transform: 'none !important' }}/>)}    
                 </>
             )}
         </Draggable>

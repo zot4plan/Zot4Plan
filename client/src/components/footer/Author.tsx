@@ -1,8 +1,8 @@
 import {memo} from 'react';
 
-import Github from '../../components/icon/Github';
-import Linkedin from '../../components/icon/Linkedin';
-import Gmail from '../../components/icon/Gmail';
+import Github from '../icon/Github';
+import Linkedin from '../icon/Linkedin';
+import Gmail from '../icon/Gmail';
 
 interface AuthorType {
     author: {

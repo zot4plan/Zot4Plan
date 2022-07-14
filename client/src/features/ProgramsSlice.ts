@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
-import { fetchProgramById, fetchSchedule } from '../api/FetchData'
+import { fetchProgram, fetchSchedule } from '../api/FetchData'
 
 export const SECTION_ID_LEN = 4; // to differentiate course in major (which cannot be remove)
 
 const getInitialState = () => {
     let sections:{[id:string]: (string|string[])[]}= {}; 
-    let addedCourses =  nanoid(5);
+    let addedCourses =  nanoid(6);
     sections[addedCourses] = [] as string [];
     
     return {
@@ -24,8 +24,8 @@ export const storeSlice = createSlice ({
     initialState,
 /************************** Reducers ***************************/
     reducers: {
-        addCourse: (state, action: PayloadAction<{courses: CourseType[]}>) => {
-            state.sections[state.addedCourses].push(action.payload.courses[0].id);
+        addCourse: (state, action: PayloadAction<string>) => {
+            state.sections[state.addedCourses].push(action.payload);
         },
 
         removeCourse: (state, action: PayloadAction<CoursePayload>) => {
@@ -73,7 +73,7 @@ export const storeSlice = createSlice ({
 /********************************** ExtraReducers ********************************/ 
     extraReducers: (builder) => {
     /************************* fetchProgramById ****************************/
-        builder.addCase(fetchProgramById.pending, (state,action) => {
+        builder.addCase(fetchProgram.pending, (state,action) => {
             state.byIds[action.meta.arg].status = "loading";
         });
         /**
@@ -82,7 +82,7 @@ export const storeSlice = createSlice ({
          * @param courseIds: string[]
          * @param courseData: CourseType[]
          */
-        builder.addCase(fetchProgramById.fulfilled, (state, action) => {  
+        builder.addCase(fetchProgram.fulfilled, (state, action) => {  
             let id = action.payload.id;
             
             state.byIds[id].status = action.payload.status;
@@ -101,37 +101,38 @@ export const storeSlice = createSlice ({
             })  
         });
 
-        builder.addCase(fetchProgramById.rejected, (state, action) => {
+        builder.addCase(fetchProgram.rejected, (state, action) => {
             state.byIds[action.meta.arg].status = "failed";
         });
 
     /***************************** fetchSchedule *******************************/
         builder.addCase(fetchSchedule.fulfilled, (state, action) => {  
-            state.selectedPrograms = action.payload.selectedPrograms;
-            state.selectedPrograms.forEach((programs, i) => {
-                if(programs.length > 0)
-                    state.index[i] = 0;
-                else
-                    state.index[i] = -1;
-                    
-                programs.forEach(program => {
-                    if(state.byIds[program.value] === undefined) {
-                        state.byIds[program.value] = {
-                            id: program.value,
-                            byIds: {}, 
-                            allIds: [],
-                            name: program.label,
-                            url: "",
-                            isMajor: program.is_major,
-                            status: "idle"
+            if(action.payload.status === "succeeded") {
+                state.selectedPrograms = action.payload.selectedPrograms;
+                state.selectedPrograms.forEach((programs, i) => {
+                    if(programs.length > 0)
+                        state.index[i] = 0;
+                    else
+                        state.index[i] = -1;
+                        
+                    programs.forEach(program => {
+                        if(state.byIds[program.value] === undefined) {
+                            state.byIds[program.value] = {
+                                id: program.value,
+                                byIds: {}, 
+                                allIds: [],
+                                name: program.label,
+                                url: "",
+                                isMajor: program.is_major,
+                                status: "idle"
+                            }
                         }
-                    }
+                    })
                 })
-            })
-            state.sections[state.addedCourses] = action.payload.addedCourses;
-            
+                state.sections[state.addedCourses] = action.payload.addedCourses;
+            }   
         });
-
+        
     },
 });
 

@@ -22,16 +22,15 @@ const Accordion = ({id, programId = -1}:SectionType) => {
     let detail, name;
     if (programId !== -1) {
         name = accordion.name;
-        detail = accordion.sectionIds.map(( section:{sectionId: string, nameChild: string}) => 
+        detail = accordion.sectionIds.map((section:{sectionId: string, nameChild: string}) => 
                     <Detail key={section.sectionId} 
                         sectionId={section.sectionId} 
                         text={section.nameChild}
-                        isGE={false}
                     />)
     }
     else {
         name = 'Added Courses';
-        detail = <Detail key={id} sectionId={id} text= {""} isGE={false}/>
+        detail = <Detail key={id} sectionId={id} text= ""/>
     }
 
     return (

@@ -1,23 +1,28 @@
 import {memo, MouseEvent} from 'react';
 import XCircle from '../icon/XCircle';
 import ReadMore from './ReadMore';
-
 import './CourseCard.css';
 
+import { useSelector, useStore } from 'react-redux';
+
 interface CourseCardType {
-    course: CourseType;
+    id: string;
+    isShow: boolean;
     color: string;
     boxShadowColor: string;
     closeCard: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
-function CourseCard({course, color, boxShadowColor, closeCard}: CourseCardType) {
+const checkLength = (text:string) => {
+    return (text.length < 100)? text: <ReadMore text={text}/>;
+}
+
+
+function CourseCard({id, isShow, color, boxShadowColor, closeCard}: CourseCardType) {
+    const store = useStore();
+    let content;
     let body = [];
-
-    const checkLength = (text:string) => {
-        return (text.length < 100)? text: <ReadMore text={text}/>;
-    }
-
+    /*
     body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
 
     if(course.corequisite !== "")
@@ -30,13 +35,13 @@ function CourseCard({course, color, boxShadowColor, closeCard}: CourseCardType) 
         body.push(<p key='restriction'> <b>{"Restriction: "}</b> {checkLength(course.restriction)} </p>)
             
     if(course.repeatability > 1)
-        body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{course.repeatability} </p>)
+        body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{(course.repeatability === 9)? "unlimited": course.repeatability} </p>)
 
     if(course.ge !== "")
         body.push(<p key='ge'> <b>{"GE: "}</b>{checkLength(course.ge)} </p>)
     
     if(course.terms !== "")
-        body.push(<p key='terms'><b>{"Last Offered: "}</b>{checkLength(course.terms)} </p>)
+        body.push(<p key='terms'><b>{"Last Offered: "}</b>{checkLength(course.terms)} </p>) */
 
     return ( 
     <>
@@ -49,14 +54,14 @@ function CourseCard({course, color, boxShadowColor, closeCard}: CourseCardType) 
         <div className="course-card" 
             style={{borderColor: color, boxShadow: '4px 4px 0px 0px ' + boxShadowColor}}
         >   
-            <div className='course-card-header' style={{backgroundColor: color}}> 
-                <p> <b>{course.id + '. ' + course.name} </b> </p> 
+        {/*    <div className='course-card-header' style={{backgroundColor: color}}> 
+                <p> <b>{id + '. ' + course.name} </b> </p> 
                 <p> {course.units + " units"} </p>
             </div>
             
             <div className="course-card-body"> 
                 {body}
-            </div> 
+        </div>  */}
 
             <div onClick={closeCard} className="absolute close-card" > <XCircle/> </div> 
         </div>

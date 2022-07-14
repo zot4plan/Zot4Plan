@@ -80,7 +80,7 @@ details[open] .quarter-droppable-area {
 }
 
 /* AccordionDetail */
-.accordion-detail, .sub-area {
+.accordion-detail, .sub-area, .grid > div {
     display: grid;
     grid-template-columns: repeat(auto-fill, 10.8rem);
     gap: 1.8rem;
@@ -173,18 +173,18 @@ details[open] .quarter-droppable-area {
     details {
         box-shadow: none;
         border: 0.2rem solid #D6D6D6 !important;
-        margin-bottom: 2.5rem !important;
+        margin-bottom: 2rem !important;
     }
     summary {
-        padding: 0.6rem 1rem;
+        padding: 0.2rem 1rem;
     }
     .quarters-wrapper {
         grid-template-areas:"hfall hwinter hspring hsummer"
                             "fall winter spring summer";
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
-
-    .quarter-header { padding: 0.25rem;}
+    .year-header {font-size: 1.4rem;}
+    .quarter-header { padding: 0.25rem; font-size: 1.2rem;}
 
     .quarter-header-fall, .quarter-header-spring, .quarter-header-winter,
     .fall, .spring, .winter {

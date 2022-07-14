@@ -1,8 +1,8 @@
 import {memo} from 'react';
 import {useSelector} from 'react-redux';
 
-import {RootState} from '../../../../app/store';
-import AccordionGE from '../../../../components/accordion/AccordionGE';
+import {RootState} from '../../../app/store';
+import AccordionGE from '../../../components/accordion/AccordionGE';
 
 function GeneralEducation() {
     const allIds = useSelector((state:RootState)=> state.ge.allIds);

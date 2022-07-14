@@ -1,6 +1,7 @@
 /**** Cancel Drop and Drag animation ****/
 #tab-container div[data-rbd-placeholder-context-id] {display: none !important;}
 #tab-container div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
+.grid div[data-rbd-draggable-context-id] {transform: none !important;}
 #tab-container div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
 
 #tab-container {
@@ -56,10 +57,8 @@
 }
 
 #program-img {
-    margin-top: 8%;
     height: auto;
     width: 94%;
-    aspect-ratio: attr(width) / attr(height);
 }
 
 .program-container {

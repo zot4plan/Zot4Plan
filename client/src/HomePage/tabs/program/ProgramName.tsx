@@ -1,11 +1,11 @@
 import {memo} from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 
-import {RootState} from '../../../../app/store';
-import ChevronLeft from '../../../../components/icon/ChervonLeft';
-import ChevronRight from '../../../../components/icon/ChervonRight';
+import {RootState} from '../../../app/store';
+import ChevronLeft from '../../../components/icon/ChervonLeft';
+import ChevronRight from '../../../components/icon/ChervonRight';
 
-import { handleSwitchProgram } from '../../../../features/ProgramsSlice';
+import { handleSwitchProgram } from '../../../features/ProgramsSlice';
 
 interface Type {
     url: string;

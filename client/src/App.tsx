@@ -2,10 +2,11 @@ import './App.css';
 import { useDispatch } from 'react-redux';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { moveCourse } from './features/StoreSlice';
-import Header from './layouts/header/Header';
-import Schedule from './layouts/body/schedule/Schedule';
-import Tabs from './layouts/body/tabs/Tabs';
-import Footer from './layouts/footer/Footer';
+import Header from './components/header/Header';
+import Schedule from './HomePage/schedule/Schedule';
+import Tabs from './HomePage/tabs/Tabs';
+import Footer from './components/footer/Footer';
+import { fetchCourse } from './api/FetchData';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,15 +15,25 @@ function App() {
     const { source, destination, draggableId } = result;
     if(!destination) return;
 
-    let courseId = draggableId.substring(source.droppableId.length);
+    let len = source.droppableId.length;
+    let courseId = draggableId.substring(len);
 
-    dispatch(moveCourse({
-      sourceId: source.droppableId,
-      destinationId: destination.droppableId,
-      sourceIndex: source.index,
-      destinationIndex: destination.index,
-      courseId: courseId
-    }))
+    if(len === 3) {
+      dispatch(moveCourse({
+        sourceId: source.droppableId,
+        destinationId: destination.droppableId,
+        sourceIndex: source.index,
+        destinationIndex: destination.index,
+        courseId: courseId
+      }))
+    }
+    else {
+      dispatch(fetchCourse({
+        destinationId: destination.droppableId,
+        destinationIndex: destination.index,
+        courseId: courseId
+      }));
+    }
   }
 
   return (

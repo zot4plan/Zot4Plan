@@ -84,6 +84,7 @@ svg { font-size: 10px; }
     align-items: center;
     flex-wrap: wrap;
 }
+.flexColumn { flex-direction: column;}
 
 .relative {position: relative;}
 .absolute {position: absolute;}
@@ -93,8 +94,9 @@ svg { font-size: 10px; }
 .round-top-left { border-top-left-radius: 1.5rem;}
 .round-top-right { border-top-right-radius: 1.5rem;}
 
-.green {color: #07B053;} 
-.red {color: var(--accent-color-1);} 
+.__react_component_tooltip.show {
+    opacity: 1 !important;
+}
 
 .btn-outlined { 
     border-radius: 50%;
@@ -106,6 +108,12 @@ svg { font-size: 10px; }
     box-shadow: 0 0 3px 3px var(--accent-color-2);
     background-color: var(--accent-color-2);
     color: white;
+}
+
+.username-input {
+    height: 2.4rem;
+    width: 100%;
+    margin: 1rem 0rem;
 }
 
 /* body */

@@ -6,7 +6,6 @@ const { sequelize } = require("../models");
 // Return all majorID, majorName, and isMajor
 exports.getAllPrograms = (_req, res) => {
     Visits.increment({total: 1}, { where: { id: "12345" } })
-
     Programs.findAll({ attributes: [['id','value'],['name','label'],'is_major']}).then(data => {
         res.send(data);
     })
@@ -22,7 +21,11 @@ exports.getAllPrograms = (_req, res) => {
 exports.getProgram = (req, res) => {
     const id = req.body.id;
     sequelize.query('CALL get_program(:id)', {replacements: {id: id}, type: sequelize.QueryTypes.SELECT})
-    .then( data => res.send({program: Object.values(data[0]), courses: Object.values(data[1])}))
+    .then( data => {
+        let departments = Object.values(data[1]).map (row => row.department);
+        res.send({program: Object.values(data[0]), departments: departments})
+        }
+    )
     .catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving courseId."
