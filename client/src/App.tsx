@@ -7,6 +7,7 @@ import Schedule from './HomePage/schedule/Schedule';
 import Tabs from './HomePage/tabs/Tabs';
 import Footer from './components/footer/Footer';
 import { fetchCourse } from './api/FetchData';
+import { BrowserRouter as Router } from 'react-router-dom'
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +39,9 @@ function App() {
 
   return (
   <div>
-    <Header/>
+    <Router>
+      <Header/>
+    </Router>
     <DragDropContext onDragEnd={onDragEnd}>
       <div id="body-container" className="relative">
         <Schedule/>
