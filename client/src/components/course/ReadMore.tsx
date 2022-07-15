@@ -7,17 +7,20 @@ interface ReadMoreType {
 const ReadMore = ({ text }: ReadMoreType) => {
     const [isReadMore, setIsReadMore] = useState(true);
 
-    const toggleReadMore = () => {
+    const toggleReadMore = (e: { stopPropagation: () => void; }) => {
+      e.stopPropagation();
       setIsReadMore(!isReadMore);
     };
 
     return (
+    <>
       <span>
         {isReadMore ? text.slice(0, 100) : text}
-        <span onClick={toggleReadMore} style={{color:'#307ABB', cursor:'pointer'}}>
-          {isReadMore ? "... read more" : " show less"}
-        </span>
       </span>
+      <span onClick={toggleReadMore} style={{color:'#307ABB', cursor:'pointer'}}>
+        {isReadMore ? "... read more" : " show less"}
+      </span>
+    </>
     );
   };
 

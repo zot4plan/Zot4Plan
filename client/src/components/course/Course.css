@@ -48,6 +48,11 @@
     color:snow;
 }
 
+.course-tooltip{
+    padding: 0 !important;
+    background-color: transparent !important;
+}
+
 
 @media only screen and (max-width: 450px) {
     .unit {display: none;}

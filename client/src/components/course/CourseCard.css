@@ -15,12 +15,6 @@
 }
 
 .course-card {
-    position: fixed;
-    z-index: 3;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-
     border: 0.5rem solid;
     border-radius: 1.6rem;
     background-color: white;
@@ -57,35 +51,27 @@
 
 .close-card:hover > svg {color: var(--primary-color);}
 
-@media only screen and (min-width: 800px) {
-    /* display course-card as a tooltip */
-    .course-card-background, .close-card {
-        display: none;
-    }
-
-    .course-card-before{
-        content: '';
-        z-index: 2;
-        top: 3.5rem;
-        left: 70%;
-        
-        display: block;
-        transform: rotate(45deg);
-        margin: auto;
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-
-    .course-card {
-        position: absolute;
-        top: 4rem;
-        left: 90%;
-        transform: translateX(-50%);
-
-        border: 0.2rem solid;
-        border-radius: 1rem;
-        width: 24rem;
-    }
-
-    .course-card-header {padding-right: 0.6rem;}
+.course-card-background, .close-card {
+    display: none;
 }
+
+.course-card-before{
+    content: '';
+    z-index: 1;
+    top: -0.7rem;
+    left: 48%;
+    
+    display: block;
+    transform: rotate(45deg);
+    margin: auto;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.course-card {
+    border: 0.2rem solid;
+    border-radius: 1rem;
+    width: 25rem;
+}
+
+.course-card-header {padding-right: 0.6rem;}

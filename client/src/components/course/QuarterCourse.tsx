@@ -1,11 +1,13 @@
-import { memo, MouseEvent } from 'react';
-import {useSelector} from 'react-redux';
+import { memo } from 'react';
+import { useSelector } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
-import {RootState} from '../../app/store';
+import { RootState } from '../../app/store';
 import ButtonRemoveCourse from '../button/ButtonRemoveCourse';
 import CourseButton from './CourseButton';
+import ReactTooltip from "react-tooltip";
 
 import './Course.css';
+import CourseCard from './CourseCard';
 
 function checkPrereqs(prereqs: any, taken:Set<string>) {
   if (Object.keys(prereqs).length === 0) return true          // No prereqs
@@ -76,29 +78,50 @@ function QuarterCourse({index, sectionId, courseId}: CoursePayload) {
     return checkPrereqs(prereqs, pastCoursesSet)
   })
 
-  return (   
+  const color = useSelector((state:RootState) => {
+    let dept = state.store.courses[courseId].data.department
+    return state.store.depts.byIds[dept];
+  })
+
+  const showUnit = true;
+  const isCrossed = false;
+
+  return (  
+  <>
     <Draggable 
       key={sectionId + courseId} 
       draggableId={sectionId + courseId} index={index}
     >
-      {(provided) => (
+      {(provided, snapshot) => (
           <div ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             className="relative quarter-course"
-            //onClick={handleOnClick}
+            data-tip data-for={courseId}
           >
             <CourseButton id={courseId} 
               sectionId={sectionId}
-              showUnit={true} 
-              isCrossed={false}
+              showUnit={showUnit} 
+              isCrossed={isCrossed}
               isWarning={!prereqsFulfilled}
             />
             <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>
-            
           </div>
       )}
     </Draggable>
+
+    <ReactTooltip 
+      id={courseId}
+      place="bottom" 
+      effect="solid" 
+      type="light"
+      arrowColor={color[1]}
+      event='click' globalEventOff='dblclick' clickable={true} isCapture={true}
+      className="course-tooltip"
+    >
+      <CourseCard id={courseId} /> 
+    </ReactTooltip>
+  </> 
   )
 }
 

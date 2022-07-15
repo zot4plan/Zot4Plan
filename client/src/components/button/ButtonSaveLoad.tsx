@@ -7,7 +7,7 @@ import Confetti from 'react-confetti';
 import Message from '../message/Message';
 import { fetchSchedule } from '../../api/FetchData';
 
-function ButtonSave () {
+function ButtonSaveLoad () {
     const [name, setName] = useState("");
     const [message, setMessage] = useState({content: "", status: 'idle', isSave: true});
     const status = useSelector((state: RootState) => state.store.status);
@@ -41,7 +41,7 @@ function ButtonSave () {
             else if (/\s/g.test(name)) 
                 setMessage({status: "failed", content: "Input cannot contain white spaces!", isSave: message.isSave})
 
-            else if(message.isSave){ // save 
+            else if(message.isSave) { // save 
                 const state:RootState = store.getState()
 
                 if(state.store.totalUnits > 0) {
@@ -100,7 +100,7 @@ function ButtonSave () {
                         name="scheduleName"
                         maxLength={maxLength}
                         value = {name}
-                        className = "username-input"
+                        className = "schedule-name-input"
                         onChange = {handleInputChange}
                     />
 
@@ -118,7 +118,7 @@ function ButtonSave () {
                     {message.status === "succeeded" && message.isSave &&
                     <Confetti
                         width={240}
-                        height={100}
+                        height={160}
                         recycle={false}
                         numberOfPieces={200}
                         tweenDuration={10000}
@@ -130,4 +130,4 @@ function ButtonSave () {
     )
 }
 
-export default ButtonSave;
+export default ButtonSaveLoad;

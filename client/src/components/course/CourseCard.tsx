@@ -1,28 +1,28 @@
-import {memo, MouseEvent} from 'react';
-import XCircle from '../icon/XCircle';
+import {memo} from 'react';
 import ReadMore from './ReadMore';
 import './CourseCard.css';
 
-import { useSelector, useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
 
 interface CourseCardType {
     id: string;
-    isShow: boolean;
-    color: string;
-    boxShadowColor: string;
-    closeCard: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
 const checkLength = (text:string) => {
     return (text.length < 100)? text: <ReadMore text={text}/>;
 }
 
+function CourseCard({id}: CourseCardType) {
+    const course = useSelector((state:RootState) => state.store.courses[id].data);
+    const color = useSelector((state:RootState) => {
+        let dept = state.store.courses[id].data.department
+        return state.store.depts.byIds[dept];
+    })
 
-function CourseCard({id, isShow, color, boxShadowColor, closeCard}: CourseCardType) {
-    const store = useStore();
     let content;
     let body = [];
-    /*
+    
     body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
 
     if(course.corequisite !== "")
@@ -41,31 +41,21 @@ function CourseCard({id, isShow, color, boxShadowColor, closeCard}: CourseCardTy
         body.push(<p key='ge'> <b>{"GE: "}</b>{checkLength(course.ge)} </p>)
     
     if(course.terms !== "")
-        body.push(<p key='terms'><b>{"Last Offered: "}</b>{checkLength(course.terms)} </p>) */
+        body.push(<p key='terms'><b>{"Last Offered: "}</b>{checkLength(course.terms)} </p>) 
 
     return ( 
-    <>
-        <div className="course-card-background"> </div>
-
-        <div className="absolute course-card-before" 
-            style={{backgroundColor: color}}>
-        </div>
-
         <div className="course-card" 
-            style={{borderColor: color, boxShadow: '4px 4px 0px 0px ' + boxShadowColor}}
+            style={{borderColor: color[1], boxShadow: '4px 4px 0px 0px ' + color[2]}}
         >   
-        {/*    <div className='course-card-header' style={{backgroundColor: color}}> 
+            <div className='course-card-header' style={{backgroundColor: color[1]}}> 
                 <p> <b>{id + '. ' + course.name} </b> </p> 
                 <p> {course.units + " units"} </p>
             </div>
             
             <div className="course-card-body"> 
                 {body}
-        </div>  */}
-
-            <div onClick={closeCard} className="absolute close-card" > <XCircle/> </div> 
+            </div>  
         </div>
-    </>
     )
 }
 

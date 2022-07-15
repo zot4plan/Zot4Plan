@@ -10,3 +10,7 @@
     background-color: var(--accent-color-1);
     color:white;
 }   
+
+@media print { 
+    .remove-year-btn {display: none;}
+}

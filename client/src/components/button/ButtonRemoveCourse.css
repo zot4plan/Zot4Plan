@@ -7,7 +7,15 @@
     visibility: hidden;
     transition: opacity var(--transition-time) ease, visibility var(--transition-time) ease;
 
-    color: #F2F2F2;
+    color: #FFFFFF;
 }
 
-.remove-course-btn svg:hover { color: white;}
+.remove-course-btn > svg {
+    transition: transform 250ms;
+}
+
+.remove-course-btn svg:hover { 
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    transform: rotate(-90deg)
+}
