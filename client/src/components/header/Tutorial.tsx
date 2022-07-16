@@ -10,8 +10,9 @@ function Tutorial () {
     }
 
     return (
-    <div className='flex-container'>
+    <>
         <button 
+            className='flex-container'
             style={{color:'white', fontSize: '2rem'}} 
             onClick={handleOnClick}
             aria-label="open tutorial"
@@ -20,7 +21,7 @@ function Tutorial () {
         </button>
 
         {showTutorial && <TutorialCard  closedTutorial={handleOnClick}/> }
-    </div>
+    </>
     )
 }
 

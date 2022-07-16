@@ -37,7 +37,7 @@ function App() {
   }
 
   return (
-  <div>
+  <>
     <Header/>
     <DragDropContext onDragEnd={onDragEnd}>
       <div id="body-container" className="relative">
@@ -46,7 +46,7 @@ function App() {
       </div>  
     </DragDropContext>
     <Footer/>
-  </div> 
+  </> 
   );
 }
 

@@ -4,6 +4,7 @@
     align-items: center;
     padding: 2rem 2.4rem;
     background-color: var(--secondary-color);
+    height:80px;
 }
 
 #brand {
@@ -19,30 +20,67 @@
     align-items: center;
 }
 
-#nav-list > li {
+.nav-item {
+    display: flex;
+    align-items: center;
     margin: 0rem 2rem;
     padding-top: 0.5rem;
     font-size: 2rem;
     color: white;
 }
 
-#nav-list > li > a {
+.nav-item > a {
     color: white;;
 }
 
-#upload { z-index: 2;}
-
-.btn-nav {
-    color: var(--accent-color-2);
+.nav-item:hover, .nav-item:hover > a,  .nav-item:hover > button{
+    color: #307ABB !important;
 }
 
-.btn-nav > svg {
-    font-size: 3.2rem;
+.nav-link{
+    position: relative;
 }
 
-.btn-nav > span {
-    font-size: 2.4rem;
-    font-weight: 400;
+.nav-link > svg {
+    font-size: 1.4rem;
+}
+
+.dropdown-menu {
+    display:none;
+    width: 200px;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-55%);
+    padding-top: 15px;
+    list-style: none;
+    text-align: start;
+    z-index: 999;
+}
+
+.dropdown-menu li {
+    background-color: #1F1F1F;
+    cursor: pointer;
+}
+
+.dropdown-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+}
+
+.dropdown-link > a {
+    text-decoration: none;
+    color: white;
+}
+
+.dropdown-link > a:hover{
+    color:#307ABB;
+} 
+
+.nav-link:hover .dropdown-menu{
+    display: block;
 }
 
 @media only screen and (max-width: 599px) {
