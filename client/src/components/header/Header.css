@@ -5,6 +5,7 @@
     padding: 2rem 2.4rem;
     background-color: var(--secondary-color);
     height:80px;
+    position: relative;
 }
 
 #brand {
@@ -13,7 +14,7 @@
     color: var(--primary-color);
 }
 
-#nav-list {
+.nav-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -50,7 +51,7 @@
     display:none;
     width: 200px;
     position: absolute;
-    top: 30px;
+    top: 20px;
     left: 50%;
     transform: translateX(-55%);
     padding-top: 15px;
@@ -98,45 +99,50 @@
 @media only screen and (max-width: 599px) {
     #brand > svg {font-size: 0.9rem;}
 
-    #menu-toggle{
+    #menu-toggle {
         display:flex;
         justify-content: center;
         align-items: center;
     }
 
-    #nav-list {
+    .nav-list {
         position:absolute;
-        flex-direction: column;
+        top: 80px;
+        left: 0;
+        z-index: 2;
+
+        height: 0;
         width: 100%;
-        top:7.5rem;
-        left:-100%;
-        transition: 0.3s;
+
+        display:block;
+        overflow: hidden;
+
+        opacity: 1;
         background-color: #1F1F1F;
-        z-index: 999;
+        transition: all .5s ease;
     }
 
-    .showMenu{ left: 0% !important; }
+    .nav-list-show {
+        height: 200px;
+        opacity: 1;
+        transform: translateY(0);
+        overflow: visible;
+    }
 
-    #nav-list > li:first-of-type {
+   .nav-list > li:first-of-type {
         width: 100%;
         border-top: 1px solid white;
-    }
+    } 
     
     .nav-item {
         display: flex;
         justify-content: center;
         margin: 0;
-        padding-top: 1.5rem;
-        padding-bottom: 1.5rem;
-    }
-
-    #nav-list > li:last-of-type {
-        padding-bottom: 3rem;
+        padding-top: 2rem;
     }
 
     .dropdown-menu {  
         transform: translateX(-50%);
-        padding-top: 20px;
-    }
+        padding-top: 30px;
+    } 
 }
-

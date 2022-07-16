@@ -18,8 +18,12 @@ const Header = () => {
       <div id="brand">
         <Logo/>
       </div>
-      
-      <ul id="nav-list" className={active? "showMenu":""}>
+
+      <button id="menu-toggle" onClick={handleOnClick}>
+        <Bars/>
+      </button>
+
+      <ul className={"nav-list " + (active? "nav-list-show ": "")}>
         <li className='nav-item'>
           <a href="#footer">Team</a>
         </li>
@@ -35,9 +39,6 @@ const Header = () => {
         </li>
       </ul>
 
-      <button id="menu-toggle" onClick={handleOnClick}>
-        <Bars/>
-      </button>
     </nav>
   )
 }
