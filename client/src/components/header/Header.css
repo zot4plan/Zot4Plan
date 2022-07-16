@@ -43,6 +43,7 @@
 
 .nav-link > svg {
     font-size: 1.4rem;
+    transition: transform 500ms;
 }
 
 .dropdown-menu {
@@ -83,6 +84,10 @@
     display: block;
 }
 
+.nav-link:hover svg{
+    transform: rotate(-180deg);
+}
+
 #menu-toggle { display: none; }
 
 #menu-toggle > svg {
@@ -105,7 +110,7 @@
         width: 100%;
         top:7.5rem;
         left:-100%;
-        transition: 0.5s;
+        transition: 0.3s;
         background-color: #1F1F1F;
         z-index: 999;
     }
@@ -113,16 +118,25 @@
     .showMenu{ left: 0% !important; }
 
     #nav-list > li:first-of-type {
+        width: 100%;
         border-top: 1px solid white;
     }
     
     .nav-item {
         display: flex;
         justify-content: center;
-        border-bottom: 1px solid white;
-        width: 100%;
         margin: 0;
-        padding: 1.5rem
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    #nav-list > li:last-of-type {
+        padding-bottom: 3rem;
+    }
+
+    .dropdown-menu {  
+        transform: translateX(-50%);
+        padding-top: 20px;
     }
 }
 
