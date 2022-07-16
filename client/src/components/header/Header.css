@@ -83,7 +83,46 @@
     display: block;
 }
 
+#menu-toggle { display: none; }
+
+#menu-toggle > svg {
+    font-size: 2.4rem;
+    color: white;
+}
+
 @media only screen and (max-width: 599px) {
     #brand > svg {font-size: 0.9rem;}
+
+    #menu-toggle{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #nav-list {
+        position:absolute;
+        flex-direction: column;
+        width: 100%;
+        top:7.5rem;
+        left:-100%;
+        transition: 0.5s;
+        background-color: #1F1F1F;
+        z-index: 999;
+    }
+
+    .showMenu{ left: 0% !important; }
+
+    #nav-list > li:first-of-type {
+        border-top: 1px solid white;
+    }
+    
+    .nav-item {
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid white;
+        width: 100%;
+        margin: 0;
+        padding: 1.5rem
+    }
 }
 

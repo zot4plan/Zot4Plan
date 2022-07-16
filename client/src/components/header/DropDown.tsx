@@ -1,7 +1,7 @@
 import './Header.css';
 
 function DropDown() {
-    const MenuItems = [
+    const menuItems = [
         {
             "name": "UCI Course Catalogue",
             "href": 'https://catalogue.uci.edu/allcourses/',
@@ -18,12 +18,12 @@ function DropDown() {
 
     return (
         <ul className='dropdown-menu'>
-            {MenuItems.map((item, index) =>  
+            {menuItems.map((item, index) =>  
                 <li key={index} className='dropdown-link'>
                     <a target="_blank" 
                         href={item.href}
                         rel="noreferrer"
-                        aria-label="Linkedin"
+                        aria-label={item.name}
                     >
                         {item.name}
                     </a>
