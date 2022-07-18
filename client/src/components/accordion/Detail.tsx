@@ -137,7 +137,7 @@ function Detail ({sectionId, text, isGE = false}:AccordionDetailType) {
     }
 
     return (
-        <>
+        <div>
             {p}
             <Droppable 
                 droppableId={sectionId}
@@ -150,11 +150,12 @@ function Detail ({sectionId, text, isGE = false}:AccordionDetailType) {
                         style={{marginBottom: len? '1.5rem' : '0rem'}}
                     >
                         <PopperList sectionId={sectionId} isGE={isGE} />
+
                         <div style={{display:'none'}}> {provided.placeholder} </div>
                     </div>
             )} 
             </Droppable>
-        </>
+        </div>
     )
 }
 

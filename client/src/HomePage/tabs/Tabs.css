@@ -1,8 +1,11 @@
 /**** Cancel Drop and Drag animation ****/
-#tab-container div[data-rbd-placeholder-context-id] {display: none !important;}
-#tab-container div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
-.grid div[data-rbd-draggable-context-id] {transform: none !important;}
-#tab-container div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
+.program-container div[data-rbd-placeholder-context-id] {display: none !important;}
+.program-container div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
+.program-container div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
+
+.ge-container div[data-rbd-placeholder-context-id] {display: none !important;}
+.ge-container div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
+.ge-container div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
 
 #tab-container {
     border-radius: 1.5rem;

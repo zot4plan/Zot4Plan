@@ -6,13 +6,12 @@ import CourseButton from './CourseButton';
 import ButtonRemoveCourse from '../button/ButtonRemoveCourse';
 import './Course.css';
 
-function getStyle(style: any, snapshot: { isDragging: any; isDropAnimating: any;}) {
+function getStyle(style: any, snapshot: {isDropAnimating: any;}) {
     if (!snapshot.isDropAnimating) 
-        return {...style, transform: snapshot.isDragging ? style?.transform : 'translate(0px, 0px)'};
+        return style;
     
     return {
         ...style,
-        transform: snapshot.isDragging ? style?.transform : 'translate(0px, 0px)',
         transitionDuration: '0.0001s',
     };
 }
@@ -57,7 +56,7 @@ function RequiredCourse({courseId, sectionId, index, handleClick}: RequiredCours
                         <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>}
                 </div>
 
-                {snapshot.isDragging && (<div className="required-course" style={{ transform: 'none !important' }}/>)}    
+                {snapshot.isDragging && (<div className="required-course"/>)}    
                 </>
             )}
         </Draggable>

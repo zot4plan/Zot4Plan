@@ -1,4 +1,4 @@
-import { memo, MouseEvent, useState} from 'react';
+import { memo, MouseEvent, useCallback, useState} from 'react';
 import { useSelector } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 import { RootState } from '../../app/store';
@@ -87,14 +87,10 @@ function QuarterCourse({index, sectionId, courseId}: QuarterCourseType) {
   const isCrossed = false;
   const [anchorEl, setAnchorEl] = useState< HTMLElement|null >(null);
 
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
-      console.log(event.currentTarget.getAttribute("data-value"));
+  const handleClick = useCallback((event: MouseEvent<HTMLElement>) => {
       setAnchorEl(anchorEl? null : event.currentTarget);
-  };  
+  },[anchorEl]);  
 
-  //const handleClickAway = () => {
-  //  setAnchorEl(null);
-  //}
   const open = Boolean(anchorEl);
   const popperId = open ? 'simple-popper' : undefined;
 
@@ -118,11 +114,11 @@ function QuarterCourse({index, sectionId, courseId}: QuarterCourseType) {
           />
           
           <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>
-    
+        
           <PopperUnstyled id={popperId} open={open} anchorEl={anchorEl}>
               <CourseCard id={courseId} isQuarter={true}/>
           </PopperUnstyled>
-          
+
         </div>
       )}
     </Draggable>
