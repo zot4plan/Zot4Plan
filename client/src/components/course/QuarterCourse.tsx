@@ -1,13 +1,12 @@
-import { memo } from 'react';
+import { memo, MouseEvent, useState} from 'react';
 import { useSelector } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 import { RootState } from '../../app/store';
 import ButtonRemoveCourse from '../button/ButtonRemoveCourse';
 import CourseButton from './CourseButton';
-import ReactTooltip from "react-tooltip";
-
+import PopperUnstyled from '@mui/base/PopperUnstyled';
+import CourseCard from '../course/CourseCard';
 import './Course.css';
-import CourseCard from './CourseCard';
 
 function checkPrereqs(prereqs: any, taken:Set<string>) {
   if (Object.keys(prereqs).length === 0) return true          // No prereqs
@@ -45,7 +44,13 @@ function checkPrereqs(prereqs: any, taken:Set<string>) {
   }
 }
 
-function QuarterCourse({index, sectionId, courseId}: CoursePayload) {
+interface QuarterCourseType {
+  index: number;
+  sectionId: string;
+  courseId: string;
+}
+
+function QuarterCourse({index, sectionId, courseId}: QuarterCourseType) {
   const prereqsFulfilled = useSelector((state:RootState) => {
     const pastCourses = new Array()
     const yearIds = state.store.years.allIds
@@ -78,50 +83,49 @@ function QuarterCourse({index, sectionId, courseId}: CoursePayload) {
     return checkPrereqs(prereqs, pastCoursesSet)
   })
 
-  const color = useSelector((state:RootState) => {
-    let dept = state.store.courses[courseId].data.department
-    return state.store.depts.byIds[dept];
-  })
-
-  const showUnit = true;
+  const showUnit = true; 
   const isCrossed = false;
+  const [anchorEl, setAnchorEl] = useState< HTMLElement|null >(null);
+
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
+      console.log(event.currentTarget.getAttribute("data-value"));
+      setAnchorEl(anchorEl? null : event.currentTarget);
+  };  
+
+  //const handleClickAway = () => {
+  //  setAnchorEl(null);
+  //}
+  const open = Boolean(anchorEl);
+  const popperId = open ? 'simple-popper' : undefined;
 
   return (  
-  <>
     <Draggable 
       key={sectionId + courseId} 
       draggableId={sectionId + courseId} index={index}
     >
-      {(provided, snapshot) => (
-          <div ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            className="relative quarter-course"
-            data-tip data-for={courseId}
-          >
-            <CourseButton id={courseId} 
-              sectionId={sectionId}
-              showUnit={showUnit} 
-              isCrossed={isCrossed}
-              isWarning={!prereqsFulfilled}
-            />
-            <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>
-          </div>
+      {(provided) => (
+        <div ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          className="relative quarter-course"
+        >
+          <CourseButton id={courseId} 
+            sectionId={sectionId}
+            showUnit={showUnit} 
+            isCrossed={isCrossed}
+            isWarning={!prereqsFulfilled}
+            handleClick={handleClick}
+          />
+          
+          <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>
+    
+          <PopperUnstyled id={popperId} open={open} anchorEl={anchorEl}>
+              <CourseCard id={courseId} isQuarter={true}/>
+          </PopperUnstyled>
+          
+        </div>
       )}
     </Draggable>
-
-    <ReactTooltip 
-      id={courseId}
-      place="bottom" 
-      effect="solid" 
-      type="light"
-      arrowColor={color[1]}
-      event='click' globalEventOff='dblclick' clickable={true} isCapture={true}
-      className="course-tooltip"
-    >
-      <CourseCard id={courseId} /> 
-    </ReactTooltip>
-  </> 
   )
 }
 

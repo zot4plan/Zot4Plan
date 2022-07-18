@@ -4,6 +4,26 @@ import {RootState} from '../../app/store';
 import {Droppable} from 'react-beautiful-dnd';
 import {memo} from 'react'
 
+interface ListType {
+  courseIds: string[];
+  sectionId: string;
+}
+
+function InnerList({courseIds, sectionId}: ListType) {
+  return (
+    <>
+      {courseIds.map((id, index) => 
+        <QuarterCourse 
+          key={id} 
+          index={index} 
+          sectionId={sectionId}
+          courseId = {id}
+        />
+      )}
+    </>
+  )
+}
+
 function Quarter({sectionId, name}:QuarterType) {
   const courses = useSelector((state:RootState) => (state.store.sections[sectionId]),shallowEqual);
 
@@ -17,14 +37,7 @@ function Quarter({sectionId, name}:QuarterType) {
             style={{backgroundColor: snapshot.isDraggingOver?'lightblue':'white'}}
             className={name + " quarter-droppable-area"}
           >
-              {courses.map((id, index) => 
-                  <QuarterCourse 
-                    key={id} 
-                    index={index} 
-                    sectionId={sectionId}
-                    courseId = {id}
-                  />
-              )}
+              <InnerList sectionId={sectionId} courseIds={courses}/>
               {provided.placeholder}
           </div>
       )} 

@@ -1,4 +1,4 @@
-import {useState, memo, MouseEvent} from 'react';
+import { memo, MouseEvent} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
 import ReactTooltip from "react-tooltip";
@@ -10,6 +10,7 @@ interface CourseButtonType {
     showUnit: boolean;
     isCrossed: boolean;
     isWarning: boolean;
+    handleClick: (event: MouseEvent<HTMLElement>) => void;
 }
 
 function removeLastWord(str: string) {
@@ -17,8 +18,7 @@ function removeLastWord(str: string) {
     return (lastIndexOfSpace === -1)? str : str.substring(0, lastIndexOfSpace);
 }
 
-function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
-    const [show, setShow] = useState(false);
+function CourseButton({id, showUnit, isCrossed, isWarning, handleClick}: CourseButtonType) {
     const units = useSelector((state: RootState) => state.store.courses[id] === undefined? 0 : state.store.courses[id].data.units);
     let colors = useSelector((state: RootState) => state.store.depts.byIds[removeLastWord(id)]);
 
@@ -50,20 +50,16 @@ function CourseButton({id, showUnit, isCrossed, isWarning}: CourseButtonType) {
     }
     else if(showUnit)
         content.push(<p key={"unit"} className='unit'> {units + ' units'} </p>)
-    
-    function handleOnClick( e: MouseEvent<HTMLDivElement> ) {
-        e.stopPropagation();
-        e.preventDefault();
-       //setShow(!show)
-    }
 
     return ( 
-        <div className="course-btn"
+        <div
+            className="course-btn"
+            onClick={handleClick}
+            data-value={id}
             style={{backgroundColor: bgColor}}
         >
             {content}
         </div>
-        
         /*show && <CourseCard id={id} isShow={show} color={colors[1]} boxShadowColor={colors[0]} closeCard={handleOnClick}/> */
     )
 }
