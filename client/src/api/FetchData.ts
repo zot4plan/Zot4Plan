@@ -1,19 +1,24 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import Axios from '../api/Axios';
 
-export const fetchCourse = createAsyncThunk("features/fetchCourse", async (id: string) => 
-    Axios.get('/api/getCourse', { params: { id: id } }).then(response => {
-        return {
-            status: "succeeded",
-            course: response.data as CourseType,
-        };
-    }).catch(() => {
-        return {
-            status: "failed",
-            course: {} as CourseType,
-        };
-    })
-);
+export const fetchCourse = createAsyncThunk("features/fetchCourse", async (id: string) => {
+    const course = sessionStorage.getItem(id);
+    if(course)
+        return {status: "succeeded", course: JSON.parse(course)};
+
+    return Axios.get('/api/getCourse', { params: { id: id } }).then(response => {
+                sessionStorage.setItem(id, JSON.stringify(response.data));
+                return {
+                    status: "succeeded",
+                    course: response.data as CourseType,
+                };
+            }).catch(() => {
+                return {
+                    status: "failed",
+                    course: {} as CourseType,
+                };
+            })
+});
 
 export const fetchAllGE = createAsyncThunk("features/fetchAllGE", async () => 
     Axios.get('/api/getAllGE').then(response => {
@@ -64,13 +69,15 @@ export const fetchProgram = createAsyncThunk("features/fetchProgram", async (id:
 export const fetchSchedule = createAsyncThunk("features/fetchSchedule", async (id: string) => 
     Axios.post('/api/getSchedule',{id: id})
     .then((response) => {
-        console.log(response);
+        const courses = response.data.courses as CourseType[];
+        courses.forEach(course => sessionStorage.setItem(course.id, JSON.stringify(course)));
+        
         return {
             status: "succeeded",
             selectedPrograms: response.data.selectedPrograms as ProgramOption[][],
             years: response.data.years as string[][][],
             addedCourses: response.data.addedCourses as string[],
-            courses: response.data.courses as CourseType[],
+            courses: courses,
         };
     })
     .catch((error)=> {

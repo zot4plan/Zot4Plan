@@ -65,13 +65,15 @@ export const storeSlice = createSlice ({
     reducers: {
         removeCourseQuarter: (state, action: PayloadAction<CoursePayload>) => {
             let id = action.payload.courseId;
-
             state.sections[action.payload.sectionId].splice(action.payload.index,1);
-            state.courses[id].remains += 1; 
-            state.totalUnits -= state.courses[id].data.units;
 
-            if(state.courses[id].remains === state.courses[id].data.repeatability)
-                delete state.courses[id];
+            if(state.courses[id] !== undefined) {
+                state.courses[id].remains += 1; 
+                state.totalUnits -= state.courses[id].data.units;
+
+                if(state.courses[id].remains === state.courses[id].data.repeatability)
+                    delete state.courses[id];
+            }
         },
 
         moveCourse: (state, action: PayloadAction<MoveCoursePayload> ) => {
@@ -201,18 +203,17 @@ export const storeSlice = createSlice ({
         builder.addCase(fetchCourse.fulfilled, (state, action)=> {
             let course = action.payload.course;
 
-            if(state.courses[course.id] === undefined) {
-                state.courses[course.id] = {
-                    data: course,
-                    remains: course.repeatability - 1,
+            if(action.payload.status === "succeeded"){
+                if(state.courses[course.id] === undefined) {
+                    state.courses[course.id] = {
+                        data: course,
+                        remains: course.repeatability,
+                    }
                 }
-            }
-            else {
+                
                 state.courses[course.id].remains -= 1;
+                state.totalUnits += course.units;
             }
-
-            state.totalUnits += course.units;
-            
         });
 
         builder.addCase(addCourse, (state, action)=> {

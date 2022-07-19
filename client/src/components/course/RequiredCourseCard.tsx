@@ -20,7 +20,6 @@ function RequiredCourseCard({id}: CourseCardType) {
             const course = sessionStorage.getItem(id);
             return course? JSON.parse(course) : null;
         }
-
         return null;
     });
 
@@ -37,7 +36,7 @@ function RequiredCourseCard({id}: CourseCardType) {
                 })
             }, 500);  
         }
-    },[course, setCourse]); 
+    },[id, course, setCourse]); 
 
     const colors = useSelector((state:RootState) => 
         id? state.store.depts.byIds[removeLastWord(id)] : ['#AFD3E9', '#70ADD7', '#3688BF']
