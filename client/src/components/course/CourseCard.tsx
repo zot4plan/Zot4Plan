@@ -1,62 +1,18 @@
-import {memo, useState, useEffect} from 'react';
-import { useStore, useSelector } from 'react-redux';
-import { RootState} from '../../app/store';
-import Axios from '../../api/Axios';
+import {memo} from 'react';
 import ReadMore from './ReadMore';
 import './CourseCard.css';
 
 interface CourseCardType {
     id: string | null;
-    isQuarter?: boolean;
+    course: CourseType | null;
+    colors: string[];
 }
 
 const checkLength = (text:string) => {
     return (text.length < 100)? text: <ReadMore text={text}/>;
 }
 
-function removeLastWord(str: string) {
-    const lastIndexOfSpace = str.lastIndexOf(' ');
-    return (lastIndexOfSpace === -1)? str : str.substring(0, lastIndexOfSpace);
-}
-
-function CourseCard({id, isQuarter = false}: CourseCardType) {
-    const store = useStore();
-    const [course, setCourse] = useState(() => {
-        if(id) {
-            if(isQuarter) {
-                const course = store.getState().store.courses[id];
-                return course === undefined? null : course.data;
-            }
-            else {
-                const course = sessionStorage.getItem(id);
-                return course? JSON.parse(course) : null;
-            }
-        }
-        return null;
-    });
-
-    useEffect(() => {  
-        if(!course && id) {
-            setTimeout(() => {
-                Axios.get('/api/getCourse', { params: { id: id} })
-                .then(res => {
-                    sessionStorage.setItem(id, JSON.stringify(res.data));
-                    setCourse(res.data);
-                })
-                .catch(() => {
-                    setCourse(null);
-                })
-            }, 500);  
-        }
-    },[course, setCourse]); 
-
-    const color = useSelector((state:RootState) => {
-        if(!id) return ['#AFD3E9', '#70ADD7', '#3688BF'];
-
-        const dept = removeLastWord(id);
-        return state.store.depts.byIds[dept];
-    })
-
+function CourseCard({id, course, colors}: CourseCardType) {
     let header =[];
     let body = [];
 
@@ -90,8 +46,8 @@ function CourseCard({id, isQuarter = false}: CourseCardType) {
     }
 
     return ( 
-        <div className="course-card" style={{borderColor: color[1], boxShadow: '4px 4px 0px 0px ' + color[2]}}>   
-            <div className='course-card-header' style={{backgroundColor: color[1]}}> 
+        <div className="course-card" style={{borderColor: colors[1], boxShadow: '4px 4px 0px 0px ' + colors[2]}}>   
+            <div className='course-card-header' style={{backgroundColor: colors[1]}}> 
                 {header}
             </div>
             <div className="course-card-body"> 

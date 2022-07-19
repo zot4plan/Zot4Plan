@@ -1,12 +1,11 @@
 import './App.css';
 import { useDispatch } from 'react-redux';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { moveCourse } from './features/StoreSlice';
+import { moveCourse} from './features/StoreSlice';
 import Header from './components/header/Header';
 import Schedule from './HomePage/schedule/Schedule';
 import Tabs from './HomePage/tabs/Tabs';
 import Footer from './components/footer/Footer';
-import { fetchCourse } from './api/FetchData';
 
 function App() {
   const dispatch = useDispatch();
@@ -18,22 +17,14 @@ function App() {
     let len = source.droppableId.length;
     let courseId = draggableId.substring(len);
 
-    if(len === 3) {
-      dispatch(moveCourse({
-        sourceId: source.droppableId,
-        destinationId: destination.droppableId,
-        sourceIndex: source.index,
-        destinationIndex: destination.index,
-        courseId: courseId
-      }))
-    }
-    else {
-      dispatch(fetchCourse({
-        destinationId: destination.droppableId,
-        destinationIndex: destination.index,
-        courseId: courseId
-      }));
-    }
+    dispatch(moveCourse({
+      sourceId: source.droppableId,
+      destinationId: destination.droppableId,
+      sourceIndex: source.index,
+      destinationIndex: destination.index,
+      courseId: courseId
+    }))
+    
   }
 
   return (

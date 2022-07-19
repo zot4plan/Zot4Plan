@@ -41,7 +41,7 @@ details:last-of-type {
 .margin-right-1 {margin-right: 1rem;}
 
 .popup {
-    border-radius: 10px !important;
+    border-radius: 16px !important;
     height: auto;
     width: 240px;
 }

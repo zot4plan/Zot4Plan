@@ -81,7 +81,10 @@ export const storeSlice = createSlice ({
 
             //prevent same course from being added to a quarter
             if(!state.sections[destinationId].includes(courseId) || sourceId === destinationId) {
-                state.sections[sourceId].splice(action.payload.sourceIndex, 1); 
+                if(sourceId.length === 3) {
+                    state.sections[sourceId].splice(action.payload.sourceIndex, 1); 
+                }
+
                 state.sections[destinationId].splice(action.payload.destinationIndex, 0, courseId); 
             }
         },
@@ -204,20 +207,11 @@ export const storeSlice = createSlice ({
                     remains: course.repeatability - 1,
                 }
             }
-            
-            if(state.depts.byIds[course.department] === undefined) { 
-                let index = state.depts.size % DEPT_COLORS.length;
-                state.depts.byIds[course.department] = DEPT_COLORS[index]
-                state.depts.size += 1;
+            else {
+                state.courses[course.id].remains -= 1;
             }
 
-            let quarterId = action.payload.destinationId,
-                courseId = action.payload.courseId;
-    
-            if(!state.sections[quarterId].includes(courseId)) {
-                state.sections[quarterId].splice(action.payload.destinationIndex, 0, courseId);
-                state.totalUnits += course.units;
-            }
+            state.totalUnits += course.units;
             
         });
 

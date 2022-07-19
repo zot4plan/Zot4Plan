@@ -1,11 +1,12 @@
 .required-course { height: 3.6rem;}
-.quarter-course { margin: 0.2rem; }
+.quarter-course { margin: 0.2rem; height: 3.6rem;}
 
 .quarter-course:hover .remove-course-btn,
 .required-course:hover .remove-course-btn {
     opacity: 1;
     visibility: visible;
 }
+
 
 .course-btn{
     display: flex;

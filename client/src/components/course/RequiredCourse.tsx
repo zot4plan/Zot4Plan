@@ -2,7 +2,7 @@ import {memo, MouseEvent} from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
 import {RootState} from '../../app/store';
-import CourseButton from './CourseButton';
+import RequiredCourseButton from './RequiredCourseButton';
 import ButtonRemoveCourse from '../button/ButtonRemoveCourse';
 import './Course.css';
 
@@ -25,8 +25,6 @@ interface RequiredCourseType {
 
 function RequiredCourse({courseId, sectionId, index, handleClick}: RequiredCourseType) {
     const isDraggable = useSelector((state: RootState) => state.store.courses[courseId] === undefined);
-    const showUnit = false;
-    const isWarning = false;
 
     return (   
         <Draggable 
@@ -42,13 +40,13 @@ function RequiredCourse({courseId, sectionId, index, handleClick}: RequiredCours
                     {...provided.dragHandleProps}
                     style={getStyle(provided.draggableProps.style, snapshot)}
                     className="relative required-course"
+                    data-value={courseId}
+                    onClick={handleClick}
                 >
-                    <CourseButton id={courseId} 
+                    <RequiredCourseButton 
+                        id={courseId} 
                         sectionId={sectionId}
-                        showUnit={showUnit} 
                         isCrossed={!isDraggable}
-                        isWarning={isWarning}
-                        handleClick={handleClick}
                     />
 
                     {/* Only courses add by students are removable */}

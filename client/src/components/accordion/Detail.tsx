@@ -4,7 +4,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import RequiredCourse from '../course/RequiredCourse';
 import PopperUnstyled from '@mui/base/PopperUnstyled';
-import CourseCard from '../course/CourseCard';
+import RequiredCourseCard from '../course/RequiredCourseCard';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 
 interface AccordionDetailType {
@@ -107,7 +107,7 @@ function PopperList({sectionId, isGE}: PopperListType) {
             onClickAway={handleClickAway}
         >
             <PopperUnstyled id={popperId} open={open} anchorEl={element.anchorEl} role="presentation">
-                <CourseCard id={element.id}/>
+                <RequiredCourseCard id={element.id}/>
             </PopperUnstyled>
         </ClickAwayListener>
       </>

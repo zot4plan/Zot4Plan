@@ -1,22 +1,16 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import Axios from '../api/Axios';
 
-export const fetchCourse = createAsyncThunk("features/fetchCourse", async (payload: FetchCourseType) => 
-    Axios.get('/api/getCourse', { params: { id: payload.courseId } }).then(response => {
+export const fetchCourse = createAsyncThunk("features/fetchCourse", async (id: string) => 
+    Axios.get('/api/getCourse', { params: { id: id } }).then(response => {
         return {
             status: "succeeded",
             course: response.data as CourseType,
-            destinationId: payload.destinationId,
-            destinationIndex: payload.destinationIndex,
-            courseId: payload.courseId,
         };
     }).catch(() => {
         return {
             status: "failed",
             course: {} as CourseType,
-            destinationId: payload.destinationId,
-            destinationIndex: payload.destinationIndex,
-            courseId: payload.courseId,
         };
     })
 );
