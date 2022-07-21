@@ -43,23 +43,24 @@ Select GE courses by section
 
 * A calendar that displays the chosen courses, divided by quarters.
 
-    - Users can add an additional academic year by clicking on the "+" button at the bottom of the calendar
+    - Users can add an additional academic year by clicking on the "Add Year" button at the top of the calendar.
 
-    - The additional year can be removed by clicking on the "-" button next to the year
+    - The additional year can be removed by clicking on the "-" button next to the year.
 
-* Major Requirement Tab 🔥
+* Major/Minor Requirements Tab 🔥
+    - Users can select up to three major and/or minor requirements.
     
-    - Each dropdown represents a section in the requirement
+    - Each dropdown represents a section in the requirement.
 
-    - Drag and drop feature that allows users to place the courses in the desired quarter(s)
+    - Drag and drop feature that allows users to place the courses in the desired quarter(s).
 
-    - A search engine that users can use to include any additional courses
+    - A search engine that users can use to search/include any additional courses.
 
 * General Education Requirement Tab ❄️
 
     - 10 main dropdowns - each represents a GE category.
 
-    - A combination of dropdown and search bar is implemented to help users find their courses in an efficient manner
+    - Each GE category dropdown contains courses that can be used to fulfill the requirement.
 
 * Card pop-up that exhibits necessary information of that particular course
 
@@ -72,15 +73,16 @@ Select GE courses by section
     - Prerequisite, Restriction, Corequisite, Repeatability
 
     - GE fulfillment
+    
+    - Past terms that the course were offered
 
 * Refresh button that allows users to remove all of the current courses on their calendar
 
 * Save and Load Implementation 🍭
 
-    - Users can save their calendar by selecting the download button, which the schedule will be downloaded as a json file
+    - Users can save their calendar under a unique username.
 
-    - The upload feature will take a json file of the schedule and load that saved version
-
+    - Users can easily upload their saved schedule by providing that same unique username.
 
 ## **How to Run Program Locally** 🏃
 
