@@ -1,20 +1,10 @@
-/*************************/
-/******* Object Type *****/
-/*************************/
-declare interface YearType {
-    id: string;
-    quarterIds: string[];
-}
-
+/************************************/
+/********** Objects Type ***********/
+/***********************************/
 declare interface ProgramOption {
     value: number;
     label: string;
     is_major: boolean;
-}
-
-declare interface QuarterType { 
-    sectionId: string;
-    name: string;
 }
 
 declare interface RequirementType {
@@ -36,16 +26,16 @@ declare interface CourseType {
     terms:string;
     units: number;
     repeatability: number;
+    [id: string]: string | number;
+}
+declare interface YearsType {
+    byIds: { [id: string]: string[] },
+    allIds: string[],
 }
 
-/************************/
-/***** Payload Type ****/
-/************************/
-declare interface FetchGEPayload { 
-   ge: GEPayload[];
-   courses: CourseType[];
-}
-
+/***********************************/
+/*********** Payload Type **********/
+/***********************************/
 declare interface GEPayload {
     id: string; 
     name: string; 
@@ -54,12 +44,6 @@ declare interface GEPayload {
 
 declare interface CoursePayload{
     sectionId: string;
-    courseId: string;
-    index: number;
-}
-
-declare interface CourseQuarterPayload {
-    quarterId: string;
     courseId: string;
     index: number;
 }
@@ -85,17 +69,6 @@ declare interface ProgramOptionPayload {
 declare interface SwitchProgramPayload {
     move: number;
     isMajor: boolean;
-}
-
-/*********** Fetch Input Types ************/
-declare interface FetchProgramType { 
-    id:number; 
-}
-
-declare interface FetchCourseType { 
-    destinationId: string;
-    destinationIndex: number;  
-    courseId: string;
 }
 
 /************* Slice **************/
@@ -139,10 +112,7 @@ declare interface GESliceType{
 }
 
 declare interface StoreSliceType {
-    years: {
-        byIds: { [id: string]: string[] },
-        allIds: string[],
-    },
+    years: YearsType,
     sections: {[id:string]: string[]},
     totalUnits: number,
     courses: {

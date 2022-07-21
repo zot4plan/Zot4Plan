@@ -11,18 +11,20 @@ interface SectionType {
     programId?: number;
 }
 
+interface ProgramSectionType{
+    sectionId: string;
+    nameChild: string;
+}
+
 const Accordion = ({id, programId = -1}:SectionType) => {
-    const accordion:any = useSelector((state: RootState) => {
-        if (programId !== -1) 
-            return state.programs.byIds[programId].byIds[id];
-        else
-            return id;
-    });
+    const accordion:any = useSelector((state: RootState) => 
+        (programId !== -1)? state.programs.byIds[programId].byIds[id] : id
+    );
 
     let detail, name;
     if (programId !== -1) {
         name = accordion.name;
-        detail = accordion.sectionIds.map((section:{sectionId: string, nameChild: string}) => 
+        detail = accordion.sectionIds.map((section:ProgramSectionType) => 
                     <Detail key={section.sectionId} 
                         sectionId={section.sectionId} 
                         text={section.nameChild}

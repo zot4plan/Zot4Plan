@@ -15,11 +15,7 @@ const DEPT_COLORS = [
 
 function removeLastWord(str:string) {
     const lastIndexOfSpace = str.lastIndexOf(' ');
-  
-    if (lastIndexOfSpace === -1) 
-      return str;
-  
-    return str.substring(0, lastIndexOfSpace);
+    return lastIndexOfSpace === -1? str : str.substring(0, lastIndexOfSpace);
 }
 
 const generateInitialState = () => {

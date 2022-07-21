@@ -9,7 +9,6 @@ interface MessageType {
 }
 
 function Message({status, content}: MessageType) {
-
     return (
         <p className={'message ' + (status === 'succeeded'? 'green': 'red')}> 
             <span className='message-icon'> 

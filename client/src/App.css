@@ -98,6 +98,7 @@ svg { font-size: 10px; }
     opacity: 1 !important;
 }
 
+/* button */
 .btn-outlined { 
     border-radius: 50%;
     line-height: 0;
@@ -108,12 +109,6 @@ svg { font-size: 10px; }
     box-shadow: 0 0 3px 3px var(--accent-color-2);
     background-color: var(--accent-color-2);
     color: white;
-}
-
-.schedule-name-input {
-    height: 2.4rem;
-    width: 100%;
-    margin: 1rem 0rem;
 }
 
 /* body */

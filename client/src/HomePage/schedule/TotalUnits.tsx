@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
 import {RootState} from '../../app/store';
 
-const TotalUnits = () => {
+function TotalUnits() {
     const units = useSelector((state:RootState)=> state.store.totalUnits);
     return (
-      <div>
-        <p> Total Units:</p>
-        <p> {units} </p>
-      </div>
+        <>
+            <p> Total Units:</p>
+            <p> {units} </p>
+        </>
     )
 }
 

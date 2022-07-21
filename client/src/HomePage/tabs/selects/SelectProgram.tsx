@@ -1,12 +1,12 @@
 import { useState, useEffect, memo, useCallback } from 'react';
-import Axios from '../../../api/Axios';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import Select, { OnChangeValue, StylesConfig} from 'react-select';
-import './SelectProgram.css';
 import { RootState } from '../../../app/store';
 import { handleChangeProgram } from '../../../features/ProgramsSlice';
+import Axios from '../../../api/Axios';
 import SelectCourses from './SelectCourses';
 import ZotSelectMajor from '../../../assets/images/ZotSelectMajor.png';
+import './SelectProgram.css';
 
 const myStyle: StylesConfig<ProgramOption, true> =  {
     container: (provided) => ({
@@ -75,6 +75,8 @@ function SelectProgram({isMajor}: SelectProgramType) {
         if(selectedOptions)
             dispatch(handleChangeProgram({value: selectedOptions as ProgramOption[], isMajor: isMajor}));
     },[dispatch, isMajor])
+
+    const placeholder = "Select your " + (isMajor? "major" : "minor");
     
     return (
     <div>
@@ -88,8 +90,8 @@ function SelectProgram({isMajor}: SelectProgramType) {
                 options = {programs.filter((program:ProgramOption) => program.is_major === isMajor)} 
                 isOptionDisabled={() => selectedPrograms.length >= 3 }
                 styles={myStyle}
-                placeholder = {"Select Your " + (isMajor? " Major" : "Minor")}
-                aria-label = {"Select Your " + (isMajor? " Major" : "Minor")}
+                placeholder = {placeholder}
+                aria-label = {placeholder}
             />
         </div>
         {selectedPrograms.length > 0 && <SelectCourses/>}

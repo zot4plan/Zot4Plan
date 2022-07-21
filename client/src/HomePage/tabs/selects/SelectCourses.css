@@ -15,7 +15,6 @@
 .add-course-btn {
     top: 50%;
     right: 3px;
-
     transform: translateY(-50%);
 
     border-radius: 50%;

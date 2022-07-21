@@ -4,7 +4,7 @@ import TutorialCard from './TutorialCard';
 function Tutorial () {
     const [showTutorial, setShowTutorial] = useState(false);
 
-    function handleOnClick( e: { preventDefault: () => void; }) {
+    const handleOnClick = ( e: { preventDefault: () => void; }) => {
         e.preventDefault();
         setShowTutorial(!showTutorial)
     }

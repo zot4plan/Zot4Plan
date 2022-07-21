@@ -45,10 +45,10 @@
     .arrow > svg {font-size: 0.7rem;}
 
     .tutorial-img { 
-        border-radius: 15px;
-        border: 6px solid #5C9DD6;
         width: 475px;
         height: 627px;
+        border-radius: 15px;
+        border: 6px solid #5C9DD6;
     }
 
 }
@@ -58,9 +58,9 @@
     .arrow > svg {font-size: 1rem;}
 
     .tutorial-img { 
-        border-radius: 15px;
-        border: 6px solid #5C9DD6;
         width: 550px;
         height: 726px;
+        border-radius: 15px;
+        border: 6px solid #5C9DD6;
     }
 }

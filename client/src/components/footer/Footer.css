@@ -60,7 +60,7 @@
     align-items: center;
 }
 
-.list {margin-top: 1rem;}
+.list {margin-top: 0.5rem;}
 
 .item > a > svg {
     font-size: 2rem;

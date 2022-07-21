@@ -81,7 +81,6 @@ export const fetchSchedule = createAsyncThunk("features/fetchSchedule", async (i
         };
     })
     .catch((error)=> {
-        console.log(error);
         return {
             status: "failed",
             selectedPrograms: [] as ProgramOption[][],

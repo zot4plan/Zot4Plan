@@ -2,10 +2,9 @@ import {useState,memo, MouseEvent} from 'react';
 import  { StylesConfig } from "react-select";
 import AsyncSelect  from 'react-select/async';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import Axios from '../../../api/Axios';
-
 import {RootState} from '../../../app/store';
 import {addCourse} from '../../../features/ProgramsSlice';
+import Axios from '../../../api/Axios';
 import AddIcon from '../../../components/icon/AddIcon';
 import Message from '../../../components/message/Message';
 import './SelectCourses.css';

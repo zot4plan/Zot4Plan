@@ -16,17 +16,15 @@ interface AuthorType {
 const Author = ({author}: AuthorType) => {
     return (
         <li>
-            <div>
-                <a target="_blank" 
-                    href={author.linkedin} 
-                    rel="noreferrer"
-                    className="name"
-                    aria-label="Linkedin"
-                >
-                    {author.name}
-                </a>
-            </div>
-
+            <a target="_blank" 
+                href={author.linkedin} 
+                rel="noreferrer"
+                className="name"
+                aria-label="Linkedin"
+            >
+                {author.name}
+            </a>
+            
             <ul className="list">
                 <li className="item" style={{marginRight: "0.5rem"}}>
                     <a target="_blank" 

@@ -1,8 +1,6 @@
-import { memo, MouseEvent} from 'react';
+import { memo } from 'react';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
-import ReactTooltip from "react-tooltip";
-import Error from '../icon/Error';
 
 interface CourseButtonType {
     id: string;
@@ -27,9 +25,7 @@ function RequiredCourseButton({id, isCrossed}: CourseButtonType) {
     }
 
     return ( 
-        <div className="course-btn"
-            style={{backgroundColor: bgColor}}
-        >
+        <div className="course-btn" style={{backgroundColor: bgColor}}>
             <p key={"course-" + id} 
                className='course-id' 
                style={{textDecoration: textDecoration, color: textColor}}

@@ -1,24 +1,33 @@
-import {useState} from 'react';
+import {useState, Fragment} from 'react';
 
 interface ReadMoreType {
-    text: string;
+    text: string | string[];
 }
 
-const ReadMore = ({ text }: ReadMoreType) => {
-    const [isReadMore, setIsReadMore] = useState(true);
+const ReadMore = ({ text}: ReadMoreType) => {
+    const [more, setMore] = useState(false);
 
     const toggleReadMore = (e: { stopPropagation: () => void; }) => {
       e.stopPropagation();
-      setIsReadMore(!isReadMore);
+      setMore(!more);
     };
+
+    let content = [];
+
+    if(typeof(text) === 'object') {
+      let len = more? text.length : 2;
+      for(let i = 0; i < len; i++) {
+        content.push(<Fragment key={i}> {text[i]} <br/> </Fragment>);
+      }
+    }
+    else 
+      content.push(<span key="text"> {more? text : text.slice(0, 100)}</span>)
 
     return (
     <>
-      <span>
-        {isReadMore ? text.slice(0, 100) : text}
-      </span>
+      {content}
       <span onClick={toggleReadMore} style={{color:'#307ABB', cursor:'pointer'}}>
-        {isReadMore ? "... read more" : " show less"}
+        {more? " show less" : "... read more"}
       </span>
     </>
     );

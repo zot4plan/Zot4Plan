@@ -4,8 +4,8 @@ import { RootState } from "../../app/store";
 import Quarter from './Quarter';
 import ButtonRemoveYear from "../button/ButtonRemoveYear";
 import Right from '../icon/ArrowRightSmall';
-
 import './Accordion.css';
+
 interface YearType {
     id: string;
     name: string;

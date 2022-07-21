@@ -27,7 +27,7 @@ function QuarterCourseCard({id}: CourseCardType) {
     )
 
     return ( 
-        <CourseCard id={id} course = {course} colors={colors} />
+        <CourseCard id={id} course={course} colors={colors} />
     )
 }
 

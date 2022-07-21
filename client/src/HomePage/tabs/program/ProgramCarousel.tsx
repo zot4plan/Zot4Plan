@@ -1,10 +1,8 @@
 import {memo} from 'react'
-import { useDispatch, useSelector} from 'react-redux';
-
+import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../app/store';
 import ChevronLeft from '../../../components/icon/ChervonLeft';
 import ChevronRight from '../../../components/icon/ChervonRight';
-
 import { handleSwitchProgram } from '../../../features/ProgramsSlice';
 
 interface Type {
@@ -13,7 +11,7 @@ interface Type {
     isMajor: boolean;
 }
 
-function ProgramName ({url, name, isMajor}: Type) {
+function ProgramCarousel ({url, name, isMajor}: Type) {
     const isShowButton = useSelector((state:RootState) => {
         let i = isMajor? 1 : 0;
         return state.programs.selectedPrograms[i].length > 1;
@@ -51,4 +49,4 @@ function ProgramName ({url, name, isMajor}: Type) {
     )
 }
 
-export default memo(ProgramName);
+export default memo(ProgramCarousel);

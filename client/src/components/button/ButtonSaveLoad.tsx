@@ -6,22 +6,26 @@ import Axios from '../../api/Axios';
 import Confetti from 'react-confetti';
 import Message from '../message/Message';
 import { fetchSchedule } from '../../api/FetchData';
+import './ButtonSaveLoad.css';
+
+const maxLength = 32;
+const minLength = 8;
+const scheduleNameNote = "Other users might be able to access and modify your schedule if the same name is used"
+                        + ", so please try to use a unique name.";
+const minLengthMessage = "Must contain at least " + minLength + " characters!";
+const spaceMessage = "Cannot contain white spaces!"
 
 function ButtonSaveLoad () {
     const [name, setName] = useState("");
     const [message, setMessage] = useState({content: "", status: 'idle', isSave: true});
     const status = useSelector((state: RootState) => state.store.status);
-    const maxLength = 32;
 
-    const dispatch = useDispatch();
-    const store = useStore();
+    const handleOnClick = (e: MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+    }
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
-    }
-
-    const handleOnClick = (e: { stopPropagation: () => void; }) => {
-        e.stopPropagation();
     }
 
     const handOnClickButton = (e: MouseEvent<HTMLButtonElement>, value: string) => {
@@ -32,14 +36,19 @@ function ButtonSaveLoad () {
             setMessage({content: "", status: 'idle', isSave: false});
     }
 
-    const handleOnSubmit = (e: { preventDefault: () => void; }) => {
+    const dispatch = useDispatch();
+    const store = useStore();
+
+    const handleOnSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
         e.preventDefault();
+
         setTimeout(() => {
-            if(name.length < 10)
-                setMessage({status: "failed", content: "Input must contain at least 10 characters!", isSave: message.isSave})
+            if(name.length < minLength)
+                setMessage({status:"failed", content: minLengthMessage, isSave: message.isSave})
 
             else if (/\s/g.test(name)) 
-                setMessage({status: "failed", content: "Input cannot contain white spaces!", isSave: message.isSave})
+                setMessage({status:"failed", content: spaceMessage, isSave: message.isSave})
 
             else if(message.isSave) { // save 
                 const state:RootState = store.getState()
@@ -71,6 +80,17 @@ function ButtonSaveLoad () {
         }, 500);
     }
 
+    const handleOnConfettiComplete = () => {
+        setMessage({status: "idle", content: "", isSave: message.isSave})
+    }
+
+    let messageContent;
+    if(status !== "idle" && !message.isSave)
+        messageContent = <Message status={status} content={(status === "succeeded")? "Loaded successfully!" : "Schedule not found!"}/>
+
+    else if(message.status !== "idle" ) 
+        messageContent = <Message status={message.status} content={message.content}/>
+        
     return (
         <div className="relative flex-container" onClick={handleOnClick}>    
             <button className='btn margin-right-1'
@@ -94,7 +114,7 @@ function ButtonSaveLoad () {
                 className='popup'
             >
                 <div className="flex-container flexColumn" onClick={handleOnClick}>
-                    <label htmlFor="scheduleName" style={{width: '100%'}}> Enter schedule name: </label>
+                    {message.isSave && <p style={{width: '100%'}}> {scheduleNameNote} </p>}
                     <input type="text"
                         id="scheduleName"
                         name="scheduleName"
@@ -102,27 +122,23 @@ function ButtonSaveLoad () {
                         value = {name}
                         className = "schedule-name-input"
                         onChange = {handleInputChange}
+                        placeholder="Schedule name"
                     />
 
                     <button className='btn' onClick={handleOnSubmit} style={{marginBottom: "0.8rem"}}> Submit </button>
 
                     <div style={{position: 'relative'}}> 
-                        {message.status !== "idle" && 
-                            <Message status={message.status} content={message.content}/>}
-
-                        {status !== "idle" && !message.isSave &&
-                            <Message status={status} 
-                                    content={(status === "succeeded")? "Load successfully!" : "Cannot find your schedule!"}/>}
+                        {messageContent}
                     </div>
 
-                    {message.status === "succeeded" && message.isSave &&
+                    {message.status === "succeeded" &&
                     <Confetti
                         width={240}
                         height={160}
                         recycle={false}
                         numberOfPieces={200}
                         tweenDuration={10000}
-                        onConfettiComplete= {() => setMessage({status: "idle", content: "", isSave: message.isSave})}
+                        onConfettiComplete={handleOnConfettiComplete}
                     />}
                 </div>
             </ReactTooltip>

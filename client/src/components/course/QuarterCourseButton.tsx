@@ -1,11 +1,11 @@
-import { memo, MouseEvent, useState, useEffect} from 'react';
+import {memo, MouseEvent, useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../../app/store';
+import { RootState } from '../../app/store';
+import { fetchCourse } from '../../api/FetchData';
 import ReactTooltip from "react-tooltip";
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import QuarterCourseCard from './QuarterCourseCard';
 import Error from '../icon/Error';
-import { fetchCourse } from '../../api/FetchData';
 
 interface CourseButtonType {
     courseId: string;
@@ -18,39 +18,70 @@ function removeLastWord(str: string) {
 }
 
 function checkPrereqs(prereqs: any, taken:Set<string>) {
-    if (Object.keys(prereqs).length === 0) return true          // No prereqs
+    if (Object.keys(prereqs).length === 0) return true; // No prereqs
   
     const key = Object.keys(prereqs)[0];
-    const reqArray = prereqs[key]
+    const reqArray = prereqs[key];
   
     if (key === 'AND') {
         for (let i = 0; i < reqArray.length; i++) {
             const req = reqArray[i]
             if (typeof(req) === 'string') {
-                if (req.includes('AP') || req.includes('ACT') || req.includes('SAT') || req.includes('PLACEMENT')) continue     // Treat those requirements as fulfilled
-                if (!taken.has(req)) return false                                                    // Missing a required class in AND
-            } else {
-                if (!checkPrereqs(req, taken)) {
-                    return false                                                 // Prereq tree inside AND not fulfilled
-                }
+                // Treat those requirements as fulfilled
+                if (req.includes('AP') || req.includes('ACT') || req.includes('SAT') || req.includes('PLACEMENT'))
+                    continue;
+                
+                // Missing a required class in AND
+                if (!taken.has(req)) 
+                    return false;                                                  
+            } 
+            else {
+                // Prereq tree inside AND not fulfilled
+                if (!checkPrereqs(req, taken)) 
+                    return false;                                           
             }
         }
-      return true                                                       // Everything fulfilled
-  
-    } else {  
-        for (let i = 0; i < reqArray.length; i++) {
-            const req = reqArray[i]
-            if (typeof(req) === 'string') { 
-                if (req.includes('AP') || req.includes('ACT') || req.includes('SAT') || req.includes('PLACEMENT')) return true     // Treat those requirements as fulfilled
-                if (taken.has(req)) return true                               // Taken a class in OR
-            } else {
-                if (checkPrereqs(req, taken)) {
-                    return true                                                 // Prereq tree fulfilled in OR
-                }
-            }
-        }
-      return false                                                      // Nothing fulfilled
+
+        return true; // Everything fulfilled                                                   
     }
+    
+    for (let i = 0; i < reqArray.length; i++) {
+        const req = reqArray[i];
+        if (typeof(req) === 'string') { 
+            // Treat those requirements as fulfilled or Taken a class in OR
+            if (req.includes('AP') || req.includes('ACT') || req.includes('SAT') || req.includes('PLACEMENT') || taken.has(req)) 
+                return true;                  
+        } 
+        else {
+            // Prereq tree fulfilled in OR
+            if (checkPrereqs(req, taken)) 
+                return true;                                               
+        }
+    }
+
+    return false; // Nothing fulfilled                                                  
+}
+
+function getPastCourses(state: RootState, sectionId: string) {
+    const pastCourses = new Set<string>();
+    const yearIds = state.store.years.allIds;
+    let ended = false;
+
+    for (let i = 0; i < yearIds.length && !ended; i++) {
+        const yearId = yearIds[i];
+        const quarterIds = state.store.years.byIds[yearId];
+
+        for (let j = 0; j < quarterIds.length; j++) {
+            if (quarterIds[j] === sectionId) { 
+                ended = true;
+                break;
+            }
+             
+            state.store.sections[quarterIds[j]].forEach(course => pastCourses.add(course));
+        }
+    }
+    
+    return pastCourses;
 }
 
 function QuarterCourseButton({courseId, sectionId}: CourseButtonType) {
@@ -59,53 +90,44 @@ function QuarterCourseButton({courseId, sectionId}: CourseButtonType) {
         return course === undefined? null : course.data;
     })
 
-    const prereqsFulfilled = useSelector((state:RootState) => {
-        if(!course) return true;
+    const units = useSelector((state: RootState) => 
+        state.store.courses[courseId] === undefined? null : state.store.courses[courseId].data.units);
 
-        const pastCourses: string[] = [];
-        const yearIds = state.store.years.allIds
-        let ended = false
-        for (let i = 0; i < yearIds.length; i++) {
-            const yearId = yearIds[i]
-            const quarterIds = state.store.years.byIds[yearId]
-            for (let j = 0; j < quarterIds.length; j++) {
-                if (quarterIds[j] === sectionId) {
-                    ended = true
-                    break
-                } else {
-                    pastCourses.push(...state.store.sections[quarterIds[j]])
-                }
-            }
-            if (ended) {
-                break
-            }
-        }
-    
-        const pastCoursesSet = new Set<string>(pastCourses)
-    
-        let prereqs = course['prerequisite_tree']
-        prereqs = prereqs.replace(/'/g, '"')                                               // Replacing with double quotes to use JSON.parse
-        if (prereqs === '') {
-            prereqs = '{}'
-        }
-        prereqs = JSON.parse(prereqs)
-    
-        return checkPrereqs(prereqs, pastCoursesSet)
-    })
-    const units = useSelector((state: RootState) => state.store.courses[courseId] === undefined? null : state.store.courses[courseId].data.units);
     const colors = useSelector((state: RootState) => state.store.depts.byIds[removeLastWord(courseId)]);
+
+    const prereqsFulfilled = useSelector((state:RootState) => {
+        if(!course) 
+            return true;
+
+        let prereqs = course['prerequisite_tree'].replace(/'/g, '"'); // Replacing with double quotes to use JSON.parse
+        if (prereqs === '') 
+            return true;
+
+        const pastCoursesSet = getPastCourses(state, sectionId);
+
+        return checkPrereqs(JSON.parse(prereqs), pastCoursesSet);
+    })
+
     const dispatch = useDispatch();
 
     useEffect(() => {  
-        if(!course) {
+        if(!course) 
             dispatch(fetchCourse(courseId));
-        }
-    },[course]); 
+    },[course, courseId, dispatch]); 
+
+    const [anchorEl, setAnchorEl] = useState<HTMLElement|null>(null);
+
+    const handleClick = (event: MouseEvent<HTMLElement>) => {
+        setAnchorEl(anchorEl? null : event.currentTarget);
+    };  
+
+    const open = Boolean(anchorEl);
+    const popperId = open ? ('popper' + sectionId + courseId) : undefined;
 
     let content;
     if (!prereqsFulfilled) {
         content =  
-            <span key={"warning" + courseId} className='course-warning' data-tip data-for='prereqTip'> 
+            <span key='warning' className='course-warning' data-tip data-for='prereqTip'> 
                 <Error/>
                 <ReactTooltip id="prereqTip" place="top" effect="solid">
                     Missing prerequisites
@@ -113,32 +135,25 @@ function QuarterCourseButton({courseId, sectionId}: CourseButtonType) {
             </span>                             
     }
     else if (units)
-        content = <p key={"unit"} className='unit'> {units + ' units'} </p>
-
-    const [anchorEl, setAnchorEl] = useState< HTMLElement|null >(null);
-    
-    const handleClick = (event: MouseEvent<HTMLElement>) => {
-        setAnchorEl(anchorEl? null : event.currentTarget);
-    };  
-    
-    const open = Boolean(anchorEl);
-    const popperId = open ? 'simple-popper' : undefined;
+        content = <p key='unit' className='unit'> {units + ' units'} </p>
 
     return ( 
-        <div className="course-btn"
-            onClick={handleClick}
-            style={{backgroundColor: colors[2]}}
-        >   
-            <p key={"course-" + courseId} className='course-id' > 
-                {courseId}
-            </p>
+        <>
+            <div className='course-btn'
+                onClick={handleClick}
+                style={{backgroundColor: colors[2]}}
+            >   
+                <p key='courseId' className='course-id' > 
+                    {courseId}
+                </p>
 
-            {content}
+                {content}
+            </div>
 
             <PopperUnstyled id={popperId} open={open} anchorEl={anchorEl}>
                 <QuarterCourseCard id={courseId}/>
             </PopperUnstyled>
-        </div>
+        </>
     )
 }
 

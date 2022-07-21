@@ -67,7 +67,7 @@
 @media print { 
     .course-id {font-size: 1.2rem; padding-left: 1.2rem;}
     .unit {padding-right: 1.2rem; padding-left: 0;}
-    .course-btn{ height: 2.6rem;}
+    .quarter-course, .course-btn{ height: 2.6rem;}
     .course-warning > svg {
         font-size: 1.5rem;
     }

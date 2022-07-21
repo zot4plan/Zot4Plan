@@ -8,9 +8,9 @@
 .ge-container div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
 
 #tab-container {
+    height: 64.8rem;
     border-radius: 1.5rem;
     box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
-    height: 64.8rem;
     margin-top: 4.8rem;
     margin-bottom : 14rem;
 }
@@ -20,8 +20,8 @@
     transition: background-color ease-in-out 0.4s;
     padding: 0.5rem;
     background-color: var(--primary-color-2);
-    cursor: pointer;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .tab:hover {color: var(--accent-color-2);}
@@ -60,24 +60,24 @@
 }
 
 #program-img {
-    height: auto;
     width: 94%;
+    height: auto;
 }
 
 .program-container {
-    overflow: scroll;
     height: 49rem;
+    overflow: scroll;
 }
 
 .ge-container {
-    overflow: scroll;
     height: 60rem;
+    overflow: scroll;
 }
 
 .loading-message {
     position: absolute;
-    left: 50%;
     top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 
 }

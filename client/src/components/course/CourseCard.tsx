@@ -1,4 +1,4 @@
-import {memo} from 'react';
+import {memo, Fragment} from 'react';
 import ReadMore from './ReadMore';
 import './CourseCard.css';
 
@@ -8,9 +8,28 @@ interface CourseCardType {
     colors: string[];
 }
 
-const checkLength = (text:string) => {
-    return (text.length < 100)? text: <ReadMore text={text}/>;
+const checkLength = (text:string|number, isTerm = false) => {
+    if(typeof(text) === 'number') return text;
+    
+    if(isTerm) {
+        let terms = text.split('.');
+        terms.pop();
+
+        if(terms.length > 2) return <ReadMore text={terms}/>
+        
+        let content:JSX.Element[] = [];
+        terms.forEach((term, index) => {
+            content.push(<Fragment key={index}> {term} <br/> </Fragment>);
+        })
+
+        return <>{content}</>;
+    }
+
+    return (text.length > 100)? <ReadMore text={text}/> : text;
 }
+
+const fields = ['corequisite', 'prerequisite', 'restriction', 'ge' ];
+const labels = ['Corequisite: ', 'Prerequisite: ', 'Restriction: ', 'GE: '];
 
 function CourseCard({id, course, colors}: CourseCardType) {
     let header =[];
@@ -22,23 +41,20 @@ function CourseCard({id, course, colors}: CourseCardType) {
 
         body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
 
-        if(course.corequisite !== "")
-            body.push(<p key='corequisite'> <b>{"Corequisites: "}</b>{checkLength(course.corequisite)}</p>);
+        fields.forEach((field, index) => {
+            if(course[field] !== "")
+                body.push(<p key={field}> <b>{labels[index]}</b>{checkLength(course[field])}</p>);
+        })
 
-        if(course.prerequisite !== "")
-            body.push(<p key='prerequisite'> <b>{"Prerequisite: "}</b>{checkLength(course.prerequisite)}</p>);
-
-        if(course.restriction !== "")
-            body.push(<p key='restriction'> <b>{"Restriction: "}</b>{checkLength(course.restriction)}</p>);
-                
         if(course.repeatability > 1)
             body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{(course.repeatability === 9)? "unlimited": course.repeatability}</p>);
-
-        if(course.ge !== "")
-            body.push(<p key='ge'> <b>{"GE: "}</b>{checkLength(course.ge)}</p>);
         
-        if(course.terms !== "")
-            body.push(<p key='terms'><b>{"Last Offered: "}</b>{checkLength(course.terms)}</p>);
+        if(course.terms !== "") {
+            body.push(<p key='terms'>
+                        <b>{"Last Offered: "}</b> <br/> 
+                        {checkLength(course.terms, true)} 
+                    </p>);
+        }
     }
     else {
         header.push(<p key="name"> <b> {id} </b> </p>) ;

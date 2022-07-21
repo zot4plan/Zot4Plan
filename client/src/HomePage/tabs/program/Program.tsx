@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../app/store';
 import Accordion from '../../../components/accordion/Accordion';
 import { fetchProgram } from '../../../api/FetchData';
-import ProgramName from './ProgramName';
+import ProgramCarousel from './ProgramCarousel';
 
 interface Type {
     isMajor: boolean;
@@ -12,9 +12,9 @@ interface Type {
 
 function Program ({isMajor, addedCourses}:Type) {
     const programId = useSelector((state:RootState) => {
-        let i = isMajor? 1 : 0;
-        let index = state.programs.index[i];
-        return (index < 0)? 0 : state.programs.selectedPrograms[i][index].value;
+        let programType = isMajor? 1 : 0;
+        let index = state.programs.index[programType];
+        return (index < 0)? 0 : state.programs.selectedPrograms[programType][index].value;
     });
 
     const allIds = useSelector((state:RootState) => (
@@ -33,7 +33,7 @@ function Program ({isMajor, addedCourses}:Type) {
         dispatch(fetchProgram(programId));
 
     else if (status === 'succeeded')  {
-        content.push(<ProgramName key="hyperlink" url={url} name={name} isMajor={isMajor}/>);
+        content.push(<ProgramCarousel key="hyperlink" url={url} name={name} isMajor={isMajor}/>);
         content.push(<Accordion key={addedCourses} id={addedCourses}/>)
         allIds.forEach(id => { content.push(<Accordion key={id} id={id} programId={programId} />) });
         content.push(<div key="empty" style={{height:'42rem'}}></div>);

@@ -1,0 +1,13 @@
+.popup {
+    border-radius: 16px !important;
+    height: auto;
+    width: 240px;
+    padding: 0.8rem 1.6rem !important;
+}
+
+.schedule-name-input {
+    height: 3.2rem;
+    width: 100%;
+    margin: 1rem 0rem;
+    border-radius: 1.6rem;
+}

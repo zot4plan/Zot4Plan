@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import LeftArrow from '../icon/ArrowLeft';
 import RightArrow from '../icon/ArrowRight';
 import XCircle from '../icon/XCircle';
@@ -13,20 +13,16 @@ function TutorialCard ({ closedTutorial }: TutorialSliderType) {
     const images = [require('../../assets/images/HowTo1.jpg'), require('../../assets/images/HowTo2.jpg')];
     const [index, setIndex] = useState(1);
 
-    function handleLeftClick( e: { preventDefault: () => void; }) {
+    function handleLeftClick( e: MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
-        if(index === 1)
-            setIndex(images.length);
-        else 
-            setIndex(index - 1);
+        const idx = index === 1? images.length : index - 1;
+        setIndex(idx);
     }
     
-    function handleRightClick( e: { preventDefault: () => void; }) {
+    function handleRightClick( e: MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
-        if(index === images.length)
-            setIndex(1);
-        else 
-            setIndex(index + 1);
+        const idx = index === images.length? 1 : index + 1;
+        setIndex(idx);
     }
       
     return (
