@@ -97,7 +97,7 @@
     color: white;
 }
 
-@media only screen and (max-width: 599px) {
+@media only screen and (max-width: 691px) {
     #brand > svg {font-size: 0.9rem;}
 
     #menu-toggle {
