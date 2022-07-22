@@ -61,15 +61,20 @@ function CourseCard({id, course, colors}: CourseCardType) {
         body.push(<p key="load" style={{height:'50px', fontSize:'1.6rem'}}>Loading...!!!</p>);
     }
 
-    return ( 
-        <div className="course-card" style={{borderColor: colors[1], boxShadow: '4px 4px 0px 0px ' + colors[2]}}>   
-            <div className='course-card-header' style={{backgroundColor: colors[1]}}> 
-                {header}
+    return (
+        <>
+            <div className="absolute course-card-before" 
+                style={{backgroundColor: colors[1]}}>
             </div>
-            <div className="course-card-body"> 
-                {body}
-            </div>  
-        </div>
+            <div className="course-card" style={{borderColor: colors[1], boxShadow: '4px 4px 0px 0px ' + colors[2]}}>   
+                <div className='course-card-header' style={{backgroundColor: colors[1]}}> 
+                    {header}
+                </div>
+                <div className="course-card-body"> 
+                    {body}
+                </div>  
+            </div>
+        </>
     )
 }
 

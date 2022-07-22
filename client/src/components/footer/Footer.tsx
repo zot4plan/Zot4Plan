@@ -3,6 +3,7 @@ import Author from './Author';
 import Gmail from '../icon/Gmail';
 import Github from '../icon/Github';
 import Tools from '../icon/Tools';
+import Bug from '../icon/Bug';
 import Tree from '../../assets/images/tree.png';
 import ZotWalk from '../../assets/images/zot-walk.png';
 import './Footer.css';
@@ -56,7 +57,7 @@ const Footer = () => {
 
         <div id="author">    
             <h1 className='header' style={{marginBottom: '1.3rem'}}>
-                Authors
+                Contributors
             </h1>
            
             <ul className='list-container'>    
@@ -66,47 +67,91 @@ const Footer = () => {
         </div>
 
         <div id="contact-us">    
-            <h1 className='header'>
+            <h1 className='header' style={{ marginLeft: '0.5rem' }}>
                 Contact Us
             </h1>
 
             <ul className='list-container'>
-                <li className="item">
+                <li className="item contact-us">
                     <a target="_blank" 
                         href="https://github.com/zot4plan/Zot4Plan#readme" 
                         rel="noreferrer"  
                         aria-label="Github"
                         data-tip data-for="githubTip"
+                        className="contact-us-icon"
                     >
                         <Github/>
                     </a>    
-
-                    <span> GitHub</span>                  
+                    <a target="_blank" 
+                        href="https://github.com/zot4plan/Zot4Plan#readme" 
+                        rel="noreferrer"  
+                        aria-label="Github"
+                        data-tip data-for="githubTip"
+                        className='name'
+                    >
+                        Github
+                    </a>      
                 </li>
 
-                <li className="item">
+                <li className="item contact-us">
                     <a target="_blank" 
                         href= {"mailto: "}
                         rel="noreferrer"
                         aria-label="Gmail"
+                        className="contact-us-icon"
                     >
                         <Gmail/>
                     </a>   
 
-                    <span> zot4plan@gmail.com</span>              
+                    <a target="_blank" 
+                        href= {"mailto: "}
+                        rel="noreferrer"
+                        aria-label="Gmail"
+                        className='name'
+                    >
+                        zot4plan@gmail.com
+                    </a>      
                 </li>
 
-                <li className="item">
-                    <p className='name'> Give Feedback or Report a Bug </p>
-
+                <li className="item contact-us">
                     <a target="_blank"
                         href="https://forms.gle/vak9jPNBMMYsRHAX9"
                         rel="noreferrer" 
                         aria-label="Give Feedback or Report a Bug"
+                        className="contact-us-icon"
                     > 
                         <Tools/>
                     </a>
+                    <a target="_blank"
+                        href="https://forms.gle/vak9jPNBMMYsRHAX9"
+                        rel="noreferrer" 
+                        aria-label="Give Feedback or Report a Bug"
+                        className="name"
+                    > 
+                        Send Us Feedback
+                    </a>
                 </li>
+
+                <li className="item contact-us">
+                    <a target="_blank"
+                        href="https://forms.gle/vak9jPNBMMYsRHAX9"
+                        rel="noreferrer" 
+                        aria-label="Give Feedback or Report a Bug"
+                        className="contact-us-icon"
+                    > 
+                        <Bug/>
+                    </a>
+                    
+                    <a target="_blank"
+                        href="https://forms.gle/vak9jPNBMMYsRHAX9"
+                        rel="noreferrer" 
+                        aria-label="Give Feedback or Report a Bug"
+                        className="name"
+                    > 
+                        Report Bug
+                    </a>
+                </li>
+
             </ul>           
         </div>
 

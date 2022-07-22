@@ -149,6 +149,11 @@ node server.js
 - Loc Duc Minh Khong [@lockhong](https://www.linkedin.com/in/lockhong/)
 - Tram Bao La [@tramla](https://www.linkedin.com/in/tram-la-680417200/)
 
+## **Members
+
+- Warren Leu [@warrenleu](): Implemented prerequisite/corequisite checking feature
+- Huong Le and Uyen Dinh: Advisors for UI implementation
+
 ## **Art Creators** 🎨
 
 - Leyna Nguyen ♥️
