@@ -1,11 +1,12 @@
 import { useState, ChangeEvent, MouseEvent} from 'react';
 import { useDispatch, useSelector, useStore } from 'react-redux';
+import { fetchSchedule } from '../../api/FetchData';
 import { RootState } from '../../app/store';
-import ReactTooltip from 'react-tooltip';
 import Axios from '../../api/Axios';
 import Confetti from 'react-confetti';
 import Message from '../message/Message';
-import { fetchSchedule } from '../../api/FetchData';
+import PopperUnstyled from '@mui/base/PopperUnstyled';
+import ClickAwayListener from '@mui/base/ClickAwayListener';
 import './ButtonSaveLoad.css';
 
 const maxLength = 32;
@@ -13,27 +14,37 @@ const minLength = 8;
 const scheduleNameNote = "Other users might be able to access and modify your schedule if the same name is used"
                         + ", so please try to use a unique name.";
 const minLengthMessage = "Must contain at least " + minLength + " characters!";
-const spaceMessage = "Cannot contain white spaces!"
+const spaceMessage = "Cannot contain white spaces!";
+
+interface SaveLoadType {
+    anchorEl: HTMLElement | null;
+    id: string | null;
+    message: string;
+    status: string;
+}
 
 function ButtonSaveLoad () {
     const [name, setName] = useState("");
-    const [message, setMessage] = useState({content: "", status: 'idle', isSave: true});
     const status = useSelector((state: RootState) => state.store.status);
+    const [element, setElement] = useState<SaveLoadType>({anchorEl: null, id: null, message: "", status: 'idle'});
+  
+    const handleClick = (event: MouseEvent<HTMLElement>) => {
+        const id = event.currentTarget.getAttribute("data-value");
+        if(element.id === id)
+            setElement({anchorEl: null, id: null, message: "", status: 'idle'})
+        else 
+            setElement({anchorEl: event.currentTarget, id: id, message: "", status: 'idle'});
+    };  
 
-    const handleOnClick = (e: MouseEvent<HTMLDivElement>) => {
-        e.stopPropagation();
-    }
+    const open = Boolean(element.anchorEl);
+    const popperId = open ? "save_load" : undefined;
+
+    const handleClickAway = () => {
+        setElement({anchorEl: null, id: element.id, message: "", status: "idle"});
+    };  
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
-    }
-
-    const handOnClickButton = (e: MouseEvent<HTMLButtonElement>, value: string) => {
-        if(value === "save" && !message.isSave) 
-            setMessage({content: "", status: 'idle', isSave: true});
-
-        else if(value === "load" && message.isSave)
-            setMessage({content: "", status: 'idle', isSave: false});
     }
 
     const dispatch = useDispatch();
@@ -45,12 +56,12 @@ function ButtonSaveLoad () {
 
         setTimeout(() => {
             if(name.length < minLength)
-                setMessage({status:"failed", content: minLengthMessage, isSave: message.isSave})
+                setElement(prevState => ({...prevState, status:"failed", message: minLengthMessage}));
 
             else if (/\s/g.test(name)) 
-                setMessage({status:"failed", content: spaceMessage, isSave: message.isSave})
+                setElement(prevState=> ({...prevState, status:"failed", message: spaceMessage}));
 
-            else if(message.isSave) { // save 
+            else if(element.id === "save") { // save 
                 const state:RootState = store.getState()
 
                 if(state.store.totalUnits > 0) {
@@ -65,84 +76,84 @@ function ButtonSaveLoad () {
                     };
 
                     Axios.post('/api/saveSchedule', {id: name, schedule: schedule}).then(() => {
-                        setMessage({status: "succeeded", content: "Saved successfully!", isSave: message.isSave})
+                        setElement(prevState => ({...prevState, status: "succeeded", message: "Saved successfully!"}))
                     }).catch(() => {
-                        setMessage({status: "failed", content: "Failed to save schedule", isSave: message.isSave})
+                        setElement(prevState => ({...prevState, status: "failed", message: "Failed to save schedule"}))
                     })
                 }
                 else
-                    setMessage({status: "failed", content: "Please add courses before saving!!!", isSave: message.isSave})
+                    setElement(prevState => ({...prevState, status: "failed", message: "Please add courses before saving!!!"}))
             }
             else { // load
                 dispatch(fetchSchedule(name));
-                setMessage({status: "idle", content: "", isSave: message.isSave})
+                setElement(prevState => ({...prevState, status: "idle", message: ""}))
             }
         }, 500);
     }
 
     const handleOnConfettiComplete = () => {
-        setMessage({status: "idle", content: "", isSave: message.isSave})
+        setElement(prevState => ({...prevState, status: "idle", message: ""}))
     }
 
     let messageContent;
-    if(status !== "idle" && !message.isSave)
+
+    if(status !== "idle" && element.id === "load")
         messageContent = <Message status={status} content={(status === "succeeded")? "Loaded successfully!" : "Schedule not found!"}/>
 
-    else if(message.status !== "idle" ) 
-        messageContent = <Message status={message.status} content={message.content}/>
+    else if(element.status !== "idle" ) 
+        messageContent = <Message status={element.status} content={element.message}/>
         
     return (
-        <div className="relative flex-container" onClick={handleOnClick}>    
-            <button className='btn margin-right-1'
-                data-tip data-for='save_load'
-                aria-label="Save Schedule"
-                onClick={(e) => handOnClickButton(e, "save")}> Save </button> 
+        <>
+            <div className="relative flex-container">    
+                <button className='btn margin-right-1' 
+                    data-value="save"
+                    aria-label="Save Schedule"
+                    onClick={handleClick}> Save </button> 
 
-            <button className='btn' 
-                data-tip data-for='save_load'
-                aria-label='Load Schedule'
-                onClick={(e) => handOnClickButton(e, "load")}> Load </button>
-
-            <ReactTooltip 
-                id="save_load" 
-                place="bottom" 
-                effect="solid" 
-                type="light"
-                event='click' globalEventOff='dblclick' clickable={true} isCapture={true}
-                border={true} 
-                borderColor='#307ABB' 
-                className='popup'
+                <button className='btn' 
+                    data-value="load"
+                    aria-label='Load Schedule'
+                    onClick={handleClick}> Load </button>
+            </div>
+            <ClickAwayListener 
+                mouseEvent="onMouseDown"
+                touchEvent="onTouchStart"
+                onClickAway={handleClickAway}
             >
-                <div className="flex-container flexColumn" onClick={handleOnClick}>
-                    {message.isSave && <p style={{width: '100%'}}> {scheduleNameNote} </p>}
-                    <input type="text"
-                        id="scheduleName"
-                        name="scheduleName"
-                        maxLength={maxLength}
-                        value = {name}
-                        className = "schedule-name-input"
-                        onChange = {handleInputChange}
-                        placeholder="Schedule name"
-                    />
+                <PopperUnstyled id={popperId} open={open} anchorEl={element.anchorEl} role="presentation">
+                    <div className="flex-container flexColumn popup">
+                        {element.id === "save" && <p> {scheduleNameNote} </p>}
 
-                    <button className='btn' onClick={handleOnSubmit} style={{marginBottom: "0.8rem"}}> Submit </button>
+                        <input type="text"
+                            id="scheduleName"
+                            name="scheduleName"
+                            maxLength={maxLength}
+                            value = {name}
+                            className = "schedule-name-input"
+                            onChange = {handleInputChange}
+                            placeholder="Schedule name"
+                        />
 
-                    <div style={{position: 'relative'}}> 
-                        {messageContent}
+                        <button className='btn' onClick={handleOnSubmit}> Submit </button>
+
+                        <div style={{position: 'relative'}}> 
+                            {messageContent}
+                        </div>
+
+                        {element.status === "succeeded" &&
+                            <Confetti
+                                width={240}
+                                height={160}
+                                recycle={false}
+                                numberOfPieces={200}
+                                tweenDuration={10000}
+                                onConfettiComplete={handleOnConfettiComplete}
+                            />}
                     </div>
-
-                    {message.status === "succeeded" &&
-                    <Confetti
-                        width={240}
-                        height={160}
-                        recycle={false}
-                        numberOfPieces={200}
-                        tweenDuration={10000}
-                        onConfettiComplete={handleOnConfettiComplete}
-                    />}
-                </div>
-            </ReactTooltip>
-        </div>
+                </PopperUnstyled>
+            </ClickAwayListener>
+        </>
     )
 }
 
