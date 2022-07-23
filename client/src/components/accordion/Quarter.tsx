@@ -4,12 +4,12 @@ import {RootState} from '../../app/store';
 import {Droppable} from 'react-beautiful-dnd';
 import {memo, useCallback} from 'react'
 
-interface QuarterType { 
+interface QuarterProps { 
     sectionId: string;
     name: string;
 }
 
-function Quarter({sectionId, name}:QuarterType) {
+function Quarter({sectionId, name}:QuarterProps) {
     const courses = useSelector((state:RootState) => state.store.sections[sectionId]);
 
     const renderCard = useCallback (

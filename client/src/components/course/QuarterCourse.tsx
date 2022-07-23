@@ -4,13 +4,13 @@ import ButtonRemoveCourse from '../button/ButtonRemoveCourse';
 import QuarterCourseButton from './QuarterCourseButton';
 import './Course.css';
 
-interface QuarterCourseType {
+interface QuarterCourseProps {
     index: number;
     sectionId: string;
     courseId: string;
 }
 
-function QuarterCourse({index, sectionId, courseId}: QuarterCourseType) {
+function QuarterCourse({index, sectionId, courseId}: QuarterCourseProps) {
     return (  
         <Draggable 
             key={sectionId + courseId} 

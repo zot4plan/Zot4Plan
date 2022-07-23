@@ -2,14 +2,13 @@ import { useState, MouseEvent } from 'react';
 import LeftArrow from '../icon/ArrowLeft';
 import RightArrow from '../icon/ArrowRight';
 import XCircle from '../icon/XCircle';
+import './TutorialCarousel.css';
 
-import './TutorialCard.css';
-
-interface TutorialSliderType{
-    closedTutorial: ( e: { preventDefault: () => void; }) => void ;
+interface TutorialCarouselProps{
+    handleClick: (e: MouseEvent<HTMLButtonElement>) => void ;
 }
 
-function TutorialCard ({ closedTutorial }: TutorialSliderType) {
+function TutorialCarousel ({ handleClick }: TutorialCarouselProps) {
     const images = [require('../../assets/images/HowTo1.jpg'), require('../../assets/images/HowTo2.jpg')];
     const [index, setIndex] = useState(1);
 
@@ -32,14 +31,14 @@ function TutorialCard ({ closedTutorial }: TutorialSliderType) {
         </button>
 
         <div className="flex-container" style={{position: 'relative'}}>
-            <div 
+            <button 
                 style={{position: 'absolute'}}
                 className= 'btn-outlined' 
                 id='close-tutorial-btn' 
-                onClick={closedTutorial}
+                onClick={handleClick}
             >
                 <XCircle/>
-            </div>
+            </button>
             
             <img
                 className='tutorial-img'
@@ -56,4 +55,4 @@ function TutorialCard ({ closedTutorial }: TutorialSliderType) {
     )
 }
 
-export default TutorialCard
+export default TutorialCarousel

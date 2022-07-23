@@ -3,10 +3,11 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../../app/store';
 import AccordionGE from '../../../components/accordion/AccordionGE';
 
+const url = "https://catalogue.uci.edu/informationforadmittedstudents/requirementsforabachelorsdegree/#generaleducationrequirementtext";
+
 function GeneralEducation() {
     const allIds = useSelector((state:RootState)=> state.ge.allIds);
     const status = useSelector((state:RootState)=>state.ge.status);
-    const url = "https://catalogue.uci.edu/informationforadmittedstudents/requirementsforabachelorsdegree/#generaleducationrequirementtext";
 
     let content;
     if (status === 'loading') 

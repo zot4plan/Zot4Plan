@@ -4,7 +4,7 @@ import { RootState} from '../../app/store';
 import './CourseCard.css';
 import CourseCard from './CourseCard';
 
-interface CourseCardType {
+interface CourseCardProps {
     id: string;
 }
 
@@ -13,12 +13,13 @@ function removeLastWord(str: string) {
     return (lastIndexOfSpace === -1)? str : str.substring(0, lastIndexOfSpace);
 }
 
-function QuarterCourseCard({id}: CourseCardType) {
+function QuarterCourseCard({id}: CourseCardProps) {
     const course = useSelector((state:RootState) => {
         if(id) {
             const course = state.store.courses[id];
             return course === undefined? null : course.data;
         }
+        
         return null;
     })
 

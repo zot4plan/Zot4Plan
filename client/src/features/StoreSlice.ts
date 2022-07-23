@@ -117,7 +117,7 @@ export const storeSlice = createSlice ({
             state.years.allIds.splice(action.payload.index,1);
         },
 
-        clearYears: (state) => {
+        clearSchedule: (state) => {
             state.years.allIds.forEach((yearId)=> {
                 state.years.byIds[yearId].forEach((quarterId) => {
                     state.sections[quarterId] = [];
@@ -126,6 +126,10 @@ export const storeSlice = createSlice ({
             state.courses = {};
             state.totalUnits = 0;
         }, 
+
+        resetStatus: (state) => {
+            state.status = "idle";
+        },
     },
 
 /********************* ExtraReducers *********************/
@@ -238,5 +242,6 @@ export const {
     moveCourse, 
     addYear, 
     removeYear, 
-    clearYears } =  storeSlice.actions;
+    clearSchedule,
+    resetStatus } =  storeSlice.actions;
 export default storeSlice.reducer;

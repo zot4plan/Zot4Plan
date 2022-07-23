@@ -1,36 +1,36 @@
-import {useState, Fragment} from 'react';
+import {useState, Fragment, MouseEvent} from 'react';
 
-interface ReadMoreType {
+interface ReadMoreProps {
     text: string | string[];
 }
 
-const ReadMore = ({ text}: ReadMoreType) => {
+function ReadMore ({text}: ReadMoreProps) {
     const [more, setMore] = useState(false);
 
-    const toggleReadMore = (e: { stopPropagation: () => void; }) => {
-      e.stopPropagation();
-      setMore(!more);
+    const toggleReadMore = (e: MouseEvent<HTMLSpanElement>) => {
+        e.stopPropagation();
+        setMore(!more);
     };
 
     let content = [];
 
     if(typeof(text) === 'object') {
-      let len = more? text.length : 2;
-      for(let i = 0; i < len; i++) {
-        content.push(<Fragment key={i}> {text[i]} <br/> </Fragment>);
-      }
+        let len = more? text.length : 2;
+
+        for(let i = 0; i < len; i++) 
+            content.push(<Fragment key={i}> {text[i]} <br/> </Fragment>);
     }
     else 
-      content.push(<span key="text"> {more? text : text.slice(0, 100)}</span>)
+        content.push(<span key="text"> {more? text : text.slice(0, 100)}</span>)
 
     return (
-    <>
-      {content}
-      <span onClick={toggleReadMore} style={{color:'#307ABB', cursor:'pointer'}}>
-        {more? " show less" : "... read more"}
-      </span>
-    </>
+        <>
+            {content}
+            <span onClick={toggleReadMore} style={{color:'#307ABB', cursor:'pointer'}}>
+                {more? " show less" : "... read more"}
+            </span>
+        </>
     );
-  };
+};
 
-  export default ReadMore;
+export default ReadMore;

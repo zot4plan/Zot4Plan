@@ -1,0 +1,43 @@
+.popup {
+    width: 28rem;
+    margin-top: 0.6rem;
+    border-radius: 1.6rem;
+    box-shadow: 0px 0px 5px 0px #1F1F1F;
+    padding: 1.2rem;
+    background-color: white;
+}
+
+.popup > p {
+    padding: 0.2rem 0.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.schedule-name-input {
+    height: 3.2rem;
+    width: 100%;
+    margin: 1rem 0rem;
+    border-radius: 1.6rem;
+    border:none;
+    -webkit-box-shadow: 2px 2px 6px 0px #00000050, 5px 5px 15px 5px rgba(0,0,0,0); 
+    box-shadow: 2px 2px 6px 0px #00000050;
+    padding: 6px 12px;
+    font-size: 1.6rem;
+}
+
+.popper-card-before{
+    position: absolute;
+    z-index: 0;
+    top: 0rem;
+    left: 50%;
+
+    width: 1.2rem;
+    height: 1.2rem;
+
+    transform: rotate(45deg) translateX(-50%);
+    margin-top: 0.35rem;
+
+    background-color: white;
+    -webkit-box-shadow: -1px -1px 1px 0px var(--accent-color-2); 
+    box-shadow: -1px -1px 1px 0px #1f1f1f90;
+}

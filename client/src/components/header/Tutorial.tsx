@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import TutorialCard from './TutorialCard';
+import { useState, MouseEvent } from 'react';
+import TutorialCarousel from './TutorialCarousel';
 
 function Tutorial () {
     const [showTutorial, setShowTutorial] = useState(false);
 
-    const handleOnClick = ( e: { preventDefault: () => void; }) => {
+    const handleClick = ( e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setShowTutorial(!showTutorial)
     }
@@ -14,13 +14,13 @@ function Tutorial () {
         <button 
             className='flex-container'
             style={{color:'white', fontSize: '2rem'}} 
-            onClick={handleOnClick}
+            onClick={handleClick}
             aria-label="open tutorial"
         >
             Tutorial
         </button>
 
-        {showTutorial && <TutorialCard  closedTutorial={handleOnClick}/> }
+        {showTutorial && <TutorialCarousel  handleClick={handleClick}/> }
     </>
     )
 }

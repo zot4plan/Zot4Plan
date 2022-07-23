@@ -2,7 +2,7 @@ import {memo, Fragment} from 'react';
 import ReadMore from './ReadMore';
 import './CourseCard.css';
 
-interface CourseCardType {
+interface CourseCardProps {
     id: string | null;
     course: CourseType | null;
     colors: string[];
@@ -31,7 +31,7 @@ const checkLength = (text:string|number, isTerm = false) => {
 const fields = ['corequisite', 'prerequisite', 'restriction', 'ge' ];
 const labels = ['Corequisite: ', 'Prerequisite: ', 'Restriction: ', 'GE: '];
 
-function CourseCard({id, course, colors}: CourseCardType) {
+function CourseCard({id, course, colors}: CourseCardProps) {
     let header =[];
     let body = [];
 
@@ -47,7 +47,10 @@ function CourseCard({id, course, colors}: CourseCardType) {
         })
 
         if(course.repeatability > 1)
-            body.push(<p key='repeat'> <b>{"Repeatability: "}</b>{(course.repeatability === 9)? "unlimited": course.repeatability}</p>);
+            body.push(<p key='repeat'> 
+                        <b>{"Repeatability: "}</b>
+                        {(course.repeatability === 9)? "unlimited": course.repeatability}
+                    </p>);
         
         if(course.terms !== "") {
             body.push(<p key='terms'>
@@ -63,13 +66,13 @@ function CourseCard({id, course, colors}: CourseCardType) {
 
     return (
         <>
-            <div className="absolute course-card-before" 
-                style={{backgroundColor: colors[1]}}>
-            </div>
+            <div className="course-card-before" style={{backgroundColor: colors[1]}}/>
+
             <div className="course-card" style={{borderColor: colors[1], boxShadow: '4px 4px 0px 0px ' + colors[2]}}>   
                 <div className='course-card-header' style={{backgroundColor: colors[1]}}> 
                     {header}
                 </div>
+
                 <div className="course-card-body"> 
                     {body}
                 </div>  

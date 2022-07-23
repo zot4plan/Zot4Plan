@@ -6,13 +6,13 @@ import ButtonRemoveYear from "../button/ButtonRemoveYear";
 import Right from '../icon/ArrowRightSmall';
 import './Accordion.css';
 
-interface YearType {
+interface YearProps {
     id: string;
     name: string;
     index: number;
 }
 
-function Year({id, name, index}:YearType) {
+function Year({id, name, index}:YearProps) {
     const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
     const QUARTER_CLASS= ["fall", "winter","spring","summer"];
     const quarterIds = useSelector((state:RootState) => (state.store.years.byIds[id]), shallowEqual);

@@ -5,13 +5,13 @@ import ChevronLeft from '../../../components/icon/ChervonLeft';
 import ChevronRight from '../../../components/icon/ChervonRight';
 import { handleSwitchProgram } from '../../../features/ProgramsSlice';
 
-interface Type {
+interface ProgramCarouselProps {
     url: string;
     name: string;
     isMajor: boolean;
 }
 
-function ProgramCarousel ({url, name, isMajor}: Type) {
+function ProgramCarousel ({url, name, isMajor}: ProgramCarouselProps) {
     const isShowButton = useSelector((state:RootState) => {
         let i = isMajor? 1 : 0;
         return state.programs.selectedPrograms[i].length > 1;
@@ -27,7 +27,8 @@ function ProgramCarousel ({url, name, isMajor}: Type) {
     
     return (
         <div className='hyperlink'
-            style={{justifyContent: isShowButton? 'space-between' : 'center'}}>
+            style={{justifyContent: isShowButton? 'space-between' : 'center'}}
+        >
             {isShowButton && 
                 <button key='ChevronLeft'
                     style={{paddingLeft:'1.5rem'}} 

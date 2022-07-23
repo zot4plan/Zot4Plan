@@ -6,17 +6,17 @@ import Right from '../icon/ArrowRightSmall';
 
 import './Accordion.css';
 
-interface SectionType {
+interface SectionProps {
     id: string;
     programId?: number;
 }
 
-interface ProgramSectionType{
+interface ProgramSectionProps{
     sectionId: string;
     nameChild: string;
 }
 
-const Accordion = ({id, programId = -1}:SectionType) => {
+const Accordion = ({id, programId = -1}:SectionProps) => {
     const accordion:any = useSelector((state: RootState) => 
         (programId !== -1)? state.programs.byIds[programId].byIds[id] : id
     );
@@ -24,7 +24,7 @@ const Accordion = ({id, programId = -1}:SectionType) => {
     let detail, name;
     if (programId !== -1) {
         name = accordion.name;
-        detail = accordion.sectionIds.map((section:ProgramSectionType) => 
+        detail = accordion.sectionIds.map((section:ProgramSectionProps) => 
                     <Detail key={section.sectionId} 
                         sectionId={section.sectionId} 
                         text={section.nameChild}

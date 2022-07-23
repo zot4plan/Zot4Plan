@@ -2,10 +2,10 @@ import {memo, useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { RootState} from '../../app/store';
 import Axios from '../../api/Axios';
-import './CourseCard.css';
 import CourseCard from './CourseCard';
+import './CourseCard.css';
 
-interface CourseCardType {
+interface CourseCardProps {
     id: string | null;
 }
 
@@ -14,7 +14,7 @@ function removeLastWord(str: string) {
     return (lastIndexOfSpace === -1)? str : str.substring(0, lastIndexOfSpace);
 }
 
-function RequiredCourseCard({id}: CourseCardType) {
+function RequiredCourseCard({id}: CourseCardProps) {
     const [course, setCourse] = useState(() => {
         if(id) {
             const course = sessionStorage.getItem(id);

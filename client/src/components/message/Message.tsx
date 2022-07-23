@@ -1,14 +1,13 @@
 import Error from '../icon/Error';
 import Success from '../icon/Success';
-
 import './Message.css';
 
-interface MessageType {
+interface MessageProps {
     status: string;
     content: string;
 }
 
-function Message({status, content}: MessageType) {
+function Message({status, content}: MessageProps) {
     return (
         <p className={'message ' + (status === 'succeeded'? 'green': 'red')}> 
             <span className='message-icon'> 

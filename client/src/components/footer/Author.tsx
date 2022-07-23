@@ -1,10 +1,9 @@
 import {memo} from 'react';
-
 import Github from '../icon/Github';
 import Linkedin from '../icon/Linkedin';
 import Gmail from '../icon/Gmail';
 
-interface AuthorType {
+interface AuthorProps {
     author: {
         name: string;
         linkedin: string;
@@ -13,7 +12,7 @@ interface AuthorType {
     }
 }
 
-const Author = ({author}: AuthorType) => {
+const Author = ({author}: AuthorProps) => {
     return (
         <li>
             <a target="_blank" 

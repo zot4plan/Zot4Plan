@@ -7,24 +7,24 @@ import PopperUnstyled from '@mui/base/PopperUnstyled';
 import RequiredCourseCard from '../course/RequiredCourseCard';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 
-interface AccordionDetailType {
+interface AccordionDetailProps {
     text: string;
     sectionId: string;
     isGE?: boolean;
 }
 
-interface ListType {
+interface ListProps {
     sectionId: string;
     isGE: boolean;
     handleClick: (event: MouseEvent<HTMLElement>) => void;
 }
 
-interface PopperListType {
+interface PopperListProps{
     isGE: boolean;
     sectionId: string;
 }
 
-function List({sectionId, isGE, handleClick}: ListType) {
+function List({sectionId, isGE, handleClick}: ListProps) {
     const courseIds = useSelector((state:RootState) => (
         isGE? state.ge.sections[sectionId]: state.programs.sections[sectionId]
     ), shallowEqual)
@@ -79,8 +79,7 @@ function List({sectionId, isGE, handleClick}: ListType) {
     )
 }
 
-
-function PopperList({sectionId, isGE}: PopperListType) {
+function PopperList({sectionId, isGE}: PopperListProps) {
     const [element, setElement] = useState<{anchorEl: HTMLElement|null, id: string|null}>({anchorEl: null, id: ""});
   
     const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -106,7 +105,23 @@ function PopperList({sectionId, isGE}: PopperListType) {
             touchEvent="onTouchStart"
             onClickAway={handleClickAway}
         >
-            <PopperUnstyled id={popperId} open={open} anchorEl={element.anchorEl} role="presentation">
+            <PopperUnstyled 
+                id={popperId} 
+                open={open} 
+                anchorEl={element.anchorEl} 
+                role="presentation" 
+                placement='bottom'
+                modifiers={[
+                    {
+                      name: 'flip',
+                      enabled: false 
+                    },
+                    {
+                      name: 'preventOverflow',
+                      enabled: true
+                    }
+                  ]}
+            >
                 <RequiredCourseCard id={element.id}/>
             </PopperUnstyled>
         </ClickAwayListener>
@@ -114,13 +129,10 @@ function PopperList({sectionId, isGE}: PopperListType) {
     )
 } 
 
-function Detail ({sectionId, text, isGE = false}:AccordionDetailType) {
-    const len = useSelector((state:RootState) => {
-        if(isGE)
-            return state.ge.sections[sectionId].length > 0;
-        
-        return state.programs.sections[sectionId].length > 0;
-    })
+function Detail ({sectionId, text, isGE = false}:AccordionDetailProps) {
+    const haveCourses = useSelector((state:RootState) => 
+        isGE? state.ge.sections[sectionId].length > 0 : state.programs.sections[sectionId].length > 0
+    )
 
     let p;
     if(text !== "") {
@@ -128,7 +140,7 @@ function Detail ({sectionId, text, isGE = false}:AccordionDetailType) {
         let content = (sub === "(b)" || sub === "(r)")? text.substring(3) : text;
         p = <p key={sectionId +'p'}  
                style={{
-                marginBottom: len? '0.5rem' : '1rem',
+                marginBottom: haveCourses? '0.5rem' : '1rem',
                 fontWeight: sub === "(b)"? 'bold' : 'normal',
                 color: sub === "(r)"? '#DA1E37':'black' ,
             }}> 
@@ -147,7 +159,7 @@ function Detail ({sectionId, text, isGE = false}:AccordionDetailType) {
                     <div ref={provided.innerRef}
                         {...provided.droppableProps}
                         className="accordion-detail"
-                        style={{marginBottom: len? '1.5rem' : '0rem'}}
+                        style={{marginBottom: haveCourses? '1.5rem' : '0rem'}}
                     >
                         <PopperList sectionId={sectionId} isGE={isGE} />
 

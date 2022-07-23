@@ -10,31 +10,27 @@
     background-color:rgba(0, 0, 0, 0.2);
 }
 
-.course-card-before{
-    display:none;
-}
-
 .course-card {
     border: 0.5rem solid;
     border-radius: 1.6rem;
     background-color: white;
 
     width: 32rem;
-    height: auto;
 
-    margin-top: 0.8rem;
+    margin-top: 0.5rem;
 }
 
 .course-card-before{
-    content: '';
+    position: absolute;
     z-index: -1;
-    display: block;
-    transform: rotate(45deg);
+    top: 0.6rem;
+    left: 50%;
+
     width: 2.5rem;
     height: 2.5rem;
-    margin: auto;
+
+    transform: rotate(45deg) translateX(-50%);
     margin-top: 0.35rem;
-    left: 50%;
 }
 
 .course-card-header {

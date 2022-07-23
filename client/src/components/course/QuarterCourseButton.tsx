@@ -7,7 +7,7 @@ import PopperUnstyled from '@mui/base/PopperUnstyled';
 import QuarterCourseCard from './QuarterCourseCard';
 import Error from '../icon/Error';
 
-interface CourseButtonType {
+interface CourseButtonProps {
     courseId: string;
     sectionId: string;
 }
@@ -16,7 +16,7 @@ function removeLastWord(str: string) {
     const lastIndexOfSpace = str.lastIndexOf(' ');
     return (lastIndexOfSpace === -1)? str : str.substring(0, lastIndexOfSpace);
 }
-
+/*
 function checkPrereqs(prereqs: any, taken:Set<string>) {
     if (Object.keys(prereqs).length === 0) return true; // No prereqs
   
@@ -25,7 +25,8 @@ function checkPrereqs(prereqs: any, taken:Set<string>) {
   
     if (key === 'AND') {
         for (let i = 0; i < reqArray.length; i++) {
-            const req = reqArray[i]
+            const req = reqArray[i];
+            
             if (typeof(req) === 'string') {
                 // Treat those requirements as fulfilled
                 if (req.includes('AP') || req.includes('ACT') || req.includes('SAT') || req.includes('PLACEMENT'))
@@ -35,11 +36,8 @@ function checkPrereqs(prereqs: any, taken:Set<string>) {
                 if (!taken.has(req)) 
                     return false;                                                  
             } 
-            else {
-                // Prereq tree inside AND not fulfilled
-                if (!checkPrereqs(req, taken)) 
-                    return false;                                           
-            }
+            else if (!checkPrereqs(req, taken)) // Prereq tree inside AND not fulfilled
+                return false;                                           
         }
 
         return true; // Everything fulfilled                                                   
@@ -47,23 +45,21 @@ function checkPrereqs(prereqs: any, taken:Set<string>) {
     
     for (let i = 0; i < reqArray.length; i++) {
         const req = reqArray[i];
+
         if (typeof(req) === 'string') { 
             // Treat those requirements as fulfilled or Taken a class in OR
             if (req.includes('AP') || req.includes('ACT') || req.includes('SAT') || req.includes('PLACEMENT') || taken.has(req)) 
                 return true;                  
         } 
-        else {
-            // Prereq tree fulfilled in OR
-            if (checkPrereqs(req, taken)) 
-                return true;                                               
-        }
+        else if (checkPrereqs(req, taken)) // Prereq tree fulfilled in OR
+            return true;                                               
     }
 
     return false; // Nothing fulfilled                                                  
 }
 
 function getPastCourses(state: RootState, sectionId: string) {
-    const pastCourses = new Set<string>();
+    const pastCourses = new Set<string> ();
     const yearIds = state.store.years.allIds;
     let ended = false;
 
@@ -75,38 +71,34 @@ function getPastCourses(state: RootState, sectionId: string) {
             if (quarterIds[j] === sectionId) { 
                 ended = true;
                 break;
-            }
-             
+            }     
             state.store.sections[quarterIds[j]].forEach(course => pastCourses.add(course));
         }
     }
     
     return pastCourses;
 }
+*/
 
-function QuarterCourseButton({courseId, sectionId}: CourseButtonType) {
-    const course = useSelector((state: RootState) => {
-        const course = state.store.courses[courseId];
-        return course === undefined? null : course.data;
-    })
+function QuarterCourseButton({courseId, sectionId}: CourseButtonProps) {
+    const course = useSelector((state: RootState) => 
+        state.store.courses[courseId] === undefined? null : state.store.courses[courseId].data
+    );
 
-    const units = useSelector((state: RootState) => 
-        state.store.courses[courseId] === undefined? null : state.store.courses[courseId].data.units);
-
-    const colors = useSelector((state: RootState) => state.store.depts.byIds[removeLastWord(courseId)]);
-
-    const prereqsFulfilled = useSelector((state:RootState) => {
-        if(!course) 
-            return true;
-
+   /* const prereqsFulfilled = useSelector((state: RootState) => {
+        if(!course) return true;
+            
         let prereqs = course['prerequisite_tree'].replace(/'/g, '"'); // Replacing with double quotes to use JSON.parse
-        if (prereqs === '') 
-            return true;
 
-        const pastCoursesSet = getPastCourses(state, sectionId);
+        return prereqs === ''? true : checkPrereqs(JSON.parse(prereqs), getPastCourses(state, sectionId));
+    }); 
+    */
 
-        return checkPrereqs(JSON.parse(prereqs), pastCoursesSet);
-    })
+    const units = useSelector((state: RootState) => course? state.store.courses[courseId].data.units : null);
+    const colors = useSelector((state: RootState) => state.store.depts.byIds[removeLastWord(courseId)]);
+    const [anchorEl, setAnchorEl] = useState<HTMLElement|null>(null);
+    const open = Boolean(anchorEl);
+    const popperId = open ? ('popper' + sectionId + courseId) : undefined;
 
     const dispatch = useDispatch();
 
@@ -115,17 +107,13 @@ function QuarterCourseButton({courseId, sectionId}: CourseButtonType) {
             dispatch(fetchCourse(courseId));
     },[course, courseId, dispatch]); 
 
-    const [anchorEl, setAnchorEl] = useState<HTMLElement|null>(null);
-
     const handleClick = (event: MouseEvent<HTMLElement>) => {
         setAnchorEl(anchorEl? null : event.currentTarget);
     };  
 
-    const open = Boolean(anchorEl);
-    const popperId = open ? ('popper' + sectionId + courseId) : undefined;
-
     let content;
-    if (!prereqsFulfilled) {
+
+    /*if (!prereqsFulfilled) {
         content =  
             <span key='warning' className='course-warning' data-tip data-for='prereqTip'> 
                 <Error/>
@@ -134,7 +122,8 @@ function QuarterCourseButton({courseId, sectionId}: CourseButtonType) {
                 </ReactTooltip>
             </span>                             
     }
-    else if (units)
+    else */
+    if (units)
         content = <p key='unit' className='unit'> {units + ' units'} </p>
 
     return ( 

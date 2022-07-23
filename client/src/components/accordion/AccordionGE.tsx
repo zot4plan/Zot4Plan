@@ -6,11 +6,11 @@ import Right from '../icon/ArrowRightSmall';
 import Detail from './Detail';
 import './Accordion.css';
 
-interface SectionType {
+interface SectionProps {
     id: string;
 }
 
-const AccordionGE = ({id}:SectionType) => {
+const AccordionGE = ({id}:SectionProps) => {
     const ge = useSelector((state: RootState) => state.ge.byIds[id]);
     const status = useSelector((state: RootState) => state.ge.byIds[id].status);
     const [isOpen, setIsOpen] = useState(false);

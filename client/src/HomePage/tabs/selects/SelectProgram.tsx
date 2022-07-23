@@ -49,9 +49,9 @@ const myStyle: StylesConfig<ProgramOption, true> =  {
     }),
 }
 
-interface SelectProgramType { isMajor: boolean;}
+interface SelectProgramProps { isMajor: boolean;}
 
-function SelectProgram({isMajor}: SelectProgramType) {
+function SelectProgram({isMajor}: SelectProgramProps) {
     const [programs, setPrograms] = useState<ProgramOption[]>([]);
     const selectedPrograms = useSelector((state: RootState) => (
         state.programs.selectedPrograms[Number(isMajor)]

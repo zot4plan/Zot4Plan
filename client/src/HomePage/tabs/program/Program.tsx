@@ -5,12 +5,12 @@ import Accordion from '../../../components/accordion/Accordion';
 import { fetchProgram } from '../../../api/FetchData';
 import ProgramCarousel from './ProgramCarousel';
 
-interface Type {
+interface PropgramProps {
     isMajor: boolean;
     addedCourses: string;
 }
 
-function Program ({isMajor, addedCourses}:Type) {
+function Program ({isMajor, addedCourses}:PropgramProps) {
     const programId = useSelector((state:RootState) => {
         let programType = isMajor? 1 : 0;
         let index = state.programs.index[programType];

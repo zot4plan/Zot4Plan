@@ -4,12 +4,12 @@ import Remove from '../icon/Remove';
 import ReactTooltip from "react-tooltip";
 import './ButtonRemoveYear.css';
 
-interface RemoveYearType {
+interface RemoveYearProps {
     id: string;
     index: number;
 }
 
-function ButtonRemoveYear({id, index}: RemoveYearType) {
+function ButtonRemoveYear({id, index}: RemoveYearProps) {
     const dispatch = useDispatch();
 
     const handleOnclick = ( e: { preventDefault: () => void; }) => {
