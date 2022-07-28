@@ -69,7 +69,7 @@ Zot4Plan is a schedule planning tool that allows Anteaters to plan out their und
 ## **How to Run Program Locally** 🏃
 
 Open 2 terminals: one is for client and the other is for server
-* First set up the database [@here](https://github.com/zot4plan/database)
+* First set up the database [here](https://github.com/zot4plan/database)
 * Then cd to server folder: 
 
 ```sh
