@@ -19,26 +19,6 @@ Zot4Plan is a schedule planning tool that allows Anteaters to plan out their und
 
 ## **Features** 💻
 
- <!---div align="center">
-
-![Major Selection](https://media.giphy.com/media/snYqfS3lBIIVlZNbVP/giphy.gif))
-
-Required courses will be displayed after major selection
-
-![Drag and Drop](https://media.giphy.com/media/qKIZtpMRtd0Ce0jKKC/giphy.gif)
-
-Drag and drop feature that allows users to place a course in their planner)
-
-![Users can add courses by using the search bar](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif)
-
-Users can add courses by using the search bar
-
-![Select GE courses by section](https://media.giphy.com/media/rJWU8FL63vdU6KNBHN/giphy.gif)
-
-Select GE courses by section
-
-</div-->
-
 * Search bar that allows users to either select or search their major of choice. 💖
 
 * A calendar that displays the chosen courses, divided by quarters.
@@ -62,7 +42,7 @@ Select GE courses by section
 
     - Each GE category dropdown contains courses that can be used to fulfill the requirement.
 
-* Card pop-up that exhibits necessary information of that particular course
+* Card pop-up that exhibits necessary information of that particular course 🍭
 
     - Course name
 
@@ -76,30 +56,32 @@ Select GE courses by section
     
     - Past terms that the course were offered
 
-* Refresh button that allows users to remove all of the current courses on their calendar
+* Clear button that allows users to remove all of the current courses on their calendar 🌪️
 
-* Save and Load Implementation 🍭
+* Save and Load Implementation 🍶
 
     - Users can save their calendar under a unique username.
 
     - Users can easily upload their saved schedule by providing that same unique username.
+   
+* Print button allows users to print their schedule as PDF file  🖨️
 
 ## **How to Run Program Locally** 🏃
 
 Open 2 terminals: one is for client and the other is for server
-
-* cd to client folder: 
+* First set up the database [@here](https://github.com/zot4plan/database)
+* Then cd to server folder: 
 
 ```sh
 npm install 
-npm start
+npm server.js
 ```
 
-* cd to server folder: 
+* Finally cd to client folder: 
 
 ```sh
 npm install
-node server.js
+node start
 ```
 
 ## **Technologies** ⛄
@@ -108,11 +90,11 @@ node server.js
 
     - React-Beautiful-DnD
 
-    - React-Redux
+    - React-Redux & Redux-Toolkit
 
     - React-Select
 
-    - React-tooltip
+    - MUI-Popper
 
     - Axios 
 
@@ -149,7 +131,7 @@ node server.js
 - Loc Duc Minh Khong [@lockhong](https://www.linkedin.com/in/lockhong/)
 - Tram Bao La [@tramla](https://www.linkedin.com/in/tram-la-680417200/)
 
-## **Members
+## **Members** 👨‍💻
 
 - Warren Leu [@warrenleu](): Implemented prerequisite/corequisite checking feature
 - Huong Le and Uyen Dinh: Advisors for UI implementation
