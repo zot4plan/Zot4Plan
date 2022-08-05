@@ -71,7 +71,7 @@ function PopperSave () {
         <div className="popper-card-before"/>
 
         <div className="flex-container flexColumn popup">
-            <p> {scheduleNameNote} </p>
+            <p style={{padding:'0.2rem 0.5rem', textAlign:'center', fontSize:'1.5rem'}}> {scheduleNameNote} </p>
 
             <input type="text"
                 id="saveName"
@@ -80,10 +80,10 @@ function PopperSave () {
                 value = {name}
                 className = "schedule-name-input"
                 onChange = {handleInputChange}
-                placeholder="Schedule name"
+                placeholder="Enter schedule name"
             />
 
-            <button className='btn' style={{margin: '1rem 0rem'}}
+            <button className='btn' style={{margin: '0.6rem 0rem'}}
                     onClick={handleOnSubmit}> Submit </button>
 
             {message.status !== "idle" && <Message status={message.status} content={message.content}/>}
@@ -91,7 +91,7 @@ function PopperSave () {
             {message.status === "succeeded" &&
                 <Confetti
                     width={240}
-                    height={160}
+                    height={240}
                     recycle={false}
                     numberOfPieces={200}
                     tweenDuration={10000}

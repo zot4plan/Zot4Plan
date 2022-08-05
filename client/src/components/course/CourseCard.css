@@ -17,7 +17,7 @@
 
     width: 32rem;
 
-    margin-top: 0.5rem;
+    margin-top: 0.9rem;
 }
 
 .course-card-before{
@@ -30,7 +30,7 @@
     height: 2.5rem;
 
     transform: rotate(45deg) translateX(-50%);
-    margin-top: 0.35rem;
+    margin-top: 0.8rem;
 }
 
 .course-card-header {

@@ -1,9 +1,9 @@
 module.exports = app => {
     const courses = require("../controllers/courses.controller.js");
-    const programs = require("../controllers/programs.controller.js")
+    const programs = require("../controllers/programs.controller.js");
     const general_education = require("../controllers/general_education.controller.js");
-    const courses_in_ge= require("../controllers/courses_in_ge.controller.js")
-    const schedules = require("../controllers/schedules.controller.js")
+    const courses_in_ge= require("../controllers/courses_in_ge.controller.js");
+    const schedules = require("../controllers/schedules.controller.js");
     var router = require("express").Router();
 
     // GET method

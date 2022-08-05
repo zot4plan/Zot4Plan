@@ -19,16 +19,16 @@ interface CourseType{
 }
 
 const myStyle: StylesConfig<OptionType, false> =  {
-    control: (provided) => {
-        return {...provided, 
-                width: '100%',
+    control: (provided) => ({
+         ...provided, 
+            width: '100%',
+            borderColor: '#1F1F1F',
+            borderRadius: '18px',
+            "&:hover": {
                 borderColor: '#1F1F1F',
-                borderRadius: '18px',
-                "&:hover": {
-                    borderColor: '#1F1F1F',
-                }
-            };
-    },
+            }
+            
+    }),
     valueContainer: (provided) => ({
         ...provided, cursor: 'text',
     }),
@@ -76,9 +76,10 @@ function SelectCourses() {
         if(selectCourse === "")
             setMessage({content: "Please select a course!", status: status})
 
-        else if(!addedCourses.includes(selectCourse))
+        else if(!addedCourses.includes(selectCourse)) {
             dispatch(addCourse(selectCourse));
-
+            setMessage({content: content + " was added successfully!", status: "succeeded"});
+        }
         else 
             setMessage({content: content + " has already been added!", status: status})
     };

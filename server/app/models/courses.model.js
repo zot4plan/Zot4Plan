@@ -19,6 +19,10 @@ module.exports = (sequelize, DataType) => {
             type: DataType.INTEGER,
             allowNull:false,
         },
+        units_text: {
+            type: DataType.STRING(10),
+            allowNull:false,
+        },
         corequisite: {
             type: DataType.STRING(1000),
             allowNull:false,
@@ -49,6 +53,22 @@ module.exports = (sequelize, DataType) => {
         },
         repeatability: {
             type: DataType.INTEGER,
+            allowNull:false,
+        },
+        pre_or_core: {
+            type: DataType.STRING(1000),
+            allowNull:false,
+        },
+        same_as: {
+            type: DataType.STRING(300),
+            allowNull:false,
+        },
+        overlaps_with: {
+            type: DataType.STRING(300),
+            allowNull:false,
+        },
+        concurrent_with: {
+            type: DataType.STRING(300),
             allowNull:false,
         },
         ge: {

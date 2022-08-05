@@ -24,7 +24,11 @@ interface RequiredCourseType {
 }
 
 function RequiredCourse({courseId, sectionId, index, handleClick}: RequiredCourseType) {
-    const isDraggable = useSelector((state: RootState) => state.store.courses[courseId] === undefined);
+    const isDraggable = useSelector((state: RootState) =>{ 
+        let course = state.store.courses[courseId];
+        
+        return course === undefined? true : course.remains > 0;
+    });
 
     return (   
         <Draggable 
@@ -45,7 +49,6 @@ function RequiredCourse({courseId, sectionId, index, handleClick}: RequiredCours
                 >
                     <RequiredCourseButton 
                         id={courseId} 
-                        sectionId={sectionId}
                         isCrossed={!isDraggable}
                     />
 

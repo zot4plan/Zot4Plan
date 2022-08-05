@@ -1,4 +1,4 @@
-import {memo} from 'react';
+import {memo, MouseEvent} from 'react';
 import { useDispatch } from 'react-redux';
 import { removeCourse } from '../../features/ProgramsSlice';
 import { removeCourseQuarter } from '../../features/StoreSlice';
@@ -7,8 +7,10 @@ import './ButtonRemoveCourse.css';
 
 function ButtonRemoveCourse({courseId, sectionId, index}: CoursePayload) {
     const dispatch = useDispatch();
-    const handleOnClick = (e: { preventDefault: () => void; }) => {
+    const handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
         e.preventDefault();
+        
         if(sectionId.length === 3)
             dispatch(removeCourseQuarter({
                 sectionId: sectionId,

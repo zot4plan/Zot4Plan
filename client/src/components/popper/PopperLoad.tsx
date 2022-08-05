@@ -56,10 +56,10 @@ function PopperLoad () {
                 value={name}
                 className="schedule-name-input"
                 onChange={handleInputChange}
-                placeholder="Schedule name"
+                placeholder="Enter schedule name"
             />
 
-            <button className='btn' style={{margin: '1rem 0rem'}}
+            <button className='btn' style={{margin: '0.6rem 0rem'}}
                     onClick={handleOnSubmit}> Submit </button>
 
             {message.status !== "idle"  && <Message status={message.status} content={message.content}/>}

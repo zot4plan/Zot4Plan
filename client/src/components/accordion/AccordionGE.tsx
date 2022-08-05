@@ -50,7 +50,7 @@ const AccordionGE = ({id}:SectionProps) => {
             </summary>
 
             <div className='section-body'>
-                <p style={{marginBottom: '1rem'}}> <b>{ge.nameChild}</b> </p>
+                <p style={{marginBottom: '1rem', textAlign: 'center', fontSize: '1.7rem'}}> <b>{ge.nameChild}</b> </p>
                 {isOpen && detail}
             </div>
         </details>

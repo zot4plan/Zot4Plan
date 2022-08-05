@@ -28,8 +28,8 @@ const checkLength = (text:string|number, isTerm = false) => {
     return (text.length > 100)? <ReadMore text={text}/> : text;
 }
 
-const fields = ['corequisite', 'prerequisite', 'restriction', 'ge' ];
-const labels = ['Corequisite: ', 'Prerequisite: ', 'Restriction: ', 'GE: '];
+const fields = ['corequisite', 'prerequisite', 'pre_or_core', 'restriction', 'same_as', 'overlaps_with', 'concurrent_with', 'ge' ];
+const labels = ['Corequisite: ', 'Prerequisite: ', 'Prerequisite or corequisite:', 'Restriction: ', 'Same as ', 'Overlaps with ', 'Concurrent with ', 'GE: '];
 
 function CourseCard({id, course, colors}: CourseCardProps) {
     let header =[];
@@ -37,10 +37,10 @@ function CourseCard({id, course, colors}: CourseCardProps) {
 
     if(course) {
         header.push(<p key="name"> <b>{id + '. ' + course.name} </b> </p>);
-        header.push(<p key="unit"> {course.units + " units"} </p>);
+        header.push(<p key="unit"> {course.units_text} </p>);
 
         body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
-
+        
         fields.forEach((field, index) => {
             if(course[field] !== "")
                 body.push(<p key={field}> <b>{labels[index]}</b>{checkLength(course[field])}</p>);

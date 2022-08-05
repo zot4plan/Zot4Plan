@@ -14,19 +14,22 @@ const Footer = () => {
             name: "Loc Duc Minh Khong",
             linkedin: "https://www.linkedin.com/in/lockhong",
             github: "https://github.com/ldkhong",
-            email: "ldkhong@uci.edu"
+            email: "ldkhong@uci.edu",
+            instagram: ""
         },
         {
             name: "Tram La",
             linkedin: "https://www.linkedin.com/in/tram-la-680417200",
             github: "https://github.com/tramla123",
-            email: "latb@uci.edu"
+            email: "latb@uci.edu",
+            instagram: ""
         },
         {
             name: "Warren Leu",
-            linkedin: "https://www.linkedin.com/",
-            github: "https://github.com/",
-            email: "@uci.edu"
+            linkedin: "https://www.linkedin.com/in/warrenleu/",
+            github: "https://github.com/SadNoodle2765/",
+            email: "",
+            instagram: "https://www.instagram.com/sadnoodle2765/"
         }
     ]
 

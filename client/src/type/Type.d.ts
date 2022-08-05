@@ -22,12 +22,18 @@ declare interface CourseType {
     prerequisite_tree: string;
     prerequisite_for: string;
     restriction: string;
+    pre_or_core: string;
+    same_as: string;
+    overlaps_with: string;
+    concurrent_with: string;
     ge:string;
     terms:string;
+    units_text:string;
     units: number;
     repeatability: number;
     [id: string]: string | number;
 }
+
 declare interface YearsType {
     byIds: { [id: string]: string[] },
     allIds: string[],

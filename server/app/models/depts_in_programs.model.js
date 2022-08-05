@@ -1,11 +1,11 @@
 module.exports = (sequelize, DataType) => {
-    const CoursesInPrograms = sequelize.define("courses_in_programs", {
+    const DeptsInPrograms = sequelize.define("depts_in_programs", {
         id: {
             type: DataType.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },  
-        course_id: {
+        dept_id: {
             type: DataType.STRING(25),
             allowNull: false,
         },  
@@ -16,8 +16,8 @@ module.exports = (sequelize, DataType) => {
     },{
         timestamps: false,
         underscored: true,
-        tableName: 'course_in_programs'
+        tableName: 'depts_in_programs'
     });
  
-    return CoursesInPrograms;
+    return DeptsInPrograms;
   };

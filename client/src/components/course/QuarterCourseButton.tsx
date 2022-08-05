@@ -2,10 +2,10 @@ import {memo, MouseEvent, useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { RootState } from '../../app/store';
 import { fetchCourse } from '../../api/FetchData';
-import ReactTooltip from "react-tooltip";
+//import ReactTooltip from "react-tooltip";
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import QuarterCourseCard from './QuarterCourseCard';
-import Error from '../icon/Error';
+//import Error from '../icon/Error';
 
 interface CourseButtonProps {
     courseId: string;

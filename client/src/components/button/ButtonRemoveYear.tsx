@@ -1,7 +1,7 @@
 import {useDispatch} from 'react-redux';
 import { removeYear } from '../../features/StoreSlice';
 import Remove from '../icon/Remove';
-import ReactTooltip from "react-tooltip";
+//import ReactTooltip from "react-tooltip";
 import './ButtonRemoveYear.css';
 
 interface RemoveYearProps {
@@ -24,10 +24,10 @@ function ButtonRemoveYear({id, index}: RemoveYearProps) {
         aria-label='remove year'
     > 
         <Remove/> 
-
+    {/*
         <ReactTooltip id={"removeYearTip" + index} place="top" effect="solid">
             Remove year
-        </ReactTooltip>
+        </ReactTooltip>  */}
     </button>
     )
 

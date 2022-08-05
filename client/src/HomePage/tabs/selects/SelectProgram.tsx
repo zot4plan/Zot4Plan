@@ -11,8 +11,7 @@ import './SelectProgram.css';
 const myStyle: StylesConfig<ProgramOption, true> =  {
     container: (provided) => ({
         ...provided, 
-        width: '100%',
-        minWidth: "27rem",
+        width: '100%'
     }),
     control: (provided) => ({
         ...provided, 

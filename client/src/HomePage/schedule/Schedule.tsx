@@ -20,13 +20,7 @@ function Schedule() {
             <ButtonsList printContent={printContent}/>
 
             <div id="schedule" ref={printRef}>
-                <div className="print">
-                    <PrintPrograms/>
-                    <div className="printUnit"> 
-                        <p> Total Units:</p>
-                        <TotalUnits/> 
-                    </div>
-                </div>
+                <PrintPrograms/>
 
                 {yearIds.map((id,index) => 
                     <Year key={id} 
@@ -42,6 +36,11 @@ function Schedule() {
                         <p> Total Units:</p>
                         <TotalUnits/> 
                     </div>
+                </div>
+                
+                <div className="print-units"> 
+                    <p> Total Units:</p>
+                    <TotalUnits/> 
                 </div>
             </div>   
         </div>

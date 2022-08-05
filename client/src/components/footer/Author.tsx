@@ -2,6 +2,7 @@ import {memo} from 'react';
 import Github from '../icon/Github';
 import Linkedin from '../icon/Linkedin';
 import Gmail from '../icon/Gmail';
+import Instagram from '../icon/Instagram'
 
 interface AuthorProps {
     author: {
@@ -9,6 +10,7 @@ interface AuthorProps {
         linkedin: string;
         github: string;
         email: string;
+        instagram: string;
     }
 }
 
@@ -45,15 +47,27 @@ const Author = ({author}: AuthorProps) => {
                     </a>
                 </li>
 
-                <li className="item" style={{marginLeft:"0.1rem"}}>
-                    <a target="_blank" 
-                        href= {"mailto: " + author.email}
-                        rel="noreferrer"
-                        aria-label="Gmail"
-                    >
-                        <Gmail/>
-                    </a>
-                </li>
+                {author.email !== '' && 
+                    <li className="item" style={{marginLeft:"0.1rem"}}>
+                        <a target="_blank" 
+                            href= {"mailto: " + author.email}
+                            rel="noreferrer"
+                            aria-label="Gmail"
+                        >
+                            <Gmail/>
+                        </a>
+                    </li>}
+
+                {author.instagram !== '' && 
+                    <li className="item" style={{marginLeft:"0.1rem"}}>
+                        <a target="_blank" 
+                            href= {author.instagram}
+                            rel="noreferrer"
+                            aria-label="Instagram"
+                        >
+                            <Instagram/>
+                        </a>
+                    </li>}   
             </ul>
         </li>
     )

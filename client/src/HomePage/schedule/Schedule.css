@@ -21,7 +21,7 @@ details:last-of-type {
     align-items: center;
 }
 
-.btn {
+.btn, .btn-year {
     box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.25);
     border: 1px solid;
     border-radius: 1.2rem;
@@ -31,7 +31,7 @@ details:last-of-type {
     color: var(--accent-color-2);
 }
 
-.btn:hover{
+.btn:hover, .btn-year:hover {
     border-color: var(--accent-color-2);
     background-color: var(--accent-color-2);
     color: white;
@@ -39,7 +39,7 @@ details:last-of-type {
 
 .margin-right-1 {margin-right: 1rem;}
 
-.print {display: none;}
+.print-programs, .print-units {display: none;}
 
 #chalkboard {
     float: right;
@@ -63,6 +63,15 @@ details:last-of-type {
 }
 
 @media only screen and (max-width: 599px) { 
+    .btn {
+        width: 6.2rem;
+        font-size: 1.5rem;
+    }
+
+    .btn-year{
+        font-size: 1.4rem;
+    }
+
     #schedule {
         height: 54rem;
         overflow-x: hidden;
@@ -73,7 +82,6 @@ details:last-of-type {
 
 @media only screen and (min-width: 600px) { 
     #schedule {height: 65rem;}
-    
 }
 
 @media only screen and (max-width: 800px) { 
@@ -100,32 +108,31 @@ details:last-of-type {
         display: block !important;
         width: 766px;
         overflow: visible !important;
-        margin: 2rem auto;
+        margin: 2.5rem auto;
         padding: 0rem;
     }
 
-    .print {display: block;}
-
-    .printUnit {
+    .print-units {
         display: flex;
-        width: 200px;
-        margin-bottom : 1rem;
-        padding-left: 1rem;
+        float: right;
+        margin-top : 1rem;
+        padding-right: 1rem;
     }
 
-    .printUnit p {
+    .print-programs {
+        display: block;
+        width: 750px;
+        padding-left: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .print-units p, .print-programs > p {
         margin-right: 0.5rem;
         font-size: 14px;
     }
 
-    .printPrograms {
-        width: 750px;
-        padding-left: 1rem;
-    }
-
-    .printPrograms > p {
-        margin-bottom : 0.5rem;
-        font-size: 14px;
+    .print-programs > p {
+        margin-bottom: 0.5rem;
     }
 
     img, .unit-text {

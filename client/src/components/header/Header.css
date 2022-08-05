@@ -120,7 +120,7 @@
 
         opacity: 1;
         background-color: #1F1F1F;
-        transition: all .5s ease;
+        transition: all .4s ease;
     }
 
     .nav-list-show {
@@ -134,7 +134,7 @@
     .nav-item > a, 
     .nav-item > button {
         opacity: 0;
-        transition: opacity .5s ease;
+        transition: opacity .1s ease;
     }
 
     .nav-item {

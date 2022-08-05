@@ -4,7 +4,6 @@ import {RootState} from '../../app/store';
 
 interface CourseButtonType {
     id: string;
-    sectionId: string;
     isCrossed: boolean;
 }
 
@@ -15,14 +14,24 @@ function removeLastWord(str: string) {
 
 function RequiredCourseButton({id, isCrossed}: CourseButtonType) {
     let bgColor = useSelector((state: RootState) => state.store.depts.byIds[removeLastWord(id)][2]);
+
+    const isTaken = useSelector((state: RootState) =>{ 
+        let course = state.store.courses[id];
+        return course === undefined? false : course.remains < course.data.repeatability;
+    });
+
     let textColor = 'white';
     let textDecoration = 'none';
 
     if (isCrossed) {
-        bgColor = '#D3D3D3'
-        textColor = 'black'
-        textDecoration = "line-through"
+        textDecoration = "line-through";
     }
+
+    if (isTaken) {
+        bgColor = '#D3D3D3';
+        textColor = 'black';
+    }
+
 
     return ( 
         <div className="course-btn" style={{backgroundColor: bgColor}}>

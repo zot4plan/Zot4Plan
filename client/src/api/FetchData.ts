@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import Axios from '../api/Axios';
+import Axios from './Axios';
 
 export const fetchCourse = createAsyncThunk("features/fetchCourse", async (id: string) => {
     const course = sessionStorage.getItem(id);

@@ -10,7 +10,7 @@ function ButtonAddYear() {
     }
 
     return ( 
-        <button className="btn" onClick={addNewYear}> 
+        <button className="btn-year" onClick={addNewYear}> 
             Add Year
         </button>
     )
