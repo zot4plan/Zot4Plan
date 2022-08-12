@@ -95,9 +95,10 @@ def write_courses():
             for key,value in uci_course.items():
                 course_names.append(key)
                 f.write('INSERT INTO courses VALUES ("' + key + '","' + value.name.strip() +  '","' + value.department + '","' + 
-                        value.units + '","' + value.description + '","' + value.prerequisite +  '","' + value.prerequisite_tree + '","' +
+                        value.units_int +  '","' + value.units_str + '","' + value.description + '","' + value.prerequisite +  '","' + value.prerequisite_tree + '","' +
                         value.prerequisite_for + '","' + value.restriction + '","' + value.repeatability + '","' + 
-                        value.corequisite + '","' + value.ge_string + '","' + value.past_terms + '");' + '\n')
+                        value.corequisite + '","' + value.pre_or_core + '","' + value.same_as + '","' + 
+                        value.overlaps_with + '","' + value.concurrent_with + '","' + value.ge_string + '","' + value.past_terms + '");' + '\n')
                 for cat in value.ge_list:
                     write_ge.write('INSERT INTO courses_in_ge (course_id, ge_id) VALUES ("' + key + '","' + cat + '");' + '\n')
     
