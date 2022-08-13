@@ -27,7 +27,9 @@ details[open] .quarter-droppable-area {
     align-items: center;
     cursor: pointer;
 }
-
+.year:hover .remove-year-btn {
+    display: block;
+}
 .accordion:hover {color: var(--accent-color-2)}
 .accordion:hover .remove-year-btn{
     visibility: visible;
