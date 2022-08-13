@@ -20,7 +20,7 @@ function Year({id, name, index}:YearProps) {
     return (
         <details open key={id} style={{marginBottom: '2.5rem'}}>
             <summary> 
-                <span className='relative accordion'>
+                <span className='relative accordion year'>
                     <h1 className="year-header"> {name} </h1>
                     <div className="right-icon">
                         <Right />
