@@ -8,26 +8,19 @@ module.exports = app => {
 
     // GET method
     router.get("/filterCourses", courses.findAll);
-
     router.get("/getAllPrograms", programs.getAllPrograms);
-
     router.get("/getAllGE",general_education.getAllGE);
-
     router.get("/getCourse", courses.findOne);
 
     // POST method
-
     router.post("/getProgram", programs.getProgram)
-
     router.post("/getCoursesInGE", courses_in_ge.getCoursesInGE);
-
     router.post("/saveSchedule", schedules.insertSchedule);
-
     router.post("/getSchedule", schedules.getSchedule);
     
     // Health check
     router.get('/health', async (_req, res) => {
-        res.send('OK');
+        res.status(200).send();
     });
 
     app.use('/api',router);

@@ -2,8 +2,7 @@ const db = require("../models");
 const CoursesInGE = db.courses_in_ge;
 
 function removeLastWord(str) {
-    const lastIndexOfSpace = str.lastIndexOf(' ');
-  
+    const lastIndexOfSpace = str.lastIndexOf(' ');  
     return (lastIndexOfSpace === -1)? str : str.substring(0, lastIndexOfSpace);
 }
 
@@ -29,8 +28,7 @@ exports.getCoursesInGE = (req, res) => {
     })
     .catch(err => {
         res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving majors."
+            message: err.message
         })
     })
 }
