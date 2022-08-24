@@ -12,7 +12,7 @@ function TutorialCarousel ({ handleClick }: TutorialCarouselProps) {
     const gif1 = require('../../assets/gifs/pickmajor.GIF');
     const gif2 = require('../../assets/gifs/schedule.GIF');
     const gif3 = require('../../assets/gifs/moreinfo.GIF');
-    const gif4 = require('../../assets/gifs/tutorial.GIF');
+    const gif4 = require('../../assets/gifs/tut.gif');
     const images = [gif1, gif2, gif3, gif4];
     const titles = ['Pick a Major', 'Add Classes', 'More Information', 'Drag and Drop Around']
     const [index, setIndex] = useState(1);
