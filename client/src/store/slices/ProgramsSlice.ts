@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
-import { fetchProgram, fetchSchedule } from '../api/FetchData'
+import { fetchProgram, fetchSchedule } from '../../api/FetchData'
 
 export const SECTION_ID_LEN = 4; // to differentiate course in major (which cannot be remove)
 
@@ -43,7 +43,7 @@ export const storeSlice = createSlice ({
             action.payload.value.forEach(program => {
                 if(state.byIds[program.value] === undefined) {
                     state.byIds[program.value] = {
-                        id: program.value,
+                        program_id: program.value,
                         byIds: {}, 
                         allIds: [],
                         name: program.label,
@@ -118,7 +118,7 @@ export const storeSlice = createSlice ({
                     programs.forEach(program => {
                         if(state.byIds[program.value] === undefined) {
                             state.byIds[program.value] = {
-                                id: program.value,
+                                program_id: program.value,
                                 byIds: {}, 
                                 allIds: [],
                                 name: program.label,

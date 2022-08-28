@@ -1,6 +1,6 @@
 import {memo} from 'react';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../../app/store';
+import {RootState} from '../../../store/store';
 import AccordionGE from '../../../components/accordion/AccordionGE';
 
 const url = "https://catalogue.uci.edu/informationforadmittedstudents/requirementsforabachelorsdegree/#generaleducationrequirementtext";

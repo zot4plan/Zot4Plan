@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
-import {RootState} from '../../app/store';
+import {RootState} from '../../store/store';
 import ButtonsList from './ButtonsList';
 import Year from '../../components/accordion/Year';
 import TotalUnits from './TotalUnits';

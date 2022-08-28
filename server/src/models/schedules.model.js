@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataType) => {
     const Schedules = sequelize.define("schedules", {
-        id: {
+        schedule_id: {
             type: DataType.STRING(64),
             allowNull:false,
             primaryKey: true
@@ -18,4 +18,4 @@ module.exports = (sequelize, DataType) => {
     });
   
     return Schedules;
-  };
+};

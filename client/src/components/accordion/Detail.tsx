@@ -1,7 +1,7 @@
 import {Droppable} from 'react-beautiful-dnd';
 import {memo, MouseEvent, useState} from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
+import { RootState } from '../../store/store';
 import RequiredCourse from '../course/RequiredCourse';
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import RequiredCourseCard from '../course/RequiredCourseCard';

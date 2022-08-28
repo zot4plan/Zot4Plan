@@ -1,6 +1,6 @@
 import {memo, useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from "../../app/store";
+import { RootState } from "../../store/store";
 import { fetchGE } from '../../api/FetchData';
 import Right from '../icon/ArrowRightSmall';
 import Detail from './Detail';
@@ -44,7 +44,7 @@ const AccordionGE = ({id}:SectionProps) => {
         >  
             <summary> 
                 <span className='relative accordion'>
-                    <h1 className="section-header"> {ge.id + '-' + ge.name} </h1>
+                    <h1 className="section-header"> {ge.ge_id + '-' + ge.name} </h1>
                     <div className="right-icon"> <Right/> </div>
                 </span>
             </summary>

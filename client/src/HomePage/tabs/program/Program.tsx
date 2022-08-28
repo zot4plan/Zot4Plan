@@ -1,6 +1,6 @@
 import {memo} from 'react'
 import { shallowEqual, useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../../app/store';
+import {RootState} from '../../../store/store';
 import Accordion from '../../../components/accordion/Accordion';
 import { fetchProgram } from '../../../api/FetchData';
 import ProgramCarousel from './ProgramCarousel';

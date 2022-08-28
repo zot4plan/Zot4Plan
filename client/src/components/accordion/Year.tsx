@@ -1,6 +1,6 @@
 import {memo} from "react";
 import { shallowEqual, useSelector } from 'react-redux';
-import { RootState } from "../../app/store";
+import { RootState } from "../../store/store";
 import Quarter from './Quarter';
 import ButtonRemoveYear from "../button/ButtonRemoveYear";
 import Right from '../icon/ArrowRightSmall';

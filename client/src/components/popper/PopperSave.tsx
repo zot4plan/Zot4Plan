@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, MouseEvent} from 'react';
 import { useStore } from 'react-redux';
-import { RootState } from '../../app/store';
+import { RootState } from '../../store/store';
 import Axios from '../../api/Axios';
 import Confetti from 'react-confetti';
 import Message from '../message/Message';
@@ -49,7 +49,7 @@ function PopperSave () {
                         years: years as string[][][],
                     };
 
-                    Axios.post('/api/saveSchedule', {id: name, schedule: schedule})
+                    Axios.put('/api/saveSchedule/' + name, {schedule: schedule})
                     .then(() => {
                         setMessage({status: "succeeded", content: succeeded})
                     })
