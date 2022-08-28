@@ -46,29 +46,16 @@ details[open] .quarter-droppable-area {
     font-size: 12px;
   }
 
-.mouse-over-popover-body {
-    background-color: #343A40;
-    color: #DEE2E6;
-    height: auto;
-    width: 220px;
-    text-align: center;
-    border-radius: 1.5rem;
-    padding: 1rem;
+.row {
+    display: flex;
+    gap: 10px;
 }
-.mouse-over-popover-before {
-    position: absolute;
-    z-index: 0;
-    top: -0.1rem;
-    left: 50%;
-
-    width: 1.2rem;
-    height: 1.2rem;
-
-    transform: rotate(45deg) translateX(-50%);
-    
-    background-color: #343A40;
-    
+.column{
+    flex: 50%;
+    font-size: 14px;
+    font-weight: 400;
 }
+
 .year-header {font-size: 1.8rem;}
 .section-header {
     font-size: 1.5rem;

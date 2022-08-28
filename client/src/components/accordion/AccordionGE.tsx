@@ -1,6 +1,6 @@
 import {memo, useEffect, useState, MouseEvent} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import PopperUnstyled from '@mui/base/PopperUnstyled';
+import ReactTooltip from "react-tooltip";
 import { RootState } from "../../app/store";
 import { fetchGE } from '../../api/FetchData';
 import Right from '../icon/ArrowRightSmall';
@@ -38,19 +38,6 @@ const AccordionGE = ({id}:SectionProps) => {
     else
         detail = <div> Cannot connect to server...!!! </div>
 
-    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-
-    const handlePopoverOpen = (event: MouseEvent<HTMLElement>) => {
-        console.log('open')
-        setAnchorEl(event.currentTarget);
-    };
-    
-    const handlePopoverClose = () => {
-        console.log('close')
-        setAnchorEl(null);
-    };
-    
-    const open = Boolean(anchorEl);
     return (
         <details key={id} 
             className='section' 
@@ -61,23 +48,19 @@ const AccordionGE = ({id}:SectionProps) => {
                 <span className='relative accordion'>
                     <h1 className="section-header"> 
                         {ge.id + '-' + ge.name}
-                        <span className="badge"
-                            onMouseEnter={handlePopoverOpen}
-                            onMouseLeave={handlePopoverClose}
+                        <span className="badge" data-tip data-for='badgeTip'
                         >
                             4
+                            <ReactTooltip id="badgeTip" place="top" effect="solid">
+                                <ul className='row'>
+                                    <li className='column'>WRITING 30</li>
+                                    <li className='column'>WRITING 50</li>
+                                </ul>
+                            </ReactTooltip>
                         </span>
                     </h1>
                     <div className="right-icon"> <Right/> </div>
                 </span>
-                <PopperUnstyled 
-                    id="mouse-over-popover"
-                    open={open}
-                    anchorEl={anchorEl}
-                >
-                <div className="mouse-over-popover-before"/>
-                    <div className='mouse-over-popover-body'>Hi</div>
-                </PopperUnstyled>
             </summary>
 
             <div className='section-body'>
