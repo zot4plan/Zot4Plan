@@ -1,6 +1,6 @@
 import QuarterCourse from '../course/QuarterCourse';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../app/store';
+import {RootState} from '../../store/store';
 import {Droppable} from 'react-beautiful-dnd';
 import {memo, useCallback} from 'react'
 

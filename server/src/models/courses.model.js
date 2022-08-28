@@ -2,81 +2,77 @@ const { Sequelize } = require("sequelize");
 
 module.exports = (sequelize, DataType) => {
     const Courses = sequelize.define("courses", {
-        id: {
+        course_id: {
             type: DataType.STRING(25),
             allowNull:false,
             primaryKey: true
         },  
         name: {
-            type: DataType.STRING(200),
+            type: DataType.STRING,
             allowNull:false,
         },
         department: {
-            type: DataType.STRING(20),
+            type: DataType.STRING,
             allowNull: false,
         },
         units: {
             type: DataType.INTEGER,
-            allowNull:false,
+            allowNull:true,
         },
         units_text: {
-            type: DataType.STRING(10),
-            allowNull:false,
+            type: DataType.STRING,
+            allowNull:true,
         },
         corequisite: {
-            type: DataType.STRING(1000),
-            allowNull:false,
+            type: DataType.STRING,
+            allowNull:true,
         },
         description: {
-            type: DataType.STRING(1000),
+            type: DataType.STRING,
             allowNull:false,
         },
         prerequisite: {
-            type: DataType.STRING(1000),
-            allowNull:false,
+            type: DataType.STRING,
+            allowNull:true,
         },
         prerequisite_tree: {
-            type: DataType.STRING(300),
-            allowNull:false,
+            type: DataType.JSON,
+            allowNull:true,
         },
         prerequisite_for: {
-            type: DataType.STRING(750),
-            allowNull:false,
-        },
-        prerequisite_tree: {
-            type: Sequelize.STRING(300),
-            allowNull:false,
+            type: DataType.STRING,
+            allowNull:true,
         },
         restriction: {
-            type: DataType.STRING(1000),
-            allowNull:false,
+            type: DataType.STRING,
+            allowNull:true,
         },
         repeatability: {
             type: DataType.INTEGER,
             allowNull:false,
         },
         pre_or_core: {
-            type: DataType.STRING(1000),
-            allowNull:false,
+            type: DataType.STRING,
+            allowNull:true,
         },
         same_as: {
-            type: DataType.STRING(300),
-            allowNull:false,
+            type: DataType.STRING,
+            allowNull:true,
         },
         overlaps_with: {
-            type: DataType.STRING(300),
-            allowNull:false,
+            type: DataType.STRING,
+            allowNull:true,
         },
         concurrent_with: {
-            type: DataType.STRING(300),
-            allowNull:false,
+            type: DataType.STRING,
+            allowNull:true,
         },
         ge: {
-            type: DataType.STRING(25),
-            allowNull:false,
+            type: DataType.STRING,
+            allowNull:true,
         },
         terms: {
-            type: DataType.STRING(350),
+            type: DataType.STRING,
             allowNull:false,
         }
     }, {

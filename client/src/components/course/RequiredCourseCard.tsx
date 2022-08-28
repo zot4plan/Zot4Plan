@@ -1,6 +1,6 @@
 import {memo, useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
-import { RootState} from '../../app/store';
+import { RootState} from '../../store/store';
 import Axios from '../../api/Axios';
 import CourseCard from './CourseCard';
 import './CourseCard.css';

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataType) => {
     const GeneralEducation = sequelize.define("general_education", {
-        id: {
+        ge_id: {
             type: DataType.STRING(5),
             primaryKey: true,
         },  
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataType) => {
             allowNull:false,
         },
         note: {
-            type: DataType.STRING(100),
+            type: DataType.STRING,
             allowNull:false,
         },
     },{

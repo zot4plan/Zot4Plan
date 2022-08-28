@@ -2,8 +2,8 @@ import {useState,memo, MouseEvent} from 'react';
 import  { StylesConfig } from "react-select";
 import AsyncSelect  from 'react-select/async';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import {RootState} from '../../../app/store';
-import {addCourse} from '../../../features/ProgramsSlice';
+import {RootState} from '../../../store/store';
+import {addCourse} from '../../../store/slices/ProgramsSlice';
 import Axios from '../../../api/Axios';
 import AddIcon from '../../../components/icon/AddIcon';
 import Message from '../../../components/message/Message';
@@ -15,19 +15,18 @@ interface OptionType {
 }
 
 interface CourseType{
-    id:string;
+    course_id:string;
 }
 
 const myStyle: StylesConfig<OptionType, false> =  {
     control: (provided) => ({
-         ...provided, 
-            width: '100%',
+        ...provided, 
+        width: '100%',
+        borderColor: '#1F1F1F',
+        borderRadius: '18px',
+        "&:hover": {
             borderColor: '#1F1F1F',
-            borderRadius: '18px',
-            "&:hover": {
-                borderColor: '#1F1F1F',
-            }
-            
+        }       
     }),
     valueContainer: (provided) => ({
         ...provided, cursor: 'text',
@@ -53,7 +52,8 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
         setTimeout(() => {
             Axios.get('/api/filterCourses', {
                 params: { id: inputValue }}).then((res) => {
-                    res.data.forEach((course:CourseType) => filterCourse.push({value: course.id, label: course.id}))
+                    console.log(res.data);
+                    res.data.forEach((course:CourseType) => filterCourse.push({value: course.course_id, label: course.course_id}))
                     callback(filterCourse);
             });
         }, 500);

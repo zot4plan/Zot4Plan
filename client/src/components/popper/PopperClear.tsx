@@ -1,6 +1,6 @@
 import {memo, MouseEvent} from 'react';
 import {useDispatch} from 'react-redux';
-import { clearSchedule } from '../../features/StoreSlice';
+import { clearSchedule } from '../../store/slices/StoreSlice';
 
 interface PopperClearProps{
     handleClick: (event: MouseEvent<HTMLButtonElement>) => void
@@ -8,7 +8,6 @@ interface PopperClearProps{
 
 function PopperClear({handleClick}: PopperClearProps) {
     const dispatch = useDispatch();
-
     const handleClear = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         dispatch(clearSchedule());
@@ -53,7 +52,7 @@ function PopperClear({handleClick}: PopperClearProps) {
                 </h1>
 
                 <p style={{fontSize: '1.4rem', marginBottom: '1rem', padding:'0rem 1rem'}}>
-                    Are your sure you want to remove all courses from your schedule? 
+                    Are you sure you want to remove all courses from your schedule? 
                 </p>
             </div>
 
@@ -67,7 +66,7 @@ function PopperClear({handleClick}: PopperClearProps) {
             >
                 <button onClick={handleClick}
                     data-value="cancel"
-                    style= {{
+                    style={{
                         marginRight: '1rem', 
                         border: '1px solid #307ABB', 
                         borderRadius: '0.4rem',
@@ -81,7 +80,7 @@ function PopperClear({handleClick}: PopperClearProps) {
 
                 <button onClick={handleClear}
                     data-value="cancel"
-                    style= {{ 
+                    style={{ 
                         marginRight: '1rem',
                         border: '1px solid red',
                         borderRadius: '0.4rem', 

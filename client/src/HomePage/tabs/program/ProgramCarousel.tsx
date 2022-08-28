@@ -1,9 +1,9 @@
 import {memo} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../../app/store';
+import {RootState} from '../../../store/store';
 import ChevronLeft from '../../../components/icon/ChervonLeft';
 import ChevronRight from '../../../components/icon/ChervonRight';
-import { handleSwitchProgram } from '../../../features/ProgramsSlice';
+import { handleSwitchProgram } from '../../../store/slices/ProgramsSlice';
 
 interface ProgramCarouselProps {
     url: string;

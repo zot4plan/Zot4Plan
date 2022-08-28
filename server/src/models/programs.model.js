@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataType) => {
     const Programs = sequelize.define("programs", {
-        id: {
+        program_id: {
             type: DataType.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         name: {
-            type: DataType.STRING(50),
+            type: DataType.STRING,
             allowNull:false,
         },
         is_major: {
@@ -17,8 +17,12 @@ module.exports = (sequelize, DataType) => {
             type: DataType.JSON,
             allowNull:false,
         },
+        departments: {
+            type: DataType.ARRAY(DataType.STRING),
+            allowNull:false,
+        },
         url: {
-            type: DataType.STRING(200),
+            type: DataType.STRING,
             allowNull:false,
         }
     }, {

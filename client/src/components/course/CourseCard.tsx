@@ -42,7 +42,7 @@ function CourseCard({id, course, colors}: CourseCardProps) {
         body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
         
         fields.forEach((field, index) => {
-            if(course[field] !== "")
+            if(course[field] !== null)
                 body.push(<p key={field}> <b>{labels[index]}</b>{checkLength(course[field])}</p>);
         })
 
@@ -52,7 +52,7 @@ function CourseCard({id, course, colors}: CourseCardProps) {
                         {(course.repeatability === 9)? "unlimited": course.repeatability}
                     </p>);
         
-        if(course.terms !== "") {
+        if(course.terms !== null) {
             body.push(<p key='terms'>
                         <b>{"Last Offered: "}</b> <br/> 
                         {checkLength(course.terms, true)} 

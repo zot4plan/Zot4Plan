@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import ProgramsReducer from "../features/ProgramsSlice";
-import GEReducer from "../features/GESlice";
-import StoreReducer from "../features/StoreSlice";
+import ProgramsReducer from "./slices/ProgramsSlice";
+import GEReducer from "./slices/GESlice";
+import StoreReducer from "./slices/StoreSlice";
 
 export const store = configureStore ({
     reducer: {

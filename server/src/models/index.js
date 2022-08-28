@@ -25,9 +25,9 @@ db.schedules= require("./schedules.model.js")(sequelize, Sequelize);
 db.visits = require("./visits.model.js")(sequelize, Sequelize);
 
 // courses_in_ge associations
-db.courses.hasMany(db.courses_in_ge, {foreignKey: 'course_id', as: 'coursesInGE'});
-db.courses_in_ge.belongsTo(db.courses, {foreignKey: 'id'} );
-db.general_education.hasMany(db.courses_in_ge, {foreignKey: 'ge_id', as: 'coursesInGE'});
-db.courses_in_ge.belongsTo(db.general_education, {foreignKey: 'id'} );
+db.courses.hasMany(db.courses_in_ge, {foreignKey: 'course_id', as: 'courses_in_ge'});
+db.courses_in_ge.belongsTo(db.courses, {foreignKey: 'course_id'} );
+db.general_education.hasMany(db.courses_in_ge, {foreignKey: 'ge_id'});
+db.courses_in_ge.belongsTo(db.general_education, {foreignKey: 'ge_id'} );
 
 module.exports = db;

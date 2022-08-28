@@ -1,7 +1,7 @@
 import {memo, useEffect, useState, MouseEvent} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from "../../store/store";
 import ReactTooltip from "react-tooltip";
-import { RootState } from "../../app/store";
 import { fetchGE } from '../../api/FetchData';
 import Right from '../icon/ArrowRightSmall';
 import Detail from './Detail';

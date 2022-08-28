@@ -1,5 +1,5 @@
 import {createSlice, nanoid } from "@reduxjs/toolkit";
-import {fetchAllGE, fetchGE} from '../api/FetchData'
+import {fetchAllGE, fetchGE} from '../../api/FetchData'
 
 const SECTION_ID_LEN = 5; // to differentiate course in major (which cannot be remove)
 
@@ -10,7 +10,7 @@ const initialState:GESliceType = {
     sections: {},
 }
 
-export const geSlice = createSlice ({
+export const storeSlice = createSlice ({
     name: "store",
     initialState,
     reducers: {},
@@ -25,14 +25,14 @@ export const geSlice = createSlice ({
             state.status = "succeeded";
 
             action.payload.forEach((category) => {
-                state.byIds[category.id] = {
-                    id: category.id,
+                state.byIds[category.ge_id] = {
+                    ge_id: category.ge_id,
                     sectionIds: [],
                     name: category.name,
                     nameChild: category.note,
                     status: 'idle'
                 }
-                state.allIds.push(category.id);
+                state.allIds.push(category.ge_id);
             })
         });
 
@@ -64,4 +64,4 @@ export const geSlice = createSlice ({
     },
 });
 
-export default geSlice.reducer;
+export default storeSlice.reducer;

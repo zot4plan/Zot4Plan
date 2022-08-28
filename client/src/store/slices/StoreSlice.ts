@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction, nanoid, isAnyOf } from "@reduxjs/toolkit";
-import { fetchProgram, fetchGE, fetchSchedule, fetchCourse} from '../api/FetchData'
+import { fetchProgram, fetchGE, fetchSchedule, fetchCourse} from '../../api/FetchData'
 import { addCourse } from "./ProgramsSlice";
 
 const ID_LENGTH = 3; // for function AddCourseToQuarter
@@ -143,7 +143,7 @@ export const storeSlice = createSlice ({
 
                 // Add courses info 
                 action.payload.courses.forEach((course) => {                 
-                    state.courses[course.id] = {
+                    state.courses[course.course_id] = {
                         data: course,
                         remains: course.repeatability,
                     }
@@ -204,14 +204,14 @@ export const storeSlice = createSlice ({
             let course = action.payload.course;
 
             if(action.payload.status === "succeeded"){
-                if(state.courses[course.id] === undefined) {
-                    state.courses[course.id] = {
+                if(state.courses[course.course_id] === undefined) {
+                    state.courses[course.course_id] = {
                         data: course,
                         remains: course.repeatability,
                     }
                 }
                 
-                state.courses[course.id].remains -= 1;
+                state.courses[course.course_id].remains -= 1;
                 state.totalUnits += course.units;
             }
         });

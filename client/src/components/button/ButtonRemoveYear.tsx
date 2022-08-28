@@ -1,5 +1,5 @@
 import {useDispatch} from 'react-redux';
-import { removeYear } from '../../features/StoreSlice';
+import { removeYear } from '../../store/slices/StoreSlice';
 import Remove from '../icon/Remove';
 //import ReactTooltip from "react-tooltip";
 import './ButtonRemoveYear.css';
@@ -18,17 +18,17 @@ function ButtonRemoveYear({id, index}: RemoveYearProps) {
     }
 
     return ( 
-    <button className="absolute remove-year-btn"
-        onClick={handleOnclick}
-        data-tip data-for={'removeYearTip' + index}
-        aria-label='remove year'
-    > 
-        <Remove/> 
-    {/*
-        <ReactTooltip id={"removeYearTip" + index} place="top" effect="solid">
-            Remove year
-        </ReactTooltip>  */}
-    </button>
+        <button className="absolute remove-year-btn"
+            onClick={handleOnclick}
+            data-tip data-for={'removeYearTip' + index}
+            aria-label='remove year'
+        > 
+            <Remove/> 
+        {/*
+            <ReactTooltip id={"removeYearTip" + index} place="top" effect="solid">
+                Remove year
+            </ReactTooltip>  */}
+        </button>
     )
 
 }
