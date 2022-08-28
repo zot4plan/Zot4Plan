@@ -9,7 +9,12 @@ interface TutorialCarouselProps{
 }
 
 function TutorialCarousel ({ handleClick }: TutorialCarouselProps) {
-    const images = [require('../../assets/images/HowTo1.jpg'), require('../../assets/images/HowTo2.jpg')];
+    const gif1 = require('../../assets/gifs/pickmajor.GIF');
+    const gif2 = require('../../assets/gifs/schedule.GIF');
+    const gif3 = require('../../assets/gifs/moreinfo.GIF');
+    const gif4 = require('../../assets/gifs/tut.gif');
+    const images = [gif1, gif2, gif3, gif4];
+    const titles = ['Pick a Major', 'Add Classes', 'More Information', 'Drag and Drop Around']
     const [index, setIndex] = useState(1);
 
     function handleLeftClick( e: MouseEvent<HTMLButtonElement>) {
@@ -29,23 +34,28 @@ function TutorialCarousel ({ handleClick }: TutorialCarouselProps) {
         <button className='arrow' onClick={handleLeftClick}>
             <LeftArrow/>
         </button>
+        <div>
+            <h1
+                className='gif-title'
+            >{titles[index-1]}</h1>
 
-        <div className="flex-container" style={{position: 'relative'}}>
-            <button 
-                style={{position: 'absolute'}}
-                className= 'btn-outlined' 
-                id='close-tutorial-btn' 
-                onClick={handleClick}
-            >
-                <XCircle/>
-            </button>
-            
-            <img
-                className='tutorial-img'
-                src={images[index - 1]} 
-                loading='lazy' 
-                alt='Website Tutorial Page 1'
-            />
+            <div className="flex-container" style={{position: 'relative'}}>
+                <button 
+                    style={{position: 'absolute'}}
+                    className= 'btn-outlined' 
+                    id='close-tutorial-btn' 
+                    onClick={handleClick}
+                >
+                    <XCircle/>
+                </button>
+                
+                <img
+                    className={'tutorial-img'}
+                    src={images[index - 1]} 
+                    loading='lazy' 
+                    alt='Website Tutorial Page 1'
+                />
+            </div>
         </div>
 
         <button className='arrow' onClick={handleRightClick}>

@@ -1,10 +1,12 @@
-import {memo, useEffect, useState} from 'react'
+import {memo, useEffect, useState, MouseEvent} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../store/store";
+import ReactTooltip from "react-tooltip";
 import { fetchGE } from '../../api/FetchData';
 import Right from '../icon/ArrowRightSmall';
 import Detail from './Detail';
 import './Accordion.css';
+
 
 interface SectionProps {
     id: string;
@@ -44,7 +46,19 @@ const AccordionGE = ({id}:SectionProps) => {
         >  
             <summary> 
                 <span className='relative accordion'>
-                    <h1 className="section-header"> {ge.ge_id + '-' + ge.name} </h1>
+                    <h1 className="section-header"> 
+                        {ge.id + '-' + ge.name}
+                        <span className="badge" data-tip data-for='badgeTip'
+                        >
+                            4
+                            <ReactTooltip id="badgeTip" place="top" effect="solid">
+                                <ul className='row'>
+                                    <li className='column'>WRITING 30</li>
+                                    <li className='column'>WRITING 50</li>
+                                </ul>
+                            </ReactTooltip>
+                        </span>
+                    </h1>
                     <div className="right-icon"> <Right/> </div>
                 </span>
             </summary>
