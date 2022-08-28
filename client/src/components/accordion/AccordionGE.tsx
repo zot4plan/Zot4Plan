@@ -47,7 +47,7 @@ const AccordionGE = ({id}:SectionProps) => {
             <summary> 
                 <span className='relative accordion'>
                     <h1 className="section-header"> 
-                        {ge.id + '-' + ge.name}
+                        {ge.ge_id + '-' + ge.name}
                         <span className="badge" data-tip data-for='badgeTip'
                         >
                             4
