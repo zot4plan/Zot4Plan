@@ -36,8 +36,45 @@ details[open] .quarter-droppable-area {
     opacity: 1;
 }
 
+.badge {
+    background-color: #afb8c133;
+    color: #24292f;
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 50%;
+    margin-left: 5px;
+    font-size: 12px;
+  }
+
+.mouse-over-popover-body {
+    background-color: #343A40;
+    color: #DEE2E6;
+    height: auto;
+    width: 220px;
+    text-align: center;
+    border-radius: 1.5rem;
+    padding: 1rem;
+}
+.mouse-over-popover-before {
+    position: absolute;
+    z-index: 0;
+    top: -0.1rem;
+    left: 50%;
+
+    width: 1.2rem;
+    height: 1.2rem;
+
+    transform: rotate(45deg) translateX(-50%);
+    
+    background-color: #343A40;
+    
+}
 .year-header {font-size: 1.8rem;}
-.section-header {font-size: 1.5rem;}
+.section-header {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
 
 .year-header, .section-header {
     flex-grow: 2;
