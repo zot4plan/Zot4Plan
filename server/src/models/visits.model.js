@@ -1,11 +1,12 @@
 module.exports = (sequelize, DataType) => {
     const Visits = sequelize.define("visits", {
-        id: {
-            type: DataType.STRING(5),
+        date_visit: {
+            type: DataType.DATEONLY,
             primaryKey: true,
         },  
-        total: {
+        number_of_visits: {
             type: DataType.INTEGER,
+            defaultValue: 1,
             allowNull:false,
         }
     }, {

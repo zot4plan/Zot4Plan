@@ -1,9 +1,9 @@
 const db = require("../models");
 const Programs = db.programs;
-const Visits = db.visits;
+const visits = require("./visits.controller.js");
 
 exports.getAllPrograms = (_req, res) => {
-    Visits.increment({total: 1}, { where: { id: "12345" } })
+    visits.countVisits();
     Programs
     .findAll({ attributes: [['program_id','value'],['name','label'],'is_major']})
     .then(data => {
@@ -16,8 +16,8 @@ exports.getAllPrograms = (_req, res) => {
 
 // return 2 Result Sets - 0: program info, 1: all courses in programs
 exports.getProgram = (req, res) => {
-    const id = req.body.id;
-    Programs.findByPk(id)
+    Programs
+    .findByPk(req.body.id)
     .then(data => {
         if(data)
             res.send(data);
