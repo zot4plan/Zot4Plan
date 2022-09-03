@@ -1,0 +1,32 @@
+.badge {
+    background-color: #afb8c133;
+    color: #24292f;
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 50%;
+    margin-left: 5px;
+    font-size: 12px;
+  }
+
+.badgeTooltip{
+    background-color: #495057 !important;
+    border-color:#495057 !important;
+    border-radius: 16px;
+}
+
+.badgeTooltip > h1 {
+    margin-bottom: 5px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    }
+
+.row {
+    content: "";
+    display: table;
+    clear: both;
+    width: 200px;
+    gap: 10px;
+}
