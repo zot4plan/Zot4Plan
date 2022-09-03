@@ -6,7 +6,7 @@ import { fetchGE } from '../../api/FetchData';
 import Right from '../icon/ArrowRightSmall';
 import Detail from './Detail';
 import './Accordion.css';
-
+import Badge from '../badge/badge';
 
 interface SectionProps {
     id: string;
@@ -48,16 +48,7 @@ const AccordionGE = ({id}:SectionProps) => {
                 <span className='relative accordion'>
                     <h1 className="section-header"> 
                         {ge.ge_id + '-' + ge.name}
-                        <span className="badge" data-tip data-for='badgeTip'
-                        >
-                            4
-                            <ReactTooltip id="badgeTip" place="top" effect="solid">
-                                <ul className='row'>
-                                    <li className='column'>WRITING 30</li>
-                                    <li className='column'>WRITING 50</li>
-                                </ul>
-                            </ReactTooltip>
-                        </span>
+                        <Badge geId={id}/>
                     </h1>
                     <div className="right-icon"> <Right/> </div>
                 </span>

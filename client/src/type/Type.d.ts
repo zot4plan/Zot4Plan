@@ -133,5 +133,6 @@ declare interface StoreSliceType {
         byIds: {[id:string]: string[];}, 
         size: number,
     },
+    takenGeCourses: {[id:string]: string[] };
     status: string,
 }

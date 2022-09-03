@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction, nanoid, isAnyOf } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction, nanoid, isAnyOf, current } from "@reduxjs/toolkit";
 import { fetchProgram, fetchGE, fetchSchedule, fetchCourse} from '../../api/FetchData'
 import { addCourse } from "./ProgramsSlice";
 
@@ -47,6 +47,7 @@ const generateInitialState = () => {
             byIds:{},
             size: 0
         },
+        takenGeCourses: {},
         status: "idle",
     }
 }
@@ -66,7 +67,12 @@ export const storeSlice = createSlice ({
             if(state.courses[id] !== undefined) {
                 state.courses[id].remains += 1; 
                 state.totalUnits -= state.courses[id].data.units;
-
+                state.courses[id].data["courses_in_ge.ge_list"].forEach(geId =>
+                    {
+                        let geCourses = current(state.takenGeCourses[geId]);
+                        state.takenGeCourses[geId] = geCourses.filter(course_id => course_id !== id);  
+                    });
+                
                 if(state.courses[id].remains === state.courses[id].data.repeatability)
                     delete state.courses[id];
             }
@@ -82,7 +88,7 @@ export const storeSlice = createSlice ({
                 if(sourceId.length === 3) {
                     state.sections[sourceId].splice(action.payload.sourceIndex, 1); 
                 }
-
+                
                 state.sections[destinationId].splice(action.payload.destinationIndex, 0, courseId); 
             }
         },
@@ -125,6 +131,7 @@ export const storeSlice = createSlice ({
             })
             state.courses = {};
             state.totalUnits = 0;
+            state.takenGeCourses = {};
         }, 
 
         resetStatus: (state) => {
@@ -153,6 +160,13 @@ export const storeSlice = createSlice ({
                         state.depts.byIds[course.department] = DEPT_COLORS[index]
                         state.depts.size += 1;
                     }
+
+                    course["courses_in_ge.ge_list"].forEach((ge: string) => {
+                        if (!state.takenGeCourses.hasOwnProperty(ge)) {
+                            state.takenGeCourses[ge] = [] as string[];
+                        }
+                        state.takenGeCourses[ge].push(course.course_id)
+                    });
                 })
 
                 let new_len = action.payload.years.length;
@@ -210,7 +224,14 @@ export const storeSlice = createSlice ({
                         remains: course.repeatability,
                     }
                 }
-                
+
+                course["courses_in_ge.ge_list"].forEach((ge: string) => {
+                    if (!state.takenGeCourses.hasOwnProperty(ge)) {
+                        state.takenGeCourses[ge] = [] as string[];
+                    }
+                    state.takenGeCourses[ge].push(course.course_id)
+                });
+
                 state.courses[course.course_id].remains -= 1;
                 state.totalUnits += course.units;
             }
