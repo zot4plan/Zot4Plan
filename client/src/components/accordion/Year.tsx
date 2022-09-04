@@ -1,4 +1,4 @@
-import {memo} from "react";
+import { memo } from "react";
 import { shallowEqual, useSelector } from 'react-redux';
 import { RootState } from "../../store/store";
 import Quarter from './Quarter';

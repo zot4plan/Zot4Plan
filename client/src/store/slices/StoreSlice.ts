@@ -66,7 +66,7 @@ export const storeSlice = createSlice ({
 
             if(state.courses[id] !== undefined) {
                 state.courses[id].remains += 1; 
-                state.totalUnits -= state.courses[id].data.units;
+                state.totalUnits -= state.courses[id].data.units[1];
                 state.courses[id].data["courses_in_ge.ge_list"].forEach(geId =>
                     {
                         let geCourses = current(state.takenGeCourses[geId]);
@@ -111,7 +111,7 @@ export const storeSlice = createSlice ({
             state.years.byIds[action.payload.id].forEach((id) => {
                 state.sections[id].forEach((courseId) => {
                     state.courses[courseId].remains += 1;
-                    state.totalUnits -= state.courses[courseId].data.units;
+                    state.totalUnits -= state.courses[courseId].data.units[1];
 
                     if(state.courses[courseId].remains === state.courses[courseId].data.repeatability)
                         delete state.courses[courseId];  
@@ -179,8 +179,8 @@ export const storeSlice = createSlice ({
                         let quarterIds = []
                 
                         for(let j = 0; j < 4; j++) {
-                        quarterIds.push(nanoid(ID_LENGTH));
-                        state.sections[quarterIds[j]] = [] as string[];
+                            quarterIds.push(nanoid(ID_LENGTH));
+                            state.sections[quarterIds[j]] = [] as string[];
                         }
                         state.years.allIds.push(yearId);
                         state.years.byIds[yearId] = quarterIds;
@@ -204,7 +204,7 @@ export const storeSlice = createSlice ({
                     year.forEach((quarter, j) => {
                         quarter.forEach(course => {
                             state.courses[course].remains -= 1;
-                            state.totalUnits += state.courses[course].data.units;
+                            state.totalUnits += state.courses[course].data.units[1];
                         })
                         
                         let quarterId = state.years.byIds[yearId][j];
@@ -214,7 +214,7 @@ export const storeSlice = createSlice ({
             }
         });
 
-        builder.addCase(fetchCourse.fulfilled, (state, action)=> {
+        builder.addCase(fetchCourse.fulfilled, (state, action) => {
             let course = action.payload.course;
 
             if(action.payload.status === "succeeded"){
@@ -233,11 +233,11 @@ export const storeSlice = createSlice ({
                 });
 
                 state.courses[course.course_id].remains -= 1;
-                state.totalUnits += course.units;
+                state.totalUnits += course.units[1];
             }
         });
 
-        builder.addCase(addCourse, (state, action)=> {
+        builder.addCase(addCourse, (state, action) => {
             let dept = removeLastWord(action.payload);
             if(state.depts.byIds[dept] === undefined) { 
                 let index = state.depts.size % DEPT_COLORS.length;
@@ -246,7 +246,7 @@ export const storeSlice = createSlice ({
             }
         });
 
-        builder.addMatcher(isAnyOf(fetchProgram.fulfilled, fetchGE.fulfilled ), (state, action)=> {
+        builder.addMatcher(isAnyOf(fetchProgram.fulfilled, fetchGE.fulfilled ), (state, action) => {
             action.payload.departments.forEach((dept) => {
                 if(state.depts.byIds[dept] === undefined) { 
                     let index = state.depts.size % DEPT_COLORS.length;

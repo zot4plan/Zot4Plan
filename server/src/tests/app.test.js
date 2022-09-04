@@ -37,13 +37,13 @@ describe('Get Endpoints', () => {
             });
         }); 
     
-        test('?id=COM should return 188 courses contain COM', done => {
+        test('?id=COM should return 188 courses contain COM but limit to 100', done => {
             request
             .get('/api/filterCourses?id=COM')
             .expect('Content-Type', /json/)
             .expect(200)
             .then(response => {
-                expect(response.body.length).toBe(188);
+                expect(response.body.length).toBe(100);
                 done();
             });
         }); 
@@ -82,13 +82,13 @@ describe('Get Endpoints', () => {
                 "overlaps_with": null, 
                 "pre_or_core": null, 
                 "prerequisite": null, 
-                "prerequisite_for": "MATH 1B, POL SCI 130A", 
+                "prerequisite_for": ["MATH 1B", "POL SCI 130A"], 
                 "prerequisite_tree": null, 
                 "repeatability": 1, 
                 "restriction": null, 
                 "same_as": null, 
                 "terms": "Fall: 2019, 2020, 2021, 2022.Summer1: 2019, 2020, 2021, 2022.Summer10wk: 2019, 2020, 2021, 2022.", 
-                "units": 4, 
+                "units": [4, 4], 
                 "units_text": "4 Workload Units"
             };
             request.get('/api/getCourse?id=MATH+1A')
@@ -143,7 +143,7 @@ describe('Post Endpoints', () => {
             .expect(200)
             .then(response => {
                 expect(response.body.name).toBe("Aerospace Engineering, B.S.");
-                expect(response.body.departments).toStrictEqual(["CHEM","EECS","MATH","PHYSICS","ENGRMAE","ECON", "ENGR"]);
+                expect(response.body.departments.length).toBe(7);
                 done();
             })
         });

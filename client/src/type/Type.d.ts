@@ -29,7 +29,7 @@ declare interface CourseType {
     ge:string;
     terms:string;
     units_text:string;
-    units: number;
+    units: number[];
     repeatability: number;
     'courses_in_ge.ge_list': string[];
     [id: string]: string | number;

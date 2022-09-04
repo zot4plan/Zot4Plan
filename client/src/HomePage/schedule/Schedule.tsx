@@ -18,7 +18,6 @@ function Schedule() {
     return (
         <div id="left-side">
             <ButtonsList printContent={printContent}/>
-
             <div id="schedule" ref={printRef}>
                 <PrintPrograms/>
 
@@ -31,7 +30,11 @@ function Schedule() {
                 )}
 
                 <div style={{position: 'relative'}}>
-                    <img id='chalkboard' src={Chalkboard} alt="Chalkboard that displays unit count" />
+                    <img 
+                        id='chalkboard' 
+                        src={Chalkboard} 
+                        alt="Chalkboard that displays unit count" 
+                    />
                     <div className='unit-text'> 
                         <p> Total Units:</p>
                         <TotalUnits/> 

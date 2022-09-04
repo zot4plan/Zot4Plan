@@ -1,4 +1,4 @@
-import {memo} from 'react'
+import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from "../../store/store";
 import ReactTooltip from "react-tooltip";
@@ -11,7 +11,8 @@ interface BadgeProps {
 const Badge = ({geId}:BadgeProps) => {
     const takenGeCourses = useSelector((state: RootState) => state.store.takenGeCourses[geId]);
     const numberOfCourses = takenGeCourses !== undefined ? takenGeCourses.length : 0;
-    console.log(takenGeCourses)
+    let tooltipContent; 
+
     return (
         <span className="badge" data-tip data-for={'badgeTip_'+geId}>
             {numberOfCourses}
@@ -29,8 +30,7 @@ const Badge = ({geId}:BadgeProps) => {
                 </ul>
             </ReactTooltip>
         </span>
-
     )
- }
+}
 
  export default memo(Badge);

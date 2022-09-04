@@ -17,6 +17,9 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+//Parse DECIMAL FROM STRING to FLOAT
+Sequelize.postgres.DECIMAL.parse = function (value) { return parseFloat(value); };
+
 db.courses = require("./courses.model.js")(sequelize, Sequelize);
 db.programs = require("./programs.model.js")(sequelize,Sequelize);
 db.general_education = require("./general_education.model.js")(sequelize,Sequelize);
