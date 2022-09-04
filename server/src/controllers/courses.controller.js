@@ -18,10 +18,10 @@ exports.searchCourses = (req, res) => {
         else { 
             id.split(" ").forEach((token, index) => { 
                 if (token.trim().length > 0) {
-                    pattern += (index > 0 ? " & +" : "+") + token + ":*";
+                    pattern += (index > 0 ? " & " : "+") + token;
                 }
             });
-            
+            pattern += ":*"
             condition = "textsearchable_index_col @@ to_tsquery(:pattern)";
         }
 
@@ -31,7 +31,9 @@ exports.searchCourses = (req, res) => {
             replacements: 
             {
                 pattern: pattern,
-            }
+            },
+            order: [["course_id", "ASC"]],
+            limit: 100,
         })
         .then(data => { res.send(data); })
         .catch(() => {

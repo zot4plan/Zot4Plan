@@ -9,13 +9,15 @@ interface CourseCardProps {
 }
 
 const checkLength = (text:string|number, isTerm = false) => {
-    if(typeof(text) === 'number') return text;
+    if(typeof(text) === 'number') 
+        return text;
     
     if(isTerm) {
         let terms = text.split('.');
         terms.pop();
 
-        if(terms.length > 2) return <ReadMore text={terms}/>
+        if(terms.length > 2) 
+            return <ReadMore text={terms}/>
         
         let content:JSX.Element[] = [];
         terms.forEach((term, index) => {
@@ -28,8 +30,26 @@ const checkLength = (text:string|number, isTerm = false) => {
     return (text.length > 100)? <ReadMore text={text}/> : text;
 }
 
-const fields = ['corequisite', 'prerequisite', 'pre_or_core', 'restriction', 'same_as', 'overlaps_with', 'concurrent_with', 'ge' ];
-const labels = ['Corequisite: ', 'Prerequisite: ', 'Prerequisite or corequisite:', 'Restriction: ', 'Same as ', 'Overlaps with ', 'Concurrent with ', 'GE: '];
+const fields = [
+    'corequisite', 
+    'prerequisite', 
+    'pre_or_core', 
+    'restriction', 
+    'same_as', 
+    'overlaps_with', 
+    'concurrent_with', 
+    'ge' 
+];
+const labels = [
+    'Corequisite: ', 
+    'Prerequisite: ', 
+    'Prerequisite or corequisite:', 
+    'Restriction: ', 
+    'Same as ', 
+    'Overlaps with ', 
+    'Concurrent with ', 
+    'GE: '
+];
 
 function CourseCard({id, course, colors}: CourseCardProps) {
     let header =[];

@@ -6,27 +6,28 @@
     border-radius: 50%;
     margin-left: 5px;
     font-size: 12px;
-  }
+}
 
 .badgeTooltip{
     background-color: #495057 !important;
     border-color:#495057 !important;
-    border-radius: 16px;
+    border-radius: 16px !important;
+    padding: 10px 5px !important;
 }
 
 .badgeTooltip > h1 {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 180px;
 }
 
 .column {
-    float: left;
-    width: 50%;
-    }
-
-.row {
-    content: "";
-    display: table;
-    clear: both;
-    width: 200px;
-    gap: 10px;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
 }

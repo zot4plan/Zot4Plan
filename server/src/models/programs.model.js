@@ -6,7 +6,7 @@ module.exports = (sequelize, DataType) => {
             autoIncrement: true
         },
         name: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
             allowNull:false,
         },
         is_major: {
@@ -18,11 +18,11 @@ module.exports = (sequelize, DataType) => {
             allowNull:false,
         },
         departments: {
-            type: DataType.ARRAY(DataType.STRING),
+            type: DataType.ARRAY(DataType.TEXT),
             allowNull:false,
         },
         url: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
             allowNull:false,
         }
     }, {

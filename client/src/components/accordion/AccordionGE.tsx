@@ -1,7 +1,6 @@
-import {memo, useEffect, useState, MouseEvent} from 'react'
+import {memo, useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../store/store";
-import ReactTooltip from "react-tooltip";
 import { fetchGE } from '../../api/FetchData';
 import Right from '../icon/ArrowRightSmall';
 import Detail from './Detail';
@@ -10,6 +9,11 @@ import Badge from '../badge/badge';
 
 interface SectionProps {
     id: string;
+}
+
+interface Section {
+    sectionId: string;
+    nameChild: string;
 }
 
 const AccordionGE = ({id}:SectionProps) => {
@@ -21,23 +25,27 @@ const AccordionGE = ({id}:SectionProps) => {
     useEffect(() => {  
         if(isOpen && status === 'idle') 
           dispatch(fetchGE(id));
-      },[isOpen, status, dispatch, id]); 
+    },[isOpen, status, dispatch, id]); 
     
-    let detail;
-
-    if(status === 'loading')
-        detail = <div> Loading...!!! </div>
-
-    else if ( status === 'succeeded')  
-        detail = ge.sectionIds.map(( section:{sectionId: string, nameChild: string}) => 
-                    <Detail key={section.sectionId} 
-                        sectionId={section.sectionId} 
-                        text={section.nameChild}
-                        isGE={true}
-                    />)
-    else
-        detail = <div> Cannot connect to server...!!! </div>
-
+    let detailBody;
+    if (status === 'loading') {
+        detailBody = <div> Loading...!!! </div>
+    }
+    else if (status === 'succeeded') {
+        detailBody = ge.sectionIds.map (
+            (section: Section) => 
+                <Detail 
+                    key={section.sectionId} 
+                    sectionId={section.sectionId} 
+                    text={section.nameChild}
+                    isGE={true}
+                />
+            )
+    }
+    else {
+        detailBody = <div> Cannot connect to server...!!! </div>
+    }
+    
     return (
         <details key={id} 
             className='section' 
@@ -55,8 +63,10 @@ const AccordionGE = ({id}:SectionProps) => {
             </summary>
 
             <div className='section-body'>
-                <p style={{marginBottom: '1rem', textAlign: 'center', fontSize: '1.7rem'}}> <b>{ge.nameChild}</b> </p>
-                {isOpen && detail}
+                <p style={{marginBottom: '1rem', textAlign: 'center', fontSize: '1.7rem'}}> 
+                    <b>{ge.nameChild}</b> 
+                </p>
+                {isOpen && detailBody}
             </div>
         </details>
     )

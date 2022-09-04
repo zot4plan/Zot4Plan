@@ -1,5 +1,3 @@
-const { Sequelize } = require("sequelize");
-
 module.exports = (sequelize, DataType) => {
     const Courses = sequelize.define("courses", {
         course_id: {
@@ -8,31 +6,31 @@ module.exports = (sequelize, DataType) => {
             primaryKey: true
         },  
         name: {
-            type: DataType.STRING,
-            allowNull:false,
+            type: DataType.TEXT,
+            allowNull:true,
         },
         department: {
-            type: DataType.STRING,
-            allowNull: false,
+            type: DataType.TEXT,
+            allowNull: true,
         },
         units: {
-            type: DataType.INTEGER,
+            type: DataType.ARRAY(DataType.DECIMAL),
             allowNull:true,
         },
         units_text: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
             allowNull:true,
         },
         corequisite: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
             allowNull:true,
         },
         description: {
-            type: DataType.STRING,
-            allowNull:false,
+            type: DataType.TEXT,
+            allowNull:true,
         },
         prerequisite: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
             allowNull:true,
         },
         prerequisite_tree: {
@@ -40,44 +38,44 @@ module.exports = (sequelize, DataType) => {
             allowNull:true,
         },
         prerequisite_for: {
-            type: DataType.STRING,
+            type: DataType.ARRAY(DataType.TEXT),
             allowNull:true,
         },
         restriction: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
             allowNull:true,
         },
         repeatability: {
             type: DataType.INTEGER,
-            allowNull:false,
+            allowNull:true,
         },
         pre_or_core: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
             allowNull:true,
         },
         same_as: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
             allowNull:true,
         },
         overlaps_with: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
             allowNull:true,
         },
         concurrent_with: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
             allowNull:true,
         },
         ge: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
             allowNull:true,
         },
         terms: {
-            type: DataType.STRING,
-            allowNull:false,
+            type: DataType.TEXT,
+            allowNull:true,
         }
     }, {
         timestamps: false
     });
   
     return Courses;
-  };
+};
