@@ -1,6 +1,6 @@
 import {memo} from 'react';
 import { useSelector } from 'react-redux';
-import { RootState} from '../../app/store';
+import {RootState} from '../../store/store';
 import './CourseCard.css';
 import CourseCard from './CourseCard';
 
@@ -15,12 +15,13 @@ function removeLastWord(str: string) {
 
 function QuarterCourseCard({id}: CourseCardProps) {
     const course = useSelector((state:RootState) => {
-        if(id) {
-            const course = state.store.courses[id];
-            return course === undefined? null : course.data;
+        let result = null;
+        
+        if(id && state.store.courses[id] !== undefined) {
+            result = state.store.courses[id].data;
         }
         
-        return null;
+        return result;
     })
 
     const colors = useSelector((state:RootState) => 

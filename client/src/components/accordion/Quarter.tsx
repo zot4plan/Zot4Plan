@@ -1,8 +1,8 @@
 import QuarterCourse from '../course/QuarterCourse';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../app/store';
-import {Droppable} from 'react-beautiful-dnd';
-import {memo, useCallback} from 'react'
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { Droppable } from 'react-beautiful-dnd';
+import { memo, useCallback } from 'react'
 
 interface QuarterProps { 
     sectionId: string;
@@ -11,7 +11,6 @@ interface QuarterProps {
 
 function Quarter({sectionId, name}:QuarterProps) {
     const courses = useSelector((state:RootState) => state.store.sections[sectionId]);
-
     const renderCard = useCallback (
         (id: string, sectionId: string, index: number) => (
             <QuarterCourse 
@@ -20,7 +19,7 @@ function Quarter({sectionId, name}:QuarterProps) {
                 sectionId={sectionId}
                 courseId = {id}
             />
-        ),[],)
+        ),[],);
 
     return (
         <Droppable droppableId={sectionId}>

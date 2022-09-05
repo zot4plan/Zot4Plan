@@ -54,7 +54,7 @@ def get_websites():
                 all_href.append([each.text, website])
                 major_urls[name] = website
 
-    # write_url(major_urls)
+    write_url(major_urls)
     return all_href
 
 
@@ -82,21 +82,12 @@ def expand_series(courses):
     :param courses: a string of characters that contains a series of courses
     :return: a list of courses in the provided string
     """
+
     items = courses.split('- ')
     name = get_name(items[0])
     for x in range(1, len(items)):
         items[x] = name + ' ' + items[x]
-    return ['-'] + items
-
-
-def expand_same_as(courses):
-    """
-    expand_same_as takes in a string of characters that have multplie courses displayed
-    together, connected by '/'. The function returns all courses in list
-    """
-    items = courses.split('/')
-    return ['/'] + items
-
+    return items
 
 
 def scrape_programs(url):
@@ -107,9 +98,9 @@ def scrape_programs(url):
 
     soup = request_websites(url)
     table = soup.find('div', id='requirementstextcontainer')
+    main = table.find_all("tr")
     requirements = []
     try:
-        main = table.find_all("tr")
         for elem in main:
             ## Checks if elem is a course (clickable)
             course = elem.find("td", class_="codecol")
@@ -126,17 +117,11 @@ def scrape_programs(url):
                         requirements[-1].child[-1].child[-1].append(name[3:])
                     else:
                         prev = requirements[-1].child[-1].child[-1]
-                        requirements[-1].child[-1].child[-1] = ['or', prev, name[3:]]
+                        requirements[-1].child[-1].child[-1] = [prev, name[3:]]
                 elif '-' in name:
                     courses = expand_series(name)
-                    requirements[-1].child[-1].child.append(courses)
-                elif '/' in name:
-                    check_course = name.split(' ')[0]
-                    if check_course not in ['CHC/LAT', 'CRM/LAW']:
-                        courses = expand_same_as(name)
-                        requirements[-1].child[-1].child.append(courses)
-                    else:
-                        requirements[-1].child[-1].child.append(name)
+                    for elem in courses:
+                        requirements[-1].child[-1].child.append(elem)
                 else:
                     requirements[-1].child[-1].child.append(name)
                 continue
@@ -193,8 +178,8 @@ def write_to_json(name, info):
 if __name__ == "__main__":
     
     all_program_reqs = get_websites()
+    print(all_program_reqs)
     for elem in all_program_reqs:
-        print(elem[0])
         program_info = scrape_programs(elem[1])
         if program_info != None:
             write_to_json(elem[0], program_info)

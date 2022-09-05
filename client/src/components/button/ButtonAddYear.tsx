@@ -1,6 +1,6 @@
 import {memo} from 'react';
 import {useDispatch} from 'react-redux';
-import { addYear } from '../../features/StoreSlice';
+import { addYear } from '../../store/slices/StoreSlice';
 
 function ButtonAddYear() {
     const dispatch = useDispatch();

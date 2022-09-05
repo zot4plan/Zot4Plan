@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import {RootState} from '../../app/store';
+import {RootState} from '../../store/store';
 
 function TotalUnits() {
     const units = useSelector((state:RootState)=> state.store.totalUnits);

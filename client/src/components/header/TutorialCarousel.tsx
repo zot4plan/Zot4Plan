@@ -1,15 +1,20 @@
 import { useState, MouseEvent } from 'react';
-import LeftArrow from '../icon/ArrowLeft';
-import RightArrow from '../icon/ArrowRight';
+import ChervonLeft from '../icon/ChervonLeft';
+import ChervonRight from '../icon/ChervonRight';
 import XCircle from '../icon/XCircle';
-import './TutorialCarousel.css';
+import pickMajor from '../../assets/gifs/pickMajor.gif';
+import addCourse from '../../assets/gifs/addCourse.gif';
+import showMoreInfo from '../../assets/gifs/showMoreInfo.gif';
+import dragDropCourses from '../../assets/gifs/dragDropCourses.gif';
 
 interface TutorialCarouselProps{
     handleClick: (e: MouseEvent<HTMLButtonElement>) => void ;
 }
 
+const images = [pickMajor, addCourse, showMoreInfo, dragDropCourses];
+const titles = ['Pick a Major', 'Add Courses', 'More Information', 'Drag and Drop Courses']
+
 function TutorialCarousel ({ handleClick }: TutorialCarouselProps) {
-    const images = [require('../../assets/images/HowTo1.jpg'), require('../../assets/images/HowTo2.jpg')];
     const [index, setIndex] = useState(1);
 
     function handleLeftClick( e: MouseEvent<HTMLButtonElement>) {
@@ -25,33 +30,38 @@ function TutorialCarousel ({ handleClick }: TutorialCarouselProps) {
     }
       
     return (
-    <div id='tutorial' className="flex-container">
+    <>
         <button className='arrow' onClick={handleLeftClick}>
-            <LeftArrow/>
+            <ChervonLeft/>
         </button>
+        <div>
+            <h1
+                className='gif-title'
+            >{titles[index-1]}</h1>
 
-        <div className="flex-container" style={{position: 'relative'}}>
-            <button 
-                style={{position: 'absolute'}}
-                className= 'btn-outlined' 
-                id='close-tutorial-btn' 
-                onClick={handleClick}
-            >
-                <XCircle/>
-            </button>
-            
-            <img
-                className='tutorial-img'
-                src={images[index - 1]} 
-                loading='lazy' 
-                alt='Website Tutorial Page 1'
-            />
+            <div className="flex-container" style={{position: 'relative'}}>
+                <button 
+                    style={{position: 'absolute'}}
+                    className= 'btn-outlined' 
+                    id='close-tutorial-btn' 
+                    onClick={handleClick}
+                >
+                    <XCircle/>
+                </button>
+                
+                <img
+                    className={'tutorial-img'}
+                    src={images[index - 1]} 
+                    loading='lazy' 
+                    alt='Website Tutorial Page 1'
+                />
+            </div>
         </div>
 
         <button className='arrow' onClick={handleRightClick}>
-            <RightArrow/>
+            <ChervonRight/>
         </button>
-    </div>
+    </>
     )
 }
 

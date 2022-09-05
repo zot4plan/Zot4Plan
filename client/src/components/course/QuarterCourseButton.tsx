@@ -1,6 +1,6 @@
 import {memo, MouseEvent, useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { RootState } from '../../app/store';
+import { RootState } from '../../store/store';
 import { fetchCourse } from '../../api/FetchData';
 //import ReactTooltip from "react-tooltip";
 import PopperUnstyled from '@mui/base/PopperUnstyled';
@@ -86,10 +86,9 @@ function QuarterCourseButton({courseId, sectionId}: CourseButtonProps) {
     );
 
    /* const prereqsFulfilled = useSelector((state: RootState) => {
-        if(!course) return true;
-            
+        if(!course) 
+            return true;    
         let prereqs = course['prerequisite_tree'].replace(/'/g, '"'); // Replacing with double quotes to use JSON.parse
-
         return prereqs === ''? true : checkPrereqs(JSON.parse(prereqs), getPastCourses(state, sectionId));
     }); 
     */
@@ -124,7 +123,7 @@ function QuarterCourseButton({courseId, sectionId}: CourseButtonProps) {
     }
     else */
     if (units)
-        content = <p key='unit' className='unit'> {units + ' units'} </p>
+        content = <p key='unit' className='unit'> {units[1] + ' units'} </p>
 
     return ( 
         <>

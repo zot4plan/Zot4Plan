@@ -1,26 +1,32 @@
-import { useState, MouseEvent } from 'react';
+import { useState } from 'react';
+import ModalUnstyled from '@mui/base/ModalUnstyled';
 import TutorialCarousel from './TutorialCarousel';
+import './Tutorial.css';
 
 function Tutorial () {
-    const [showTutorial, setShowTutorial] = useState(false);
-
-    const handleClick = ( e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        setShowTutorial(!showTutorial)
-    }
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
     <>
         <button 
             className='flex-container'
             style={{color:'white', fontSize: '2rem'}} 
-            onClick={handleClick}
+            onClick={handleOpen}
             aria-label="open tutorial"
         >
             Tutorial
         </button>
-
-        {showTutorial && <TutorialCarousel  handleClick={handleClick}/> }
+        <ModalUnstyled
+            aria-describedby="unstyled-modal-description"
+            open={open}
+            onClose={handleClose}
+        >
+            <div id='tutorial' className="flex-container">
+                <TutorialCarousel  handleClick={handleClose}/>
+            </div>
+        </ModalUnstyled>
     </>
     )
 }

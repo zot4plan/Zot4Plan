@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
-import {RootState} from '../../app/store';
+import {RootState} from '../../store/store';
 import ButtonsList from './ButtonsList';
 import Year from '../../components/accordion/Year';
 import TotalUnits from './TotalUnits';
@@ -18,7 +18,6 @@ function Schedule() {
     return (
         <div id="left-side">
             <ButtonsList printContent={printContent}/>
-
             <div id="schedule" ref={printRef}>
                 <PrintPrograms/>
 
@@ -31,7 +30,11 @@ function Schedule() {
                 )}
 
                 <div style={{position: 'relative'}}>
-                    <img id='chalkboard' src={Chalkboard} alt="Chalkboard that displays unit count" />
+                    <img 
+                        id='chalkboard' 
+                        src={Chalkboard} 
+                        alt="Chalkboard that displays unit count" 
+                    />
                     <div className='unit-text'> 
                         <p> Total Units:</p>
                         <TotalUnits/> 

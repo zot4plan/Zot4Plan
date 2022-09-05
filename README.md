@@ -1,4 +1,4 @@
-# **Zot4Plan - UCI Undergraduate Progress Tracker**
+# **Zot4Plan - UCI Undergraduate Schedule Planner**
 
 By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`](https://www.linkedin.com/in/lockhong/)
 
@@ -7,10 +7,9 @@ By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`
 </p>
 
 <div align="center"> 
-
-[Start building your UCI plan here!!!](https://www.zot4plan.com) 🎉
-
+    [Start building your UCI plan here!!!](https://www.zot4plan.com) 🎉
 </div>
+
 
 ## **Description** 📖
 
@@ -19,8 +18,6 @@ Zot4Plan is a schedule planning tool that allows Anteaters to plan out their und
 
 ## **Features** 💻
 
-* Search bar that allows users to either select or search their major of choice. 💖
-
 * A calendar that displays the chosen courses, divided by quarters.
 
     - Users can add an additional academic year by clicking on the "Add Year" button at the top of the calendar.
@@ -28,11 +25,9 @@ Zot4Plan is a schedule planning tool that allows Anteaters to plan out their und
     - The additional year can be removed by clicking on the "-" button next to the year.
 
 * Major/Minor Requirements Tab 🔥
-    - Users can select up to three major and/or minor requirements.
+    - Search bar that allows users to either search or select up to three their major of choice.
     
     - Each dropdown represents a section in the requirement.
-
-    - Drag and drop feature that allows users to place the courses in the desired quarter(s).
 
     - A search engine that users can use to search/include any additional courses.
 
@@ -42,19 +37,9 @@ Zot4Plan is a schedule planning tool that allows Anteaters to plan out their und
 
     - Each GE category dropdown contains courses that can be used to fulfill the requirement.
 
+* Drag and drop feature that allows users to place the courses in the desired quarter(s). 💖
+
 * Card pop-up that exhibits necessary information of that particular course 🍭
-
-    - Course name
-
-    - Course description
-
-    - Unit(s)
-
-    - Prerequisite, Restriction, Corequisite, Repeatability
-
-    - GE fulfillment
-    
-    - Past terms that the course were offered
 
 * Clear button that allows users to remove all of the current courses on their calendar 🌪️
 
@@ -66,10 +51,12 @@ Zot4Plan is a schedule planning tool that allows Anteaters to plan out their und
    
 * Print button allows users to print their schedule as PDF file  🖨️
 
+
 ## **How to Run Program Locally** 🏃
 
-Open 2 terminals: one is for client and the other is for server
 * First set up the database [here](https://github.com/zot4plan/database)
+
+Open 2 terminals: one is for client and the other is for server
 * Then cd to server folder: 
 
 ```sh
@@ -96,9 +83,11 @@ node start
 
     - MUI-Popper
 
+    - React-tooltip
+
     - Axios 
 
-* Back-end: NodeJS 14.17.0
+* Back-end: NodeJS 16.16.0
 
     - Cors
 
@@ -118,6 +107,7 @@ node start
 
 * Database: MySql 8.0.28
 
+
 ## **Performance** 🚀
 
 <p align="center">
@@ -126,17 +116,25 @@ node start
 
 </p>
 
+
 ## **Creators & Maintainers** 😈
 
 - Loc Duc Minh Khong [@lockhong](https://www.linkedin.com/in/lockhong/)
 - Tram Bao La [@tramla](https://www.linkedin.com/in/tram-la-680417200/)
 
+
 ## **Members** 👨‍💻
 
-- Warren Leu [@warrenleu](): Implemented prerequisite/corequisite checking feature
-- Huong Le and Uyen Dinh: Advisors for UI implementation
+- Uyen Thi Phuong Dinh [@uyendinh]()
+- Vianey Mursio [@vianey]()
+- Warren Leu [@warrenleu]()
+- Huong Le: Advisors for UI implementation
+
 
 ## **Art Creators** 🎨
 
 - Leyna Nguyen ♥️
-- https://www.etsy.com/listing/797921174/anteater-stickers
+
+## Source Citation
+
+- Anteater-sticker: https://www.etsy.com/listing/797921174/anteater-stickers

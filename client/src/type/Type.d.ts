@@ -13,7 +13,7 @@ declare interface RequirementType {
 }
 
 declare interface CourseType { 
-    id: string;
+    course_id: string;
     name: string;
     department: string;
     corequisite: string;
@@ -29,8 +29,9 @@ declare interface CourseType {
     ge:string;
     terms:string;
     units_text:string;
-    units: number;
+    units: number[];
     repeatability: number;
+    'courses_in_ge.ge_list': string[];
     [id: string]: string | number;
 }
 
@@ -43,7 +44,7 @@ declare interface YearsType {
 /*********** Payload Type **********/
 /***********************************/
 declare interface GEPayload {
-    id: string; 
+    ge_id: string; 
     name: string; 
     note: string;
 }
@@ -79,7 +80,7 @@ declare interface SwitchProgramPayload {
 
 /************* Slice **************/
 declare interface GEType {
-    id: string; 
+    ge_id: string; 
     sectionIds: { sectionId: string, nameChild: string} [];
     name: string; 
     nameChild: string;
@@ -93,13 +94,14 @@ declare interface AccordionType {
 }
 
 declare interface ProgramType {
-    id: number;
+    program_id: number;
     byIds:{ [id:string]: AccordionType}; 
     allIds: string[];
     name: string;
     url: string;
     isMajor: boolean;
     status: string;
+
 }
 
 declare interface ProgramsSliceType{
@@ -131,5 +133,6 @@ declare interface StoreSliceType {
         byIds: {[id:string]: string[];}, 
         size: number,
     },
+    takenGeCourses: {[id:string]: string[] };
     status: string,
 }

@@ -27,15 +27,20 @@ details[open] .quarter-droppable-area {
     align-items: center;
     cursor: pointer;
 }
-
+.year:hover .remove-year-btn {
+    display: block;
+}
 .accordion:hover {color: var(--accent-color-2)}
 .accordion:hover .remove-year-btn{
     visibility: visible;
     opacity: 1;
 }
 
-.year-header {font-size: 1.8rem;}
-.section-header {font-size: 1.5rem;}
+.section-header {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
 
 .year-header, .section-header {
     flex-grow: 2;
@@ -46,6 +51,8 @@ details[open] .quarter-droppable-area {
     line-height: 0;
     transition: transform var(--transition-time);
 }
+
+.right-icon > svg {font-size: 1.4rem;}
 
 .section-body { 
     padding: 1.6rem 0.8rem;
@@ -93,15 +100,13 @@ details[open] .quarter-droppable-area {
 .or-container > span {
     z-index: 0;
     top: 0.8rem;
-    left: 11rem;
-    font-size: 1.5rem;
+    left: 11.1rem;
+    font-size: 1.4rem;
 } 
 
 @media only screen and (max-width: 599px) { 
     summary { padding: 0.6rem 0.4rem;}
     .section {margin: 2rem 1rem;}
-
-    .right-icon > svg {font-size: 0.9rem;}
 
     .quarters-wrapper {
         grid-template-areas:"hfall" "fall"

@@ -45,55 +45,39 @@ def check_course_exist(course_id):
     
     new_course = Course()
     new_course.course_key, new_course.description = course_id, NO_COURSE_WARNING
-    
+
     f = open("../database/courses.sql", "a")
     f.write('INSERT INTO courses VALUES ("' + course_id + '","' + new_course.name.strip() +  '","' + new_course.department + '","' + 
-            new_course.units_int + '","' + new_course.units_str + '","' + new_course.description + '","' + new_course.prerequisite +  '","' + new_course.prerequisite_tree + '","' +
+            new_course.units + '","' + new_course.description + '","' + new_course.prerequisite +  '","' + new_course.prerequisite_tree + '","' +
             new_course.prerequisite_for + '","' + new_course.restriction + '","' + new_course.repeatability + '","' + 
-            new_course.corequisite + '","' + new_course.pre_or_core + '","' + new_course.same_as + '","' +
-            new_course.overlaps_with + '","' + new_course.concurrent_with + '","' + new_course.ge_string + '","' + new_course.past_terms + '");' + '\n')
-    f.close()
+            new_course.corequisite + '","' + new_course.ge_string + '","' + new_course.past_terms + '");' + '\n')
 
     all_courses.append(course_id)
     with open('../other/courseIDs.json', "w") as course_file:
         json.dump(all_courses, course_file, indent=4)
+    f.close()
 
 
-def write_required_depts(info, index):
+def write_required_courses(info, index):
     """
-    write_required_depts write the ID of courses that students 
+    write_required_courses write the ID of courses that students 
     have to take for the program requirements.
     """
 
-    out_file = open("../database/depts_in_programs.sql", "a")
-    all_depts = set()
+    out_file = open("../database/courses_in_programs.sql", "a")
     for header in info:
         for section in header['child']:
             for course in section['child']:    
                 if type(course) == str:
                     check_course_exist(course)
-                    all_depts.add(get_dept(course))
+                    out_file.write("INSERT INTO courses_in_programs (course_id, program_id) VALUES (" +
+                                    "'" + course + "', " + "'" + str(index) + "');" + "\n")
                 else:
                     for elem in course:
                         check_course_exist(elem)
-                        all_depts.add(get_dept(elem))
-    
-    for elem in all_depts:
-        out_file.write("INSERT INTO depths_in_programs (dept_id, program_id) VALUES (" +
-                        "'" + elem + "', " + "'" + str(index) + "');" + "\n")
+                        out_file.write("INSERT INTO courses_in_programs (course_id, program_id) VALUES (" +
+                                    "'" + elem + "', " + "'" + str(index) + "');" + "\n")
     out_file.close
-
-
-def get_dept(course):
-    """
-    get_dept takes in course id as a parameter and extract the course id number and
-    return the department name
-    """
-    for x in range(len(course)-1, -1, -1):
-        if course[x] != ' ':
-            continue 
-        else:
-            return course[:x]
 
 
 def write_requirements(file_names, out_file):
@@ -117,7 +101,7 @@ def write_requirements(file_names, out_file):
             write_majors.write("INSERT INTO programs (name, is_major, requirement, url) VALUES (" + 
                                 "'" + name + "', " + "'" + str(is_major) + "', " + "'" + requirement + "', '" + 
                                 all_urls[name.replace('-', '/')] + '#requirementstext' + "');" + "\n")
-            write_required_depts(all_info, index)
+            write_required_courses(all_info, index)
 
     open_urls.close()
     write_majors.close()

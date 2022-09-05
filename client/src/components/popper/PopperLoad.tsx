@@ -1,8 +1,8 @@
 import { useState, ChangeEvent, MouseEvent} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedule } from '../../api/FetchData';
-import { RootState } from '../../app/store';
-import { resetStatus } from '../../features/StoreSlice';
+import { RootState } from '../../store/store';
+import { resetStatus } from '../../store/slices/StoreSlice';
 import Confetti from 'react-confetti';
 import Message from '../message/Message';
 import './PopperSaveLoad.css';

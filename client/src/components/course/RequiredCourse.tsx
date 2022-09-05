@@ -1,7 +1,7 @@
 import {memo, MouseEvent} from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
-import {RootState} from '../../app/store';
+import {RootState} from '../../store/store';
 import RequiredCourseButton from './RequiredCourseButton';
 import ButtonRemoveCourse from '../button/ButtonRemoveCourse';
 import './Course.css';

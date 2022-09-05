@@ -1,7 +1,7 @@
-import {Droppable} from 'react-beautiful-dnd';
-import {memo, MouseEvent, useState} from 'react';
+import { Droppable } from 'react-beautiful-dnd';
+import { memo, MouseEvent, useState } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
+import { RootState } from '../../store/store';
 import RequiredCourse from '../course/RequiredCourse';
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import RequiredCourseCard from '../course/RequiredCourseCard';
@@ -130,27 +130,31 @@ function PopperList({sectionId, isGE}: PopperListProps) {
 } 
 
 function Detail ({sectionId, text, isGE = false}:AccordionDetailProps) {
-    const haveCourses = useSelector((state:RootState) => 
+    const detailCourses = useSelector((state:RootState) => 
         isGE? state.ge.sections[sectionId].length > 0 : state.programs.sections[sectionId].length > 0
     )
 
-    let p;
+    let detailDescription;
     if(text !== "") {
-        let sub = text.substring(0,3);
-        let content = (sub === "(b)" || sub === "(r)")? text.substring(3) : text;
-        p = <p key={sectionId +'p'}  
-               style={{
-                marginBottom: haveCourses? '0.5rem' : '1rem',
-                fontWeight: sub === "(b)"? 'bold' : 'normal',
-                color: sub === "(r)"? '#DA1E37':'black' ,
-            }}> 
-                {content}
+        let textTag = text.substring(0,3);
+        text = (textTag === '(b)'|| textTag === '(r)') 
+                ? text.substring(3) 
+                : text;
+        detailDescription = 
+            <p  key={sectionId +'p'}  
+                style={{
+                    marginBottom: detailCourses ? '0.5rem' : '1rem',
+                    fontWeight: textTag === '(b)' ? 'bold' : 'normal',
+                    color: textTag === '(r)' ? '#DA1E37' : 'black' ,
+                }}
+            > 
+                {text}
             </p>
     }
 
     return (
         <div>
-            {p}
+            {detailDescription}
             <Droppable 
                 droppableId={sectionId}
                 isDropDisabled={true}
@@ -159,13 +163,13 @@ function Detail ({sectionId, text, isGE = false}:AccordionDetailProps) {
                     <div ref={provided.innerRef}
                         {...provided.droppableProps}
                         className="accordion-detail"
-                        style={{marginBottom: haveCourses? '1.5rem' : '0rem'}}
+                        style={{marginBottom: detailCourses? '1.5rem' : '0rem'}}
                     >
                         <PopperList sectionId={sectionId} isGE={isGE} />
 
                         <div style={{display:'none'}}> {provided.placeholder} </div>
                     </div>
-            )} 
+                )} 
             </Droppable>
         </div>
     )
