@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { useSelector } from 'react-redux';
 import { RootState } from "../../store/store";
 import Detail from './Detail';
-import Right from '../icon/ArrowRightSmall';
+import ChervonRight from '../icon/ChervonRight';
 import './Accordion.css';
 
 interface SectionProps {
@@ -38,11 +38,17 @@ const Accordion = ({id, programId = -1}:SectionProps) => {
         <details key={id} className='section'>  
             <summary> 
                 <span className='relative accordion'>
-                    <h1 className="section-header"> {name} </h1>
-                    <div className="right-icon"> <Right /> </div>
+                    <h1 className="section-header"> 
+                        {name} 
+                    </h1>
+                    <div className="right-icon"> 
+                        <ChervonRight/> 
+                    </div>
                 </span>
             </summary>
-            <div className='section-body'> {detail} </div>
+            <div className='section-body'> 
+                {detail} 
+            </div>
         </details>
      )
  }

@@ -144,6 +144,7 @@ export const storeSlice = createSlice ({
         builder.addCase(fetchSchedule.fulfilled, (state, action) => { 
             state.status = action.payload.status;
             state.courses = {}; 
+            state.takenGeCourses = {};
             state.totalUnits = 0;
 
             if(action.payload.status === "succeeded") {

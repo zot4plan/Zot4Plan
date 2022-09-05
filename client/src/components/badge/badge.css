@@ -19,11 +19,14 @@
     margin-bottom: 8px;
 }
 
+.badgeTooltip > p {
+    font-size: 1.4rem;
+    margin: 0 0.5rem;
+}
+
 .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 180px;
 }
 

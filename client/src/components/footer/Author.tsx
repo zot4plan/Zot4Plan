@@ -1,16 +1,19 @@
-import {memo} from 'react';
+import { memo } from 'react';
 import Github from '../icon/Github';
 import Linkedin from '../icon/Linkedin';
 import Gmail from '../icon/Gmail';
-import Instagram from '../icon/Instagram'
+import Instagram from '../icon/Instagram';
+import Facebook from '../icon/Facebook';
 
 interface AuthorProps {
     author: {
         name: string;
-        linkedin: string;
-        github: string;
-        email: string;
-        instagram: string;
+        role: string;
+        linkedin?: string;
+        github?: string;
+        email?: string;
+        instagram?: string;
+        facebook?: string;
     }
 }
 
@@ -26,8 +29,9 @@ const Author = ({author}: AuthorProps) => {
                 {author.name}
             </a>
             
-            <ul className="list">
-                <li className="item" style={{marginRight: "0.5rem"}}>
+            <ul className="list author-icon">
+                {author.linkedin !== undefined &&
+                <li className="item">
                     <a target="_blank" 
                         href={author.linkedin}
                         rel="noreferrer"
@@ -35,9 +39,10 @@ const Author = ({author}: AuthorProps) => {
                     >
                         <Linkedin/>
                     </a>
-                </li>
+                </li>}
 
-                <li className="item" style={{marginLeft: "0.5rem",marginRight: "0.5rem"}}>
+                {author.github !== undefined &&
+                <li className="item">
                     <a target="_blank" 
                         href={author.github}
                         rel="noreferrer"
@@ -45,29 +50,40 @@ const Author = ({author}: AuthorProps) => {
                     >
                         <Github/>
                     </a>
-                </li>
+                </li>}
 
-                {author.email !== '' && 
-                    <li className="item" style={{marginLeft:"0.1rem"}}>
-                        <a target="_blank" 
-                            href= {"mailto: " + author.email}
-                            rel="noreferrer"
-                            aria-label="Gmail"
-                        >
-                            <Gmail/>
-                        </a>
-                    </li>}
+                {author.facebook !== undefined && 
+                <li className="item">
+                    <a target="_blank" 
+                        href= {author.facebook}
+                        rel="noreferrer"
+                        aria-label="Facebook"
+                    >
+                        <Facebook />
+                    </a>
+                </li>}  
 
-                {author.instagram !== '' && 
-                    <li className="item" style={{marginLeft:"0.1rem"}}>
-                        <a target="_blank" 
-                            href= {author.instagram}
-                            rel="noreferrer"
-                            aria-label="Instagram"
-                        >
-                            <Instagram/>
-                        </a>
-                    </li>}   
+                {author.instagram !== undefined && 
+                <li className="item">
+                    <a target="_blank" 
+                        href= {author.instagram}
+                        rel="noreferrer"
+                        aria-label="Instagram"
+                    >
+                        <Instagram/>
+                    </a>
+                </li>}  
+
+                {author.email !== undefined && 
+                <li className="item">
+                    <a target="_blank" 
+                        href= {"mailto: " + author.email}
+                        rel="noreferrer"
+                        aria-label="Gmail"
+                    >
+                        <Gmail/>
+                    </a>
+                </li>}
             </ul>
         </li>
     )

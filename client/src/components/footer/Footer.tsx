@@ -1,4 +1,4 @@
-import {memo} from 'react';
+import { memo } from 'react';
 import Author from './Author';
 import Gmail from '../icon/Gmail';
 import Github from '../icon/Github';
@@ -11,27 +11,41 @@ import './Footer.css';
 const Footer = () => {
     const authors = [
         {
-            name: "Loc Duc Minh Khong",
+            name: "Loc Khong",
+            role: "Author",
             linkedin: "https://www.linkedin.com/in/lockhong",
             github: "https://github.com/ldkhong",
             email: "ldkhong@uci.edu",
-            instagram: ""
         },
         {
             name: "Tram La",
+            role: "Author",
             linkedin: "https://www.linkedin.com/in/tram-la-680417200",
             github: "https://github.com/tramla123",
             email: "latb@uci.edu",
-            instagram: ""
+        },
+        {
+            name: "Uyen Dinh",
+            role: "Member",
+            linkedin: "https://www.linkedin.com/in/uyen-dinh-74b97418a",
+            github: "https://github.com/UyenDinh171",
+            email: "uyentd@uci.edu",
+        },
+        {
+            name: "Vianey Mursio",
+            role: "Member",
+            facebook: "https://www.facebook.com/profile.php?id=100071189183519",
+            instagram: "https://instagram.com/viaaneyy.y?igshid=YmMyMTA2M2Y=",
+            email: "vianeyf@uci.edu",
         },
         {
             name: "Warren Leu",
+            role: "Member",
             linkedin: "https://www.linkedin.com/in/warrenleu/",
             github: "https://github.com/SadNoodle2765/",
-            email: "",
             instagram: "https://www.instagram.com/sadnoodle2765/"
         }
-    ]
+    ];
 
     const email = "zot4plan@gmail.com";
     
@@ -55,20 +69,9 @@ const Footer = () => {
                         Disclaimer: All of the information we obtained are from the UCI catalogue. Please make sure to check your schedule with an academic counselor. Thank you - Zot! Zot! Zot! 
                     </p>
                     <p>
-                        (Last Updated On: July 20th, 2022)
+                        (Last Updated On: September 5th, 2022)
                     </p>
                 </div>
-            </div>
-
-            <div id="author">    
-                <h1 className='header' style={{marginBottom: '1.3rem'}}>
-                    Contributors
-                </h1>
-            
-                <ul className='list-container'>    
-                    {authors.map((author) => <Author key={author.name} author={author} />)}
-                </ul>
-            
             </div>
 
             <div id="contact-us">    
@@ -76,7 +79,7 @@ const Footer = () => {
                     Contact Us
                 </h1>
 
-                <ul className='list-container'>
+                <ul className='list-container list-contact-us'>
                     <li className="item contact-us">
                         <a target="_blank" 
                             href="https://github.com/zot4plan/Zot4Plan#readme" 
@@ -156,8 +159,17 @@ const Footer = () => {
                             Report Bug
                         </a>
                     </li>
-
                 </ul>           
+            </div>
+
+            <div id="author">    
+                <h1 className='header' style={{marginBottom: '1.3rem'}}>
+                    Contributors
+                </h1>
+            
+                <ul className='list-container list-author'>    
+                    {authors.map((author) => <Author key={author.name} author={author} />)}
+                </ul>
             </div>
 
             <div id='copyright'>

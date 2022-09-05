@@ -11,7 +11,18 @@ interface BadgeProps {
 const Badge = ({geId}:BadgeProps) => {
     const takenGeCourses = useSelector((state: RootState) => state.store.takenGeCourses[geId]);
     const numberOfCourses = takenGeCourses !== undefined ? takenGeCourses.length : 0;
-    let tooltipContent; 
+    let tooltipContent = numberOfCourses === 0 
+        ? <p>You have not taken any courses in this category.</p>
+        : <>
+            <h1>Taken Courses</h1>
+            <ul className='row'>
+                {takenGeCourses.map(courseId => 
+                    <li key={courseId} className='column'>
+                        {courseId}
+                    </li>
+                )}
+            </ul>
+         </>;
 
     return (
         <span className="badge" data-tip data-for={'badgeTip_'+geId}>
@@ -23,11 +34,7 @@ const Badge = ({geId}:BadgeProps) => {
                 place="top" 
                 effect="solid"
             >
-                <h1>Taken Courses</h1>
-                <ul className='row'>
-                    {takenGeCourses !== undefined 
-                    && takenGeCourses.map(courseId => <li key={courseId} className='column'>{courseId}</li>)}
-                </ul>
+                {tooltipContent}
             </ReactTooltip>
         </span>
     )

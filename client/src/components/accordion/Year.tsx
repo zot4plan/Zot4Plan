@@ -3,7 +3,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { RootState } from "../../store/store";
 import Quarter from './Quarter';
 import ButtonRemoveYear from "../button/ButtonRemoveYear";
-import Right from '../icon/ArrowRightSmall';
+import ChervonRight from '../icon/ChervonRight';
 import './Accordion.css';
 
 interface YearProps {
@@ -23,7 +23,7 @@ function Year({id, name, index}:YearProps) {
                 <span className='relative accordion year'>
                     <h1 className="year-header"> {name} </h1>
                     <div className="right-icon">
-                        <Right />
+                        <ChervonRight/>
                     </div>
                     {index > 3 && <ButtonRemoveYear id={id} index={index}/>}
                 </span>

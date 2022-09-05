@@ -6,7 +6,8 @@ export const fetchCourse = createAsyncThunk("features/fetchCourse", async (id: s
     if(course)
         return {status: "succeeded", course: JSON.parse(course)};
 
-    return Axios.get('/api/getCourse', { params: { id: id } })
+    return Axios
+            .get('/api/getCourse', { params: { id: id } })
             .then(response => {
                 sessionStorage.setItem(id, JSON.stringify(response.data));
                 return {
@@ -23,18 +24,15 @@ export const fetchCourse = createAsyncThunk("features/fetchCourse", async (id: s
 });
 
 export const fetchAllGE = createAsyncThunk("features/fetchAllGE", async () => 
-    Axios.get('/api/getAllGE')
-    .then(response => {
-        console.log(response);
-        return response.data as GEPayload[];
-    })
-    .catch(() => {
-        return [] as GEPayload[];
-    })
+    Axios
+    .get('/api/getAllGE')
+    .then(response => response.data as GEPayload[])
+    .catch(() => [] as GEPayload[])
 );
 
 export const fetchGE = createAsyncThunk("features/fetchGE", async (id: string) => 
-    Axios.post('/api/getCoursesInGE', {id: id}).then(response => {
+    Axios.post('/api/getCoursesInGE', {id: id})
+    .then(response => {
         return {
             status: "succeeded",
             departments: response.data.departments as string[], 
@@ -56,7 +54,7 @@ export const fetchProgram = createAsyncThunk("features/fetchProgram", async (id:
             status: "succeeded",
             id: id,
             requirement: response.data.requirement as RequirementType[],
-            url: response.data.url, // link to the requirement page of major
+            url: response.data.url, 
             departments: response.data.departments as string[],
         };
     })

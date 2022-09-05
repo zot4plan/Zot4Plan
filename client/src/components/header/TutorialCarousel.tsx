@@ -1,20 +1,20 @@
 import { useState, MouseEvent } from 'react';
-import LeftArrow from '../icon/ArrowLeft';
-import RightArrow from '../icon/ArrowRight';
+import ChervonLeft from '../icon/ChervonLeft';
+import ChervonRight from '../icon/ChervonRight';
 import XCircle from '../icon/XCircle';
-import './TutorialCarousel.css';
+import pickMajor from '../../assets/gifs/pickMajor.gif';
+import addCourse from '../../assets/gifs/addCourse.gif';
+import showMoreInfo from '../../assets/gifs/showMoreInfo.gif';
+import dragDropCourses from '../../assets/gifs/dragDropCourses.gif';
 
 interface TutorialCarouselProps{
     handleClick: (e: MouseEvent<HTMLButtonElement>) => void ;
 }
 
+const images = [pickMajor, addCourse, showMoreInfo, dragDropCourses];
+const titles = ['Pick a Major', 'Add Courses', 'More Information', 'Drag and Drop Courses']
+
 function TutorialCarousel ({ handleClick }: TutorialCarouselProps) {
-    const gif1 = require('../../assets/gifs/pickmajor.GIF');
-    const gif2 = require('../../assets/gifs/schedule.GIF');
-    const gif3 = require('../../assets/gifs/moreinfo.GIF');
-    const gif4 = require('../../assets/gifs/tut.gif');
-    const images = [gif1, gif2, gif3, gif4];
-    const titles = ['Pick a Major', 'Add Classes', 'More Information', 'Drag and Drop Around']
     const [index, setIndex] = useState(1);
 
     function handleLeftClick( e: MouseEvent<HTMLButtonElement>) {
@@ -30,9 +30,9 @@ function TutorialCarousel ({ handleClick }: TutorialCarouselProps) {
     }
       
     return (
-    <div id='tutorial' className="flex-container">
+    <>
         <button className='arrow' onClick={handleLeftClick}>
-            <LeftArrow/>
+            <ChervonLeft/>
         </button>
         <div>
             <h1
@@ -59,9 +59,9 @@ function TutorialCarousel ({ handleClick }: TutorialCarouselProps) {
         </div>
 
         <button className='arrow' onClick={handleRightClick}>
-            <RightArrow/>
+            <ChervonRight/>
         </button>
-    </div>
+    </>
     )
 }
 

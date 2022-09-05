@@ -2,7 +2,7 @@ import {memo, useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../store/store";
 import { fetchGE } from '../../api/FetchData';
-import Right from '../icon/ArrowRightSmall';
+import ChervonRight from '../icon/ChervonRight';
 import Detail from './Detail';
 import './Accordion.css';
 import Badge from '../badge/badge';
@@ -58,12 +58,14 @@ const AccordionGE = ({id}:SectionProps) => {
                         {ge.ge_id + '-' + ge.name}
                         <Badge geId={id}/>
                     </h1>
-                    <div className="right-icon"> <Right/> </div>
+                    <div className="right-icon"> 
+                        <ChervonRight/> 
+                    </div>
                 </span>
             </summary>
 
             <div className='section-body'>
-                <p style={{marginBottom: '1rem', textAlign: 'center', fontSize: '1.7rem'}}> 
+                <p style={{marginBottom: '1rem', textAlign: 'center', fontSize: '1.6rem'}}> 
                     <b>{ge.nameChild}</b> 
                 </p>
                 {isOpen && detailBody}
