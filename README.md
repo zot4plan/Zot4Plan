@@ -6,7 +6,12 @@ By: [`Tram La`](https://www.linkedin.com/in/tram-la-680417200/) and [`Loc Khong`
     <img src="https://user-images.githubusercontent.com/70680546/165196022-10b8483c-fb8b-4ca1-96e1-19756dd659c5.PNG" width="720" />
 </p>
 
-[Start building your UCI plan here!](https://www.zot4plan.com) 🎉 
+
+<div align="center">
+
+[Start building your UCI plan here!](https://www.zot4plan.com)
+
+</div>
 
 
 ## **Description** 📖
@@ -93,8 +98,10 @@ node start
 
     - Sequelize
 
-    - Mysql
-
+    - PostgreSQL
+    
+    - Jest
+    
 * Scrape and build data: Python 3.8.5
 
     - BeautifulSoup
@@ -103,7 +110,7 @@ node start
 
     - Json
 
-* Database: MySql 8.0.28
+* Database: PostgreSQL 14.5.0
 
 
 ## **Performance** 🚀
@@ -133,6 +140,6 @@ node start
 
 - Leyna Nguyen ♥️
 
-## Source Citation
+## Image Source Citation
 
 - Anteater-sticker: https://www.etsy.com/listing/797921174/anteater-stickers
