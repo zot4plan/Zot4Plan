@@ -112,6 +112,8 @@ node start
 
 * Database: PostgreSQL 14.5.0
 
+* Hosting services: Amazon EC2 and RDS
+
 
 ## **Performance** 🚀
 
