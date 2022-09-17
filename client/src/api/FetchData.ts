@@ -3,8 +3,9 @@ import Axios from './Axios';
 
 export const fetchCourse = createAsyncThunk("features/fetchCourse", async (id: string) => {
     const course = sessionStorage.getItem(id);
-    if(course)
+    if(course) {
         return {status: "succeeded", course: JSON.parse(course)};
+    }
 
     return Axios
             .get('/api/getCourse', { params: { id: id } })

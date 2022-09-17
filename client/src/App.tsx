@@ -2,8 +2,8 @@ import { useDispatch } from 'react-redux';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { moveCourse} from './store/slices/StoreSlice';
 import Header from './components/header/Header';
-import Schedule from './homePage/schedule/Schedule';
-import Tabs from './homePage/tabs/Tabs';
+import Schedule from './home/schedule/Schedule';
+import Tabs from './home/tabs/Tabs';
 import Footer from './components/footer/Footer';
 import './App.css';
 

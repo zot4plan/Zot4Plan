@@ -8,7 +8,7 @@ interface CourseCardProps {
     colors: string[];
 }
 
-const checkLength = (text:string|number, isTerm = false) => {
+const checkLength = (text:string | number, isTerm = false) => {
     if(typeof(text) === 'number') 
         return text;
     
@@ -33,7 +33,7 @@ const checkLength = (text:string|number, isTerm = false) => {
 const fields = [
     'corequisite', 
     'prerequisite', 
-    'pre_or_core', 
+    'prerequisite_or_corequisite', 
     'restriction', 
     'same_as', 
     'overlaps_with', 
@@ -62,7 +62,7 @@ function CourseCard({id, course, colors}: CourseCardProps) {
         body.push(<p key='description' style={{margin:'0rem'}}>{course.description}</p>);
         
         fields.forEach((field, index) => {
-            if(course[field] !== null)
+            if(course[field])
                 body.push(<p key={field}> <b>{labels[index]}</b>{checkLength(course[field])}</p>);
         })
 
@@ -72,7 +72,7 @@ function CourseCard({id, course, colors}: CourseCardProps) {
                         {(course.repeatability === 9)? "unlimited": course.repeatability}
                     </p>);
         
-        if(course.terms !== null) {
+        if(course.terms) {
             body.push(<p key='terms'>
                         <b>{"Last Offered: "}</b> <br/> 
                         {checkLength(course.terms, true)} 
