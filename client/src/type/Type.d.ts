@@ -1,6 +1,6 @@
 /************************************/
-/********** Objects Type ***********/
-/***********************************/
+/********** Objects Type ************/
+/************************************/
 declare interface ProgramOption {
     value: number;
     label: string;
@@ -16,20 +16,22 @@ declare interface CourseType {
     course_id: string;
     name: string;
     department: string;
-    corequisite: string;
+    units: number[];
+    units_text:string;
     description: string;
-    prerequisite: string;
-    prerequisite_tree: string;
-    prerequisite_for: string;
-    restriction: string;
-    pre_or_core: string;
-    same_as: string;
-    overlaps_with: string;
-    concurrent_with: string;
+    prerequisite: string | null;
+    prerequisite_tree: object | null;
+    prerequisite_for: string | null;
+    corequisite: string | null;
+    corequisite_tree: object | null;
+    prerequisite_or_corequisite: string;
+    prerequisite_or_corequisite_tree: object | null;
+    restriction: string | null;
+    same_as: string | null;
+    overlaps_with: string | null;
+    concurrent_with: string | null;
     ge:string;
     terms:string;
-    units_text:string;
-    units: number[];
     repeatability: number;
     'courses_in_ge.ge_list': string[];
     [id: string]: string | number;
@@ -78,7 +80,9 @@ declare interface SwitchProgramPayload {
     isMajor: boolean;
 }
 
-/************* Slice **************/
+/***********************************/
+/************* Slice ***************/
+/***********************************/
 declare interface GEType {
     ge_id: string; 
     sectionIds: { sectionId: string, nameChild: string} [];

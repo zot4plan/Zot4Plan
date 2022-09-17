@@ -21,10 +21,6 @@ module.exports = (sequelize, DataType) => {
             type: DataType.TEXT,
             allowNull:true,
         },
-        corequisite: {
-            type: DataType.TEXT,
-            allowNull:true,
-        },
         description: {
             type: DataType.TEXT,
             allowNull:true,
@@ -41,15 +37,23 @@ module.exports = (sequelize, DataType) => {
             type: DataType.ARRAY(DataType.TEXT),
             allowNull:true,
         },
-        restriction: {
+        corequisite: {
             type: DataType.TEXT,
             allowNull:true,
         },
-        repeatability: {
-            type: DataType.INTEGER,
+        corequisite_tree: {
+            type: DataType.JSON,
             allowNull:true,
         },
-        pre_or_core: {
+        prerequisite_or_corequisite: {
+            type: DataType.TEXT,
+            allowNull:true,
+        },
+        prerequisite_or_corequisite_tree: {
+            type: DataType.JSON,
+            allowNull:true,
+        },
+        restriction: {
             type: DataType.TEXT,
             allowNull:true,
         },
@@ -63,6 +67,10 @@ module.exports = (sequelize, DataType) => {
         },
         concurrent_with: {
             type: DataType.TEXT,
+            allowNull:true,
+        },
+        repeatability: {
+            type: DataType.INTEGER,
             allowNull:true,
         },
         ge: {
