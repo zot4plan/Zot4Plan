@@ -139,4 +139,5 @@ declare interface StoreSliceType {
     },
     takenGeCourses: {[id:string]: string[] };
     status: string,
+    isPrerequisiteCheck: boolean,
 }

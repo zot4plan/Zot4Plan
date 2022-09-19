@@ -49,6 +49,7 @@ const generateInitialState = () => {
         },
         takenGeCourses: {},
         status: "idle",
+        isPrerequisiteCheck: true,
     }
 }
 
@@ -137,6 +138,10 @@ export const storeSlice = createSlice ({
         resetStatus: (state) => {
             state.status = "idle";
         },
+
+        setIsPrerequisiteCheck: (state) => {
+            state.isPrerequisiteCheck = !state.isPrerequisiteCheck
+        }
     },
 
 /********************* ExtraReducers *********************/
@@ -265,5 +270,6 @@ export const {
     addYear, 
     removeYear, 
     clearSchedule,
-    resetStatus } =  storeSlice.actions;
+    resetStatus,
+    setIsPrerequisiteCheck } =  storeSlice.actions;
 export default storeSlice.reducer;

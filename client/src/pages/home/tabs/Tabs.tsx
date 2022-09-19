@@ -1,7 +1,7 @@
 import {memo, useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllGE } from '../../api/FetchData';
-import { RootState } from '../../store/store';
+import { fetchAllGE } from '../../../api/FetchData';
+import { RootState } from '../../../store/store';
 import GeneralEducation from './generalEducation/GeneralEducation';
 import Program from './program/Program';
 import SelectProgram from './selects/SelectProgram';

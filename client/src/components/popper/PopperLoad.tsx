@@ -72,8 +72,8 @@ function PopperLoad () {
                     width={240}
                     height={160}
                     recycle={false}
-                    numberOfPieces={200}
-                    tweenDuration={10000}
+                    numberOfPieces={100}
+                    tweenDuration={300}
                     onConfettiComplete={handleOnConfettiComplete}
                 />}
         </div>  

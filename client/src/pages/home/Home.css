@@ -1,0 +1,36 @@
+#body-container {
+    display: grid; 
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 599px) {
+    p {font-size: 1.4rem;}
+    
+    #body-container {
+        grid-template-columns: minmax(12rem,20rem) minmax(24rem, 35rem);
+        column-gap: 0.3rem;
+        margin: 0rem 1rem;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 500px and up) */
+@media only screen and (min-width: 600px) {
+    #body-container {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 1rem;
+        margin: 0rem 1rem ;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 800px) {
+    #body-container { grid-template-columns: 7.5fr 4.5fr;}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    #body-container {
+        column-gap: 2rem;
+        margin: 0rem 2rem;
+    }
+}
