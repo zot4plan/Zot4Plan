@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import {RootState} from '../../store/store';
+import {RootState} from '../../../store/store';
 
 const PrintPrograms = () => {
     const selectedPrograms = useSelector((state:RootState)=> state.programs.selectedPrograms);

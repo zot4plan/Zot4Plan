@@ -1,11 +1,11 @@
 import { useState, useEffect, memo, useCallback } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import Select, { OnChangeValue, StylesConfig} from 'react-select';
-import { RootState } from '../../../store/store';
-import { handleChangeProgram } from '../../../store/slices/ProgramsSlice';
-import Axios from '../../../api/Axios';
+import { RootState } from '../../../../store/store';
+import { handleChangeProgram } from '../../../../store/slices/ProgramsSlice';
+import Axios from '../../../../api/Axios';
 import SelectCourses from './SelectCourses';
-import ZotSelectMajor from '../../../assets/images/ZotSelectMajor.png';
+import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
 import './SelectProgram.css';
 
 const myStyle: StylesConfig<ProgramOption, true> =  {

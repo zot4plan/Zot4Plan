@@ -1,0 +1,31 @@
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem;
+    gap: 1rem;
+}
+
+.btn, .btn-year {
+    box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.25);
+    border: 1px solid;
+    border-radius: 1.2rem;
+    width: 7.8rem;
+    height: 2.8rem;
+    font-size: 1.6rem;
+    color: var(--accent-color-2);
+}
+
+.btn:hover, .btn-year:hover {
+    border-color: var(--accent-color-2);
+    background-color: var(--accent-color-2);
+    color: white;
+}
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+@media only screen and (min-width: 992px) { 
+    .buttons { margin: 1rem 2.5rem; }
+}

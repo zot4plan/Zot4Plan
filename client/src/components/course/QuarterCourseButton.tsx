@@ -18,8 +18,9 @@ function removeLastWord(str: string) {
 }
 
 function checkFulfilled(prereqs: any, taken:Set<string>) {
-    if (Object.keys(prereqs).length === 0) 
+    if (Object.keys(prereqs).length === 0) {
         return true; 
+    }
   
     const key = Object.keys(prereqs)[0];
     const reqArray = prereqs[key];
@@ -41,16 +42,15 @@ function checkFulfilled(prereqs: any, taken:Set<string>) {
             else if (!checkFulfilled(req, taken)) {
                 return false;                      
             }                     
-        }
-
-        return true;                                               
+        }                                             
     }
     else {
         for (let i = 0; i < reqArray.length; i++) {
             const req = reqArray[i];
             if (typeof(req) === 'string') { 
-                if (req.includes('AP') || req.includes('ACT') || req.includes('SAT') || req.includes('Placement') || taken.has(req)) 
+                if (req.includes('AP') || req.includes('ACT') || req.includes('SAT') || req.includes('Placement') || taken.has(req)) {
                     return true;                  
+                }
             } 
             // Prereq tree fulfilled in OR
             else if (checkFulfilled(req, taken)) {
@@ -58,21 +58,9 @@ function checkFulfilled(prereqs: any, taken:Set<string>) {
             }                                               
         }
     }
-    
-    for (let i = 0; i < reqArray.length; i++) {
-        const req = reqArray[i];
-        if (typeof(req) === 'string') { 
-            if (req.includes('AP') || req.includes('ACT') || req.includes('SAT') || req.includes('Placement') || taken.has(req)) 
-                return true;                  
-        } 
-        // Prereq tree fulfilled in OR
-        else if (checkFulfilled(req, taken)) {
-            return true;
-        }                                               
-    }
-
-    return false;                                                  
+    return key === 'and';                                                  
 }
+
 enum Requirement {
     Prerequisite = 1,
     Prerequisite_or_Corequisite = 2,
@@ -122,7 +110,7 @@ function QuarterCourseButton({courseId, sectionId}: CourseButtonProps) {
     );
 
     const isFulfilled = useSelector((state: RootState) => {
-        if (!course) {
+        if (!course || !state.store.isPrerequisiteCheck) {
             return true;
         }
 

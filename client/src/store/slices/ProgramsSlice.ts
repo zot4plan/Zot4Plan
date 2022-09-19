@@ -5,12 +5,12 @@ export const SECTION_ID_LEN = 4; // to differentiate course in major (which cann
 
 const getInitialState = () => {
     let sections:{[id:string]: (string|string[])[]}= {}; 
-    let addedCourses =  nanoid(6);
+    let addedCourses = nanoid(6);
     sections[addedCourses] = [] as string [];
     
     return {
         byIds: {},
-        selectedPrograms:[[],[]],
+        selectedPrograms: [[],[]],
         index: [-1,-1],
         addedCourses: addedCourses,
         sections: sections,

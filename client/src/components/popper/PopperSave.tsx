@@ -94,7 +94,7 @@ function PopperSave () {
                     height={240}
                     recycle={false}
                     numberOfPieces={200}
-                    tweenDuration={10000}
+                    tweenDuration={3000}
                     onConfettiComplete={handleOnConfettiComplete}
                 />}
         </div>    
