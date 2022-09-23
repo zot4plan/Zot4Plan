@@ -57,9 +57,11 @@ function Buttons({printContent}: ButtonsListProps) {
                     <ReactTooltip 
                         id='sample' 
                         place="top" 
+                        type="info"
                         effect="solid"
+                        className='coming-soon'
                     >
-                        Comming Soon
+                        COMING SOON
                     </ReactTooltip>
             </li> 
             <li> 

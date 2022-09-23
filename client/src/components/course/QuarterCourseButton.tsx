@@ -155,7 +155,12 @@ function QuarterCourseButton({courseId, sectionId}: CourseButtonProps) {
         content =  
             <span key='warning' className='course-warning' data-tip data-for='prereqTip'> 
                 <Error/>
-                <ReactTooltip id="prereqTip" place="top" effect="solid">
+                <ReactTooltip 
+                    id="prereqTip" 
+                    place="top" 
+                    effect="solid"
+                    className="course-warning-tooltip"
+                >
                     Missing prerequisite/corequisite
                 </ReactTooltip>
             </span>                             

@@ -26,6 +26,12 @@
     opacity: 0.3;
 }
 
+.coming-soon {
+    border-radius: 10px !important;
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+}
+
 @media only screen and (min-width: 992px) { 
     .buttons { margin: 1rem 2.5rem; }
 }
