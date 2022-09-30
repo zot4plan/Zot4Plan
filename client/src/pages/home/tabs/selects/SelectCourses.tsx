@@ -52,7 +52,6 @@ const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => 
         setTimeout(() => {
             Axios.get('/api/filterCourses', {
                 params: { id: inputValue }}).then((res) => {
-                    console.log(res.data);
                     res.data.forEach((course:CourseType) => filterCourse.push({value: course.course_id, label: course.course_id}))
                     callback(filterCourse);
             });

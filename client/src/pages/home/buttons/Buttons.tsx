@@ -53,9 +53,25 @@ function Buttons({printContent}: ButtonsListProps) {
                     data-value="sample"
                     //onClick={handleClick} 
                     data-tip data-for='sample'
-                    aria-label='remove all courses'> Samples </button> 
+                    aria-label='remove all courses'> Sample </button> 
                     <ReactTooltip 
                         id='sample' 
+                        place="top" 
+                        type="info"
+                        effect="solid"
+                        className='coming-soon'
+                    >
+                        COMING SOON
+                    </ReactTooltip>
+            </li> 
+            <li>  
+                <button className="btn disabled" 
+                    data-value="AP exams"
+                    //onClick={handleClick} 
+                    data-tip data-for='ap exams'
+                    aria-label='remove all courses'> AP exam </button> 
+                    <ReactTooltip 
+                        id='ap exams' 
                         place="top" 
                         type="info"
                         effect="solid"

@@ -69,7 +69,6 @@ enum Requirement {
 
 function getPastCourses(state: RootState, sectionId: string, option: Requirement) {
     const pastCourses = new Set<string> ();
-    const currentCourses = new Set<string> ();
     const yearIds = state.store.years.allIds;
 
     let ended = false;
@@ -80,7 +79,7 @@ function getPastCourses(state: RootState, sectionId: string, option: Requirement
         for (let j = 0; j < quarterIds.length && !ended; j++) {
             if (quarterIds[j] === sectionId) { 
                 if(option !== 1) {
-                    state.store.sections[quarterIds[j]].forEach(course => currentCourses.add(course));
+                    state.store.sections[quarterIds[j]].forEach(course => pastCourses.add(course));
                 }
                 ended = true;
             } 
@@ -89,17 +88,8 @@ function getPastCourses(state: RootState, sectionId: string, option: Requirement
             }
         }
     }
-    
-    if (option === 1) {
-        return pastCourses;
-    }
-    else if (option === 2) {
-        currentCourses.forEach(course => pastCourses.add(course));
-        return pastCourses;
-    }
-    else {
-        return currentCourses;
-    }
+     
+    return pastCourses;
 }
 
 function QuarterCourseButton({courseId, sectionId}: CourseButtonProps) {
