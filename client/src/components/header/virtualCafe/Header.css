@@ -1,0 +1,79 @@
+.popup-top {
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color:#B5838D;
+    padding: 0.5rem;
+    border-radius: 15px;
+}
+
+.input-title {
+  position:absolute;
+  left: 15%;
+  z-index: 1;
+  top:28%;
+  font-size: 1.2rem;
+}
+
+.input-box {
+  margin-top: 0px;
+  padding: 0px;
+  width: 70%;
+  outline: none;
+  border-radius: 10px;
+  height:30px;
+  padding:0.5rem;
+  font-size: 1rem;
+}
+
+.show-hide {
+  position: absolute;
+  top: 0;
+  border-radius: 5px;
+  right:15%;
+  z-index:2;
+  border:none;
+  top: 2px;
+  cursor: pointer;
+  color:black;
+  padding:0.5rem;
+  background-color: white;
+  font-size: 1rem;
+  margin-top:0.2rem;
+}
+
+.show-hide:hover{
+  transform: scale(1.1);
+  filter: drop-shadow(2px 3px 3px #333);
+}
+
+.add-task-box {
+  border:1px solid black;
+  width: 70%;
+  margin-right:1rem;
+  margin-bottom: 0.4rem;
+  padding: 0.5rem;
+  font-size: 16px;
+}
+
+.task-item {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  align-items: center;
+  text-align: start;
+  border-bottom: groove;
+}
+
+.close {
+  padding-left: 1rem;
+}
+
+.close:hover {
+  cursor: pointer;
+  color:white;
+  transform: scale(1.1);
+  filter: drop-shadow(2px 3px 3px #333);
+}

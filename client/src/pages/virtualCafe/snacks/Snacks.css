@@ -1,0 +1,17 @@
+.snack-table{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #D1B3C4;
+    border-radius: 25px;
+    padding: 3.5rem 1rem;
+}
+
+.snacks-icon {
+    width: 20%;
+    height:auto;
+}
+
+.snack-icon:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(2px 3px 3px #333);
+}

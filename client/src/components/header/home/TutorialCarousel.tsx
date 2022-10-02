@@ -1,16 +1,15 @@
 import { useState, MouseEvent } from 'react';
-import ChervonLeft from '../icon/ChervonLeft';
-import ChervonRight from '../icon/ChervonRight';
-import XCircle from '../icon/XCircle';
-import pickMajor from '../../assets/gifs/pickMajor.gif';
-import addCourse from '../../assets/gifs/addCourse.gif';
-import showMoreInfo from '../../assets/gifs/showMoreInfo.gif';
-import dragDropCourses from '../../assets/gifs/dragDropCourses.gif';
+import ChervonLeft from '../../icon/ChervonLeft';
+import ChervonRight from '../../icon/ChervonRight';
+import XCircle from '../../icon/XCircle';
+import pickMajor from '../../../assets/gifs/pickMajor.gif';
+import addCourse from '../../../assets/gifs/addCourse.gif';
+import showMoreInfo from '../../../assets/gifs/showMoreInfo.gif';
+import dragDropCourses from '../../../assets/gifs/dragDropCourses.gif';
 
 interface TutorialCarouselProps{
     handleClick: (e: MouseEvent<HTMLButtonElement>) => void ;
 }
-
 const images = [pickMajor, addCourse, showMoreInfo, dragDropCourses];
 const titles = ['Pick a Major', 'Add Courses', 'More Information', 'Drag and Drop Courses']
 
@@ -35,9 +34,7 @@ function TutorialCarousel ({ handleClick }: TutorialCarouselProps) {
             <ChervonLeft/>
         </button>
         <div>
-            <h1
-                className='gif-title'
-            >{titles[index-1]}</h1>
+            <h1 className='gif-title'> {titles[index-1]} </h1>
 
             <div className="flex-container" style={{position: 'relative'}}>
                 <button 

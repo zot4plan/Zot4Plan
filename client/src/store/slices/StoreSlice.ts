@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction, nanoid, isAnyOf, current } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, nanoid, isAnyOf, current } from "@reduxjs/toolkit";
 import { fetchProgram, fetchGE, fetchSchedule, fetchCourse} from '../../api/FetchData'
 import { addCourse } from "./ProgramsSlice";
 
