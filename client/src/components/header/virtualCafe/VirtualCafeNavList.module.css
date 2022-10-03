@@ -1,0 +1,13 @@
+.item { margin: 0rem 1rem; }
+  
+.item > button, .item > a {
+    font-size: 24px;
+    color: black;
+    letter-spacing: 2px;
+}
+  
+.item:hover{
+    color:white;
+    transform: scale(1.1);
+    filter: drop-shadow(2px 3px 3px #333);
+}

@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Header from './components/header/home/Header';
+import Header from './components/header/Header';
 import Home from './pages/home/Home';
 import VirtualCafe from './pages/virtualCafe/VirtualCafe';
 import Footer from './components/footer/Footer';
@@ -11,7 +11,7 @@ function App() {
 
     return (
         <>
-            {show && <Header/>}
+            {show && <Header path={location.pathname}/>}
             <Routes>
                 <Route path='/' element={<Home/>}/>
                 <Route path='/home' element={<Home/>}/>

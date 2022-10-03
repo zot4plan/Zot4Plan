@@ -1,0 +1,31 @@
+.timer_container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: #D1B3C4;
+    padding: 3rem 1rem;
+    
+    border-radius: 25px;
+    letter-spacing: 2px;
+}
+
+.timer_container > h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+}
+
+.timer {
+    padding: 0.4rem 2rem 0.4rem 2rem;
+    color: black;
+    background-color: white;
+    border-radius: 15px;
+    letter-spacing: 5px;
+}
+
+.timer:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(2px 3px 3px #333);
+}

@@ -2,58 +2,10 @@
 
 ul {list-style-type: none;}
 
-.virtual-cafe {
-    text-align: center;
-}
-
 .virtual-cafe * {
   font-family: 'Open Sans Condensed', sans-serif !important;
 }
 
-.nav-container{
-  display: flex;
-  list-style-type: none;
-  background-color: #B5838D;
-  justify-content: flex-end;
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-}
-
-.nav-item {
-  margin: 0rem 1rem;
-}
-
-.header-items {
-  font-size: 25px;
-  letter-spacing: 2px;
-}
-
-.header-items:hover{
-  color:white;
-  transform: scale(1.1);
-  filter: drop-shadow(2px 3px 3px #333);
-  cursor: pointer;
-}
-
-.grid-container {
-  display:grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-}
-
-.background-images{
-  width: 99%;
-  height:auto;
-  border-radius: 25px;
-  padding-left:0.5rem;
-  grid-area: 1 / 2 / 3 / 3;
-}
-
-.media-nav{
-  justify-content: space-evenly;
-}
 
 .modal {
   position: fixed;
@@ -80,169 +32,17 @@ ul {list-style-type: none;}
   border-radius: 30px;
 }
 
-.clock{
-  font-size: 2rem;
-  padding: 0.4rem 2rem 0.4rem 2rem;
+.virtual-cafe-button{
+  font-size: 3.2rem;
+  padding: 0.6rem 3.2rem;
   color: black;
   background-color: white;
-  border-radius: 15px;
-  letter-spacing: 5px;
+  border-radius: 1.5rem;
+  letter-spacing: 0.2rem;
 }
 
-.clock:hover 
-{
-  transform: scale(1.1);
-  filter: drop-shadow(2px 3px 3px #333);
-}
-
-audio:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(2px 3px 3px #333);
-}
-
-.button{
-  font-size: 30px;
-  padding: 0.4rem 3rem 0.4rem 3rem;
-  color: black;
-  background-color: white;
-  border-radius: 15px;
-  letter-spacing: 2px;
-}
-
-.button:hover{
+.virtual-cafe-button:hover{
   transform: scale(1.1);
   filter: drop-shadow(2px 3px 3px #333);
   cursor: pointer;
-}
-
-/* header.css */
-.popup-top {
-    display:flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    background-color:#B5838D;
-    padding: 0.5rem;
-    border-radius: 15px;
-}
-
-.input-title {
-  position:absolute;
-  left: 15%;
-  z-index: 1;
-  top:28%;
-  font-size: 1.2rem;
-}
-
-.input-box {
-  margin-top: 0px;
-  padding: 0px;
-  width: 70%;
-  outline: none;
-  border-radius: 10px;
-  height:30px;
-  padding:0.5rem;
-  font-size: 1rem;
-}
-
-.show-hide {
-  position: absolute;
-  top: 0;
-  border-radius: 5px;
-  right:15%;
-  z-index:2;
-  border:none;
-  top: 2px;
-  cursor: pointer;
-  color:black;
-  padding:0.5rem;
-  background-color: white;
-  font-size: 1rem;
-  margin-top:0.2rem;
-}
-
-.show-hide:hover{
-  transform: scale(1.1);
-  filter: drop-shadow(2px 3px 3px #333);
-}
-
-.add-task-box {
-  border:1px solid black;
-  width: 70%;
-  margin-right:1rem;
-  margin-bottom: 0.4rem;
-  padding: 0.5rem;
-  font-size: 16px;
-}
-
-.task-item {
-  display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  align-items: center;
-  text-align: start;
-  border-bottom: groove;
-}
-
-.close {
-  padding-left: 1rem;
-}
-
-.close:hover {
-  cursor: pointer;
-  color:white;
-  transform: scale(1.1);
-  filter: drop-shadow(2px 3px 3px #333);
-}
-
-/* timer */
-.timer-container {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #D1B3C4;
-    padding:3rem 1rem 3rem 1rem;
-    border-radius: 25px;
-    letter-spacing: 2px;
-}
-
-.timer {
-    padding: 0.4rem 2rem 0.4rem 2rem;
-    color: black;
-    background-color: white;
-    border-radius: 15px;
-    letter-spacing: 5px;
-}
-
-.timer:hover {
-    transform: scale(1.1);
-    filter: drop-shadow(2px 3px 3px #333);
-}
-
-.modal-top {
-    display:flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    background-color:#B5838D;
-    padding: 0.5rem;
-    border-radius: 20px;
-}
-
-/* snack */
-.snack-table{
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #D1B3C4;
-    border-radius: 25px;
-    padding: 3.5rem 1rem;
-}
-
-.snacks-icon {
-    width: 20%;
-    height:auto;
-}
-
-.snack-icon:hover {
-    transform: scale(1.1);
-    filter: drop-shadow(2px 3px 3px #333);
 }

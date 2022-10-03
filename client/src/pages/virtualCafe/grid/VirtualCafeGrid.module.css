@@ -1,0 +1,43 @@
+.grid_container {
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.background_images{
+    width: 100%;
+    height:auto;
+    border-radius: 2.4rem;
+    grid-area: 1 / 2 / 3 / 3;
+}
+
+.start_btn {
+    border: 2px outset black;
+    border-radius: 1.6rem;
+    background-color: white;
+
+    font-size: 3.2rem; 
+    font-weight: 500;
+    letter-spacing: 0.5rem;
+    padding: 1.6rem;
+}
+
+.start_btn:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(2px 3px 3px #333);
+}
+
+.snack_container{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #D1B3C4;
+    border-radius: 2.4rem;
+    padding: 4.8rem 1.6rem;
+}
+
+.snack_icon:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(2px 3px 3px #333);
+}

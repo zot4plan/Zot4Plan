@@ -1,4 +1,4 @@
-import QuarterCourse from '../course/QuarterCourse';
+import QuarterCourse from '../course/quarter/QuarterCourse';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { Droppable } from 'react-beautiful-dnd';
