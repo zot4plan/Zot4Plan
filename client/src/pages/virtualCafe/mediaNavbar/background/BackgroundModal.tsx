@@ -9,32 +9,30 @@ interface SelectBackgroundProps {
 
 function BackgroundModal({ handleClose, setBackground }: SelectBackgroundProps) {
     return (
-        <div className='popup'>
-            <div className="popup-inner">
-                <div className="popup-header">
-                    <h5 className='title'> Select a Background </h5>
-                    <div onClick={handleClose} >
-                        <Xmark/>
-                    </div>
-                </div>
-                <div className="popup-list-outer">
-                    <ul className="popup-list">
-                        {backgrounds.map((background) => (
-                            <li key={background.id} className='background-info'>       
-                                <img 
-                                    className='icon' 
-                                    src={background.path} 
-                                    alt={background.description}
-                                    onClick={() => 
-                                    {
-                                        setBackground(background); 
-                                        handleClose();
-                                    }}
-                                />
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+        <div className={styles.modal}>
+            <div className={styles.modal_header}>
+                <h1> Select a Background </h1>
+                <button className={styles.x_icon} onClick={handleClose}>
+                    <Xmark/>
+                </button>
+            </div>
+            <div className={styles.modal_body}>
+                <ul>
+                    {backgrounds.map((background) => (
+                        <li key={background.id}>       
+                            <img 
+                                className={styles.img_bg}
+                                src={background.path} 
+                                alt={background.description}
+                                onClick={() => 
+                                {
+                                    setBackground(background); 
+                                    handleClose();
+                                }}
+                            />
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     )

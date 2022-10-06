@@ -30,7 +30,7 @@ function VirtualCafeNavList ({isActive}: HeaderProps) {
                     open={open}
                     onClose={handleClose}
                 >
-                    <div className='modal-background'>
+                    <div className='modal-background flex-container'>
                         <ToDoList handleClose={handleClose}/>
                     </div>
                 </ModalUnstyled>

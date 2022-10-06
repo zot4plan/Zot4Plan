@@ -19,9 +19,9 @@ function VirtualCafe() {
         setBackground(item);
     }
 
-    const changeSetTime = (studyTime: number, breakTime: number) => {
-        setTime({study: studyTime, break: breakTime});
-    }
+    // const changeSetTime = (studyTime: number, breakTime: number) => {
+    //     setTime({study: studyTime, break: breakTime});
+    // }
 
     return (
         <div className="virtual-cafe">

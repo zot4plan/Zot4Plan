@@ -34,7 +34,7 @@ const MediaNav = ({setBackground}: MediaNavbarProps) => {
                     open={open}
                     onClose={handleClose}
                 >
-                    <div className='modal-background'>
+                    <div className='modal-background flex-container'>
                         <BackgroundModal 
                             handleClose={handleClose}
                             setBackground={setBackground}

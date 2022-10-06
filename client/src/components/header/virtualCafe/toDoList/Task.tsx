@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Xmark from '../../../icon/Xmark';
+import styles from './Task.module.css';
 
 interface TaskProps {
     task: any;
@@ -10,7 +11,7 @@ const Task = ({ task, onDelete }: TaskProps) => {
     const handleOnChange = () => setComplete(!complete);
     
     return (
-        <li className="task-item">
+        <li className={styles.task_item}>
             <input 
                 style={{"gridArea": "1 / 1 / 2 / 2"}} 
                 type='checkbox' 

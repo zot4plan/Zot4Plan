@@ -1,10 +1,10 @@
 import { useState, ChangeEvent, FormEvent } from "react"
-
-interface TaskModalProps {
+import styles from './AddTaskForm.module.css'
+interface AddTaskFormProps {
     handleAddTask: (task:string) => void;
 }
 
-const TaskModal = ({handleAddTask}: TaskModalProps) => {
+const AddTaskForm = ({handleAddTask}: AddTaskFormProps) => {
     const [task, setTask] = useState('');
 
     const onChange = (event: ChangeEvent<HTMLInputElement>) => setTask(event.target.value);
@@ -18,13 +18,13 @@ const TaskModal = ({handleAddTask}: TaskModalProps) => {
   return (
     <div>
         <form onSubmit={onSubmit}>
-            <fieldset style={{borderRadius:"20px"}}>
+            <fieldset style={{textAlign:"center", borderRadius:"20px"}}>
                 <legend> Add Task </legend>
                 <input 
                     type="text" 
                     required value={task}
                     onChange={onChange}
-                    className="add-task-box"
+                    className={styles.add_task_box}
                     placeholder="Enter your task..."
                 />
                 <input type="submit" value="Add"/>
@@ -34,4 +34,4 @@ const TaskModal = ({handleAddTask}: TaskModalProps) => {
   )
 }
 
-export default TaskModal;
+export default AddTaskForm;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Timer from './timer/Timer';
-import Boba from "../assets/images/boba.png"
-import Cookie from "../assets/images/cookie.png"
+import Boba from "../assets/images/snacks/boba.png"
+import Cookie from "../assets/images/snacks/cookie.png"
 import styles from './VirtualCafeGrid.module.css';
 
 interface VirtualCafeGridProps {
@@ -18,10 +18,8 @@ interface VirtualCafeGridProps {
 
 function VirtualCafeGrid({background, time}:VirtualCafeGridProps) {
     const [isStart, setIsStart] = useState(false);
-    const handleSetIsStart = () => {
-        setIsStart(!isStart);
-    }
-
+    const handleSetIsStart = () => setIsStart(!isStart);
+    
     return (
         <div className={styles.grid_container}>
             <div className='flex-container'>

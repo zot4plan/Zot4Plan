@@ -4,11 +4,11 @@
     background: #fff;
     outline: none;
     padding: 2rem;
-    border-radius: 2.4rem;
+    border-radius: 30px;
     width: 350px;
     height: 500px;
 }
-  
+
 .modal_header {
     display:flex;
     justify-content: center;
@@ -21,31 +21,25 @@
 .modal_header h1{
     font-size: 2.4rem;
 }
-
-.modal_body {
+  
+.modal_body{
+    position: relative;
+    height: 320px;
+    border: 1px solid #ccc;
     background: #fff;
-    padding: 0rem 1rem;
-}
-.modal_body > ul {
-    height: 405px;
-    width: 300px;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: 'touch';
-}
-
-.img_bg{
-    width: 98%;
-    height: auto;
-    border-radius: 2.4rem;
-    padding: 0.5rem;
+    outline: none;
+    padding: 20px;
+    margin-top: 1rem;
+    border-radius: 25px;
 }
   
-.img_bg:hover{
-    transform: scale(1.02);
-    filter: drop-shadow(2px 3px 3px #333);
-    cursor: pointer;
+.tasks {
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: 'touch';
+    padding-right:1rem;
 }
-
+  
 .x_icon {
     position: absolute;
     top: 1.6rem;

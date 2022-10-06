@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import Task from "./Task";
-import TaskModal from "./TaskModal";
+import AddTaskForm from "./AddTaskForm";
 import Xmark from '../../../icon/Xmark';
-//import "../grid/background/Background.css";
+import styles from "./ToDoList.module.css";
 
 interface ToDoListProps {
     handleClose: () => void;
@@ -25,31 +25,35 @@ function ToDoList({ handleClose }: ToDoListProps) {
     }
  
 return (
-    <div className="popup">
-        <div className="popup-inner">
-            <div className="modal-top" style={{backgroundColor:"white"}}>
-                <h2>To-Do List!</h2>
-                <button onClick={handleClose}> 
+        <div className={styles.modal}>
+            <div className={styles.modal_header} style={{backgroundColor:"white"}}>
+                <h1>To-Do List!</h1>
+                <button onClick={handleClose} className={styles.x_icon}> 
                     <Xmark/>
                 </button>
             </div>
-            <TaskModal handleAddTask={handleAddTask}/>
-            <div className="popup-list-outer">
-                <div className="popup-list">
+            <AddTaskForm handleAddTask={handleAddTask}/>
+            <div className={styles.modal_body}>
+                <div className={styles.tasks}>
                     {tasks.length > 0 
                     ? (<ul>
-                            {tasks.map((task:any) => (
-                                <Task 
-                                    key={task.id} 
-                                    task={task} 
-                                    onDelete={handleDeleteTask}/>
-                            ))} 
-                        </ul>) 
-                    : <p>No current task to display ... Z z z...</p>}
+                        {tasks.map((task:any) => (
+                            <Task 
+                                key={task.id} 
+                                task={task} 
+                                onDelete={handleDeleteTask}/>
+                        ))} 
+                    </ul>) 
+                    : <p style={{textAlign: "center"}}>
+                        No current task to display ... 
+                        <span style={{fontSize: "19px"}}>&nbsp;z&nbsp;</span> 
+                        <span style={{fontSize: "16px"}}>z&nbsp;</span>
+                        <span style={{fontSize: "13px"}}>z</span> 
+                        ...
+                    </p>}
                 </div>
             </div>
         </div>
-    </div>
   )
 }
 
