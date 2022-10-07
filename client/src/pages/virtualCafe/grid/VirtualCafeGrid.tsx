@@ -18,29 +18,28 @@ interface VirtualCafeGridProps {
 
 function VirtualCafeGrid({background, time}:VirtualCafeGridProps) {
     const [isStart, setIsStart] = useState(false);
-    const handleSetIsStart = () => setIsStart(!isStart);
+    const handleStart = () => setIsStart(true);
     
     return (
         <div className={styles.grid_container}>
-            <div className='flex-container'>
+            <div className={styles.time}>
                 {!isStart
-                ? <button 
-                    onClick={handleSetIsStart} 
-                    className={styles.start_btn}
-                > 
-                    Start Timer
-                </button>
-                : <Timer studyTime={time.study} breakTime={time.break} />}
+                ? <>
+                    <button onClick={handleStart} className={styles.timer_btn}>Start Timer</button>
+                    <button className={styles.timer_btn}>Set Timer</button>
+                </>
+                : <Timer studyTime={time.study} breakTime={time.break}/>}
             </div>
             <div className={styles.snack_container}>
                 <img className={styles.snack_icon} src={Boba} alt="Cup of Boba Milk Tea Icon"/>
                 <img className={styles.snack_icon} src={Cookie} alt="Cup of Coffee Icon"/>
             </div>
-            <img 
-                className={styles.background_images} 
-                src={background.path} 
-                alt={background.description}
-            />
+            <div className={styles.background_images}>
+                <img  
+                    src={background.path} 
+                    alt={background.description}
+                />
+            </div>
         </div>   
     );
 }

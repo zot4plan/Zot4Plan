@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from "react"
-import Xmark from "../../../components/icon/Xmark"
+import Xmark from "../../../../components/icon/Xmark"
 
 interface TimeSettingProps {
     toggleTimeSetting: () => void;

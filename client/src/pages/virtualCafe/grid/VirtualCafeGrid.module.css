@@ -6,25 +6,40 @@
     padding: 1rem;
 }
 
+.time{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
 .background_images{
+    grid-area: 1 / 2 / 3 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background_images > img {
     width: 100%;
     height:auto;
     border-radius: 2.4rem;
-    grid-area: 1 / 2 / 3 / 3;
 }
 
-.start_btn {
+.timer_btn {
+    width: 180px;
     border: 2px outset black;
     border-radius: 1.6rem;
     background-color: white;
 
-    font-size: 3.2rem; 
-    font-weight: 500;
+    font-size: 2.4rem; 
+    font-weight: 600;
     letter-spacing: 0.5rem;
-    padding: 1.6rem;
+    padding: 1rem;
 }
 
-.start_btn:hover {
+.timer_btn:hover {
     transform: scale(1.1);
     filter: drop-shadow(2px 3px 3px #333);
 }

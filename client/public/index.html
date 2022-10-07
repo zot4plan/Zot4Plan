@@ -14,6 +14,16 @@ EMAIL: ldkhong@uci.edu
       content="zot4plan is a schedule planning tool that help UCI students visualize their academic plan"
     />
 
+    <meta http-equiv="Content-Security-Policy" 
+          content="
+                    font-src 'self' fonts.gstatic.com;
+                    style-src 'self' 'unsafe-inline' fonts.googleapis.com;
+                    base-uri 'self';
+                    form-action 'self';
+                    connect-src ws://localhost:3000/ws;
+                    img-src 'self' data: ;
+                    script-src 'self' ws://localhost:3000/ws "> 
+
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
