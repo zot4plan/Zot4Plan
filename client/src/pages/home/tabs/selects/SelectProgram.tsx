@@ -2,7 +2,7 @@ import { useState, useEffect, memo, useCallback } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import Select, { OnChangeValue, StylesConfig} from 'react-select';
 import { RootState } from '../../../../store/store';
-import { handleChangeProgram } from '../../../../store/slices/ProgramsSlice';
+import { changeProgram } from '../../../../store/slices/ProgramsSlice';
 import Axios from '../../../../api/Axios';
 import SelectCourses from './SelectCourses';
 import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
@@ -72,7 +72,7 @@ function SelectProgram({isMajor}: SelectProgramProps) {
     // Get Major Requirement Courses
     const handleOnChange = useCallback((selectedOptions: OnChangeValue<ProgramOption, true>) => {
         if(selectedOptions)
-            dispatch(handleChangeProgram({value: selectedOptions as ProgramOption[], isMajor: isMajor}));
+            dispatch(changeProgram({value: selectedOptions as ProgramOption[], isMajor: isMajor}));
     },[dispatch, isMajor])
 
     const placeholder = "Select your " + (isMajor? "major" : "minor");

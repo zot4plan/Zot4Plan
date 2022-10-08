@@ -17,7 +17,7 @@ function RequiredCourseCard({id}: CourseCardProps) {
     const [course, setCourse] = useState(() => {
         if(id) {
             const course = sessionStorage.getItem(id);
-            return course? JSON.parse(course) : null;
+            return course ? JSON.parse(course) : null;
         }
         return null;
     });
@@ -38,7 +38,9 @@ function RequiredCourseCard({id}: CourseCardProps) {
     },[id, course, setCourse]); 
 
     const colors = useSelector((state:RootState) => 
-        id? state.store.depts.byIds[removeLastWord(id)] : ['#AFD3E9', '#70ADD7', '#3688BF']
+        id 
+        ? state.course.depts.byIds[removeLastWord(id)] 
+        : ['#AFD3E9', '#70ADD7', '#3688BF']
     )
 
     return ( 

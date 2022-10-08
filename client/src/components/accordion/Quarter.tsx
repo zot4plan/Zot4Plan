@@ -10,7 +10,7 @@ interface QuarterProps {
 }
 
 function Quarter({sectionId, name}:QuarterProps) {
-    const courses = useSelector((state:RootState) => state.store.sections[sectionId]);
+    const courses = useSelector((state:RootState) => state.course.sections[sectionId]);
     const renderCard = useCallback (
         (id: string, sectionId: string, index: number) => (
             <QuarterCourse 

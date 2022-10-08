@@ -1,21 +1,20 @@
 import './DropDown.css';
+const menuItems = [
+    {
+        "name": "UCI Course Catalogue",
+        "href": 'https://catalogue.uci.edu/allcourses/',
+    },
+    {
+        "name": "UCI Majors Catalogue",
+        "href": "https://catalogue.uci.edu/undergraduatedegrees/",
+    },
+    {
+        "name": "UCI Academic Advising",
+        "href": "https://ps.uci.edu/stuaff/ac.html",
+    }
+];
 
 function DropDown() {
-    const menuItems = [
-        {
-            "name": "UCI Course Catalogue",
-            "href": 'https://catalogue.uci.edu/allcourses/',
-        },
-        {
-            "name": "UCI Majors Catalogue",
-            "href": "https://catalogue.uci.edu/undergraduatedegrees/",
-        },
-        {
-            "name": "UCI Academic Advising",
-            "href": "https://ps.uci.edu/stuaff/ac.html",
-        }
-    ];
-
     return (
         <ul className='dropdown-menu'>
             {menuItems.map((item, index) =>  

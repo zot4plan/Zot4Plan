@@ -1,7 +1,7 @@
 import {memo, MouseEvent} from 'react';
 import { useDispatch } from 'react-redux';
 import { removeCourse } from '../../store/slices/ProgramsSlice';
-import { removeCourseQuarter } from '../../store/slices/StoreSlice';
+import { removeCourseQuarter } from '../../store/slices/CourseSlice';
 import Xmark from '../icon/Xmark';
 import './ButtonRemoveCourse.css';
 

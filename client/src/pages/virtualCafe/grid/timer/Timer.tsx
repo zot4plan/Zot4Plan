@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import PauseIcon from '../../../../components/icon/MusicNote';
+import PauseIcon from '../../../../components/icon/PauseIcon';
 import PlayIcon from '../../../../components/icon/PlayIcon';
 import styles from './Timer.module.css';
 
@@ -9,32 +9,38 @@ interface TimerProps{
 }
 
 const Timer = ({ studyTime, breakTime }:TimerProps) => {
-    const [isPause, setIsPause] = useState(false);
-    const [isStudy, setIsStudy] = useState(true);
-    const [minutes, setMinutes] = useState(studyTime);
-    const [seconds, setSeconds] = useState(0);
-    const handlePause = () => setIsPause(!isPause);
+    const [myTimer, setMyTimer] = useState({
+        isPause: true,
+        isStudy: true,
+        minutes: studyTime,
+        seconds: 0,
+    })
+    const handlePause = () => setMyTimer(prevState => ({...prevState, isPause: !myTimer.isPause}));
 
     useEffect(() => {
         var timer = setInterval(() => {
-            if(!isPause) {
-                setSeconds(seconds - 1)
-                if(seconds === 0)
+            if(!myTimer.isPause) {
+                if(myTimer.seconds === 0)
                 {
-                    if(minutes === 0)
+                    if(myTimer.minutes === 0)
                     {
-                        if(studyTime)
-                            setMinutes(breakTime - 1);
-                        else 
-                            setMinutes(studyTime - 1);
-                        setSeconds(59);
-                        setIsStudy(!isStudy);
+                        setMyTimer(prevState => ({
+                            ...prevState, 
+                            minutes: myTimer.isStudy ? breakTime - 1 : studyTime - 1,
+                            seconds: 59,
+                            isStudy: !myTimer.isStudy
+                        }));
                     }
                     else {
-                        setMinutes(minutes - 1);
-                        setSeconds(59);
+                        setMyTimer(prevState => ({
+                            ...prevState, 
+                            minutes: myTimer.minutes - 1,
+                            seconds: 59,
+                        }));
                     }
                 }
+                else
+                    setMyTimer(prevState => ({...prevState, seconds: myTimer.seconds - 1}));
             }
         }, 1000);
         return () => clearInterval(timer);
@@ -44,15 +50,15 @@ const Timer = ({ studyTime, breakTime }:TimerProps) => {
         <div className={styles.container}>
             <div className={styles.timerContainer}>
                 <h1> 
-                    {studyTime ? "Work Time:" : "Break Time:" } 
+                    {myTimer.isStudy ? "Work Time:" : "Break Time:" } 
                 </h1>
                 <h1 className={styles.timer}>
-                    {minutes >= 10 ? minutes : "0" + minutes}:
-                    {seconds >= 10 ? seconds : "0" + seconds}
+                    {myTimer.minutes >= 10 ? myTimer.minutes : "0" + myTimer.minutes}:
+                    {myTimer.seconds >= 10 ? myTimer.seconds : "0" + myTimer.seconds}
                 </h1>
             </div>
-            <button onClick={handlePause} className={styles.stopIcon}>
-                {isPause? <PlayIcon/> : <PauseIcon/>}
+            <button onClick={handlePause} className={styles.playIcon}>
+                {myTimer.isPause ? <PlayIcon/> : <PauseIcon/>}
             </button>
         </div>
     )

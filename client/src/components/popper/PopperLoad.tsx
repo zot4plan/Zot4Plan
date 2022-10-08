@@ -1,8 +1,8 @@
 import { useState, ChangeEvent, MouseEvent} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSchedule } from '../../api/FetchData';
+import { getSchedule } from '../../api/Controller';
 import { RootState } from '../../store/store';
-import { resetStatus } from '../../store/slices/StoreSlice';
+import { resetStatus } from '../../store/slices/CourseSlice';
 import Confetti from 'react-confetti';
 import Message from '../message/Message';
 import './PopperSaveLoad.css';
@@ -17,7 +17,7 @@ const failed = "Schedule not found!";
 function PopperLoad () {
     const [name, setName] = useState("");
     const [message, setMessage] = useState({status: "idle", content: ""});
-    const loadStatus = useSelector((state: RootState) => state.store.status);
+    const loadStatus = useSelector((state: RootState) => state.course.status);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
@@ -35,7 +35,7 @@ function PopperLoad () {
             setMessage({ status:"failed", content: minLengthMessage});
 
         else {
-            dispatch(fetchSchedule(name));
+            dispatch(getSchedule(name));
             setMessage({status: "idle", content: ""});
         }
     }

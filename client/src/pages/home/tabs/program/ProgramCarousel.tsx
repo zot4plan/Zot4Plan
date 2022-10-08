@@ -1,9 +1,9 @@
-import {memo} from 'react'
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../../../store/store';
+import { memo } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../store/store';
 import ChevronLeft from '../../../../components/icon/ChervonLeft';
 import ChevronRight from '../../../../components/icon/ChervonRight';
-import { handleSwitchProgram } from '../../../../store/slices/ProgramsSlice';
+import { switchProgram } from '../../../../store/slices/ProgramsSlice';
 
 interface ProgramCarouselProps {
     url: string;
@@ -12,25 +12,23 @@ interface ProgramCarouselProps {
 }
 
 function ProgramCarousel ({url, name, isMajor}: ProgramCarouselProps) {
-    const isShowButton = useSelector((state:RootState) => {
-        let i = isMajor? 1 : 0;
-        return state.programs.selectedPrograms[i].length > 1;
-    });
-
+    const isShowButton = useSelector((state:RootState) => 
+        state.programs.selectedPrograms[isMajor? 1 : 0].length > 1
+    );
+    
     const dispatch = useDispatch();
 
     function handleOnClick(event: React.MouseEvent<HTMLButtonElement>) {  
         event.preventDefault();
-        const move = Number(event.currentTarget.value);
-        dispatch(handleSwitchProgram({move: move, isMajor: isMajor}));
+        dispatch(switchProgram({move: Number(event.currentTarget.value), isMajor: isMajor}));
     }
     
     return (
         <div className='hyperlink'
-            style={{justifyContent: isShowButton? 'space-between' : 'center'}}
+            style={{justifyContent: isShowButton ? 'space-between' : 'center'}}
         >
-            {isShowButton && 
-                <button key='ChevronLeft'
+            {isShowButton 
+            && <button key='ChevronLeft'
                     style={{paddingLeft:'1.5rem'}} 
                     value={-1} onClick={handleOnClick}
                 > 
@@ -39,8 +37,8 @@ function ProgramCarousel ({url, name, isMajor}: ProgramCarouselProps) {
 
             <a href={url} target='_blank' rel="noreferrer"> {name} </a>
 
-            {isShowButton && 
-                <button key='ChevronRight' 
+            {isShowButton 
+            && <button key='ChevronRight' 
                     style={{paddingRight:'2rem'}} 
                     value={1} onClick={handleOnClick}
                 > 

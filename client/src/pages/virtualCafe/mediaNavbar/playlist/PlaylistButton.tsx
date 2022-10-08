@@ -2,11 +2,7 @@ import { useState} from 'react';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import PlaylistModal from './PlaylistModal';
 
-interface PlaylistButtonProps {
-    setPlaylist: (Playlist:any) => void;
-}
-
-const PlaylistButton = ({setPlaylist}: PlaylistButtonProps) => {
+const PlaylistButton = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -23,10 +19,7 @@ const PlaylistButton = ({setPlaylist}: PlaylistButtonProps) => {
                 onClose={handleClose}
             >
                 <div className='modal-background flex-container'>
-                    <PlaylistModal 
-                        handleClose={handleClose}
-                        setPlaylist={setPlaylist}
-                    />
+                    <PlaylistModal handleClose={handleClose}/>
                 </div>
             </ModalUnstyled>
         </>

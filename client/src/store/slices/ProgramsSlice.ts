@@ -1,11 +1,11 @@
-import {createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
-import { fetchProgram, fetchSchedule } from '../../api/FetchData'
-
-export const SECTION_ID_LEN = 4; // to differentiate course in major (which cannot be remove)
+import { createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
+import { getProgram, getSchedule } from '../../api/Controller'
+import { ID_LENGTH } from "../constants/Constants";
+// export const SECTION_ID_LEN = 4; // to differentiate course in major (which cannot be remove)
 
 const getInitialState = () => {
     let sections:{[id:string]: (string|string[])[]}= {}; 
-    let addedCourses = nanoid(6);
+    let addedCourses = nanoid(ID_LENGTH.ADD_COURSES);
     sections[addedCourses] = [] as string [];
     
     return {
@@ -19,7 +19,7 @@ const getInitialState = () => {
 
 const initialState:ProgramsSliceType = getInitialState();
 
-export const storeSlice = createSlice ({
+export const programSlice = createSlice ({
     name: "store",
     initialState,
 /************************** Reducers ***************************/
@@ -32,7 +32,7 @@ export const storeSlice = createSlice ({
             state.sections[state.addedCourses].splice(action.payload.index,1);
         },
 
-        handleChangeProgram: (state, action: PayloadAction<ProgramOptionPayload>) => { 
+        changeProgram: (state, action: PayloadAction<ProgramOptionPayload>) => { 
             let i = action.payload.isMajor? 1 : 0,
                 currentIndex = state.index[i],
                 len = action.payload.value.length;
@@ -54,10 +54,9 @@ export const storeSlice = createSlice ({
                 }
             })
             state.selectedPrograms[i] = action.payload.value;
-            
         },
 
-        handleSwitchProgram: (state, action: PayloadAction<SwitchProgramPayload>) => { 
+        switchProgram: (state, action: PayloadAction<SwitchProgramPayload>) => { 
             let i = action.payload.isMajor? 1 : 0,
                 nextIndex = state.index[i] + action.payload.move,
                 currentLength = state.selectedPrograms[i].length;
@@ -73,40 +72,41 @@ export const storeSlice = createSlice ({
 /********************************** ExtraReducers ********************************/ 
     extraReducers: (builder) => {
     /************************* fetchProgramById ****************************/
-        builder.addCase(fetchProgram.pending, (state,action) => {
+        builder.addCase(getProgram.pending, (state,action) => {
             state.byIds[action.meta.arg].status = "loading";
         });
+
         /**
          * @param requirement: []
          * @param url: string
          * @param courseIds: string[]
          * @param courseData: CourseType[]
          */
-        builder.addCase(fetchProgram.fulfilled, (state, action) => {  
+        builder.addCase(getProgram.fulfilled, (state, action) => {  
             let id = action.payload.id;
             
             state.byIds[id].status = action.payload.status;
             state.byIds[id].url = action.payload.url;
             
             action.payload.requirement.forEach ((accordion)=>{
-                const accordionId = nanoid(SECTION_ID_LEN);
+                const accordionId = nanoid(ID_LENGTH.PROGRAM_SECTION);
                 state.byIds[id].allIds.push(accordionId);
                 state.byIds[id].byIds[accordionId] = {id: accordionId, name: accordion.name, sectionIds: []};
             
                 accordion.child.forEach((section) => {
-                    const sectionId = nanoid(SECTION_ID_LEN);
+                    const sectionId = nanoid(ID_LENGTH.PROGRAM_SECTION);
                     state.byIds[id].byIds[accordionId].sectionIds.push({sectionId: sectionId, nameChild: section.name})
                     state.sections[sectionId] = section.child;
                 })
             })  
         });
 
-        builder.addCase(fetchProgram.rejected, (state, action) => {
+        builder.addCase(getProgram.rejected, (state, action) => {
             state.byIds[action.meta.arg].status = "failed";
         });
 
     /***************************** fetchSchedule *******************************/
-        builder.addCase(fetchSchedule.fulfilled, (state, action) => {  
+        builder.addCase(getSchedule.fulfilled, (state, action) => {  
             if(action.payload.status === "succeeded") {
                 state.selectedPrograms = action.payload.selectedPrograms;
                 state.selectedPrograms.forEach((programs, i) => {
@@ -131,14 +131,15 @@ export const storeSlice = createSlice ({
                 })
                 state.sections[state.addedCourses] = action.payload.addedCourses;
             }   
-        });
-        
+        });   
     },
 });
 
 export const { 
     addCourse,  
     removeCourse,
-    handleChangeProgram,
-    handleSwitchProgram } =  storeSlice.actions;
-export default  storeSlice.reducer;
+    changeProgram,
+    switchProgram 
+} =  programSlice.actions;
+
+export default programSlice.reducer;

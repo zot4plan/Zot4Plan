@@ -1,27 +1,35 @@
-import Library from "../assets/images/backgrounds/library.jpeg";
-import StudyGIF1 from "../assets/images/backgrounds/pixel-study.gif";
-import StudyGIF2 from "../assets/images/backgrounds/student-studying.gif";
+import Library from "../../../assets/backgrounds/library.jpeg";
+import StudyGIF1 from "../../../assets/backgrounds/pixel-study.gif";
+import StudyGIF2 from "../../../assets/backgrounds/student-studying.gif";
 
 export const backgrounds = [
     {
-      id: 0,
-      description: "none",
-      path: null
+      background_id: 0,
+      name: "Youtube",
+      description: "Youtube",
+      url: "",
+      like: 0,
     },
     {
-      id: 1,
+      background_id: 1,
+      name: "",
       description: "Drawing of Library",
-      path: Library
+      url: Library,
+      like: 0,
     },
     {
-      id: 2,
+      background_id: 2,
+      name: "",
       description: "Student studying GIF",
-      path: StudyGIF1
+      url: StudyGIF1,
+      like: 0,
     },
     {
-      id: 3,
+      background_id: 3,
+      name: "",
       description: "Student studying GIF",
-      path: StudyGIF2
+      url: StudyGIF2,
+      like: 0,
     },
 ];
 
@@ -30,34 +38,32 @@ export const playlists = [
     genre: "Vietnamese",
     playlist: [
       {
-        id: "FN7ALfpGxiI",
+        playlist_id: "FN7ALfpGxiI",
         name: "My Favorite Songs - LK",
-        url: "https://www.youtube.com/embed/videoseries?list=PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk"
+        url: "https://www.youtube.com/embed/videoseries?list=PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk",
+        like: 0,
+        view: 0
       },
       {
-        id: "ja0HeFa8GJc",
+        playlist_id: "ja0HeFa8GJc",
         name: "Lofi chill 1",
         url: "https://www.youtube.com/embed/ja0HeFa8GJc",
+        like: 0,
+        view: 0
       },
       {
-        id: "r4Xstoq18gA",
+        playlist_id: "pnV3XUzc87g",
         name: "Lofi chill 2",
-        url: "https://www.youtube.com/embed/r4Xstoq18gA",
+        url: "https://www.youtube.com/embed/pnV3XUzc87g",
+        like: 0,
+        view: 0
       },
       {
-        id: "pnV3XUzc87g",
-        name: "Lofi chill 3",
-        url: "https://www.youtube.com/embed/pnV3XUzc87g"
-      },
-      {
-        id: "amSIcuOyKsg",
-        name: "Lofi chill 4",
-        url: "https://www.youtube.com/embed/amSIcuOyKsg"
-      },
-      {
-        id: "GPRqYSz_QZA",
+        playlist_id: "GPRqYSz_QZA",
         name: "Candles and Flowers",
-        url: "https://www.youtube.com/embed/GPRqYSz_QZA"
+        url: "https://www.youtube.com/embed/GPRqYSz_QZA",
+        like: 0,
+        view: 0
       }
     ]
   }

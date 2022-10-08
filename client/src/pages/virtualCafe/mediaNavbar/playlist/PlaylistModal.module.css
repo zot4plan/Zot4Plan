@@ -39,14 +39,14 @@
 }
 
 .x_icon > svg {
+    transition: transform 250ms;
     font-size: 2rem;
 }
-  
-.x_icon:hover{
+
+.x_icon > svg:hover {
     cursor: pointer;
-    color:white;
-    transform: scale(1.1);
-    filter: drop-shadow(2px 3px 3px #333);
+    border-radius: 50%;
+    transform: rotate(-90deg);
 }
 
 .playlist {

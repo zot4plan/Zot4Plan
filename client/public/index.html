@@ -19,16 +19,16 @@ EMAIL: ldkhong@uci.edu
                     style-src 'self' 'unsafe-inline' fonts.googleapis.com;
                     base-uri 'self';
                     form-action 'self';
-                    connect-src ws://localhost:3000/ws;
+                    connect-src ws://localhost:3000/ws localhost:8080;
                     img-src 'self' data: http://img.youtube.com https://i.ytimg.com;
                     frame-src youtube.com www.youtube.com;
                     script-src 'self' ws://localhost:3000/ws "> 
-
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
     <title>Zot4Plan - UCI Schedule Planner</title>
   </head>
   <body>

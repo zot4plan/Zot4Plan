@@ -1,13 +1,12 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import Axios from './Axios';
 
-export const fetchCourse = createAsyncThunk("features/fetchCourse", async (id: string) => {
+export const getCourse = createAsyncThunk("features/getCourse", async (id: string) => {
     const course = sessionStorage.getItem(id);
-    if(course) {
-        return {status: "succeeded", course: JSON.parse(course)};
-    }
 
-    return Axios
+    return course 
+        ?  {status: "succeeded", course: JSON.parse(course)}
+        :   Axios
             .get('/api/getCourse', { params: { id: id } })
             .then(response => {
                 sessionStorage.setItem(id, JSON.stringify(response.data));
@@ -24,14 +23,14 @@ export const fetchCourse = createAsyncThunk("features/fetchCourse", async (id: s
             })
 });
 
-export const fetchAllGE = createAsyncThunk("features/fetchAllGE", async () => 
+export const getAllGE = createAsyncThunk("features/getAllGE", async () => 
     Axios
-    .get('/api/getAllGE')
-    .then(response => response.data as GEPayload[])
-    .catch(() => [] as GEPayload[])
+        .get('/api/getAllGE')
+        .then(response => response.data as GEPayload[])
+        .catch(() => [] as GEPayload[])
 );
 
-export const fetchGE = createAsyncThunk("features/fetchGE", async (id: string) => 
+export const getGE = createAsyncThunk("features/getGE", async (id: string) => 
     Axios.post('/api/getCoursesInGE', {id: id})
     .then(response => {
         return {
@@ -48,7 +47,7 @@ export const fetchGE = createAsyncThunk("features/fetchGE", async (id: string) =
     })
 );
 
-export const fetchProgram = createAsyncThunk("features/fetchProgram", async (id: number) => 
+export const getProgram = createAsyncThunk("features/getProgram", async (id: number) => 
     Axios.post('/api/getProgram', {id: id})
     .then( response => {
         return {
@@ -70,7 +69,7 @@ export const fetchProgram = createAsyncThunk("features/fetchProgram", async (id:
     })
 ); 
 
-export const fetchSchedule = createAsyncThunk("features/fetchSchedule", async (id: string) => 
+export const getSchedule = createAsyncThunk("features/getSchedule", async (id: string) => 
     Axios.put('/api/loadSchedule/' + id)
     .then((response) => {
         const courses = response.data.courses as CourseType[];

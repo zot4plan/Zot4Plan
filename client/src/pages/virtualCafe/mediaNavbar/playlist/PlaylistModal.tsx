@@ -1,14 +1,16 @@
+import { useDispatch } from "react-redux";
 import Xmark from "../../../../components/icon/Xmark";
 import { playlists } from "../../data/data";
 import MusicNote from "../../../../components/icon/MusicNote";
 import styles from './PlaylistModal.module.css';
+import { changePlaylist } from "../../../../store/slices/VirtualCafeSlice";
+
 interface PlaylistModalProps {
     handleClose: () => void;
-    setPlaylist: (playlist:any) => void;
 }
 
-function PlaylistModal({handleClose, setPlaylist}: PlaylistModalProps) {
-
+function PlaylistModal({handleClose}: PlaylistModalProps) {
+    const dispatch = useDispatch();
     return (
         <div className={styles.modal}>
             <div className={styles.modal_header}>
@@ -25,18 +27,17 @@ function PlaylistModal({handleClose, setPlaylist}: PlaylistModalProps) {
                             <ul className={styles.playlist}>
                                 {category.playlist.map((playlist)=> (
                                     <li 
-                                        key={playlist.id} 
+                                        key={playlist.playlist_id} 
                                         className={styles.item} 
                                         onClick={()=> {
-                                            setPlaylist(playlist)
+                                            dispatch(changePlaylist(playlist));
                                             handleClose();
                                         }}
                                     >
                                         <div>
                                             <span className={styles.musicNote}><MusicNote/></span>{playlist.name}
                                         </div>
-                                        
-                                        <img src={"http://img.youtube.com/vi/" + playlist.id +"/default.jpg"} 
+                                        <img src={"http://img.youtube.com/vi/" + playlist.playlist_id + "/default.jpg"} 
                                             title="YouTube Video"  
                                             alt="YouTube Video"/>
                                     </li>

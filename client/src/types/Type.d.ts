@@ -42,6 +42,22 @@ declare interface YearsType {
     allIds: string[],
 }
 
+declare interface PlaylistType {
+    playlist_id: string;
+    name: string;
+    url: string;
+    like: number;
+    view: number;
+}
+
+declare interface BackgroundType {
+    background_id: number;
+    name: string;
+    description: string; 
+    url: string;
+    like: number;
+}
+
 /***********************************/
 /*********** Payload Type **********/
 /***********************************/
@@ -123,7 +139,7 @@ declare interface GESliceType{
     sections: {[id:string]: string[]};
 }
 
-declare interface StoreSliceType {
+declare interface CourseSliceType {
     years: YearsType,
     sections: {[id:string]: string[]},
     totalUnits: number,
@@ -140,4 +156,9 @@ declare interface StoreSliceType {
     takenGeCourses: {[id:string]: string[] };
     status: string,
     isPrerequisiteCheck: boolean,
+}
+
+declare interface VirtualCafeSliceType {
+    background: BackgroundType;
+    playlist: PlaylistType;
 }

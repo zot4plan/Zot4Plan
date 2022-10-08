@@ -1,14 +1,17 @@
+import { useDispatch } from "react-redux";
 import Xmark from "../../../../components/icon/Xmark";
 import { backgrounds } from "../../data/data";
 import Youtube from '../../../../components/icon/Youtube'
 import styles from './BackgroundModal.module.css';
+import { changeBackground } from "../../../../store/slices/VirtualCafeSlice";
 
 interface SelectBackgroundProps {
-    setBackground: (background:any) => void;
     handleClose: () => void;
 }
 
-function BackgroundModal({ handleClose, setBackground }: SelectBackgroundProps) {
+function BackgroundModal({ handleClose }: SelectBackgroundProps) {
+    const dispatch = useDispatch();
+
     return (
         <div className={styles.modal}>
             <div className={styles.modal_header}>
@@ -20,17 +23,17 @@ function BackgroundModal({ handleClose, setBackground }: SelectBackgroundProps) 
             <div className={styles.modal_body}>
                 <ul>
                     {backgrounds.map((background) => (
-                        <li key={background.id} 
+                        <li key={background.background_id} 
                             onClick={() => 
                             {
-                                setBackground(background); 
+                                dispatch(changeBackground(background))
                                 handleClose();
                             }}
                         > 
-                            {background.path 
+                            {background.url 
                             ?   <img 
                                     className={styles.img_bg}
-                                    src={background.path} 
+                                    src={background.url} 
                                     alt={background.description}
                                 />
                             : <div className={styles.default}> <Youtube/> </div>}

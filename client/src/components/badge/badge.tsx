@@ -9,7 +9,7 @@ interface BadgeProps {
 }
 
 const Badge = ({geId}:BadgeProps) => {
-    const takenGeCourses = useSelector((state: RootState) => state.store.takenGeCourses[geId]);
+    const takenGeCourses = useSelector((state: RootState) => state.course.takenGeCourses[geId]);
     const numberOfCourses = takenGeCourses !== undefined ? takenGeCourses.length : 0;
     let tooltipContent = numberOfCourses === 0 
         ? <p>You have not taken any courses in this category.</p>

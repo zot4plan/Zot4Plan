@@ -1,4 +1,5 @@
 .time{
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,4 +22,18 @@
 .timer_btn:hover {
     transform: scale(1.1);
     filter: drop-shadow(2px 3px 3px #333);
+}
+
+.setting {
+    position: absolute;
+    right: 6px;
+    bottom: 3px;
+}
+
+.setting > svg {
+    font-size: 3.6rem;
+}
+
+.setting:hover > svg {
+    transform: scale(1.1);
 }

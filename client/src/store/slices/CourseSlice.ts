@@ -1,17 +1,7 @@
 import { createSlice, PayloadAction, nanoid, isAnyOf, current } from "@reduxjs/toolkit";
-import { fetchProgram, fetchGE, fetchSchedule, fetchCourse} from '../../api/FetchData'
+import { getProgram, getGE, getSchedule, getCourse } from '../../api/Controller'
 import { addCourse } from "./ProgramsSlice";
-
-const ID_LENGTH = 3; // for function AddCourseToQuarter
-const DEPT_COLORS = [
-    ['#AFD3E9', '#70ADD7', '#3688BF'], // Columbia Blue
-    ['#B1B1D3', '#8989BD', '#7C7CB6'], // Dark Blue Gray
-    ['#91A9B6', '#6C8C9D', '#628293'], // State Gray
-    ['#E4F1ED', '#C9E3DB', '#78BAA6'], // Mint Cream
-    ['#AEC3D5', '#86A5C1', '#6B91B3'], // Cerelean Frost
-    ['#C8DFE4', '#ADCFD7' ,'#5094A5'], // Columnbia Blue 
-    ['#B6CDC8', '#79A49B', '#639288'], // Wintergreen Dream
-]
+import { DEPT_COLORS, ID_LENGTH } from "../constants/Constants" 
 
 function removeLastWord(str:string) {
     const lastIndexOfSpace = str.lastIndexOf(' ');
@@ -24,11 +14,11 @@ const generateInitialState = () => {
     let yearIds = [];
     
     for(let i = 0; i < 4; i++) {
-        yearIds.push(nanoid(ID_LENGTH));
+        yearIds.push(nanoid(ID_LENGTH.YEAR));
         let quarterIds = []
 
         for(let j = 0; j < 4; j++) {
-           quarterIds.push(nanoid(ID_LENGTH));
+           quarterIds.push(nanoid(ID_LENGTH.QUARTER));
            sections[quarterIds[j]] = [] as string[];
         }
 
@@ -52,18 +42,16 @@ const generateInitialState = () => {
         isPrerequisiteCheck: true,
     }
 }
+const initialState: CourseSliceType = generateInitialState();
 
-const initialState: StoreSliceType = generateInitialState();
-
-export const storeSlice = createSlice ({
+export const courseSlice = createSlice ({
     name: "store",
     initialState,
-
 /*********************** Reducers ************************/
     reducers: {
         removeCourseQuarter: (state, action: PayloadAction<CoursePayload>) => {
             let id = action.payload.courseId;
-            state.sections[action.payload.sectionId].splice(action.payload.index,1);
+            state.sections[action.payload.sectionId].splice(action.payload.index, 1);
 
             if(state.courses[id] !== undefined) {
                 state.courses[id].remains += 1; 
@@ -86,7 +74,7 @@ export const storeSlice = createSlice ({
 
             //prevent same course from being added to a quarter
             if(!state.sections[destinationId].includes(courseId) || sourceId === destinationId) {
-                if(sourceId.length === 3) {
+                if(sourceId.length === ID_LENGTH.QUARTER) {
                     state.sections[sourceId].splice(action.payload.sourceIndex, 1); 
                 }
                 
@@ -96,9 +84,9 @@ export const storeSlice = createSlice ({
 
         addYear: (state) => {
             if(state.years.allIds.length < 9) {
-                let newYearId = nanoid(ID_LENGTH);
-                let newQuarterIds = [nanoid(ID_LENGTH), nanoid(ID_LENGTH),
-                                     nanoid(ID_LENGTH), nanoid(ID_LENGTH)];
+                let newYearId = nanoid(ID_LENGTH.YEAR);
+                let newQuarterIds = [nanoid(ID_LENGTH.QUARTER), nanoid(ID_LENGTH.QUARTER),
+                                     nanoid(ID_LENGTH.QUARTER), nanoid(ID_LENGTH.QUARTER)];
                 
                 for(let i = 0; i < 4; i++)
                     state.sections[newQuarterIds[i]] = [] as string[]
@@ -143,17 +131,15 @@ export const storeSlice = createSlice ({
             state.isPrerequisiteCheck = !state.isPrerequisiteCheck
         }
     },
-
 /********************* ExtraReducers *********************/
     extraReducers: (builder) => {
-        builder.addCase(fetchSchedule.fulfilled, (state, action) => { 
+        builder.addCase(getSchedule.fulfilled, (state, action) => { 
             state.status = action.payload.status;
             state.courses = {}; 
             state.takenGeCourses = {};
             state.totalUnits = 0;
 
             if(action.payload.status === "succeeded") {
-
                 // Add courses info 
                 action.payload.courses.forEach((course) => {                 
                     state.courses[course.course_id] = {
@@ -181,11 +167,11 @@ export const storeSlice = createSlice ({
                 // Add Year
                 if(current_len < new_len) {
                     for(let i = state.years.allIds.length; i < new_len; i++) {
-                        let yearId = nanoid(ID_LENGTH);
+                        let yearId = nanoid(ID_LENGTH.YEAR);
                         let quarterIds = []
                 
                         for(let j = 0; j < 4; j++) {
-                            quarterIds.push(nanoid(ID_LENGTH));
+                            quarterIds.push(nanoid(ID_LENGTH.QUARTER));
                             state.sections[quarterIds[j]] = [] as string[];
                         }
                         state.years.allIds.push(yearId);
@@ -220,7 +206,7 @@ export const storeSlice = createSlice ({
             }
         });
 
-        builder.addCase(fetchCourse.fulfilled, (state, action) => {
+        builder.addCase(getCourse.fulfilled, (state, action) => {
             let course = action.payload.course;
 
             if(action.payload.status === "succeeded"){
@@ -252,7 +238,7 @@ export const storeSlice = createSlice ({
             }
         });
 
-        builder.addMatcher(isAnyOf(fetchProgram.fulfilled, fetchGE.fulfilled ), (state, action) => {
+        builder.addMatcher(isAnyOf(getProgram.fulfilled, getGE.fulfilled ), (state, action) => {
             action.payload.departments.forEach((dept) => {
                 if(state.depts.byIds[dept] === undefined) { 
                     let index = state.depts.size % DEPT_COLORS.length;
@@ -271,5 +257,7 @@ export const {
     removeYear, 
     clearSchedule,
     resetStatus,
-    setIsPrerequisiteCheck } =  storeSlice.actions;
-export default storeSlice.reducer;
+    setIsPrerequisiteCheck 
+} =  courseSlice.actions;
+
+export default courseSlice.reducer;

@@ -1,8 +1,8 @@
-import {memo} from 'react'
+import { memo } from 'react'
 import { shallowEqual, useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../../../store/store';
+import { RootState } from '../../../../store/store';
 import Accordion from '../../../../components/accordion/Accordion';
-import { fetchProgram } from '../../../../api/FetchData';
+import { getProgram } from '../../../../api/Controller';
 import ProgramCarousel from './ProgramCarousel';
 
 interface PropgramProps {
@@ -14,7 +14,7 @@ function Program ({isMajor, addedCourses}:PropgramProps) {
     const programId = useSelector((state:RootState) => {
         let programType = isMajor? 1 : 0;
         let index = state.programs.index[programType];
-        return (index < 0)? 0 : state.programs.selectedPrograms[programType][index].value;
+        return index < 0 ? 0 : state.programs.selectedPrograms[programType][index].value;
     });
 
     const allIds = useSelector((state:RootState) => (
@@ -30,7 +30,7 @@ function Program ({isMajor, addedCourses}:PropgramProps) {
     let content = [] as JSX.Element [];
 
     if (status === 'idle') 
-        dispatch(fetchProgram(programId));
+        dispatch(getProgram(programId));
 
     else if (status === 'succeeded')  {
         content.push(<ProgramCarousel key="hyperlink" url={url} name={name} isMajor={isMajor}/>);
@@ -38,7 +38,7 @@ function Program ({isMajor, addedCourses}:PropgramProps) {
         allIds.forEach(id => { content.push(<Accordion key={id} id={id} programId={programId} />) });
         content.push(<div key="empty" style={{height:'42rem'}}></div>);
     }
-    else if( status === 'error')
+    else if (status === 'error')
         content.push(<div key="error" className='loading-message red'>Cannot retrieve the data...!!!</div>) 
     
     return (

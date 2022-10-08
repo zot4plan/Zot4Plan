@@ -6,7 +6,7 @@ export enum ID_LENGTH {
     ADD_COURSES = 5
 }
 
-const DEPT_COLORS = [
+export const DEPT_COLORS = [
     ['#AFD3E9', '#70ADD7', '#3688BF'], // Columbia Blue
     ['#B1B1D3', '#8989BD', '#7C7CB6'], // Dark Blue Gray
     ['#91A9B6', '#6C8C9D', '#628293'], // State Gray

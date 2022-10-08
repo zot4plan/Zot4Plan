@@ -38,10 +38,10 @@ function PopperSave () {
             setTimeout(() => {
                 const state:RootState = store.getState()
 
-                if(state.store.totalUnits > 0) {
-                    const years = state.store.years.allIds.map(id => 
-                        state.store.years.byIds[id].map(id => 
-                            state.store.sections[id]
+                if(state.course.totalUnits > 0) {
+                    const years = state.course.years.allIds.map(id => 
+                        state.course.years.byIds[id].map(id => 
+                            state.course.sections[id]
                     ));
                     const schedule = {
                         selectedPrograms: state.programs.selectedPrograms,

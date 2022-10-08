@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import {RootState} from '../../../store/store';
 import RequiredCourseButton from './RequiredCourseButton';
 import ButtonRemoveCourse from '../../button/ButtonRemoveCourse';
+import { ID_LENGTH } from '../../../store/constants/Constants';
 import '../Course.css';
 
 function getStyle(style: any, snapshot: {isDropAnimating: any;}) {
@@ -25,7 +26,7 @@ interface RequiredCourseType {
 
 function RequiredCourse({courseId, sectionId, index, handleClick}: RequiredCourseType) {
     const isDraggable = useSelector((state: RootState) =>{ 
-        let course = state.store.courses[courseId];
+        let course = state.course.courses[courseId];
         
         return course === undefined? true : course.remains > 0;
     });
@@ -53,7 +54,7 @@ function RequiredCourse({courseId, sectionId, index, handleClick}: RequiredCours
                     />
 
                     {/* Only courses add by students are removable */}
-                    {sectionId.length === 6 && 
+                    {sectionId.length === ID_LENGTH.ADD_COURSES && 
                         <ButtonRemoveCourse courseId={courseId} sectionId={sectionId} index={index}/>}
                 </div>
 

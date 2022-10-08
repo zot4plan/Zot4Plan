@@ -2,11 +2,7 @@ import { useState} from 'react';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import BackgroundModal from './BackgroundModal';
 
-interface BackgroundButtonProps {
-    setBackground: (background:any) => void;
-}
-
-const BackgroundButton = ({setBackground}: BackgroundButtonProps) => {
+const BackgroundButton = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -23,10 +19,7 @@ const BackgroundButton = ({setBackground}: BackgroundButtonProps) => {
                 onClose={handleClose}
             >
                 <div className='modal-background flex-container'>
-                    <BackgroundModal 
-                        handleClose={handleClose}
-                        setBackground={setBackground}
-                    />
+                    <BackgroundModal handleClose={handleClose}/>
                 </div>
             </ModalUnstyled>
         </>

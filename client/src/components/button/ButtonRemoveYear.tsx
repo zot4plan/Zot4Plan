@@ -1,5 +1,5 @@
 import {useDispatch} from 'react-redux';
-import { removeYear } from '../../store/slices/StoreSlice';
+import { removeYear } from '../../store/slices/CourseSlice';
 import Remove from '../icon/Remove';
 import './ButtonRemoveYear.css';
 

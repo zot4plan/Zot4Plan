@@ -1,7 +1,7 @@
-import {memo, MouseEvent, useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import { memo, MouseEvent, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../store/store';
-import { fetchCourse } from '../../../api/FetchData';
+import { getCourse } from '../../../api/Controller';
 import ReactTooltip from "react-tooltip";
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import QuarterCourseCard from './QuarterCourseCard';
@@ -63,22 +63,22 @@ function checkFulfilled(prereqs: any, taken:Set<string>) {
 
 function getPastCourses(state: RootState, sectionId: string, isGetCurrentCourse: boolean) {
     const pastCourses = new Set<string> ();
-    const yearIds = state.store.years.allIds;
+    const yearIds = state.course.years.allIds;
 
     let ended = false;
     for (let i = 0; i < yearIds.length && !ended; i++) {
         const yearId = yearIds[i];
-        const quarterIds = state.store.years.byIds[yearId];
+        const quarterIds = state.course.years.byIds[yearId];
 
         for (let j = 0; j < quarterIds.length && !ended; j++) {
             if (quarterIds[j] === sectionId) { 
                 if(isGetCurrentCourse) {
-                    state.store.sections[quarterIds[j]].forEach(course => pastCourses.add(course));
+                    state.course.sections[quarterIds[j]].forEach(course => pastCourses.add(course));
                 }
                 ended = true;
             } 
             else {
-                state.store.sections[quarterIds[j]].forEach(course => pastCourses.add(course));
+                state.course.sections[quarterIds[j]].forEach(course => pastCourses.add(course));
             }
         }
     }
@@ -88,13 +88,13 @@ function getPastCourses(state: RootState, sectionId: string, isGetCurrentCourse:
 
 function QuarterCourseButton({courseId, sectionId}: CourseButtonProps) {
     const course = useSelector((state: RootState) => 
-        state.store.courses[courseId] === undefined 
+        state.course.courses[courseId] === undefined 
             ? null 
-            : state.store.courses[courseId].data
+            : state.course.courses[courseId].data
     );
 
     const isFulfilled = useSelector((state: RootState) => {
-        if (!course || !state.store.isPrerequisiteCheck) {
+        if (!course || !state.course.isPrerequisiteCheck) {
             return true;
         }
 
@@ -117,8 +117,8 @@ function QuarterCourseButton({courseId, sectionId}: CourseButtonProps) {
         return isPrerequisitePass && isCorequisitePass;
     }); 
 
-    const units = useSelector((state: RootState) => course ? state.store.courses[courseId].data.units : null);
-    const colors = useSelector((state: RootState) => state.store.depts.byIds[removeLastWord(courseId)]);
+    const units = useSelector((state: RootState) => course ? state.course.courses[courseId].data.units : null);
+    const colors = useSelector((state: RootState) => state.course.depts.byIds[removeLastWord(courseId)]);
     const [anchorEl, setAnchorEl] = useState<HTMLElement|null>(null);
     const open = Boolean(anchorEl);
     const popperId = open ? ('popper' + sectionId + courseId) : undefined;
@@ -127,7 +127,7 @@ function QuarterCourseButton({courseId, sectionId}: CourseButtonProps) {
 
     useEffect(() => {  
         if(!course) 
-            dispatch(fetchCourse(courseId));
+            dispatch(getCourse(courseId));
     },[course, courseId, dispatch]); 
 
     const handleClick = (event: MouseEvent<HTMLElement>) => {

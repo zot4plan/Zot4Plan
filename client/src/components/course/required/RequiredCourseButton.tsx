@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../../store/store';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
 
 interface CourseButtonType {
     id: string;
@@ -13,10 +13,10 @@ function removeLastWord(str: string) {
 }
 
 function RequiredCourseButton({id, isCrossed}: CourseButtonType) {
-    let bgColor = useSelector((state: RootState) => state.store.depts.byIds[removeLastWord(id)][2]);
+    let bgColor = useSelector((state: RootState) => state.course.depts.byIds[removeLastWord(id)][2]);
 
     const isTaken = useSelector((state: RootState) =>{ 
-        let course = state.store.courses[id];
+        let course = state.course.courses[id];
         return course === undefined? false : course.remains < course.data.repeatability;
     });
 

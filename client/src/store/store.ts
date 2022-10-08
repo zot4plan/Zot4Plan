@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import ProgramsReducer from "./slices/ProgramsSlice";
 import GEReducer from "./slices/GESlice";
-import StoreReducer from "./slices/StoreSlice";
+import CourseReducer from "./slices/CourseSlice";
+import VirtualCafeReducre from "./slices/VirtualCafeSlice";
 
 export const store = configureStore ({
     reducer: {
-       store: StoreReducer,
+       course: CourseReducer,
        programs: ProgramsReducer,
        ge: GEReducer,
+       virtualCafe: VirtualCafeReducre,
     },
 })
 

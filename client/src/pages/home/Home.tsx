@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { moveCourse} from '../../store/slices/StoreSlice';
+import { moveCourse} from '../../store/slices/CourseSlice';
 import Buttons from './buttons/Buttons';
 import Schedule from './schedule/Schedule';
 import Tabs from './tabs/Tabs';
@@ -9,7 +9,7 @@ import './Home.css';
 
 function App() {
     const dispatch = useDispatch();
-    const onDragEnd = (result: DropResult ) => {
+    const onDragEnd = (result: DropResult) => {
         const { source, destination, draggableId } = result;
         if(!destination) return;
 

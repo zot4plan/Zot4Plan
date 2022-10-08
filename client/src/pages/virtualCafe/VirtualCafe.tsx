@@ -1,35 +1,34 @@
-import { useState } from 'react';
 import Header from '../../components/header/Header';
-import MediaNavbar from './mediaNavbar/MediaNavbar';
-import VirtualCafeGrid from './grid/VirtualCafeGrid';
-import { backgrounds } from './data/data';
-import { playlists } from './data/data';
+import TimeContainer from './grid/timer/TimeContainer';
+import Background from './grid/background/Background';
+import Playlist from './grid/playlist/Playlist';
+import Boba from "../../assets/snacks/boba.png"
+import Cookie from "../../assets/snacks/cookie.png"
+import Clock from './mediaNavbar/clock/Clock';
+import BackgroundButton from './mediaNavbar/background/BackgroundButton';
+import PlaylistButton from './mediaNavbar/playlist/PlaylistButton';
 import './VirtualCafe.css';
 
-interface BackgroundProps {
-    id: number;
-    description: string; 
-    path: string;
-}
-
-interface PlayListProps {
-    id: string;
-    name: string;
-    url: string;
-}
-
 function VirtualCafe() {
-    const [background, setBackground] = useState(backgrounds[3]);
-    const [playlist, setPlaylist] = useState(playlists[0].playlist[0]);
-
-    const changeBackground = (item: BackgroundProps) => setBackground(item);
-    const changePlaylist = (item: PlayListProps) => setPlaylist(item);
-
     return (
         <div className="virtual-cafe">
             <Header path="/virtual-cafe"/>
-            <VirtualCafeGrid background={background} playlist={playlist.url}/>
-            <MediaNavbar setBackground={changeBackground} setPlaylist={changePlaylist}/>
+            <div className="virtual-grid-container">
+                <TimeContainer/>
+                <div className="snack-container">
+                    <img className="snack" src={Boba} alt="Cup of Boba Milk Tea Icon"/>
+                    <img className="snack" src={Cookie} alt="Cup of Coffee Icon"/>
+                </div>
+                <div className="video-container">
+                    <Background/>
+                    <Playlist/>
+                </div>
+            </div>   
+            <ul className="media-nav">
+                <li><Clock/></li>
+                <li><BackgroundButton/></li>
+                <li><PlaylistButton/></li>
+            </ul> 
         </div>
     );
 }

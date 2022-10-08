@@ -15,7 +15,7 @@ interface YearProps {
 function Year({id, name, index}:YearProps) {
     const QUARTER_NAMES = ["Fall", "Winter","Spring","Summer"];
     const QUARTER_CLASS= ["fall", "winter","spring","summer"];
-    const quarterIds = useSelector((state:RootState) => (state.store.years.byIds[id]), shallowEqual);
+    const quarterIds = useSelector((state:RootState) => (state.course.years.byIds[id]), shallowEqual);
 
     return (
         <details open key={id} style={{marginBottom: '2.5rem'}}>

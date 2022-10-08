@@ -14,14 +14,14 @@ function removeLastWord(str: string) {
 
 function QuarterCourseCard({id}: CourseCardProps) {
     const course = useSelector((state:RootState) =>  
-        id && state.store.courses[id] !== undefined 
-        ? state.store.courses[id].data
+        id && state.course.courses[id] !== undefined 
+        ? state.course.courses[id].data
         : null
     )
 
     const colors = useSelector((state:RootState) => 
         id 
-        ? state.store.depts.byIds[removeLastWord(id)] 
+        ? state.course.depts.byIds[removeLastWord(id)] 
         : ['#AFD3E9', '#70ADD7', '#3688BF']
     )
 
