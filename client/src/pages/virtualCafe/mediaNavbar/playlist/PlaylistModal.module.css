@@ -3,9 +3,9 @@
     border: 1px solid #ccc;
     background: #fff;
     outline: none;
-    padding: 2rem;
+    padding: 2rem 1rem;
     border-radius: 2.4rem;
-    width: 350px;
+    width: 400px;
     height: 500px;
 }
   
@@ -25,45 +25,11 @@
 .modal_body {
     background: #fff;
     padding: 0rem 1rem;
-}
-.modal_body > ul {
-    height: 405px;
-    width: 300px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: 'touch';
 }
-
-.default {
-    width: 95%;
-    height: 140px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid black;
-    border-radius: 2.4rem;
-    margin: 0.5rem;
-}
-
-.default > svg {
-    font-size: 9rem;
-}
-
-.img_bg{
-    width: 98%;
-    height: auto;
-    border-radius: 2.4rem;
-    padding: 0.5rem;
-}
-  
-.img_bg:hover{
-    transform: scale(1.02);
-    filter: drop-shadow(2px 3px 3px #333);
-    cursor: pointer;
-}
-
-.default:hover{ 
-    transform: scale(1.02);
-    cursor: pointer;
+.modal_body > ul {
+    height: 405px;
 }
 
 .x_icon {
@@ -81,4 +47,30 @@
     color:white;
     transform: scale(1.1);
     filter: drop-shadow(2px 3px 3px #333);
+}
+
+.playlist {
+    padding: 1rem 0rem;
+}
+
+.playlist > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.playlist > li > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.musicNote > svg {
+    font-size: 2.4rem;
+}
+
+.item {
+    cursor: pointer;
+    margin-bottom: 1rem;
 }

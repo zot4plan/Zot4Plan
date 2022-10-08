@@ -1,43 +1,44 @@
-import { useState } from 'react';
-import Timer from './timer/Timer';
+import Time from './timer/Time';
 import Boba from "../assets/images/snacks/boba.png"
 import Cookie from "../assets/images/snacks/cookie.png"
 import styles from './VirtualCafeGrid.module.css';
+import MusicNotes from '../../../components/icon/MusicNotes';
 
 interface VirtualCafeGridProps {
     background: {
         id: number,
-        path: string,
+        path: string | null,
         description: string
-    }
-    time: {
-        study: number,
-        break: number
-    }
+    },
+    playlist: string;
 }
 
-function VirtualCafeGrid({background, time}:VirtualCafeGridProps) {
-    const [isStart, setIsStart] = useState(false);
-    const handleStart = () => setIsStart(true);
-    
+function VirtualCafeGrid({background, playlist}:VirtualCafeGridProps) {
+
     return (
         <div className={styles.grid_container}>
-            <div className={styles.time}>
-                {!isStart
-                ? <>
-                    <button onClick={handleStart} className={styles.timer_btn}>Start Timer</button>
-                    <button className={styles.timer_btn}>Set Timer</button>
-                </>
-                : <Timer studyTime={time.study} breakTime={time.break}/>}
-            </div>
+            <Time/>
             <div className={styles.snack_container}>
-                <img className={styles.snack_icon} src={Boba} alt="Cup of Boba Milk Tea Icon"/>
-                <img className={styles.snack_icon} src={Cookie} alt="Cup of Coffee Icon"/>
+                <img className={styles.snack} src={Boba} alt="Cup of Boba Milk Tea Icon"/>
+                <img className={styles.snack} src={Cookie} alt="Cup of Coffee Icon"/>
             </div>
-            <div className={styles.background_images}>
-                <img  
-                    src={background.path} 
-                    alt={background.description}
+            <div className={styles.videoContainer}>
+                {background.path &&
+                <>
+                    <img  
+                        src={background.path} 
+                        alt={background.description}
+                    />
+                    <p className={styles.p}> Click image to play/stop <span> <MusicNotes/> </span> </p>
+                </>}
+                <iframe 
+                    width="560" 
+                    height="315"
+                    style={{opacity: background.path? 0.0001 : 1}} 
+                    src={playlist}
+                    title="YouTube video player" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" 
                 />
             </div>
         </div>   

@@ -1,47 +1,20 @@
-import { useState} from 'react';
-import ModalUnstyled from '@mui/base/ModalUnstyled';
-import Song from '../assets/audio/Intellect.mp3';
 import Clock from './clock/Clock';
-import BackgroundModal from './background/BackgroundModal';
 import styles from './MediaNavbar.module.css';
+import BackgroundButton from './background/BackgroundButton';
+import PlaylistButton from './playlist/PlaylistButton';
 
 interface MediaNavbarProps {
     setBackground: (background:any) => void;
+    setPlaylist: (playlist:any) => void;
 }
 
-const MediaNav = ({setBackground}: MediaNavbarProps) => {
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+const MediaNav = ({setBackground, setPlaylist}: MediaNavbarProps) => {
 
     return (       
         <ul className={styles.media_nav}>
-            <li> 
-                <Clock/>
-            </li>
-            <li>  
-                <audio controls loop>
-                    <source src={Song} type='audio/mpeg'/>
-                </audio>
-            </li>
-            <li>
-                <button className='virtual-cafe-button' onClick={handleOpen}>
-                    Background
-                </button>
-                <ModalUnstyled
-                    aria-labelledby="list of backgrounds"
-                    aria-describedby="select background"
-                    open={open}
-                    onClose={handleClose}
-                >
-                    <div className='modal-background flex-container'>
-                        <BackgroundModal 
-                            handleClose={handleClose}
-                            setBackground={setBackground}
-                        />
-                    </div>
-                </ModalUnstyled>
-            </li>
+            <li><Clock/></li>
+            <li><BackgroundButton setBackground={setBackground}/></li>
+            <li><PlaylistButton setPlaylist={setPlaylist}/></li>
         </ul>     
     )
 }

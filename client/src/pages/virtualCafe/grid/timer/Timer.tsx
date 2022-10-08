@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import PauseIcon from '../../../../components/icon/PauseIcon';
+import PauseIcon from '../../../../components/icon/MusicNote';
 import PlayIcon from '../../../../components/icon/PlayIcon';
 import styles from './Timer.module.css';
 

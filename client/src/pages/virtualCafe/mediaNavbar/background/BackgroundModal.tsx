@@ -1,5 +1,6 @@
 import Xmark from "../../../../components/icon/Xmark";
 import { backgrounds } from "../../data/data";
+import Youtube from '../../../../components/icon/Youtube'
 import styles from './BackgroundModal.module.css';
 
 interface SelectBackgroundProps {
@@ -19,17 +20,20 @@ function BackgroundModal({ handleClose, setBackground }: SelectBackgroundProps) 
             <div className={styles.modal_body}>
                 <ul>
                     {backgrounds.map((background) => (
-                        <li key={background.id}>       
-                            <img 
-                                className={styles.img_bg}
-                                src={background.path} 
-                                alt={background.description}
-                                onClick={() => 
-                                {
-                                    setBackground(background); 
-                                    handleClose();
-                                }}
-                            />
+                        <li key={background.id} 
+                            onClick={() => 
+                            {
+                                setBackground(background); 
+                                handleClose();
+                            }}
+                        > 
+                            {background.path 
+                            ?   <img 
+                                    className={styles.img_bg}
+                                    src={background.path} 
+                                    alt={background.description}
+                                />
+                            : <div className={styles.default}> <Youtube/> </div>}
                         </li>
                     ))}
                 </ul>
