@@ -4,6 +4,8 @@ import { backgrounds, playlists } from "../../pages/virtualCafe/data/data";
 const initialState:VirtualCafeSliceType = {
     background: backgrounds[3],
     playlist: playlists[0].playlist[0],
+    playlists: [],
+    share: []
 }
 
 export const VirtualCafeSlice = createSlice ({

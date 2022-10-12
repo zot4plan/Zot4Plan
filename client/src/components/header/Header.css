@@ -27,9 +27,14 @@
     font-size: 2rem;
 }
 
+.nav-item > button {
+    font-size: 2rem;
+    color: white;
+}
+
 .nav-item,
 .nav-item > a {
-    color: white;;
+    color: white;
 }
 
 .nav-item:hover, 

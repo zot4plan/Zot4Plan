@@ -1,0 +1,49 @@
+.form {
+    background-color: white;
+    border-radius: 1.6rem;
+    padding: 2rem;
+}
+
+.form > label {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.selectWrapper > select {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+}
+
+.selectWrapper {
+    position: relative;
+}
+
+.selectWrapper > .arrowDown {
+    top: 6px;
+    right: 10px;
+    position: absolute;
+}
+
+.form > label > span {
+    padding-left: 1rem;
+}
+
+.form > label > input, .selectWrapper > select {
+    height: 3.2rem;
+    border: 2px solid #B5838D;
+    border-radius: 1.6rem;
+    padding-left: 1rem;
+}
+
+.form > div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 1rem;
+}

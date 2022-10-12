@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Xmark from '../../../icon/Xmark';
+import Xmark from '../../../../components/icon/Xmark';
 import styles from './Task.module.css';
 
 interface TaskProps {

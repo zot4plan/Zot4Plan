@@ -9,7 +9,11 @@ module.exports = (sequelize, DataType) => {
             type: DataType.JSON,
             allowNull:false,
         },
-        last_access_date: {
+        active_date: {
+            type: DataType.DATEONLY,
+            allowNull:false,
+        },
+        created_date: {
             type: DataType.DATEONLY,
             allowNull:false,
         }

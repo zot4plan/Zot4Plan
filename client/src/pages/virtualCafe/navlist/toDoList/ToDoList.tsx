@@ -2,7 +2,7 @@ import { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import Task from "./Task";
 import AddTaskForm from "./AddTaskForm";
-import Xmark from '../../../icon/Xmark';
+import Xmark from '../../../../components/icon/Xmark';
 import styles from "./ToDoList.module.css";
 
 interface ToDoListProps {
@@ -26,9 +26,9 @@ function ToDoList({ handleClose }: ToDoListProps) {
  
 return (
         <div className={styles.modal}>
-            <div className={styles.modal_header} style={{backgroundColor:"white"}}>
+            <div className={styles.modal_header}>
                 <h1>To-Do List!</h1>
-                <button onClick={handleClose} className={styles.x_icon}> 
+                <button onClick={handleClose} className='virtual-cafe-x-button'> 
                     <Xmark/>
                 </button>
             </div>

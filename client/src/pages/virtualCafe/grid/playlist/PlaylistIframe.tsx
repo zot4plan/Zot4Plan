@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/store';
 
-function Playlist() {
+function PlaylistIframe() {
     const opacity = useSelector((state:RootState) => state.virtualCafe.background.url ? 0.0001 : 1);
-    const playlist = useSelector((state:RootState) => state.virtualCafe.playlist.url);
+    const playlist = useSelector((state:RootState) => state.virtualCafe.playlist.embed_url);
     return (
         <iframe 
             width="560" 
@@ -17,4 +17,4 @@ function Playlist() {
     );
 }
 
-export default Playlist;
+export default PlaylistIframe;

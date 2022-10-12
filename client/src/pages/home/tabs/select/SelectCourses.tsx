@@ -1,24 +1,15 @@
-import {useState,memo, MouseEvent} from 'react';
+import { useState,memo, MouseEvent } from 'react';
 import  { StylesConfig } from "react-select";
 import AsyncSelect  from 'react-select/async';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import {RootState} from '../../../../store/store';
-import {addCourse} from '../../../../store/slices/ProgramsSlice';
-import Axios from '../../../../api/Axios';
+import { RootState } from '../../../../store/store';
+import { addCourse } from '../../../../store/slices/ProgramsSlice';
+import { getCourses } from '../../../../api/HomeController';
 import AddIcon from '../../../../components/icon/AddIcon';
 import Message from '../../../../components/message/Message';
 import './SelectCourses.css';
 
-interface OptionType {
-    value: string;
-    label: string;
-}
-
-interface CourseType{
-    course_id:string;
-}
-
-const myStyle: StylesConfig<OptionType, false> =  {
+const myStyle: StylesConfig<CourseOptionType, false> =  {
     control: (provided) => ({
         ...provided, 
         width: '100%',
@@ -40,22 +31,6 @@ const myStyle: StylesConfig<OptionType, false> =  {
     indicatorsContainer: (provided)=> ({
         ...provided, marginRight: '3.7rem'
     }),
-}
-
-// Search courses from databases
-const promiseOptions = (inputValue: string, callback:(options: OptionType[]) => void) => {
-    let filterCourse:OptionType[] = [];
-
-    if(inputValue.length < 3)
-        callback(filterCourse);
-    else 
-        setTimeout(() => {
-            Axios.get('/api/filterCourses', {
-                params: { id: inputValue }}).then((res) => {
-                    res.data.forEach((course:CourseType) => filterCourse.push({value: course.course_id, label: course.course_id}))
-                    callback(filterCourse);
-            });
-        }, 500);
 }
 
 function SelectCourses() {
@@ -83,7 +58,7 @@ function SelectCourses() {
             setMessage({content: content + " has already been added!", status: status})
     };
 
-    const handleOnChange = (option: OptionType | null) => {
+    const handleOnChange = (option: CourseOptionType | null) => {
         if(option)
             setSelectCourse(option.value);
         else
@@ -97,7 +72,7 @@ function SelectCourses() {
                     isClearable={true}
                     cacheOptions 
                     defaultOptions
-                    loadOptions={promiseOptions}
+                    loadOptions={getCourses}
                     isOptionDisabled={(option)=> addedCourses.includes(option.label)}
                     onChange={handleOnChange}
                     styles={myStyle}

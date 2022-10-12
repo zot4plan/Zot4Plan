@@ -1,23 +1,22 @@
-import {memo, useState, MouseEvent} from 'react';
+import {memo, FC, useState, MouseEvent} from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../icon/Logo';
 import Bars from '../icon/Bars';
-import HomeNavList from './home/HomeNavList';
-import VirtualCafeNavList from './virtualCafe/VirtualCafeNavList';
 import './Header.css';
 
 interface HeaderProps {
     path: string;
+    className?: string;
+    heartColor: string;
+    NavList: FC<NavListProps>;
 }
 
-function Header ({path}:HeaderProps) {
+function Header ({path, className = '', heartColor, NavList}: HeaderProps) {
     const [active, setActive] = useState(false);
-
     const handleOnClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setActive(!active);
     };
-
     const resetActive = () => setActive(false);
 
     const style = path === '/virtual-cafe'
@@ -27,17 +26,13 @@ function Header ({path}:HeaderProps) {
     return (
         <nav className="navbar" style={style}>        
             <Link to="/home" id="brand" onClick={resetActive}>
-                <Logo heartColor={path === '/virtual-cafe'? '#FFFFFF' : 'var(--accent-color-2)'}/>
+                <Logo heartColor={heartColor}/>
             </Link>
         
             <button id="menu-toggle" onClick={handleOnClick}>
                 <Bars/>
             </button>
-            {
-                path !== '/virtual-cafe' 
-                ? <HomeNavList isActive={active}/>
-                : <VirtualCafeNavList isActive = {active}/>
-            }
+            <NavList isActive={active}/>
         </nav>
     )
 }

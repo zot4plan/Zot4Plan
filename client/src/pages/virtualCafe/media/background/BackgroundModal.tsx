@@ -5,18 +5,14 @@ import Youtube from '../../../../components/icon/Youtube'
 import styles from './BackgroundModal.module.css';
 import { changeBackground } from "../../../../store/slices/VirtualCafeSlice";
 
-interface SelectBackgroundProps {
-    handleClose: () => void;
-}
-
-function BackgroundModal({ handleClose }: SelectBackgroundProps) {
+function BackgroundModal({ handleClose }: ModalProps) {
     const dispatch = useDispatch();
 
     return (
         <div className={styles.modal}>
             <div className={styles.modal_header}>
                 <h1> Select a Background </h1>
-                <button className={styles.x_icon} onClick={handleClose}>
+                <button className='virtual-cafe-x-button' onClick={handleClose}>
                     <Xmark/>
                 </button>
             </div>

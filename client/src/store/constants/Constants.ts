@@ -1,9 +1,9 @@
 export enum ID_LENGTH {
-    YEAR = 1,
-    QUARTER = 2,
-    PROGRAM_SECTION = 3,
-    GE_SECTION = 4,
-    ADD_COURSES = 5
+    YEAR = 3,
+    QUARTER = 4,
+    PROGRAM_SECTION = 5,
+    GE_SECTION = 6,
+    ADD_COURSES = 7
 }
 
 export const DEPT_COLORS = [

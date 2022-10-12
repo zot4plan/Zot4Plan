@@ -1,10 +1,10 @@
 import { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllGE } from '../../../api/Controller';
+import { getAllGE } from '../../../api/HomeController';
 import { RootState } from '../../../store/store';
 import GeneralEducation from './generalEducation/GeneralEducation';
 import Program from './program/Program';
-import SelectProgram from './selects/SelectProgram';
+import SelectProgram from './select/SelectProgram';
 
 import './Tabs.css';
 

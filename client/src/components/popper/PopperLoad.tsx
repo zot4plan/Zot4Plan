@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, MouseEvent} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSchedule } from '../../api/Controller';
+import { getSchedule } from '../../api/HomeController';
 import { RootState } from '../../store/store';
 import { resetStatus } from '../../store/slices/CourseSlice';
 import Confetti from 'react-confetti';
@@ -72,8 +72,8 @@ function PopperLoad () {
                     width={240}
                     height={160}
                     recycle={false}
-                    numberOfPieces={100}
-                    tweenDuration={300}
+                    numberOfPieces={50}
+                    tweenDuration={100}
                     onConfettiComplete={handleOnConfettiComplete}
                 />}
         </div>  

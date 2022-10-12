@@ -1,7 +1,7 @@
 import {memo, useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../store/store";
-import { getGE } from '../../api/Controller';
+import { getGE } from '../../api/HomeController';
 import ChervonRight from '../icon/ChervonRight';
 import Detail from './Detail';
 import './Accordion.css';

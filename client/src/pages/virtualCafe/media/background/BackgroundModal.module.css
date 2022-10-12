@@ -65,20 +65,3 @@
     transform: scale(1.02);
     cursor: pointer;
 }
-
-.x_icon {
-    position: absolute;
-    top: 1.6rem;
-    right: 1.6rem;
-}
-
-.x_icon > svg {
-    font-size: 2rem;
-}
-  
-.x_icon:hover{
-    cursor: pointer;
-    color:white;
-    transform: scale(1.1);
-    filter: drop-shadow(2px 3px 3px #333);
-}

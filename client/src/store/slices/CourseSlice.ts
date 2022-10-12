@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, nanoid, isAnyOf, current } from "@reduxjs/toolkit";
-import { getProgram, getGE, getSchedule, getCourse } from '../../api/Controller'
+import { getProgram, getGE, getSchedule, getCourse } from '../../api/HomeController'
 import { addCourse } from "./ProgramsSlice";
 import { DEPT_COLORS, ID_LENGTH } from "../constants/Constants" 
 
@@ -50,6 +50,7 @@ export const courseSlice = createSlice ({
 /*********************** Reducers ************************/
     reducers: {
         removeCourseQuarter: (state, action: PayloadAction<CoursePayload>) => {
+            console.log(action.payload);
             let id = action.payload.courseId;
             state.sections[action.payload.sectionId].splice(action.payload.index, 1);
 
@@ -134,87 +135,22 @@ export const courseSlice = createSlice ({
 /********************* ExtraReducers *********************/
     extraReducers: (builder) => {
         builder.addCase(getSchedule.fulfilled, (state, action) => { 
-            state.status = action.payload.status;
+            state.status = "succeeded";
             state.courses = {}; 
             state.takenGeCourses = {};
             state.totalUnits = 0;
 
-            if(action.payload.status === "succeeded") {
-                // Add courses info 
-                action.payload.courses.forEach((course) => {                 
-                    state.courses[course.course_id] = {
-                        data: course,
-                        remains: course.repeatability,
-                    }
-                    
-                    if(state.depts.byIds[course.department] === undefined) { 
-                        let index = state.depts.size % DEPT_COLORS.length;
-                        state.depts.byIds[course.department] = DEPT_COLORS[index]
-                        state.depts.size += 1;
-                    }
-
-                    course["courses_in_ge.ge_list"].forEach((ge: string) => {
-                        if (!state.takenGeCourses.hasOwnProperty(ge)) {
-                            state.takenGeCourses[ge] = [] as string[];
-                        }
-                        state.takenGeCourses[ge].push(course.course_id)
-                    });
-                })
-
-                let new_len = action.payload.years.length;
-                let current_len = state.years.allIds.length;
-
-                // Add Year
-                if(current_len < new_len) {
-                    for(let i = state.years.allIds.length; i < new_len; i++) {
-                        let yearId = nanoid(ID_LENGTH.YEAR);
-                        let quarterIds = []
+            // Add courses info 
+            action.payload.courses.forEach((course) => {                 
+                state.courses[course.course_id] = {
+                    data: course,
+                    remains: course.repeatability,
+                }
                 
-                        for(let j = 0; j < 4; j++) {
-                            quarterIds.push(nanoid(ID_LENGTH.QUARTER));
-                            state.sections[quarterIds[j]] = [] as string[];
-                        }
-                        state.years.allIds.push(yearId);
-                        state.years.byIds[yearId] = quarterIds;
-                    }
-                }
-                // Remove Year
-                else {
-                    for(let i = current_len - 1; i >= new_len; i--) {
-                        let yearId = state.years.allIds[i];
-                        state.years.byIds[yearId].forEach((id) => {
-                            delete state.sections[id];
-                        })
-                        delete state.years.byIds[yearId];
-                        state.years.allIds.pop();
-                    }
-                }
-
-                // Add Courses to Years
-                action.payload.years.forEach((year, i) => {
-                    let yearId = state.years.allIds[i];
-                    year.forEach((quarter, j) => {
-                        quarter.forEach(course => {
-                            state.courses[course].remains -= 1;
-                            state.totalUnits += state.courses[course].data.units[1];
-                        })
-                        
-                        let quarterId = state.years.byIds[yearId][j];
-                        state.sections[quarterId] = quarter;
-                    })
-                })
-            }
-        });
-
-        builder.addCase(getCourse.fulfilled, (state, action) => {
-            let course = action.payload.course;
-
-            if(action.payload.status === "succeeded"){
-                if(state.courses[course.course_id] === undefined) {
-                    state.courses[course.course_id] = {
-                        data: course,
-                        remains: course.repeatability,
-                    }
+                if(state.depts.byIds[course.department] === undefined) { 
+                    let index = state.depts.size % DEPT_COLORS.length;
+                    state.depts.byIds[course.department] = DEPT_COLORS[index]
+                    state.depts.size += 1;
                 }
 
                 course["courses_in_ge.ge_list"].forEach((ge: string) => {
@@ -223,10 +159,72 @@ export const courseSlice = createSlice ({
                     }
                     state.takenGeCourses[ge].push(course.course_id)
                 });
+            })
 
-                state.courses[course.course_id].remains -= 1;
-                state.totalUnits += course.units[1];
+            let new_len = action.payload.years.length;
+            let current_len = state.years.allIds.length;
+
+            // Add Year
+            if(current_len < new_len) {
+                for(let i = state.years.allIds.length; i < new_len; i++) {
+                    let yearId = nanoid(ID_LENGTH.YEAR);
+                    let quarterIds = []
+            
+                    for(let j = 0; j < 4; j++) {
+                        quarterIds.push(nanoid(ID_LENGTH.QUARTER));
+                        state.sections[quarterIds[j]] = [] as string[];
+                    }
+                    state.years.allIds.push(yearId);
+                    state.years.byIds[yearId] = quarterIds;
+                }
             }
+
+            // Remove Year
+            else {
+                for(let i = current_len - 1; i >= new_len; i--) {
+                    let yearId = state.years.allIds[i];
+                    state.years.byIds[yearId].forEach((id) => {
+                        delete state.sections[id];
+                    })
+                    delete state.years.byIds[yearId];
+                    state.years.allIds.pop();
+                }
+            }
+
+            // Add Courses to Years
+            action.payload.years.forEach((year, i) => {
+                let yearId = state.years.allIds[i];
+                year.forEach((quarter, j) => {
+                    quarter.forEach(course => {
+                        state.courses[course].remains -= 1;
+                        state.totalUnits += state.courses[course].data.units[1];
+                    })
+                    
+                    let quarterId = state.years.byIds[yearId][j];
+                    state.sections[quarterId] = quarter;
+                })
+            })
+        });
+
+        builder.addCase(getCourse.fulfilled, (state, action) => {
+            let course = action.payload.course;
+
+            if(state.courses[course.course_id] === undefined) {
+                state.courses[course.course_id] = {
+                    data: course,
+                    remains: course.repeatability,
+                }
+            }
+
+            course["courses_in_ge.ge_list"].forEach((ge: string) => {
+                if (!state.takenGeCourses.hasOwnProperty(ge)) {
+                    state.takenGeCourses[ge] = [] as string[];
+                }
+                state.takenGeCourses[ge].push(course.course_id)
+            });
+
+            state.courses[course.course_id].remains -= 1;
+            state.totalUnits += course.units[1]; 
         });
 
         builder.addCase(addCourse, (state, action) => {
@@ -247,6 +245,11 @@ export const courseSlice = createSlice ({
                 }
             })
         })
+
+        builder.addMatcher(isAnyOf(getProgram.rejected, getGE.rejected, getCourse.rejected, getSchedule.rejected), (state, _) => {
+            state.status = "failed";
+        })
+
     },
 });
 

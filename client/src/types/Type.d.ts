@@ -7,6 +7,15 @@ declare interface ProgramOption {
     is_major: boolean;
 }
 
+declare interface CourseOptionType {
+    value: string;
+    label: string;
+}
+
+declare interface CourseIdType {
+    course_id: string;
+}
+
 declare interface RequirementType {
     name: string;
     child: ({name:string, child:(string|string[])[]})[]; // need to be rename 
@@ -44,8 +53,14 @@ declare interface YearsType {
 
 declare interface PlaylistType {
     playlist_id: string;
+    thumbnail: string | null;
     name: string;
-    url: string;
+    author: string | null;
+    share_by: string | null;
+    original_url: string;
+    embed_url: string;
+    language: string;
+    genre: string[];
     like: number;
     view: number;
 }
@@ -56,6 +71,21 @@ declare interface BackgroundType {
     description: string; 
     url: string;
     like: number;
+}
+
+declare interface SharePlaylistType {
+    playlist_id: string;
+    original_url: string;
+    embed_url: string;
+    name: string;
+}
+
+declare interface ModalProps {
+    handleClose: () => void
+}
+
+declare interface NavListProps {
+    isActive: boolean;
 }
 
 /***********************************/
@@ -161,4 +191,6 @@ declare interface CourseSliceType {
 declare interface VirtualCafeSliceType {
     background: BackgroundType;
     playlist: PlaylistType;
+    playlists: {name: string; songs: PlaylistType[]}[];
+    share: SharePlaylistType[];
 }

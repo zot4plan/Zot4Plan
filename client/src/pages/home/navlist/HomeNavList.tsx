@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
-import ArrowDown from '../../icon/ArrowDown';
+import ArrowDown from '../../../components/icon/ArrowDown';
+import ModalButton from '../../../components/modal/ModalButton';
 import DropDown from './resource/DropDown'
-import Tutorial from './tutorial/Tutorial';
+import TutorialModal from './tutorial/TutorialModal';
 
-interface HomeNavListProp {
-    isActive: boolean;
-}
-function HomeNavList ({isActive}: HomeNavListProp) {
+function HomeNavList ({isActive}: NavListProps) {
     return (
         <ul className={"nav-list " + (isActive? "nav-list-show ": "")}>
             <li className='nav-item'>
@@ -18,7 +16,7 @@ function HomeNavList ({isActive}: HomeNavListProp) {
             </li>
 
             <li className='nav-item'>
-                <Tutorial/> 
+                <ModalButton label="Tutorial" className="flex-container" ModalContent={TutorialModal}/> 
             </li>
 
             <li className='nav-item'>

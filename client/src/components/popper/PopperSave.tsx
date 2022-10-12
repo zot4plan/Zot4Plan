@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, MouseEvent} from 'react';
 import { useStore } from 'react-redux';
 import { RootState } from '../../store/store';
-import Axios from '../../api/Axios';
+import { addOrEditSchedule } from '../../api/HomeController';
 import Confetti from 'react-confetti';
 import Message from '../message/Message';
 import './PopperSaveLoad.css';
@@ -12,8 +12,6 @@ const scheduleNameNote = "Other users might be able to access and modify your sc
                         + ", so please try to use a unique name.";
 const minLengthMessage = "Must contain at least " + minLength + " characters!";
 const spaceMessage = "Cannot contain white spaces!";
-const succeeded = "Saved successfully!";
-const failed = "Failed to save schedule";
 const noCourses= "Please add courses before saving!!!";
 
 function PopperSave () {
@@ -49,13 +47,7 @@ function PopperSave () {
                         years: years as string[][][],
                     };
 
-                    Axios.put('/api/saveSchedule/' + name, {schedule: schedule})
-                    .then(() => {
-                        setMessage({status: "succeeded", content: succeeded})
-                    })
-                    .catch(() => {
-                        setMessage({status: "failed", content: failed})
-                    })
+                    addOrEditSchedule(name, schedule, setMessage);
                 }
                 else
                     setMessage({status: "failed", content: noCourses});

@@ -26,6 +26,7 @@ db.general_education = require("./general_education.model.js")(sequelize,Sequeli
 db.courses_in_ge = require("./courses_in_ge.model.js")(sequelize, Sequelize);
 db.schedules= require("./schedules.model.js")(sequelize, Sequelize);
 db.visits = require("./visits.model.js")(sequelize, Sequelize);
+db.playlists = require("./playlists.model.js")(sequelize, Sequelize);
 
 // courses_in_ge associations
 db.courses.hasMany(db.courses_in_ge, {foreignKey: 'course_id', as: 'courses_in_ge'});

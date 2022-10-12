@@ -3,7 +3,7 @@ const Programs = db.programs;
 const visits = require("./visits.controller.js");
 
 exports.getAllPrograms = (_req, res) => {
-    visits.countVisits();
+    visits.updateHomeVisits();
     Programs
     .findAll({ attributes: [['program_id','value'],['name','label'],'is_major']})
     .then(data => {

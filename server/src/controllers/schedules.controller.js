@@ -9,8 +9,10 @@ exports.upsertSchedule = (req, res) => {
     .upsert({
         schedule_id: req.params.id, 
         schedule: req.body.schedule, 
-        last_access_date: new Date()
+        active_date: new Date(),
+        created_date: new Date (),
     }, {
+        fields: ['schedule', 'active_date'],
         returning: false,
     })
     .then(() => {
@@ -24,7 +26,7 @@ exports.upsertSchedule = (req, res) => {
 exports.getSchedule = (req, res) => {
     Schedules
     .update(
-        { last_access_date: new Date() },
+        { active_date: new Date() },
         { 
             where: {
                 schedule_id : req.params.id 

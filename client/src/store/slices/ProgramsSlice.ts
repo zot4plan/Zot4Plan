@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
-import { getProgram, getSchedule } from '../../api/Controller'
+import { getProgram, getSchedule } from '../../api/HomeController'
 import { ID_LENGTH } from "../constants/Constants";
 // export const SECTION_ID_LEN = 4; // to differentiate course in major (which cannot be remove)
 
@@ -76,16 +76,10 @@ export const programSlice = createSlice ({
             state.byIds[action.meta.arg].status = "loading";
         });
 
-        /**
-         * @param requirement: []
-         * @param url: string
-         * @param courseIds: string[]
-         * @param courseData: CourseType[]
-         */
         builder.addCase(getProgram.fulfilled, (state, action) => {  
             let id = action.payload.id;
             
-            state.byIds[id].status = action.payload.status;
+            state.byIds[id].status = "succeeded";
             state.byIds[id].url = action.payload.url;
             
             action.payload.requirement.forEach ((accordion)=>{
@@ -107,30 +101,28 @@ export const programSlice = createSlice ({
 
     /***************************** fetchSchedule *******************************/
         builder.addCase(getSchedule.fulfilled, (state, action) => {  
-            if(action.payload.status === "succeeded") {
-                state.selectedPrograms = action.payload.selectedPrograms;
-                state.selectedPrograms.forEach((programs, i) => {
-                    if(programs.length > 0)
-                        state.index[i] = 0;
-                    else
-                        state.index[i] = -1;
-                        
-                    programs.forEach(program => {
-                        if(state.byIds[program.value] === undefined) {
-                            state.byIds[program.value] = {
-                                program_id: program.value,
-                                byIds: {}, 
-                                allIds: [],
-                                name: program.label,
-                                url: "",
-                                isMajor: program.is_major,
-                                status: "idle"
-                            }
+            state.selectedPrograms = action.payload.selectedPrograms;
+            state.selectedPrograms.forEach((programs, i) => {
+                if(programs.length > 0)
+                    state.index[i] = 0;
+                else
+                    state.index[i] = -1;
+                    
+                programs.forEach(program => {
+                    if(state.byIds[program.value] === undefined) {
+                        state.byIds[program.value] = {
+                            program_id: program.value,
+                            byIds: {}, 
+                            allIds: [],
+                            name: program.label,
+                            url: "",
+                            isMajor: program.is_major,
+                            status: "idle"
                         }
-                    })
+                    }
                 })
-                state.sections[state.addedCourses] = action.payload.addedCourses;
-            }   
+            })
+            state.sections[state.addedCourses] = action.payload.addedCourses;
         });   
     },
 });

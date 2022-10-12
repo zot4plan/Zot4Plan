@@ -1,5 +1,5 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-import { getAllGE, getGE } from '../../api/Controller'
+import { getAllGE, getGE } from '../../api/HomeController'
 import { ID_LENGTH } from "../constants/Constants";
 
 const initialState:GESliceType = {
@@ -15,7 +15,7 @@ export const geSlice = createSlice ({
     reducers: {},
 /********************************** ExtraReducers ********************************/ 
     extraReducers: (builder) => {
-    /********************** FetchAllGE ************************/
+    /********************** getAllGE ************************/
         builder.addCase(getAllGE.pending, (state) => {
             state.status = "loading";
         });
@@ -46,15 +46,14 @@ export const geSlice = createSlice ({
 
         builder.addCase(getGE.fulfilled,(state, action) => {    
             const geId = action.meta.arg;
-            state.byIds[geId].status = action.payload.status;
+            state.byIds[geId].status = "succeeded";
 
-            if(state.byIds[geId].status === "succeeded") {
-                action.payload.departments.forEach((dept) => {
-                    let sectionId = nanoid(ID_LENGTH.GE_SECTION);
-                    state.byIds[geId].sectionIds.push({sectionId: sectionId, nameChild: dept});
-                    state.sections[sectionId] = action.payload.courses_in_depts[dept];
-                })
-            }
+            action.payload.departments.forEach((dept) => {
+                let sectionId = nanoid(ID_LENGTH.GE_SECTION);
+                state.byIds[geId].sectionIds.push({sectionId: sectionId, nameChild: dept});
+                state.sections[sectionId] = action.payload.courses_in_depts[dept];
+            })
+            
         });
 
         builder.addCase(getGE.rejected,(state, action) => {

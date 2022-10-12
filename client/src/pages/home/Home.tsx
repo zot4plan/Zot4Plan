@@ -5,9 +5,12 @@ import { moveCourse} from '../../store/slices/CourseSlice';
 import Buttons from './buttons/Buttons';
 import Schedule from './schedule/Schedule';
 import Tabs from './tabs/Tabs';
+import HomeNavList from './navlist/HomeNavList';
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
 import './Home.css';
 
-function App() {
+function Home() {
     const dispatch = useDispatch();
     const onDragEnd = (result: DropResult) => {
         const { source, destination, draggableId } = result;
@@ -29,14 +32,22 @@ function App() {
     const printContent = () => printRef.current;
 
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
+        <>
+            <Header 
+                path="/home" 
+                heartColor="var(--accent-color-2)"
+                NavList={HomeNavList}
+            />
+            <DragDropContext onDragEnd={onDragEnd}>
             <Buttons printContent={printContent}/>
             <div id="body-container" className="relative">
                 <Schedule ref={printRef}/>
                 <Tabs/>
             </div>  
-        </DragDropContext>
+            </DragDropContext>
+            <Footer/>
+        </>
     );
 }
 
-export default App;
+export default Home;

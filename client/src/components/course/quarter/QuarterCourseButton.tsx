@@ -1,7 +1,7 @@
 import { memo, MouseEvent, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../store/store';
-import { getCourse } from '../../../api/Controller';
+import { getCourse } from '../../../api/HomeController';
 import ReactTooltip from "react-tooltip";
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import QuarterCourseCard from './QuarterCourseCard';

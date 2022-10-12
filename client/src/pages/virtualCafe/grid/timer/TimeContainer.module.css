@@ -20,14 +20,14 @@
 }
 
 .timer_btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.02);
     filter: drop-shadow(2px 3px 3px #333);
 }
 
 .setting {
     position: absolute;
-    right: 6px;
-    bottom: 3px;
+    right: 8px;
+    bottom: 4px;
 }
 
 .setting > svg {
@@ -35,5 +35,5 @@
 }
 
 .setting:hover > svg {
-    transform: scale(1.1);
+    transform: scale(1.02);
 }
