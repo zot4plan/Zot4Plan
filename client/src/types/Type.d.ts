@@ -1,6 +1,4 @@
-/************************************/
 /********** Objects Type ************/
-/************************************/
 declare interface ProgramOption {
     value: number;
     label: string;
@@ -73,13 +71,7 @@ declare interface BackgroundType {
     like: number;
 }
 
-declare interface SharePlaylistType {
-    playlist_id: string;
-    original_url: string;
-    embed_url: string;
-    name: string;
-}
-
+/*********** Component Props ************/
 declare interface ModalProps {
     handleClose: () => void
 }
@@ -88,9 +80,11 @@ declare interface NavListProps {
     isActive: boolean;
 }
 
-/***********************************/
-/*********** Payload Type **********/
-/***********************************/
+declare interface IconProps {
+    className?: string;
+}
+
+/*********** Payload Type ***********/
 declare interface GEPayload {
     ge_id: string; 
     name: string; 
@@ -126,6 +120,13 @@ declare interface SwitchProgramPayload {
     isMajor: boolean;
 }
 
+declare interface AddPlaylistPayload {
+    playlist_id: string, 
+    name:string, 
+    prefix: string, 
+    shareBy: string
+}
+
 /***********************************/
 /************* Slice ***************/
 /***********************************/
@@ -150,8 +151,7 @@ declare interface ProgramType {
     name: string;
     url: string;
     isMajor: boolean;
-    status: string;
-
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
 }
 
 declare interface ProgramsSliceType{
@@ -165,32 +165,33 @@ declare interface ProgramsSliceType{
 declare interface GESliceType{
     byIds: { [id:string]: GEType};
     allIds: string[];
-    status: string;
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
     sections: {[id:string]: string[]};
 }
 
 declare interface CourseSliceType {
-    years: YearsType,
-    sections: {[id:string]: string[]},
-    totalUnits: number,
+    years: YearsType;
+    sections: {[id:string]: string[]};
+    totalUnits: number;
     courses: {
         [id:string]: {
             data: CourseType, 
             remains: number,
         }
-    },
+    };
     depts: {
         byIds: {[id:string]: string[];}, 
         size: number,
-    },
-    takenGeCourses: {[id:string]: string[] };
-    status: string,
-    isPrerequisiteCheck: boolean,
+    };
+    takenGeCourses: {[id:string]: string[]};
+    status: 'idle' | 'succeeded' | 'failed';
+    isPrerequisiteCheck: boolean;
+    pageLoading: 'idle' | 'succeeded' | 'failed';
 }
 
 declare interface VirtualCafeSliceType {
     background: BackgroundType;
     playlist: PlaylistType;
-    playlists: {name: string; songs: PlaylistType[]}[];
-    share: SharePlaylistType[];
+    sharePlaylists: PlaylistType[];
+    pageLoading: 'idle' | 'succeeded' | 'failed';
 }

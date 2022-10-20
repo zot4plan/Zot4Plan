@@ -5,7 +5,7 @@ import { getGE } from '../../api/HomeController';
 import ChervonRight from '../icon/ChervonRight';
 import Detail from './Detail';
 import './Accordion.css';
-import Badge from '../badge/badge';
+import Badge from './badge/badge';
 
 interface SectionProps {
     id: string;

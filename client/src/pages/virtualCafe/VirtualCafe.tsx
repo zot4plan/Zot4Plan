@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store/store';
 import Header from '../../components/header/Header';
 import TimeContainer from './grid/timer/TimeContainer';
 import Background from './grid/background/Background';
@@ -9,9 +12,19 @@ import ModalButton from '../../components/modal/ModalButton';
 import BackgroundModal from './media/background/BackgroundModal';
 import PlaylistModal from './media/playlist/PlaylistModal';
 import VirtualCafeNavList from './navlist/VirtualCafeNavList';
+import { updateVirtualCafeVisit } from '../../api/VirtualCafeController';
 import './VirtualCafe.css';
 
 function VirtualCafe() {
+    const loading = useSelector((state: RootState) => state.virtualCafe.pageLoading);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(loading === 'idle') {
+            dispatch(updateVirtualCafeVisit());
+        }
+    },[loading, dispatch])
+
     return (
         <div className="virtual-cafe">
             <Header path='/virtual-cafe' heartColor='#FFF' NavList={VirtualCafeNavList}/>

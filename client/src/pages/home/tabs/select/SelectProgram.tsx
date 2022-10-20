@@ -3,9 +3,9 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import Select, { OnChangeValue, StylesConfig} from 'react-select';
 import { RootState } from '../../../../store/store';
 import { changeProgram } from '../../../../store/slices/ProgramsSlice';
-import Axios from '../../../../api/Axios';
 import SelectCourses from './SelectCourses';
 import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
+import { getAllPrograms } from '../../../../api/HomeController';
 import './SelectProgram.css';
 
 const myStyle: StylesConfig<ProgramOption, true> =  {
@@ -48,7 +48,9 @@ const myStyle: StylesConfig<ProgramOption, true> =  {
     }),
 }
 
-interface SelectProgramProps { isMajor: boolean;}
+interface SelectProgramProps { 
+    isMajor: boolean;
+}
 
 function SelectProgram({isMajor}: SelectProgramProps) {
     const [programs, setPrograms] = useState<ProgramOption[]>([]);
@@ -58,18 +60,23 @@ function SelectProgram({isMajor}: SelectProgramProps) {
 
     const dispatch = useDispatch();
 
-    // Retrieve all majors after rendering
-    useEffect( () => {
-        async function fetchAllPrograms() {
-            const res = await Axios('/api/getAllPrograms');
-            const programsArray = await res.data.map((program:ProgramOption) => program);
-            setPrograms(programsArray);   
-        }
+    useEffect(() => {
+        const fetchAllPrograms = async () => {
+            getAllPrograms()
+            .then(res => {
+                const programsArray = res.data.map((program:ProgramOption) => program);
+                setPrograms(programsArray);
+            }) 
+            .catch(err => {
+                console.log(err);
+            });
+        };
+
         if(programs.length === 0) 
             fetchAllPrograms();  
+
     },[programs]); 
 
-    // Get Major Requirement Courses
     const handleOnChange = useCallback((selectedOptions: OnChangeValue<ProgramOption, true>) => {
         if(selectedOptions)
             dispatch(changeProgram({value: selectedOptions as ProgramOption[], isMajor: isMajor}));

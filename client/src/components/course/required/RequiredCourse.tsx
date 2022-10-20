@@ -3,7 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
 import {RootState} from '../../../store/store';
 import RequiredCourseButton from './RequiredCourseButton';
-import ButtonRemoveCourse from '../../button/ButtonRemoveCourse';
+import ButtonRemoveCourse from '../removeButton/ButtonRemoveCourse';
 import { ID_LENGTH } from '../../../store/constants/Constants';
 import '../Course.css';
 

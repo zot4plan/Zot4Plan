@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsPrerequisiteCheck } from '../../store/slices/CourseSlice';
-import { RootState } from '../../store/store';
-import Switch from './Switch';
+import { setIsPrerequisiteCheck } from '../../../../store/slices/CourseSlice';
+import { RootState } from '../../../../store/store';
+import Switch from '../../../../components/switch/Switch';
 
 function PrerequisiteCheckBox() {
     const label = "Prerequisite Check";    

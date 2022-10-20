@@ -35,60 +35,55 @@ export const backgrounds = [
 
 export const playlists = [
   {
+    playlist_id: "PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk",
+    thumbnail: "FN7ALfpGxiI",
+    name: "My Favorite Songs - LK",
+    author: null,
+    share_by: null,
+    original_url: 'https://youtube.com/playlist?list=PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk',
+    embed_url: "https://www.youtube.com/embed/videoseries?list=PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk",
     language: "Vietnamese",
-    playlist: [
-      {
-        playlist_id: "PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk",
-        thumbnail: "FN7ALfpGxiI",
-        name: "My Favorite Songs - LK",
-        author: null,
-        share_by: null,
-        original_url: 'https://youtube.com/playlist?list=PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk',
-        embed_url: "https://www.youtube.com/embed/videoseries?list=PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk",
-        language: "Vietnamese",
-        genre: [],
-        like: 0,
-        view: 0
-      },
-      {
-        playlist_id: "ja0HeFa8GJc",
-        thumbnail: "",
-        name: "Lofi chill 1",
-        author: null,
-        share_by: null,
-        original_url: 'https://youtu.be/ja0HeFa8GJc',
-        embed_url: "https://www.youtube.com/embed/ja0HeFa8GJc",
-        language: "Vietnamsese",
-        genre: [],
-        like: 0,
-        view: 0
-      },
-      {
-        playlist_id: "pnV3XUzc87g",
-        thumbnail: "",
-        name: "Lofi chill 2",
-        author: null,
-        share_by: null,
-        original_url: 'https://youtu.be/pnV3XUzc87g',
-        embed_url: "https://www.youtube.com/embed/pnV3XUzc87g",
-        language: "Vietnamsese",
-        genre: [],
-        like: 0,
-        view: 0
-      },
-      {
-        playlist_id: "GPRqYSz_QZA",
-        thumbnail: "",
-        name: "Candles and Flowers",
-        author: null,
-        share_by: null,
-        original_url: 'https://youtu.be/GPRqYSz_QZA',
-        embed_url: "https://www.youtube.com/embed/GPRqYSz_QZA",
-        language: "Vietnamsese",
-        genre: [],
-        like: 0,
-        view: 0
-      }
-    ]
+    genre: [],
+    like: 0,
+    view: 0
+  },
+  {
+    playlist_id: "ja0HeFa8GJc",
+    thumbnail: "ja0HeFa8GJc",
+    name: "Lofi chill 1",
+    author: null,
+    share_by: null,
+    original_url: 'https://youtu.be/ja0HeFa8GJc',
+    embed_url: "https://www.youtube.com/embed/ja0HeFa8GJc",
+    language: "Vietnamsese",
+    genre: [],
+    like: 0,
+    view: 0
+  },
+  {
+    playlist_id: "pnV3XUzc87g",
+    thumbnail: "pnV3XUzc87g",
+    name: "Lofi chill 2",
+    author: null,
+    share_by: null,
+    original_url: 'https://youtu.be/pnV3XUzc87g',
+    embed_url: "https://www.youtube.com/embed/pnV3XUzc87g",
+    language: "Vietnamsese",
+    genre: [],
+    like: 0,
+    view: 0
+  },
+  {
+    playlist_id: "GPRqYSz_QZA",
+    thumbnail: "GPRqYSz_QZA",
+    name: "Candles and Flowers",
+    author: null,
+    share_by: null,
+    original_url: 'https://youtu.be/GPRqYSz_QZA',
+    embed_url: "https://www.youtube.com/embed/GPRqYSz_QZA",
+    language: "Vietnamsese",
+    genre: [],
+    like: 0,
+    view: 0
   }
 ];

@@ -1,8 +1,9 @@
 import {memo, MouseEvent} from 'react';
 import { useDispatch } from 'react-redux';
-import { removeCourse } from '../../store/slices/ProgramsSlice';
-import { removeCourseQuarter } from '../../store/slices/CourseSlice';
-import Xmark from '../icon/Xmark';
+import { removeCourse } from '../../../store/slices/ProgramsSlice';
+import { removeCourseQuarter } from '../../../store/slices/CourseSlice';
+import { ID_LENGTH } from '../../../store/constants/Constants';
+import Xmark from '../../icon/Xmark';
 import './ButtonRemoveCourse.css';
 
 function ButtonRemoveCourse({courseId, sectionId, index}: CoursePayload) {
@@ -11,13 +12,13 @@ function ButtonRemoveCourse({courseId, sectionId, index}: CoursePayload) {
         e.stopPropagation();
         e.preventDefault();
         
-        if(sectionId.length === 3)
+        if(sectionId.length === ID_LENGTH.QUARTER)
             dispatch(removeCourseQuarter({
                 sectionId: sectionId,
                 index: index,
                 courseId: courseId
             }))
-        else
+        else if(sectionId.length === ID_LENGTH.ADD_COURSES)
             dispatch(removeCourse({
                 sectionId: sectionId,
                 index: index,

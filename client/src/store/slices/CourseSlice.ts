@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction, nanoid, isAnyOf, current } from "@reduxjs/toolkit";
-import { getProgram, getGE, getSchedule, getCourse } from '../../api/HomeController'
+import { getProgram, getGE, getSchedule, getCourse, updateHomeVisit } from '../../api/HomeController'
 import { addCourse } from "./ProgramsSlice";
-import { DEPT_COLORS, ID_LENGTH } from "../constants/Constants" 
+import { DEPT_COLORS, ID_LENGTH } from "../constants/Constants";
 
 function removeLastWord(str:string) {
     const lastIndexOfSpace = str.lastIndexOf(' ');
-    return lastIndexOfSpace === -1? str : str.substring(0, lastIndexOfSpace);
+    return lastIndexOfSpace === -1 ? str : str.substring(0, lastIndexOfSpace);
 }
 
 const generateInitialState = () => {
@@ -38,16 +38,16 @@ const generateInitialState = () => {
             size: 0
         },
         takenGeCourses: {},
-        status: "idle",
+        status: 'idle',
         isPrerequisiteCheck: true,
+        pageLoading: 'idle'
     }
 }
-const initialState: CourseSliceType = generateInitialState();
+const initialState = generateInitialState() as CourseSliceType;
 
 export const courseSlice = createSlice ({
     name: "store",
     initialState,
-/*********************** Reducers ************************/
     reducers: {
         removeCourseQuarter: (state, action: PayloadAction<CoursePayload>) => {
             console.log(action.payload);
@@ -132,8 +132,11 @@ export const courseSlice = createSlice ({
             state.isPrerequisiteCheck = !state.isPrerequisiteCheck
         }
     },
-/********************* ExtraReducers *********************/
     extraReducers: (builder) => {
+        /**
+         * HTTP GET
+         * getSchedule
+         */
         builder.addCase(getSchedule.fulfilled, (state, action) => { 
             state.status = "succeeded";
             state.courses = {}; 
@@ -206,6 +209,10 @@ export const courseSlice = createSlice ({
             })
         });
 
+        /**
+         * HTTP GET
+         * getCourse
+         */
         builder.addCase(getCourse.fulfilled, (state, action) => {
             let course = action.payload.course;
 
@@ -227,6 +234,10 @@ export const courseSlice = createSlice ({
             state.totalUnits += course.units[1]; 
         });
 
+        /**
+         * HTTP GET
+         * addCourse
+         */
         builder.addCase(addCourse, (state, action) => {
             let dept = removeLastWord(action.payload);
             if(state.depts.byIds[dept] === undefined) { 
@@ -236,6 +247,22 @@ export const courseSlice = createSlice ({
             }
         });
 
+        /**
+         * HTPP PUT
+         * updateHomeVisit
+         */
+        builder.addCase(updateHomeVisit.fulfilled, (state, _) => { 
+            state.pageLoading = 'succeeded';
+        })
+
+        builder.addCase(updateHomeVisit.rejected, (state, _) => { 
+            state.pageLoading = 'failed';
+        })
+
+        /**
+         * HTTP GET
+         * getProgram & getGE
+         */
         builder.addMatcher(isAnyOf(getProgram.fulfilled, getGE.fulfilled ), (state, action) => {
             action.payload.departments.forEach((dept) => {
                 if(state.depts.byIds[dept] === undefined) { 
@@ -246,10 +273,12 @@ export const courseSlice = createSlice ({
             })
         })
 
+        /**
+         * Rejected
+         */
         builder.addMatcher(isAnyOf(getProgram.rejected, getGE.rejected, getCourse.rejected, getSchedule.rejected), (state, _) => {
             state.status = "failed";
         })
-
     },
 });
 

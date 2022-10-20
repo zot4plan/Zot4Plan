@@ -23,7 +23,7 @@ exports.upsertSchedule = (req, res) => {
     })
 }
 
-exports.getSchedule = (req, res) => {
+exports.updateAndGetSchedule = (req, res) => {
     Schedules
     .update(
         { active_date: new Date() },

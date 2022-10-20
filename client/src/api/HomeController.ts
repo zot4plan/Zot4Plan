@@ -1,9 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import Axios from './Axios';
 
-export const getCourse = createAsyncThunk("features/getCourse", async (id: string) => {
-    const course = sessionStorage.getItem(id);
-    return course 
+export const getCourse = createAsyncThunk(
+    "courses/getCourse", 
+    (id: string) => {
+        const course = sessionStorage.getItem(id);
+        return course 
         ?  {status: "succeeded", course: JSON.parse(course)}
         :   Axios
             .get('/api/getCourse', { params: { id: id } })
@@ -13,7 +15,8 @@ export const getCourse = createAsyncThunk("features/getCourse", async (id: strin
                     course: response.data as CourseType,
                 };
             })
-});
+    }
+);
 
 export const getCourses = (search: string, callback:(options: CourseOptionType[]) => void) => {
     let filterCourse:CourseOptionType[] = [];
@@ -21,54 +24,59 @@ export const getCourses = (search: string, callback:(options: CourseOptionType[]
         callback(filterCourse);
     }
     else {
-        setTimeout(async () => {
+        setTimeout(() => {
             Axios.get('/api/filterCourses', {params: { id: search }})
             .then((res) => {
-                res.data.forEach((course:CourseIdType) => filterCourse.push({value: course.course_id, label: course.course_id}))
+                res.data.forEach((course:CourseIdType) => 
+                    filterCourse.push({value: course.course_id, label: course.course_id})
+                );
                 callback(filterCourse);
             })
-            .catch(() => {
-                callback(filterCourse);
+            .catch((err) => {
+                console.log(err);
             });
         }, 500);
     }
 }
 
-export const getAllGE = createAsyncThunk("features/getAllGE", async () => 
-    Axios
-    .get('/api/getAllGE')
-    .then(response => response.data as GEPayload[])
+export const getAllPrograms = async () => await Axios.get('/api/getAllPrograms');
+
+export const getAllGE = createAsyncThunk(
+    "generalEducation/getAllGE", 
+    async (_) => {
+        const response = await Axios.get('/api/getAllGE');
+        return response.data as GEPayload[];
+    }
 );
 
-export const getGE = createAsyncThunk("features/getGE", async (id: string) => 
-    Axios
-    .post('/api/getCoursesInGE', {id: id})
-    .then(response => {
+export const getGE = createAsyncThunk(
+    "generalEducation/getGE", 
+    async (id: string) => {
+        const response = await Axios.post('/api/getCoursesInGE', {id: id})
         return {
-            status: "succeeded",
             departments: response.data.departments as string[], 
             courses_in_depts: response.data.courses_in_depts as {[id:string]: string[]}
         };
-    })
+    }
 );
 
-export const getProgram = createAsyncThunk("features/getProgram", async (id: number) => 
-    Axios
-    .post('/api/getProgram', {id: id})
-    .then( response => {
+export const getProgram = createAsyncThunk(
+    "programs/getProgram", 
+    async (id: number) => {
+        const response = await Axios.post('/api/getProgram', {id: id})
         return {
             id: id,
             requirement: response.data.requirement as RequirementType[],
             url: response.data.url, 
             departments: response.data.departments as string[],
         };
-    })
+    }
 ); 
 
-export const getSchedule = createAsyncThunk("features/getSchedule", async (id: string) => 
-    Axios
-    .put('/api/loadSchedule/' + id)
-    .then((response) => {
+export const getSchedule = createAsyncThunk(
+    "schedule/getSchedule", 
+    async (id: string) => {
+        const response = await Axios.put('/api/loadSchedule/' + id);
         const courses = response.data.courses as CourseType[];
         courses.forEach(course => sessionStorage.setItem(course.course_id, JSON.stringify(course)));
         return {
@@ -77,16 +85,19 @@ export const getSchedule = createAsyncThunk("features/getSchedule", async (id: s
             addedCourses: response.data.addedCourses as string[],
             courses: courses,
         };
-    })
+    }
 ); 
 
-export const addOrEditSchedule = async (
+export const addOrEditSchedule = (
     name: string, 
     schedule: any, 
-    setMessage: (value: React.SetStateAction<{status: string; content: string;}>) => void) => 
-    {
-        Axios
-        .put('/api/saveSchedule/' + name, {schedule: schedule})
-        .then(() => setMessage({status: "succeeded", content: "Saved successfully!"}))
-        .catch(() => setMessage({status: "failed", content: "Failed to save schedule"}))
-    };
+    setMessage: (value: React.SetStateAction<{status: string; content: string;}>) => void
+) => Axios
+    .put('/api/saveSchedule/' + name, {schedule: schedule})
+    .then(() => setMessage({status: "succeeded", content: "Saved successfully!"}))
+    .catch(() => setMessage({status: "failed", content: "Failed to save schedule"}))
+
+export const updateHomeVisit = createAsyncThunk(
+    "features/updateHomeVisit", 
+    async (_) => await Axios.put('/api/updateHomeVisit')
+);

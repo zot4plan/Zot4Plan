@@ -38,8 +38,8 @@ function Program ({isMajor, addedCourses}:PropgramProps) {
         allIds.forEach(id => { content.push(<Accordion key={id} id={id} programId={programId} />) });
         content.push(<div key="empty" style={{height:'42rem'}}></div>);
     }
-    else if (status === 'error')
-        content.push(<div key="error" className='loading-message red'>Cannot retrieve the data...!!!</div>) 
+    else if (status === 'failed')
+        content.push(<div key="failed" className='loading-message red'>Cannot retrieve the data...!!!</div>) 
     
     return (
         <div className="program-container relative"> 

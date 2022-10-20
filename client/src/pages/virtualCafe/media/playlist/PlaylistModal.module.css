@@ -6,7 +6,7 @@
     padding: 2rem 1rem 2rem 0rem;
     border-radius: 2.4rem;
     width: 400px;
-    height: 550px;
+    height: 580px;
 }
   
 .modal_header {
@@ -23,50 +23,11 @@
 }
 
 .modal_body {
+    height: 435px;
+    margin-top: 3rem;
     background: #fff;
     overflow-y: scroll;
     -webkit-overflow-scrolling: 'touch';
-}
-
-.modal_body > ul {
-    height: 405px;
-}
-
-.modal_body h1 {
-    padding: 0 2rem;
-}
-
-.playlist {
-    padding: 1rem 0rem;
-}
-
-.item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    padding-right: 0.5rem;
-    padding-left: 2rem;
-    margin-bottom: 1rem;
-}
-
-.item > div {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
-}
-
-.item > img {
-    padding: 0rem 0.5rem;
-}
-
-.item:hover {
-    background-color: rgba(0, 0, 0, 0.10);
-}
-
-.musicNote > svg {
-    font-size: 2.4rem;
 }
 
 .modal_footer {

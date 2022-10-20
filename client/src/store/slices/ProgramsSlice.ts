@@ -71,7 +71,10 @@ export const programSlice = createSlice ({
     },
 /********************************** ExtraReducers ********************************/ 
     extraReducers: (builder) => {
-    /************************* fetchProgramById ****************************/
+        /**
+         * HTTP GET
+         * getProgram
+         */
         builder.addCase(getProgram.pending, (state,action) => {
             state.byIds[action.meta.arg].status = "loading";
         });
@@ -99,7 +102,10 @@ export const programSlice = createSlice ({
             state.byIds[action.meta.arg].status = "failed";
         });
 
-    /***************************** fetchSchedule *******************************/
+        /**
+         * HTTP PUT (update active_date & return)
+         * getSchedule
+         */
         builder.addCase(getSchedule.fulfilled, (state, action) => {  
             state.selectedPrograms = action.payload.selectedPrograms;
             state.selectedPrograms.forEach((programs, i) => {
@@ -125,6 +131,7 @@ export const programSlice = createSlice ({
             state.sections[state.addedCourses] = action.payload.addedCourses;
         });   
     },
+
 });
 
 export const { 

@@ -4,6 +4,10 @@ function Clock() {
     const [ClockState, setClockState] = useState('');
     useEffect(() => {
         setInterval(() => setClockState((new Date()).toLocaleTimeString([], { timeStyle: "short" })),);
+        //unmounted
+        return () => {
+            setClockState(''); // This worked for me
+        };
     },[]);
 
     return (

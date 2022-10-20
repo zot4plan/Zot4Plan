@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from "../../store/store";
+import { RootState } from "../../../store/store";
 import ReactTooltip from "react-tooltip";
 import './badge.css';
 

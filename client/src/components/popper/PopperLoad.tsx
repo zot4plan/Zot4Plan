@@ -11,8 +11,8 @@ const maxLength = 32;
 const minLength = 8;
 const minLengthMessage = "Must contain at least " + minLength + " characters!";
 const spaceMessage = "Cannot contain white spaces!";
-const succeeded = "Loaded successfully!";
-const failed = "Schedule not found!";
+const succeededMessage = "Loaded successfully!";
+const failedMessage = "Schedule not found!";
 
 function PopperLoad () {
     const [name, setName] = useState("");
@@ -65,7 +65,7 @@ function PopperLoad () {
             {message.status !== "idle"  && <Message status={message.status} content={message.content}/>}
             
             {loadStatus !== "idle" && 
-                <Message status={loadStatus} content={(loadStatus === "succeeded")? succeeded : failed}/>}
+                <Message status={loadStatus} content={(loadStatus === "succeeded") ? succeededMessage : failedMessage}/>}
 
             {loadStatus === "succeeded" &&
                 <Confetti

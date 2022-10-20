@@ -2,7 +2,7 @@ import { memo } from "react";
 import { shallowEqual, useSelector } from 'react-redux';
 import { RootState } from "../../store/store";
 import Quarter from './Quarter';
-import ButtonRemoveYear from "../button/ButtonRemoveYear";
+import ButtonRemoveYear from "./ButtonRemoveYear";
 import ChervonRight from '../icon/ChervonRight';
 import './Accordion.css';
 

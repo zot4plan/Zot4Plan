@@ -3,11 +3,11 @@ import PopperUnstyled from '@mui/base/PopperUnstyled';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 import ReactToPrint from 'react-to-print';
 import ReactTooltip from "react-tooltip";
-import ButtonAddYear from '../../../components/button/ButtonAddYear';
+import ButtonAddYear from './addYear/ButtonAddYear';
 import PopperClear from '../../../components/popper/PopperClear';
 import PopperLoad from '../../../components/popper/PopperLoad';
 import PopperSave from '../../../components/popper/PopperSave';
-import PrerequisiteSwitch from '../../../components/switch/PrerequisiteSwitch';
+import PrerequisiteSwitch from './prerequisite/PrerequisiteSwitch';
 import '../schedule/Schedule.css';
 import './Buttons.css'
 

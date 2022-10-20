@@ -47,7 +47,8 @@ module.exports = (sequelize, DataType) => {
             defaultValue: 0
         },
         created_date: {
-            type: DataType.DATEONLY,
+            type: 'TIMESTAMP',
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
             allowNull: false,
         },
         is_verified: {

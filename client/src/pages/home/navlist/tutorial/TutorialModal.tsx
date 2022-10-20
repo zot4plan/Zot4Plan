@@ -7,11 +7,13 @@ import addCourse from '../../../../assets/gifs/addCourse.gif';
 import showMoreInfo from '../../../../assets/gifs/showMoreInfo.gif';
 import dragDropCourses from '../../../../assets/gifs/dragDropCourses.gif';
 import './TutorialModal.css';
+import Spinner from '../../../../components/icon/Spinner';
 
 const images = [pickMajor, addCourse, showMoreInfo, dragDropCourses];
 const titles = ['Pick a Major', 'Add Courses', 'More Information', 'Drag and Drop Courses']
 
 function TutorialCarousel ({ handleClose }: ModalProps) {
+    const [loading, setLoading] = useState(true);
     const [index, setIndex] = useState(1);
 
     const handleLeftClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -23,6 +25,10 @@ function TutorialCarousel ({ handleClose }: ModalProps) {
         e.preventDefault();
         setIndex(index === images.length? 1 : index + 1);
     }
+
+    const imageLoaded = () => {
+        setLoading(false);
+    };
       
     return (
         <>
@@ -40,12 +46,17 @@ function TutorialCarousel ({ handleClose }: ModalProps) {
                         onClick={handleClose}
                     >
                         <XCircle/>
-                    </button>          
+                    </button>  
+                    <div style={{display: loading ? "block" : "none"}}>
+                        <Spinner/>
+                    </div>        
                     <img
+                        style={{display: loading ? "none" : "block"}}
                         className={'tutorial-img'}
                         src={images[index - 1]} 
                         loading='lazy' 
                         alt='Website Tutorial Page 1'
+                        onLoad={imageLoaded}
                     />
                 </div>
             </div>

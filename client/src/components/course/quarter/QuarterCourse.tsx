@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import ButtonRemoveCourse from '../../button/ButtonRemoveCourse';
+import ButtonRemoveCourse from '../removeButton/ButtonRemoveCourse';
 import QuarterCourseButton from './QuarterCourseButton';
 import '../Course.css';
 
