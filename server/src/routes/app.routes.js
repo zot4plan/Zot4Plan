@@ -6,6 +6,7 @@ module.exports = app => {
     const schedules = require("../controllers/schedules.controller.js");
     const playlists = require("../controllers/playlists.controller.js");
     const visits = require("../controllers/visits.controller");
+    const reports = require("../controllers/reports.controller");
     var router = require("express").Router();
 
     // GET method
@@ -16,9 +17,10 @@ module.exports = app => {
     router.get("/getAllPlaylists",playlists.getPlaylists);
 
     // POST method
-    router.post("/getProgram", programs.getProgram)
+    router.post("/getProgram", programs.getProgram);
     router.post("/getCoursesInGE", courses_in_ge.getCoursesInGE);
     router.post("/addPlaylist", playlists.addPlaylist);
+    router.post("/addReport", reports.addReport);
 
     // PUT method
     router.put("/saveSchedule/:id", schedules.upsertSchedule);

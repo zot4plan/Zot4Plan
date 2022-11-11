@@ -1,9 +1,9 @@
 .playlist-heading {
     font-size: 1.8rem;
-    padding: 0rem 2rem;
+    padding: 1rem 2rem 0rem 2rem;
 }
 
-.music-note  {
+.music-note > svg {
     font-size: 2.4rem;
 }
 

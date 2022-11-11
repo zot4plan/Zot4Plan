@@ -22,7 +22,6 @@ const initialState:ProgramsSliceType = getInitialState();
 export const programSlice = createSlice ({
     name: "store",
     initialState,
-/************************** Reducers ***************************/
     reducers: {
         addCourse: (state, action: PayloadAction<string>) => {
             state.sections[state.addedCourses].push(action.payload);
@@ -69,7 +68,6 @@ export const programSlice = createSlice ({
                 state.index[i] = nextIndex;
         },
     },
-/********************************** ExtraReducers ********************************/ 
     extraReducers: (builder) => {
         /**
          * HTTP GET

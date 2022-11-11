@@ -50,7 +50,6 @@ export const courseSlice = createSlice ({
     initialState,
     reducers: {
         removeCourseQuarter: (state, action: PayloadAction<CoursePayload>) => {
-            console.log(action.payload);
             let id = action.payload.courseId;
             state.sections[action.payload.sectionId].splice(action.payload.index, 1);
 
@@ -135,7 +134,7 @@ export const courseSlice = createSlice ({
     extraReducers: (builder) => {
         /**
          * HTTP GET
-         * getSchedule
+         * get Schedule
          */
         builder.addCase(getSchedule.fulfilled, (state, action) => { 
             state.status = "succeeded";
@@ -290,6 +289,6 @@ export const {
     clearSchedule,
     resetStatus,
     setIsPrerequisiteCheck 
-} =  courseSlice.actions;
+} = courseSlice.actions;
 
 export default courseSlice.reducer;

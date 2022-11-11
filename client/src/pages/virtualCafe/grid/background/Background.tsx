@@ -3,11 +3,16 @@ import { RootState } from '../../../../store/store';
 import MusicNotes from '../../../../components/icon/MusicNotes';
 
 function Background() {
-    const {backgroundUrl, backgroundDescription} = 
-        useSelector((state:RootState) => ({
+    const {backgroundUrl, backgroundDescription} = useSelector((state:RootState) => ({
             backgroundUrl: state.virtualCafe.background.url,
             backgroundDescription: state.virtualCafe.background.description
         }));
+
+    const playlistName = useSelector((state:RootState) => 
+        state.virtualCafe.playlist 
+            ? state.virtualCafe.playlist.name
+            : ''
+    );
 
     return (
         <>
@@ -17,7 +22,11 @@ function Background() {
                         src={backgroundUrl} 
                         alt={backgroundDescription}
                     />
-                    <p> Click image to play/stop <span> <MusicNotes/> </span> </p>
+                    <p> 
+                        Click image to play/stop 
+                        <MusicNotes/>  
+                        <span> ({playlistName}) </span>
+                    </p>
                 </> 
             }
         </>     

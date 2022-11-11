@@ -1,0 +1,11 @@
+.virtual-cafe-toolbar {
+    display: flex;
+    background-color: #B5838D;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 1rem;
+    gap: 2rem;
+    border-radius: 2.4rem;
+    padding: 1rem 2rem;
+}

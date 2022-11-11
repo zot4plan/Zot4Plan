@@ -31,6 +31,13 @@ export const backgrounds = [
       url: StudyGIF2,
       like: 0,
     },
+    {
+      background_id: 4,
+      name: "Lofi Guy",
+      description: "Student studying GIF",
+      url: "https://media.tenor.com/ItlVfQ5tMv0AAAAd/lofi-music-lofiartwork.gif",
+      like: 0,
+    },
 ];
 
 export const playlists = [

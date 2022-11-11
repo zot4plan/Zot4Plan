@@ -12,10 +12,12 @@ const initialState:GESliceType = {
 export const geSlice = createSlice ({
     name: "store",
     initialState,
-    reducers: {},
-/********************************** ExtraReducers ********************************/ 
+    reducers: {}, 
     extraReducers: (builder) => {
-    /********************** getAllGE ************************/
+        /**
+         * Http Get
+         * get all ge
+         */
         builder.addCase(getAllGE.pending, (state) => {
             state.status = "loading";
         });
@@ -39,7 +41,10 @@ export const geSlice = createSlice ({
             state.status = "failed";
         }); 
 
-    /************************** FetchGE ************************/
+        /**
+         * Http Get
+         * Get Ge
+         */
         builder.addCase(getGE.pending,(state, action) => {
             state.byIds[action.meta.arg].status = "loading";
         });

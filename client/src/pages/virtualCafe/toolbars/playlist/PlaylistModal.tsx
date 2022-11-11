@@ -1,26 +1,25 @@
 import Xmark from "../../../../components/icon/Xmark";
 import ModalButton from "../../../../components/modal/ModalButton";
-import SharePlaylistModal from "./childModal/SharePlaylistModal";
-import ReportPlaylistModal from "./childModal/ReportPlaylistModal";
+import SharePlaylistForm from "./forms/SharePlaylistForm";
+import ReportPlaylistForm from "./forms/ReportPlaylistForm";
 import UnverifiedPlaylist from "./playlists/UnverifiedPlaylists";
 import VerifiedPlaylist from "./playlists/VerifiedPlaylists";
-import styles from './PlaylistModal.module.css';
 
 function PlaylistModal({ handleClose }: ModalProps) {
     return (
-        <div className={styles.modal}>
-            <div className={styles.modal_header}>
+        <div className='virtual-cafe-modal'>
+            <div className='virtual-cafe-modal-header'>
                 <button className='virtual-cafe-x-button' onClick={handleClose}>
                     <Xmark/>
                 </button>
             </div>
-            <div className={styles.modal_body}> 
+            <div className='virtual-cafe-modal-body'> 
                 <UnverifiedPlaylist handleClose={handleClose}/>         
                 <VerifiedPlaylist handleClose={handleClose}/>
             </div>
-            <div className={styles.modal_footer}>
-                <ModalButton label="Share your playlist" className="virtual-cafe-modal-button" ModalContent={SharePlaylistModal}/>
-                <ModalButton label="Report" className="virtual-cafe-modal-button" ModalContent={ReportPlaylistModal}/>
+            <div className='virtual-cafe-modal-footer'>
+                <ModalButton label="Share your playlist" className="virtual-cafe-modal-button" ModalContent={SharePlaylistForm}/>
+                <ModalButton label="Report" className="virtual-cafe-modal-button" ModalContent={ReportPlaylistForm}/>
             </div>
         </div>
     )

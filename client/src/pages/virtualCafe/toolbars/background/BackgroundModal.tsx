@@ -9,26 +9,24 @@ function BackgroundModal({ handleClose }: ModalProps) {
     const dispatch = useDispatch();
 
     return (
-        <div className={styles.modal}>
-            <div className={styles.modal_header}>
+        <div className='virtual-cafe-modal' style={{width: '350px'}}>
+            <div className='virtual-cafe-modal-header'>
                 <h1> Select a Background </h1>
                 <button className='virtual-cafe-x-button' onClick={handleClose}>
                     <Xmark/>
                 </button>
             </div>
-            <div className={styles.modal_body}>
-                <ul>
+            <div className='virtual-cafe-modal-body' style={{height: '475px'}}>
+                <ul style={{paddingLeft: '2.5rem'}}>
                     {backgrounds.map((background) => (
                         <li key={background.background_id} 
-                            onClick={() => 
-                            {
+                            onClick={() => {
                                 dispatch(changeBackground(background))
                                 handleClose();
                             }}
                         > 
                             {background.url 
-                            ?   <img 
-                                    className={styles.img_bg}
+                            ? <img className={styles.img_bg}
                                     src={background.url} 
                                     alt={background.description}
                                 />

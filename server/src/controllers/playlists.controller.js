@@ -73,11 +73,10 @@ const prefixes = new Set([
 
 exports.addPlaylist = (req, res) => {
     const playlist = req.body;
-    console.log(playlist);
     const err = validatePlaylist(playlist);
-    console.log(err);
+    
     if(err)
-        return res.status(400).send({message: err})
+        res.status(400).send({message: err})
     else {
         const playlistData = {
             playlist_id: playlist.id,

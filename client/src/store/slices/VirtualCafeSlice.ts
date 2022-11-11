@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { updateVirtualCafeVisit } from "../../api/VirtualCafeController";
+import { addPlaylist, getPlaylists, updateVirtualCafeVisit } from "../../api/VirtualCafeController";
 import { backgrounds, playlists } from "../../pages/virtualCafe/data/data";
 
 const initialState:VirtualCafeSliceType = {
     background: backgrounds[3],
     playlist: playlists[0],
+    allPlaylists: [],
     sharePlaylists: [],
-    pageLoading: 'idle'
+    pageLoading: 'idle',
+    getPlaylistsStatus: 'idle',
 }
 
 export const VirtualCafeSlice = createSlice ({
@@ -19,14 +21,14 @@ export const VirtualCafeSlice = createSlice ({
 
         changePlaylist: (state, action: PayloadAction<PlaylistType>) => {
             state.playlist = action.payload;
-        }
+        },
     },
     extraReducers: (builder) => { 
         /**
-         * HTPP PUT
-         * updateHomeVisit
+         * HTTP PUT
+         * updateVirtualCafeVisit
          */
-        builder.addCase(updateVirtualCafeVisit.fulfilled, (state, _) => { 
+         builder.addCase(updateVirtualCafeVisit.fulfilled, (state, _) => { 
             state.pageLoading = 'succeeded';
         })
 
@@ -34,6 +36,26 @@ export const VirtualCafeSlice = createSlice ({
             state.pageLoading = 'failed';
         })
 
+        /**
+         * HTTP POST
+         * Add Playlist
+         */
+        builder.addCase(addPlaylist.fulfilled, (state, action) => { 
+            state.sharePlaylists.push(action.payload);
+        })
+
+         /**
+         * HTTP GET
+         * Get Playlists
+         */
+        builder.addCase(getPlaylists.fulfilled, (state, action) => { 
+            state.getPlaylistsStatus = 'succeeded';
+            state.allPlaylists = action.payload;
+        })
+
+        builder.addCase(getPlaylists.rejected, (state, _) => { 
+            state.getPlaylistsStatus = 'failed';
+        })
     },
 });
 

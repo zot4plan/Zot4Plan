@@ -1,6 +1,5 @@
 const db = require("../models");
 const Programs = db.programs;
-const visits = require("./visits.controller.js");
 
 exports.getAllPrograms = (_req, res) => {
     Programs

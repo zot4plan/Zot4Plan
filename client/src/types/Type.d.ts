@@ -82,6 +82,7 @@ declare interface NavListProps {
 
 declare interface IconProps {
     className?: string;
+    fontSize?: string;
 }
 
 /*********** Payload Type ***********/
@@ -121,10 +122,19 @@ declare interface SwitchProgramPayload {
 }
 
 declare interface AddPlaylistPayload {
-    playlist_id: string, 
-    name:string, 
-    prefix: string, 
-    shareBy: string
+    playlist: {
+        playlist_id: string, 
+        name:string, 
+        prefix: string, 
+        shareBy: string
+    }
+    setStatus: React.Dispatch<React.SetStateAction<{
+        url: string;
+        name: string;
+        shareBy: string;
+        status: string;
+        message: string;
+    }>>
 }
 
 /***********************************/
@@ -192,6 +202,8 @@ declare interface CourseSliceType {
 declare interface VirtualCafeSliceType {
     background: BackgroundType;
     playlist: PlaylistType;
+    allPlaylists: PlaylistType[];
+    getPlaylistsStatus: 'idle' | 'succeeded' | 'failed';
     sharePlaylists: PlaylistType[];
     pageLoading: 'idle' | 'succeeded' | 'failed';
 }

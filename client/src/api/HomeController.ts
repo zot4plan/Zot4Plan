@@ -1,20 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import Axios from './Axios';
 
-export const getCourse = createAsyncThunk(
-    "courses/getCourse", 
+export const getCourse = createAsyncThunk("courses/getCourse", 
     (id: string) => {
         const course = sessionStorage.getItem(id);
         return course 
-        ?  {status: "succeeded", course: JSON.parse(course)}
-        :   Axios
-            .get('/api/getCourse', { params: { id: id } })
-            .then(response => {
-                sessionStorage.setItem(id, JSON.stringify(response.data));
-                return {
-                    course: response.data as CourseType,
-                };
-            })
+            ? {status: "succeeded", course: JSON.parse(course)}
+            : Axios.get('/api/getCourse', { params: { id: id } })
+                .then(response => {
+                    sessionStorage.setItem(id, JSON.stringify(response.data));
+                    return {
+                        course: response.data as CourseType,
+                    };
+                })
     }
 );
 
@@ -41,16 +39,14 @@ export const getCourses = (search: string, callback:(options: CourseOptionType[]
 
 export const getAllPrograms = async () => await Axios.get('/api/getAllPrograms');
 
-export const getAllGE = createAsyncThunk(
-    "generalEducation/getAllGE", 
-    async (_) => {
+export const getAllGE = createAsyncThunk("generalEducation/getAllGE", 
+    async () => {
         const response = await Axios.get('/api/getAllGE');
         return response.data as GEPayload[];
     }
 );
 
-export const getGE = createAsyncThunk(
-    "generalEducation/getGE", 
+export const getGE = createAsyncThunk("generalEducation/getGE", 
     async (id: string) => {
         const response = await Axios.post('/api/getCoursesInGE', {id: id})
         return {
@@ -60,8 +56,7 @@ export const getGE = createAsyncThunk(
     }
 );
 
-export const getProgram = createAsyncThunk(
-    "programs/getProgram", 
+export const getProgram = createAsyncThunk("programs/getProgram", 
     async (id: number) => {
         const response = await Axios.post('/api/getProgram', {id: id})
         return {
@@ -73,8 +68,7 @@ export const getProgram = createAsyncThunk(
     }
 ); 
 
-export const getSchedule = createAsyncThunk(
-    "schedule/getSchedule", 
+export const getSchedule = createAsyncThunk("schedule/getSchedule", 
     async (id: string) => {
         const response = await Axios.put('/api/loadSchedule/' + id);
         const courses = response.data.courses as CourseType[];
@@ -92,12 +86,11 @@ export const addOrEditSchedule = (
     name: string, 
     schedule: any, 
     setMessage: (value: React.SetStateAction<{status: string; content: string;}>) => void
-) => Axios
-    .put('/api/saveSchedule/' + name, {schedule: schedule})
+) => 
+    Axios.put('/api/saveSchedule/' + name, {schedule: schedule})
     .then(() => setMessage({status: "succeeded", content: "Saved successfully!"}))
     .catch(() => setMessage({status: "failed", content: "Failed to save schedule"}))
 
-export const updateHomeVisit = createAsyncThunk(
-    "features/updateHomeVisit", 
-    async (_) => await Axios.put('/api/updateHomeVisit')
+export const updateHomeVisit = createAsyncThunk("features/updateHomeVisit", 
+    async () => await Axios.put('/api/updateHomeVisit')
 );
