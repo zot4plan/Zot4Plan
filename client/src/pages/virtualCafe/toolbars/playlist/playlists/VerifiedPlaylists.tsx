@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { getPlaylists } from "../../../../../api/VirtualCafeController";
+import { getPlaylists } from "../../../../../controllers/VirtualCafeController";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../../../../components/icon/Spinner";
 import Playlists from "./Playlists";

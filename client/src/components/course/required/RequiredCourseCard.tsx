@@ -1,7 +1,7 @@
 import {memo, useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { RootState} from '../../../store/store';
-import Axios from '../../../api/Axios';
+import Axios from '../../../controllers/Axios';
 import CourseCard from '../popup/CourseCard';
 
 interface CourseCardProps {

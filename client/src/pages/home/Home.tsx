@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { moveCourse } from '../../store/slices/CourseSlice';
-import { updateHomeVisit } from '../../api/HomeController';
+import { updateHomeVisit } from '../../controllers/HomeController';
 import { RootState } from '../../store/store';
 import Buttons from './toolbars/Buttons';
 import Schedule from './schedule/Schedule';

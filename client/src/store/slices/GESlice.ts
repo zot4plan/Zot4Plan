@@ -1,5 +1,5 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-import { getAllGE, getGE } from '../../api/HomeController'
+import { getAllGE, getGE } from '../../controllers/HomeController'
 import { ID_LENGTH } from "../constants/Constants";
 
 const initialState:GESliceType = {

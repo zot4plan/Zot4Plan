@@ -1,6 +1,6 @@
 import { ChangeEvent, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addReport, getPlaylists } from "../../../../../api/VirtualCafeController";
+import { addReport, getPlaylists } from "../../../../../controllers/VirtualCafeController";
 import Xmark from '../../../../../components/icon/Xmark';
 import Message from "../../../../../components/message/Message";
 import ModalResponse from '../../../../../components/modal/ModalResponse';

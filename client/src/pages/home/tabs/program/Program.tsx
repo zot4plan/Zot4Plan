@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector} from 'react-redux';
 import { RootState } from '../../../../store/store';
 import Accordion from '../../../../components/accordion/Accordion';
-import { getProgram } from '../../../../api/HomeController';
+import { getProgram } from '../../../../controllers/HomeController';
 import ProgramCarousel from './ProgramCarousel';
 
 interface PropgramProps {

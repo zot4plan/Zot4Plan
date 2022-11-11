@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, MouseEvent} from 'react';
 import { useStore } from 'react-redux';
 import { RootState } from '../../store/store';
-import { addOrEditSchedule } from '../../api/HomeController';
+import { addOrEditSchedule } from '../../controllers/HomeController';
 import Confetti from 'react-confetti';
 import Message from '../message/Message';
 import './PopperSaveLoad.css';

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { addPlaylist, getPlaylists, updateVirtualCafeVisit } from "../../api/VirtualCafeController";
+import { addPlaylist, getPlaylists, updateVirtualCafeVisit } from "../../controllers/VirtualCafeController";
 import { backgrounds, playlists } from "../../pages/virtualCafe/data/data";
 
 const initialState:VirtualCafeSliceType = {

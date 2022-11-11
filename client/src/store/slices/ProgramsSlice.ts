@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
-import { getProgram, getSchedule } from '../../api/HomeController'
+import { getProgram, getSchedule } from '../../controllers/HomeController'
 import { ID_LENGTH } from "../constants/Constants";
 // export const SECTION_ID_LEN = 4; // to differentiate course in major (which cannot be remove)
 

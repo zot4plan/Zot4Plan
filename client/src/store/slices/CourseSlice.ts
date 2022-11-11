@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, nanoid, isAnyOf, current } from "@reduxjs/toolkit";
-import { getProgram, getGE, getSchedule, getCourse, updateHomeVisit } from '../../api/HomeController'
+import { getProgram, getGE, getSchedule, getCourse, updateHomeVisit } from '../../controllers/HomeController'
 import { addCourse } from "./ProgramsSlice";
 import { DEPT_COLORS, ID_LENGTH } from "../constants/Constants";
 

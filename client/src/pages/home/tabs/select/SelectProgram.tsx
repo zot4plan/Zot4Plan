@@ -5,7 +5,7 @@ import { RootState } from '../../../../store/store';
 import { changeProgram } from '../../../../store/slices/ProgramsSlice';
 import SelectCourses from './SelectCourses';
 import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
-import { getAllPrograms } from '../../../../api/HomeController';
+import { getAllPrograms } from '../../../../controllers/HomeController';
 import './SelectProgram.css';
 
 const myStyle: StylesConfig<ProgramOption, true> =  {

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { changePlaylist } from "../../../../../store/slices/VirtualCafeSlice";
-import { updateView } from "../../../../../api/VirtualCafeController";
+import { updateView } from "../../../../../controllers/VirtualCafeController";
 import MusicNote from "../../../../../components/icon/MusicNote";
 import './Playlists.css';
 

@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, MouseEvent} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSchedule } from '../../api/HomeController';
+import { getSchedule } from '../../controllers/HomeController';
 import { RootState } from '../../store/store';
 import { resetStatus } from '../../store/slices/CourseSlice';
 import Confetti from 'react-confetti';

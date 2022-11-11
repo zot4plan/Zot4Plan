@@ -5,7 +5,7 @@ import Header from '../../components/header/Header';
 import VirtualCafeNavList from './navbar/VirtualCafeNavList';
 import VirtualCafeGrid from './grid/VirtualCafeGrid';
 import VirtualCafeToolbar from './toolbars/VirtualCafeToolbar';
-import { updateVirtualCafeVisit } from '../../api/VirtualCafeController';
+import { updateVirtualCafeVisit } from '../../controllers/VirtualCafeController';
 import './VirtualCafe.css';
 
 function VirtualCafe() {

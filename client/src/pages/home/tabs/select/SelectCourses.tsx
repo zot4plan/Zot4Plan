@@ -4,7 +4,7 @@ import AsyncSelect  from 'react-select/async';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { RootState } from '../../../../store/store';
 import { addCourse } from '../../../../store/slices/ProgramsSlice';
-import { getCourses } from '../../../../api/HomeController';
+import { getCourses } from '../../../../controllers/HomeController';
 import AddIcon from '../../../../components/icon/AddIcon';
 import Message from '../../../../components/message/Message';
 import './SelectCourses.css';
