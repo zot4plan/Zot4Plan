@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
 import { getProgram, getSchedule } from '../../controllers/HomeController'
-import { ID_LENGTH } from "../constants/Constants";
-// export const SECTION_ID_LEN = 4; // to differentiate course in major (which cannot be remove)
+import { ID_LENGTH } from "../../constants/Constants";
 
 const getInitialState = () => {
     let sections:{[id:string]: (string|string[])[]}= {}; 
@@ -15,6 +14,18 @@ const getInitialState = () => {
         addedCourses: addedCourses,
         sections: sections,
     }
+}
+
+const getDefaultProgram = (program: ProgramOption) => {
+    return {
+        program_id: program.value,
+        byIds: {}, 
+        allIds: [],
+        name: program.label,
+        url: "",
+        isMajor: program.is_major,
+        status: "idle"
+    } as ProgramType
 }
 
 const initialState:ProgramsSliceType = getInitialState();
@@ -41,15 +52,7 @@ export const programSlice = createSlice ({
                 
             action.payload.value.forEach(program => {
                 if(state.byIds[program.value] === undefined) {
-                    state.byIds[program.value] = {
-                        program_id: program.value,
-                        byIds: {}, 
-                        allIds: [],
-                        name: program.label,
-                        url: "",
-                        isMajor: program.is_major,
-                        status: "idle"
-                    }
+                    state.byIds[program.value] = getDefaultProgram(program);
                 }
             })
             state.selectedPrograms[i] = action.payload.value;
@@ -114,15 +117,7 @@ export const programSlice = createSlice ({
                     
                 programs.forEach(program => {
                     if(state.byIds[program.value] === undefined) {
-                        state.byIds[program.value] = {
-                            program_id: program.value,
-                            byIds: {}, 
-                            allIds: [],
-                            name: program.label,
-                            url: "",
-                            isMajor: program.is_major,
-                            status: "idle"
-                        }
+                        state.byIds[program.value] = getDefaultProgram(program);
                     }
                 })
             })

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../store/store';
-import MusicNotes from '../../../../components/icon/MusicNotes';
+import { RootState } from '../../../../../store/store';
+import MusicNotes from '../../../../../components/icon/MusicNotes';
 
 function Background() {
     const {backgroundUrl, backgroundDescription} = useSelector((state:RootState) => ({

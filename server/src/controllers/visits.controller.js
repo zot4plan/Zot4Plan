@@ -7,9 +7,9 @@ exports.updateHomeVisit = (_, res) => {
         model: Visits,
         bind: [new Date()],
         raw: false,
-        returning: true,
+        returning: false,
     }).then(()=> {
-        res.status(200).send();  
+        res.status(200).send('OK');  
     })
     .catch(() => {
         res.status(500).send("Something is wrong");
@@ -21,9 +21,9 @@ exports.updateVirtualCafeVisit = (_, res) => {
         model: Visits,
         bind: [new Date()],
         raw: false,
-        returning: true,
+        returning: false,
     }).then(()=> {
-        res.status(200).send();  
+        res.status(200).send('OK');  
     })
     .catch(() => {
         res.status(500).send("Something is wrong");

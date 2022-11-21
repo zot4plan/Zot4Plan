@@ -29,10 +29,10 @@ function VerifiedPlaylist({ handleClose }: ModalProps) {
                 <Spinner/>
             </div>
             <ul style={{display: isLoading ? 'none' : 'block'}}>
-                { playlists 
+                {   playlists 
                     && <Playlists 
                         handleClose={handleClose} 
-                        heading='Playlist'
+                        heading='All Playlists'
                         playlists={playlists} 
                         onImageLoad={imageLoaded}
                     />

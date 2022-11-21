@@ -2,12 +2,12 @@ import { FC, useState } from 'react';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 
 interface ModalButtonProps {
-    label: string;
+    Label: string | FC<IconProps>;
     className?: string;
     ModalContent: FC<ModalProps>;
 }
 
-const ModalButton = ({label, className, ModalContent}: ModalButtonProps) => {
+const ModalButton = ({Label, className, ModalContent}: ModalButtonProps) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -15,11 +15,11 @@ const ModalButton = ({label, className, ModalContent}: ModalButtonProps) => {
     return (       
         <>
             <button className={className} onClick={handleOpen}>
-                {label}
+               {typeof(Label) === 'string' ? Label : <Label/>}
             </button>
             <ModalUnstyled
-                aria-labelledby={label}
-                aria-describedby={label}
+                aria-labelledby={typeof(Label) === 'string' ? Label : 'modal'}
+                aria-describedby={typeof(Label) === 'string' ? Label : 'modal'}
                 open={open}
                 onClose={handleClose}
             >

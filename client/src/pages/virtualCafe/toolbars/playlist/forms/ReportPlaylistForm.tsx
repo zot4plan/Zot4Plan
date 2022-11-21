@@ -5,7 +5,7 @@ import Xmark from '../../../../../components/icon/Xmark';
 import Message from "../../../../../components/message/Message";
 import ModalResponse from '../../../../../components/modal/ModalResponse';
 import { RootState } from "../../../../../store/store";
-import './Form.css';
+import '../../../Form.css';
 
 function ReportPlaylistForm({handleClose}: ModalProps) {
     const status = useSelector((state: RootState) => state.virtualCafe.getPlaylistsStatus);
@@ -14,8 +14,9 @@ function ReportPlaylistForm({handleClose}: ModalProps) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(status === 'idle') 
+        if(status === 'idle') {
             dispatch(getPlaylists());
+        }
     },[status, dispatch]);
 
     const handleChangeSelect = (event: ChangeEvent<HTMLSelectElement>) => 
@@ -27,7 +28,7 @@ function ReportPlaylistForm({handleClose}: ModalProps) {
     const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
         
-        if(form.playlistId && form.reason && form.reason.length > 256) {
+        if(!form.playlistId || !form.reason || form.reason.length > 256) {
             setForm(prevState => ({...prevState, status: 'failed', message: 'Invalid Input'}));
         }
         else {
@@ -42,38 +43,40 @@ function ReportPlaylistForm({handleClose}: ModalProps) {
     }
 
     return (
-        <>
-            {form.status !== 'succeeded'
-                ? <form className='form' style={{width: '340px', height: '265px'}} onSubmit={handleSubmit}>
-                    <label>
-                        <span>Playlist:</span>
-                        <div className='selectWrapper'>
-                            <select value={form.playlistId} onChange={handleChangeSelect}>
-                                <option key='dumbOption' value='' > Select an option </option>
-                                {playlists.map((playlist) => 
-                                    <option key={playlist.playlist_id} value={playlist.playlist_id}>
-                                        {playlist.name}
-                                    </option>
-                                )}
-                            </select>
-                        </div>
-                    </label>
-                    <label>
-                        <span>Reason:</span>
-                        <input type="text" maxLength={256} value={form.reason} onChange={handleChangeReason} placeholder="Racism, discrimination, or insults"/>
-                    </label>
-                    <div>{form.status === 'failed' && <Message status={form.status} content={form.message}/>}</div>
-                    <div className='form-button-wrapper'>
-                        <button type='button' onClick={handleClose} className='virtual-cafe-modal-button' > Cancel </button>
-                        <button type='submit' className='virtual-cafe-modal-button'> Report </button>
+        <> 
+        {form.status !== 'succeeded'
+            ? <form className='form' style={{width: '340px', height: '265px'}} onSubmit={handleSubmit}>
+                <label>
+                    <p>Playlist:</p>
+                    <div className='selectWrapper'>
+                        <select value={form.playlistId} onChange={handleChangeSelect}>
+                            <option key='dumbOption' value='' > Select an option </option>
+                            {playlists.map((playlist) => 
+                                <option key={playlist.playlist_id} value={playlist.playlist_id}>
+                                    {playlist.name}
+                                </option>
+                            )}
+                        </select>
                     </div>
-                    <button type='button' className='virtual-cafe-x-button' onClick={handleClose}> <Xmark/></button>
-                </form>
-                : <ModalResponse 
-                    heading='Thank You' 
-                    body='We have received your report. We will review it shortly!' 
-                    buttonText='Done' 
-                    handleClose={handleClose}/>}
+                </label>
+                <label>
+                    <p>Reason:</p>
+                    <input type="text" maxLength={256} minLength={8} value={form.reason} onChange={handleChangeReason} placeholder="Racism, discrimination, or insults"/>
+                </label>
+                <div>{form.status === 'failed' && <Message status={form.status} content={form.message}/>}</div>
+                <div className='form-button-wrapper'>
+                    <button type='button' onClick={handleClose} className='virtual-cafe-modal-button' > Cancel </button>
+                    <button type='submit' className='virtual-cafe-modal-button'> Report </button>
+                </div>
+                <button type='button' className='virtual-cafe-x-button' onClick={handleClose}> <Xmark/></button>
+            </form>
+            : <ModalResponse 
+                heading='Thank You' 
+                body='We have received your report. We will review it shortly!' 
+                buttonText='Done' 
+                handleClose={handleClose}
+            />
+        }
         </>
     )
 }

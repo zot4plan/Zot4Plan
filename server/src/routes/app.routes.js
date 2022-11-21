@@ -27,6 +27,7 @@ module.exports = app => {
     router.put("/loadSchedule/:id", schedules.updateAndGetSchedule);
     router.put("/updateHomeVisit", visits.updateHomeVisit);
     router.put("/updateVirtualCafeVisit", visits.updateVirtualCafeVisit);
+    router.put("/updateView/:id", playlists.updateView);
     
     // Health check
     router.get('/health', async (_req, res) => res.status(200).send('OK'));

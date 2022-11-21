@@ -9,6 +9,7 @@ const initialState:VirtualCafeSliceType = {
     sharePlaylists: [],
     pageLoading: 'idle',
     getPlaylistsStatus: 'idle',
+    time: { workTime: 45, breakTime: 15 }
 }
 
 export const VirtualCafeSlice = createSlice ({
@@ -22,13 +23,17 @@ export const VirtualCafeSlice = createSlice ({
         changePlaylist: (state, action: PayloadAction<PlaylistType>) => {
             state.playlist = action.payload;
         },
+
+        editTime: (state, action: PayloadAction<VCTimeType>) => {
+            state.time = action.payload;
+        },
     },
     extraReducers: (builder) => { 
         /**
          * HTTP PUT
          * updateVirtualCafeVisit
          */
-         builder.addCase(updateVirtualCafeVisit.fulfilled, (state, _) => { 
+        builder.addCase(updateVirtualCafeVisit.fulfilled, (state, _) => { 
             state.pageLoading = 'succeeded';
         })
 
@@ -61,7 +66,8 @@ export const VirtualCafeSlice = createSlice ({
 
 export const {
     changeBackground,
-    changePlaylist
+    changePlaylist,
+    editTime
 } = VirtualCafeSlice.actions;
 
 export default VirtualCafeSlice.reducer;

@@ -62,11 +62,11 @@
     position: absolute;
 }
 
-.form > label > span {
+.form > label > p {
     padding-left: 1rem;
 }
 
-.form > label > input, .selectWrapper > select {
+.form input, .selectWrapper > select {
     height: 3.2rem;
     border: 2px solid #B5838D;
     border-radius: 1.6rem;

@@ -25,14 +25,14 @@ details:last-of-type {
 
 #chalkboard {
     float: right;
-    width: 16.5rem;
-    height: 11.5rem;
+    width: 15rem;
+    height: 11rem;
 }
 
 .unit-text {
     position: absolute;
-    right: -3.5rem;
-    bottom: -0.2rem;
+    right: -0.5rem;
+    bottom: -0.3rem;
     transform: translate(-50%, -50%);
     font-family:'courier';
     text-align: center;

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataType) => {
             type: DataType.STRING(128),
             allowNull: true,
         },
-        share_by: {
+        shared_by: {
             type: DataType.STRING(128),
             allowNull: true,
         },

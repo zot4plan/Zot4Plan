@@ -42,9 +42,9 @@ function Home() {
     const printContent = () => printRef.current;
 
     return (
-        <>
+        <div id="home">
             <Header 
-                path="/home" 
+                navbarStyle={{ margin: '0rem', backgroundColor: 'var(--secondary-color)', borderRadius: '0rem' }}
                 heartColor="var(--accent-color-2)"
                 NavList={HomeNavList}
             />
@@ -56,7 +56,7 @@ function Home() {
             </div>  
             </DragDropContext>
             <Footer/>
-        </>
+        </div>
     );
 }
 

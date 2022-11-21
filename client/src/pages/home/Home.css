@@ -1,3 +1,16 @@
+#home * {
+    font-display: optional;
+    font-family: 'Roboto','Times New Roman',Times, serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#home input, 
+#home textarea, 
+#home button {
+    margin: 0;
+}
+
 #body-container {
     display: grid; 
 }

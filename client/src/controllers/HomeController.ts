@@ -92,5 +92,8 @@ export const addOrEditSchedule = (
     .catch(() => setMessage({status: "failed", content: "Failed to save schedule"}))
 
 export const updateHomeVisit = createAsyncThunk("features/updateHomeVisit", 
-    async () => await Axios.put('/api/updateHomeVisit')
+    async () => {
+        const response =  await Axios.put('/api/updateHomeVisit');
+        return response.data;
+    }
 );

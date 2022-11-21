@@ -1,0 +1,23 @@
+#virtual-cafe-time-form {
+    width: 270px;
+    height: 220px;
+}
+
+#virtual-cafe-time-form label > div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+#virtual-cafe-time-form input {
+    width: 60px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-left: 1rem;
+    text-align: center;
+}
+
+#virtual-cafe-time-form .time-unit {
+    font-weight: 500;
+}

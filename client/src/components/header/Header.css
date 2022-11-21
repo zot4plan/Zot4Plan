@@ -40,7 +40,7 @@
 .nav-item:hover, 
 .nav-item:hover > a,  
 .nav-item:hover > button{
-    color: #307ABB !important;
+    color: #307ABB;
 }
 
 .nav-link{ position: relative;}
@@ -72,30 +72,6 @@
         display:flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .nav-list {
-        position:absolute;
-        z-index: 2;
-        top: 80px;
-        left: 0;
-
-        width: 100%;
-        height: 0;
-
-        display:block;
-        overflow: hidden;
-
-        opacity: 1;
-        background-color: #1F1F1F;
-        transition: all .4s ease;
-    }
-
-    .nav-list-show {
-        height: 200px;
-        opacity: 1;
-        transform: translateY(0);
-        overflow: visible;
     }
 
     .nav-item, 

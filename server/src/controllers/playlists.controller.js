@@ -46,11 +46,11 @@ exports.getPlaylists = (_req, res) => {
     });
 }
 
-exports.updateView = (_req, res) => {
+exports.updateView = (req, res) => {
     Playlists.increment('view', 
     { 
         by: 1,
-        where: { playlist_id: res.body.id },
+        where: { playlist_id: req.params.id },
         returning: false
     })
     .then(() => {
@@ -87,7 +87,7 @@ exports.addPlaylist = (req, res) => {
                 (playlist.prefix === 'https://youtube.com/playlist?list=' 
                 ? 'https://www.youtube.com/embed/videoseries?list=' 
                 : 'https://www.youtube.com/embed/') + playlist.id,
-            share_by: playlist.shareBy ? playlist.shareBy : null,
+            shared_by: playlist.sharedBy ? playlist.sharedBy : null,
         };
 
         Playlists
@@ -108,7 +108,7 @@ function validatePlaylist(playlist) {
     else if(playlist.name.length > 128 || playlist.name.length < 1) {
         return "Invalid playlist name";
     }
-    else if(playlist.shareBy.length > 128 || playlist.name.length < 1) {
+    else if(playlist.sharedBy.length > 128 || playlist.name.length < 1) {
         return "Invalid sharer's name";
     }
     else {

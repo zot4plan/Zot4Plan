@@ -1,21 +1,34 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import PauseIcon from '../../../../components/icon/PauseIcon';
 import PlayIcon from '../../../../components/icon/PlayIcon';
-import styles from './Timer.module.css';
+import Refresh from '../../../../components/icon/Refresh';
+import SettingIcon from '../../../../components/icon/SettingIcon';
+import ModalButton from '../../../../components/modal/ModalButton';
+import { RootState } from '../../../../store/store';
+import TimeForm from './form/TimeForm';
+import './Timer.css';
 
-interface TimerProps{
-    studyTime: number;
-    breakTime: number;
-}
-
-const Timer = ({ studyTime, breakTime }:TimerProps) => {
-    const [myTimer, setMyTimer] = useState({
+const initialState = (workTime: number, isWork=true) => {
+    return {
         isPause: true,
-        isStudy: true,
-        minutes: studyTime,
+        isWork: isWork,
+        minutes: workTime,
         seconds: 0,
-    })
+    }
+};
+
+const Timer = () => {
+    const time = useSelector((state: RootState) => state.virtualCafe.time);
+    const [myTimer, setMyTimer] = useState(initialState(time.workTime));
+
     const handlePause = () => setMyTimer(prevState => ({...prevState, isPause: !myTimer.isPause}));
+
+    const handleReset = () => setMyTimer(initialState(myTimer.isWork ? time.workTime : time.breakTime, myTimer.isWork));
+
+    useEffect(()=> {
+        setMyTimer(initialState(time.workTime));
+    },[time])
 
     useEffect(() => {
         var timer = setInterval(() => {
@@ -26,9 +39,9 @@ const Timer = ({ studyTime, breakTime }:TimerProps) => {
                     {
                         setMyTimer(prevState => ({
                             ...prevState, 
-                            minutes: myTimer.isStudy ? breakTime - 1 : studyTime - 1,
+                            minutes: myTimer.isWork ? time.breakTime - 1 : time.workTime - 1,
                             seconds: 59,
-                            isStudy: !myTimer.isStudy
+                            isWork: !myTimer.isWork
                         }));
                     }
                     else {
@@ -43,25 +56,26 @@ const Timer = ({ studyTime, breakTime }:TimerProps) => {
                     setMyTimer(prevState => ({...prevState, seconds: myTimer.seconds - 1}));
             }
         }, 1000);
+        
         return () => clearInterval(timer);
     });
 
     return (
-        <div className={styles.container}>
-            <div className={styles.timerContainer}>
-                <h1> 
-                    {myTimer.isStudy ? "Work Time:" : "Break Time:" } 
-                </h1>
-                <h1 className={styles.timer}>
-                    {myTimer.minutes >= 10 ? myTimer.minutes : "0" + myTimer.minutes}:
-                    {myTimer.seconds >= 10 ? myTimer.seconds : "0" + myTimer.seconds}
-                </h1>
+        <div className='timer-wrapper flex-container'>
+            <div className='clock-container flex-container'>
+                <p> { myTimer.isWork ? "Work Time:" : "Break Time:" } </p>
+                <p className='timer'>
+                    { myTimer.minutes >= 10 ? myTimer.minutes : "0" + myTimer.minutes }
+                    :{ myTimer.seconds >= 10 ? myTimer.seconds : "0" + myTimer.seconds }
+                </p>
             </div>
-            <button onClick={handlePause} className={styles.playIcon}>
-                {myTimer.isPause ? <PlayIcon/> : <PauseIcon/>}
-            </button>
+            <div className='timer-toolbar-container'>
+                <ModalButton Label={SettingIcon} className='timer-icon' ModalContent={TimeForm}/>
+                <button onClick={handlePause} className='timer-icon'>{myTimer.isPause ? <PlayIcon/> : <PauseIcon/>}</button>
+                <button className='timer-icon' onClick={handleReset}> <Refresh/> </button>
+            </div>
         </div>
     )
 }
 
-export default Timer
+export default Timer;

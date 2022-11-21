@@ -8,8 +8,8 @@ function VirtualCafeToolbar() {
     return (
         <ul className="virtual-cafe-toolbar">
             <li><Clock/></li>
-            <li><ModalButton label="Background" className='virtual-cafe-button' ModalContent={BackgroundModal}/></li>
-            <li><ModalButton label="Playlist" className='virtual-cafe-button' ModalContent={PlaylistModal}/></li>
+            <li><ModalButton Label="Background" className='virtual-cafe-button' ModalContent={BackgroundModal}/></li>
+            <li><ModalButton Label="Playlist" className='virtual-cafe-button' ModalContent={PlaylistModal}/></li>
         </ul> 
     );
 }

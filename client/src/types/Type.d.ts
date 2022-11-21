@@ -1,4 +1,6 @@
 /********** Objects Type ************/
+
+//Home - schedule
 declare interface ProgramOption {
     value: number;
     label: string;
@@ -49,12 +51,13 @@ declare interface YearsType {
     allIds: string[],
 }
 
+//Virtual-cafe
 declare interface PlaylistType {
     playlist_id: string;
     thumbnail: string | null;
     name: string;
     author: string | null;
-    share_by: string | null;
+    shared_by: string | null;
     original_url: string;
     embed_url: string;
     language: string;
@@ -69,6 +72,11 @@ declare interface BackgroundType {
     description: string; 
     url: string;
     like: number;
+}
+
+declare interface VCTimeType {
+    workTime: number;
+    breakTime: number;
 }
 
 /*********** Component Props ************/
@@ -126,12 +134,12 @@ declare interface AddPlaylistPayload {
         playlist_id: string, 
         name:string, 
         prefix: string, 
-        shareBy: string
+        sharedBy: string
     }
     setStatus: React.Dispatch<React.SetStateAction<{
         url: string;
         name: string;
-        shareBy: string;
+        sharedBy: string;
         status: string;
         message: string;
     }>>
@@ -142,7 +150,7 @@ declare interface AddPlaylistPayload {
 /***********************************/
 declare interface GEType {
     ge_id: string; 
-    sectionIds: { sectionId: string, nameChild: string} [];
+    sectionIds: { sectionId: string, nameChild: string } [];
     name: string; 
     nameChild: string;
     status: string; 
@@ -151,12 +159,12 @@ declare interface GEType {
 declare interface AccordionType {
     id: string;
     name: string;
-    sectionIds: { sectionId: string, nameChild: string} [];
+    sectionIds: { sectionId: string, nameChild: string } [];
 }
 
 declare interface ProgramType {
     program_id: number;
-    byIds:{ [id:string]: AccordionType}; 
+    byIds:{ [id:string]: AccordionType }; 
     allIds: string[];
     name: string;
     url: string;
@@ -165,23 +173,23 @@ declare interface ProgramType {
 }
 
 declare interface ProgramsSliceType{
-    byIds: {[id: string]: ProgramType };
+    byIds: { [id: string]: ProgramType };
     selectedPrograms: ProgramOption[][]; // 0-index is minors, 1-index is majors 
     index: number[]; // 0-index is the current minor displaying, 1-index is for major
     addedCourses: string,
-    sections: {[id:string]: (string|string[])[]};
+    sections: { [id:string]: (string|string[])[] };
 }
 
 declare interface GESliceType{
-    byIds: { [id:string]: GEType};
+    byIds: { [id:string]: GEType };
     allIds: string[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    sections: {[id:string]: string[]};
+    sections: { [id:string]: string[] };
 }
 
 declare interface CourseSliceType {
     years: YearsType;
-    sections: {[id:string]: string[]};
+    sections: { [id:string]: string[] };
     totalUnits: number;
     courses: {
         [id:string]: {
@@ -190,10 +198,10 @@ declare interface CourseSliceType {
         }
     };
     depts: {
-        byIds: {[id:string]: string[];}, 
+        byIds: { [id:string]: string[] }, 
         size: number,
     };
-    takenGeCourses: {[id:string]: string[]};
+    takenGeCourses: { [id:string]: string[] };
     status: 'idle' | 'succeeded' | 'failed';
     isPrerequisiteCheck: boolean;
     pageLoading: 'idle' | 'succeeded' | 'failed';
@@ -206,4 +214,5 @@ declare interface VirtualCafeSliceType {
     getPlaylistsStatus: 'idle' | 'succeeded' | 'failed';
     sharePlaylists: PlaylistType[];
     pageLoading: 'idle' | 'succeeded' | 'failed';
+    time: VCTimeType;
 }

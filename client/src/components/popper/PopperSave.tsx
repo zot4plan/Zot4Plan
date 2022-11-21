@@ -34,7 +34,7 @@ function PopperSave () {
 
         else   
             setTimeout(() => {
-                const state:RootState = store.getState()
+                const state:RootState = store.getState();
 
                 if(state.course.totalUnits > 0) {
                     const years = state.course.years.allIds.map(id => 

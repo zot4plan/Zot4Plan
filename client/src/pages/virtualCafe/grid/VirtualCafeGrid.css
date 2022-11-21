@@ -5,7 +5,18 @@
     gap: 1rem;
     padding: 2rem 1rem;
 }
-  
+
+/* time */
+.time-conainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* snack */
 .snack-container{
     display: flex;
     justify-content: space-evenly;
@@ -18,7 +29,9 @@
     transform: scale(1.02);
     filter: drop-shadow(2px 3px 3px #333);
 }
-  
+ 
+
+/* video-background */
 .video-container{
     grid-area: 1 / 2 / 3 / 3;
     position: relative;
@@ -53,12 +66,12 @@
     transform: translateX(-50%);
     
     font-size: 1.6rem;
-    font-weight: 600;
     cursor: default;
 }
 
 .video-container p > span {
     margin-left: 2.6rem;
+    font-size: 1.6rem;
 }
   
 .video-container p > svg {

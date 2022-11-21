@@ -4,7 +4,7 @@ import { addPlaylist } from "../../../../../controllers/VirtualCafeController";
 import Xmark from "../../../../../components/icon/Xmark";
 import Message from "../../../../../components/message/Message";
 import ModalResponse from "../../../../../components/modal/ModalResponse";
-import './Form.css';
+import '../../../Form.css';
 
 const prefixes = [
     'https://www.youtube.com/playlist?list=',
@@ -16,7 +16,7 @@ function SharePlaylistForm({handleClose}: ModalProps) {
     const [form, setForm] = useState({
         url: '', 
         name: '',
-        shareBy: '',
+        sharedBy: '',
         status: 'idle', 
         message: ''
     });
@@ -28,8 +28,8 @@ function SharePlaylistForm({handleClose}: ModalProps) {
     const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => 
         setForm(prevState => ({...prevState, name: event.target.value.replace(/[<>,]/gi, '')}));
     
-    const handleChangeShareBy = (event: ChangeEvent<HTMLInputElement>) => 
-        setForm(prevState => ({...prevState, shareBy: event.target.value.replace(/[<>,]/gi, '')}));
+    const handleChangeSharedBy = (event: ChangeEvent<HTMLInputElement>) => 
+        setForm(prevState => ({...prevState, sharedBy: event.target.value.replace(/[<>,]/gi, '')}));
     
     const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -52,7 +52,7 @@ function SharePlaylistForm({handleClose}: ModalProps) {
                     playlist_id: id, 
                     name: form.name, 
                     prefix: prefix, 
-                    shareBy: form.shareBy
+                    sharedBy: form.sharedBy
                 },
                 setStatus: setForm
             }));
@@ -64,16 +64,16 @@ function SharePlaylistForm({handleClose}: ModalProps) {
             {form.status !== 'succeeded'
             ? <form className='form' style={{width: '340px', height: '340px'}} onSubmit={handleSubmit}>
                 <label>
-                    <span> Playlist Name: </span>
+                    <p> Playlist Name: </p>
                     <input type="text" maxLength={128} minLength={2} value={form.name} onChange={handleChangeName} placeholder="playlist" required/>
                 </label>
                 <label>
-                    <span>Share Link (youtube):</span>
+                    <p>Share Link (youtube):</p>
                     <input type="url" maxLength={256} value={form.url} onChange={handleChangeUrl} placeholder="https://www.youtube.com/" required/>
                 </label>
                 <label>
-                    <span>Share By:</span>
-                    <input type="text" maxLength={64} minLength={1} value={form.shareBy} onChange={handleChangeShareBy} placeholder="your nickname"/>
+                    <p>Share By:</p>
+                    <input type="text" maxLength={64} minLength={1} value={form.sharedBy} onChange={handleChangeSharedBy} placeholder="your nickname"/>
                 </label>
                 <div>{form.status === 'failed' && <Message status={form.status} content={form.message}/>}</div>
                 <div className='form-button-wrapper'>

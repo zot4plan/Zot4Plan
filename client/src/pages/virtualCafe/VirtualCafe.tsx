@@ -20,7 +20,11 @@ function VirtualCafe() {
 
     return (
         <div className="virtual-cafe">
-            <Header path='/virtual-cafe' heartColor='#FFF' NavList={VirtualCafeNavList}/>
+            <Header  
+                navbarStyle={{ margin: '0.5rem 1rem', backgroundColor: '#B5838D', borderRadius: '2.4rem' }}
+                heartColor='#FFF' 
+                NavList={VirtualCafeNavList}
+            />
             <VirtualCafeGrid/>
             <VirtualCafeToolbar/>
         </div>

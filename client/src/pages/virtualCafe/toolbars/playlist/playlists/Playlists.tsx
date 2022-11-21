@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { changePlaylist } from "../../../../../store/slices/VirtualCafeSlice";
-import { updateView } from "../../../../../controllers/VirtualCafeController";
 import MusicNote from "../../../../../components/icon/MusicNote";
 import './Playlists.css';
+import View from "../../../../../components/icon/View";
 
 interface PlaylistsProps {
     handleClose: () => void;
@@ -21,13 +21,16 @@ function Playlists({ handleClose, onImageLoad, heading, playlists}: PlaylistsPro
                     className='playlist-item' 
                     onClick={()=> {
                         dispatch(changePlaylist(playlist));
-                        updateView(playlist.playlist_id);
                         handleClose();
                     }}
                 >
-                    <div>
-                        <span className='music-note'><MusicNote/></span> 
-                        <p> {playlist.name} </p>
+                    <div className='playlist-description'>
+                        <div><MusicNote fontSize="2rem"/></div> 
+                        <div> 
+                            <p style={{fontSize:'1.6rem'}}> {playlist.name} </p>
+                            <p style={{fontSize:'1.4rem', color:'var(--vc-spec-text-second)'}}>Shared by: {playlist.shared_by}</p>
+                            <p style={{fontSize:'1.4rem', color:'var(--vc-spec-text-second)'}}> {playlist.view} <span style={{marginLeft: '0.3rem'}}><View fontSize='1.6rem'/></span> </p> 
+                        </div>
                     </div>
                     <img src={"http://img.youtube.com/vi/" + playlist.thumbnail + "/default.jpg"} 
                         title="YouTube Video"  

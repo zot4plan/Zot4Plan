@@ -13,13 +13,13 @@ function PlaylistModal({ handleClose }: ModalProps) {
                     <Xmark/>
                 </button>
             </div>
-            <div className='virtual-cafe-modal-body'> 
+            <div className='virtual-cafe-modal-body' style={{height: '435px'}}> 
                 <UnverifiedPlaylist handleClose={handleClose}/>         
                 <VerifiedPlaylist handleClose={handleClose}/>
             </div>
             <div className='virtual-cafe-modal-footer'>
-                <ModalButton label="Share your playlist" className="virtual-cafe-modal-button" ModalContent={SharePlaylistForm}/>
-                <ModalButton label="Report" className="virtual-cafe-modal-button" ModalContent={ReportPlaylistForm}/>
+                <ModalButton Label="Share your playlist" className="virtual-cafe-modal-button" ModalContent={SharePlaylistForm}/>
+                <ModalButton Label="Report" className="virtual-cafe-modal-button" ModalContent={ReportPlaylistForm}/>
             </div>
         </div>
     )

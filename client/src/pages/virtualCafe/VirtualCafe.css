@@ -1,5 +1,12 @@
 .virtual-cafe * {
     font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 300;
+}
+
+.virtual-cafe input, 
+.virtual-cafe textarea, 
+.virtual-cafe button {
+    margin: 0;
 }
     
 /* button */
@@ -28,8 +35,8 @@
     
 .virtual-cafe-x-button {
     position: absolute;
-    top: 1.6rem;
-    right: 1.6rem;
+    top: 1rem;
+    right: 1rem;
 }
     
 .virtual-cafe-x-button > svg {
@@ -65,8 +72,6 @@
 }
 
 .virtual-cafe-modal-body {
-    height: 435px;
-    margin-top: 3rem;
     background: #fff;
     overflow-y: scroll;
     -webkit-overflow-scrolling: 'touch';

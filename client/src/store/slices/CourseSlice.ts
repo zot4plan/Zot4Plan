@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, nanoid, isAnyOf, current } from "@reduxjs/toolkit";
 import { getProgram, getGE, getSchedule, getCourse, updateHomeVisit } from '../../controllers/HomeController'
 import { addCourse } from "./ProgramsSlice";
-import { DEPT_COLORS, ID_LENGTH } from "../constants/Constants";
+import { DEPT_COLORS, ID_LENGTH } from "../../constants/Constants";
 
 function removeLastWord(str:string) {
     const lastIndexOfSpace = str.lastIndexOf(' ');

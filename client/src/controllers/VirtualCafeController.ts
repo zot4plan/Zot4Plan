@@ -15,9 +15,9 @@ export const addPlaylist = createAsyncThunk("features/addPlaylists",
                 id: request.playlist.playlist_id, 
                 name: request.playlist.name, 
                 prefix: request.playlist.prefix, 
-                shareBy: request.playlist.shareBy
+                sharedBy: request.playlist.sharedBy
             });
-            request.setStatus({url: '', name: '', shareBy: '', status: 'succeeded', message: ''});
+            request.setStatus({url: '', name: '', sharedBy: '', status: 'succeeded', message: ''});
             return response.data;
         }
         catch (err) {
@@ -39,11 +39,14 @@ export const addReport = async (playlistId: string, reason: string) => (
 )
 
 export const updateView = async (playlistId: string) => 
-    Axios.put('/api/updateView', {playlistId: playlistId}).catch(err => console.log(err));
+    Axios.put('/api/updateView/' + playlistId).catch(err => console.log(err));
 
 export const updateLike = async (playlistId: string) => 
     Axios.put('/api/updateLike', {playlistId: playlistId}).catch(err => console.log(err));
 
 export const updateVirtualCafeVisit = createAsyncThunk("features/updateVirtualCafeVisit", 
-    async () =>  await Axios.put('/api/updateVirtualCafeVisit')
+    async () =>  { 
+        var response = await Axios.put('/api/updateVirtualCafeVisit');
+        return response.data;
+    }
 );
