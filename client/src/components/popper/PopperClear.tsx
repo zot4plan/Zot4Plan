@@ -1,6 +1,6 @@
 import {memo, MouseEvent} from 'react';
 import {useDispatch} from 'react-redux';
-import { clearSchedule } from '../../store/slices/StoreSlice';
+import { clearSchedule } from '../../store/slices/CourseSlice';
 
 interface PopperClearProps{
     handleClick: (event: MouseEvent<HTMLButtonElement>) => void

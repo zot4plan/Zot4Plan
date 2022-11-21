@@ -1,15 +1,28 @@
-import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { moveCourse} from '../../store/slices/StoreSlice';
-import Buttons from './buttons/Buttons';
+import { moveCourse } from '../../store/slices/CourseSlice';
+import { updateHomeVisit } from '../../controllers/HomeController';
+import { RootState } from '../../store/store';
+import Buttons from './toolbars/Buttons';
 import Schedule from './schedule/Schedule';
 import Tabs from './tabs/Tabs';
+import HomeNavList from './navbar/HomeNavList';
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
 import './Home.css';
 
-function App() {
+function Home() {
+    const loading = useSelector((state: RootState) => state.course.pageLoading);
     const dispatch = useDispatch();
-    const onDragEnd = (result: DropResult ) => {
+
+    useEffect(() => {
+        if(loading === 'idle') {
+            dispatch(updateHomeVisit())
+        }
+    },[loading, dispatch]);
+
+    const onDragEnd = (result: DropResult) => {
         const { source, destination, draggableId } = result;
         if(!destination) return;
 
@@ -29,14 +42,22 @@ function App() {
     const printContent = () => printRef.current;
 
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
+        <div id="home">
+            <Header 
+                navbarStyle={{ margin: '0rem', backgroundColor: 'var(--secondary-color)', borderRadius: '0rem' }}
+                heartColor="var(--accent-color-2)"
+                NavList={HomeNavList}
+            />
+            <DragDropContext onDragEnd={onDragEnd}>
             <Buttons printContent={printContent}/>
             <div id="body-container" className="relative">
                 <Schedule ref={printRef}/>
                 <Tabs/>
             </div>  
-        </DragDropContext>
+            </DragDropContext>
+            <Footer/>
+        </div>
     );
 }
 
-export default App;
+export default Home;

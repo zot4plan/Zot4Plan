@@ -2,9 +2,9 @@ import { Droppable } from 'react-beautiful-dnd';
 import { memo, MouseEvent, useState } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import RequiredCourse from '../course/RequiredCourse';
+import RequiredCourse from '../course/required/RequiredCourse';
 import PopperUnstyled from '@mui/base/PopperUnstyled';
-import RequiredCourseCard from '../course/RequiredCourseCard';
+import RequiredCourseCard from '../course/required/RequiredCourseCard';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 
 interface AccordionDetailProps {

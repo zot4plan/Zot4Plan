@@ -6,7 +6,7 @@ interface TotalUnitsProps {
 }
 
 function TotalUnits({className}: TotalUnitsProps) {
-    const units = useSelector((state:RootState)=> state.store.totalUnits);
+    const units = useSelector((state:RootState)=> state.course.totalUnits);
     return (
         <div className={className}> 
             <p> Total Units:</p>

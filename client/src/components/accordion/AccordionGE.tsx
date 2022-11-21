@@ -1,11 +1,11 @@
 import {memo, useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../store/store";
-import { fetchGE } from '../../api/FetchData';
+import { getGE } from '../../controllers/HomeController';
 import ChervonRight from '../icon/ChervonRight';
 import Detail from './Detail';
 import './Accordion.css';
-import Badge from '../badge/badge';
+import Badge from './badge/badge';
 
 interface SectionProps {
     id: string;
@@ -24,7 +24,7 @@ const AccordionGE = ({id}:SectionProps) => {
     
     useEffect(() => {  
         if(isOpen && status === 'idle') 
-          dispatch(fetchGE(id));
+          dispatch(getGE(id));
     },[isOpen, status, dispatch, id]); 
     
     let detailBody;

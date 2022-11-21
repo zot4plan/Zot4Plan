@@ -1,23 +1,23 @@
-import {memo, useEffect, useState} from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllGE } from '../../../api/FetchData';
+import { getAllGE } from '../../../controllers/HomeController';
 import { RootState } from '../../../store/store';
 import GeneralEducation from './generalEducation/GeneralEducation';
 import Program from './program/Program';
-import SelectProgram from './selects/SelectProgram';
+import SelectProgram from './select/SelectProgram';
 
 import './Tabs.css';
 
-function Tabs () {
+function Tabs() {
     const [tab, setTab] = useState({id: 1, isMajor: true}); // Major: 1, minor: 2, GE: 3 
     const addedCourses = useSelector((state:RootState)=> state.programs.addedCourses);
     const status = useSelector((state:RootState)=> state.ge.status);
 
     const dispatch = useDispatch();
 
-    useEffect( () => {  
+    useEffect(() => {  
         if(tab.id === 3 && status === 'idle') 
-            dispatch(fetchAllGE());
+            dispatch(getAllGE());
     },[tab.id, status, dispatch]); 
 
     return (

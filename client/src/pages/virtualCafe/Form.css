@@ -1,0 +1,85 @@
+.form {
+    position: relative;
+    background-color: white;
+    border-radius: 1.6rem;
+    padding: 2rem;
+}
+
+.success-message-wrapper {
+    position: relative;
+    height: 300px;
+    width: 340px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background-color: white;
+    border-radius: 1.6rem;
+    padding: 2rem;
+}
+
+.success-message-wrapper > p {
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    color: #495057
+}
+
+.success-message-wrapper > .virtual-cafe-modal-button {
+    width: 150px;
+}
+
+.form label:nth-child(1) {
+    margin-top: 2rem;
+}
+
+.form > label {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.selectWrapper > select {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+}
+
+.selectWrapper {
+    position: relative;
+}
+
+.selectWrapper > .arrowDown {
+    top: 6px;
+    right: 10px;
+    position: absolute;
+}
+
+.form > label > p {
+    padding-left: 1rem;
+}
+
+.form input, .selectWrapper > select {
+    height: 3.2rem;
+    border: 2px solid #B5838D;
+    border-radius: 1.6rem;
+    padding-left: 1rem;
+}
+
+.form > div {
+    height: 2.6rem;
+}
+
+.form-button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}

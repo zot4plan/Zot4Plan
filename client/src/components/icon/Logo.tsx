@@ -1,4 +1,7 @@
-function Logo () {
+interface LogoProps {
+    heartColor: string;
+}
+function Logo ({heartColor}: LogoProps) {
     return (
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
          width="17.6em" height="3.6em" viewBox="0 0 317 65"
@@ -38,7 +41,8 @@ function Logo () {
         -26 52 -30 111 -30 90 0 154 32 195 99 63 101 26 245 -78 310 -61 38 -142 45
         -201 18z m163 -36 c38 -20 78 -65 96 -108 36 -86 4 -184 -75 -226 -63 -33
         -151 -28 -204 12 -103 79 -94 248 18 316 38 24 125 27 165 6z"/>
-        <path style={{fill:'var(--accent-color-2)'}} d="M658 353 c-41 -47 -49 -103 -23 -152 8 -16 43 -54 77 -85 l63 -56 79
+        <path style={{fill: heartColor}} 
+            d="M658 353 c-41 -47 -49 -103 -23 -152 8 -16 43 -54 77 -85 l63 -56 79
         80 c78 79 79 80 74 124 -11 97 -81 138 -130 76 l-24 -30 -22 30 c-26 35 -70
         41 -94 13z"/>
         <path d="M2328 454 c-5 -4 -8 -14 -8 -22 0 -11 11 -13 58 -7 108 12 191 -28

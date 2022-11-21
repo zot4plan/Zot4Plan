@@ -1,46 +1,35 @@
-import {memo, useState, MouseEvent} from 'react';
+import {memo, FC, useState, MouseEvent, CSSProperties} from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../icon/Logo';
-import DropDown from './DropDown'
-import Tutorial from './Tutorial';
-import DownArrow from '../icon/ArrowDown';
 import Bars from '../icon/Bars';
 import './Header.css';
 
-function Header () {
+interface HeaderProps {
+    navbarStyle: CSSProperties;
+    heartColor: string;
+    NavList: FC<NavListProps>;
+    theme?: any;
+}
+
+function Header ({navbarStyle, heartColor, NavList}: HeaderProps) {
     const [active, setActive] = useState(false);
     const handleOnClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setActive(!active);
     };
+    const resetActive = () => setActive(false);
 
     return (
-        <nav id="nav-bar"> 
-            <div id="brand">
-                <Logo/>
-            </div>
+        <nav className="navbar" style={navbarStyle}>        
+            <Link to="/home" id="brand" onClick={resetActive}>
+                <Logo heartColor={heartColor}/>
+            </Link>
         
             <button id="menu-toggle" onClick={handleOnClick}>
                 <Bars/>
             </button>
-        
-            <ul className={"nav-list " + (active? "nav-list-show ": "")}>
-                <li className='nav-item'>
-                    <a href="#footer">Team</a>
-                </li>
 
-                <li className='nav-item'>
-                    <a href="#footer">Contact</a>
-                </li>
-
-                <li className='nav-item'>
-                    <Tutorial/> 
-                </li>
-
-                <li className='nav-item nav-link'>
-                    <span style={{marginRight: '0.5rem'}}> Resources </span> <DownArrow />
-                    <DropDown/>
-                </li>
-            </ul>
+            <NavList isActive={active}/>
         </nav>
     )
 }

@@ -10,12 +10,12 @@ import './Schedule.css';
 const YEAR_NAMES = ["1st","2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"];
 
 const Schedule = forwardRef((_, ref: Ref<HTMLDivElement>) => {
-    const yearIds = useSelector((state: RootState) => (state.store.years.allIds), shallowEqual);
+    const yearIds = useSelector((state: RootState) => (state.course.years.allIds), shallowEqual);
     return (
         <div id="left-side">
             <div id="schedule" ref={ref}>
                 <PrintPrograms/>
-                {yearIds.map((id,index) => 
+                {yearIds.map((id, index) => 
                     <Year key={id} 
                         id={id}
                         name={YEAR_NAMES[index] + " Year"} 

@@ -4,10 +4,15 @@ module.exports = (sequelize, DataType) => {
             type: DataType.DATEONLY,
             primaryKey: true,
         },  
-        number_of_visits: {
+        home: {
             type: DataType.INTEGER,
             defaultValue: 1,
-            allowNull:false,
+            allowNull: false,
+        },
+        virtual_cafe: {
+            type: DataType.INTEGER,
+            defaultValue: 0,
+            allowNull: false,
         }
     }, {
         timestamps: false

@@ -1,0 +1,42 @@
+.timer-wrapper {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+
+    background-color: #D1B3C4;
+    border-radius: 2.4rem;
+}
+
+.clock-container {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem;
+    letter-spacing: 2px;
+}
+
+.clock-container > p {
+    font-size: 3.2rem;
+}
+
+.timer-icon > svg {
+    font-size: 3.2rem;
+}
+
+.timer-icon:hover > svg {
+    transform: scale(1.02);
+}
+
+.timer {
+    padding: 0.4rem 1.6rem;
+    background-color: white;
+    border-radius: 1.6rem;
+    letter-spacing: 0.5rem;
+}
+
+.timer-toolbar-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+}

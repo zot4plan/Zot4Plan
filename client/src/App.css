@@ -9,7 +9,12 @@
 /* 1. Global Styles */
 :root {
     --transition-time: 400ms;
+    /* text */
     --text-color: #000000; /* black */
+    --vc-spec-text-primary: #000000;
+    --vc-spec-text-second: #6c757d;
+
+    /* background */
     --border-color: #D6D6D6;  /* light gray*/
     --primary-color:#FFFFFF; /* white */
     --primary-color-2: #F2F2F2; /* cultured */
@@ -23,11 +28,6 @@
 
 body {
     margin: 0;
-    font-display: optional;
-    font-family: 'Roboto','Times New Roman',Times, serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: var(--text-color);
 }
   
 code {font-family: 'Roboto','Times New Roman',Times, serif;}
@@ -102,4 +102,17 @@ svg { font-size: 10px; }
     box-shadow: 0 0 3px 3px var(--accent-color-2);
     background-color: var(--accent-color-2);
     color: white;
+}
+
+/* modal */
+.modal-background {
+    position: fixed;
+    z-index: 4;
+    top: 0px;
+    left: 0px;
+    overflow: scroll;
+
+    background-color:rgba(0, 0, 0, 0.20);
+    width: 100%;
+    height: 100%;
 }

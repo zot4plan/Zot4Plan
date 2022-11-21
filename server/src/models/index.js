@@ -20,14 +20,17 @@ db.sequelize = sequelize;
 //Parse DECIMAL FROM STRING to FLOAT
 Sequelize.postgres.DECIMAL.parse = function (value) { return parseFloat(value); };
 
+// Models
 db.courses = require("./courses.model.js")(sequelize, Sequelize);
 db.programs = require("./programs.model.js")(sequelize,Sequelize);
 db.general_education = require("./general_education.model.js")(sequelize,Sequelize);
 db.courses_in_ge = require("./courses_in_ge.model.js")(sequelize, Sequelize);
 db.schedules= require("./schedules.model.js")(sequelize, Sequelize);
 db.visits = require("./visits.model.js")(sequelize, Sequelize);
+db.playlists = require("./playlists.model.js")(sequelize, Sequelize);
+db.reports = require("./reports.model.js")(sequelize, Sequelize);
 
-// courses_in_ge associations
+// Associations
 db.courses.hasMany(db.courses_in_ge, {foreignKey: 'course_id', as: 'courses_in_ge'});
 db.courses_in_ge.belongsTo(db.courses, {foreignKey: 'course_id'} );
 db.general_education.hasMany(db.courses_in_ge, {foreignKey: 'ge_id'});

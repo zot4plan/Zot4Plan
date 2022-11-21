@@ -1,0 +1,8 @@
+.task_item {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    text-align: start;
+    border-bottom: groove;
+}

@@ -1,4 +1,4 @@
-#nav-bar,
+.navbar,
 #brand,
 .nav-list,
 .nav-item,
@@ -7,12 +7,11 @@
     align-items: center;
 }
 
-#nav-bar {
+.navbar {
     position: relative;
     justify-content: space-between;
     height:80px;
     padding: 2rem 2.4rem;
-    background-color: var(--secondary-color);
 }
 
 #brand { color: var(--primary-color); }
@@ -23,20 +22,25 @@
 }
 
 .nav-item {
-    margin: 0rem 2rem;
+    margin: 0rem 1.2rem;
     padding-top: 0.5rem;
     font-size: 2rem;
 }
 
+.nav-item > button {
+    font-size: 2rem;
+    color: white;
+}
+
 .nav-item,
 .nav-item > a {
-    color: white;;
+    color: white;
 }
 
 .nav-item:hover, 
 .nav-item:hover > a,  
 .nav-item:hover > button{
-    color: #307ABB !important;
+    color: #307ABB;
 }
 
 .nav-link{ position: relative;}
@@ -50,45 +54,9 @@
     transform: rotate(-180deg);
 }
 
-.dropdown-menu {
-    position: absolute;
-    z-index: 999;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-55%);
-
-    display: none;
-    width: 200px;
-   
-    padding-top: 15px;
-    list-style: none;
-    text-align: start;
-}
-
-.dropdown-menu li {
-    background-color: #1F1F1F;
-    cursor: pointer;
-}
-
-.nav-link:hover .dropdown-menu{
+.nav-link:hover ul{
     display: block;
 }
-
-.dropdown-link {
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 16px;
-}
-
-.dropdown-link > a {
-    text-decoration: none;
-    color: white;
-}
-
-.dropdown-link > a:hover{
-    color:#307ABB;
-} 
 
 #menu-toggle { display: none; }
 
@@ -97,37 +65,13 @@
     color: white;
 }
 
-@media only screen and (max-width: 691px) {
+@media only screen and (max-width: 800px) {
     #brand > svg {font-size: 0.9rem;}
 
     #menu-toggle {
         display:flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .nav-list {
-        position:absolute;
-        z-index: 2;
-        top: 80px;
-        left: 0;
-
-        width: 100%;
-        height: 0;
-
-        display:block;
-        overflow: hidden;
-
-        opacity: 1;
-        background-color: #1F1F1F;
-        transition: all .4s ease;
-    }
-
-    .nav-list-show {
-        height: 200px;
-        opacity: 1;
-        transform: translateY(0);
-        overflow: visible;
     }
 
     .nav-item, 
@@ -153,10 +97,5 @@
    .nav-list > li:first-of-type {
         width: 100%;
         border-top: 1px solid white;
-    } 
-
-    .dropdown-menu {  
-        transform: translateX(-50%);
-        padding-top: 30px;
     } 
 }

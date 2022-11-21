@@ -59,8 +59,10 @@
 }
 
 #program-img {
-    width: 94%;
+    max-height: 500px;
+    max-width: 100%;
     height: auto;
+    width: auto;
 }
 
 .program-container {

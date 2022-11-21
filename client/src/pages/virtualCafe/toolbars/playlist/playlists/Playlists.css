@@ -1,0 +1,35 @@
+.playlist-heading {
+    font-size: 1.8rem;
+    padding: 0rem 2rem;
+}
+
+.playlist-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding-right: 0.5rem;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.playlist-item > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.playlist-description p {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.playlist-item > img {
+    padding: 0rem 0.5rem;
+}
+
+.playlist-item:hover {
+    background-color: rgba(0, 0, 0, 0.10);
+}

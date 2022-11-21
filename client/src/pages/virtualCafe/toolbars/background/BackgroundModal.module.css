@@ -1,0 +1,32 @@
+.default {
+    width: 95%;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 2.4rem;
+    margin: 0.5rem;
+}
+
+.default > svg {
+    font-size: 9rem;
+}
+
+.img_bg{
+    width: 98%;
+    height: auto;
+    border-radius: 2.4rem;
+    padding: 0.5rem;
+}
+  
+.img_bg:hover{
+    transform: scale(1.02);
+    filter: drop-shadow(2px 3px 3px #333);
+    cursor: pointer;
+}
+
+.default:hover{ 
+    transform: scale(1.02);
+    cursor: pointer;
+}
