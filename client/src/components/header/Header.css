@@ -10,11 +10,15 @@
 .navbar {
     position: relative;
     justify-content: space-between;
-    height:80px;
+    height: 94px;
     padding: 2rem 2.4rem;
+    background-image:url("../../assets/theme/christmas/snowflake.png");
 }
 
-#brand { color: var(--primary-color); }
+#brand { 
+    position: relative;
+    color: var(--primary-color); 
+}
 
 .nav-list {
     flex-wrap: wrap;
@@ -65,9 +69,7 @@
     color: white;
 }
 
-@media only screen and (max-width: 800px) {
-    #brand > svg {font-size: 0.9rem;}
-
+@media only screen and (max-width: 820px) {
     #menu-toggle {
         display:flex;
         justify-content: center;

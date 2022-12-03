@@ -1,18 +1,14 @@
 import {memo} from 'react';
 import { useSelector } from 'react-redux';
+import { getDeptFromCourse } from '../../../helpers/helpers';
 import {RootState} from '../../../store/store';
 import CourseCard from '../popup/CourseCard';
 
-interface CourseCardProps {
+interface ICourseCardProps {
     id: string;
 }
 
-function removeLastWord(str: string) {
-    const lastIndexOfSpace = str.lastIndexOf(' ');
-    return (lastIndexOfSpace === -1)? str : str.substring(0, lastIndexOfSpace);
-}
-
-function QuarterCourseCard({id}: CourseCardProps) {
+function QuarterCourseCard({id}: ICourseCardProps) {
     const course = useSelector((state:RootState) =>  
         id && state.course.courses[id] !== undefined 
         ? state.course.courses[id].data
@@ -21,7 +17,7 @@ function QuarterCourseCard({id}: CourseCardProps) {
 
     const colors = useSelector((state:RootState) => 
         id 
-        ? state.course.depts.byIds[removeLastWord(id)] 
+        ? state.course.depts.byIds[getDeptFromCourse(id)] 
         : ['#AFD3E9', '#70ADD7', '#3688BF']
     )
 

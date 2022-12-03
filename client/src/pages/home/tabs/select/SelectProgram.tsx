@@ -100,11 +100,12 @@ function SelectProgram({isMajor}: SelectProgramProps) {
                 aria-label = {placeholder}
             />
         </div>
-        {selectedPrograms.length > 0 && <SelectCourses/>}
-        {selectedPrograms.length === 0 && 
-        <div key="img" className='flex-container'>
-            <img id='program-img' src={ZotSelectMajor} alt='please select your major!'/>
-        </div>
+        {
+        selectedPrograms.length > 0 
+            ? <SelectCourses/>
+            :  <div key="img" className='flex-container img-container'>
+                    <img id='program-img' src={ZotSelectMajor} alt='please select your major!'/>
+                </div>
         }
     </div>
     )

@@ -31,10 +31,8 @@ details:last-of-type {
 
 .unit-text {
     position: absolute;
-    right: -0.5rem;
-    bottom: -0.3rem;
-    transform: translate(-50%, -50%);
-    font-family:'courier';
+    right: 34px;
+    bottom: 16px;
     text-align: center;
     color: white;
 }
@@ -42,6 +40,14 @@ details:last-of-type {
 .unit-text p {
     margin-bottom: 0.5rem;
     font-size: 16px;
+}
+
+.bells {
+    position: absolute;
+    right: 54px;
+    top: -2px;
+    width: 40px;
+    height: 38px;
 }
 
 @media only screen and (max-width: 599px) { 

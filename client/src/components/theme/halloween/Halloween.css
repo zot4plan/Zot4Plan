@@ -1,0 +1,102 @@
+/** 
+* Table of Contents
+*    1. tombstones
+*    2. ghost
+*    3. flying bats 
+***/
+
+/* 1.tombstones */
+.tombstones {
+    position: absolute;
+    right: -45px;
+    bottom: -10px;
+    font-size: 5.4rem;
+    color: white;
+    transform: rotate(4deg);
+}
+
+/* 2. ghost */
+.ghost-container {
+    margin-left: 1.6rem;
+ }
+
+.ghost {
+    font-size: 3.2rem;
+    animation: float 3s ease-out infinite;
+}
+   
+ @keyframes float {
+    0% {      
+        transform: translate(0, 8px); 
+    }
+    50% {
+        transform: translate(0, -6px);
+    }
+    100% {
+        transform: translate(0, 8px);
+    }
+}
+
+/* 3. flying bats */
+/* customizable snowflake styling */
+  
+@-webkit-keyframes snowflakes-fall {
+    0% {
+        top:-10%
+    }
+    100% {
+        top:100%
+    }
+}
+@-webkit-keyframes snowflakes-shake {
+    0% {
+        -webkit-transform:translateX(0px);
+        transform:translateX(0px)
+    }
+    50% {
+        -webkit-transform:translateX(120px);
+        transform:translateX(120px)
+    }
+    100% {
+        -webkit-transform:translateX(0px);
+        transform:translateX(0px)
+    }
+}
+@keyframes snowflakes-fall {
+    0% {
+        top:-10%
+    }
+    100% {
+        top:100%
+    }
+}
+@keyframes snowflakes-shake {
+    0% {
+        transform:translateX(0px)
+    }
+    50% {
+        transform:translateX(80px)
+    }
+    100% {
+        transform:translateX(0px)
+    }
+}
+.snowflake {
+    position:fixed;
+    top:-10%;
+    z-index:9999;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    cursor:default;
+    -webkit-animation-name: snowflakes-fall, snowflakes-shake;
+    -webkit-animation-duration: 5s, 3s;
+    -webkit-animation-timing-function:linear, ease-in-out;
+    animation-name:snowflakes-fall,snowflakes-shake;
+    animation-duration: 5s, 3s;
+    animation-iteration-count: 1, infinite;
+    animation-timing-function:linear, ease-in-out;
+}
+
+.snowflake > img {height: 4rem; width: 4rem; bottom: 0; display: block;}

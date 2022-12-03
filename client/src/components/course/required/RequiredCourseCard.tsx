@@ -3,17 +3,13 @@ import { useSelector } from 'react-redux';
 import { RootState} from '../../../store/store';
 import Axios from '../../../controllers/Axios';
 import CourseCard from '../popup/CourseCard';
+import { getDeptFromCourse } from '../../../helpers/helpers';
 
-interface CourseCardProps {
+interface ICourseCardProps {
     id: string | null;
 }
 
-function removeLastWord(str: string) {
-    const lastIndexOfSpace = str.lastIndexOf(' ');
-    return (lastIndexOfSpace === -1)? str : str.substring(0, lastIndexOfSpace);
-}
-
-function RequiredCourseCard({id}: CourseCardProps) {
+function RequiredCourseCard({id}: ICourseCardProps) {
     const [course, setCourse] = useState(() => {
         if(id) {
             const course = sessionStorage.getItem(id);
@@ -39,7 +35,7 @@ function RequiredCourseCard({id}: CourseCardProps) {
 
     const colors = useSelector((state:RootState) => 
         id 
-        ? state.course.depts.byIds[removeLastWord(id)] 
+        ? state.course.depts.byIds[getDeptFromCourse(id)] 
         : ['#AFD3E9', '#70ADD7', '#3688BF']
     )
 

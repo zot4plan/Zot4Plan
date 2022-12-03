@@ -1,61 +1,55 @@
 import { memo } from 'react';
 import Author from './Author';
-import Gmail from '../icon/Gmail';
-import Github from '../icon/Github';
-import Tools from '../icon/Tools';
-import Bug from '../icon/Bug';
-import Tree from '../../assets/images/tree.png';
-import ZotWalk from '../../assets/images/zot-walk.png';
+import Lights from '../theme/christmas/Lights';
+import Contact from './Contact';
 import './Footer.css';
+import Decoration from './Decoration';
+import MerryChristmas from '../theme/christmas/MerryChristmas';
+
+const authors = [
+    {
+        name: "Loc Khong",
+        role: "Author",
+        linkedin: "https://www.linkedin.com/in/lockhong",
+        github: "https://github.com/ldkhong",
+        email: "ldkhong@uci.edu",
+    },
+    {
+        name: "Tram La",
+        role: "Author",
+        linkedin: "https://www.linkedin.com/in/tram-la-680417200",
+        github: "https://github.com/tramla123",
+        email: "latb@uci.edu",
+    },
+    {
+        name: "Uyen Dinh",
+        role: "Member",
+        linkedin: "https://www.linkedin.com/in/uyen-dinh-74b97418a",
+        github: "https://github.com/UyenDinh171",
+        email: "uyentd@uci.edu",
+    },
+    {
+        name: "Vianey Mursio",
+        role: "Member",
+        facebook: "https://www.facebook.com/profile.php?id=100071189183519",
+        instagram: "https://instagram.com/viaaneyy.y?igshid=YmMyMTA2M2Y=",
+        email: "vianeyf@uci.edu",
+    },
+    {
+        name: "Warren Leu",
+        role: "Member",
+        linkedin: "https://www.linkedin.com/in/warrenleu/",
+        github: "https://github.com/SadNoodle2765/",
+        instagram: "https://www.instagram.com/sadnoodle2765/"
+    }
+];
 
 const Footer = () => {
-    const authors = [
-        {
-            name: "Loc Khong",
-            role: "Author",
-            linkedin: "https://www.linkedin.com/in/lockhong",
-            github: "https://github.com/ldkhong",
-            email: "ldkhong@uci.edu",
-        },
-        {
-            name: "Tram La",
-            role: "Author",
-            linkedin: "https://www.linkedin.com/in/tram-la-680417200",
-            github: "https://github.com/tramla123",
-            email: "latb@uci.edu",
-        },
-        {
-            name: "Uyen Dinh",
-            role: "Member",
-            linkedin: "https://www.linkedin.com/in/uyen-dinh-74b97418a",
-            github: "https://github.com/UyenDinh171",
-            email: "uyentd@uci.edu",
-        },
-        {
-            name: "Vianey Mursio",
-            role: "Member",
-            facebook: "https://www.facebook.com/profile.php?id=100071189183519",
-            instagram: "https://instagram.com/viaaneyy.y?igshid=YmMyMTA2M2Y=",
-            email: "vianeyf@uci.edu",
-        },
-        {
-            name: "Warren Leu",
-            role: "Member",
-            linkedin: "https://www.linkedin.com/in/warrenleu/",
-            github: "https://github.com/SadNoodle2765/",
-            instagram: "https://www.instagram.com/sadnoodle2765/"
-        }
-    ];
-
-    const email = "zot4plan@gmail.com";
-    
     return (
-        <footer id="footer">
-            <div id="zot-tree">
-                <img src={ZotWalk} style={{width: '6.4rem', height:'6.4rem'}} alt="A walking aneater"/>
-                <img src={Tree} style={{width: '12.8rem', height:'12.8rem'}} alt="A black tree"/>
-            </div>
-
+        <footer id="footer" className='home-footer'>
+            <Lights/>
+            <Decoration/>
+            <MerryChristmas className='merry-christmas'/>
             <div>
                 <h1 className='header'>
                     About Us
@@ -69,7 +63,7 @@ const Footer = () => {
                         Disclaimer: All of the information we obtained are from the UCI catalogue. Please make sure to check your schedule with an academic counselor. Thank you - Zot! Zot! Zot! 
                     </p>
                     <p>
-                        (Last Updated On: September 5th, 2022)
+                        (Last Updated On: Nov 27th, 2022)
                     </p>
                 </div>
             </div>
@@ -78,88 +72,7 @@ const Footer = () => {
                 <h1 className='header' style={{ marginLeft: '0.5rem' }}>
                     Contact Us
                 </h1>
-
-                <ul className='list-container list-contact-us'>
-                    <li className="item contact-us">
-                        <a target="_blank" 
-                            href="https://github.com/zot4plan/Zot4Plan#readme" 
-                            rel="noreferrer"  
-                            aria-label="Github"
-                            className="contact-us-icon"
-                        >
-                            <Github/>
-                        </a>  
-
-                        <a target="_blank" 
-                            href="https://github.com/zot4plan/Zot4Plan#readme" 
-                            rel="noreferrer"  
-                            aria-label="Github"
-                            className='name'
-                        >
-                            Github
-                        </a>      
-                    </li>
-
-                    <li className="item contact-us">
-                        <a target="_blank" 
-                            href= {"mailto: " + email}
-                            rel="noreferrer"
-                            aria-label="Gmail"
-                            className="contact-us-icon"
-                        >
-                            <Gmail/>
-                        </a>   
-
-                        <a target="_blank" 
-                            href= {"mailto: " + email}
-                            rel="noreferrer"
-                            aria-label="Gmail"
-                            className='name'
-                        >
-                            {email}
-                        </a>      
-                    </li>
-
-                    <li className="item contact-us">
-                        <a target="_blank"
-                            href="https://forms.gle/vak9jPNBMMYsRHAX9"
-                            rel="noreferrer" 
-                            aria-label="Give Feedback"
-                            className="contact-us-icon"
-                        > 
-                            <Tools/>
-                        </a>
-
-                        <a target="_blank"
-                            href="https://forms.gle/vak9jPNBMMYsRHAX9"
-                            rel="noreferrer" 
-                            aria-label="Give Feedback"
-                            className="name"
-                        > 
-                            Send Us Feedback
-                        </a>
-                    </li>
-
-                    <li className="item contact-us">
-                        <a target="_blank"
-                            href="https://forms.gle/vak9jPNBMMYsRHAX9"
-                            rel="noreferrer" 
-                            aria-label="Report a Bug"
-                            className="contact-us-icon"
-                        > 
-                            <Bug/>
-                        </a>
-                        
-                        <a target="_blank"
-                            href="https://forms.gle/vak9jPNBMMYsRHAX9"
-                            rel="noreferrer" 
-                            aria-label="Report a Bug"
-                            className="name"
-                        > 
-                            Report Bug
-                        </a>
-                    </li>
-                </ul>           
+                <Contact/>
             </div>
 
             <div id="author">    

@@ -30,7 +30,7 @@ const Author = ({author}: AuthorProps) => {
             </a>
             
             <ul className="list author-icon">
-                {author.linkedin !== undefined &&
+                {author.linkedin &&
                 <li className="item">
                     <a target="_blank" 
                         href={author.linkedin}
@@ -41,7 +41,7 @@ const Author = ({author}: AuthorProps) => {
                     </a>
                 </li>}
 
-                {author.github !== undefined &&
+                {author.github &&
                 <li className="item">
                     <a target="_blank" 
                         href={author.github}
@@ -52,7 +52,7 @@ const Author = ({author}: AuthorProps) => {
                     </a>
                 </li>}
 
-                {author.facebook !== undefined && 
+                {author.facebook && 
                 <li className="item">
                     <a target="_blank" 
                         href= {author.facebook}
@@ -63,7 +63,7 @@ const Author = ({author}: AuthorProps) => {
                     </a>
                 </li>}  
 
-                {author.instagram !== undefined && 
+                {author.instagram && 
                 <li className="item">
                     <a target="_blank" 
                         href= {author.instagram}
@@ -74,7 +74,7 @@ const Author = ({author}: AuthorProps) => {
                     </a>
                 </li>}  
 
-                {author.email !== undefined && 
+                {author.email && 
                 <li className="item">
                     <a target="_blank" 
                         href= {"mailto: " + author.email}

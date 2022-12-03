@@ -5,6 +5,10 @@
     margin: 1rem 5%;
 }
 
+.img-container {
+   padding: 1rem; 
+}
+
 @media only screen and (max-width: 599px) {
     #select-major > label {
         display: none;

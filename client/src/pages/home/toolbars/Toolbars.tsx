@@ -9,7 +9,7 @@ import PopperLoad from '../../../components/popper/PopperLoad';
 import PopperSave from '../../../components/popper/PopperSave';
 import PrerequisiteSwitch from './prerequisite/PrerequisiteSwitch';
 import '../schedule/Schedule.css';
-import './Buttons.css'
+import './Toolbars.css'
 
 interface ButtonsListProps {
     printContent: () => React.ReactInstance | null;
@@ -20,7 +20,7 @@ interface StateType {
     id: string | null;
 }
 
-function Buttons({printContent}: ButtonsListProps) {
+function Toolbars({printContent}: ButtonsListProps) {
     const [element, setElement] = useState<StateType>({anchorEl: null, id: null});
     const open = Boolean(element.anchorEl);
     const popperId = open ? "popper" : undefined;
@@ -40,7 +40,7 @@ function Buttons({printContent}: ButtonsListProps) {
 
     return (
     <>
-        <ul className='buttons'>
+        <ul className='home-toolbars'>
             <li> <ButtonAddYear/> </li>
             <li>  
                 <button className="btn" 
@@ -120,4 +120,4 @@ function Buttons({printContent}: ButtonsListProps) {
     )
 }
 
-export default Buttons;
+export default Toolbars;

@@ -10,25 +10,18 @@ function Background() {
 
     const playlistName = useSelector((state:RootState) => 
         state.virtualCafe.playlist 
-            ? state.virtualCafe.playlist.name
-            : ''
+        ? state.virtualCafe.playlist.name
+        : ''
     );
 
     return (
         <>
-            {backgroundUrl 
-            &&  <>
-                    <img  
-                        src={backgroundUrl} 
-                        alt={backgroundDescription}
-                    />
-                    <p> 
-                        Click image to play/stop 
-                        <MusicNotes/>  
-                        <span> ({playlistName}) </span>
-                    </p>
-                </> 
-            }
+        {backgroundUrl 
+        &&  <>
+                <img src={backgroundUrl} alt={backgroundDescription}/>
+                <p> Click image to play/stop <MusicNotes/> <span> ({playlistName}) </span> </p>
+            </> 
+        }
         </>     
     );
 }

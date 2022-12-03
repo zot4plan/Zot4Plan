@@ -1,10 +1,28 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addPlaylist, getPlaylists, updateVirtualCafeVisit } from "../../controllers/VirtualCafeController";
-import { backgrounds, playlists } from "../../pages/virtualCafe/data/data";
+import { backgrounds } from "../../pages/virtualCafe/data/data";
 
+const initialPlaylist = () => {
+    const playlist = localStorage.getItem('currentPlaylist');
+    return playlist 
+        ? JSON.parse(playlist) as PlaylistType
+        : {
+            playlist_id: "PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk",
+            thumbnail: "FN7ALfpGxiI",
+            name: "Simple Love (Vietnamese)",
+            author: null,
+            shared_by: 'LK',
+            original_url: 'https://youtube.com/playlist?list=PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk',
+            embed_url: "https://www.youtube.com/embed/videoseries?list=PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk",
+            language: "Vietnamese",
+            genre: [],
+            like: 0,
+            view: 0
+          }
+}
 const initialState:VirtualCafeSliceType = {
     background: backgrounds[3],
-    playlist: playlists[0],
+    playlist: initialPlaylist(),
     allPlaylists: [],
     sharePlaylists: [],
     pageLoading: 'idle',
@@ -21,6 +39,7 @@ export const VirtualCafeSlice = createSlice ({
         },
 
         changePlaylist: (state, action: PayloadAction<PlaylistType>) => {
+            localStorage.setItem('currentPlaylist', JSON.stringify(action.payload));
             state.playlist = action.payload;
         },
 

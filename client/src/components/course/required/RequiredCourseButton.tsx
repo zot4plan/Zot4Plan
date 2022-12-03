@@ -1,19 +1,15 @@
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
+import { getDeptFromCourse } from '../../../helpers/helpers';
 import { RootState } from '../../../store/store';
 
-interface CourseButtonType {
+interface ICourseButtonType {
     id: string;
     isCrossed: boolean;
 }
 
-function removeLastWord(str: string) {
-    const lastIndexOfSpace = str.lastIndexOf(' ');
-    return (lastIndexOfSpace === -1)? str : str.substring(0, lastIndexOfSpace);
-}
-
-function RequiredCourseButton({id, isCrossed}: CourseButtonType) {
-    let bgColor = useSelector((state: RootState) => state.course.depts.byIds[removeLastWord(id)][2]);
+function RequiredCourseButton({id, isCrossed}: ICourseButtonType) {
+    let bgColor = useSelector((state: RootState) => state.course.depts.byIds[getDeptFromCourse(id)][2]);
 
     const isTaken = useSelector((state: RootState) =>{ 
         let course = state.course.courses[id];
@@ -31,7 +27,6 @@ function RequiredCourseButton({id, isCrossed}: CourseButtonType) {
         bgColor = '#D3D3D3';
         textColor = 'black';
     }
-
 
     return ( 
         <div className="course-btn" style={{backgroundColor: bgColor}}>
