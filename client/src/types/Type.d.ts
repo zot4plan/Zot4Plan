@@ -93,6 +93,10 @@ declare interface IconProps {
     fontSize?: string;
 }
 
+declare interface ImageProps {
+    className?: string;
+}
+
 /*********** Payload Type ***********/
 declare interface GEPayload {
     ge_id: string; 

@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-beautiful-dnd": "^13.1.2"
+    "@types/react-beautiful-dnd": "^13.1.2",
+    "@types/webpack-env": "^1.18.0"
   }
 }

@@ -2,7 +2,10 @@
     position: relative;
     display: grid;
     justify-items: center;
-    padding: 4rem 4rem 0 4rem;
+}
+
+.home-footer {
+    padding: 5rem 4rem 0 4rem;
     background-color: var(--secondary-color);
     color: var(--primary-color);
 }
@@ -29,6 +32,64 @@
     transition: left 0.5s;
 }
 
+.ornament {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+}
+
+#greenBall {
+    left:80px;
+    bottom: 12px;
+}
+
+#yellowRedBall {
+    left: 96px;
+    bottom: 42px;
+}
+
+#yellowBall {
+    right: 38px;
+    top: 28px;
+}   
+
+#greenStar {
+    right:-5px;
+    bottom: 25px;
+}
+
+#redStarBall {
+    right: 16px;
+    bottom: 50px;
+}
+
+#greenRedBall {
+    right: 36px;
+    bottom: 20px;
+}
+
+#greenStripedBall {
+    left: 70px;
+    top: 50px;
+}
+#yellowStar {
+    left: 100px;
+    top: 36px;
+}
+#topStar {
+    position: absolute;
+    height: 31px;
+    width: 32px;
+    right:49px;
+    top: -16px;
+}
+
+.merry-christmas {
+    position: absolute;
+    bottom: 54px;
+    height: 128px;
+    width: 168px;
+}
 
 #logo-container {
     margin: 5rem 0rem 2rem 0rem;
@@ -120,6 +181,10 @@
 
     #contact-us, #author {
         margin-top: 4rem;
+    }
+
+    #author {
+        margin-bottom: 10rem;
     }
 
     #about-us-content > p {

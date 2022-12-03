@@ -1,7 +1,3 @@
-import Library from "../../../assets/backgrounds/library.jpeg";
-import StudyGIF1 from "../../../assets/backgrounds/pixel-study.gif";
-import StudyGIF2 from "../../../assets/backgrounds/student-studying.gif";
-
 export const backgrounds = [
     {
       background_id: 0,
@@ -13,84 +9,50 @@ export const backgrounds = [
     {
       background_id: 1,
       name: "",
-      description: "Drawing of Library",
-      url: Library,
+      description: "cafe anime",
+      url: "https://media.tenor.com/qpPEu40bU0AAAAAC/cafe-anime.gif",
       like: 0,
     },
     {
       background_id: 2,
-      name: "",
+      name: "lofi study girl",
       description: "Student studying GIF",
-      url: StudyGIF1,
+      url: "https://media.tenor.com/4ryx66tWEhcAAAAd/pixel-study.gif",
       like: 0,
     },
     {
       background_id: 3,
-      name: "",
+      name: "lofi study girl",
       description: "Student studying GIF",
-      url: StudyGIF2,
+      url: "https://media.tenor.com/zFYlcnyDzhkAAAAd/student-studying.gif",
       like: 0,
     },
     {
       background_id: 4,
-      name: "Lofi Guy",
+      name: "Lofi study Guy",
       description: "Student studying GIF",
       url: "https://media.tenor.com/ItlVfQ5tMv0AAAAd/lofi-music-lofiartwork.gif",
       like: 0,
     },
-];
-
-export const playlists = [
-  {
-    playlist_id: "PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk",
-    thumbnail: "FN7ALfpGxiI",
-    name: "My Favorite Songs - LK",
-    author: null,
-    shared_by: null,
-    original_url: 'https://youtube.com/playlist?list=PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk',
-    embed_url: "https://www.youtube.com/embed/videoseries?list=PLSbcvcMOgs9EvNjev3R4LhcmubNH4Redk",
-    language: "Vietnamese",
-    genre: [],
-    like: 0,
-    view: 0
-  },
-  {
-    playlist_id: "ja0HeFa8GJc",
-    thumbnail: "ja0HeFa8GJc",
-    name: "Lofi chill 1",
-    author: null,
-    shared_by: null,
-    original_url: 'https://youtu.be/ja0HeFa8GJc',
-    embed_url: "https://www.youtube.com/embed/ja0HeFa8GJc",
-    language: "Vietnamsese",
-    genre: [],
-    like: 0,
-    view: 0
-  },
-  {
-    playlist_id: "pnV3XUzc87g",
-    thumbnail: "pnV3XUzc87g",
-    name: "Lofi chill 2",
-    author: null,
-    shared_by: null,
-    original_url: 'https://youtu.be/pnV3XUzc87g',
-    embed_url: "https://www.youtube.com/embed/pnV3XUzc87g",
-    language: "Vietnamsese",
-    genre: [],
-    like: 0,
-    view: 0
-  },
-  {
-    playlist_id: "GPRqYSz_QZA",
-    thumbnail: "GPRqYSz_QZA",
-    name: "Candles and Flowers",
-    author: null,
-    shared_by: null,
-    original_url: 'https://youtu.be/GPRqYSz_QZA',
-    embed_url: "https://www.youtube.com/embed/GPRqYSz_QZA",
-    language: "Vietnamsese",
-    genre: [],
-    like: 0,
-    view: 0
-  }
+    {
+      background_id: 5,
+      name: "Lofi study girl",
+      description: "lofi browsing",
+      url: "https://media.tenor.com/4RYbGa1GttQAAAAd/lofi-browsing.gif",
+      like: 0,
+    },
+    {
+      background_id: 6,
+      name: "chill chill",
+      description: "listen to music",
+      url: "https://media.tenor.com/TcZSmOlB5sAAAAAd/anime.gif",
+      like: 0,
+    },
+    {
+      background_id: 7,
+      name: "cat & rain",
+      description: "cat & rain",
+      url: "https://media.tenor.com/cKHb1dXlv8UAAAAC/cat-rain.gif",
+      like: 0,
+    }
 ];

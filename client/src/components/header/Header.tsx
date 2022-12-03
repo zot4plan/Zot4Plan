@@ -1,4 +1,4 @@
-import {memo, FC, useState, MouseEvent, CSSProperties} from 'react';
+import { memo, FC, useState, MouseEvent, CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../icon/Logo';
 import Bars from '../icon/Bars';
@@ -8,23 +8,26 @@ interface HeaderProps {
     navbarStyle: CSSProperties;
     heartColor: string;
     NavList: FC<NavListProps>;
-    theme?: any;
+    Theme?: FC<any>;
 }
 
-function Header ({navbarStyle, heartColor, NavList}: HeaderProps) {
+function Header ({navbarStyle, heartColor, NavList, Theme}: HeaderProps) {
     const [active, setActive] = useState(false);
+
     const handleOnClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setActive(!active);
     };
+
     const resetActive = () => setActive(false);
 
     return (
-        <nav className="navbar" style={navbarStyle}>        
+        <nav className="navbar" style={navbarStyle}>     
             <Link to="/home" id="brand" onClick={resetActive}>
                 <Logo heartColor={heartColor}/>
+                {Theme && <Theme/>}
             </Link>
-        
+
             <button id="menu-toggle" onClick={handleOnClick}>
                 <Bars/>
             </button>

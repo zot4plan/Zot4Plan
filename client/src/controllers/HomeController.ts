@@ -7,12 +7,12 @@ export const getCourse = createAsyncThunk("courses/getCourse",
         return course 
             ? {status: "succeeded", course: JSON.parse(course)}
             : Axios.get('/api/getCourse', { params: { id: id } })
-                .then(response => {
-                    sessionStorage.setItem(id, JSON.stringify(response.data));
-                    return {
-                        course: response.data as CourseType,
-                    };
-                })
+            .then(response => {
+                sessionStorage.setItem(id, JSON.stringify(response.data));
+                return {
+                    course: response.data as CourseType,
+                };
+            })
     }
 );
 

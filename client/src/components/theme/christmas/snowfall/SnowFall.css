@@ -1,0 +1,71 @@
+@keyframes float {
+    0% {      
+        transform: translate(0, 8px); 
+    }
+    50% {
+        transform: translate(0, -6px);
+    }
+    100% {
+        transform: translate(0, 8px);
+    }
+}
+  
+@-webkit-keyframes snowflakes-fall {
+    0% {
+        top:-10%
+    }
+    100% {
+        top:100%
+    }
+}
+@-webkit-keyframes snowflakes-shake {
+    0% {
+        -webkit-transform:translateX(0px);
+        transform:translateX(0px)
+    }
+    50% {
+        -webkit-transform:translateX(20px);
+        transform:translateX(20px)
+    }
+    100% {
+        -webkit-transform:translateX(0px);
+        transform:translateX(0px)
+    }
+}
+@keyframes snowflakes-fall {
+    0% {
+        top:-10%
+    }
+    100% {
+        top:100%
+    }
+}
+@keyframes snowflakes-shake {
+    0% {
+        transform:translateX(0px)
+    }
+    50% {
+        transform:translateX(20px)
+    }
+    100% {
+        transform:translateX(0px)
+    }
+}
+.snowflake {
+    position:fixed;
+    top:-10%;
+    z-index:9999;
+    color: #f2ecdf;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    cursor:default;
+    -webkit-animation-name: snowflakes-fall, snowflakes-shake;
+    -webkit-animation-duration: 10s, 2s;
+    -webkit-animation-timing-function:linear, ease-in-out;
+    animation-name: snowflakes-fall, snowflakes-shake;
+    animation-duration: 10s, 2s;
+    animation-iteration-count: infinite, infinite;
+    animation-timing-function:linear, ease-in-out;
+}

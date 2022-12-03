@@ -20,13 +20,8 @@ function HomeNavList ({isActive}: NavListProps) {
                 <ModalButton Label="Tutorial" className="flex-container" ModalContent={TutorialModal}/> 
             </li>
 
-            <li className='nav-item'>
-                Themes 
-            </li>
-
             <li className='nav-item nav-link'>
-                <span style={{marginRight: '0.5rem'}}> Resources </span>
-                <ArrowDown/>
+                <span style={{marginRight: '0.5rem'}}> Resources </span> <ArrowDown/>
                 <DropDown/>
             </li>
         </ul>

@@ -2,11 +2,7 @@ import { createSlice, PayloadAction, nanoid, isAnyOf, current } from "@reduxjs/t
 import { getProgram, getGE, getSchedule, getCourse, updateHomeVisit } from '../../controllers/HomeController'
 import { addCourse } from "./ProgramsSlice";
 import { DEPT_COLORS, ID_LENGTH } from "../../constants/Constants";
-
-function removeLastWord(str:string) {
-    const lastIndexOfSpace = str.lastIndexOf(' ');
-    return lastIndexOfSpace === -1 ? str : str.substring(0, lastIndexOfSpace);
-}
+import { getDeptFromCourse } from "../../helpers/helpers";
 
 const generateInitialState = () => {
     let years:{[id:string]: string[]} = {};
@@ -238,7 +234,7 @@ export const courseSlice = createSlice ({
          * addCourse
          */
         builder.addCase(addCourse, (state, action) => {
-            let dept = removeLastWord(action.payload);
+            let dept = getDeptFromCourse(action.payload);
             if(state.depts.byIds[dept] === undefined) { 
                 let index = state.depts.size % DEPT_COLORS.length;
                 state.depts.byIds[dept] = DEPT_COLORS[index]

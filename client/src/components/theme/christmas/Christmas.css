@@ -1,0 +1,15 @@
+.snowmanXmasHat {
+    position: absolute;
+    top: 4px;
+    left: 22px;
+    width: 36px;
+    height: 40px;
+}
+
+.santa {
+    position: absolute;
+    width: 42px;
+    height: 40px;
+    left: 100%;
+    top: -26px;
+}
