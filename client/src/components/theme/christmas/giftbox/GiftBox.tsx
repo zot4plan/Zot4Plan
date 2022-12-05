@@ -1,5 +1,6 @@
 import './GiftBox.css';
 import reindeerGiftBox from '../../../../assets/theme/christmas/reindeer-gift-box.png'
+import { memo } from 'react';
 
 interface IGiftBoxProps {
     isOpen: boolean;
@@ -30,4 +31,4 @@ function GiftBox({isOpen}:IGiftBoxProps) {
     )
 }
 
-export default GiftBox;
+export default memo(GiftBox);

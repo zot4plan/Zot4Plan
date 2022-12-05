@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { sessionStorageGetItem } from "../../../../../helpers/helpers";
 
 const useAudio = (url:string) => {
     const [audio] = useState(new Audio(url));
-    const [playing, setPlaying] = useState(!sessionStorageGetItem('isPlayed', 'boolean'));
+    const [playing, setPlaying] = useState(false);
   
     const toggle = () => setPlaying(!playing);
   
@@ -20,7 +19,6 @@ const useAudio = (url:string) => {
   
     useEffect(() => {
         audio.addEventListener('ended', () => {
-            sessionStorage.setItem('isPlayed', 'true');
             setPlaying(false);
         });
 

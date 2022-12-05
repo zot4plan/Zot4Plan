@@ -21,7 +21,7 @@ const initialPlaylist = () => {
           }
 }
 const initialState:VirtualCafeSliceType = {
-    background: backgrounds[3],
+    background: backgrounds[0],
     playlist: initialPlaylist(),
     allPlaylists: [],
     sharePlaylists: [],
