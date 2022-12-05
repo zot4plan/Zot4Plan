@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from 'react'
+import { FC, MouseEvent, useEffect, useState } from 'react'
 import SnowFalls from '../snowfall/SnowFall';
 import useAudio from "./hooks/useAudio";
 
@@ -11,6 +11,16 @@ interface IAudioProps {
 
 function Player({audioSrc, ButtonContent, className, controls = false}:IAudioProps) {
     const [playing, toggle] = useAudio(audioSrc);
+    const [initPlay, setInitPlay] = useState(true);
+
+    useEffect(() => {
+        if(initPlay) {
+            setTimeout(() => {
+                setInitPlay(false);
+            }, 12000)
+        }
+    },[initPlay])
+
     const handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         toggle();
@@ -20,10 +30,15 @@ function Player({audioSrc, ButtonContent, className, controls = false}:IAudioPro
             <ButtonContent isOpen={playing}/>
             {playing && 
             <>
-                <SnowFalls key={1} size={100}/>
-                <SnowFalls key={2} size={100}/>
-                <SnowFalls key={3} size={50}/>
+                <SnowFalls key={1} size={50}/>
+                <SnowFalls key={2} size={75}/>
             </>}
+            {initPlay &&
+            <>
+                <SnowFalls key={1} size={25}/>
+                <SnowFalls key={2} size={50}/>
+            </>
+            }
         </button>
     )
 }

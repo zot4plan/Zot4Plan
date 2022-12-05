@@ -1,9 +1,9 @@
 import Background from './video/background/Background';
 import PlaylistIframe from './video/playlist/PlaylistIframe';
+import Timer from './timer/Timer';
 import Boba from "../../../assets/snacks/boba.png"
 import Cookie from "../../../assets/snacks/cookie.png"
 import './VirtualCafeGrid.css';
-import Timer from './timer/Timer';
 
 function VirtualCafeGrid() {
     return (
