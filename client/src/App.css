@@ -24,7 +24,13 @@
     --red: #DA1E37; /* note */
 }
 
-* { box-sizing: border-box;}
+* {
+    box-sizing: border-box;
+    font-display: swap;
+    font-family: 'Roboto','Times New Roman',Times, serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 body {
     margin: 0;
