@@ -1,9 +1,6 @@
-import { memo } from 'react';
-import "./ApExamForm.css";
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/store';
 import ApExamListItem from './ApExamListItem';
-
 
 const ApExamList = () => {
     const apExamList = useSelector((state: RootState) => state.course.apExam)
@@ -16,5 +13,4 @@ const ApExamList = () => {
     )
 }
 
-
-export default memo(ApExamList);
+export default ApExamList;

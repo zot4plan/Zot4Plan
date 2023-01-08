@@ -9,7 +9,7 @@ import AddIcon from '../../../../components/icon/AddIcon';
 import Message from '../../../../components/message/Message';
 import './SelectCourses.css';
 
-const myStyle: StylesConfig<CourseOptionType, false> =  {
+const myStyle: StylesConfig<OptionType, false> =  {
     control: (provided) => ({
         ...provided, 
         width: '100%',
@@ -56,7 +56,7 @@ function SelectCourses() {
             setMessage({content: content + " has already been added!", status: status})
     };
 
-    const handleOnChange = (option: CourseOptionType | null) => 
+    const handleOnChange = (option: OptionType | null) => 
         setSelectCourse(option ? option.value : '');
     
     return (

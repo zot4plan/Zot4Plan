@@ -5,7 +5,7 @@ import { RootState } from '../../../store/store';
 import GeneralEducation from './generalEducation/GeneralEducation';
 import Program from './program/Program';
 import SelectProgram from './select/SelectProgram';
-import PopperApExam from './apExam/ApExamForm';
+import ApExamForm from './apExam/form/ApExamForm';
 import './Tabs.css';
 import ApExamList from './apExam/ApExamList';
 
@@ -47,7 +47,7 @@ function Tabs() {
                 <li onClick={() => setTab(prev => ({ ...prev, id: 4 }))}
                     className={'tab flex-container round-top-right ' + (tab.id === 4 ? "active" : "")}
                 >
-                    AP Exams
+                    AP Exam
                 </li>
             </ul>
 
@@ -61,7 +61,7 @@ function Tabs() {
             </div>
 
             <div style={{ display: tab.id === 4 ? "block" : "none" }}>
-                <PopperApExam />
+                <ApExamForm />
                 <div id="ap-list">
                     <ApExamList/>
                 </div>

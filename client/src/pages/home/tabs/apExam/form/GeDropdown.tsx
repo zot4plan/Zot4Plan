@@ -1,8 +1,7 @@
 import { memo } from "react";
 import Select, { OnChangeValue, StylesConfig } from 'react-select';
 
-
-const style: StylesConfig<GeOptionType, true> = {
+const style: StylesConfig<OptionType, true> = {
     control: (provided) => ({
         ...provided,
         width: '100%',
@@ -23,42 +22,39 @@ const style: StylesConfig<GeOptionType, true> = {
     }),
 }
 
-interface GeOptionType { value: string, label: string }
-interface GeDropdownProps {
-    selectGe: GeOptionType[];
-    setSelectGe: (ge: GeOptionType[]) => void;
-}
-function GeDropdown({ selectGe, setSelectGe }: GeDropdownProps) {
-    const ge_list: GeOptionType[] = [
-        { value: "IA", label: "IA" },
-        { value: "IB", label: "IB" },
-        { value: "II", label: "II" },
-        { value: "III", label: "III" },
-        { value: "IV", label: "IV" },
-        { value: "VA", label: "VA" },
-        { value: "VB", label: "VB" },
-        { value: "VI", label: "VI" },
-        { value: "VII", label: "VII" },
-        { value: "VIII", label: "VIII" },
-    ]
+const geOptions: OptionType[] = [
+    { value: "IA", label: "IA" },
+    { value: "IB", label: "IB" },
+    { value: "II", label: "II" },
+    { value: "III", label: "III" },
+    { value: "IV", label: "IV" },
+    { value: "VA", label: "VA" },
+    { value: "VB", label: "VB" },
+    { value: "VI", label: "VI" },
+    { value: "VII", label: "VII" },
+    { value: "VIII", label: "VIII" },
+]
 
-    const handleChange = (option: OnChangeValue<GeOptionType, true>) => {
-        setSelectGe(option as GeOptionType[]);
+interface GeDropdownProps {
+    selectGe: OptionType[];
+    setSelectGe: (ge: OptionType[]) => void;
+}
+
+function GeDropdown({ selectGe, setSelectGe }: GeDropdownProps) {
+    const handleChange = (option: OnChangeValue<OptionType, true>) => {
+        setSelectGe(option as OptionType[]);
     }
 
-
     return (
-
         <Select
             styles={style}
             isMulti
             value={selectGe}
-            options={ge_list}
+            options={geOptions}
             onChange={handleChange}
             placeholder="Select GE Category"
             isOptionDisabled={() => selectGe.length >= 2}
         />
-
     )
 }
 

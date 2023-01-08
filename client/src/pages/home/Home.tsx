@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { moveCourse } from '../../store/slices/CourseSlice';
+import { ToastContainer } from 'react-toastify';
 import Toolbars from './toolbars/Toolbars';
 import Schedule from './schedule/Schedule';
 import Tabs from './tabs/Tabs';
@@ -11,6 +12,7 @@ import Footer from '../../components/footer/Footer';
 import UpdateVisitCount from '../../helpers/UpdateVisitCount';
 // import Christmas from '../../components/theme/christmas/Christmas';
 import './Home.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Home() {
     const dispatch = useDispatch();
@@ -39,7 +41,7 @@ function Home() {
             <Header 
                 navbarStyle={{ 
                     margin: '0rem', 
-                    backgroundColor: 'var(--secondary-color)', 
+                    backgroundColor: 'var(--black-2)', 
                     borderRadius: '0rem',
                  }}
                 heartColor="var(--accent-color-2)"
@@ -55,6 +57,7 @@ function Home() {
             </DragDropContext>
             <Footer/>
             <UpdateVisitCount page="home"/>
+            <ToastContainer theme="dark"/>
         </div>
     );
 }

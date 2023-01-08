@@ -16,8 +16,8 @@ export const getCourse = createAsyncThunk("courses/getCourse",
     }
 );
 
-export const getCourses = (search: string, callback:(options: CourseOptionType[]) => void) => {
-    let filterCourse:CourseOptionType[] = [];
+export const getCourses = (search: string, callback:(options: OptionType[]) => void) => {
+    let filterCourse:OptionType[] = [];
     if(search.length < 3) {
         callback(filterCourse);
     }

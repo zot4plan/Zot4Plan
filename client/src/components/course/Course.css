@@ -1,8 +1,8 @@
-.required-course { height: 3.6rem;}
-.quarter-course { margin: 0.2rem; height: 3.6rem;}
+.required-course { height: 3.6rem; }
+.quarter-course { margin: 0.2rem; height: 3.6rem; }
 
-.quarter-course:hover .remove-course-btn,
-.required-course:hover .remove-course-btn {
+.quarter-course:hover .remove-btn,
+.required-course:hover .remove-btn {
     opacity: 1;
     visibility: visible;
 }
@@ -61,19 +61,17 @@
 
 
 @media only screen and (max-width: 450px) {
-    .unit {display: none;}
+    .unit { display: none; }
 }
 
 @media only screen and (max-width: 599px) { 
-    .course-btn { height: 3.2rem;}
-    .course-id {font-size: 1.2rem;}
+    .course-btn { height: 3.2rem; }
+    .course-id { font-size: 1.2rem; }
 }
 
 @media print { 
-    .course-id {font-size: 1.2rem; padding-left: 1.2rem;}
-    .unit {padding-right: 1.2rem; padding-left: 0;}
-    .quarter-course, .course-btn{ height: 2.6rem;}
-    .course-warning > svg {
-        font-size: 1.5rem;
-    }
+    .course-id { font-size: 1.2rem; padding-left: 1.2rem; }
+    .unit { padding-right: 1.2rem; padding-left: 0; }
+    .quarter-course, .course-btn{ height: 2.6rem; }
+    .course-warning > svg { font-size: 1.5rem; }
 }

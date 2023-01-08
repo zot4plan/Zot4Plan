@@ -27,7 +27,7 @@ function ButtonRemoveCourse({courseId, sectionId, index}: CoursePayload) {
     }; 
   
     return (      
-        <button className='remove-course-btn' onClick={handleOnClick}>
+        <button className='remove-btn' onClick={handleOnClick}>
             <Xmark/>
         </button>
     )

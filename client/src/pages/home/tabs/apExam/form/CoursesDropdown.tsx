@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import { OnChangeValue, StylesConfig } from 'react-select';
 import AsyncSelect from 'react-select/async';
-import { getCourses } from '../../../../controllers/HomeController';
+import { getCourses } from '../../../../../controllers/HomeController';
 
-const myStyle: StylesConfig<CourseOptionType, true> = {
+const myStyle: StylesConfig<OptionType, true> = {
     control: (provided) => ({
         ...provided,
         width: '100%',
@@ -24,12 +24,12 @@ const myStyle: StylesConfig<CourseOptionType, true> = {
     }),
 }
 interface CoursesDropdownProps {
-    selectCourses: CourseOptionType[];
-    setSelectCourses: (courses:CourseOptionType[]) => void;
+    selectCourses: OptionType[];
+    setSelectCourses: (courses: OptionType[]) => void;
 }
 function CoursesDropdown({selectCourses, setSelectCourses}: CoursesDropdownProps) {
-    const handleOnChange = (option: OnChangeValue<CourseOptionType, true>) => {
-        let courses: CourseOptionType[] = option.map((course: CourseOptionType) => course)
+    const handleOnChange = (option: OnChangeValue<OptionType, true>) => {
+        let courses:OptionType[] = option.map((course:OptionType) => course)
         setSelectCourses(courses);
     }
     return (
@@ -44,7 +44,7 @@ function CoursesDropdown({selectCourses, setSelectCourses}: CoursesDropdownProps
             styles={myStyle}
             value={selectCourses}
             maxMenuHeight={250}
-            placeholder="Select Courses"
+            placeholder="Search"
             aria-label="Browse courses by ID"
         />
     )

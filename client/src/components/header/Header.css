@@ -12,7 +12,7 @@
     justify-content: space-between;
     height: 94px;
     padding: 2rem 2.4rem;
-    background-image:url("../../assets/theme/christmas/snowflake.png");
+    /* background-image: url("../../assets/theme/christmas/snowflake.png"); */
 }
 
 #brand { 

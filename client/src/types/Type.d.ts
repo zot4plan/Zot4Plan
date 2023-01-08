@@ -7,7 +7,7 @@ declare interface ProgramOption {
     is_major: boolean;
 }
 
-declare interface CourseOptionType {
+declare interface OptionType {
     value: string;
     label: string;
 }
