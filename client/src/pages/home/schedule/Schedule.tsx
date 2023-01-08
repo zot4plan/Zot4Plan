@@ -5,7 +5,7 @@ import Year from '../../../components/accordion/Year';
 import TotalUnits from './TotalUnits';
 import PrintPrograms from './PrintPrograms';
 import Chalkboard from '../../../assets/images/chalkboard.png';
-import Bells from '../../../components/theme/christmas/Bells';
+// import Bells from '../../../components/theme/christmas/Bells';
 import './Schedule.css';
 
 const YEAR_NAMES = ["1st","2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"];
@@ -30,7 +30,7 @@ const Schedule = forwardRef((_, ref: Ref<HTMLDivElement>) => {
                         alt="Chalkboard that displays unit count" 
                     />
                     <TotalUnits className='unit-text'/>   
-                    <Bells className='bells'/> 
+                    {/* <Bells className='bells'/>  */}
                 </div>       
                 <TotalUnits className='print-units'/>            
             </div>   

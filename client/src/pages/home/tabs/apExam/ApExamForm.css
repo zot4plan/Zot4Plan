@@ -1,0 +1,89 @@
+.ap-exam-container {
+    margin: 10px;
+}
+
+.ap-exam-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ap-exam-dropdowns {
+    width: 100%;
+}
+
+.ap-exam-input-container {
+    display: flex;
+    margin: 10px;
+    width: 100%;
+    padding: 0px 10px;
+
+}
+
+.ap-exam-input-container label {
+    font-size: 14px;
+    font-weight: bold;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.ap-exam-input-container>input {
+    font-size: 1.6rem;
+    width: 100%;
+    border-radius: 16px;
+    height: 36px;
+    padding-left: 10px;
+    box-shadow: none;
+    border-style: solid;
+    border-color: #1F1F1F;
+    border-width: 1px;
+}
+
+.ap-exam-input-container>input::placeholder {
+    color: hsl(0, 0%, 20%);
+    opacity: 1;
+}
+
+.ap-exam-input-container>input::-ms-input-placeholder {
+    color: hsl(0, 0%, 20%);
+}
+
+.ap-exam-input-container>input::-ms-input-placeholder {
+    color: hsl(0, 0%, 20%);
+}
+
+.list-display {
+    position: relative;
+    margin-bottom: 5px;
+    width: 125px;
+    border-radius: 1rem;
+}
+
+.ap-name {
+    text-align: center;
+    padding: 5px;
+    border-radius: 1rem;
+}
+
+
+.examTooltip {
+    background-color: #495057 !important;
+    border-color: #495057 !important;
+    border-radius: 16px !important;
+    padding: 10px !important;
+    width: 250px;
+}
+
+.list-display:hover .remove-course-btn {
+    opacity: 1;
+    visibility: visible;
+    color: black;
+}
+
+.list-display:hover {
+    border: 1px solid black !important;
+}

@@ -22,6 +22,7 @@
   },
   "include": [
     "src",
-    "src/type/Type.d.ts"
+    "src/type/Type.d.ts",
+    "src/pages/home/tabs/apExam/GeDropdown.tsx"
   ]
 }

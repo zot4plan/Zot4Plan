@@ -5,52 +5,66 @@ import { RootState } from '../../../store/store';
 import GeneralEducation from './generalEducation/GeneralEducation';
 import Program from './program/Program';
 import SelectProgram from './select/SelectProgram';
-
+import PopperApExam from './apExam/ApExamForm';
 import './Tabs.css';
+import ApExamList from './apExam/ApExamList';
 
 function Tabs() {
-    const [tab, setTab] = useState({id: 1, isMajor: true}); // Major: 1, minor: 2, GE: 3 
-    const addedCourses = useSelector((state:RootState)=> state.programs.addedCourses);
-    const status = useSelector((state:RootState)=> state.ge.status);
+    const [tab, setTab] = useState({ id: 1, isMajor: true }); // Major: 1, minor: 2, GE: 3 
+    const addedCourses = useSelector((state: RootState) => state.programs.addedCourses);
+    const status = useSelector((state: RootState) => state.ge.status);
 
     const dispatch = useDispatch();
 
-    useEffect(() => {  
-        if(tab.id === 3 && status === 'idle') 
+    useEffect(() => {
+        if (tab.id === 3 && status === 'idle')
             dispatch(getAllGE());
-    },[tab.id, status, dispatch]); 
+    }, [tab.id, status, dispatch]);
 
     return (
         <div id="tab-container">
-            <ul style={{display: "flex"}}>
-                <li style={{ borderRight:'1px solid white' }}
-                onClick={() => setTab({id: 1, isMajor: true})}
-                className={'tab flex-container round-top-left ' + (tab.id === 1?"active":"")}
+            <ul style={{ display: "flex" }}>
+                <li style={{ borderRight: '1px solid white' }}
+                    onClick={() => setTab({ id: 1, isMajor: true })}
+                    className={'tab flex-container round-top-left ' + (tab.id === 1 ? "active" : "")}
                 >
                     Major
                 </li>
 
-                <li style={{ borderRight:'1px solid white' }}
-                onClick={()=>setTab({id: 2, isMajor: false})}
-                className={'tab flex-container ' + (tab.id === 2?"active":"")} 
+                <li style={{ borderRight: '1px solid white' }}
+                    onClick={() => setTab({ id: 2, isMajor: false })}
+                    className={'tab flex-container ' + (tab.id === 2 ? "active" : "")}
                 >
                     Minor
                 </li>
 
-                <li onClick={()=>setTab( prev => ({...prev, id: 3}) )}
-                className={'tab flex-container round-top-right ' + (tab.id === 3?"active":"")} 
+                <li onClick={() => setTab(prev => ({ ...prev, id: 3 }))}
+                    className={'tab flex-container ' + (tab.id === 3 ? "active" : "")}
                 >
                     GE
-                </li> 
+                </li>
+
+                <li onClick={() => setTab(prev => ({ ...prev, id: 4 }))}
+                    className={'tab flex-container round-top-right ' + (tab.id === 4 ? "active" : "")}
+                >
+                    AP Exams
+                </li>
             </ul>
 
-            <div style={{display: tab.id !== 3? "block": "none"}}>
+            <div style={{ display: tab.id !== 3 && tab.id !== 4 ? "block" : "none" }}>
                 <SelectProgram key="selectProgram" isMajor={tab.isMajor} />
-                <Program key="program" isMajor={tab.isMajor} addedCourses={addedCourses}/>
+                <Program key="program" isMajor={tab.isMajor} addedCourses={addedCourses} />
             </div>
 
-            <div style={{display: tab.id === 3? "block": "none"}}>
-                <GeneralEducation/>
+            <div style={{ display: tab.id === 3 ? "block" : "none" }}>
+                <GeneralEducation />
+            </div>
+
+            <div style={{ display: tab.id === 4 ? "block" : "none" }}>
+                <PopperApExam />
+                <div id="ap-list">
+                    <ApExamList/>
+                </div>
             </div>
         </div>
     );

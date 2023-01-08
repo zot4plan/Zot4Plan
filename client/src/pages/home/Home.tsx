@@ -9,7 +9,7 @@ import HomeNavList from './navbar/HomeNavList';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import UpdateVisitCount from '../../helpers/UpdateVisitCount';
-import Christmas from '../../components/theme/christmas/Christmas';
+// import Christmas from '../../components/theme/christmas/Christmas';
 import './Home.css';
 
 function Home() {
@@ -44,7 +44,7 @@ function Home() {
                  }}
                 heartColor="var(--accent-color-2)"
                 NavList={HomeNavList}
-                Theme={Christmas}
+                // Theme={Christmas}
             />
             <DragDropContext onDragEnd={onDragEnd}>
             <Toolbars printContent={printContent}/>

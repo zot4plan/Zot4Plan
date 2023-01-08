@@ -5,7 +5,7 @@ import { RootState } from '../../store/store';
 import { resetStatus } from '../../store/slices/CourseSlice';
 import Confetti from 'react-confetti';
 import Message from '../message/Message';
-import './PopperSaveLoad.css';
+import './Popper.css';
 
 const maxLength = 32;
 const minLength = 8;

@@ -8,18 +8,18 @@
     font-size: 12px;
 }
 
-.badgeTooltip{
+.badgeTooltip {
     background-color: #495057 !important;
-    border-color:#495057 !important;
+    border-color: #495057 !important;
     border-radius: 16px !important;
-    padding: 10px 5px !important;
+    padding: 10px 0px !important;
 }
 
-.badgeTooltip > h1 {
+.badgeTooltip>h1 {
     margin-bottom: 8px;
 }
 
-.badgeTooltip > p {
+.badgeTooltip>p {
     font-size: 1.4rem;
     margin: 0 0.5rem;
 }
@@ -33,4 +33,9 @@
 .column {
     font-size: 1.4rem;
     margin-bottom: 5px;
+}
+
+.ge {
+    text-align: center;
+    padding-top: 10px;
 }
