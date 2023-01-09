@@ -45,6 +45,8 @@ function PopperSave () {
                         selectedPrograms: state.programs.selectedPrograms,
                         addedCourses: state.programs.sections[state.programs.addedCourses],
                         years: years as string[][][],
+                        apExam: state.course.apExam,
+                        apExamUnits: state.course.apExamUnits,
                     };
 
                     addOrEditSchedule(name, schedule, setMessage);

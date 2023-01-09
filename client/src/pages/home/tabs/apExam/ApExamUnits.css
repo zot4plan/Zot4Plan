@@ -1,0 +1,25 @@
+.ap-exam-units-wrapper {
+    display: flex;
+    align-items: center;
+    padding-left: 19px;
+    padding-right: 19px;
+    height: 46px;
+    /* width: 144px; */
+    border-radius: 2rem;
+    color: var(--accent-color-2);
+    font-size: 1.8rem;
+    border: 1px solid var(--accent-color-2);
+}
+
+.ap-exam-units-wrapper:hover {
+    background-color: var(--accent-color-2);
+    color: white;
+}
+
+.ap-exam-units-input {
+    width: 50px;
+    font-size: 1.6rem;
+    border-radius: 1rem;
+    padding-left: 6px;
+    border-color: var(--accent-color-2);
+}

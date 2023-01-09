@@ -27,30 +27,17 @@ const generateInitialState = () => {
             allIds: yearIds as string[],
         },
         totalUnits: 0,
+        apExamUnits: 0,
         sections: sections,
         courses: {},
         depts: {
-            byIds: {
-                'HISTORY': ['#AFD3E9', '#70ADD7', '#3688BF'],
-                'MATH': ['#B1B1D3', '#8989BD', '#7C7CB6']
-            },
+            byIds: {},
             size: 0
         },
         takenGeCourses: {},
         status: 'idle',
         isPrerequisiteCheck: true,
-        apExam: [
-            {
-                GE: ['IB'],
-                courses: ['HISTORY 10'],
-                name: "APUSH"
-            },
-            {
-                GE: ['IV'],
-                courses: ['MATH 2A'],
-                name: "AP CALC"
-            },
-        ],
+        apExam: [],
         pageLoading: 'idle'
     }
 }
@@ -93,7 +80,6 @@ export const courseSlice = createSlice({
         },
 
         addApExam: (state, action: PayloadAction<ApExamType>) => {
-            console.log(action.payload)
             let dept = getDeptFromCourse(action.payload.courses[0]);
             if (state.depts.byIds[dept] === undefined) {
                 let index = state.depts.size % DEPT_COLORS.length;
@@ -105,6 +91,11 @@ export const courseSlice = createSlice({
 
         removeApExam: (state, action: PayloadAction<number>) => {
             state.apExam.splice(action.payload, 1)
+        },
+
+        editApExamUnits: (state, action: PayloadAction<number>) => {
+            state.totalUnits += (action.payload - state.apExamUnits)
+            state.apExamUnits = action.payload
         },
 
         addYear: (state) => {
@@ -165,7 +156,17 @@ export const courseSlice = createSlice({
             state.status = "succeeded";
             state.courses = {};
             state.takenGeCourses = {};
-            state.totalUnits = 0;
+            state.totalUnits = action.payload.apExamUnits;
+            state.apExamUnits = action.payload.apExamUnits;
+            state.apExam = action.payload.apExam;
+            action.payload.apExam.forEach((apExam) => {
+                let dept = getDeptFromCourse(apExam.courses[0]);
+                if (state.depts.byIds[dept] === undefined) {
+                let index = state.depts.size % DEPT_COLORS.length;
+                state.depts.byIds[dept] = DEPT_COLORS[index]
+                state.depts.size += 1;
+            }
+            })
 
             // Add courses info 
             action.payload.courses.forEach((course) => {
@@ -314,6 +315,7 @@ export const {
     clearSchedule,
     addApExam,
     removeApExam,
+    editApExamUnits,
     resetStatus,
     setIsPrerequisiteCheck
 } = courseSlice.actions;

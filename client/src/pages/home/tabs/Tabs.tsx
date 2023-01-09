@@ -8,6 +8,7 @@ import SelectProgram from './select/SelectProgram';
 import ApExamForm from './apExam/form/ApExamForm';
 import './Tabs.css';
 import ApExamList from './apExam/ApExamList';
+import ApExamUnits from './apExam/ApExamUnits'
 
 function Tabs() {
     const [tab, setTab] = useState({ id: 1, isMajor: true }); // Major: 1, minor: 2, GE: 3 
@@ -65,6 +66,7 @@ function Tabs() {
                 <div id="ap-list">
                     <ApExamList/>
                 </div>
+                <ApExamUnits/>
             </div>
         </div>
     );

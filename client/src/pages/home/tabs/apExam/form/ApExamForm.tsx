@@ -81,16 +81,6 @@ function ApExamForm() {
                         <GeDropdown selectGe={form.GE} setSelectGe={handleSelectGe} />
                     </div>
                 </div>
-                {/* <div className='input-container'>
-                    <h2>Units Received</h2>
-                    <input
-                        placeholder='EX: 32'
-                        type="number"
-                        required
-                        value={units}
-                        onChange={(e) => setUnits(e.target.value)}
-                    />
-                </div> */}
                 <div className='flex-container'>
                     <button className='btn' type="submit"> Submit </button>
                 </div>

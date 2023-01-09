@@ -201,6 +201,7 @@ declare interface CourseSliceType {
     years: YearsType;
     sections: { [id: string]: string[] };
     totalUnits: number;
+    apExamUnits: number;
     courses: {
         [id: string]: {
             data: CourseType,

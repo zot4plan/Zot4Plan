@@ -78,6 +78,8 @@ export const getSchedule = createAsyncThunk("schedule/getSchedule",
             years: response.data.years as string[][][],
             addedCourses: response.data.addedCourses as string[],
             courses: courses,
+            apExam: response.data.apExam as ApExamType[],
+            apExamUnits: response.data.apExamUnits as number,
         };
     }
 ); 
