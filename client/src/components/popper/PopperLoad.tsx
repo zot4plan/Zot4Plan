@@ -5,7 +5,7 @@ import { RootState } from '../../store/store';
 import { resetStatus } from '../../store/slices/CourseSlice';
 import Confetti from 'react-confetti';
 import Message from '../message/Message';
-import './PopperSaveLoad.css';
+import './Popper.css';
 
 const maxLength = 32;
 const minLength = 8;
@@ -25,7 +25,7 @@ function PopperLoad () {
 
     const dispatch = useDispatch();
 
-    const handleOnSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+    const handleOnSubmit = (e: MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (/\s/g.test(name)) 
@@ -49,18 +49,19 @@ function PopperLoad () {
         <div className="popper-card-before"/>
 
         <div className="flex-container flexColumn popup">
-            <input type="text"
-                id="loadName"
-                name="loadName"
-                maxLength={maxLength}
-                value={name}
-                className="schedule-name-input"
-                onChange={handleInputChange}
-                placeholder="Enter schedule name"
-            />
+            <form onSubmit={handleOnSubmit}>
+                <input type="text"
+                    id="loadName"
+                    name="loadName"
+                    maxLength={maxLength}
+                    value={name}
+                    className="schedule-name-input"
+                    onChange={handleInputChange}
+                    placeholder="Enter schedule name"
+                />
 
-            <button className='btn' style={{margin: '0.6rem 0rem'}}
-                    onClick={handleOnSubmit}> Submit </button>
+                <button className='btn' style={{margin: '0.6rem 0rem'}}> Submit </button>
+            </form>
 
             {message.status !== "idle"  && <Message status={message.status} content={message.content}/>}
             

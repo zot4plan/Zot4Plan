@@ -1,10 +1,10 @@
 import { memo } from 'react';
 import Author from './Author';
-import Lights from '../theme/christmas/Lights';
+// import Lights from '../theme/christmas/Lights';
 import Contact from './Contact';
 import './Footer.css';
 import Decoration from './Decoration';
-import MerryChristmas from '../theme/christmas/MerryChristmas';
+// import MerryChristmas from '../theme/christmas/MerryChristmas';
 
 const authors = [
     {
@@ -31,8 +31,8 @@ const authors = [
     {
         name: "Vianey Mursio",
         role: "Member",
-        facebook: "https://www.facebook.com/profile.php?id=100071189183519",
-        instagram: "https://instagram.com/viaaneyy.y?igshid=YmMyMTA2M2Y=",
+        linkedin: "https://www.linkedin.com/in/vianey-flores-mursio/",
+        instagram: "https://www.instagram.com/vianeymursio/",
         email: "vianeyf@uci.edu",
     },
     {
@@ -47,9 +47,9 @@ const authors = [
 const Footer = () => {
     return (
         <footer id="footer" className='home-footer'>
-            <Lights/>
             <Decoration/>
-            <MerryChristmas className='merry-christmas'/>
+            {/* <Lights/>
+            <MerryChristmas className='merry-christmas'/> */}
             <div>
                 <h1 className='header'>
                     About Us
@@ -63,7 +63,7 @@ const Footer = () => {
                         Disclaimer: All of the information we obtained are from the UCI catalogue. Please make sure to check your schedule with an academic counselor. Thank you - Zot! Zot! Zot! 
                     </p>
                     <p>
-                        (Last Updated On: Nov 27th, 2022)
+                        (Last Updated On: Jan 9th, 2023)
                     </p>
                 </div>
             </div>

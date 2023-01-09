@@ -1,4 +1,4 @@
-.remove-course-btn{
+.remove-btn{
     position:absolute;
     top: 0.2rem;
     right: 0.2rem;
@@ -10,11 +10,11 @@
     color: #FFFFFF;
 }
 
-.remove-course-btn > svg {
+.remove-btn > svg {
     transition: transform 250ms;
 }
 
-.remove-course-btn svg:hover { 
+.remove-btn svg:hover { 
     border-radius: 50%;
     transform: rotate(-90deg);
 }

@@ -1,0 +1,41 @@
+.ap-exam-item-container {
+    position: relative;
+    width: 135px;
+    height: 36px;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0px 7px;
+}
+
+.ap-exam-item-container > p {
+    border-radius: 1rem;
+    width: 128px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.exam-tooltip {
+    border-radius: 16px !important;
+    padding: 10px !important;
+    width: 275px;
+}
+
+.exam-tooltip > h1 {
+    text-align: center;
+}
+
+.exam-tooltip > div {
+    margin: 10px 0px;
+}
+
+.ap-exam-item-container:hover .remove-btn {
+    opacity: 1;
+    visibility: visible;
+    color: black;
+}
+
+.ap-exam-item-container:hover {
+    border-color: var(--black-2) !important;
+}

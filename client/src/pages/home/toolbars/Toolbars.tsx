@@ -20,103 +20,87 @@ interface StateType {
     id: string | null;
 }
 
-function Toolbars({printContent}: ButtonsListProps) {
-    const [element, setElement] = useState<StateType>({anchorEl: null, id: null});
+function Toolbars({ printContent }: ButtonsListProps) {
+    const [element, setElement] = useState<StateType>({ anchorEl: null, id: null });
     const open = Boolean(element.anchorEl);
     const popperId = open ? "popper" : undefined;
 
     const handleClick = (event: MouseEvent<HTMLElement>) => {
         event.preventDefault();
         const id = event.currentTarget.getAttribute("data-value");
-        if(element.id === id || id === "cancel")
-            setElement({anchorEl: null, id: null})
-        else 
-            setElement({anchorEl: event.currentTarget, id: id});
-    };  
+        if (element.id === id || id === "cancel")
+            setElement({ anchorEl: null, id: null })
+        else
+            setElement({ anchorEl: event.currentTarget, id: id });
+    };
 
     const handleClickAway = () => {
-        setElement({anchorEl: null, id: element.id});
-    };  
+        setElement({ anchorEl: null, id: element.id });
+    };
 
     return (
-    <>
-        <ul className='home-toolbars'>
-            <li> <ButtonAddYear/> </li>
-            <li>  
-                <button className="btn" 
-                    data-value="clear"
-                    onClick={handleClick} 
-                    aria-label='remove all courses'> Clear </button> 
-            </li>  
-            <li>  
-                <button className="btn disabled" 
-                    data-value="sample"
-                    //onClick={handleClick} 
-                    data-tip data-for='sample'
-                    aria-label='remove all courses'> Sample </button> 
-                    <ReactTooltip 
-                        id='sample' 
-                        place="top" 
+        <>
+            <ul className='home-toolbars'>
+                <li> <ButtonAddYear /> </li>
+                <li>
+                    <button className="btn"
+                        data-value="clear"
+                        onClick={handleClick}
+                        aria-label='remove all courses'> Clear </button>
+                </li>
+                <li>
+                    <button className="btn disabled"
+                        data-value="sample"
+                        //onClick={handleClick} 
+                        data-tip data-for='sample'
+                        aria-label='remove all courses'> Sample </button>
+                    <ReactTooltip
+                        id='sample'
+                        place="top"
                         type="info"
                         effect="solid"
                         className='coming-soon'
                     >
                         COMING SOON
                     </ReactTooltip>
-            </li> 
-            <li>  
-                <button className="btn disabled" 
-                    data-value="AP exams"
-                    //onClick={handleClick} 
-                    data-tip data-for='ap exams'
-                    aria-label='remove all courses'> AP exam </button> 
-                    <ReactTooltip 
-                        id='ap exams' 
-                        place="top" 
-                        type="info"
-                        effect="solid"
-                        className='coming-soon'
-                    >
-                        COMING SOON
-                    </ReactTooltip>
-            </li> 
-            <li> 
-                <button className='btn' 
-                    data-value="save"
-                    onClick={handleClick}
-                    aria-label="Save Schedule"> Save </button> 
-            </li>
-            <li>
-                <button className='btn' 
-                    data-value="load"
-                    onClick={handleClick}
-                    aria-label='Load Schedule'> Load </button>
-            </li>
-            <li> 
-                <ReactToPrint 
-                    trigger={() => <button className="btn">Print</button>}
-                    content={printContent}
-                />
-            </li>
-            <li style={{display: 'flex'}}> <PrerequisiteSwitch/> </li>   
-        </ul>   
+                </li>
+                <li>
+                    <button className='btn'
+                        data-value="save"
+                        onClick={handleClick}
+                        aria-label="Save Schedule"> Save </button>
+                </li>
+                <li>
+                    <button className='btn'
+                        data-value="load"
+                        onClick={handleClick}
+                        aria-label='Load Schedule'> Load </button>
+                </li>
+                <li>
+                    <ReactToPrint
+                        trigger={() => <button className="btn">Print</button>}
+                        content={printContent}
+                    />
+                </li>
+                <li style={{ display: 'flex' }}> <PrerequisiteSwitch /> </li>
+            </ul>
 
-        <ClickAwayListener 
-            mouseEvent="onMouseDown"
-            touchEvent="onTouchStart"
-            onClickAway={handleClickAway}
-        >
-            <PopperUnstyled 
-                id={popperId} 
-                open={open} 
-                anchorEl={element.anchorEl}
+            <ClickAwayListener
+                mouseEvent="onMouseDown"
+                touchEvent="onTouchStart"
+                onClickAway={handleClickAway}
             >
-                {element.id === "clear" && <PopperClear handleClick={handleClick}/>}
-                {element.id === "save" && <PopperSave/>}
-                {element.id === "load" && <PopperLoad/>}
-            </PopperUnstyled>
-        </ClickAwayListener> 
-    </>         
+                <PopperUnstyled
+                    id={popperId}
+                    open={open}
+                    anchorEl={element.anchorEl}
+                >
+                    {element.id === "clear" && <PopperClear handleClick={handleClick} />}
+                    {element.id === "save" && <PopperSave />}
+                    {element.id === "load" && <PopperLoad />}
+                </PopperUnstyled>
+            </ClickAwayListener>
+        </>
     )
 }
 

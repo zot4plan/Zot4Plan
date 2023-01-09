@@ -1,0 +1,46 @@
+.ap-exam-units-wrapper {
+    display: flex;
+    align-items: center;
+    height: 46px;
+
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+
+    border-radius: 2rem;
+    border: 1px solid var(--accent-color-2);
+
+    color: var(--accent-color-2);
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.ap-exam-units-wrapper:hover {
+    background-color: var(--accent-color-2);
+    color: white;
+}
+
+.ap-exam-units-input {
+    width: 50px;
+    height: 27px;
+    padding-right: 5px;
+    text-align: right;
+    border-radius: 1.6rem;
+    box-shadow: none;
+    border: 1px solid var(--accent-color-2);
+    font-size: 1.4rem;
+    cursor: text;
+}
+
+.ap-exam-note {
+    margin: 5px 10px;
+}
+
+.ap-exam-note, .ap-exam-note > a {
+    color: var(--accent-color-2);
+    font-size: 1.4rem;
+}
+
+.ap-exam-note > a {
+    font-weight: bold;
+    text-decoration: underline;
+}

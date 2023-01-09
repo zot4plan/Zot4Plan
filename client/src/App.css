@@ -18,7 +18,7 @@
     --border-color: #D6D6D6;  /* light gray*/
     --primary-color:#FFFFFF; /* white */
     --primary-color-2: #F2F2F2; /* cultured */
-    --secondary-color:#1F1F1F; /* Eerie Black */
+    --black-2:#1F1F1F; /* Eerie Black */
     --accent-color-1:#DF2935; /* Rose Madder */
     --accent-color-2:#307ABB; /* French Blue */
     --red: #DA1E37; /* note */
@@ -90,12 +90,12 @@ svg { font-size: 10px; }
 .static {position: static;}
 .fixed {position: fixed;}
 
-.round-top-left { border-top-left-radius: 1.5rem;}
-.round-top-right { border-top-right-radius: 1.5rem;}
+.round-top-left { border-top-left-radius: 1.5rem; }
+.round-top-right { border-top-right-radius: 1.5rem; }
 
-.__react_component_tooltip.show {
-    opacity: 1 !important;
-}
+.__react_component_tooltip.show { opacity: 1 !important; }
+
+.text-bold { font-weight: bold; }
 
 /* button */
 .btn-outlined { 

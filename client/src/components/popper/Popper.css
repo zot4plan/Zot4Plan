@@ -7,20 +7,24 @@
     background-color: white;
 }
 
+.popup > form {
+    text-align: center;
+}
+
 .schedule-name-input {
-    -webkit-appearance: none;  /* Fixed Iphone mess up input form */
+    /* Fixed Iphone mess up input form */
     height: 3.2rem;
     width: 100%;
     margin: 1rem 0rem;
     border-radius: 1.6rem;
-    border:none;
-    -webkit-box-shadow: 1px 1px 6px 0px #00000090; 
+    border: none;
+    -webkit-box-shadow: 1px 1px 6px 0px #00000090;
     box-shadow: 1px 1px 6px 0px #00000090;
     padding: 6px 12px;
     font-size: 1.6rem;
 }
 
-.popper-card-before{
+.popper-card-before {
     position: absolute;
     z-index: 0;
     top: 0rem;
@@ -33,6 +37,10 @@
     margin-top: 0.35rem;
 
     background-color: white;
-    -webkit-box-shadow: -1px -1px 1px 0px var(--accent-color-2); 
+    -webkit-box-shadow: -1px -1px 1px 0px var(--accent-color-2);
     box-shadow: -1px -1px 1px 0px #1f1f1f90;
+}
+
+.division {
+    margin-bottom: 10px;
 }

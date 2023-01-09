@@ -1,17 +1,24 @@
 /**** Cancel Drop and Drag animation ****/
-.program-container div[data-rbd-placeholder-context-id] {display: none !important;}
-.program-container div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
-.program-container div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
+.program-container div[data-rbd-placeholder-context-id],
+.ge-container div[data-rbd-placeholder-context-id] {
+    display: none !important;
+}
 
-.ge-container div[data-rbd-placeholder-context-id] {display: none !important;}
-.ge-container div[data-rbd-draggable-context-id] {transition: 0.001s !important;}
-.ge-container div[data-rbd-droppable-context-id] {transition: 0.001s !important;}
+.program-container div[data-rbd-draggable-context-id],
+.ge-container div[data-rbd-draggable-context-id] {
+    transition: 0.001s !important;
+}
+
+.program-container div[data-rbd-droppable-context-id],
+.ge-container div[data-rbd-droppable-context-id] {
+    transition: 0.001s !important;
+}
 
 #tab-container {
     height: 64rem;
     border-radius: 1.5rem;
     box-shadow: 0rem 0.2rem 0.4rem 0rem rgb(0 0 0/60%);
-    margin-bottom : 14rem;
+    margin-bottom: 14rem;
 }
 
 .tab {
@@ -23,7 +30,13 @@
     cursor: pointer;
 }
 
-.tab:hover {color: var(--accent-color-2);}
+.tab:hover {
+    color: var(--accent-color-2);
+}
+
+.border-right {
+    border-right: 1px solid white;
+}
 
 .active {
     border-top: 0.4rem solid var(--accent-color-2);
@@ -34,7 +47,7 @@
 .hyperlink {
     display: flex;
     align-items: center;
-    margin: 0 0.5rem 1.5rem 0.5rem;
+    margin: 1rem 0.5rem 1.5rem 0.5rem;
 }
 
 .hyperlink > button {
@@ -43,7 +56,8 @@
     align-items: center;
 }
 
-.hyperlink > a, .hyperlink > button > svg{
+.hyperlink > a,
+.hyperlink > button > svg {
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--accent-color-2);
@@ -53,9 +67,9 @@
     text-align: center;
 }
 
-.hyperlink > a:hover {
-    text-decoration: underline; 
-    color:#FF934F;
+.hyperlink>a:hover {
+    text-decoration: underline;
+    color: #FF934F;
 }
 
 #program-img {
@@ -80,12 +94,27 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 }
-@media only screen and (max-width: 599px) { 
-    #tab-container {height: 53.7rem;}
-    .tab {font-size: 1.5rem;}
-    .hyperlink > a, .hyperlink > svg { font-size: 1.6rem;}
-    .ge-container {height: 49rem;}
-    .program-container { height: 39rem;}
+
+@media only screen and (max-width: 599px) {
+    #tab-container {
+        height: 53.7rem;
+    }
+
+    .tab {
+        font-size: 1.5rem;
+    }
+
+    .hyperlink>a,
+    .hyperlink>svg {
+        font-size: 1.6rem;
+    }
+
+    .ge-container {
+        height: 49rem;
+    }
+
+    .program-container {
+        height: 39rem;
+    }
 }

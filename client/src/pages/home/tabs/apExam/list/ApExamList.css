@@ -1,0 +1,18 @@
+.ap-exam-list-container {
+    margin: 2rem 1.6rem 3rem 1.6rem; 
+    height: 160px;
+}
+
+.ap-exam-list-container > p {
+    font-size: 1.4rem;
+    height: 100%;
+}
+
+.ap-exam-list-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0px;
+    gap: 1rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

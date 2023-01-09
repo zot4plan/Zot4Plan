@@ -4,7 +4,7 @@ import { RootState } from '../../store/store';
 import { addOrEditSchedule } from '../../controllers/HomeController';
 import Confetti from 'react-confetti';
 import Message from '../message/Message';
-import './PopperSaveLoad.css';
+import './Popper.css';
 
 const maxLength = 32;
 const minLength = 8;
@@ -23,7 +23,7 @@ function PopperSave () {
         setName(e.target.value);
     }
 
-    const handleOnSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+    const handleOnSubmit = (e: MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (/\s/g.test(name)) 
@@ -45,6 +45,8 @@ function PopperSave () {
                         selectedPrograms: state.programs.selectedPrograms,
                         addedCourses: state.programs.sections[state.programs.addedCourses],
                         years: years as string[][][],
+                        apExam: state.course.apExam,
+                        apExamUnits: state.course.apExamUnits,
                     };
 
                     addOrEditSchedule(name, schedule, setMessage);
@@ -65,18 +67,19 @@ function PopperSave () {
         <div className="flex-container flexColumn popup">
             <p style={{padding:'0.2rem 0.5rem', textAlign:'center', fontSize:'1.5rem'}}> {scheduleNameNote} </p>
 
-            <input type="text"
-                id="saveName"
-                name="saveName"
-                maxLength={maxLength}
-                value = {name}
-                className = "schedule-name-input"
-                onChange = {handleInputChange}
-                placeholder="Enter schedule name"
-            />
+            <form onSubmit={handleOnSubmit}>
+                <input type="text"
+                    id="saveName"
+                    name="saveName"
+                    maxLength={maxLength}
+                    value = {name}
+                    className = "schedule-name-input"
+                    onChange = {handleInputChange}
+                    placeholder="Enter schedule name"
+                />
 
-            <button className='btn' style={{margin: '0.6rem 0rem'}}
-                    onClick={handleOnSubmit}> Submit </button>
+                <button className='btn' style={{margin: '0.6rem 0rem'}}> Submit </button>
+            </form>
 
             {message.status !== "idle" && <Message status={message.status} content={message.content}/>}
 

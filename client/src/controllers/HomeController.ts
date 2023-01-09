@@ -16,8 +16,8 @@ export const getCourse = createAsyncThunk("courses/getCourse",
     }
 );
 
-export const getCourses = (search: string, callback:(options: CourseOptionType[]) => void) => {
-    let filterCourse:CourseOptionType[] = [];
+export const getCourses = (search: string, callback:(options: OptionType[]) => void) => {
+    let filterCourse:OptionType[] = [];
     if(search.length < 3) {
         callback(filterCourse);
     }
@@ -78,6 +78,8 @@ export const getSchedule = createAsyncThunk("schedule/getSchedule",
             years: response.data.years as string[][][],
             addedCourses: response.data.addedCourses as string[],
             courses: courses,
+            apExam: response.data.apExam as ApExamType[],
+            apExamUnits: response.data.apExamUnits as number,
         };
     }
 ); 

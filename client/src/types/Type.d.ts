@@ -7,7 +7,7 @@ declare interface ProgramOption {
     is_major: boolean;
 }
 
-declare interface CourseOptionType {
+declare interface OptionType {
     value: string;
     label: string;
 }
@@ -18,15 +18,15 @@ declare interface CourseIdType {
 
 declare interface RequirementType {
     name: string;
-    child: ({name:string, child:(string|string[])[]})[]; // need to be rename 
+    child: ({ name: string, child: (string | string[])[] })[]; // need to be rename 
 }
 
-declare interface CourseType { 
+declare interface CourseType {
     course_id: string;
     name: string;
     department: string;
     units: number[];
-    units_text:string;
+    units_text: string;
     description: string;
     prerequisite: string | null;
     prerequisite_tree: object | null;
@@ -39,8 +39,8 @@ declare interface CourseType {
     same_as: string | null;
     overlaps_with: string | null;
     concurrent_with: string | null;
-    ge:string;
-    terms:string;
+    ge: string;
+    terms: string;
     repeatability: number;
     'courses_in_ge.ge_list': string[];
     [id: string]: string | number;
@@ -49,6 +49,12 @@ declare interface CourseType {
 declare interface YearsType {
     byIds: { [id: string]: string[] },
     allIds: string[],
+}
+
+declare interface ApExamType {
+    name: string;
+    courses: string[];
+    GE: string[];
 }
 
 //Virtual-cafe
@@ -69,7 +75,7 @@ declare interface PlaylistType {
 declare interface BackgroundType {
     background_id: number;
     name: string;
-    description: string; 
+    description: string;
     url: string;
     like: number;
 }
@@ -99,12 +105,12 @@ declare interface ImageProps {
 
 /*********** Payload Type ***********/
 declare interface GEPayload {
-    ge_id: string; 
-    name: string; 
+    ge_id: string;
+    name: string;
     note: string;
 }
 
-declare interface CoursePayload{
+declare interface CoursePayload {
     sectionId: string;
     courseId: string;
     index: number;
@@ -114,7 +120,7 @@ declare interface MoveCoursePayload {
     sourceId: string;
     destinationId: string;
     sourceIndex: number;
-    destinationIndex: number;  
+    destinationIndex: number;
     courseId: string;
 }
 
@@ -135,9 +141,9 @@ declare interface SwitchProgramPayload {
 
 declare interface AddPlaylistPayload {
     playlist: {
-        playlist_id: string, 
-        name:string, 
-        prefix: string, 
+        playlist_id: string,
+        name: string,
+        prefix: string,
         sharedBy: string
     }
     setStatus: React.Dispatch<React.SetStateAction<{
@@ -153,22 +159,22 @@ declare interface AddPlaylistPayload {
 /************* Slice ***************/
 /***********************************/
 declare interface GEType {
-    ge_id: string; 
-    sectionIds: { sectionId: string, nameChild: string } [];
-    name: string; 
+    ge_id: string;
+    sectionIds: { sectionId: string, nameChild: string }[];
+    name: string;
     nameChild: string;
-    status: string; 
+    status: string;
 }
 
 declare interface AccordionType {
     id: string;
     name: string;
-    sectionIds: { sectionId: string, nameChild: string } [];
+    sectionIds: { sectionId: string, nameChild: string }[];
 }
 
 declare interface ProgramType {
     program_id: number;
-    byIds:{ [id:string]: AccordionType }; 
+    byIds: { [id: string]: AccordionType };
     allIds: string[];
     name: string;
     url: string;
@@ -176,38 +182,41 @@ declare interface ProgramType {
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
 }
 
-declare interface ProgramsSliceType{
+declare interface ProgramsSliceType {
     byIds: { [id: string]: ProgramType };
     selectedPrograms: ProgramOption[][]; // 0-index is minors, 1-index is majors 
     index: number[]; // 0-index is the current minor displaying, 1-index is for major
     addedCourses: string,
-    sections: { [id:string]: (string|string[])[] };
+    sections: { [id: string]: (string | string[])[] };
 }
 
-declare interface GESliceType{
-    byIds: { [id:string]: GEType };
+declare interface GESliceType {
+    byIds: { [id: string]: GEType };
     allIds: string[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    sections: { [id:string]: string[] };
+    sections: { [id: string]: string[] };
 }
 
 declare interface CourseSliceType {
     years: YearsType;
-    sections: { [id:string]: string[] };
+    sections: { [id: string]: string[] };
     totalUnits: number;
+    apExamUnits: number;
     courses: {
-        [id:string]: {
-            data: CourseType, 
+        [id: string]: {
+            data: CourseType,
             remains: number,
         }
     };
     depts: {
-        byIds: { [id:string]: string[] }, 
+        byIds: { [id: string]: string[] },
         size: number,
     };
-    takenGeCourses: { [id:string]: string[] };
+    takenGeCourses: { [id: string]: string[] };
     status: 'idle' | 'succeeded' | 'failed';
     isPrerequisiteCheck: boolean;
+    apExam: ApExamType[];
+    apExamCourses: { [id: string]: boolean };
     pageLoading: 'idle' | 'succeeded' | 'failed';
 }
 
