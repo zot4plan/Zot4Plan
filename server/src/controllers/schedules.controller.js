@@ -76,8 +76,8 @@ const getAllCourses = (schedule, res) => {
             selectedPrograms: schedule.selectedPrograms,
             addedCourses: addedCourses,
             courses: data, 
-            apExam: schedule.apExam,
-            apExamUnits: schedule.apExamUnits,
+            apExam: schedule.apExam ? schedule.apExam : [],
+            apExamUnits: schedule.apExamUnits ? schedule.apExamUnits : 0,
         });  
     })
     .catch(() => {

@@ -38,6 +38,7 @@ const generateInitialState = () => {
         status: 'idle',
         isPrerequisiteCheck: true,
         apExam: [],
+        apExamCourses: {},
         pageLoading: 'idle'
     }
 }
@@ -87,10 +88,20 @@ export const courseSlice = createSlice({
                 state.depts.size += 1;
             }
             state.apExam.push(action.payload);
+            
+            action.payload.courses.forEach(course => {
+                if (!state.apExamCourses[course])
+                    state.apExamCourses[course] = true;
+            })
         },
 
         removeApExam: (state, action: PayloadAction<number>) => {
-            state.apExam.splice(action.payload, 1)
+            let courses = state.apExam[action.payload].courses;
+            courses.forEach(course => {
+                if (state.apExamCourses[course])
+                    delete state.apExamCourses[course];
+            })
+            state.apExam.splice(action.payload, 1);
         },
 
         editApExamUnits: (state, action: PayloadAction<number>) => {
@@ -156,16 +167,23 @@ export const courseSlice = createSlice({
             state.status = "succeeded";
             state.courses = {};
             state.takenGeCourses = {};
+            state.apExamCourses = {};
             state.totalUnits = action.payload.apExamUnits;
             state.apExamUnits = action.payload.apExamUnits;
             state.apExam = action.payload.apExam;
+
             action.payload.apExam.forEach((apExam) => {
                 let dept = getDeptFromCourse(apExam.courses[0]);
                 if (state.depts.byIds[dept] === undefined) {
-                let index = state.depts.size % DEPT_COLORS.length;
-                state.depts.byIds[dept] = DEPT_COLORS[index]
-                state.depts.size += 1;
-            }
+                    let index = state.depts.size % DEPT_COLORS.length;
+                    state.depts.byIds[dept] = DEPT_COLORS[index]
+                    state.depts.size += 1;
+                }
+
+                apExam.courses.forEach(course => {
+                    if (!state.apExamCourses[course])
+                        state.apExamCourses[course] = true;
+                })
             })
 
             // Add courses info 

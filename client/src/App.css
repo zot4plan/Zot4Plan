@@ -90,12 +90,12 @@ svg { font-size: 10px; }
 .static {position: static;}
 .fixed {position: fixed;}
 
-.round-top-left { border-top-left-radius: 1.5rem;}
-.round-top-right { border-top-right-radius: 1.5rem;}
+.round-top-left { border-top-left-radius: 1.5rem; }
+.round-top-right { border-top-right-radius: 1.5rem; }
 
-.__react_component_tooltip.show {
-    opacity: 1 !important;
-}
+.__react_component_tooltip.show { opacity: 1 !important; }
+
+.text-bold { font-weight: bold; }
 
 /* button */
 .btn-outlined { 

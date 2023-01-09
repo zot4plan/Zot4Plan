@@ -17,7 +17,7 @@ const myStyle: StylesConfig<OptionType, true> = {
         ...provided, cursor: 'text',
     }),
     placeholder: (provided) => ({
-        ...provided, color: '#1F1F1F',
+        ...provided, color: 'hsl(0, 0%, 20%)', fontSize: '1.4rem'
     }),
     indicatorSeparator: (provided) => ({
         ...provided, backgroundColor: '#1F1F1F'

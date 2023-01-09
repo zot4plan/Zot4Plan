@@ -7,8 +7,11 @@
     background-color: white;
 }
 
+.popup > form {
+    text-align: center;
+}
+
 .schedule-name-input {
-    -webkit-appearance: none;
     /* Fixed Iphone mess up input form */
     height: 3.2rem;
     width: 100%;

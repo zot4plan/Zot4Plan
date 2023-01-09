@@ -46,7 +46,7 @@ function checkFulfilled(prereqs: any, taken:Set<string>) {
 }
 
 function getPastCourses(state: RootState, sectionId: string, isGetCurrentCourse: boolean) {
-    const pastCourses = new Set<string> ();
+    const pastCourses = new Set<string> (Object.keys(state.course.apExamCourses));
     const yearIds = state.course.years.allIds;
 
     let ended = false;

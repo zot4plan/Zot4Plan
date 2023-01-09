@@ -1,24 +1,15 @@
 /**** Cancel Drop and Drag animation ****/
-.program-container div[data-rbd-placeholder-context-id] {
-    display: none !important;
-}
-
-.program-container div[data-rbd-draggable-context-id] {
-    transition: 0.001s !important;
-}
-
-.program-container div[data-rbd-droppable-context-id] {
-    transition: 0.001s !important;
-}
-
+.program-container div[data-rbd-placeholder-context-id],
 .ge-container div[data-rbd-placeholder-context-id] {
     display: none !important;
 }
 
+.program-container div[data-rbd-draggable-context-id],
 .ge-container div[data-rbd-draggable-context-id] {
     transition: 0.001s !important;
 }
 
+.program-container div[data-rbd-droppable-context-id],
 .ge-container div[data-rbd-droppable-context-id] {
     transition: 0.001s !important;
 }
@@ -43,6 +34,10 @@
     color: var(--accent-color-2);
 }
 
+.border-right {
+    border-right: 1px solid white;
+}
+
 .active {
     border-top: 0.4rem solid var(--accent-color-2);
     background-color: var(--primary-color);
@@ -52,23 +47,23 @@
 .hyperlink {
     display: flex;
     align-items: center;
-    margin: 0 0.5rem 1.5rem 0.5rem;
+    margin: 1rem 0.5rem 1.5rem 0.5rem;
 }
 
-.hyperlink>button {
+.hyperlink > button {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-.hyperlink>a,
-.hyperlink>button>svg {
+.hyperlink > a,
+.hyperlink > button > svg {
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--accent-color-2);
 }
 
-.hyperlink>a {
+.hyperlink > a {
     text-align: center;
 }
 
@@ -99,7 +94,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 }
 
 @media only screen and (max-width: 599px) {
@@ -123,10 +117,4 @@
     .program-container {
         height: 39rem;
     }
-}
-
-#ap-list {
-    max-height: 200px;
-    overflow-y: scroll;
-    margin: 20px;
 }

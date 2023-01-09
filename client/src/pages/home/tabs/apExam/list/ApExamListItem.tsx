@@ -1,10 +1,10 @@
 import { memo } from "react";
 import { useDispatch } from 'react-redux';
-import { removeApExam } from '../../../../store/slices/CourseSlice';
+import { removeApExam } from '../../../../../store/slices/CourseSlice';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../store/store';
-import { getDeptFromCourse } from '../../../../helpers/helpers';
-import Xmark from "../../../../components/icon/Xmark";
+import { RootState } from '../../../../../store/store';
+import { getDeptFromCourse } from '../../../../../helpers/helpers';
+import Xmark from "../../../../../components/icon/Xmark";
 import ReactTooltip from "react-tooltip";
 import "./ApExamListItem.css";
 
@@ -24,35 +24,32 @@ function ApExamListItem({ exam, index }: ApExamListItemProps) {
     const handleRemoveApExam = () => { dispatch(removeApExam(index)) }
 
     return (
-        <div 
-            className='ap-exam-container' 
+        <li 
+            className='flex-container ap-exam-item-container' 
             data-tip data-for={name} 
-            style={{ backgroundColor: colors[0] }}
+            style={{ backgroundColor: colors[0], borderColor: colors[2] }}
         >
-            <p className='ap-exam-name'> {name} </p>
+            <p> {name} </p>
             <button className='remove-btn' onClick={handleRemoveApExam}>
                 <Xmark />
             </button>
 
             <ReactTooltip
-                arrowColor='#495057'
+                arrowColor={colors[1]}
                 className='exam-tooltip'
+                backgroundColor={colors[2]}
+                borderColor={colors[1]}
                 id={name}
                 place="top"
                 effect="solid"
             >
-                <div>
-                    <span>
-                        <span style={{ fontWeight: 'bold' }}>Covers: </span> {coursesList}
-                    </span>
+                <h1>{name}</h1>
+                <div> <span className='text-bold'>
+                    {courses.length > 1 ? 'Classes:' : 'Class:'} </span> {coursesList} 
                 </div>
-                <div style={{ marginTop: '10px' }}>
-                    <span>
-                        <span style={{ fontWeight: 'bold' }}>GE: </span> {geList}
-                    </span>
-                </div>
+                <div> <span className='text-bold'>GE: </span> {geList} </div>
             </ReactTooltip>
-        </div>
+        </li>
     )
 }
 

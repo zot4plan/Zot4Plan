@@ -3,7 +3,7 @@ import Author from './Author';
 // import Lights from '../theme/christmas/Lights';
 import Contact from './Contact';
 import './Footer.css';
-// import Decoration from './Decoration';
+import Decoration from './Decoration';
 // import MerryChristmas from '../theme/christmas/MerryChristmas';
 
 const authors = [
@@ -47,8 +47,8 @@ const authors = [
 const Footer = () => {
     return (
         <footer id="footer" className='home-footer'>
-            {/* <Lights/>
             <Decoration/>
+            {/* <Lights/>
             <MerryChristmas className='merry-christmas'/> */}
             <div>
                 <h1 className='header'>
@@ -63,7 +63,7 @@ const Footer = () => {
                         Disclaimer: All of the information we obtained are from the UCI catalogue. Please make sure to check your schedule with an academic counselor. Thank you - Zot! Zot! Zot! 
                     </p>
                     <p>
-                        (Last Updated On: Nov 27th, 2022)
+                        (Last Updated On: Jan 9th, 2023)
                     </p>
                 </div>
             </div>

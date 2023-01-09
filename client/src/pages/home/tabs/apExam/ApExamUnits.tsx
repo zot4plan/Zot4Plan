@@ -2,25 +2,41 @@ import { useState, MouseEvent, FormEvent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../store/store';
 import { editApExamUnits } from '../../../../store/slices/CourseSlice';
-import './ApExamUnits.css';
 import { toast } from 'react-toastify';
+import ApExamNote from './ApExamNote';
+import './ApExamUnits.css';
 
 const ApExamUnits = () => {
-    const currentUnits = useSelector((state: RootState) => state.course.apExamUnits)
-    const [onEditMode, setOnEditMode] = useState(true)
-    const openEditMode = (e: MouseEvent<HTMLSpanElement>) => {
-        setOnEditMode(true)
+    const currentUnits = useSelector((state: RootState) => state.course.apExamUnits);
+    const [onEditMode, setOnEditMode] = useState(true);
+    const [units, setUnits] = useState(currentUnits);
+    const dispatch = useDispatch();
+
+    const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        onSubmit();
     }
-    const [units, setUnits] = useState(currentUnits)
-    const dispatch = useDispatch()
-    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        e.stopPropagation()
+
+    const onSubmit = () => {
         if (units < 0) {
-            toast.warning('Units cannot be negative')
-        } else {
-            setOnEditMode(false)
-            dispatch(editApExamUnits(units))
+            toast.warning('Credits cannot be negative')
+        } 
+        else if (units > 120) {
+            toast.warning('Credits earned is too large. Please check again!')
+        }
+        else {
+            setOnEditMode(false);
+            dispatch(editApExamUnits(units));
+        }
+    }
+
+    const toggleEditMode = (e: MouseEvent<HTMLSpanElement>) => {
+        e.preventDefault();
+        if(onEditMode) {
+            onSubmit();
+        }
+        else {
+            setOnEditMode(true);
         }
     }
 
@@ -30,23 +46,25 @@ const ApExamUnits = () => {
 
     return (
         <div className='flex-container'>
-            <div className='ap-exam-units-wrapper'>
-                <span style={{ fontWeight: 'bold' }}>Units:</span>&nbsp;{
+            <div className='ap-exam-units-wrapper' onClick={toggleEditMode}>
+                <span className='text-bold'>Total credits earned:&nbsp;</span>{
                     !onEditMode
-                        ? <span onClick={openEditMode}>{currentUnits}</span>
+                        ? <span>{currentUnits}</span>
                         : <span>
-                            <form onSubmit={onSubmit}>
+                            <form onSubmit={handleOnSubmit} style={{ marginLeft: '6px' }}>
                                 <input
                                     className='ap-exam-units-input'
                                     type="number"
                                     required
                                     value={units}
                                     onChange={e => setUnits(parseInt(e.target.value))}
+                                    onClick={(e) => e.stopPropagation()}
                                 />
                             </form>
                         </span>
                 }
             </div>
+            <ApExamNote/>
         </div>
     )
 }

@@ -216,6 +216,7 @@ declare interface CourseSliceType {
     status: 'idle' | 'succeeded' | 'failed';
     isPrerequisiteCheck: boolean;
     apExam: ApExamType[];
+    apExamCourses: { [id: string]: boolean };
     pageLoading: 'idle' | 'succeeded' | 'failed';
 }
 

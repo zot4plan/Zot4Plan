@@ -1,4 +1,4 @@
-import { useState,memo, MouseEvent } from 'react';
+import { useState, memo, FormEvent } from 'react';
 import  { StylesConfig } from "react-select";
 import AsyncSelect  from 'react-select/async';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
@@ -6,7 +6,7 @@ import { RootState } from '../../../../store/store';
 import { addCourse } from '../../../../store/slices/ProgramsSlice';
 import { getCourses } from '../../../../controllers/HomeController';
 import AddIcon from '../../../../components/icon/AddIcon';
-import Message from '../../../../components/message/Message';
+import { toast } from 'react-toastify';
 import './SelectCourses.css';
 
 const myStyle: StylesConfig<OptionType, false> =  {
@@ -34,56 +34,53 @@ const myStyle: StylesConfig<OptionType, false> =  {
 }
 
 function SelectCourses() {
-    const [selectCourse, setSelectCourse] = useState<string>("");
-    const [message, setMessage] = useState({content: "", status: 'idle'});
+    const [selectCourse, setSelectCourse] = useState<OptionType | null>(null);
 
     const addedCourses = useSelector((state:RootState) => state.programs.sections[state.programs.addedCourses], shallowEqual); 
     const dispatch = useDispatch();
 
-    const submitAddCourse =(event: MouseEvent<HTMLButtonElement>) => {
+    const submitAddCourse =(event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        let content = selectCourse, 
-            status = "failed";
+        let content = selectCourse ? selectCourse.value : ''
 
-        if(selectCourse === "") {
-            setMessage({content: "Please select a course!", status: status});
+        if(!selectCourse) {
+            toast.error("Please select a course!");
         }
-        else if(!addedCourses.includes(selectCourse)) {
-            dispatch(addCourse(selectCourse));
-            setMessage({content: content + " was added successfully!", status: "succeeded"});
+        else if(!addedCourses.includes(selectCourse.value)) {
+            dispatch(addCourse(selectCourse.value));
+            setSelectCourse(null)
+            toast.success(content + " was added successfully!");
         }
-        else 
-            setMessage({content: content + " has already been added!", status: status})
+        else {
+            toast.warning(content + " has already been added!")
+        }
     };
 
-    const handleOnChange = (option: OptionType | null) => 
-        setSelectCourse(option ? option.value : '');
+    const handleOnChange = (option: OptionType | null) => {
+        if(option) {
+            setSelectCourse(option);
+        }
+    }
     
     return (
         <div className='input-container'>
-            <div className='relative browse-container'>
+            <form className='relative browse-container' onSubmit={submitAddCourse}>
                 <AsyncSelect
                     isClearable={true}
                     cacheOptions 
                     defaultOptions
                     loadOptions={getCourses}
                     isOptionDisabled={(option) => addedCourses.includes(option.label)}
+                    value={selectCourse}
                     onChange={handleOnChange}
                     styles={myStyle}
                     maxMenuHeight={250}
                     components={{DropdownIndicator: () => null}}
-                    placeholder="Add Course"
+                    placeholder="Search Courses"
                     aria-label="Browse courses by ID"
                 />
-                <button className='absolute add-course-btn' onClick={submitAddCourse}> <AddIcon/> </button>
-            </div>
-
-            <div className={'message-container relative ' + (message.status !== 'idle' ? 'fade-message' : '')}  
-                onAnimationEnd={() => setMessage({content:"", status: 'idle'})}
-            >
-                {message.status !== 'idle' 
-                && <Message status={message.status} content={message.content}/>}
-            </div>
+                <button className='absolute add-course-btn' type='submit'> <AddIcon/> </button>
+            </form>
         </div>
     )
 };

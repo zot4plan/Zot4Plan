@@ -23,7 +23,7 @@ function PopperSave () {
         setName(e.target.value);
     }
 
-    const handleOnSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+    const handleOnSubmit = (e: MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (/\s/g.test(name)) 
@@ -67,18 +67,19 @@ function PopperSave () {
         <div className="flex-container flexColumn popup">
             <p style={{padding:'0.2rem 0.5rem', textAlign:'center', fontSize:'1.5rem'}}> {scheduleNameNote} </p>
 
-            <input type="text"
-                id="saveName"
-                name="saveName"
-                maxLength={maxLength}
-                value = {name}
-                className = "schedule-name-input"
-                onChange = {handleInputChange}
-                placeholder="Enter schedule name"
-            />
+            <form onSubmit={handleOnSubmit}>
+                <input type="text"
+                    id="saveName"
+                    name="saveName"
+                    maxLength={maxLength}
+                    value = {name}
+                    className = "schedule-name-input"
+                    onChange = {handleInputChange}
+                    placeholder="Enter schedule name"
+                />
 
-            <button className='btn' style={{margin: '0.6rem 0rem'}}
-                    onClick={handleOnSubmit}> Submit </button>
+                <button className='btn' style={{margin: '0.6rem 0rem'}}> Submit </button>
+            </form>
 
             {message.status !== "idle" && <Message status={message.status} content={message.content}/>}
 
