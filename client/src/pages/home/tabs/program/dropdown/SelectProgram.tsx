@@ -66,10 +66,8 @@ function SelectProgram({isMajor}: SelectProgramProps) {
             setPrograms(programsArray);
         };
 
-        if(programs.length === 0) 
-            fetchPrograms();  
-
-    },[programs]); 
+        fetchPrograms();  
+    },[]); 
 
     const handleOnChange = useCallback((selectedOptions: OnChangeValue<ProgramOption, true>) => {
         if(selectedOptions)
