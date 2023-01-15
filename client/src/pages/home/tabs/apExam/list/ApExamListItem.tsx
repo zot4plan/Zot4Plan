@@ -14,7 +14,7 @@ interface ApExamListItemProps {
 }
 
 function ApExamListItem({ exam, index }: ApExamListItemProps) {
-    const { name, courses, GE, units, score } = exam
+    const { id, name, courses, GE, units, score } = exam
     const geList = GE.join(', ')
     const coursesList = courses.join(', ')
     const colors = useSelector((state: RootState) => courses.length 
@@ -22,11 +22,11 @@ function ApExamListItem({ exam, index }: ApExamListItemProps) {
         : ['#AFD3E9', '#70ADD7', '#3688BF']);
     const dispatch = useDispatch()
     const handleRemoveApExam = () => { dispatch(removeApExam(index)) }
-
+    const dataFor = name + (id ? id : '');
     return (
         <li 
             className='flex-container ap-exam-item-container' 
-            data-tip data-for={name} 
+            data-tip data-for={dataFor} 
             style={{ backgroundColor: colors[0], borderColor: colors[2] }}
         >
             <p> {name} </p>
@@ -39,7 +39,7 @@ function ApExamListItem({ exam, index }: ApExamListItemProps) {
                 className='exam-tooltip'
                 backgroundColor={colors[2]}
                 borderColor={colors[1]}
-                id={name}
+                id={dataFor}
                 place="top"
                 effect="solid"
             >

@@ -3,7 +3,7 @@ import VirtualCafeNavList from './navbar/VirtualCafeNavList';
 import VirtualCafeGrid from './grid/VirtualCafeGrid';
 import VirtualCafeToolbar from './toolbars/VirtualCafeToolbar';
 import UpdateVisitCount from '../../helpers/UpdateVisitCount';
-import Christmas from '../../components/theme/christmas/Christmas';
+// import Christmas from '../../components/theme/christmas/Christmas';
 import './VirtualCafe.css';
 
 function VirtualCafe() {
@@ -13,7 +13,7 @@ function VirtualCafe() {
                 navbarStyle={{ margin: '0.5rem 1rem', backgroundColor: '#B5838D', borderRadius: '2.4rem' }}
                 heartColor='#FFF' 
                 NavList={VirtualCafeNavList}
-                Theme={Christmas}
+                // Theme={Christmas}
             />
             <VirtualCafeGrid/>
             <VirtualCafeToolbar/>
