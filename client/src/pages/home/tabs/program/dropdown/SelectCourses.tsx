@@ -2,11 +2,12 @@ import { useState, memo, FormEvent } from 'react';
 import  { StylesConfig } from "react-select";
 import AsyncSelect  from 'react-select/async';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { RootState } from '../../../../store/store';
-import { addCourse } from '../../../../store/slices/ProgramsSlice';
-import { getCourses } from '../../../../controllers/HomeController';
-import AddIcon from '../../../../components/icon/AddIcon';
+import { RootState } from '../../../../../store/store';
+import { addCourse } from '../../../../../store/slices/ProgramsSlice';
+import { getCourses } from '../../../../../controllers/HomeController';
+import AddIcon from '../../../../../components/icon/AddIcon';
 import { toast } from 'react-toastify';
+import debounce from "lodash/debounce";
 import './SelectCourses.css';
 
 const myStyle: StylesConfig<OptionType, false> =  {
@@ -35,7 +36,7 @@ const myStyle: StylesConfig<OptionType, false> =  {
 
 function SelectCourses() {
     const [selectCourse, setSelectCourse] = useState<OptionType | null>(null);
-
+    
     const addedCourses = useSelector((state:RootState) => state.programs.sections[state.programs.addedCourses], shallowEqual); 
     const dispatch = useDispatch();
 
@@ -61,6 +62,10 @@ function SelectCourses() {
             setSelectCourse(option);
         }
     }
+
+    // prevent unnecessary requests - send after user stops typing
+    const wait = 300;
+    const debouncedLoadOptions = debounce(getCourses, wait);
     
     return (
         <div className='input-container'>
@@ -69,7 +74,7 @@ function SelectCourses() {
                     isClearable={true}
                     cacheOptions 
                     defaultOptions
-                    loadOptions={getCourses}
+                    loadOptions={debouncedLoadOptions}
                     isOptionDisabled={(option) => addedCourses.includes(option.label)}
                     value={selectCourse}
                     onChange={handleOnChange}

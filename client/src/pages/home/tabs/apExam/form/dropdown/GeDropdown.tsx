@@ -21,7 +21,7 @@ const style: StylesConfig<OptionType, true> = {
         ...provided, backgroundColor: '#1F1F1F'
     }),
     multiValue: (provided) => ({
-        ...provided, width: '150px'
+        ...provided, maxWidth: '150px'
     })
 }
 

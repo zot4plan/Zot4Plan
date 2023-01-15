@@ -7,7 +7,7 @@ module.exports = (sequelize, DataType) => {
         },  
         name: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
         },
         department: {
             type: DataType.TEXT,
@@ -15,71 +15,76 @@ module.exports = (sequelize, DataType) => {
         },
         units: {
             type: DataType.ARRAY(DataType.DECIMAL),
-            allowNull:true,
+            allowNull: true,
         },
         units_text: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
         },
         description: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
         },
         prerequisite: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
         },
         prerequisite_tree: {
             type: DataType.JSON,
-            allowNull:true,
+            allowNull: true,
         },
         prerequisite_for: {
             type: DataType.ARRAY(DataType.TEXT),
-            allowNull:true,
+            allowNull: true,
         },
         corequisite: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
         },
         corequisite_tree: {
             type: DataType.JSON,
-            allowNull:true,
+            allowNull: true,
         },
         prerequisite_or_corequisite: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
         },
         prerequisite_or_corequisite_tree: {
             type: DataType.JSON,
-            allowNull:true,
+            allowNull: true,
         },
         restriction: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
         },
         same_as: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
         },
         overlaps_with: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
         },
         concurrent_with: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
         },
         repeatability: {
             type: DataType.INTEGER,
-            allowNull:true,
+            allowNull: true,
         },
         ge: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
         },
         terms: {
             type: DataType.TEXT,
-            allowNull:true,
+            allowNull: true,
+        },
+        alt_course_id: {
+            type: DataType.STRING(25),
+            allowNull:false,
+            unique: true
         }
     }, {
         timestamps: false

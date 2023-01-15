@@ -1,11 +1,11 @@
 import { useState, useEffect, memo, useCallback } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import Select, { OnChangeValue, StylesConfig} from 'react-select';
-import { RootState } from '../../../../store/store';
-import { changeProgram } from '../../../../store/slices/ProgramsSlice';
+import { RootState } from '../../../../../store/store';
+import { changeProgram } from '../../../../../store/slices/ProgramsSlice';
 import SelectCourses from './SelectCourses';
-import ZotSelectMajor from '../../../../assets/images/ZotSelectMajor.png';
-import { getAllPrograms } from '../../../../controllers/HomeController';
+import ZotSelectMajor from '../../../../../assets/images/ZotSelectMajor.png';
+import { getAllPrograms } from '../../../../../controllers/HomeController';
 import './SelectProgram.css';
 
 const myStyle: StylesConfig<ProgramOption, true> =  {
@@ -61,19 +61,13 @@ function SelectProgram({isMajor}: SelectProgramProps) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const fetchAllPrograms = async () => {
-            getAllPrograms()
-            .then(res => {
-                const programsArray = res.data.map((program:ProgramOption) => program);
-                setPrograms(programsArray);
-            }) 
-            .catch(err => {
-                console.log(err);
-            });
+        const fetchPrograms = async () => {
+            const programsArray = await getAllPrograms();
+            setPrograms(programsArray);
         };
 
         if(programs.length === 0) 
-            fetchAllPrograms();  
+            fetchPrograms();  
 
     },[programs]); 
 

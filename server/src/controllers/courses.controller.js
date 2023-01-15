@@ -3,34 +3,21 @@ const db = require("../models");
 const Courses = db.courses;
 const CoursesInGE = db.courses_in_ge;
 
-exports.searchCourses = (req, res) => {
-    let id = req.query.id;
+exports.getAllCoursesById = (req, res) => {
+    let id = req.query.id.toUpperCase();
 
-    // Use LIKE if id contains special character, else use FULLTEXT SEARCH
-    if( id !== undefined && id.length >= 3){
-        let pattern = "";
-        let condition = "";
-
-        if(id.indexOf("\&") > -1) { 
-            pattern = id + "%";
-            condition = "course_id LIKE :pattern";
-        }
-        else { 
-            id.split(" ").forEach((token, index) => { 
-                if (token.trim().length > 0) {
-                    pattern += (index > 0 ? " & " : "+") + token;
-                }
-            });
-            pattern += ":*"
-            condition = "textsearchable_index_col @@ to_tsquery(:pattern)";
-        }
-
+    if( id !== undefined && id.length >= 2){
         Courses.findAll({ 
             attributes: ['course_id'],
-            where: Sequelize.literal(condition),
-            replacements: 
-            {
-                pattern: pattern,
+            where: {
+                [Sequelize.Op.or]: {
+                    course_id: {
+                        [Sequelize.Op.like]: id.toUpperCase() + "%"
+                    },
+                    alt_course_id: {
+                        [Sequelize.Op.like]: id.toUpperCase() + "%"
+                    }
+                }
             },
             order: [["course_id", "ASC"]],
             limit: 100,
@@ -42,10 +29,11 @@ exports.searchCourses = (req, res) => {
             })
         })
     }
-    else
+    else {
         res.status(500).send({
-            message: "Error retrieving courses with pattern = " + req.query.id
+            message: req.query.id + ' is too short'
         })  
+    }
 };
 
 // Find Course with course id

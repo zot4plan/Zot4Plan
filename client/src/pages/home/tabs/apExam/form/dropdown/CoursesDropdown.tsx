@@ -1,7 +1,8 @@
+import debounce from 'lodash/debounce';
 import { memo } from 'react';
 import { OnChangeValue, StylesConfig } from 'react-select';
 import AsyncSelect from 'react-select/async';
-import { getCourses } from '../../../../../controllers/HomeController';
+import { getCourses } from '../../../../../../controllers/HomeController';
 
 const myStyle: StylesConfig<OptionType, true> = {
     control: (provided) => ({
@@ -32,13 +33,18 @@ function CoursesDropdown({selectCourses, setSelectCourses}: CoursesDropdownProps
         let courses:OptionType[] = option.map((course:OptionType) => course)
         setSelectCourses(courses);
     }
+
+    // prevent unnecessary requests
+    const wait = 300;
+    const debouncedLoadOptions = debounce(getCourses, wait);
+
     return (
         <AsyncSelect
             isMulti={true}
             isClearable={true}
             cacheOptions
             defaultOptions
-            loadOptions={getCourses}
+            loadOptions={debouncedLoadOptions}
             isOptionDisabled={(option) => selectCourses.includes(option)}
             onChange={handleOnChange}
             styles={myStyle}

@@ -1,5 +1,5 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-import { getAllGE, getGE } from '../../controllers/HomeController'
+import { getAllGE, getCoursesByGE } from '../../controllers/HomeController'
 import { ID_LENGTH } from "../../constants/Constants";
 
 const initialState:GESliceType = {
@@ -45,11 +45,11 @@ export const geSlice = createSlice ({
          * Http Get
          * Get Ge
          */
-        builder.addCase(getGE.pending,(state, action) => {
+        builder.addCase(getCoursesByGE.pending,(state, action) => {
             state.byIds[action.meta.arg].status = "loading";
         });
 
-        builder.addCase(getGE.fulfilled,(state, action) => {    
+        builder.addCase(getCoursesByGE.fulfilled,(state, action) => {    
             const geId = action.meta.arg;
             state.byIds[geId].status = "succeeded";
 
@@ -61,7 +61,7 @@ export const geSlice = createSlice ({
             
         });
 
-        builder.addCase(getGE.rejected,(state, action) => {
+        builder.addCase(getCoursesByGE.rejected,(state, action) => {
             state.byIds[action.meta.arg].status = "failed";
         }); 
     },

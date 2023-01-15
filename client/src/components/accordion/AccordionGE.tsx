@@ -1,7 +1,7 @@
 import {memo, useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../store/store";
-import { getGE } from '../../controllers/HomeController';
+import { getCoursesByGE } from '../../controllers/HomeController';
 import ChervonRight from '../icon/ChervonRight';
 import Detail from './Detail';
 import './Accordion.css';
@@ -24,7 +24,7 @@ const AccordionGE = ({id}:SectionProps) => {
     
     useEffect(() => {  
         if(isOpen && status === 'idle') 
-          dispatch(getGE(id));
+          dispatch(getCoursesByGE(id));
     },[isOpen, status, dispatch, id]); 
     
     let detailBody;

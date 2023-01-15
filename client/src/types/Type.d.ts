@@ -52,9 +52,22 @@ declare interface YearsType {
 }
 
 declare interface ApExamType {
+    id: string | number;
     name: string;
     courses: string[];
     GE: string[];
+    units: number;
+    score: number;
+}
+
+declare interface ApExamOption {
+    value: string | number; // ap_exam_id
+    label: string; // ap_exam_name
+    courses?: string[];
+    GE?: string[];
+    units?: number;
+    score?: number;
+    isNew?: boolean;
 }
 
 //Virtual-cafe

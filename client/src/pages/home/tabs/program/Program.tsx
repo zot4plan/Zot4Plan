@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector} from 'react-redux';
 import { RootState } from '../../../../store/store';
 import Accordion from '../../../../components/accordion/Accordion';
-import { getProgram } from '../../../../controllers/HomeController';
+import { getProgramById } from '../../../../controllers/HomeController';
 import ProgramCarousel from './ProgramCarousel';
 
 interface PropgramProps {
@@ -29,7 +29,7 @@ function Program ({isMajor, addedCourses}:PropgramProps) {
 
     useEffect(()=> {
         if (status === 'idle') 
-            dispatch(getProgram(programId));
+            dispatch(getProgramById(programId));
     },[status, dispatch, programId]);
 
     let content = [] as JSX.Element [];

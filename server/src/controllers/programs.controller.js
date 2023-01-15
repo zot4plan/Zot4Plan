@@ -13,7 +13,7 @@ exports.getAllPrograms = (_req, res) => {
 }
 
 // return 2 Result Sets - 0: program info, 1: all courses in programs
-exports.getProgram = (req, res) => {
+exports.getProgramById = (req, res) => {
     Programs
     .findByPk(req.body.id)
     .then(data => {

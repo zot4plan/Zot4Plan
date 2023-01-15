@@ -48,7 +48,7 @@ function PopperLoad () {
     <>
         <div className="popper-card-before"/>
 
-        <div className="flex-container flexColumn popup">
+        <div className="flex-container flex-column popup">
             <form onSubmit={handleOnSubmit}>
                 <input type="text"
                     id="loadName"

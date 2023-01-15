@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction, nanoid, isAnyOf, current } from "@reduxjs/toolkit";
-import { getProgram, getGE, getSchedule, getCourse, updateHomeVisit } from '../../controllers/HomeController'
+import { getProgramById, getCoursesByGE, getSchedule, getCourse, updateHomeVisit } from '../../controllers/HomeController'
 import { addCourse } from "./ProgramsSlice";
 import { DEPT_COLORS, ID_LENGTH } from "../../constants/Constants";
 import { getDeptFromCourse } from "../../helpers/helpers";
+import { toast } from "react-toastify";
 
 const generateInitialState = () => {
     let years: { [id: string]: string[] } = {};
@@ -81,32 +82,48 @@ export const courseSlice = createSlice({
         },
 
         addApExam: (state, action: PayloadAction<ApExamType>) => {
-            let dept = getDeptFromCourse(action.payload.courses[0]);
-            if (state.depts.byIds[dept] === undefined) {
-                let index = state.depts.size % DEPT_COLORS.length;
-                state.depts.byIds[dept] = DEPT_COLORS[index]
-                state.depts.size += 1;
+            const isAdded = state.apExam.find(exam => exam.id === action.payload.id);
+
+            if(isAdded) {
+                toast.error('AP Exam has already been added.');
+            } 
+            else {
+                if(action.payload.courses.length) {
+                    let dept = getDeptFromCourse(action.payload.courses[0]);
+                    if (state.depts.byIds[dept] === undefined) {
+                        let index = state.depts.size % DEPT_COLORS.length;
+                        state.depts.byIds[dept] = DEPT_COLORS[index]
+                        state.depts.size += 1;
+                    }
+                }
+    
+                state.apExam.push(action.payload);
+    
+                if(action.payload.units) {
+                    state.apExamUnits += action.payload.units;
+                    state.totalUnits += action.payload.units;
+                }
+                
+                action.payload.courses.forEach(course => {
+                    if (!state.apExamCourses[course])
+                        state.apExamCourses[course] = true;
+                })
             }
-            state.apExam.push(action.payload);
-            
-            action.payload.courses.forEach(course => {
-                if (!state.apExamCourses[course])
-                    state.apExamCourses[course] = true;
-            })
         },
 
         removeApExam: (state, action: PayloadAction<number>) => {
-            let courses = state.apExam[action.payload].courses;
-            courses.forEach(course => {
+            let apExam = state.apExam[action.payload];
+            apExam.courses.forEach(course => {
                 if (state.apExamCourses[course])
                     delete state.apExamCourses[course];
             })
-            state.apExam.splice(action.payload, 1);
-        },
 
-        editApExamUnits: (state, action: PayloadAction<number>) => {
-            state.totalUnits += (action.payload - state.apExamUnits)
-            state.apExamUnits = action.payload
+            if(apExam.units) {
+                state.apExamUnits -= apExam.units;
+                state.totalUnits -= apExam.units; 
+            }
+            state.apExam.splice(action.payload, 1);
+
         },
 
         addYear: (state) => {
@@ -168,8 +185,8 @@ export const courseSlice = createSlice({
             state.courses = {};
             state.takenGeCourses = {};
             state.apExamCourses = {};
-            state.totalUnits = action.payload.apExamUnits;
-            state.apExamUnits = action.payload.apExamUnits;
+            state.totalUnits = 0;
+            state.apExamUnits = 0;
             state.apExam = action.payload.apExam;
 
             action.payload.apExam.forEach((apExam) => {
@@ -184,6 +201,11 @@ export const courseSlice = createSlice({
                     if (!state.apExamCourses[course])
                         state.apExamCourses[course] = true;
                 })
+
+                if(apExam.units) {
+                    state.apExamUnits += apExam.units;
+                    state.totalUnits += apExam.units;
+                }
             })
 
             // Add courses info 
@@ -306,7 +328,7 @@ export const courseSlice = createSlice({
          * HTTP GET
          * getProgram & getGE
          */
-        builder.addMatcher(isAnyOf(getProgram.fulfilled, getGE.fulfilled), (state, action) => {
+        builder.addMatcher(isAnyOf(getProgramById.fulfilled, getCoursesByGE.fulfilled), (state, action) => {
             action.payload.departments.forEach((dept) => {
                 if (state.depts.byIds[dept] === undefined) {
                     let index = state.depts.size % DEPT_COLORS.length;
@@ -319,7 +341,7 @@ export const courseSlice = createSlice({
         /**
          * Rejected
          */
-        builder.addMatcher(isAnyOf(getProgram.rejected, getGE.rejected, getCourse.rejected, getSchedule.rejected), (state, _) => {
+        builder.addMatcher(isAnyOf(getProgramById.rejected, getCoursesByGE.rejected, getCourse.rejected, getSchedule.rejected), (state, _) => {
             state.status = "failed";
         })
     },
@@ -333,7 +355,6 @@ export const {
     clearSchedule,
     addApExam,
     removeApExam,
-    editApExamUnits,
     resetStatus,
     setIsPrerequisiteCheck
 } = courseSlice.actions;

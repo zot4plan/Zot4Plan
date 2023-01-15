@@ -6,7 +6,7 @@ function removeLastWord(str) {
     return (lastIndexOfSpace === -1)? str : str.substring(0, lastIndexOfSpace);
 }
 
-exports.getCoursesInGE = (req, res) => {
+exports.getCoursesByGE = (req, res) => {
     const id = req.body.id;
     CoursesInGE.findAll({attributes: [['course_id', 'id']], where: {ge_id: id}})
     .then(data => {

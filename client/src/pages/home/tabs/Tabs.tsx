@@ -4,7 +4,7 @@ import { getAllGE } from '../../../controllers/HomeController';
 import { RootState } from '../../../store/store';
 import GeneralEducation from './generalEducation/GeneralEducation';
 import Program from './program/Program';
-import SelectProgram from './select/SelectProgram';
+import SelectProgram from './program/dropdown/SelectProgram';
 import ApExam from './apExam/ApExam';
 import './Tabs.css';
 

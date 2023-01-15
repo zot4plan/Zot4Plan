@@ -14,10 +14,10 @@ interface ApExamListItemProps {
 }
 
 function ApExamListItem({ exam, index }: ApExamListItemProps) {
-    const { name, courses, GE } = exam
+    const { name, courses, GE, units, score } = exam
     const geList = GE.join(', ')
     const coursesList = courses.join(', ')
-    const colors = useSelector((state: RootState) => state.course.depts.byIds[getDeptFromCourse(courses[0])]
+    const colors = useSelector((state: RootState) => courses.length 
         ? state.course.depts.byIds[getDeptFromCourse(courses[0])]
         : ['#AFD3E9', '#70ADD7', '#3688BF']);
     const dispatch = useDispatch()
@@ -44,10 +44,13 @@ function ApExamListItem({ exam, index }: ApExamListItemProps) {
                 effect="solid"
             >
                 <h1>{name}</h1>
-                <div> <span className='text-bold'>
-                    {courses.length > 1 ? 'Classes:' : 'Class:'} </span> {coursesList} 
-                </div>
-                <div> <span className='text-bold'>GE: </span> {geList} </div>
+                {score > 0 && <div> <span className='text-bold'>Min Score: </span> { score } </div>}
+                {courses.length > 0 
+                && <div> 
+                    <span className='text-bold'> {courses.length > 1 ? 'Classes:' : 'Class:'} </span> { coursesList } 
+                </div>}
+                {GE.length > 0 && <div> <span className='text-bold'>GE: </span> { geList } </div>}
+                {units > 0 && <div> <span className='text-bold'>Credits Earned: </span> { units } </div>}
             </ReactTooltip>
         </li>
     )

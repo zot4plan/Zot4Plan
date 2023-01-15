@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
-import { getProgram, getSchedule } from '../../controllers/HomeController'
+import { getProgramById, getSchedule } from '../../controllers/HomeController'
 import { ID_LENGTH } from "../../constants/Constants";
 
 const getInitialState = () => {
@@ -76,11 +76,11 @@ export const programSlice = createSlice ({
          * HTTP GET
          * getProgram
          */
-        builder.addCase(getProgram.pending, (state,action) => {
+        builder.addCase(getProgramById.pending, (state,action) => {
             state.byIds[action.meta.arg].status = "loading";
         });
 
-        builder.addCase(getProgram.fulfilled, (state, action) => {  
+        builder.addCase(getProgramById.fulfilled, (state, action) => {  
             let id = action.payload.id;
             
             state.byIds[id].status = "succeeded";
@@ -99,7 +99,7 @@ export const programSlice = createSlice ({
             })  
         });
 
-        builder.addCase(getProgram.rejected, (state, action) => {
+        builder.addCase(getProgramById.rejected, (state, action) => {
             state.byIds[action.meta.arg].status = "failed";
         });
 

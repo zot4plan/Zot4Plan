@@ -45,8 +45,7 @@ function PopperSave () {
                         selectedPrograms: state.programs.selectedPrograms,
                         addedCourses: state.programs.sections[state.programs.addedCourses],
                         years: years as string[][][],
-                        apExam: state.course.apExam,
-                        apExamUnits: state.course.apExamUnits,
+                        apExam: state.course.apExam
                     };
 
                     addOrEditSchedule(name, schedule, setMessage);
@@ -64,7 +63,7 @@ function PopperSave () {
     <>
         <div className="popper-card-before"/>
 
-        <div className="flex-container flexColumn popup">
+        <div className="flex-container flex-column popup">
             <p style={{padding:'0.2rem 0.5rem', textAlign:'center', fontSize:'1.5rem'}}> {scheduleNameNote} </p>
 
             <form onSubmit={handleOnSubmit}>
