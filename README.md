@@ -45,14 +45,14 @@ Open 2 terminals: one is for client and the other is for server
 
 ```sh
 npm install 
-npm server.js
+node server.js
 ```
 
 * Finally cd to client folder: 
 
 ```sh
 npm install
-node start
+npm run start
 ```
 
 ## **Technologies** ⛄
